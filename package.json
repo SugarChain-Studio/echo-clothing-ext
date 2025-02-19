@@ -1,5 +1,5 @@
 {
-    "name": "mod",
+    "name": "echo-clothing-ext",
     "version": "1.1.0",
     "scripts": {
         "type-check": "tsc --noEmit --allowJs --checkJs -p jsconfig.json",
@@ -14,10 +14,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/emdsa2/-mod"
+        "url": "https://github.com/SugarChain-Studio/echo-clothing-ext"
     },
     "rollupSetting": {
-        "output": "mod.js",
+        "output": "bc-cloth.js",
         "input": "src/main.js",
         "assets": {
             "location": "resources",
@@ -28,10 +28,10 @@
             ]
         },
         "componentDir": "src/components",
-        "loaderName": "BC_Cloth2.user.js",
+        "loaderName": "bc-cloth.user.js",
         "beta": {
-            "output": "mod-beta.js",
-            "loaderName": "BC_Cloth2-beta.user.js"
+            "output": "bc-cloth-beta.js",
+            "loaderName": "bc-cloth-beta.user.js"
         }
     },
     "displayName": "服装拓展",
