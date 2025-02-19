@@ -1,0 +1,61 @@
+{
+    "name": "mod",
+    "version": "1.1.0",
+    "scripts": {
+        "type-check": "tsc --noEmit --allowJs --checkJs -p jsconfig.json",
+        "build": "rollup -c rollup.config.js",
+        "dev": "pnpm type-check && pnpm resources:dev && pnpm -r build --configDebug --configBaseURL \"http://localhost:8080/\"",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+        "resources:rel": "node ./scripts/.resource.js --rel",
+        "resources:dev": "node ./scripts/.resource.js --dev",
+        "serve": "http-server -p 8080 --cors public",
+        "git:release": "git checkout release && git merge origin/main && git push && git checkout main"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/emdsa2/-mod"
+    },
+    "rollupSetting": {
+        "output": "mod.js",
+        "input": "src/main.js",
+        "assets": {
+            "location": "resources",
+            "assets": [
+                "Assets",
+                "Audio",
+                "Screens"
+            ]
+        },
+        "componentDir": "src/components",
+        "loaderName": "BC_Cloth2.user.js",
+        "beta": {
+            "output": "mod-beta.js",
+            "loaderName": "BC_Cloth2-beta.user.js"
+        }
+    },
+    "displayName": "服装拓展",
+    "modFullName": "Echo的服装拓展",
+    "author": "Echo",
+    "description": "BC视觉表现的美学修正与拓展",
+    "devDependencies": {
+        "@rollup/plugin-alias": "^5.1.1",
+        "@rollup/plugin-commonjs": "^25.0.8",
+        "@rollup/plugin-node-resolve": "^15.2.4",
+        "@rollup/plugin-replace": "^5.0.7",
+        "@rollup/plugin-terser": "^0.4.4",
+        "bc-stubs": "^111.0.0",
+        "bondage-club-mod-sdk": "^1.2.0",
+        "rollup": "^4.22.4",
+        "rollup-plugin-cleanup": "^3.2.1",
+        "rollup-plugin-copy": "^3.5.0",
+        "rollup-plugin-import-css": "^3.5.7",
+        "conventional-changelog-cli": "^5.0.0",
+        "copyfiles": "^2.4.1",
+        "fs-extra": "^11.2.0",
+        "github-markdown-css": "^5.7.0",
+        "http-server": "^14.1.1",
+        "marked": "^14.1.2",
+        "typescript": "^5.6.2"
+    },
+    "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
+}
