@@ -4,7 +4,8 @@
     "scripts": {
         "type-check": "tsc --noEmit --allowJs --checkJs -p jsconfig.json",
         "build": "rollup -c rollup.config.js",
-        "dev": "pnpm type-check && pnpm resources:dev && pnpm -r build --configDebug --configBaseURL \"http://localhost:8080/\"",
+        "dev": "pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBaseURL \"http://localhost:8080/\"",
+        "dev:beta": "pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBeta --configBaseURL \"http://localhost:8080/\"",
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
         "resources:rel": "node ./scripts/.resource.js --rel",
         "resources:dev": "node ./scripts/.resource.js --dev",
@@ -57,5 +58,5 @@
         "marked": "^14.1.2",
         "typescript": "^5.6.2"
     },
-    "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
+    "packageManager": "pnpm@9.12.2"
 }
