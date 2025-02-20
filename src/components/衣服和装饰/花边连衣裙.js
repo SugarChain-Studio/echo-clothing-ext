@@ -7,7 +7,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 25,
+    Priority: 30,
     DefaultColor: [
         "#3F3F3F",
         "#3F3F3F",
