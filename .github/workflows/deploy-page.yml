@@ -6,8 +6,16 @@ on:
       - release
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -59,6 +67,9 @@ jobs:
 
       - name: Build Beta
         run: pnpm build --configBaseURL $PAGE_URL --configBeta
+      
+      - name: Create Change Log and Page
+        run: pnpm changelog && pnpm changelog:page
 
       - name: Checkout release
         uses: actions/checkout@v3
@@ -74,10 +85,11 @@ jobs:
       - name: Copy Resources
         run: pnpm resources:rel
 
-      - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          target_branch: gh-pages
-          build_dir: ./public
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: 'public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
