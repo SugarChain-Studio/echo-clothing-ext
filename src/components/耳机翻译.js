@@ -30,19 +30,18 @@ function validItemCraftingDesc(vAssets) {
  * @returns {Promise<{ translatedText: string }>}
  */
 function translateText(sourceText, targetLang) {
-    return fetch(
-        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURI(
-            sourceText
-        )}`
-    )
-        .then((response) => response.json())
-        .then((dt) => {
-            const [translatedText, retSourceText] = dt[0][0];
-            const retSourceLang = dt[2];
-            if (retSourceLang === targetLang || translatedText === sourceText || retSourceText !== sourceText)
-                return undefined;
-            else return Promise.resolve({ translatedText });
-        });
+    return new Promise(async (resolve) => {
+        const response = await fetch(
+            `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURI(
+                sourceText
+            )}`
+        );
+        const data = await response.json();
+        const [translatedText, retSourceText] = data[0][0];
+        const retSourceLang = data[2];
+        if (retSourceLang === targetLang || translatedText === sourceText || retSourceText !== sourceText) return;
+        resolve({ translatedText });
+    });
 }
 
 export default function () {
