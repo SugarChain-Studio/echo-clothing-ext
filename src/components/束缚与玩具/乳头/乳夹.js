@@ -37,9 +37,9 @@ const extended = {
 
 const translations = {
     CN: "乳夹",
-    EN: "乳夹",
-    RU: "乳夹",
-    UA: "乳夹",
+    EN: "Nipple Clamps",
+    RU: "Зажимы для сосков",
+    UA: "Зажими для сосків",
 };
 
 export default function () {

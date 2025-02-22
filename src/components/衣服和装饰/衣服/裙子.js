@@ -48,8 +48,8 @@ const asset = {
 
 /** @type {Translation.Entry} */
 const translation = {
-    CN: "裙子",
-    EN: "Lace dress",
+    CN: "呢子高腰裙子",
+    EN: "Woolen High Waist Skirt",
 };
 
 export default function () {
