@@ -29,7 +29,7 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "乳胶紧身衣",
-    EN: "乳胶紧身衣",
+    EN: "Latex Bodysuit",
 };
 
 export default function () {

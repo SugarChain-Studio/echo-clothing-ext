@@ -307,13 +307,14 @@ const translations = {
         },
         ItemHands: {
             拳击手套_Luzi: "Boxing Gloves",
-            伊偶_Luzi: "Yi Doll",
         },
         ItemHandheld: {
             电蚊拍_Luzi: "Electric Fly Swatter",
             书: "Book",
             奶瓶: "Milk Bottle",
             红包: "Red Packet",
+            拳击手套_Luzi: "Boxing Gloves",
+            伊偶_Luzi: "Cyäegha Doll",
         },
         ItemDevices: {
             树_Luzi: "Tree",

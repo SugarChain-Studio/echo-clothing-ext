@@ -19,7 +19,7 @@ const asset = {
 
 const translations = {
     CN: "拖鞋",
-    EN: "拖鞋",
+    EN: "Slippers",
 };
 
 

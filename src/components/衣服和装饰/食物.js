@@ -233,6 +233,7 @@ const translations = {
             棒棒糖_Luzi: "棒棒糖",
             烤鱼_Luzi: "烤鱼",
             鸡腿_Luzi: "烤鸡腿",
+            蛋糕卷_Luzi: "蛋糕卷",
             奶茶: "奶茶",
         },
         ItemMouth: {
@@ -252,7 +253,7 @@ const translations = {
             棒棒糖_Luzi: "Lollipop",
             烤鱼_Luzi: "Grilled Fish",
             鸡腿_Luzi: "Roasted Chicken Leg",
-            蛋糕卷_Luzi: "蛋糕卷",
+            蛋糕卷_Luzi: "Cake Roll",
             奶茶: "Milk Tea",
         },
         ItemMouth: {
@@ -260,7 +261,7 @@ const translations = {
             烤鱼_Luzi: "Grilled Fish",
             鸡腿_Luzi: "Roasted Chicken Leg",
             煎包_Luzi: "Fried Bun",
-            蛋糕卷_Luzi: "蛋糕卷",
+            蛋糕卷_Luzi: "Cake Roll",
         },
         ItemHood: {
             汉堡_Luzi: "Hamburger",
@@ -278,7 +279,7 @@ const translations = {
             棒棒糖_Luzi: "Леденец",
             烤鱼_Luzi: "Запечённая рыба",
             鸡腿_Luzi: "Запечённая куриная нога",
-            蛋糕卷_Luzi: "蛋糕卷",
+            蛋糕卷_Luzi: "Рулет",
         },
         ItemHood: {
             汉堡_Luzi: "Гамбургер",

@@ -315,6 +315,7 @@ const dialog = {
 
 const translations = {
     CN: "电击器",
+    EN: "Shock Device",
 };
 
 export default function () {

@@ -163,6 +163,8 @@ const translations = {
     CN: {
         Cloth: {
             披肩_Luzi: "披肩",
+        },
+        ClothAccessory: {
             披肩短_Luzi: "披肩短",
             披肩长_Luzi: "披肩长",
         },
@@ -170,6 +172,8 @@ const translations = {
     EN: {
         Cloth: {
             披肩_Luzi: "Shawl",
+        },
+        ClothAccessory: {
             披肩短_Luzi: "Short Shawl",
             披肩长_Luzi: "Long Shawl",
         },
@@ -177,6 +181,8 @@ const translations = {
     RU: {
         Cloth: {
             披肩_Luzi: "Палантин",
+        },
+        ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Длинный палантин",
         },
@@ -184,6 +190,8 @@ const translations = {
     UA: {
         Cloth: {
             披肩_Luzi: "Палантин",
+        },
+        ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Довгий палантин",
         },

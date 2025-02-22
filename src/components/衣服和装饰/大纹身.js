@@ -297,6 +297,9 @@ const dialogs = {
 };
 
 export default function () {
-    AssetManager.addAsset("BodyMarkings", asset, extended);
+    AssetManager.addAsset("BodyMarkings", asset, extended, {
+        CN: "大纹身",
+        EN: "Large Tattoo",
+    });
     AssetManager.addCustomDialog(dialogs);
 }

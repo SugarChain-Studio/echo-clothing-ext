@@ -12,7 +12,7 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "围脖",
-    EN: "围脖",
+    EN: "Scarf",
 };
 
 export default function () {
