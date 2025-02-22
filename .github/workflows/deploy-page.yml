@@ -18,9 +18,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v4
         with:
+          ref: main
           submodules: 'recursive'
+          fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -57,14 +60,6 @@ jobs:
 
           echo "PAGE_URL=$PAGE_URL" >> $GITHUB_ENV
 
-      - name: Checkout main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          submodules: 'recursive'
-          clean: false
-          fetch-depth: 0
-
       - name: Copy Beta Resources
         run: pnpm resources:rel --type beta
 
@@ -81,6 +76,9 @@ jobs:
           submodules: 'recursive'
           clean: false
           fetch-depth: 0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
   
       - name: Build
         run: pnpm build --configBaseURL $PAGE_URL
