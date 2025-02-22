@@ -39,12 +39,7 @@ const groups = [
             BodyCosplay: true,
             Default: false,
             Random: false,
-            Asset: [
-                {
-                    Name: "无_Luzi",
-                    Random: false,
-                },
-            ],
+            Asset: [],
             Color: ["Default"],
         },
         description: {
@@ -94,12 +89,7 @@ const groups = [
             EditOpacity: true,
             MinOpacity: 0,
             MaxOpacity: 1,
-            Asset: [
-                {
-                    Name: "无_Luzi",
-                    Random: false,
-                },
-            ],
+            Asset: [],
             Color: ["Default"],
         },
         description: {
@@ -118,12 +108,7 @@ const groups = [
             EditOpacity: true,
             MinOpacity: 0,
             MaxOpacity: 1,
-            Asset: [
-                {
-                    Name: "无_Luzi",
-                    Random: false,
-                },
-            ],
+            Asset: [],
             Color: ["Default"],
         },
         description: {
@@ -142,12 +127,7 @@ const groups = [
             EditOpacity: true,
             MinOpacity: 0,
             MaxOpacity: 1,
-            Asset: [
-                {
-                    Name: "无_Luzi",
-                    Random: false,
-                },
-            ],
+            Asset: [],
             Color: ["Default"],
         },
         description: {
@@ -165,12 +145,7 @@ const groups = [
             EditOpacity: true,
             MinOpacity: 0,
             MaxOpacity: 1,
-            Asset: [
-                {
-                    Name: "无_Luzi",
-                    Random: false,
-                },
-            ],
+            Asset: [],
             Color: ["Default"],
         },
         description: {
