@@ -44,7 +44,6 @@ jobs:
           release_branches: 'release'
           pre_release_branches: 'main'
           append_to_pre_release_tag: 'beta'
-          default_bump: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set page url
