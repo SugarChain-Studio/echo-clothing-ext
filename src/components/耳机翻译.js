@@ -1,22 +1,24 @@
 import ModManager from "@mod-utils/ModManager";
 
-/** @type {_.PRecord<CustomGroupName,Set<string>>} */
+/** @type {_.PRecord<CustomGroupName,Set<string> | "any">} */
 const speakingAssets = {
     ItemMisc: new Set(["TeddyBear", "PetPotato", "BunPlush", "FoxPlush", "Karl"]),
+    ItemHandheld: new Set(["Shark", "伊偶_Luzi", "Smartphone", "Phone1", "Phone2"]),
 };
 
-/** @type {_.PRecord<CustomGroupName,Set<string>>} */
+/** @type {_.PRecord<CustomGroupName,Set<string> | "any">} */
 const hearingAssets = {
-    ItemEars: new Set(["FuturisticEarphones"]),
+    ItemEars: "any",
 };
+
 /**
- * @param {_.PRecord<CustomGroupName,Set<string>>} vAssets
+ * @param {_.PRecord<CustomGroupName,Set<string> | "any">} vAssets
  * @returns {string | undefined}
  */
 function validItemCraftingDesc(vAssets) {
     for (const [groupName, assets] of Object.entries(vAssets)) {
         const item = InventoryGet(Player, /** @type{any}*/ (groupName));
-        if (item && assets.has(item.Asset.Name)) {
+        if (item && (assets == "any" || assets.has(item.Asset.Name)) ) {
             const m = item.Craft?.Description?.match(/["“](.+)["”]/);
             if (m) return m[1];
         }
@@ -45,7 +47,7 @@ function translateText(sourceText, targetLang) {
 }
 
 export default function () {
-    ModManager.progressiveHook("ChatRoomMessage").inject((args, next) => {
+    ModManager.progressiveHook("ChatRoomMessageDisplay").inject((args, next) => {
         const data = args[0];
         if (["Chat", "Whisper", "Emote"].includes(data.Type)) {
             if (Array.isArray(data.Dictionary) && data.Dictionary.find((d) => d["AutoTranslated"])) return;
