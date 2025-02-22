@@ -1,5 +1,6 @@
+import { CharacterTag } from "@mod-utils/charaTag";
 import ModManager from "@mod-utils/ModManager";
-import { Path } from "@mod-utils/path";
+import { ModInfo } from "@mod-utils/rollupHelper";
 
 const 服装拓展 = `data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
 G3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAG+ElEQVRo3u2abUxU6RXHf5eB
@@ -112,85 +113,32 @@ qqokPz/fm5eXp/F4PG1l9jLf/rYYAgS0XruBUmAzUAw45BZQlwH/h7ADu4Cn2o7rFUXRiojnOz2v
 C4AXgDxgMHA/MADo00HqF8DfgFwROfN/P68LgMHtesIIGIEgQAtoWl89V+smtvF7P6/775TdwG5g
 N7Ab+D3iv1pwu837LMfzAAAAAElFTkSuQmCC`;
 
-const status = Object.freeze({
-    echo: {
-        msg: "╰(*°▽°*)╯",
-        flag: "ECHO",
-        img: 服装拓展,
-    },
-    echoBeta: {
-        msg: "╰(*°▽°*)╯BETA",
-        flag: "ECHOBETA",
-        img: 服装拓展beta,
-    },
-    echo2: {
-        msg: "(._.)",
-        flag: "ECHO2",
-        img: 动作拓展,
-    },
-});
+/**
+ * @param {Parameters<globalThis["ChatRoomDrawCharacterStatusIcons"]>} arg0
+ * @returns
+ */
+function drawStatus([C, CharX, CharY, Zoom]) {
+    const tag = CharacterTag.getTag(C);
+    if (!tag) return;
 
-function flagStatus(data) {
-    const state = Object.values(status).find((s) => data.Content === s.msg);
-    if (!state) return;
+    const mod1Version = tag["服装拓展"];
+    if (mod1Version) {
+        if (mod1Version.includes("beta"))
+            DrawImageResize(服装拓展beta, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
+        else DrawImageResize(服装拓展, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
+    }
 
-    const CRCharacter = ChatRoomCharacterDrawlist.find((C) => C.MemberNumber === data.Sender);
-    if (CRCharacter) {
-        CRCharacter[state.flag] = true;
+    if (tag["动作拓展"]) {
+        DrawImageResize(动作拓展, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
     }
 }
 
-function drawStatus(drawArgs) {
-    const [C, CharX, CharY, Zoom] = drawArgs;
-    Object.values(status)
-        .filter((s) => C[s.flag])
-        .forEach((s) => DrawImageResize(s.img, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom));
-}
-
-function sendHidden(text) {
-    ServerSend("ChatRoomChat", {
-        Content: `${text}`,
-        Type: "Hidden",
-    });
-}
-
-function delayedSendHidden(text) {
-    setTimeout(() => {
-        sendHidden(text);
-    }, 2000);
-}
-
 export default function () {
-    ModManager.hookFunction("ChatRoomSync", 10, (args, next) => {
-        delayedSendHidden(status.echo.msg);
-        next(args);
-    });
+    CharacterTag.myTag(ModInfo.name, ModInfo.version);
 
-    ModManager.hookFunction("ChatRoomSyncMemberLeave", 10, (args, next) => {
-        delayedSendHidden(status.echo.msg);
-        next(args);
-    });
+    CharacterTag.init();
 
-    ModManager.hookFunction("ChatRoomMessage", 10, (args, next) => {
-        let data = args[0];
-        if (data.Content === "ServerEnter") {
-            delayedSendHidden(status.echo.msg);
-        }
-        next(args);
-    });
-
-    ModManager.hookFunction("ChatRoomMessage", 0, (args, next) => {
-        const data = args[0];
-        if (data.Type === "Hidden") {
-            flagStatus(data);
-        }
-        next(args);
-    });
-
-    ModManager.hookFunction("ChatRoomDrawCharacterStatusIcons", 10, (args, next) => {
-        if (ChatRoomHideIconState == 0) {
-            drawStatus(args);
-        }
-        next(args);
+    ModManager.progressiveHook("ChatRoomDrawCharacterStatusIcons", 10).inject((args, next) => {
+        if (ChatRoomHideIconState == 0) drawStatus(args);
     });
 }
