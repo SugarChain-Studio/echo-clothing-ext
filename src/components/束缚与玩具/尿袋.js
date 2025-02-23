@@ -190,12 +190,11 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
                 // 10800 = 3 hours
                 property.Liquid = Math.min(1, delta / 1000 / 10800.0 + property.Liquid);
                 ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
+                CharacterRefresh(C, false);
             }
             mData.lastUpdate = now;
         }
     }
-
-    Tools.drawUpdate(C, mData);
 }
 
 /** @type {NoArchItemConfig} */
