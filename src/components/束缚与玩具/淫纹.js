@@ -12,7 +12,7 @@ import { VersionSupport } from "@mod-utils/VersionSupport";
  */
 
 /**
- * @typedef { { ArousalCheckTimer:number, NextMasturbateTime:number, Frame: number, FrameTimer:number }} 淫纹DataType
+ * @typedef { { ArousalCheckTimer:number, NextMasturbateTime:number, BlinkCycle: number, BlinkTimer:number, FrameTimer:number }} 淫纹DataType
  */
 
 /** @type { AssetGroupItemName } */
@@ -201,7 +201,8 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
 
     if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/ (Item.Property));
 
-    Tools.drawUpdate(C, Data);
+    if(/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow)
+        Tools.drawUpdate(C, Data);
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, 淫纹DataType>} */
@@ -212,10 +213,21 @@ function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) 
         if (!property.Glow) return { Opacity: 0 };
 
         const Data = PersistentData();
-        const TwinkleSpeed = C.ArousalSettings ? 110 - C.ArousalSettings.Progress : 50;
-        Data.Frame = Data.Frame || 0;
-        Data.Frame = (Data.Frame + 1) % TwinkleSpeed;
-        return { Opacity: 0.7 + 0.3 * Math.cos(((Data.Frame * 1) / TwinkleSpeed) * 2 * Math.PI) };
+
+        const now = Date.now();
+
+        // 闪烁周期时间, 0.5 ~ 5 秒
+        const TwinkleCycleTime = (C.ArousalSettings ? Math.max(10, 110 - C.ArousalSettings.Progress) : 100) * 50;
+
+        // 随机偏移一点时间，避免同步闪烁
+        if(!Data.BlinkCycle) Data.BlinkCycle = Math.floor(Math.random() * 1000);  
+        if(!Data.BlinkTimer) Data.BlinkTimer = now;
+
+        const delta = now - Data.BlinkTimer;
+        Data.BlinkTimer = now;
+        Data.BlinkCycle += delta / TwinkleCycleTime * Math.PI * 2;
+
+        return { Opacity: 0.7 + 0.3 * Math.cos(Data.BlinkCycle) };
     }
 }
 
