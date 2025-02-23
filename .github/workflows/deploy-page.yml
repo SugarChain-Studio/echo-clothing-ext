@@ -66,7 +66,11 @@ jobs:
         run: pnpm build --configBaseURL $PAGE_URL --configBeta
       
       - name: Create Change Log and Page
-        run: pnpm changelog && pnpm changelog:page
+        run: |
+          git tag | grep 'beta' | xargs -r git tag -d
+          pnpm changelog 
+          pnpm changelog:page
+          git fetch --tags
 
       - name: Checkout release
         uses: actions/checkout@v3
