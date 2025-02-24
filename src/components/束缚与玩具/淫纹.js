@@ -12,7 +12,7 @@ import { VersionSupport } from "@mod-utils/VersionSupport";
  */
 
 /**
- * @typedef { { ArousalCheckTimer:number, NextMasturbateTime:number, BlinkCycle: number, BlinkTimer:number, FrameTimer:number }} 淫纹DataType
+ * @typedef { { ArousalCheckTimer:number, NextMasturbateTime:number, BlinkCycle: number, BlinkTimer:number }} MyDataType
  */
 
 /** @type { AssetGroupItemName } */
@@ -46,7 +46,7 @@ function AssetsItemPelvis随机自慰() {
 
 /**
  * @param {Character} player
- * @param {淫纹DataType} data
+ * @param {MyDataType} data
  * @param {ExtendItemProperties} property
  */
 function updateRuns(player, data, property) {
@@ -195,7 +195,7 @@ function dialogClickHook(Data, originalFunction) {
     }
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, 淫纹DataType>} */
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MyDataType>} */
 function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     const Data = PersistentData();
 
@@ -205,7 +205,7 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
         Tools.drawUpdate(C, Data);
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, 淫纹DataType>} */
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MyDataType>} */
 function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) {
     if (L === "发光") {
         const property = /** @type {ExtendItemProperties} */ (Property);

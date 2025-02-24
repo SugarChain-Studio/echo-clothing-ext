@@ -45,7 +45,7 @@ const extended = {
 };
 
 /**
- * @typedef { { Frame?:number, FrameTimer?:number, FrameDelay?:number, Draws: boolean } } MyDataType
+ * @typedef { { Frame?:number, FrameDelay?:number, Draws: boolean } } MyDataType
  */
 
 // 只有10张图片
@@ -57,7 +57,6 @@ const FrameDef = Array.from({ length: MaxFrame }, (_, i) => i);
 function beforeDraw({ PersistentData, L, LayerType }) {
     const Data = PersistentData();
     Data.Frame = Data.Frame || 0;
-    Data.FrameTimer = Data.FrameTimer || 0;
 
     Data.Frame = Data.Draws ? (Data.Frame + 1) % MaxFrame : 0;
     return { LayerType: FrameDef[Data.Frame].toString() };
