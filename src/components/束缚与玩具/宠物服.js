@@ -20,6 +20,7 @@ const asset = {
         "HandsLeft",
         "HandsRight",
     ],
+    ParentGroup: "BodyUpper",
     Fetish: ["Leather", "Pet"],
     Prerequisite: ["HasBreasts"],
     AllowActivePose: ["BaseUpper", "OverTheHead", "Yoked", "AllFours"],
@@ -41,13 +42,17 @@ const asset2 = {
     Random: false,
     Gender: "F",
     Top: 0,
-    Left: 0,
+    Left: {
+        Kneel: 0,
+        KneelingSpread: 30,
+    },
     // Difficulty: 12,
     // SelfBondage: 8,
     // Time: 40,
     // RemoveTime: 30,
     // AllowLock: true,
     // AllowTighten: true,
+    ParentGroup: "BodyLower",
     Fetish: ["Leather", "Pet"],
     AllowActivePose: ["Kneel", "KneelingSpread", "AllFours"],
     SetPose: ["Kneel", "KneelingSpread"],
@@ -74,6 +79,6 @@ const translations2 = {
 };
 
 export default function () {
-    // AssetManager.addAsset("ItemArms", asset, undefined, translations);
-    // AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
+    AssetManager.addAsset("ItemArms", asset, undefined, translations);
+    AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
 }
