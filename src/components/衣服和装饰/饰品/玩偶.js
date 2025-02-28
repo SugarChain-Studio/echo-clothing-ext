@@ -113,6 +113,16 @@ const asset = {
         { Name: "黛烟", AllowTypes: { x: 7 } },
         { Name: "空", AllowTypes: { x: 8 } },
 
+        // 笠花和An'an的家
+        { Name: "笠花", AllowTypes: { lihua: 1 } },
+        { Name: "Anan", AllowTypes: { lihua: 2 } },
+        { Name: "空", AllowTypes: { lihua: 3 } },
+        { Name: "空", AllowTypes: { lihua: 4 } },
+        { Name: "空", AllowTypes: { lihua: 5 } },
+        { Name: "空", AllowTypes: { lihua: 6 } },
+        { Name: "空", AllowTypes: { lihua: 7 } },
+        { Name: "空", AllowTypes: { lihua: 8 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -133,8 +143,8 @@ const asset = {
         { Name: "小铃铛", AllowTypes: { l: 17 } },
         { Name: "莉莉丝", AllowTypes: { l: 18 } },
         { Name: "LaBi", AllowTypes: { l: 19 } },
-        { Name: "空", AllowTypes: { l: 20 } },
-        { Name: "空", AllowTypes: { l: 21 } },
+        { Name: "Mutsuki", AllowTypes: { l: 20 } },
+        { Name: "澈羽枫灵", AllowTypes: { l: 21 } },
         { Name: "空", AllowTypes: { l: 22 } },
         { Name: "空", AllowTypes: { l: 23 } },
         { Name: "空", AllowTypes: { l: 24 } },
@@ -152,7 +162,9 @@ const typeNames = {
     y: "小夜家玩偶",
     hz: "盒子的小黑屋玩偶",
     x: "吸血鬼城堡",
+    lihua: "笠花和An'an的家",
     l: "路过的玩偶",
+    
 };
 
 const translations = { CN: "玩偶", EN: "Plushies" };
@@ -161,6 +173,7 @@ const translations = { CN: "玩偶", EN: "Plushies" };
 const predefDialog = {
     CN: {
         ItemMisc玩偶_LuziOptionhz4: "Neko",
+        ItemMisc玩偶_LuziOptionlihua2: "An'an",
 
         ItemMisc玩偶_LuziSetd2: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
         ItemMisc玩偶_LuziSets3: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
