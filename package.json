@@ -6,6 +6,7 @@
         "dev": "pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBaseURL \"http://localhost:8080/\"",
         "dev:beta": "pnpm type-check && pnpm resources:dev --type beta && pnpm build --configDebug --configBeta --configBaseURL \"http://localhost:8080/\"",
         "changelog": "conventional-changelog -p angular -o CHANGELOG.md -r 0",
+        "changelog:stdout": "conventional-changelog -p angular",
         "changelog:page": "node ./scripts/.changelog.js CHANGELOG.md public/changelog.html",
         "resources:rel": "node ./scripts/.resource.js --rel",
         "resources:dev": "node ./scripts/.resource.js --dev",

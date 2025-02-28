@@ -1,0 +1,38 @@
+name: Version Notification
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Remove local beta tags
+        run: git tag | grep 'beta' | xargs -r git tag -d
+
+      - name: Generate changelog and set to output
+        run: |
+          $CHANGELOG=$(pnpm changelog:stdout -r 1)
+          echo "::set-output name=changelog::$CHANGELOG"
+      
+      - name: Send discord message
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: |
+            **New version released!**
+            ${{ steps.check-version.outputs.changelog }}
