@@ -24,9 +24,14 @@ const asset = {
     Fetish: ["Leather", "Pet"],
     Prerequisite: ["HasBreasts"],
     AllowActivePose: ["BaseUpper", "OverTheHead", "Yoked", "AllFours"],
-    SetPose: ["BaseUpper", "OverTheHead", "Yoked"],
+    SetPose: ["BaseUpper"],
     Effect: [E.Block, E.BlockWardrobe],
     Block: ["ItemHands", "ItemHandheld"],
+    PoseMapping: {
+        OverTheHead: "OverTheHead",
+        Yoked: "Yoked",
+        AllFours: "AllFours",
+    },
     Layer: [
         { Name: "手臂" },
         { Name: "拘束" },
@@ -44,7 +49,7 @@ const asset2 = {
     Top: 0,
     Left: {
         Kneel: 0,
-        KneelingSpread: 30,
+        KneelingSpread: 60,
     },
     // Difficulty: 12,
     // SelfBondage: 8,
@@ -55,7 +60,11 @@ const asset2 = {
     ParentGroup: "BodyLower",
     Fetish: ["Leather", "Pet"],
     AllowActivePose: ["Kneel", "KneelingSpread", "AllFours"],
-    SetPose: ["Kneel", "KneelingSpread"],
+    SetPose: ["Kneel"],
+    PoseMapping: {
+        Kneel: "Kneel",
+        KneelingSpread: "KneelingSpread",
+    },
     Layer: [
         { Name: "拘束" },
         { Name: "拘束高光" },
