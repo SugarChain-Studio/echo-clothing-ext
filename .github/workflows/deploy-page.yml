@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - release
-      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -97,3 +97,52 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  version-notification:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release
+        uses: actions/checkout@v4
+        with:
+          ref: release
+          submodules: 'recursive'
+          fetch-depth: 0
+        
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install conventional-changelog
+        run: pnpm add -g conventional-changelog-cli
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Remove local beta tags
+        run: git tag | grep 'beta' | xargs -r git tag -d
+
+      - name: Generate changelog info and set to output
+        id: changelog
+        run: |
+          changelog=$(conventional-changelog -p angular -r 1 | sed '/^# /d' | sed '/^$/N;/^\n$/D')
+          version=$(git describe --tags --abbrev=0)
+          name=$(node ./scripts/.package-props.js displayName)
+
+          echo "# [$name] New version released!" >> temp.txt
+          echo "Version: $version" >> temp.txt
+          echo "$changelog" >> temp.txt
+
+          echo 'message<<EOF' >> $GITHUB_OUTPUT
+          cat temp.txt >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+          
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: ${{ steps.changelog.outputs.message }}
