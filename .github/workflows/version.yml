@@ -27,18 +27,19 @@ jobs:
       - name: Generate changelog info and set to output
         id: changelog
         run: |
-          $CHANGELOG=$(pnpm --silent changelog:stdout -r 1)
+          $CHANGELOG=$(conventional-changelog -p angular -r 1)
           echo "::set-output name=changelog::$CHANGELOG"
           $VERSION=$(git describe --tags --abbrev=0)
           echo "::set-output name=version::$VERSION"
-          $NAME=$(pnpm --silent package-props displayName)
+          $NAME=$(node ./scripts/.package-props.js displayName displayName)
           echo "::set-output name=name::$NAME"
-      
-      - name: Send discord message
-        uses: Ilshidur/action-discord@v2
+
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        uses: Ilshidur/action-discord@master
         with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: |
+          args: |
             ** [${{ steps.changelog.outputs.name }}] New version released!**
             Version: ${{ steps.changelog.outputs.version }}
             ${{ steps.changelog.outputs.changelog }}
