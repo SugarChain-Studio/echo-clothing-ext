@@ -50,6 +50,7 @@ const asset2 = {
     Left: {
         Kneel: 0,
         KneelingSpread: 60,
+        AllFours: 0,
     },
     // Difficulty: 12,
     // SelfBondage: 8,
