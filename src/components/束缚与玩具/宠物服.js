@@ -90,6 +90,6 @@ const translations2 = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemArms", asset, undefined, translations);
-    AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
+    // AssetManager.addAsset("ItemArms", asset, undefined, translations);
+    // AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
 }
