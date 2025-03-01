@@ -11,6 +11,7 @@
         "resources:rel": "node ./scripts/.resource.js --rel",
         "resources:dev": "node ./scripts/.resource.js --dev",
         "serve": "http-server -p 8080 --cors public",
+        "package-props": "node ./scripts/.package-props.js",
         "git:release": "git checkout release && git merge origin/main && git push && git checkout main"
     },
     "repository": {

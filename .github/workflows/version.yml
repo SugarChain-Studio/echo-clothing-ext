@@ -24,15 +24,21 @@ jobs:
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
 
-      - name: Generate changelog and set to output
+      - name: Generate changelog info and set to output
+        id: changelog
         run: |
-          $CHANGELOG=$(pnpm changelog:stdout -r 1)
+          $CHANGELOG=$(pnpm --silent changelog:stdout -r 1)
           echo "::set-output name=changelog::$CHANGELOG"
+          $VERSION=$(git describe --tags --abbrev=0)
+          echo "::set-output name=version::$VERSION"
+          $NAME=$(pnpm --silent package-props displayName)
+          echo "::set-output name=name::$NAME"
       
       - name: Send discord message
         uses: Ilshidur/action-discord@v2
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           content: |
-            **New version released!**
-            ${{ steps.check-version.outputs.changelog }}
+            ** [${{ steps.changelog.outputs.name }}] New version released!**
+            Version: ${{ steps.changelog.outputs.version }}
+            ${{ steps.changelog.outputs.changelog }}
