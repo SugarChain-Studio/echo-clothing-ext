@@ -64,6 +64,7 @@ const asset2 = {
     PoseMapping: {
         Kneel: "Kneel",
         KneelingSpread: "KneelingSpread",
+        AllFours: "AllFours",
     },
     Layer: [
         { Name: "拘束" },
