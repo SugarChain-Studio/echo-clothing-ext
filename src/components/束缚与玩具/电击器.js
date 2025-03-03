@@ -22,7 +22,7 @@ function beforeDraw(data, originalFunction, { L, PersistentData }) {
 function setNextShockRunTime(C, Item) {
     if (!C.IsPlayer()) return;
     Item.Property.NextShockTime = shockRunNextTime();
-    if (CurrentScreen == "ChatRoom") {
+    if (ServerPlayerIsInChatRoom()) {
         ChatRoomCharacterItemUpdate(Player, Item.Asset.Group.Name);
     }
 }

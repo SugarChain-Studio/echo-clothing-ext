@@ -3,7 +3,13 @@ import { VersionSupport } from "@mod-utils/VersionSupport";
 import { Tools } from "@mod-utils/Tools";
 
 /**
- * @typedef { globalThis.ItemProperties & { Liquid: number; Auto: boolean } } ExtendItemProperties
+ * @typedef {Object} ExtendItemPropertiesPart
+ * @property {number} Liquid
+ * @property {boolean} Auto
+ */
+
+/**
+ * @typedef { globalThis.ItemProperties & ExtendItemPropertiesPart } ExtendItemProperties
  */
 
 /** @type {CustomAssetDefinition} */
@@ -93,7 +99,7 @@ function dialogClickHook(Data, originalFunction) {
         if (!C) return;
         ExtendedItemCustomClickAndPush(C, DialogFocusItem, key, () => func(), false, false);
         CharacterRefresh(C, false, false);
-        if (CurrentScreen == "ChatRoom") {
+        if (ServerPlayerIsInChatRoom()) {
             ChatRoomCharacterItemUpdate(C, DialogFocusItem.Asset.Group.Name);
 
             const Dictionary = new DictionaryBuilder()
