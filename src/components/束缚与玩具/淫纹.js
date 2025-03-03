@@ -111,7 +111,7 @@ function AssetsItemPelvis随机自慰(C) {
         return;
     }
 
-    const groups = activity.Target.filter((x) => !InventoryGroupIsBlockedForCharacter(Player, x, true));
+    const groups = activity.Target.filter((x) => ActivityCanBeDone(Player, "MasturbateHand", x));
     if (groups.length === 0) {
         whenBlocked();
         return;
@@ -402,17 +402,17 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
 
         淫纹强制高潮: "SourceCharacter通过AssetName上的魔法令TargetCharacter强制高潮.",
 
-        自慰Block00: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的私处.",
-        自慰Block01: "SourceCharacter急切的想要抚慰自己,扭动肩膀,尽可能让乳尖受到进一步刺激.",
-        自慰Block02: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦私处,但仍难以得到刺激.",
-        自慰Block03: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但她的手臂完全无法动弹.",
-        自慰Block04:
+        自慰BlockV0: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的私处.",
+        自慰BlockV1: "SourceCharacter急切的想要抚慰自己,扭动肩膀,尽可能让乳尖受到进一步刺激.",
+        自慰BlockV2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦私处,但仍难以得到刺激.",
+        自慰BlockV3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但她的手臂完全无法动弹.",
+        自慰BlockV4:
             "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着私处摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
-        自慰Block10: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的阴茎.",
-        自慰Block11: "SourceCharacter急切的想要抚慰自己,扭动身体,尽可能磨蹭阴茎龟头.",
-        自慰Block12: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦龟头,但仍难以得到刺激.",
-        自慰Block13: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但他的手臂完全无法动弹.",
-        自慰Block14:
+        自慰BlockP0: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的阴茎.",
+        自慰BlockP1: "SourceCharacter急切的想要抚慰自己,扭动身体,尽可能磨蹭阴茎龟头.",
+        自慰BlockP2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦龟头,但仍难以得到刺激.",
+        自慰BlockP3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但他的手臂完全无法动弹.",
+        自慰BlockP4:
             "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着阴茎摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
     },
     EN: {
@@ -429,25 +429,25 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
 
         淫纹强制高潮: "SourceCharacter uses magic on AssetName to force TargetCharacter to orgasm.",
 
-        自慰Block00:
+        自慰BlockV0:
             "SourceCharacter eagerly wants to pleasure themselves, trembling and squeezing their thighs together to stimulate their private areas as much as possible.",
-        自慰Block01:
+        自慰BlockV1:
             "SourceCharacter eagerly wants to pleasure themselves, wriggling their shoulders to further stimulate their nipples.",
-        自慰Block02:
+        自慰BlockV2:
             "SourceCharacter eagerly wants to pleasure themselves, squeezing their thighs together to rub their private areas but still finding it difficult to stimulate themselves.",
-        自慰Block03:
+        自慰BlockV3:
             "SourceCharacter eagerly wants to pleasure themselves, struggling with their arms to masturbate, but their arms are completely immobilized.",
-        自慰Block04:
+        自慰BlockV4:
             "SourceCharacter eagerly wants to pleasure themselves, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰Block10:
+        自慰BlockP0:
             "SourceCharacter was eager to soothe himself, trembling and gripping his legs, trying to stimulate his penis as much as possible.",
-        自慰Block11:
+        自慰BlockP1:
             "SourceCharacter is eager to soothe himself, twisting his body and rubbing against the glans penis as much as possible.",
-        自慰Block12:
+        自慰BlockP2:
             "SourceCharacter urgently wanted to comfort himself, clamping his legs and rubbing his glans, but still struggled to get stimulation.",
-        自慰Block13:
+        自慰BlockP3:
             "SourceCharacter desperately wanted to comfort himself, struggling with his arms to masturbate, but his arms were completely immobile.",
-        自慰Block14:
+        自慰BlockP4:
             "SourceCharacter urgently wanted to comfort himself, and in vain, his arm groped towards his penis, but the joy that was so close at hand was so unattainable at this moment.",
     },
     UA: {
@@ -461,25 +461,25 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
             "SourceCharacter використовує магію на AssetName, щоб зупинити примусову мастурбацію TargetCharacter.",
         淫纹强制高潮:
             "SourceCharacter використовує магію на AssetName, щоб змусити TargetCharacter досягти оргазму.",
-        自慰Block00:
+        自慰BlockV0:
             "SourceCharacter з нетерпінням хоче чіпати себе, стискає свої лахи як їхні ноги трусяться від жаги стимулювати себе якомога більше.",
-        自慰Block01:
+        自慰BlockV1:
             "SourceCharacter з нетерпінням хоче чіпати себе, трусячи своїми плечима з жагою стимулювати свої груди й соски.",
-        自慰Block02:
+        自慰BlockV2:
             "SourceCharacter з нетерпінням хоче чіпати себе, стискає свої лахи як їхні ноги трусяться від жаги стимулювати себе якомога більше але натомість не получається стимулювати себе так просто.",
-        自慰Block03:
+        自慰BlockV3:
             "SourceCharacter з нетерпінням хоче чіпати себе, пробуючи чинити опір проти щупальевого косьюму як їхні руки зв'язані позаду їх.",
-        自慰Block04:
+        自慰BlockV4:
             "SourceCharacter з нетерпінням хоче чіпати себе, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰Block10:
+        自慰BlockP0:
             "SourceCharacter з нетерпінням хоче охолодити свою жагу, як його тіло труситься і він стискає свої ляхи, пробуючи стимулювати себе якомога більше.",
-        自慰Block11:
+        自慰BlockP1:
             "SourceCharacter з нетерпінням хоче охолодити свою жагу, як він повертає своє тіло всік і всяк якомога більше.",
-        自慰Block12:
+        自慰BlockP2:
             "SourceCharacter терміново хоче знизити жагу, як він стискає свої ляхи і тре свою голівку пісюна, але з невдалою спробою пробує стимулювати себе.",
-        自慰Block13:
+        自慰BlockP3:
             "SourceCharacter терміново хоче знизити жагу, намагаючись використати свої руки з користю і мастурбувати, але натомість його руки жалюгідно нерухомі.",
-        自慰Block14:
+        自慰BlockP4:
             "SourceCharacter з гіганською жагою чіпати себе, цого рука слідує до його пісюна стискаючи з впевненістю, натомість не отримує доступне задоволення в руці.",
 
     },
@@ -495,25 +495,25 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
             "SourceCharacter использует магию на AssetName, чтобы остановить принудительную мастурбацию TargetCharacter.",
         淫纹强制高潮:
             "SourceCharacter использует магию на AssetName, чтобы заставить TargetCharacter кончить.",
-        自慰Block00:
+        自慰BlockV0:
             "SourceCharacter eagerly wants to pleasure themselves, trembling and squeezing their thighs together to stimulate their private areas as much as possible.",
-        自慰Block01:
+        自慰BlockV1:
             "SourceCharacter eagerly wants to pleasure themselves, wriggling their shoulders to further stimulate their nipples.",
-        自慰Block02:
+        自慰BlockV2:
             "SourceCharacter eagerly wants to pleasure themselves, squeezing their thighs together to rub their private areas but still finding it difficult to stimulate themselves.",
-        自慰Block03:
+        自慰BlockV3:
             "SourceCharacter eagerly wants to pleasure themselves, struggling with their arms to masturbate, but their arms are completely immobilized.",
-        自慰Block04:
+        自慰BlockV4:
             "SourceCharacter eagerly wants to pleasure themselves, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰Block10:
+        自慰BlockP0:
             "SourceCharacter was eager to soothe himself, trembling and gripping his legs, trying to stimulate his penis as much as possible.",
-        自慰Block11:
+        自慰BlockP1:
             "SourceCharacter is eager to soothe himself, twisting his body and rubbing against the glans penis as much as possible.",
-        自慰Block12:
+        自慰BlockP2:
             "SourceCharacter urgently wanted to comfort himself, clamping his legs and rubbing his glans, but still struggled to get stimulation.",
-        自慰Block13:
+        自慰BlockP3:
             "SourceCharacter desperately wanted to comfort himself, struggling with his arms to masturbate, but his arms were completely immobile.",
-        自慰Block14:
+        自慰BlockP4:
             "SourceCharacter urgently wanted to comfort himself, and in vain, his arm groped towards his penis, but the joy that was so close at hand was so unattainable at this moment.",
     },
 });
