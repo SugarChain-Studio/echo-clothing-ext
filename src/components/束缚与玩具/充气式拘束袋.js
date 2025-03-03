@@ -360,7 +360,7 @@ const translations = {
 
 export default function () {
     AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addAsset("ItemArms", asset, extended, translations);
+    AssetManager.addAsset("ItemArms", { ...asset, DynamicGroupName: "ItemDevices" }, extended, translations);
     AssetManager.addCustomDialog(dialog);
     AssetManager.addCustomDialog(dialog2);
 }
