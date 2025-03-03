@@ -650,8 +650,7 @@ const translations2 = {
 };
 
 export default function () {
-    ChatRoomEvents.init();
-    ChatRoomEvents.instance.on("Action", (data) => onActionHandler(data));
+    ChatRoomEvents.on("Action", (data) => onActionHandler(data));
 
     AssetManager.addAsset("ItemPelvis", asset, extended, translations);
     AssetManager.addAsset("ItemTorso", { ...asset, DynamicGroupName: "ItemPelvis" }, extended, translations);
