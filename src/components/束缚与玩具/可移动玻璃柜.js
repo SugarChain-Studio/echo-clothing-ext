@@ -20,64 +20,22 @@ const asset = {
     SetPose: ["BackElbowTouch", "LegsClosed"],
     Priority: 62,
     Layer: [
-        { Name: "框架",
-            ParentGroup: VersionSupport.NoParentGroup
-        },
-        { Name: "颈部护垫",
-            ParentGroup: VersionSupport.NoParentGroup
-        },
-        { Name: "腿部护垫",
-            ParentGroup: "BodyLower"
-        },        
-        { Name: "不透明玻璃后",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 1},
-            Priority :6
-        },
-        { Name: "透明玻璃后",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 0 },
-            Priority :6
-        },
-        { Name: "分隔",
-            ParentGroup: VersionSupport.NoParentGroup,
-            Priority :6
-        },
-        { Name: "不透明玻璃上",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 1 , up: 0 },
-        },
-        { Name: "透明玻璃上",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 0 , up: 0 },
-        },
-        { Name: "不透明玻璃下",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 1 , down: 0 },
-        },
-        { Name: "透明玻璃下",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { t: 0 , down: 0 },
-        },        
-        { Name: "反光上",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: {  up: 0 },
-        },
-        { Name: "反光下",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: {  down: 0 },
-        },       
-        { Name: "铰链上",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { up: 0 },
-        },
-        { Name: "铰链下",
-            ParentGroup: VersionSupport.NoParentGroup,
-            AllowTypes: { down: 0 },
-        },
+        { Name: "框架", ParentGroup: VersionSupport.NoParentGroup },
+        { Name: "颈部护垫", ParentGroup: VersionSupport.NoParentGroup },
+        { Name: "腿部护垫", ParentGroup: "BodyLower" },
+        { Name: "不透明玻璃后", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1 }, Priority: 6 },
+        { Name: "透明玻璃后", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0 }, Priority: 6 },
+        { Name: "分隔", ParentGroup: VersionSupport.NoParentGroup, Priority: 6 },
+        { Name: "不透明玻璃上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1, up: 0 } },
+        { Name: "透明玻璃上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0, up: 0 } },
+        { Name: "不透明玻璃下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1, down: 0 } },
+        { Name: "透明玻璃下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0, down: 0 } },
+        { Name: "反光上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { up: 0 } },
+        { Name: "反光下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { down: 0 } },
+        { Name: "铰链上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { up: 0 } },
+        { Name: "铰链下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { down: 0 } },
     ],
 };
-
 
 const translations = {
     CN: "可移动玻璃柜",
@@ -92,57 +50,47 @@ const extended = {
     ChangeWhenLocked: false,
     Modules: [
         {
-            Name: "玻璃类型",          
+            Name: "玻璃类型",
             Key: "t",
             DrawImages: false,
-            Options: [          
-                {                  
-                   
-                },       
-                {
-                    
-                }
-            ],
-        },{
-            Name: "胸部玻璃门",          
+            Options: [{}, {}],
+        },
+        {
+            Name: "胸部玻璃门",
             Key: "up",
             DrawImages: false,
-            Options: [          
-                {      
-                   Property: { 
-                   Block: ["ItemHands",
-                     "ItemHandheld", 
-                     "ItemArms",
-                     "ItemBreast", 
-                     "ItemTorso2", 
-                     "ItemNipples", 
-                     "ItemNipplesPiercings"],
-                   }
-                },       
+            Options: [
                 {
-                    
-                }
-            ],
-        },{
-            Name: "腹部玻璃门",          
-            Key: "down",
-            DrawImages: false,
-            Options: [          
-                {               
-                   Property: { 
-                   Block: ["ItemPelvis",
-                     "ItemButt",
-                     "ItemVulva",
-                     "ItemVulvaPiercings"]
-                   }
-                },       
-                {
-                    
-                }
+                    Property: {
+                        Block: [
+                            "ItemHands",
+                            "ItemHandheld",
+                            "ItemArms",
+                            "ItemBreast",
+                            "ItemTorso2",
+                            "ItemNipples",
+                            "ItemNipplesPiercings",
+                        ],
+                    },
+                },
+                {},
             ],
         },
-    ] };
-
+        {
+            Name: "腹部玻璃门",
+            Key: "down",
+            DrawImages: false,
+            Options: [
+                {
+                    Property: {
+                        Block: ["ItemPelvis", "ItemButt", "ItemVulva", "ItemVulvaPiercings"],
+                    },
+                },
+                {},
+            ],
+        },
+    ],
+};
 
 /** @type {Translation.Dialog} */
 const dialogs = {
@@ -157,7 +105,7 @@ const dialogs = {
         ItemTorso可移动玻璃柜Select胸部玻璃门: "选择胸部玻璃门",
         ItemTorso可移动玻璃柜Module胸部玻璃门: "胸部玻璃门",
         ItemTorso可移动玻璃柜Optionup0: "关上",
-        ItemTorso可移动玻璃柜Optionup1: "打开",        
+        ItemTorso可移动玻璃柜Optionup1: "打开",
         ItemTorso可移动玻璃柜Setup0: "SourceCharacter关上了DestinationCharacter胸部的玻璃门",
         ItemTorso可移动玻璃柜Setup1: "SourceCharacter打开了DestinationCharacter胸部的玻璃门",
         ItemTorso可移动玻璃柜Select腹部玻璃门: "选择腹部玻璃门",
@@ -173,7 +121,8 @@ const dialogs = {
         ItemTorso可移动玻璃柜Module玻璃类型: "Glass Type",
         ItemTorso可移动玻璃柜Optiont0: "Transparent Glass",
         ItemTorso可移动玻璃柜Optiont1: "Opaque Glass",
-        ItemTorso可移动玻璃柜Sett0: "SourceCharacter replaced DestinationCharacter's glass cabinet with transparent glass",
+        ItemTorso可移动玻璃柜Sett0:
+            "SourceCharacter replaced DestinationCharacter's glass cabinet with transparent glass",
         ItemTorso可移动玻璃柜Sett1: "SourceCharacter replaced DestinationCharacter's glass cabinet with opaque glass",
         ItemTorso可移动玻璃柜Select胸部玻璃门: "Select Breast Glass Door",
         ItemTorso可移动玻璃柜Module胸部玻璃门: "Breast Glass Door",
@@ -187,15 +136,17 @@ const dialogs = {
         ItemTorso可移动玻璃柜Optiondown1: "Open",
         ItemTorso可移动玻璃柜Setdown0: "SourceCharacter closed DestinationCharacter's abdominal glass door",
         ItemTorso可移动玻璃柜Setdown1: "SourceCharacter opened DestinationCharacter's abdominal glass door",
-        },
+    },
     RU: {
         ItemTorso可移动玻璃柜SelectBase: "Выберите крепление",
         ItemTorso可移动玻璃柜Select玻璃类型: "Выберите тип стекла",
         ItemTorso可移动玻璃柜Module玻璃类型: "Тип стекла",
         ItemTorso可移动玻璃柜Optiont0: "Прозрачное стекло",
         ItemTorso可移动玻璃柜Optiont1: "Непрозрачное стекло",
-        ItemTorso可移动玻璃柜Sett0: "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на прозрачное стекло",
-        ItemTorso可移动玻璃柜Sett1: "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на непрозрачное стекло",
+        ItemTorso可移动玻璃柜Sett0:
+            "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на прозрачное стекло",
+        ItemTorso可移动玻璃柜Sett1:
+            "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на непрозрачное стекло",
         ItemTorso可移动玻璃柜Select胸部玻璃门: "Выберите стеклянную дверцу груди",
         ItemTorso可移动玻璃柜Module胸部玻璃门: "Стеклянная дверца груди",
         ItemTorso可移动玻璃柜Optionup0: "Закрыть",
@@ -232,8 +183,7 @@ const dialogs = {
     },
 };
 
-
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translations);
+    AssetManager.addAsset("ItemTorso", asset, extended, translations, true);
     AssetManager.addCustomDialog(dialogs);
 }
