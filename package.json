@@ -50,6 +50,7 @@
         "bondage-club-mod-sdk": "^1.2.0",
         "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
+        "eventemitter3": "^5.0.1",
         "github-markdown-css": "^5.7.0",
         "http-server": "^14.1.1",
         "marked": "^14.1.4",

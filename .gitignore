@@ -4,3 +4,5 @@ public/
 草稿/
 resources/**/*.psd
 /CHANGELOG.md
+/.vscode
+/.idea
