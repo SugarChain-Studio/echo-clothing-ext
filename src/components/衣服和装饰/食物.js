@@ -291,15 +291,13 @@ export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
     AssetManager.afterLoad(() => {
-        ModManager.progressiveHook("DrawCharacter")
-            .inside("LoginRun")
+        ModManager.progressiveHook("LoginDoNextThankYou").next()
             .inject((args, next) => {
                 if (CurrentScreen !== "Login") return next(args);
-                const [C] = args;
-                const hood = C.Appearance.find((a) => a.Asset.Group.Name === "ItemHood");
+                const hood = LoginCharacter.Appearance.find((a) => a.Asset.Group.Name === "ItemHood");
                 if (!hood || hood.Asset.Name !== "汉堡_Luzi") {
-                    InventoryWear(C, "汉堡_Luzi", "ItemHood");
-                    CharacterRefresh(C);
+                    InventoryWear(LoginCharacter, "汉堡_Luzi", "ItemHood");
+                    CharacterRefresh(LoginCharacter);
                 }
             });
     });

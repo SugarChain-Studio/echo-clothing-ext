@@ -1,6 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import ChatRoomOrder from "@mod-utils/ChatRoomOrder";
-import ModManager from "@mod-utils/ModManager";
+import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomGroupedAssetDefinitions }} */
@@ -81,30 +80,22 @@ export default function () {
 
     AssetManager.addGroupedAssets(assets, translations);
 
-    ModManager.progressiveHook("DrawCharacter", 1)
-        .inside("ChatRoomCharacterViewLoopCharacters")
-        .inject((args, next) => {
-            const [C, X, Y, Zoom] = args;
-            const sharedC = ChatRoomOrder.requireSharedCenter(C);
+    DrawCharacterModifier.addModifier((C, arg) => {
+        const { Zoom } = arg;
+        const sharedC = ChatRoomOrder.requireSharedCenter(C);
+        if (!sharedC) return arg;
 
-            if (!sharedC) return;
+        if (
+            sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "缰绳_Luzi" ||
+            sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "鞍_Luzi"
+        ) return arg;
 
-            if (
-                sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "缰绳_Luzi" ||
-                sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "鞍_Luzi"
-            )
-                return;
+        if (sharedC.prev.MemberNumber === C.MemberNumber) {
+            return {C, X: sharedC.center.X, Y: sharedC.center.Y - 50 * Zoom, Zoom};
+        }
 
-            if (sharedC.prev.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X;
-                args[2] = sharedC.center.Y - 50 * Zoom;
-                return;
-            }
-
-            if (sharedC.next.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-        });
+        if (sharedC.next.MemberNumber === C.MemberNumber) {
+            return {C, X: sharedC.center.X, Y: sharedC.center.Y, Zoom};
+        }
+    })
 }

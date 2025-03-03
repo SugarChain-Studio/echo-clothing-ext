@@ -1,6 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import ChatRoomOrder from "@mod-utils/ChatRoomOrder";
-import ModManager from "@mod-utils/ModManager";
+import { DrawCharacterModifier, ChatRoomOrder } from "@mod-utils/ChatRoomOrder";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const asset = {
@@ -60,32 +59,21 @@ const translations = {
 export default function () {
     // AssetManager.addGroupedAssets(asset, translations);
 
-    ModManager.progressiveHook("DrawCharacter", 1)
-        .inside("ChatRoomCharacterViewLoopCharacters")
-        .inject((args, next) => {
-            const [C, X, Y, Zoom] = args;
-            const sharedC = ChatRoomOrder.requireSharedCenter(C);
+    DrawCharacterModifier.addModifier((C, arg)=>{
+        const {X,Y,Zoom} = arg;
+        const sharedC = ChatRoomOrder.requireSharedCenter(C);
+        if (!sharedC) return arg;
+        if (
+            sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "马车_Luzi" ||
+            sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "马车前_Luzi"
+        ) return arg;
 
-            if (!sharedC) return;
+        if (sharedC.next.MemberNumber === C.MemberNumber) {
+            return {X: sharedC.center.X - 130 / Zoom, Y: sharedC.center.Y, Zoom,};
+        }
 
-            if (
-                sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "马车_Luzi" ||
-                sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "马车前_Luzi"
-            )
-                return;
-
-            if (sharedC.next.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X - 130 / args[3];
-                args[2] = sharedC.center.Y;
-                args[4] = false;
-                return;
-            }
-
-            if (sharedC.prev.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X + 80 / args[3];
-                args[2] = sharedC.center.Y;
-                args[4] = false;
-                return;
-            }
-        });
+        if (sharedC.prev.MemberNumber === C.MemberNumber) {
+            return {X: sharedC.center.X + 80 / Zoom, Y: sharedC.center.Y, Zoom,};
+        }
+    })
 }

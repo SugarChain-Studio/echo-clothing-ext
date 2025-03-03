@@ -2,7 +2,7 @@ import { Option } from "@mod-utils/fp";
 // import { unit } from "@mod-utils/fp";
 import ModManager from "@mod-utils/ModManager";
 import AssetManager from "@mod-utils/AssetManager";
-import ChatRoomOrder from "@mod-utils/ChatRoomOrder";
+import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -140,28 +140,18 @@ const translations = {
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
-    ModManager.progressiveHook("DrawCharacter", 1)
-        .inside("ChatRoomCharacterViewLoopCharacters")
-        .inject((args, next) => {
-            const [C, X, Y, Zoom] = args;
-            const sharedC = ChatRoomOrder.requireSharedCenter(C);
 
-            if (!sharedC) return;
-            if (
-                sharedC.prev.MemberNumber === C.MemberNumber &&
-                InventoryIsItemInList(C, "ItemDevices", ["床左边_Luzi"])
-            ) {
-                args[1] = sharedC.center.X - 100 * Zoom;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-            if (
-                sharedC.next.MemberNumber === C.MemberNumber &&
-                InventoryIsItemInList(C, "ItemDevices", ["床右边_Luzi"])
-            ) {
-                args[1] = sharedC.center.X + 100 * Zoom;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-        });
+    DrawCharacterModifier.addModifier((C, arg) => {
+        const { Zoom } = arg;
+        const sharedC = ChatRoomOrder.requireSharedCenter(C);
+        if (!sharedC) return arg;
+
+        if (sharedC.prev.MemberNumber === C.MemberNumber && InventoryIsItemInList(C, "ItemDevices", ["床左边_Luzi"])) {
+            return { X: sharedC.center.X - 100 * Zoom, Y: sharedC.center.Y, Zoom };
+        }
+
+        if (sharedC.next.MemberNumber === C.MemberNumber && InventoryIsItemInList(C, "ItemDevices", ["床右边_Luzi"])) {
+            return { X: sharedC.center.X + 100 * Zoom, Y: sharedC.center.Y, Zoom };
+        }
+    });
 }

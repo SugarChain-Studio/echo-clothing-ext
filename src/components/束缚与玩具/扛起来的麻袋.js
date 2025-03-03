@@ -1,5 +1,6 @@
 import AssetManager from "@mod-utils/AssetManager";
-import ChatRoomOrder from "@mod-utils/ChatRoomOrder";
+import { DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
+import { ChatRoomOrder } from "@mod-utils/ChatRoomOrder/roomOrder";
 import ModManager from "@mod-utils/ModManager";
 
 export default function () {
@@ -33,36 +34,26 @@ export default function () {
             return next(args);
         });
 
-    ModManager.progressiveHook("DrawCharacter", 1)
-        .inside("ChatRoomCharacterViewLoopCharacters")
-        .inject((args, next) => {
-            const [C, X, Y, Zoom] = args;
-            const sharedC = ChatRoomOrder.requireSharedCenter(C);
+    DrawCharacterModifier.addModifier((C, arg) => {
+        const { X, Y, Zoom } = arg;
+        const sharedC = ChatRoomOrder.requireSharedCenter(C);
+        if (!sharedC) return arg;
 
-            if (!sharedC) return;
+        if (
+            sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "BurlapSack" ||
+            sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "扛起来的麻袋_Luzi"
+        ) return arg;
 
-            if (
-                sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "BurlapSack" ||
-                sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "扛起来的麻袋_Luzi"
-            )
-                return;
-
-            if (sharedC.prev.MemberNumber === C.MemberNumber) {
-                if (sharedC.next.ActivePose[0] === "Kneel" || sharedC.next.ActivePose[0] === "KneelingSpread") {
-                    args[1] = sharedC.center.X;
-                    args[2] = sharedC.center.Y - 120 * Zoom;
-                    return;
-                } else {
-                    args[1] = sharedC.center.X;
-                    args[2] = sharedC.center.Y - 340 * Zoom;
-                    return;
-                }
+        if (sharedC.prev.MemberNumber === C.MemberNumber) {
+            if (sharedC.next.ActivePose[0] === "Kneel" || sharedC.next.ActivePose[0] === "KneelingSpread") {
+                return { X: sharedC.center.X, Y: sharedC.center.Y - 120 * Zoom, Zoom };
+            } else {
+                return { X: sharedC.center.X, Y: sharedC.center.Y - 340 * Zoom, Zoom };
             }
+        }
 
-            if (sharedC.next.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-        });
+        if (sharedC.next.MemberNumber === C.MemberNumber) {
+            return { X: sharedC.center.X, Y: sharedC.center.Y, Zoom };
+        }
+    });
 }

@@ -1,6 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import ChatRoomOrder from "@mod-utils/ChatRoomOrder";
-import ModManager from "@mod-utils/ModManager";
+import { DrawCharacterModifier, ChatRoomOrder } from "@mod-utils/ChatRoomOrder";
 
 export default function () {
     AssetManager.addAsset(
@@ -25,30 +24,22 @@ export default function () {
             "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
     });
 
-    ModManager.progressiveHook("DrawCharacter", 1)
-        .inside("ChatRoomCharacterViewLoopCharacters")
-        .inject((args, next) => {
-            const [C, X, Y, Zoom] = args;
-            const sharedC = ChatRoomOrder.requireSharedCenter(C);
+    DrawCharacterModifier.addModifier((C, arg) => {
+        const { X, Y, Zoom } = arg;
+        const sharedC = ChatRoomOrder.requireSharedCenter(C);
+        if (!sharedC) return arg;
 
-            if (!sharedC) return;
+        if (
+            sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "CollarLeash" ||
+            sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "拉紧的牵绳_Luzi"
+        ) return arg;
 
-            if (
-                sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "CollarLeash" ||
-                sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "拉紧的牵绳_Luzi"
-            )
-                return;
+        if (sharedC.prev.MemberNumber === C.MemberNumber) {
+            return { X: sharedC.center.X - 150 * Zoom, Y: sharedC.center.Y, Zoom };
+        }
 
-            if (sharedC.next.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-
-            if (sharedC.prev.MemberNumber === C.MemberNumber) {
-                args[1] = sharedC.center.X - 150 * Zoom;
-                args[2] = sharedC.center.Y;
-                return;
-            }
-        });
+        if (sharedC.next.MemberNumber === C.MemberNumber) {
+            return { X: sharedC.center.X, Y: sharedC.center.Y, Zoom };
+        }
+    });
 }
