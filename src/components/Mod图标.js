@@ -1,6 +1,6 @@
 import { CharacterTag } from "@mod-utils/charaTag";
 import ModManager from "@mod-utils/ModManager";
-import { ModInfo } from "@mod-utils/rollupHelper";
+import { betaFlag, ModInfo } from "@mod-utils/rollupHelper";
 
 const 服装拓展 = `data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
 G3RFWHRTb2Z0d2FyZQBDZWxzeXMgU3R1ZGlvIFRvb2zBp+F8AAAG+ElEQVRo3u2abUxU6RXHf5eB
@@ -118,23 +118,20 @@ N7Ab+D3iv1pwu837LMfzAAAAAElFTkSuQmCC`;
  * @returns
  */
 function drawStatus([C, CharX, CharY, Zoom]) {
-    const tag = CharacterTag.getTag(C);
-    if (!tag) return;
-
-    const mod1Version = tag["服装拓展"];
+    const mod1Version = CharacterTag.get(C, "服装拓展");
     if (mod1Version) {
-        if (mod1Version.includes("beta"))
-            DrawImageResize(服装拓展beta, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
+        if (mod1Version.beta) DrawImageResize(服装拓展beta, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
         else DrawImageResize(服装拓展, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
     }
 
-    if (tag["动作拓展"]) {
+    const mod2Version = CharacterTag.get(C, "动作拓展");
+    if (mod2Version) {
         DrawImageResize(动作拓展, CharX + 420 * Zoom, CharY + 5, 35 * Zoom, 35 * Zoom);
     }
 }
 
 export default function () {
-    CharacterTag.myTag(ModInfo.name, ModInfo.version);
+    CharacterTag.tag(ModInfo.name, { version: ModInfo.version, beta: betaFlag });
 
     CharacterTag.init();
 

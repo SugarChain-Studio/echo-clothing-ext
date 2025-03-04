@@ -60,7 +60,7 @@ export default function () {
     });
 
     ModManager.afterInit(async () => {
-        await sleepUntil(() => window.GLDrawCanvas !== undefined);
+        await sleepUntil(() => globalThis["GLDrawCanvas"] !== undefined);
         GLDrawResetCanvas();
         // CommonDrawCanvasPrepare(Player);
     });
