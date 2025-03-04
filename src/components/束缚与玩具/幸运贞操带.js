@@ -43,7 +43,7 @@ const asset = {
     Prerequisite: ["AccessCrotch", "HasVagina", "CanCoverVulva"],
     ExpressionTrigger: [{ Name: "Soft", Group: "Eyebrows", Timer: 10 }],
     Layer: [{ Name: "底色" }, { Name: "色调" }, { Name: "反射" }, { Name: "高光" }],
-    Effect: [E.Chaste],
+    Effect: [E.CanEdge],
     Hide: ["Pussy"],
     Extended: true,
 };
