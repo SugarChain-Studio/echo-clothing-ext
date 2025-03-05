@@ -9,10 +9,18 @@ const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({
     Left: 0,
     Priority,
     Layer: [
-        { Name: "左", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
-        { Name: "右", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
+        { Name: "左茉莉花", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "左线", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "左莫桑石", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "左流苏", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "左金属片", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "右茉莉花", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
+        { Name: "右线", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
+        { Name: "右莫桑石", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
+        { Name: "右流苏", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "右金属片", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
     ],
-});
+});  
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
