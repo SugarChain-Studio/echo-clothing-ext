@@ -267,8 +267,10 @@ function onAction(data) {
         const FocusGroupName = Dictionary.find((x) => "FocusGroupName" in x)?.FocusGroupName;
         if (!tamperArea.includes(FocusGroupName)) return;
         const ActivityName = Dictionary.find((x) => "ActivityName" in x)?.ActivityName;
+        const activity = AssetGetActivity("Female3DCG", ActivityName);
         const factor = PreferenceGetActivityFactor(Player, ActivityName, true);
-        if (factor >= 2) PropertyShockPublishAction(Player, thisItem, true);
+        if (factor >= 2 && activity.Prerequisite.includes("UseHands"))
+            PropertyShockPublishAction(Player, thisItem, true);
     }
 }
 
