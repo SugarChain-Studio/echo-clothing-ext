@@ -16,7 +16,20 @@ const asset = {
     Time: 10,
     Effect: [E.Slow, E.Block],
     DynamicBeforeDraw: true,
-    Hide: ["ItemHandheld", "Bracelet", "HandsLeft", "HandsRight", "SocksRight", "SocksLeft", "BodyLower", "BodyUpper","AnkletLeft","AnkletRight","ArmsLeft","ArmsRight",],
+    Hide: [
+        "ItemHandheld",
+        "Bracelet",
+        "HandsLeft",
+        "HandsRight",
+        "SocksRight",
+        "SocksLeft",
+        "BodyLower",
+        "BodyUpper",
+        "AnkletLeft",
+        "AnkletRight",
+        "ArmsLeft",
+        "ArmsRight",
+    ],
     HideItem: [
         "ItemArmsCeilingShackles",
         "ItemArmsBolero",
@@ -60,7 +73,6 @@ const asset = {
             ColorSuffix: { HEX_COLOR: "White" },
             PoseMapping: {
                 TapedHands: "BaseUpper",
-                BackBoxTie: "BackBoxTie",
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "BackElbowTouch",
                 OverTheHead: "OverTheHead",
@@ -540,11 +552,19 @@ const extened = {
                     Property: { Difficulty: 8, Effect: [E.CuffedFeet] },
                 },
                 {
-                    Property: { Difficulty: 8, Effect: [E.CuffedFeet, E.Mounted], SetPose: ["BackBoxTie", "KneelingSpread"] },
+                    Property: {
+                        Difficulty: 8,
+                        Effect: [E.CuffedFeet, E.Mounted],
+                        SetPose: ["BackBoxTie", "KneelingSpread"],
+                    },
                     Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
                 {
-                    Property: { Difficulty: 8, Effect: [E.CuffedFeet, E.Mounted], SetPose: ["BackBoxTie", "KneelingSpread"] },
+                    Property: {
+                        Difficulty: 8,
+                        Effect: [E.CuffedFeet, E.Mounted],
+                        SetPose: ["BackBoxTie", "KneelingSpread"],
+                    },
                     Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
                 {
