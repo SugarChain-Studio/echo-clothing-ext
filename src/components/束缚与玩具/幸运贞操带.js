@@ -1,5 +1,6 @@
 import AssetManager from "@mod-utils/AssetManager";
 import { ChatRoomEvents } from "@mod-utils/Events";
+import { OrgasmEvents } from "@mod-utils/Events/orgasm";
 import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
@@ -11,6 +12,7 @@ import { VersionSupport } from "@mod-utils/VersionSupport";
  * @property {number} LastOrgasmTime
  * @property {number} OrgasmCount
  * @property {number} RuinedOrgasmCount
+ * @property {number} ResistedOrgasmCount
  */
 
 /**
@@ -19,8 +21,7 @@ import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /**
  * @typedef {Object} FortuneChastityBeltPersistentData
- * @property {boolean} InOrgasm
- * @property {boolean} InDenial
+ * @property {boolean} Initiated
  * @property {number} Timer
  */
 
@@ -57,9 +58,11 @@ const extended = {
         ScriptDraw: scriptDraw,
         Draw: dialogDrawHook,
     },
-    BaselineProperty: {
+    BaselineProperty: /** @type {ExtendItemProperties}*/ ({
         OrgasmCount: 0,
-    },
+        RuinedOrgasmCount: 0,
+        ResistedOrgasmCount: 0,
+    }),
     Modules: [
         {
             Name: "Shield",
@@ -112,24 +115,29 @@ const extended = {
     ],
 };
 
-/**
- * @param {Partial<FortuneChastityBeltPersistentData>} data
- */
-const tryInitData = (data) => {
-    if (typeof data.InOrgasm !== "boolean") data.InOrgasm = false;
-    if (typeof data.InDenial !== "boolean") data.InDenial = false;
-    if (typeof data.Timer !== "number") data.Timer = Date.now();
-};
-
 /** @type {AssetGroupItemName[]} */
 const tamperArea = ["ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt"];
+
+const orgasmFlags = {
+    Orgasmed: false,
+    Ruined: false,
+    Resisted: false,
+};
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, FortuneChastityBeltPersistentData>} */
 function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
     if (!C.IsPlayer()) return;
 
     const data = PersistentData();
-    tryInitData(data);
+
+    // 初始化数据
+    if (typeof data.Timer !== "number") data.Timer = Date.now();
+    if (!data.Initiated) {
+        orgasmFlags.Orgasmed = false;
+        orgasmFlags.Ruined = false;
+        orgasmFlags.Resisted = false;
+        data.Initiated = true;
+    }
 
     let need_push = false;
 
@@ -147,17 +155,26 @@ function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
 
     data.Timer = Date.now();
 
-    // 高潮检测
-    if (C.ArousalSettings?.OrgasmStage > 1) {
-        // undefined > 1 为 false
-        if (!data.InOrgasm) {
-            data.InOrgasm = true;
-            property.OrgasmCount = (property.OrgasmCount || 0) + 1;
-            need_push = true;
-            property.LastOrgasmTime = Date.now();
-        }
-    } else {
-        data.InOrgasm = false;
+    // 检测高潮
+    if (orgasmFlags.Orgasmed) {
+        property.LastOrgasmTime = Date.now();
+        property.OrgasmCount++;
+        orgasmFlags.Orgasmed = false;
+        need_push = true;
+    }
+
+    // 检测拒绝
+    if (orgasmFlags.Ruined) {
+        property.RuinedOrgasmCount++;
+        orgasmFlags.Ruined = false;
+        need_push = true;
+    }
+
+    // 检测忍耐
+    if (orgasmFlags.Resisted) {
+        property.ResistedOrgasmCount++;
+        orgasmFlags.Resisted = false;
+        need_push = true;
     }
 
     // 擅动检测
@@ -230,18 +247,23 @@ function dialogDrawHook(Data, originalFunction) {
 
     MainCanvas.textAlign = "right";
     const now = Date.now();
-    DrawTextFit(customDialogText("WornTime"), 1470, 650, 300, "White", "Gray");
-    DrawTextFit(customDialogText("LastOrgasmTime"), 1470, 725, 300, "White", "Gray");
-    DrawTextFit(customDialogText("OrgasmCount"), 1470, 800, 300, "White", "Gray");
+    const LeftPartX = 1470;
+    DrawTextFit(customDialogText("WornTime"), LeftPartX, 650, 300, "White", "Gray");
+    DrawTextFit(customDialogText("LastOrgasmTime"), LeftPartX, 725, 300, "White", "Gray");
+    DrawTextFit(customDialogText("OrgasmCount"), LeftPartX, 800, 300, "White", "Gray");
+    DrawTextFit(customDialogText("RuinedCount"), LeftPartX, 875, 300, "White", "Gray");
 
     MainCanvas.textAlign = "left";
-    DrawTextFit(toDDHHMMSS((now - property.WornTime) / 1000), 1530, 650, 300, "White", "Gray");
+    const RightPartX = 1530;
+
+    DrawTextFit(toDDHHMMSS((now - property.WornTime) / 1000), RightPartX, 650, 300, "White", "Gray");
 
     if (property.LastOrgasmTime > 0)
-        DrawTextFit(toDDHHMMSS((now - property.LastOrgasmTime) / 1000), 1550, 725, 300, "White", "Gray");
-    else DrawTextFit(customDialogText("NeverTime"), 1530, 725, 300, "White", "Gray");
+        DrawTextFit(toDDHHMMSS((now - property.LastOrgasmTime) / 1000), RightPartX, 725, 300, "White", "Gray");
+    else DrawTextFit(customDialogText("NeverTime"), RightPartX, 725, 300, "White", "Gray");
 
-    DrawTextFit(`${property.OrgasmCount}`, 1530, 800, 300, "White", "Gray");
+    DrawTextFit(`${property.OrgasmCount}`, RightPartX, 800, 300, "White", "Gray");
+    DrawTextFit(`${property.RuinedOrgasmCount}/${property.ResistedOrgasmCount}`, RightPartX, 875, 300, "White", "Gray");
 
     MainCanvas.textAlign = oldAlign;
 }
@@ -292,6 +314,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["幸运贞操带"], {
         WornTime: "穿戴时间:",
         LastOrgasmTime: "距离上次高潮时间:",
         OrgasmCount: "高潮次数:",
+        RuinedCount: "毁灭/忍耐次数:",
 
         NeverTime: "未曾发生",
     },
@@ -312,6 +335,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["幸运贞操带"], {
         WornTime: "Worn Time:",
         LastOrgasmTime: "Since Last Orgasm:",
         OrgasmCount: "Orgasm Count:",
+        RuinedCount: "Ruined/Resisted Count:",
 
         NeverTime: "Never Occurred",
     },
@@ -347,8 +371,8 @@ const dialogs = Tools.replicateTypedItemDialog(["ItemPelvis"], ["幸运贞操带
         Optiont1: "挣扎",
         Optiont2: "挣扎和动作",
         Sett0: "SourceCharacter关闭了DestinationCharacterAssetName上的电击惩罚",
-        Sett1: "SourceCharacter设置DestinationCharacterAssetName会用惩罚保护区域的挣扎行为",
-        Sett2: "SourceCharacter设置DestinationCharacterAssetName会用惩罚保护区域的挣扎行为和动作",
+        Sett1: "SourceCharacter设置DestinationCharacterAssetName会用电击惩罚保护区域的挣扎行为",
+        Sett2: "SourceCharacter设置DestinationCharacterAssetName会用电击惩罚保护区域的挣扎行为和动作",
     },
     EN: {
         SelectBase: "Select Configuration",
@@ -411,4 +435,16 @@ export default function () {
     AssetManager.addCustomDialog(dialogs);
     AssetManager.addCustomDialog(custom_dialogs);
     AssetManager.addLayerNames("ItemPelvis", asset, layers);
+
+    OrgasmEvents.on("orgasmed", (data) => {
+        orgasmFlags.Orgasmed = true;
+    });
+
+    OrgasmEvents.on("ruined", (data) => {
+        orgasmFlags.Ruined = true;
+    });
+
+    OrgasmEvents.on("resisted", (data) => {
+        orgasmFlags.Resisted = true;
+    });
 }
