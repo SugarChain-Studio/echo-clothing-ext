@@ -147,8 +147,8 @@ const asset = {
         { Name: "澈羽枫灵", AllowTypes: { l: 21 } },
         { Name: "五十提", AllowTypes: { l: 22 } },
         { Name: "Shika", AllowTypes: { l: 23 } },
-        { Name: "空", AllowTypes: { l: 24 } },
-        { Name: "空", AllowTypes: { l: 25 } },
+        { Name: "依伊可", AllowTypes: { l: 24 } },
+        { Name: "白墨鴝", AllowTypes: { l: 25 } },
         { Name: "空", AllowTypes: { l: 26 } },
     ],
 };
