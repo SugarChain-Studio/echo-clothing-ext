@@ -24,10 +24,10 @@ const asset = {
         { Name: "2", AllowTypes: { typed: [1, 2, 3, 4, 5, 6, 7] } },
         { Name: "3", AllowTypes: { typed: [2, 3, 4, 5, 6, 7] } },
         { Name: "4", AllowTypes: { typed: [3, 4, 5, 6, 7] } },
-        { Name: "5", AllowTypes: { typed: [4, 5, 6, 7] } },
-        { Name: "6", AllowTypes: { typed: [5, 6, 7] } },
-        { Name: "7", AllowTypes: { typed: [6, 7] } },
-        { Name: "8", AllowTypes: { typed: [7] } },
+        { Name: "5", ParentGroup: {}, AllowTypes: { typed: [4, 5, 6, 7] } },
+        { Name: "6", ParentGroup: {}, AllowTypes: { typed: [5, 6, 7] } },
+        { Name: "7", ParentGroup: {}, AllowTypes: { typed: [6, 7] } },
+        { Name: "8", ParentGroup: {}, AllowTypes: { typed: [7] } },
     ],
 };
 
