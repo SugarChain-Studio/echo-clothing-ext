@@ -230,6 +230,27 @@ modules.forEach((m) => {
     };
 });
 
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, {lastType:string}>} */
+function scriptDraw(mdata, originalFunction, { C, Item, PersistentData }) {
+    const data = PersistentData();
+    const typeRecord = Item.Property?.TypeRecord || {};
+
+    let needUpdate = false;
+    const activeType = Object.entries(typeRecord).find(([k, v]) => !!v && k !== data.lastType);
+    if (activeType) {
+        data.lastType = activeType[0];
+        for (const k in typeRecord) {
+            if (k !== data.lastType) typeRecord[k] = 0;
+        }
+        needUpdate = true;
+    }
+
+    if (needUpdate) {
+        if (C.IsPlayer()) ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
+        CharacterRefresh(C, false);
+    }
+}
+
 /** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -237,6 +258,9 @@ const extended = {
     Modules: modules,
     DrawImages: false,
     DrawData: Tools.makeButtonGroup(modules.length),
+    ScriptHooks: {
+        ScriptDraw: scriptDraw,
+    },
 };
 
 const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
