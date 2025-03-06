@@ -10,7 +10,7 @@ const asset = {
     AllowLock: true,
     DrawLocks: false,
     Difficulty: 25,
-    Hide: ["HandsLeft", "HandsRight", "BodyLower", "BodyUpper", "ArmsLeft", "ArmsRight",],
+    Hide: ["HandsLeft", "HandsRight", "BodyLower", "BodyUpper", "ArmsLeft", "ArmsRight"],
     Layer: [
         {
             Name: "下半身",
@@ -52,7 +52,7 @@ const asset = {
             Priority: 28,
             Top: 0,
             Left: 0,
-            ParentGroup: "BodyUpper",
+            ParentGroup: {},
             InheritColor: "BodyUpper",
             HideColoring: true,
             ColorSuffix: { HEX_COLOR: "White" },
