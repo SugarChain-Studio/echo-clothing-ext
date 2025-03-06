@@ -8,15 +8,23 @@ const asset = {
     Top: 0,
     Left: 0,
     Prerequisite: ["HasBreasts"],
+    ParentGroup: {
+        [PoseType.DEFAULT]: "BodyUpper",
+        TapedHands: "BodyUpper",
+        Yoked: PoseType.DEFAULT,
+        OverTheHead: PoseType.DEFAULT,
+        BackBoxTie: PoseType.DEFAULT,
+        BackElbowTouch: PoseType.DEFAULT,
+        BackCuffs: PoseType.DEFAULT,
+    },
     PoseMapping: {
-        TapedHands: "TapedHands",
+        AllFours: "AllFours",
+        Hogtied: "Hogtied",
         Yoked: "BackElbowTouch",
         OverTheHead: "BackElbowTouch",
         BackBoxTie: "BackElbowTouch",
         BackElbowTouch: "BackElbowTouch",
         BackCuffs: "BackElbowTouch",
-        AllFours: "AllFours",
-        Hogtied: "Hogtied",
     },
     Layer: [
         {
@@ -28,6 +36,8 @@ const asset = {
             Priority: 26,
         },
         {
+            PoseMapping: {},
+            ParentGroup: {},
             Name: "蝴蝶结",
             Priority: 26,
         },
@@ -47,14 +57,13 @@ const asset2 = {
     Gender: "F",
     Top: 0,
     Left: 0,
+    Priority: 35,
     Prerequisite: ["HasBreasts"],
-    DefaultColor: ["#3F3F3F","#808080"],
+    DefaultColor: ["#3F3F3F", "#808080"],
     Layer: [
         {
             Name: "裙子",
-            Priority: 35,
             PoseMapping: {
-                TapedHands: "TapedHands",
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
                 BackBoxTie: "BackBoxTie",
@@ -66,7 +75,6 @@ const asset2 = {
         },
         {
             Name: "围裙",
-            Priority: 35,
             PoseMapping: {
                 TapedHands: "TapedHands",
                 Yoked: "BackElbowTouch",
