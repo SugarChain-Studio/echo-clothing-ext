@@ -1,24 +1,29 @@
 import AssetManager from "@mod-utils/AssetManager";
+import { Path } from "@mod-utils/path";
+import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
+
+/** @type {AssetPoseMapping} */
+const specialMapping = {
+    TapedHands: "TapedHands",
+    Yoked: "TapedHands",
+    OverTheHead: "TapedHands",
+    BackBoxTie: "TapedHands",
+    BackElbowTouch: "TapedHands",
+    BackCuffs: "TapedHands",
+    Hogtied: "TapedHands",
+    AllFours: "TapedHands",
+};
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "玩偶_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 125,
+    Top: 225,
     ParentGroup: VersionSupport.NoParentGroup,
     Priority: 50,
-    PoseMapping: {
-        TapedHands: "TapedHands",
-        Yoked: "TapedHands",
-        OverTheHead: "TapedHands",
-        BackBoxTie: "TapedHands",
-        BackElbowTouch: "TapedHands",
-        BackCuffs: "TapedHands",
-        Hogtied: "TapedHands",
-        AllFours: "TapedHands",
-    },
+    PoseMapping: {},
     Layer: [
         // 玩具店
         { Name: "Saki", AllowTypes: { d: 1 } },
@@ -32,11 +37,13 @@ const asset = {
         { Name: "Reisigure", AllowTypes: { s: 4 } },
         { Name: "Atlantis", AllowTypes: { s: 5 } },
         { Name: "Xin", AllowTypes: { s: 6 } },
-        { Name: "空", AllowTypes: { s: 7 } },
-        { Name: "空", AllowTypes: { s: 8 } },
 
         // 芷窝
-        { Name: "芷童", AllowTypes: { z: 1 } },
+        {
+            Name: "芷童",
+            PoseMapping: specialMapping,
+            AllowTypes: { z: 1 },
+        },
         { Name: "ZforShort", AllowTypes: { z: 2 } },
         { Name: "Gin", AllowTypes: { z: 3 } },
         { Name: "Echo", AllowTypes: { z: 4 } },
@@ -49,10 +56,6 @@ const asset = {
         { Name: "Suki", AllowTypes: { z: 11 } },
         { Name: "haru", AllowTypes: { z: 12 } },
         { Name: "兔叽", AllowTypes: { z: 13 } },
-        { Name: "空", AllowTypes: { z: 14 } },
-        { Name: "空", AllowTypes: { z: 15 } },
-        { Name: "空", AllowTypes: { z: 16 } },
-        { Name: "空", AllowTypes: { z: 17 } },
 
         // Catnest
         { Name: "XinLian", AllowTypes: { c: 1 } },
@@ -70,9 +73,6 @@ const asset = {
         { Name: "Nail", AllowTypes: { f: 3 } },
         { Name: "Nekonya蓝", AllowTypes: { f: 4 } },
         { Name: "小果", AllowTypes: { f: 5 } },
-        { Name: "空", AllowTypes: { f: 6 } },
-        { Name: "空", AllowTypes: { f: 7 } },
-        { Name: "空", AllowTypes: { f: 8 } },
 
         // 小夜家玩偶
         { Name: "向归夜", AllowTypes: { y: 1 } },
@@ -88,10 +88,6 @@ const asset = {
         { Name: "xxxx", AllowTypes: { y: 11 } },
         { Name: "果子狸", AllowTypes: { y: 12 } },
         { Name: "雪瑗", AllowTypes: { y: 13 } },
-        { Name: "空", AllowTypes: { y: 14 } },
-        { Name: "空", AllowTypes: { y: 15 } },
-        { Name: "空", AllowTypes: { y: 16 } },
-        { Name: "空", AllowTypes: { y: 17 } },
 
         // 盒子的小黑屋
         { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
@@ -100,11 +96,13 @@ const asset = {
         { Name: "Neko2", AllowTypes: { hz: 4 } },
         { Name: "mizuki池", AllowTypes: { hz: 5 } },
         { Name: "莉娅", AllowTypes: { hz: 6 } },
-        { Name: "空", AllowTypes: { hz: 7 } },
-        { Name: "空", AllowTypes: { hz: 8 } },
 
         // 吸血鬼城堡
-        { Name: "岚岚", AllowTypes: { x: 1 } },
+        {
+            Name: "岚岚",
+            PoseMapping: specialMapping,
+            AllowTypes: { x: 1 },
+        },
         { Name: "欧佩娜", AllowTypes: { x: 2 } },
         { Name: "艾欧娜", AllowTypes: { x: 3 } },
         { Name: "柚子", AllowTypes: { x: 4 } },
@@ -116,12 +114,6 @@ const asset = {
         // 笠花和An'an的家
         { Name: "笠花", AllowTypes: { lihua: 1 } },
         { Name: "Anan", AllowTypes: { lihua: 2 } },
-        { Name: "空", AllowTypes: { lihua: 3 } },
-        { Name: "空", AllowTypes: { lihua: 4 } },
-        { Name: "空", AllowTypes: { lihua: 5 } },
-        { Name: "空", AllowTypes: { lihua: 6 } },
-        { Name: "空", AllowTypes: { lihua: 7 } },
-        { Name: "空", AllowTypes: { lihua: 8 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -129,7 +121,11 @@ const asset = {
         { Name: "Lilian", AllowTypes: { l: 3 } },
         { Name: "泠雨", AllowTypes: { l: 4 } },
         { Name: "墨芸", AllowTypes: { l: 5 } },
-        { Name: "Poi", AllowTypes: { l: 6 } },
+        {
+            Name: "Poi",
+            PoseMapping: specialMapping,
+            AllowTypes: { l: 6 },
+        },
         { Name: "Pokemon", AllowTypes: { l: 7 } },
         { Name: "Clara", AllowTypes: { l: 8 } },
         { Name: "WallyIlma", AllowTypes: { l: 9 } },
@@ -144,12 +140,15 @@ const asset = {
         { Name: "莉莉丝", AllowTypes: { l: 18 } },
         { Name: "LaBi", AllowTypes: { l: 19 } },
         { Name: "Mutsuki", AllowTypes: { l: 20 } },
-        { Name: "澈羽枫灵", AllowTypes: { l: 21 } },
+        {
+            Name: "澈羽枫灵",
+            PoseMapping: specialMapping,
+            AllowTypes: { l: 21 },
+        },
         { Name: "五十提", AllowTypes: { l: 22 } },
         { Name: "Shika", AllowTypes: { l: 23 } },
         { Name: "依伊可", AllowTypes: { l: 24 } },
         { Name: "白墨鴝", AllowTypes: { l: 25 } },
-        { Name: "空", AllowTypes: { l: 26 } },
     ],
 };
 
@@ -164,7 +163,6 @@ const typeNames = {
     x: "吸血鬼城堡",
     lihua: "笠花和An'an的家",
     l: "路过的玩偶",
-    
 };
 
 const translations = { CN: "玩偶", EN: "Plushies" };
@@ -179,14 +177,22 @@ const predefDialog = {
         ItemMisc玩偶_LuziSets3: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
         ItemMisc玩偶_LuziSetc3: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
         ItemMisc玩偶_LuziSetc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
-        ItemMisc玩偶_LuziSetx1: "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
-        ItemMisc玩偶_LuziSetl24: "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
+        ItemMisc玩偶_LuziSetx1:
+            "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
+        ItemMisc玩偶_LuziSetl24:
+            "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
     },
 };
 
 // 下面是根据上面的内容，生成描述的代码
 // 也就是说，不用手动写描述文字啦，只用写上面的内容就行
 
+// 图层不允许调色
+asset.Layer.forEach((layer, index) => {
+    layer.AllowColorize = false;
+});
+
+// 生成模块定义
 /** @type {ModularItemModuleConfig []} */
 const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
@@ -195,7 +201,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
     if (!module) {
         pv.push({
             Name,
-            DrawImages: false,
+            DrawImages: true,
             Key,
             Options: [{}, {}],
         });
@@ -203,90 +209,100 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
+
+/** @type { Record<keyof typeof typeNames, string[]> } */
+const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
+    const [k, v] = Object.entries(cv.AllowTypes)[0];
+    if (!pv[k]) pv[k] = [""];
+    pv[k].push(cv.Name);
+    return pv;
+}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+
+modules.forEach((m) => {
+    m.DrawData = {
+        elementData: m.Options.map((opt, idx) => {
+            if (idx === 0) return { imagePath: Path.空png };
+            return {
+                imagePath: `Assets/Female3DCG/ItemMisc/玩偶_Luzi_${typedLayerNames[m.Key][idx]}.png`,
+            };
+        }),
+    };
+});
 
 /** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChangeWhenLocked: false,
     Modules: modules,
+    DrawImages: false,
+    DrawData: Tools.makeButtonGroup(modules.length),
 };
 
 const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
-/** @type { Record<string,string> } */
-const cnDialog = /** @type {ModularItemModuleConfig[]}*/ (modules).reduce((pv, cv) => {
-    const { Name, Key, Options } = cv;
+const cnDialog = Tools.dialogGenerator(
+    modules,
+    {
+        groups: ["ItemMisc"],
+        itemNames: ["玩偶_Luzi"],
+        selectBase: "选择玩偶房间",
+        module: ({ Name }) => ({ Select: `选择${Name}`, Module: `${Name}` }),
+        option: (option, optionIndex, { Name }) => {
+            const layerName = layerNames[`${Name}${optionIndex}`];
+            if (!layerName) return { Option: "空", Set: "SourceCharacter移除了DestinationCharacter手上的玩偶." };
+            return {
+                Option: `${layerName}`,
+                Set: `SourceCharacter给DestinationCharacter一个可爱的${layerName}玩偶.`,
+            };
+        },
+    },
+    predefDialog.CN || {}
+);
 
-    pv[`ItemMisc玩偶_LuziSelect${Name}`] = `选择${Name}`;
-    pv[`ItemMisc玩偶_LuziModule${Name}`] = `${Name}`;
-    pv[`ItemMisc玩偶_LuziOption${Key}0`] = "空";
-    pv[`ItemMisc玩偶_LuziSet${Key}0`] = "SourceCharacter移除了DestinationCharacter手上的玩偶.";
+const enDialog = Tools.dialogGenerator(
+    modules,
+    {
+        groups: ["ItemMisc"],
+        itemNames: ["玩偶_Luzi"],
+        selectBase: "Select Plushies Room",
+        module: ({ Name }) => ({ Select: `Select ${Name}`, Module: `${Name}` }),
+        option: (option, optionIndex, { Name }) => {
+            const layerName = layerNames[`${Name}${optionIndex}`];
+            if (!layerName)
+                return { Option: "Empty", Set: "SourceCharacter removes the doll from DestinationCharacter hand." };
+            return {
+                Option: `${layerName}`,
+                Set: `SourceCharacter gives DestinationCharacter a cute ${layerName} doll.`,
+            };
+        },
+    },
+    predefDialog.EN || {}
+);
 
-    Options.forEach((_, i) => {
-        if (i === 0) return;
-        const layerName = layerNames[`${Name}${i}`];
-        if (!layerName) return;
-        const keyOption = `ItemMisc玩偶_LuziOption${Key}${i}`;
-        const keySet = `ItemMisc玩偶_LuziSet${Key}${i}`;
-        if (typeof pv[keyOption] !== "string") pv[keyOption] = `${layerName}`;
-        if (typeof pv[keySet] !== "string")
-            pv[keySet] = `SourceCharacter给DestinationCharacter一个可爱的${layerName}玩偶.`;
-    });
-
-    return pv;
-}, /** @type { Record<string,string> } */({ ItemMisc玩偶_LuziSelectBase: "选择房间", ...(predefDialog.CN || {}) }));
-
-/** @type { Record<string,string> } */
-
-const enDialog = /** @type {ModularItemModuleConfig[]}*/ (modules).reduce((pv, cv) => {
-    const { Name, Key, Options } = cv;
-
-    pv[`ItemMisc玩偶_LuziSelect${Name}`] = `Select ${Name}`;
-    pv[`ItemMisc玩偶_LuziModule${Name}`] = `${Name}`;
-    pv[`ItemMisc玩偶_LuziOption${Key}0`] = "Empty";
-    pv[`ItemMisc玩偶_LuziSet${Key}0`] = "SourceCharacter removes the doll from DestinationCharacter hand.";
-
-    Options.forEach((_, i) => {
-        if (i === 0) return;
-        const layerName = layerNames[`${Name}${i}`];
-        if (!layerName) return;
-        const keyOption = `ItemMisc玩偶_LuziOption${Key}${i}`;
-        const keySet = `ItemMisc玩偶_LuziSet${Key}${i}`;
-        if (typeof pv[keyOption] !== "string") pv[keyOption] = `${layerName}`;
-        if (typeof pv[keySet] !== "string")
-            pv[keySet] = `SourceCharacter gives DestinationCharacter a cute ${layerName} doll.`;
-    });
-
-    return pv;
-}, /** @type { Record<string,string> } */({ ItemMisc玩偶_LuziSelectBase: "Select Room", ...(predefDialog.EN || {}) }));
-
-/** @type { Record<string,string> } */
-const ruDialog = /** @type {ModularItemModuleConfig[]}*/ (modules).reduce((pv, cv) => {
-    const { Name, Key, Options } = cv;
-
-    pv[`ItemMisc玩偶_LuziSelect${Name}`] = `Выбрать ${Name}`;
-    pv[`ItemMisc玩偶_LuziModule${Name}`] = `${Name}`;
-    pv[`ItemMisc玩偶_LuziOption${Key}0`] = "Пусто";
-    pv[`ItemMisc玩偶_LuziSet${Key}0`] = "SourceCharacter удаляет куклу из руки DestinationCharacter.";
-
-    Options.forEach((_, i) => {
-        if (i === 0) return;
-        const layerName = layerNames[`${Name}${i}`];
-        if (!layerName) return;
-        const keyOption = `ItemMisc玩偶_LuziOption${Key}${i}`;
-        const keySet = `ItemMisc玩偶_LuziSet${Key}${i}`;
-        if (typeof pv[keyOption] !== "string") pv[keyOption] = `${layerName}`;
-        if (typeof pv[keySet] !== "string")
-            pv[keySet] = `SourceCharacter дает DestinationCharacter милую куклу ${layerName}.`;
-    });
-
-    return pv;
-}, /** @type { Record<string,string> } */({ ItemMisc玩偶_LuziSelectBase: "Выбрать комнату", ...(predefDialog.RU || {}) }));
+const ruDialog = Tools.dialogGenerator(
+    modules,
+    {
+        groups: ["ItemMisc"],
+        itemNames: ["玩偶_Luzi"],
+        selectBase: "Выбрать комнату с куклами",
+        module: ({ Name }) => ({ Select: `Выбрать ${Name}`, Module: `${Name}` }),
+        option: (option, optionIndex, { Name }) => {
+            const layerName = layerNames[`${Name}${optionIndex}`];
+            if (!layerName)
+                return { Option: "Пусто", Set: "SourceCharacter удаляет куклу из руки DestinationCharacter." };
+            return {
+                Option: `${layerName}`,
+                Set: `SourceCharacter дает DestinationCharacter милую куклу ${layerName}.`,
+            };
+        },
+    },
+    predefDialog.RU || {}
+);
 
 /** @type {Translation.Dialog} */
 const dialogs = {
