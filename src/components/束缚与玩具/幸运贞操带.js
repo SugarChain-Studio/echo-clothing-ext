@@ -291,7 +291,7 @@ function onAction(data) {
         const ActivityName = Dictionary.find((x) => "ActivityName" in x)?.ActivityName;
         const activity = AssetGetActivity("Female3DCG", ActivityName);
         const factor = PreferenceGetActivityFactor(Player, ActivityName, true);
-        if (factor >= 2 && activity.Prerequisite.includes("UseHands"))
+        if (factor >= 2 && (activity.Prerequisite.includes("UseHands") || activity.Prerequisite.includes("UseArms")))
             PropertyShockPublishAction(Player, thisItem, true);
     }
 }
