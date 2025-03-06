@@ -1,16 +1,27 @@
 import AssetManager from "@mod-utils/AssetManager";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "脚趾戒指_Luzi",
     Random: false,
     Gender: "F",
-    Top: 0,
+    Top: 850,
     Left: 0,
     Extended: true,
-    DefaultColor: ["#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897", "#9B9897"],
+    DefaultColor: [
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+        "#9B9897",
+    ],
     PoseMapping: {
-        BaseLower: PoseType.DEFAULT,
         Kneel: "Hide",
         KneelingSpread: "Hide",
         LegsClosed: "LegsClosed",
@@ -21,16 +32,16 @@ const asset = {
     ParentGroup: "BodyLower",
     Priority: 21,
     Layer: [
-        { Name: "左1", AllowTypes: { L1: 1 },},
-        { Name: "右1", AllowTypes: { R1: 1 },},
-        { Name: "左2", AllowTypes: { L2: 1 },},
-        { Name: "右2", AllowTypes: { R2: 1 },},
-        { Name: "左3", AllowTypes: { L3: 1 },},
-        { Name: "右3", AllowTypes: { R3: 1 },},
-        { Name: "左4", AllowTypes: { L4: 1 },},
-        { Name: "右4", AllowTypes: { R4: 1 },},
-        { Name: "左5", AllowTypes: { L5: 1 },},
-        { Name: "右5", AllowTypes: { R5: 1 },},
+        { Name: "左1", AllowTypes: { L1: 1 } },
+        { Name: "右1", AllowTypes: { R1: 1 } },
+        { Name: "左2", AllowTypes: { L2: 1 } },
+        { Name: "右2", AllowTypes: { R2: 1 } },
+        { Name: "左3", AllowTypes: { L3: 1 } },
+        { Name: "右3", AllowTypes: { R3: 1 } },
+        { Name: "左4", AllowTypes: { L4: 1 } },
+        { Name: "右4", AllowTypes: { R4: 1 } },
+        { Name: "左5", AllowTypes: { L5: 1 } },
+        { Name: "右5", AllowTypes: { R5: 1 } },
     ],
 };
 
@@ -40,48 +51,82 @@ const extended = {
     ChangeWhenLocked: false,
     Modules: [
         {
-            Name: "左1", DrawImages: false,
-            Key: "L1", Options: [{}, {}],
+            Name: "右5",
+            DrawImages: false,
+            Key: "R5",
+            Options: [{}, {}],
         },
         {
-            Name: "右1", DrawImages: false,
-            Key: "R1", Options: [{}, {}],
+            Name: "右4",
+            DrawImages: false,
+            Key: "R4",
+            Options: [{}, {}],
         },
         {
-            Name: "左2", DrawImages: false,
-            Key: "L2", Options: [{}, {}],
+            Name: "右3",
+            DrawImages: false,
+            Key: "R3",
+            Options: [{}, {}],
         },
         {
-            Name: "右2", DrawImages: false,
-            Key: "R2", Options: [{}, {}],
+            Name: "右2",
+            DrawImages: false,
+            Key: "R2",
+            Options: [{}, {}],
         },
         {
-            Name: "左3", DrawImages: false,
-            Key: "L3", Options: [{}, {}],
+            Name: "右1",
+            DrawImages: false,
+            Key: "R1",
+            Options: [{}, {}],
         },
         {
-            Name: "右3", DrawImages: false,
-            Key: "R3", Options: [{}, {}],
+            Name: "左1",
+            DrawImages: false,
+            Key: "L1",
+            Options: [{}, {}],
         },
         {
-            Name: "左4", DrawImages: false,
-            Key: "L4", Options: [{}, {}],
+            Name: "左2",
+            DrawImages: false,
+            Key: "L2",
+            Options: [{}, {}],
         },
         {
-            Name: "右4", DrawImages: false,
-            Key: "R4", Options: [{}, {}],
+            Name: "左3",
+            DrawImages: false,
+            Key: "L3",
+            Options: [{}, {}],
         },
         {
-            Name: "左5", DrawImages: false,
-            Key: "L5", Options: [{}, {}],
+            Name: "左4",
+            DrawImages: false,
+            Key: "L4",
+            Options: [{}, {}],
         },
         {
-            Name: "右5", DrawImages: false,
-            Key: "R5", Options: [{}, {}],
+            Name: "左5",
+            DrawImages: false,
+            Key: "L5",
+            Options: [{}, {}],
         },
     ],
+    DrawData: {
+        elementData: [
+            .../** @type {{position:[number,number]}[]} */ (
+                Array.from({ length: 5 }).map((_, idx) => ({
+                    position: [1135 + 250 * (idx % 3), 450 + 75 * Math.floor(idx / 3)],
+                }))
+            ),
+            .../** @type {{position:[number,number]}[]} */ (
+                Array.from({ length: 5 }).map((_, idx) => ({
+                    position: [1135 + 250 * (idx % 3), 450 + 75 * 3 + 75 * Math.floor(idx / 3)],
+                }))
+            ),
+        ],
+        itemsPerPage: 10,
+    },
 };
-
 
 /** @type {Translation.Dialog} */
 const dialog = {
