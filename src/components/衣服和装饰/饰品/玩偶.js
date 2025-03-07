@@ -29,6 +29,7 @@ const asset = {
         { Name: "Saki", AllowTypes: { d: 1 } },
         { Name: "Luzi", AllowTypes: { d: 2 } },
         { Name: "若若", AllowTypes: { d: 3 } },
+        { Name: "Lamia", AllowTypes: { d: 4 } },
 
         // 狼窝
         { Name: "吉娜", AllowTypes: { s: 1 } },
@@ -114,6 +115,9 @@ const asset = {
         // 笠花和An'an的家
         { Name: "笠花", AllowTypes: { lihua: 1 } },
         { Name: "Anan", AllowTypes: { lihua: 2 } },
+        { Name: "雨笠银花", AllowTypes: { lihua: 3 } },
+        { Name: "dudu", AllowTypes: { lihua: 4 } },
+        { Name: "卜卜", AllowTypes: { lihua: 5 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -149,6 +153,9 @@ const asset = {
         { Name: "Shika", AllowTypes: { l: 23 } },
         { Name: "依伊可", AllowTypes: { l: 24 } },
         { Name: "白墨鴝", AllowTypes: { l: 25 } },
+        { Name: "忧绪", AllowTypes: { l: 26 } },
+        { Name: "墨璃", AllowTypes: { l: 27 } },
+
     ],
 };
 
