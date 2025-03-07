@@ -115,8 +115,9 @@ class PlayerManager {
         this.src = source;
 
         const req = parseSource(source);
-        if (!req) {
+        if (!req?.url) {
             this.hide();
+            return;
         }
         return fetch(req.url)
             .then(
