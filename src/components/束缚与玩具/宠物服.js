@@ -52,12 +52,12 @@ const asset2 = {
         KneelingSpread: 60,
         AllFours: 0,
     },
-    // Difficulty: 12,
-    // SelfBondage: 8,
-    // Time: 40,
-    // RemoveTime: 30,
-    // AllowLock: true,
-    // AllowTighten: true,
+    Difficulty: 12,
+    SelfBondage: 8,
+    Time: 40,
+    RemoveTime: 30,
+    AllowLock: true,
+    AllowTighten: true,
     ParentGroup: "BodyLower",
     Fetish: ["Leather", "Pet"],
     AllowActivePose: ["Kneel", "KneelingSpread", "AllFours"],
@@ -91,5 +91,5 @@ const translations2 = {
 
 export default function () {
     // AssetManager.addAsset("ItemArms", asset, undefined, translations);
-    // AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
+    AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
 }
