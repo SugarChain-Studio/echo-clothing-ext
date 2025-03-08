@@ -143,7 +143,7 @@ const asset = {
         { Name: "小铃铛", AllowTypes: { l: 17 } },
         { Name: "莉莉丝", AllowTypes: { l: 18 } },
         { Name: "LaBi", AllowTypes: { l: 19 } },
-        { Name: "Mutsuki", AllowTypes: { l: 20 } },
+        { Name: "忧绪", AllowTypes: { l: 20 } },
         {
             Name: "澈羽枫灵",
             PoseMapping: specialMapping,
@@ -153,7 +153,7 @@ const asset = {
         { Name: "Shika", AllowTypes: { l: 23 } },
         { Name: "依伊可", AllowTypes: { l: 24 } },
         { Name: "白墨鴝", AllowTypes: { l: 25 } },
-        { Name: "忧绪", AllowTypes: { l: 26 } },
+        { Name: "希雅", AllowTypes: { l: 26 } },
         { Name: "墨璃", AllowTypes: { l: 27 } },
 
     ],
