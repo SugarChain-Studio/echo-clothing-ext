@@ -29,6 +29,10 @@ const asset = {
         "AnkletRight",
         "ArmsLeft",
         "ArmsRight",
+        "Gloves",
+        "Bracelet",
+        "HandAccessoryLeft",
+        "HandAccessoryRight",
     ],
     HideItem: [
         "ItemArmsCeilingShackles",
