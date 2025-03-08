@@ -30,8 +30,8 @@ const asset = {
     ParentGroup: "BodyUpper",
     Fetish: ["Leather", "Pet"],
     Prerequisite: ["HasBreasts"],
-    AllowActivePose: ["BaseUpper", "OverTheHead", "Yoked", "AllFours"],
-    SetPose: ["BaseUpper"],
+    AllowActivePose: ["BackElbowTouch", "OverTheHead", "Yoked", "AllFours"],
+    SetPose: ["BackElbowTouch"],
     Effect: [E.Block, E.BlockWardrobe],
     Block: ["ItemHands", "ItemHandheld"],
     PoseMapping: {
