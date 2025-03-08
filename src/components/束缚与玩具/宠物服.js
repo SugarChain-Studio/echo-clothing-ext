@@ -8,17 +8,24 @@ const asset = {
     Gender: "F",
     Top: 0,
     Left: 0,
-    // Difficulty: 12,
-    // SelfBondage: 8,
-    // Time: 40,
-    // RemoveTime: 30,
-    // AllowLock: true,
-    // AllowTighten: true,
+    Difficulty: 12,
+    SelfBondage: 8,
+    Time: 40,
+    RemoveTime: 30,
+    AllowLock: true,
+    AllowTighten: true,
     Hide: [
         "ArmsLeft",
         "ArmsRight",
         "HandsLeft",
         "HandsRight",
+        "AnkletLeft",
+        "AnkletRight",
+        "ItemHands",
+        "Gloves",
+        "Bracelet",
+        "HandAccessoryLeft",
+        "HandAccessoryRight",
     ],
     ParentGroup: "BodyUpper",
     Fetish: ["Leather", "Pet"],
@@ -90,6 +97,6 @@ const translations2 = {
 };
 
 export default function () {
-    // AssetManager.addAsset("ItemArms", asset, undefined, translations);
+    AssetManager.addAsset("ItemArms", asset, undefined, translations);
     AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
 }
