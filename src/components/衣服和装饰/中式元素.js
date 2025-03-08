@@ -14,11 +14,12 @@ const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({
         { Name: "左莫桑石", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
         { Name: "左流苏", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
         { Name: "左金属片", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+
         { Name: "右茉莉花", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
         { Name: "右线", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
         { Name: "右莫桑石", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
-        { Name: "右流苏", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
-        { Name: "右金属片", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
+        { Name: "右流苏", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
+        { Name: "右金属片", AllowTypes: [{ typed: 1 }, { typed: 2 }] },
     ],
 });
 
