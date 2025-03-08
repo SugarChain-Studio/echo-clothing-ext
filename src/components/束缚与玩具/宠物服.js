@@ -35,6 +35,7 @@ const asset = {
     Effect: [E.Block, E.BlockWardrobe],
     Block: ["ItemHands", "ItemHandheld"],
     PoseMapping: {
+        BackElbowTouch: "BackElbowTouch",
         OverTheHead: "OverTheHead",
         Yoked: "Yoked",
         AllFours: "AllFours",
