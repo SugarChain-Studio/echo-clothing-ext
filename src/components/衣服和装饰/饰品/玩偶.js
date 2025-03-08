@@ -32,12 +32,12 @@ const asset = {
         { Name: "Lamia", AllowTypes: { d: 4 } },
 
         // 狼窝
-        { Name: "吉娜", AllowTypes: { s: 1 } },
-        { Name: "Ada", AllowTypes: { s: 2 } },
-        { Name: "Luzi2", AllowTypes: { s: 3 } },
-        { Name: "Reisigure", AllowTypes: { s: 4 } },
-        { Name: "Atlantis", AllowTypes: { s: 5 } },
-        { Name: "Xin", AllowTypes: { s: 6 } },
+        { Name: "Xin", AllowTypes: { s: 1 } },
+        { Name: "吉娜", AllowTypes: { s: 2 } },
+        { Name: "Ada", AllowTypes: { s: 3 } },
+        { Name: "Luzi2", AllowTypes: { s: 4 } },
+        { Name: "Reisigure", AllowTypes: { s: 5 } },
+        { Name: "Atlantis", AllowTypes: { s: 6 } },
 
         // 芷窝
         {
@@ -45,18 +45,17 @@ const asset = {
             PoseMapping: specialMapping,
             AllowTypes: { z: 1 },
         },
-        { Name: "ZforShort", AllowTypes: { z: 2 } },
-        { Name: "Gin", AllowTypes: { z: 3 } },
-        { Name: "Echo", AllowTypes: { z: 4 } },
-        { Name: "ᐛ", AllowTypes: { z: 5 } },
-        { Name: "ᐖ", AllowTypes: { z: 6 } },
-        { Name: "芙缇娅", AllowTypes: { z: 7 } },
-        { Name: "芷小童", AllowTypes: { z: 8 } },
-        { Name: "临", AllowTypes: { z: 9 } },
-        { Name: "小安", AllowTypes: { z: 10 } },
-        { Name: "Suki", AllowTypes: { z: 11 } },
-        { Name: "haru", AllowTypes: { z: 12 } },
-        { Name: "兔叽", AllowTypes: { z: 13 } },
+        { Name: "Gin", AllowTypes: { z: 2 } },
+        { Name: "Echo", AllowTypes: { z: 3 } },
+        { Name: "ᐛ", AllowTypes: { z: 4 } },
+        { Name: "ᐖ", AllowTypes: { z: 5 } },
+        { Name: "芙缇娅", AllowTypes: { z: 6 } },
+        { Name: "芷小童", AllowTypes: { z: 7 } },
+        { Name: "临", AllowTypes: { z: 8 } },
+        { Name: "小安", AllowTypes: { z: 9 } },
+        { Name: "Suki", AllowTypes: { z: 10 } },
+        { Name: "haru", AllowTypes: { z: 11 } },
+        { Name: "兔叽", AllowTypes: { z: 12 } },
 
         // Catnest
         { Name: "XinLian", AllowTypes: { c: 1 } },
@@ -64,9 +63,9 @@ const asset = {
         { Name: "Cyäegha", AllowTypes: { c: 3 } },
         { Name: "PumpkinPie", AllowTypes: { c: 4 } },
         { Name: "Lux", AllowTypes: { c: 5 } },
-        { Name: "居x", AllowTypes: { c: 6 } },
-        { Name: "Caius", AllowTypes: { c: 7 } },
-        { Name: "Neko", AllowTypes: { c: 8 } },
+        { Name: "Caius", AllowTypes: { c: 6 } },
+        { Name: "Neko", AllowTypes: { c: 7 } },
+        { Name: "居x", AllowTypes: { c: 8 } },
 
         // 猫州猫庭府玩偶
         { Name: "Axa", AllowTypes: { f: 1 } },
@@ -110,7 +109,6 @@ const asset = {
         { Name: "梨子", AllowTypes: { x: 5 } },
         { Name: "Lyndis琳", AllowTypes: { x: 6 } },
         { Name: "黛烟", AllowTypes: { x: 7 } },
-        { Name: "空", AllowTypes: { x: 8 } },
 
         // 笠花和An'an的家
         { Name: "笠花", AllowTypes: { lihua: 1 } },
@@ -118,6 +116,10 @@ const asset = {
         { Name: "雨笠银花", AllowTypes: { lihua: 3 } },
         { Name: "dudu", AllowTypes: { lihua: 4 } },
         { Name: "卜卜", AllowTypes: { lihua: 5 } },
+
+        // 鸢堡
+        { Name: "鸢", AllowTypes: { yb: 1 } },
+        { Name: "ZforShort", AllowTypes: { yb: 2 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -137,24 +139,24 @@ const asset = {
         { Name: "瑞饼", AllowTypes: { l: 11 } },
         { Name: "Annie", AllowTypes: { l: 12 } },
         { Name: "accoo", AllowTypes: { l: 13 } },
-        { Name: "鸢", AllowTypes: { l: 14 } },
-        { Name: "疾风", AllowTypes: { l: 15 } },
-        { Name: "Eleanor", AllowTypes: { l: 16 } },
-        { Name: "小铃铛", AllowTypes: { l: 17 } },
-        { Name: "莉莉丝", AllowTypes: { l: 18 } },
-        { Name: "LaBi", AllowTypes: { l: 19 } },
-        { Name: "忧绪", AllowTypes: { l: 20 } },
+        { Name: "疾风", AllowTypes: { l: 14 } },
+        { Name: "Eleanor", AllowTypes: { l: 15 } },
+        { Name: "小铃铛", AllowTypes: { l: 16 } },
+        { Name: "莉莉丝", AllowTypes: { l: 17 } },
+        { Name: "LaBi", AllowTypes: { l: 18 } },
+        { Name: "忧绪", AllowTypes: { l: 19 } },
         {
             Name: "澈羽枫灵",
             PoseMapping: specialMapping,
-            AllowTypes: { l: 21 },
+            AllowTypes: { l: 20 },
         },
-        { Name: "五十提", AllowTypes: { l: 22 } },
-        { Name: "Shika", AllowTypes: { l: 23 } },
-        { Name: "依伊可", AllowTypes: { l: 24 } },
-        { Name: "白墨鴝", AllowTypes: { l: 25 } },
-        { Name: "希雅", AllowTypes: { l: 26 } },
-        { Name: "墨璃", AllowTypes: { l: 27 } },
+        { Name: "五十提", AllowTypes: { l: 21 } },
+        { Name: "Shika", AllowTypes: { l: 22 } },
+        { Name: "依伊可", AllowTypes: { l: 23 } },
+        { Name: "白墨鴝", AllowTypes: { l: 24 } },
+        { Name: "希雅", AllowTypes: { l: 25 } },
+        { Name: "墨璃", AllowTypes: { l: 26 } },
+        { Name: "铃奈", AllowTypes: { l: 27 } },
 
     ],
 };
@@ -169,6 +171,7 @@ const typeNames = {
     hz: "盒子的小黑屋玩偶",
     x: "吸血鬼城堡",
     lihua: "笠花和An'an的家",
+    yb: "鸢堡",
     l: "路过的玩偶",
 };
 
@@ -216,7 +219,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -224,7 +227,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -274,7 +277,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = Tools.dialogGenerator(
     modules,
