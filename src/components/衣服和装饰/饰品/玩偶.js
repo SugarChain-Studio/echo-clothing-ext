@@ -120,6 +120,7 @@ const asset = {
         // 鸢堡
         { Name: "鸢", AllowTypes: { yb: 1 } },
         { Name: "ZforShort", AllowTypes: { yb: 2 } },
+        { Name: "luobo", AllowTypes: { yb: 3 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
