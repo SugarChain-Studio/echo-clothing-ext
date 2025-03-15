@@ -172,9 +172,9 @@ const dialog = Tools.replicateTypedItemDialog(["ItemHandheld"], ["折扇_Luzi"],
 
 const translations = {
     CN: "折扇",
-    EN: "Fan",
-    RU: "Веер",
-    UA: "Вітрощі",
+    EN: "Folding fan",
+    RU: "Складной веер",
+    UA: "Розкладний вентилятор",
 };
 
 export default function () {
