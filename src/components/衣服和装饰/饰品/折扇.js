@@ -9,6 +9,7 @@ const asset = {
     Top: 240,
     Left: 150,
     Priority: 55,
+    Difficulty: -10,
     ParentGroup: VersionSupport.NoParentGroup,
     PoseMapping: {
         TapedHands: PoseType.DEFAULT,

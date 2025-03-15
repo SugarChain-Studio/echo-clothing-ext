@@ -124,6 +124,7 @@ const assets = {
             Random: false,
             Top: -110,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Fetish: ["Sadism"],
             AllowActivity: ["ShockItem"],
@@ -144,6 +145,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Priority: 26,
             PoseMapping: {
@@ -170,6 +172,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Priority: 46,
             PoseMapping: {
@@ -199,6 +202,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Priority: 46,
             PoseMapping: {
@@ -219,6 +223,7 @@ const assets = {
             Top: {
                 OverTheHead: -100,
             },
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 Yoked: "Yoked",
@@ -329,12 +334,10 @@ export default function () {
     AssetManager.addImageMapping(
         clothLCSetting.reduce((pv, cv, idx) => {
             ["Panties", "BodyMarkings", "BodyMarkings2_Luzi"].forEach((group) => {
-                pv[
-                    `Screens/Inventory/${group}/淫纹_Luzi/${cv.Name}.png`
-                ] = `Screens/Inventory/ItemPelvis/淫纹_Luzi/t${idx}.png`;
-                pv[
-                    `Assets/Female3DCG/${group}/淫纹_Luzi_${cv.Name}.png`
-                ] = `Assets/Female3DCG/ItemPelvis/淫纹_Luzi_${cv.Src}.png`;
+                pv[`Screens/Inventory/${group}/淫纹_Luzi/${cv.Name}.png`] =
+                    `Screens/Inventory/ItemPelvis/淫纹_Luzi/t${idx}.png`;
+                pv[`Assets/Female3DCG/${group}/淫纹_Luzi_${cv.Name}.png`] =
+                    `Assets/Female3DCG/ItemPelvis/淫纹_Luzi_${cv.Src}.png`;
             });
             return pv;
         }, {})

@@ -11,6 +11,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
         },
@@ -21,6 +22,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -169,23 +171,19 @@ function AddAssetButt() {
             "Assets/Female3DCG/ItemButt/大号拉珠.png";
 
         dialogButt["CN"][`ItemButt大号拉珠${bcount}`] = `${bcount}个珠子`;
-        dialogButt["CN"][
-            `ItemButt大号拉珠Set${bcount}Increase`
-        ] = `SourceCharacter抓住AssetName，将${bcount}个珠子塞入TargetCharacter的肛门.`;
-        dialogButt["CN"][
-            `ItemButt大号拉珠Set${bcount}Decrease`
-        ] = `SourceCharacter抓住AssetName，将${bcount}个珠子拉出TargetCharacter的肛门.`;
+        dialogButt["CN"][`ItemButt大号拉珠Set${bcount}Increase`] =
+            `SourceCharacter抓住AssetName，将${bcount}个珠子塞入TargetCharacter的肛门.`;
+        dialogButt["CN"][`ItemButt大号拉珠Set${bcount}Decrease`] =
+            `SourceCharacter抓住AssetName，将${bcount}个珠子拉出TargetCharacter的肛门.`;
 
         const bead = i === 0 ? "Bead" : "Beads";
         const lower_bead = bead.toLowerCase();
 
         dialogButt["EN"][`ItemButt大号拉珠${bcount}`] = `${bcount} ${bead}`;
-        dialogButt["EN"][
-            `ItemButt大号拉珠Set${bcount}Increase`
-        ] = `SourceCharacter grabs AssetName, and inserts ${bcount} ${lower_bead} in DestinationCharacter butt.`;
-        dialogButt["EN"][
-            `ItemButt大号拉珠Set${bcount}Decrease`
-        ] = `SourceCharacter grabs AssetName, and pulls ${bcount} ${lower_bead} from DestinationCharacter butt.`;
+        dialogButt["EN"][`ItemButt大号拉珠Set${bcount}Increase`] =
+            `SourceCharacter grabs AssetName, and inserts ${bcount} ${lower_bead} in DestinationCharacter butt.`;
+        dialogButt["EN"][`ItemButt大号拉珠Set${bcount}Decrease`] =
+            `SourceCharacter grabs AssetName, and pulls ${bcount} ${lower_bead} from DestinationCharacter butt.`;
     }
 
     AssetManager.addImageMapping(imageMappings);

@@ -7,6 +7,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
+    Difficulty: -10,
     ParentGroup: VersionSupport.NoParentGroup,
     Extended: true,
     Fetish: ["Sadism"],
@@ -40,7 +41,7 @@ const asset = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [{ Name: "无" }, { Name: "阿巴阿巴" }, { Name: "阿巴AK" },],
+    Options: [{ Name: "无" }, { Name: "阿巴阿巴" }, { Name: "阿巴AK" }],
 };
 
 /** @type {Translation.Dialog} */

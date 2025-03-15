@@ -7,6 +7,7 @@ const asset = {
     Random: false,
     Top: -100,
     Left: -150,
+    Difficulty: -10,
     ParentGroup: VersionSupport.NoParentGroup,
     PoseMapping: {
         TapedHands: PoseType.HIDE,
@@ -104,14 +105,20 @@ const dialog = {
         ItemHandheld油纸伞山水: "Landscape",
         ItemHandheld油纸伞竹子: "Bamboo",
         ItemHandheld油纸伞卡通: "Cartoon",
-        ItemHandheld油纸伞Set无图案: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with no pattern.",
-        ItemHandheld油纸伞Set花1: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a flower pattern.",
-        ItemHandheld油纸伞Set花2: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a flower pattern.",
-        ItemHandheld油纸伞Set山水: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a landscape pattern.",
-        ItemHandheld油纸伞Set竹子: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a bamboo pattern.",
-        ItemHandheld油纸伞Set卡通: "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a cartoon pattern.",
-    }
-}
+        ItemHandheld油纸伞Set无图案:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with no pattern.",
+        ItemHandheld油纸伞Set花1:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a flower pattern.",
+        ItemHandheld油纸伞Set花2:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a flower pattern.",
+        ItemHandheld油纸伞Set山水:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a landscape pattern.",
+        ItemHandheld油纸伞Set竹子:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a bamboo pattern.",
+        ItemHandheld油纸伞Set卡通:
+            "SourceCharacter changes TargetCharacter to an oil-paper umbrella with a cartoon pattern.",
+    },
+};
 
 const translations = {
     CN: "油纸伞",
@@ -122,14 +129,3 @@ export default function () {
     AssetManager.addAsset("ItemHandheld", asset, extended, translations);
     AssetManager.addCustomDialog(dialog);
 }
-
-
-
-
-
-
-
-
-
-
-

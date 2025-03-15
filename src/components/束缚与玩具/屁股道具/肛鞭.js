@@ -10,6 +10,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
         },
@@ -20,6 +21,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -63,8 +65,6 @@ const translations = {
     },
 };
 
-
-
 /** @type { CustomAssetDefinition } */
 const assetButt = {
     Name: "肛鞭",
@@ -84,21 +84,25 @@ const assetButt = {
             Name: "一半",
             Top: -200,
             AllowTypes: { typed: 0 },
-            Alpha: [{
-                Group: ["ItemButt",],
-                Masks: [[220, 0, 60, 540]],
-            }]
+            Alpha: [
+                {
+                    Group: ["ItemButt"],
+                    Masks: [[220, 0, 60, 540]],
+                },
+            ],
         },
         {
             Name: "全部",
             Top: -364,
             AllowTypes: { typed: 1 },
-            Alpha: [{
-                Group: ["ItemButt",],
-                Masks: [[220, 0, 60, 540]],
-            }]
-        }
-    ]
+            Alpha: [
+                {
+                    Group: ["ItemButt"],
+                    Masks: [[220, 0, 60, 540]],
+                },
+            ],
+        },
+    ],
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -112,7 +116,7 @@ const extendedButt = {
             Name: "全部",
         },
     ],
-    DrawImages: false
+    DrawImages: false,
 };
 
 /** @type {Translation.Dialog} */
@@ -130,7 +134,7 @@ const dialogButt = {
         ItemButt肛鞭全部: "Stuff it all in.",
         ItemButt肛鞭Set一半: "SourceCharacter pulls the anal whip halfway out of TargetCharacter's anus.",
         ItemButt肛鞭Set全部: "SourceCharacter inserts all the anal whips into TargetCharacter's anus.",
-    }
+    },
 };
 
 const translationsButt = {
@@ -142,16 +146,19 @@ const translationsButt = {
 function InventoryItemButtAnalWhipHook(data, originalFunction, C, item, newOption, previousOption) {
     if (C.IsPlayer()) {
         // The Player pulls beads from her own butt
-        ActivityArousalItem(C, C, item.Asset)
+        ActivityArousalItem(C, C, item.Asset);
     }
 }
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
-
-    AssetManager.addImageMapping({ "Assets/Female3DCG/ItemButt/肛鞭_typed0_一半.png": "Assets/Female3DCG/ItemButt/肛鞭.png" });
-    AssetManager.addImageMapping({ "Assets/Female3DCG/ItemButt/肛鞭_typed1_全部.png": "Assets/Female3DCG/ItemButt/肛鞭.png" });
+    AssetManager.addImageMapping({
+        "Assets/Female3DCG/ItemButt/肛鞭_typed0_一半.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
+    });
+    AssetManager.addImageMapping({
+        "Assets/Female3DCG/ItemButt/肛鞭_typed1_全部.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
+    });
     AssetManager.addAsset("ItemButt", assetButt, extendedButt, translationsButt);
     AssetManager.addCustomDialog(dialogButt);
 }

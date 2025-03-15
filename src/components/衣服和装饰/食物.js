@@ -10,6 +10,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
             PoseMapping: {
@@ -31,6 +32,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
             PoseMapping: {
@@ -50,6 +52,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
         },
@@ -59,6 +62,7 @@ const assets = {
             Top: 160,
             Left: 160,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
             PoseMapping: {
@@ -78,6 +82,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 55,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Effect: [],
         },
@@ -88,6 +93,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 2,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -105,6 +111,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -136,6 +143,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -163,6 +171,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -180,6 +189,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
             Priority: 55,
             DefaultColor: ["#BA9273", "#F9F4E0", "#B4B4B4", "Default", "#878787"],
@@ -220,6 +230,7 @@ const assets = {
             Top: 0,
             Left: 2,
             Block: [],
+            Difficulty: -10,
             ParentGroup: VersionSupport.NoParentGroup,
         },
     ],
@@ -291,7 +302,8 @@ export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
     AssetManager.afterLoad(() => {
-        ModManager.progressiveHook("LoginDoNextThankYou").next()
+        ModManager.progressiveHook("LoginDoNextThankYou")
+            .next()
             .inject((args, next) => {
                 if (CurrentScreen !== "Login") return next(args);
                 const hood = LoginCharacter.Appearance.find((a) => a.Asset.Group.Name === "ItemHood");
