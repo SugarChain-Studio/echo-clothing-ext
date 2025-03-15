@@ -1,12 +1,14 @@
 import AssetManager from "@mod-utils/AssetManager";
+import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
     Name: "折扇_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Top: 240,
+    Left: 150,
+    Priority: 55,
     ParentGroup: VersionSupport.NoParentGroup,
     PoseMapping: {
         TapedHands: PoseType.DEFAULT,
@@ -18,22 +20,74 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
-    DefaultColor: ["#000000", "#000000", "Default"],
+    DefaultColor: ["#FFFFFF", "#0C0809", "#2B1D11", "#2B1D11", "#2B1D11", "#848484"],
+    AllowActivity: ["SpankItem", "RubItem"],
+    ActivityAudio: ["SmackCrop"],
     Layer: [
         {
-            Name: "扇柄展开",
-            Priority: 55,
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "扇柄",
-            Priority: 55,
+            Name: "折叠扇面",
             AllowTypes: { n: [0] },
         },
         {
-            Name: "扇页展开",
-            Priority: 55,
+            Name: "折叠扇面边缘",
+            AllowTypes: { n: [0] },
+        },
+        {
+            Name: "折叠扇骨",
+            AllowTypes: { n: [0] },
+        },
+        {
+            Name: "展开扇骨后",
             AllowTypes: { n: [1] },
+        },
+        {
+            Name: "展开扇面",
+            CopyLayerColor: "折叠扇面",
+            AllowTypes: { n: [1] },
+        },
+        {
+            Name: "展开扇面边缘",
+            CopyLayerColor: "折叠扇面边缘",
+            AllowTypes: { n: [1] },
+        },
+        {
+            Name: "展开扇骨",
+            AllowTypes: { n: [1] },
+        },
+        {
+            Name: "展开扇面阴影",
+            Priority: 56,
+            AllowTypes: { n: [1] },
+        },
+        {
+            Name: "梅",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [1] },
+        },
+        {
+            Name: "兰",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [2] },
+        },
+        {
+            Name: "竹",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [3] },
+        },
+        {
+            Name: "菊",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [4] },
+        },
+        {
+            Name: "山水",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [5] },
+        },
+        {
+            Name: "溪上扁舟隔月来",
+            AllowColorize: false,
+            AllowTypes: { n: [1], p: [6] },
         },
     ],
 };
@@ -48,52 +102,73 @@ const extended = {
             Key: "n",
             Options: [{}, {}],
         },
+        {
+            Name: "图案",
+            DrawImages: false,
+            Key: "p",
+            Options: [{}, {}, {}, {}, {}, {}, {}],
+        },
     ],
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = Tools.replicateTypedItemDialog(["ItemHandheld"], ["折扇_Luzi"], {
     CN: {
-        ItemHandheld折扇_LuziSelectBase: "选择配置",
-        ItemHandheld折扇_LuziSelect展开: "展开扇子",
-        ItemHandheld折扇_LuziModule展开: "展开扇子",
-        ItemHandheld折扇_LuziOptionn0: "关闭",
-        ItemHandheld折扇_LuziOptionn1: "展开",
+        SelectBase: "选择配置",
+        Module展开: "展开扇子",
+        Module图案: "图案",
 
-        ItemHandheld折扇_LuziSetn0: "SourceCharacter关闭了TargetCharacter的折扇。",
-        ItemHandheld折扇_LuziSetn1: "SourceCharacter展开了TargetCharacter的折扇。",
+        Select展开: "展开扇子",
+        Optionn0: "关闭",
+        Optionn1: "展开",
+        Setn0: "SourceCharacter将TargetCharacter的折扇轻合，檀木扇骨收作蝶栖梅枝，绢面星斗复归砚底玄池。",
+        Setn1: "SourceCharacter振腕展开TargetCharacter的折扇，玉竹扇骨化开半阙月光，素绢云纹漫卷三秋溪山。",
+
+        Select图案: "选择图案",
+        Optionp0: "无",
+        Optionp1: "梅",
+        Optionp2: "兰",
+        Optionp3: "竹",
+        Optionp4: "菊",
+        Optionp5: "山水",
+        Optionp6: "西溪舟行其一",
+        Setp0: "SourceCharacter执扇在手，轻拂流云，将TargetCharacter扇面复归素白澄明之境。",
+        Setp1: "SourceCharacter提笔落朱砂，为TargetCharacter描就扇上『疏影横枝』，暗香浮动月黄昏。",
+        Setp2: "SourceCharacter运腕生幽芳，在TargetCharacter扇骨间勾勒『空谷猗兰』，九畹清风徐徐来。",
+        Setp3: "SourceCharacter蘸墨写劲节，使TargetCharacter掌中折扇顿生『潇湘竹韵』，万叶秋声满庭轩。",
+        Setp4: "SourceCharacter点金成傲霜，令TargetCharacter扇面铺展『东篱霜菊』，黄金甲胄抱香寒。",
+        Setp5: "SourceCharacter破墨染氤氲，于TargetCharacter素纨上皴擦『千里江山』，青绿千载见沧溟。",
+        Setp6: "SourceCharacter悬腕书诗魄，在TargetCharacter玉竹扇间挥就『溪上扁舟隔月来』，一竿撑碎水云光。",
     },
     EN: {
-        ItemHandheld折扇_LuziSelectBase: "Select Configuration",
-        ItemHandheld折扇_LuziSelect展开: "Open Fan",
-        ItemHandheld折扇_LuziModule展开: "Open Fan",
-        ItemHandheld折扇_LuziOptionn0: "Closed",
-        ItemHandheld折扇_LuziOptionn1: "Opened",
+        SelectBase: "Select Configuration",
+        Module展开: "Open Fan",
+        Module图案: "Pattern",
 
-        ItemHandheld折扇_LuziSetn0: "SourceCharacter closed TargetCharacter's fan.",
-        ItemHandheld折扇_LuziSetn1: "SourceCharacter opened TargetCharacter's fan.",
-    },
-    UA: {
-        ItemHandheld折扇_LuziSelectBase: "Вибрати конфігурацію",
-        ItemHandheld折扇_LuziSelect展开: "Розгорнути вітрощі",
-        ItemHandheld折扇_LuziModule展开: "Розгорнути вітрощі",
-        ItemHandheld折扇_LuziOptionn0: "Закрито",
-        ItemHandheld折扇_LuziOptionn1: "Відкрито",
+        Select展开: "Open Fan",
+        Optionn0: "Closed",
+        Optionn1: "Opened",
+        Setn0: "SourceCharacter furls TargetCharacter's sandalwood fan, Where moonlit covenant folds back into inkwell night.",
+        Setn1: "SourceCharacter releases TargetCharacter's jade-bamboo fan, Unfolding solar flare across silk-cloud scroll of time.",
 
-        ItemHandheld折扇_LuziSetn0: "SourceCharacter закрив вітрощі TargetCharacter.",
-        ItemHandheld折扇_LuziSetn1: "SourceCharacter розгорнув вітрощі TargetCharacter.",
-    },
-    RU: {
-        ItemHandheld折扇_LuziSelectBase: "Выбрать конфигурацию",
-        ItemHandheld折扇_LuziSelect展开: "Развернуть веер",
-        ItemHandheld折扇_LuziModule展开: "Развернуть веер",
-        ItemHandheld折扇_LuziOptionn0: "Закрыто",
-        ItemHandheld折扇_LuziOptionn1: "Открыто",
+        Select图案: "Select Pattern",
+        Optionp0: "None",
+        Optionp1: "Plum",
+        Optionp2: "Orchid",
+        Optionp3: "Bamboo",
+        Optionp4: "Chrysanthemum",
+        Optionp5: "Landscape",
+        Optionp6: "西溪舟行 part 1",
 
-        ItemHandheld折扇_LuziSetn0: "SourceCharacter закрыл веер TargetCharacter.",
-        ItemHandheld折扇_LuziSetn1: "SourceCharacter открыл веер TargetCharacter.",
+        Setp0: "With cloud-chasing strokes, SourceCharacter sweeps away worldly traces from TargetCharacter's fan, restoring its parchment to the pristine void.",
+        Setp1: 'SourceCharacter etches "Plum Shadows Dance" upon TargetCharacter\'s silk canvas, floating fragrance under twilight moon.',
+        Setp2: "SourceCharacter weaves \"Orchid Whispers\" through TargetCharacter's bamboo slats, nine meadows' breeze caught in ink-washed grace.",
+        Setp3: 'SourceCharacter carves "Bamboo Sonata" into TargetCharacter\'s folding ribs, with each fold whispering autumn’s song through hollow jade.',
+        Setp4: "SourceCharacter gilds \"Chrysanthemum Armor\" across TargetCharacter's parchment, frost-kissed petals guarding winter's golden throne.",
+        Setp5: 'Celestial strokes swirl "Misty Peaks Voyage" onto TargetCharacter\'s silk canvas, where ink-washed mountains breathe eternal jade.',
+        Setp6: 'SourceCharacter inscribes "Moonlit Ripple Verse" along TargetCharacter\'s jade-bamboo ribs, where silvered oars cleave poetry from the stream.',
     },
-};
+});
 
 const translations = {
     CN: "折扇",
@@ -106,14 +181,3 @@ export default function () {
     AssetManager.addAsset("ItemHandheld", asset, extended, translations);
     AssetManager.addCustomDialog(dialog);
 }
-
-
-
-
-
-
-
-
-
-
-
