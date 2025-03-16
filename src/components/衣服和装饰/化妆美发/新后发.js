@@ -1,5 +1,6 @@
 import AssetManager from "@mod-utils/AssetManager";
 import { pickEntry, setupEntries } from "@mod-utils/AssetManager/entries";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {Array<CustomAssetDefinition>}} */
@@ -259,12 +260,12 @@ const translations = {
             低双马尾2: "低双马尾 2",
             低双马尾3: "低双马尾 3",
             低双马尾4: "低双马尾 4",
-            低双马尾5: "低双马尾 5",    
-            低双马尾6: "低双马尾 6",            
-            双马尾1: "双马尾 1",           
-            双马尾2: "双马尾 2",           
-            双马尾3: "双马尾 3",     
-            双马尾4: "双马尾 4",     
+            低双马尾5: "低双马尾 5",
+            低双马尾6: "低双马尾 6",
+            双马尾1: "双马尾 1",
+            双马尾2: "双马尾 2",
+            双马尾3: "双马尾 3",
+            双马尾4: "双马尾 4",
             双马尾5: "双马尾 5",
             卷发后1: "卷发后1",
             卷发后2: "卷发后2",
@@ -302,43 +303,36 @@ const translations = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "左侧" },
-        { Name: "右侧" },
-        { Name: "都有" },
-    ],
+    Options: [{ Name: "左侧" }, { Name: "右侧" }, { Name: "都有" }],
 };
 
-export default function () {
-    assets.forEach(asset => {
-        if (asset.Extended === true) {
-            AssetManager.addAsset("新后发_Luzi", asset, extended, getTranslations("新后发_Luzi", asset.Name));
+const dialogGen = (name) =>
+    DialogTools.replicateGroupedItemDialog(["新后发_Luzi"], [name], {
+        CN: {
+            Select: "选择外观",
+            左侧: "左侧",
+            右侧: "右侧",
+            都有: "都有",
+        },
+        EN: {
+            Select: "Choose look",
+            左侧: "Left",
+            右侧: "Right",
+            都有: "Both",
+        },
+    });
 
-            AssetManager.addCustomDialog(getDialog("新后发_Luzi", asset.Name));
-        }
-        else {
-            AssetManager.addAsset("新后发_Luzi", asset, null, getTranslations("新后发_Luzi", asset.Name));
+export default function () {
+    assets.forEach((asset) => {
+        const names = DialogTools.pickDialog(translations, "新后发_Luzi", asset.Name);
+        if (asset.Extended === true) {
+            AssetManager.addAsset("新后发_Luzi", asset, extended, names);
+            AssetManager.addCustomDialog(dialogGen(asset.Name));
+        } else {
+            AssetManager.addAsset("新后发_Luzi", asset, null, names);
         }
     });
 }
-
-/**
- * @param {string} groupKey - 分组键
- * @param {string} entryKey - 条目键
- * @returns {Translation.Entry} - 返回翻译
- */
-function getTranslations(groupKey, entryKey) {
-    const result = {};
-
-    for (const lang in translations) {
-        if (translations[lang][groupKey] && translations[lang][groupKey][entryKey]) {
-            result[lang] = translations[lang][groupKey][entryKey];
-        }
-    }
-
-    return result;
-}
-
 /**
  * @param {string} groupKey - 分组键
  * @param {string} entryKey - 条目键
@@ -347,7 +341,7 @@ function getTranslations(groupKey, entryKey) {
 function getDialog(groupKey, entryKey) {
     const dialog = {
         CN: {},
-        EN: {}
+        EN: {},
     };
 
     dialog["CN"][groupKey + entryKey + "Select"] = "选择外观";

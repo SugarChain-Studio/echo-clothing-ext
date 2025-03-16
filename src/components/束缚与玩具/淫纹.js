@@ -1,6 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import { Tools } from "@mod-utils/Tools";
-import ModManager from "@mod-utils/ModManager";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 import { ChatRoomEvents } from "@mod-utils/Events";
 
@@ -90,7 +89,7 @@ function AssetsItemPelvis随机自慰(C) {
 
     DrawFlashScreen("#F347B4", 1500, 500);
 
-    const customDialog = Tools.makeCustomDialogGenerator(asset.Name);
+    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
 
     const whenBlocked = () => {
         ServerSend("ChatRoomChat", {
@@ -98,7 +97,7 @@ function AssetsItemPelvis随机自慰(C) {
             Type: "Action",
             Dictionary: [{ SourceCharacter: Player.MemberNumber }],
         });
-    }
+    };
 
     if (!Player.CanInteract()) {
         whenBlocked();
@@ -183,7 +182,7 @@ function onActionHandler(data) {
     ) {
         if (Content.includes("ActionUse")) {
             const assetName = Dictionary.find((x) => "AssetName" in x)?.AssetName;
-            const groupName = /** @type {any}*/(Dictionary.find((x) => "FocusGroupName" in x))?.FocusGroupName;
+            const groupName = /** @type {any}*/ (Dictionary.find((x) => "FocusGroupName" in x))?.FocusGroupName;
             if (assetName !== asset.Name || !groupName) return;
 
             const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
@@ -216,7 +215,7 @@ function dialogDrawHook(Data, originalFunction) {
     if (!DialogFocusItem) return;
     if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
     } else {
-        const customDialog = Tools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
 
         const prevAlign = MainCanvas.textAlign;
         MainCanvas.textAlign = "center";
@@ -258,7 +257,7 @@ function dialogClickHook(Data, originalFunction) {
         const clickPush = (key, func) =>
             ExtendedItemCustomClickAndPush(CharacterGetCurrent(), DialogFocusItem, key, () => func(), false, false);
 
-        const customDialog = Tools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
 
         if (RMouseIn(buttons.高潮按钮)) {
             const Dictionary = new DictionaryBuilder()
@@ -295,10 +294,9 @@ function dialogClickHook(Data, originalFunction) {
 function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     const Data = PersistentData();
 
-    if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/(Item.Property));
+    if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/ (Item.Property));
 
-    if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow)
-        Tools.drawUpdate(C, Data);
+    if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow) Tools.drawUpdate(C, Data);
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MyDataType>} */
@@ -321,12 +319,11 @@ function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) 
 
         const delta = now - Data.BlinkTimer;
         Data.BlinkTimer = now;
-        Data.BlinkCycle += delta / TwinkleCycleTime * Math.PI * 2;
+        Data.BlinkCycle += (delta / TwinkleCycleTime) * Math.PI * 2;
 
         return { Opacity: 0.7 + 0.3 * Math.cos(Data.BlinkCycle) };
     }
 }
-
 
 /** @type {AssetArchetypeConfig} */
 const extended = {
@@ -374,7 +371,7 @@ const extended2 = {
     },
 };
 
-const lock_dialogs = Tools.replicateTypedItemDialog(["ItemMisc"], ["淫纹锁_Luzi_Padlock"], {
+const lock_dialogs = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["淫纹锁_Luzi_Padlock"], {
     CN: {
         Intro: "画着复杂的文字",
     },
@@ -386,10 +383,10 @@ const lock_dialogs = Tools.replicateTypedItemDialog(["ItemMisc"], ["淫纹锁_Lu
     },
     UA: {
         Intro: "Намальовано складними літерами",
-    }
+    },
 });
 
-const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
+const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
     CN: {
         淫纹发光按钮: "淫纹发光",
         淫纹强制自慰按钮: "淫纹强制自慰",
@@ -406,14 +403,12 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
         自慰BlockV1: "SourceCharacter急切的想要抚慰自己,扭动肩膀,尽可能让乳尖受到进一步刺激.",
         自慰BlockV2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦私处,但仍难以得到刺激.",
         自慰BlockV3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但她的手臂完全无法动弹.",
-        自慰BlockV4:
-            "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着私处摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
+        自慰BlockV4: "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着私处摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
         自慰BlockP0: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的阴茎.",
         自慰BlockP1: "SourceCharacter急切的想要抚慰自己,扭动身体,尽可能磨蹭阴茎龟头.",
         自慰BlockP2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦龟头,但仍难以得到刺激.",
         自慰BlockP3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但他的手臂完全无法动弹.",
-        自慰BlockP4:
-            "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着阴茎摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
+        自慰BlockP4: "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着阴茎摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
     },
     EN: {
         淫纹发光按钮: "Lewd Crest Glowing",
@@ -424,8 +419,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
 
         开始淫纹强制自慰:
             "SourceCharacter uses magic on AssetName to make TargetCharacter start continuous masturbation.",
-        停止淫纹强制自慰:
-            "SourceCharacter uses magic on AssetName to stop the forced masturbation of TargetCharacter.",
+        停止淫纹强制自慰: "SourceCharacter uses magic on AssetName to stop the forced masturbation of TargetCharacter.",
 
         淫纹强制高潮: "SourceCharacter uses magic on AssetName to force TargetCharacter to orgasm.",
 
@@ -459,8 +453,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
             "SourceCharacter використовує магію на AssetName, щоб змусити TargetCharacter почати безперервну мастурбацію.",
         停止淫纹强制自慰:
             "SourceCharacter використовує магію на AssetName, щоб зупинити примусову мастурбацію TargetCharacter.",
-        淫纹强制高潮:
-            "SourceCharacter використовує магію на AssetName, щоб змусити TargetCharacter досягти оргазму.",
+        淫纹强制高潮: "SourceCharacter використовує магію на AssetName, щоб змусити TargetCharacter досягти оргазму.",
         自慰BlockV0:
             "SourceCharacter з нетерпінням хоче чіпати себе, стискає свої лахи як їхні ноги трусяться від жаги стимулювати себе якомога більше.",
         自慰BlockV1:
@@ -481,7 +474,6 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
             "SourceCharacter терміново хоче знизити жагу, намагаючись використати свої руки з користю і мастурбувати, але натомість його руки жалюгідно нерухомі.",
         自慰BlockP4:
             "SourceCharacter з гіганською жагою чіпати себе, цого рука слідує до його пісюна стискаючи з впевненістю, натомість не отримує доступне задоволення в руці.",
-
     },
     RU: {
         淫纹发光按钮: "Светящийся Lewd Crest",
@@ -493,8 +485,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
             "SourceCharacter использует магию на AssetName, чтобы TargetCharacter начал непрерывную мастурбацию.",
         停止淫纹强制自慰:
             "SourceCharacter использует магию на AssetName, чтобы остановить принудительную мастурбацию TargetCharacter.",
-        淫纹强制高潮:
-            "SourceCharacter использует магию на AssetName, чтобы заставить TargetCharacter кончить.",
+        淫纹强制高潮: "SourceCharacter использует магию на AssetName, чтобы заставить TargetCharacter кончить.",
         自慰BlockV0:
             "SourceCharacter eagerly wants to pleasure themselves, trembling and squeezing their thighs together to stimulate their private areas as much as possible.",
         自慰BlockV1:
@@ -518,7 +509,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["淫纹_Luzi"], {
     },
 });
 
-const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", "ItemTorso2"], ["淫纹_Luzi"], {
+const item_dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis", "ItemTorso", "ItemTorso2"], ["淫纹_Luzi"], {
     CN: {
         SelectBase: "淫纹设置",
         Module样式: "淫纹样式",
@@ -540,8 +531,7 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiona2: "寸止",
         Optiona3: "拒绝",
         Seta0: "SourceCharacter通过AssetName上的魔法令TargetCharacter的淫纹恢复自然状态.",
-        Seta1:
-            "SourceCharacter通过AssetName上的魔法令TargetCharacter的小穴保持湿润,持续处于发情状态.",
+        Seta1: "SourceCharacter通过AssetName上的魔法令TargetCharacter的小穴保持湿润,持续处于发情状态.",
         Seta2: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够处于高潮边缘.",
         Seta3: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够拒绝高潮.",
     },
@@ -565,14 +555,10 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiona1: "Continuous Heat",
         Optiona2: "Edge",
         Optiona3: "Deny",
-        Seta0:
-            "SourceCharacter uses magic on AssetName to restore TargetCharacter's Lust Pattern to its natural state.",
-        Seta1:
-            "SourceCharacter uses magic on AssetName to keep TargetCharacter's intimate area moist and in a continuous state of heat.",
-        Seta2:
-            "SourceCharacter uses magic on AssetName to keep TargetCharacter at the edge of orgasm.",
-        Seta3:
-            "SourceCharacter uses magic on AssetName to make TargetCharacter able to only reject orgasm.",
+        Seta0: "SourceCharacter uses magic on AssetName to restore TargetCharacter's Lust Pattern to its natural state.",
+        Seta1: "SourceCharacter uses magic on AssetName to keep TargetCharacter's intimate area moist and in a continuous state of heat.",
+        Seta2: "SourceCharacter uses magic on AssetName to keep TargetCharacter at the edge of orgasm.",
+        Seta3: "SourceCharacter uses magic on AssetName to make TargetCharacter able to only reject orgasm.",
     },
     UA: {
         SelectBase: "Налаштування Lewd Crest",
@@ -584,8 +570,7 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiont1: "Стиль 1",
         Optiont2: "Стиль 2",
         Optiont3: "Стиль 3",
-        Sett0:
-            "SourceCharacter встановлює для шаблону Lust DestinationCharacter стиль за замовчуванням.",
+        Sett0: "SourceCharacter встановлює для шаблону Lust DestinationCharacter стиль за замовчуванням.",
         Sett1: "SourceCharacter встановлює стиль 1 для моделі Lust для персонажа призначення.",
         Sett2: "SourceCharacter встановлює шаблон хтивості DestinationCharacter на стиль 2.",
         Sett3: "SourceCharacter встановлює стиль 3 для шаблону хтивості DestinationCharacter.",
@@ -594,15 +579,10 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiona1: "Безперервне тепло",
         Optiona2: "Край",
         Optiona3: "Заперечувати",
-        Seta0:
-            "SourceCharacter використовує магію на AssetName, щоб відновити шаблон хіть TargetCharacter до його природного стану.",
-        Seta1:
-            "SourceCharacter використовує магію на AssetName, щоб підтримувати інтимну зону TargetCharacter вологою та постійно нагріватись.",
-        Seta2:
-            "SourceCharacter використовує магію на AssetName, щоб утримувати TargetCharacter на межі оргазму.",
-        Seta3:
-            "SourceCharacter використовує магію на AssetName, щоб зробити TargetCharacter здатним лише відкидати оргазм.",
-
+        Seta0: "SourceCharacter використовує магію на AssetName, щоб відновити шаблон хіть TargetCharacter до його природного стану.",
+        Seta1: "SourceCharacter використовує магію на AssetName, щоб підтримувати інтимну зону TargetCharacter вологою та постійно нагріватись.",
+        Seta2: "SourceCharacter використовує магію на AssetName, щоб утримувати TargetCharacter на межі оргазму.",
+        Seta3: "SourceCharacter використовує магію на AssetName, щоб зробити TargetCharacter здатним лише відкидати оргазм.",
     },
     RU: {
         SelectBase: "Настройки Lewd Crest",
@@ -614,8 +594,7 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiont1: "Стиль 1",
         Optiont2: "Стиль 2",
         Optiont3: "Стиль 3",
-        Sett0:
-            "SourceCharacter устанавливает узор похоти DestinationCharacter на стиль по умолчанию.",
+        Sett0: "SourceCharacter устанавливает узор похоти DestinationCharacter на стиль по умолчанию.",
         Sett1: "SourceCharacter устанавливает Lust Pattern DestinationCharacter на Style 1.",
         Sett2: "SourceCharacter устанавливает Lust Pattern DestinationCharacter на Style 2.",
         Sett3: "SourceCharacter устанавливает Lust Pattern DestinationCharacter на Style 3.",
@@ -625,14 +604,10 @@ const item_dialogs = Tools.replicateTypedItemDialog(["ItemPelvis", "ItemTorso", 
         Optiona1: "Постоянный нагрев",
         Optiona2: "Грань",
         Optiona3: "Запретить",
-        Seta0:
-            "SourceCharacter использует магию на AssetName, чтобы восстановить Lust Pattern TargetCharacter до его естественного состояния.",
-        Seta1:
-            "SourceCharacter использует магию на AssetName, чтобы поддерживать интимную зону TargetCharacter влажной и в постоянном состоянии тепла.",
-        Seta2:
-            "SourceCharacter использует магию на AssetName, чтобы удерживать TargetCharacter на грани оргазма.",
-        Seta3:
-            "SourceCharacter использует магию на AssetName, чтобы TargetCharacter мог только отвергать оргазм.",
+        Seta0: "SourceCharacter использует магию на AssetName, чтобы восстановить Lust Pattern TargetCharacter до его естественного состояния.",
+        Seta1: "SourceCharacter использует магию на AssetName, чтобы поддерживать интимную зону TargetCharacter влажной и в постоянном состоянии тепла.",
+        Seta2: "SourceCharacter использует магию на AssetName, чтобы удерживать TargetCharacter на грани оргазма.",
+        Seta3: "SourceCharacter использует магию на AssetName, чтобы TargetCharacter мог только отвергать оргазм.",
     },
 });
 

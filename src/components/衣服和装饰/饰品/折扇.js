@@ -1,5 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomAssetDefinition } */
@@ -113,7 +113,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = Tools.replicateTypedItemDialog(["ItemHandheld"], ["折扇_Luzi"], {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["折扇_Luzi"], {
     CN: {
         SelectBase: "选择配置",
         Module展开: "展开扇子",

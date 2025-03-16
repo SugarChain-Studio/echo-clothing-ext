@@ -1,5 +1,5 @@
 import AssetManager from "@mod-utils/AssetManager";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type {(Name:string, Priority:number) => CustomAssetDefinitionAppearance} */
 const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({
@@ -134,11 +134,15 @@ const translations = {
     },
 };
 
-const customDialog = Tools.replicateTypedItemDialog(["HairAccessory1", "HairAccessory3"], ["茉莉花钿1", "茉莉花钿2"], {
-    CN: { Select: "选择花的位置", 左: "左", 右: "右", 两侧: "两侧" },
-    EN: { Select: "Select flower position", 左: "Left", 右: "Right", 两侧: "Both" },
-    RU: { Select: "Выберите положение цветка", 左: "Лево", 右: "Право", 两侧: "Оба" },
-});
+const customDialog = DialogTools.replicateGroupedItemDialog(
+    ["HairAccessory1", "HairAccessory3"],
+    ["茉莉花钿1", "茉莉花钿2"],
+    {
+        CN: { Select: "选择花的位置", 左: "左", 右: "右", 两侧: "两侧" },
+        EN: { Select: "Select flower position", 左: "Left", 右: "Right", 两侧: "Both" },
+        RU: { Select: "Выберите положение цветка", 左: "Лево", 右: "Право", 两侧: "Оба" },
+    }
+);
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations, extended);

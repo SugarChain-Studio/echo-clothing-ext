@@ -1,6 +1,6 @@
 import AssetManager from "@mod-utils/AssetManager";
 import ModManager from "@mod-utils/ModManager";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -103,7 +103,7 @@ const config = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = Tools.replicateTypedItemDialog(["ItemNeckRestraints"], ["监控机器人_Luzi"], {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemNeckRestraints"], ["监控机器人_Luzi"], {
     CN: {
         Select: "选择模式",
         跟随模式: "跟随模式",

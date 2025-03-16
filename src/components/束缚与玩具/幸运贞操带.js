@@ -1,7 +1,7 @@
 import AssetManager from "@mod-utils/AssetManager";
 import { ChatRoomEvents } from "@mod-utils/Events";
 import { OrgasmEvents } from "@mod-utils/Events/orgasm";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /**
@@ -229,7 +229,7 @@ function dialogDrawHook(Data, originalFunction) {
     const Item = DialogFocusItem;
     if (!Item || Item.Asset.Name !== asset.Name) return;
 
-    const customDialog = Tools.makeCustomDialogGenerator(asset.Name);
+    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
     const customDialogText = (...keys) => AssetTextGet(customDialog(...keys));
 
     const property = /**@type {ExtendItemProperties}*/ (Item.Property);
@@ -296,7 +296,7 @@ function onAction(data) {
     }
 }
 
-const custom_dialogs = Tools.replicateCustomDialog(["幸运贞操带"], {
+const custom_dialogs = DialogTools.replicateCustomDialog(["幸运贞操带"], {
     CN: {
         ShieldState0: "都打开",
         ShieldState1: "前部关闭",
@@ -341,7 +341,7 @@ const custom_dialogs = Tools.replicateCustomDialog(["幸运贞操带"], {
     },
 });
 
-const dialogs = Tools.replicateTypedItemDialog(["ItemPelvis"], ["幸运贞操带"], {
+const dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis"], ["幸运贞操带"], {
     CN: {
         SelectBase: "选择配置",
         ModuleShield: "选择护盾",

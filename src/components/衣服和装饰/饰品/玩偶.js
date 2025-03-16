@@ -1,6 +1,6 @@
 import AssetManager from "@mod-utils/AssetManager";
 import { Path } from "@mod-utils/path";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {AssetPoseMapping} */
@@ -158,7 +158,6 @@ const asset = {
         { Name: "希雅", AllowTypes: { l: 25 } },
         { Name: "墨璃", AllowTypes: { l: 26 } },
         { Name: "铃奈", AllowTypes: { l: 27 } },
-
     ],
 };
 
@@ -220,7 +219,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -228,7 +227,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -278,9 +277,9 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
-const cnDialog = Tools.dialogGenerator(
+const cnDialog = DialogTools.dialogGenerator(
     modules,
     {
         groups: ["ItemMisc"],
@@ -299,7 +298,7 @@ const cnDialog = Tools.dialogGenerator(
     predefDialog.CN || {}
 );
 
-const enDialog = Tools.dialogGenerator(
+const enDialog = DialogTools.dialogGenerator(
     modules,
     {
         groups: ["ItemMisc"],
@@ -319,7 +318,7 @@ const enDialog = Tools.dialogGenerator(
     predefDialog.EN || {}
 );
 
-const ruDialog = Tools.dialogGenerator(
+const ruDialog = DialogTools.dialogGenerator(
     modules,
     {
         groups: ["ItemMisc"],
