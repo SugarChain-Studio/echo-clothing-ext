@@ -19,6 +19,14 @@ import { ChatRoomEvents } from "@mod-utils/Events";
  * @property { number } BlinkTimer
  */
 
+/**
+ * @typedef { Object } Rect
+ * @property {number} X
+ * @property {number} Y
+ * @property {number} W
+ * @property {number} H
+ */
+
 /** @type { CustomAssetDefinition} */
 const asset = {
     Name: "淫纹_Luzi",

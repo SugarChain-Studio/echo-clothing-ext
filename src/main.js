@@ -4,6 +4,7 @@ import { ModInfo } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
 import { once } from "@mod-utils/loadFlag";
+import { CharacterTag } from "@mod-utils/charaTag";
 import log from "@mod-utils/log";
 
 const message = {
@@ -14,6 +15,11 @@ const message = {
 once(ModInfo.name, () => {
     ModManager.init(ModInfo);
     AssetManager.init(setup);
+
+    AssetManager.enableNonModValidation((param) => {
+        const from = ChatRoomCharacter.find((c) => c.MemberNumber === param.sourceMemberNumber);
+        return from && !!CharacterTag.get(from, ModInfo.name);
+    });
 
     if (Player?.MemberNumber) {
         const userLanguage = navigator.language.startsWith("zh") ? "zh" : "en";

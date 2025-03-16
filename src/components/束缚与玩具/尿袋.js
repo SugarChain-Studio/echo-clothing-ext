@@ -9,6 +9,14 @@ import { Tools } from "@mod-utils/Tools";
  */
 
 /**
+ * @typedef { Object } Rect
+ * @property {number} X
+ * @property {number} Y
+ * @property {number} W
+ * @property {number} H
+ */
+
+/**
  * @typedef { globalThis.ItemProperties & ExtendItemPropertiesPart } ExtendItemProperties
  */
 
