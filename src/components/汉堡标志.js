@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { ModInfo } from "@mod-utils/rollupHelper";
 import { makeTooltipIcon } from "@mod-utils/Tooltip";

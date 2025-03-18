@@ -1,11 +1,13 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "./assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { ModInfo } from "@mod-utils/rollupHelper";
+import { assetOverrides, baseURL, ModInfo } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
 import { once } from "@mod-utils/loadFlag";
 import { CharacterTag } from "@mod-utils/charaTag";
 import log from "@mod-utils/log";
+import { Logger } from "./logger";
+import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",
@@ -13,6 +15,13 @@ const message = {
 };
 
 once(ModInfo.name, () => {
+    HookManager.setLogger(Logger);
+    AssetManager.setLogger(Logger);
+
+    resolveAssetOverrides(baseURL, assetOverrides).then((overrides) => {
+        AssetManager.imageMapping.setBasicImgMapping(overrides);
+    });
+
     HookManager.init(ModInfo);
     AssetManager.init(setup);
 

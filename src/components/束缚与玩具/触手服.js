@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 function scriptDrawHook(data, originalFunction, drawData) {

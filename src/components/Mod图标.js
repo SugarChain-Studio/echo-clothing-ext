@@ -1,5 +1,5 @@
 import { CharacterTag } from "@mod-utils/charaTag";
-import ModManager from "@mod-utils/ModManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { betaFlag, ModInfo } from "@mod-utils/rollupHelper";
 
 const 服装拓展 = `data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAACXBIWXMAAAsSAAALEgHS3X78AAAA
@@ -135,7 +135,7 @@ export default function () {
 
     CharacterTag.init();
 
-    ModManager.progressiveHook("ChatRoomDrawCharacterStatusIcons", 10).inject((args, next) => {
+    HookManager.progressiveHook("ChatRoomDrawCharacterStatusIcons", 10).inject((args, next) => {
         if (ChatRoomHideIconState == 0) drawStatus(args);
     });
 }

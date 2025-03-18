@@ -1,7 +1,7 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
-import { ChatRoomEvents } from "@mod-utils/Events";
+import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 
 /**
  * @typedef { { Masturbate:boolean, Glow: boolean } } LewdCrestData

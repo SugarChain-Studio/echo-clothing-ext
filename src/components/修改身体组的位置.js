@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../assetForward";
 import { Tools } from "@mod-utils/Tools";
 
 export default function () {

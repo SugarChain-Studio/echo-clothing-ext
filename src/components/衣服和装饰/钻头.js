@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";

@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../../../assetForward";
 import { DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 import { ChatRoomOrder } from "@mod-utils/ChatRoomOrder/roomOrder";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";

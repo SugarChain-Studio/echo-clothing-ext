@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../assetForward";
 
 /** @type { {groupDef: CustomGroupDefinition, description: Translation.Entry }[]} */
 const groups = [

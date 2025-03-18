@@ -47,7 +47,7 @@ function translateText(sourceText, targetLang) {
 }
 
 export default function () {
-    ModManager.progressiveHook("ChatRoomMessageDisplay").inject((args, next) => {
+    HookManager.progressiveHook("ChatRoomMessageDisplay").inject((args, next) => {
         const data = args[0];
         if (["Chat", "Whisper", "Emote"].includes(data.Type)) {
             if (Array.isArray(data.Dictionary) && data.Dictionary.find((d) => d["AutoTranslated"])) return;

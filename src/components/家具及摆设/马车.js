@@ -1,4 +1,4 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
+import { AssetManager } from "../../assetForward";
 import { DrawCharacterModifier, ChatRoomOrder } from "@mod-utils/ChatRoomOrder";
 
 /** @type {CustomGroupedAssetDefinitions} */

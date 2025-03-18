@@ -1,6 +1,6 @@
-import { AssetManager } from "@sugarch/bc-asset-manager";
-import { ChatRoomEvents } from "@mod-utils/Events";
-import { OrgasmEvents } from "@mod-utils/Events/orgasm";
+import { AssetManager } from "../../assetForward";
+import { ChatRoomEvents } from "@sugarch/bc-event-handler";
+import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 

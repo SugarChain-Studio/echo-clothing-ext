@@ -24,14 +24,14 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.36.0)
       '@sugarch/bc-asset-manager':
-        specifier: ^0.2.0
-        version: 0.2.0(@sugarch/bc-mod-hook-manager@0.2.0(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
+        specifier: ^0.2.1
+        version: 0.2.1(@sugarch/bc-mod-hook-manager@0.2.2(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-event-handler':
         specifier: ^0.2.0
-        version: 0.2.0(@sugarch/bc-mod-hook-manager@0.2.0(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
+        version: 0.2.0(@sugarch/bc-mod-hook-manager@0.2.2(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-mod-hook-manager':
-        specifier: ^0.2.0
-        version: 0.2.0(bondage-club-mod-sdk@1.2.0)
+        specifier: ^0.2.2
+        version: 0.2.2(bondage-club-mod-sdk@1.2.0)
       bc-stubs:
         specifier: ^113.0.0
         version: 113.0.0
@@ -44,9 +44,6 @@ importers:
       copyfiles:
         specifier: ^2.4.1
         version: 2.4.1
-      eventemitter3:
-        specifier: ^5.0.1
-        version: 5.0.1
       github-markdown-css:
         specifier: ^5.8.1
         version: 5.8.1
@@ -296,10 +293,10 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
-  '@sugarch/bc-asset-manager@0.2.0':
-    resolution: {integrity: sha512-fpJ6yI27oX4TxIZiUD6d8nJRczaTq573NZ4G8AeZYAZXxw+GbHYRqeNx/9Oul8wr9SuuJAi2eC1+jrxOjfu6pg==}
+  '@sugarch/bc-asset-manager@0.2.1':
+    resolution: {integrity: sha512-8VnZJsXMwtg3H1Dsm9e0al2/s6+mWod/eFi5KzmBPSkLJL0oTLJKNcgTJviCxFdyzg9COQIGFtRC10yUPkP2sQ==}
     peerDependencies:
-      '@sugarch/bc-mod-hook-manager': 0.2.0
+      '@sugarch/bc-mod-hook-manager': 0.2.2
       bondage-club-mod-sdk: ^1.2.0
 
   '@sugarch/bc-event-handler@0.2.0':
@@ -308,8 +305,8 @@ packages:
       '@sugarch/bc-mod-hook-manager': 0.2.0
       bondage-club-mod-sdk: ^1.2.0
 
-  '@sugarch/bc-mod-hook-manager@0.2.0':
-    resolution: {integrity: sha512-lH2KhX54u5BukZ+jJWZ85NlyiuKTiMdWgw418zvP8YzmJAiH+7w4AtlcBrwM26YCk+a6KauXWn3lvyiDqCkdvA==}
+  '@sugarch/bc-mod-hook-manager@0.2.2':
+    resolution: {integrity: sha512-E0nhRNCHejzyvVghRl5ze45KOjjsBuuSQgPlptz0VMIJYIinb16tdsKi2SrigYuuhy0SENngfiQUa6aOyyMjGQ==}
     peerDependencies:
       bondage-club-mod-sdk: ^1.2.0
 
@@ -572,9 +569,6 @@ packages:
 
   eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
-
-  eventemitter3@5.0.1:
-    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
 
   fast-glob@3.3.3:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
@@ -1323,17 +1317,17 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@sugarch/bc-asset-manager@0.2.0(@sugarch/bc-mod-hook-manager@0.2.0(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-asset-manager@0.2.1(@sugarch/bc-mod-hook-manager@0.2.2(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
     dependencies:
-      '@sugarch/bc-mod-hook-manager': 0.2.0(bondage-club-mod-sdk@1.2.0)
+      '@sugarch/bc-mod-hook-manager': 0.2.2(bondage-club-mod-sdk@1.2.0)
       bondage-club-mod-sdk: 1.2.0
 
-  '@sugarch/bc-event-handler@0.2.0(@sugarch/bc-mod-hook-manager@0.2.0(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-event-handler@0.2.0(@sugarch/bc-mod-hook-manager@0.2.2(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
     dependencies:
-      '@sugarch/bc-mod-hook-manager': 0.2.0(bondage-club-mod-sdk@1.2.0)
+      '@sugarch/bc-mod-hook-manager': 0.2.2(bondage-club-mod-sdk@1.2.0)
       bondage-club-mod-sdk: 1.2.0
 
-  '@sugarch/bc-mod-hook-manager@0.2.0(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-mod-hook-manager@0.2.2(bondage-club-mod-sdk@1.2.0)':
     dependencies:
       bondage-club-mod-sdk: 1.2.0
 
@@ -1595,8 +1589,6 @@ snapshots:
   estree-walker@2.0.2: {}
 
   eventemitter3@4.0.7: {}
-
-  eventemitter3@5.0.1: {}
 
   fast-glob@3.3.3:
     dependencies:
