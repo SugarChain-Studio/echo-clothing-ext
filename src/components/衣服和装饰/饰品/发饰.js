@@ -13,14 +13,14 @@ const assets = [
         Extended: true,
         Layer: [
             {
-                Name: "左侧",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "右侧",
+                Name: "右",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -33,14 +33,14 @@ const assets = [
         Extended: true,
         Layer: [
             {
-                Name: "左侧",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "右侧",
+                Name: "右",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -53,14 +53,14 @@ const assets = [
         Extended: true,
         Layer: [
             {
-                Name: "左侧",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "右侧",
+                Name: "右",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -74,24 +74,24 @@ const assets = [
         DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
         Layer: [
             {
-                Name: "左侧夹子",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "左侧心",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "右侧夹子",
+                Name: "右夹子",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
             },
             {
-                Name: "右侧心",
+                Name: "右心",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左夹子",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
+            },
+            {
+                Name: "左心",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -105,14 +105,14 @@ const assets = [
         Extended: true,
         Layer: [
             {
-                Name: "左侧",
-                Priority: 54,
-                AllowTypes: { typed: [0, 2] },
-            },
-            {
-                Name: "右侧",
+                Name: "右",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -122,18 +122,60 @@ const assets = [
         Left: 100,
         Top: 0,
         ParentGroup: VersionSupport.NoParentGroup,
+        DefaultColor :["#D0CF58", "#D0CF58"],
+        Extended: true,
+        Layer: [
+            {
+                Name: "右",
+                Priority: 54,
+                AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
+            },
+        ],
+    },
+    {
+        Name: "月亮发饰",
+        Random: false,
+        Left: 100,
+        Top: 0,
+        ParentGroup: VersionSupport.NoParentGroup,
         DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
             {
-                Name: "左侧",
+                Name: "右",
+                Priority: 54,
+                AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
                 Priority: 54,
                 AllowTypes: { typed: [0, 2] },
             },
+        ],
+    },
+    {
+        Name: "蝙蝠翼发卡",
+        Random: false,
+        Left: 100,
+        Top: 0,
+        ParentGroup: VersionSupport.NoParentGroup,
+        DefaultColor :["#232323", "#232323"],
+        Extended: true,
+        Layer: [
             {
-                Name: "右侧",
+                Name: "右",
                 Priority: 54,
                 AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
             },
         ],
     },
@@ -149,7 +191,9 @@ const translations = {
             心型发卡: "心型发卡",
             星星发卡: "星星发卡",
             星星发卡2: "星星发卡 2",
-        },
+            月亮发饰: "月亮发饰",
+            蝙蝠翼发卡: "蝙蝠翼发卡",
+        }
     },
     EN: {
         HairAccessory1: {
@@ -159,7 +203,9 @@ const translations = {
             心型发卡: "Heart Hair Clip",
             星星发卡: "Star Hair Clip",
             星星发卡2: "Star Hair Clip 2",
-        },
+            月亮发饰: "Moon Hair Clip",
+            蝙蝠翼发卡: "Bat Wing Hair Clip",
+        }
     },
 };
 
@@ -171,22 +217,22 @@ Object.keys(translations).forEach((lang) => {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [{ Name: "左侧" }, { Name: "右侧" }, { Name: "都有" }],
+    Options: [{ Name: "左" }, { Name: "右" }, { Name: "两侧" }],
 };
 
 const dialogGen = (name) =>
     DialogTools.replicateGroupedItemDialog(["HairAccessory1", "HairAccessory3"], [name], {
         CN: {
             Select: "选择外观",
-            左侧: "左侧",
-            右侧: "右侧",
-            都有: "都有",
+            左: "左",
+            右: "右",
+            两侧: "两侧",
         },
         EN: {
             Select: "Choose look",
-            左侧: "Left",
-            右侧: "Right",
-            都有: "Both",
+            左: "Left",
+            右: "Right",
+            两侧: "Both",
         },
     });
 
