@@ -3,9 +3,8 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { assetOverrides, baseURL, ModInfo } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
-import { once } from "@mod-utils/loadFlag";
+import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
-import log from "@mod-utils/log";
 import { Logger } from "./logger";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
@@ -32,6 +31,6 @@ once(ModInfo.name, () => {
 
     if (Player?.MemberNumber) {
         const userLanguage = navigator.language.startsWith("zh") ? "zh" : "en";
-        log.warn(message[userLanguage]);
+        Logger.warn(message[userLanguage]);
     }
 });

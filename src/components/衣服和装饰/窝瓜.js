@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { Path } from "@mod-utils/path";
+import { PathTools } from "@sugarch/bc-mod-utility";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -77,8 +77,8 @@ const extended = {
 
 /** @type {Record<string, string>} */
 const icons = {
-    "Screens/Inventory/ItemDevices/窝瓜_Luzi/没盖子.png": Path.空png,
-    "Screens/Inventory/ItemDevices/窝瓜_Luzi/有盖子.png": Path.空png,
+    "Screens/Inventory/ItemDevices/窝瓜_Luzi/没盖子.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemDevices/窝瓜_Luzi/有盖子.png": PathTools.emptyImage,
 };
 
 /** @type {Translation.Dialog} */

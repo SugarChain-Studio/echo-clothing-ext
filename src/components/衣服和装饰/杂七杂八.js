@@ -248,7 +248,7 @@ const assets = {
     ],
 };
 
-/** @type {_.PRecord<CustomGroupName, ExtendedItemGroupConfig>} */
+/** @type {Partial<Record<CustomGroupName, ExtendedItemGroupConfig>>} */
 const extendedConfig = {
     ...["Panties", "BodyMarkings"].reduce((pv, group) => {
         if (!pv[group]) pv[group] = {};

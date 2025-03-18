@@ -149,7 +149,7 @@ function InventoryItemButtLongAnalBeadsPublishActionHook(data, originalFunction,
 function AddAssetButt() {
     extendedButt["Options"] = [];
 
-    /**  @type {CustomImageMapping} */
+    /**  @type {Record<string,string>} */
     const imageMappings = {};
 
     for (let i = 0; i < 9; i++) {

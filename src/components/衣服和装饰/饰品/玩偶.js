@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Path } from "@mod-utils/path";
+import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
@@ -232,7 +232,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
 modules.forEach((m) => {
     m.DrawData = {
         elementData: m.Options.map((opt, idx) => {
-            if (idx === 0) return { imagePath: Path.空png };
+            if (idx === 0) return { imagePath: PathTools.emptyImage };
             return {
                 imagePath: `Assets/Female3DCG/ItemMisc/玩偶_Luzi_${typedLayerNames[m.Key][idx]}.png`,
             };

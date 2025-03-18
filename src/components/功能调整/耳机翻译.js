@@ -1,18 +1,18 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
-/** @type {_.PRecord<CustomGroupName,Set<string> | "any">} */
+/** @type {Partial<Record<CustomGroupName,Set<string> | "any">>} */
 const speakingAssets = {
     ItemMisc: new Set(["TeddyBear", "PetPotato", "BunPlush", "FoxPlush", "Karl"]),
     ItemHandheld: new Set(["Shark", "伊偶_Luzi", "Smartphone", "Phone1", "Phone2"]),
 };
 
-/** @type {_.PRecord<CustomGroupName,Set<string> | "any">} */
+/** @type {Partial<Record<CustomGroupName,Set<string> | "any">>} */
 const hearingAssets = {
     ItemEars: "any",
 };
 
 /**
- * @param {_.PRecord<CustomGroupName,Set<string> | "any">} vAssets
+ * @param {Partial<Record<CustomGroupName,Set<string> | "any">>} vAssets
  * @returns {string | undefined}
  */
 function validItemCraftingDesc(vAssets) {

@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Path } from "@mod-utils/path";
+import { PathTools } from "@sugarch/bc-mod-utility";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -154,10 +154,10 @@ const extended = {
 
 /** @type {Record<string, string>} */
 const icons = {
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/无.png": Path.空png,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/乳胶衣.png": Path.空png,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/透视紧身衣.png": Path.空png,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/紧身衣.png": Path.空png,
+    "Screens/Inventory/ItemTorso/拘束套装_Luzi/无.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装_Luzi/乳胶衣.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装_Luzi/透视紧身衣.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装_Luzi/紧身衣.png": PathTools.emptyImage,
 };
 
 const dialogs = {
