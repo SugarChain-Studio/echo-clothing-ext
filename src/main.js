@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { ModInfo } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
@@ -13,10 +13,10 @@ const message = {
 };
 
 once(ModInfo.name, () => {
-    ModManager.init(ModInfo);
+    HookManager.init(ModInfo);
     AssetManager.init(setup);
 
-    AssetManager.enableNonModValidation((param) => {
+    AssetManager.enableValidation((param) => {
         const from = ChatRoomCharacter.find((c) => c.MemberNumber === param.sourceMemberNumber);
         return from && !!CharacterTag.get(from, ModInfo.name);
     });

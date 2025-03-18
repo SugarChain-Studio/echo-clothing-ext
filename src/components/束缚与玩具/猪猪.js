@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {

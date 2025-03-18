@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -37,27 +37,27 @@ const extended = {
     ChangeWhenLocked: false,
     Modules: [
         {
-            Name: "绑带",          
+            Name: "绑带",
             Key: "s",
             DrawImages: false,
-            Options: [      
-                {},         
-                {                  
-                    Property: {
-                         Block: ["ItemHands", "ItemHandheld"],
-                         Effect: [E.Block, E.BlockWardrobe],
-                         SetPose: ["BaseUpper"],
-                         Difficulty: 20, 
-                    },
-                    Effect: [E.Block, E.BlockWardrobe],
-                },       
+            Options: [
+                {},
                 {
                     Property: {
-                         Block: ["ItemHands", "ItemHandheld"],
-                         Effect: [E.Block, E.BlockWardrobe],
-                         SetPose: ["BaseUpper"],
-                         Difficulty: 20
-                    }
+                        Block: ["ItemHands", "ItemHandheld"],
+                        Effect: [E.Block, E.BlockWardrobe],
+                        SetPose: ["BaseUpper"],
+                        Difficulty: 20,
+                    },
+                    Effect: [E.Block, E.BlockWardrobe],
+                },
+                {
+                    Property: {
+                        Block: ["ItemHands", "ItemHandheld"],
+                        Effect: [E.Block, E.BlockWardrobe],
+                        SetPose: ["BaseUpper"],
+                        Difficulty: 20,
+                    },
                 },
             ],
         },
@@ -69,11 +69,11 @@ const extended = {
                 {
                     Property: { Intensity: -1, Effect: ["Egged"] },
                 },
-                { 
+                {
                     Prerequisite: ["AccessBreast"],
                     Property: { Intensity: 0, Effect: ["Egged", "Vibrating"] },
                 },
-                { 
+                {
                     Prerequisite: ["AccessBreast"],
                     Property: { Intensity: 1, Effect: ["Egged", "Vibrating"] },
                 },
@@ -95,11 +95,11 @@ const extended = {
                 {
                     Property: { Intensity: -1, Effect: ["Egged"] },
                 },
-                { 
+                {
                     Prerequisite: ["AccessCrotch"],
                     Property: { Intensity: 0, Effect: ["Egged", "Vibrating"] },
                 },
-                { 
+                {
                     Prerequisite: ["AccessCrotch"],
                     Property: { Intensity: 1, Effect: ["Egged", "Vibrating"] },
                 },
@@ -113,7 +113,8 @@ const extended = {
                 },
             ],
         },
-    ] };
+    ],
+};
 
 /** @type {Translation.Dialog} */
 const dialogs = {

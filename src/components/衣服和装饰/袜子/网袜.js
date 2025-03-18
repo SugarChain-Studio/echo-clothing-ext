@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -7,7 +7,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 12,
-    DefaultColor: ["#351C1C", "#351C1C", "#1C1111", "#1C1111", "#170E0E", "#170E0E", "#000000",],
+    DefaultColor: ["#351C1C", "#351C1C", "#1C1111", "#1C1111", "#170E0E", "#170E0E", "#000000"],
     Layer: [
         {
             Name: "上袜",
@@ -97,7 +97,8 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Socks",
+    AssetManager.addAsset(
+        "Socks",
         {
             ...asset,
             Left: {
@@ -108,6 +109,8 @@ export default function () {
                 LegsOpen: 0,
                 Spread: 0,
             },
-        }, undefined, translation
+        },
+        undefined,
+        translation
     );
-};
+}

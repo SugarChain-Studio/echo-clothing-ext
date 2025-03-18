@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -28,10 +28,8 @@ const asset = {
             AllowTypes: { typed: [1] },
             Alpha: [
                 {
-                    Group: ["Garters",],
-                    Masks: [
-                        [251, 0, 250, 1000],
-                    ],
+                    Group: ["Garters"],
+                    Masks: [[251, 0, 250, 1000]],
                 },
             ],
         },
@@ -42,10 +40,8 @@ const asset = {
             AllowTypes: { typed: [2] },
             Alpha: [
                 {
-                    Group: ["Garters",],
-                    Masks: [
-                        [0, 0, 250, 1000],
-                    ],
+                    Group: ["Garters"],
+                    Masks: [[0, 0, 250, 1000]],
                 },
             ],
         },
@@ -55,11 +51,7 @@ const asset = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "双腿" },
-        { Name: "左腿", },
-        { Name: "右腿", },
-    ],
+    Options: [{ Name: "双腿" }, { Name: "左腿" }, { Name: "右腿" }],
 };
 
 /** @type {Translation.Dialog} */
@@ -75,7 +67,7 @@ const dialog = {
         Garters蕾丝边_Luzi左腿: "Left leg",
         Garters蕾丝边_Luzi右腿: "Right leg",
         Garters蕾丝边_Luzi双腿: "Both",
-    }
+    },
 };
 
 /** @type {Translation.Entry} */
@@ -87,4 +79,4 @@ const translation = {
 export default function () {
     AssetManager.addAsset("Garters", asset, extended, translation);
     AssetManager.addCustomDialog(dialog);
-};
+}

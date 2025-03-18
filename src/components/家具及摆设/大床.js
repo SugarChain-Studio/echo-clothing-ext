@@ -1,7 +1,7 @@
 import { Option } from "@mod-utils/fp";
 // import { unit } from "@mod-utils/fp";
-import ModManager from "@mod-utils/ModManager";
-import AssetManager from "@mod-utils/AssetManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 
 /** @type {CustomGroupedAssetDefinitions} */
@@ -135,7 +135,7 @@ const translations = {
             床左边_Luzi: "Ліва сторона ліжка",
             床右边_Luzi: "Права сторона ліжка",
         },
-    }
+    },
 };
 
 export default function () {

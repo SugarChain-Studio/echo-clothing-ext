@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -171,16 +171,11 @@ const dialog = {
         ItemVulva更多有线跳蛋_LuziOptiono3: "Висока потужність",
         ItemVulva更多有线跳蛋_LuziOptiono4: "Максимальна потужність",
 
-        ItemVulva更多有线跳蛋_LuziSeto0:
-            "SourceCharacter вимикає вібратори TargetCharacter.",
-        ItemVulva更多有线跳蛋_LuziSeto1:
-            "SourceCharacter вмикає вібратори TargetCharacter до низького рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto2:
-            "SourceCharacter вмикає вібратори TargetCharacter's до середнього рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto3:
-            "SourceCharacter вмикає вібратори TargetCharacter's до високого рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto4:
-            "SourceCharacter вмикає вібратори TargetCharacter's до максимального рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto0: "SourceCharacter вимикає вібратори TargetCharacter.",
+        ItemVulva更多有线跳蛋_LuziSeto1: "SourceCharacter вмикає вібратори TargetCharacter до низького рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto2: "SourceCharacter вмикає вібратори TargetCharacter's до середнього рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto3: "SourceCharacter вмикає вібратори TargetCharacter's до високого рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto4: "SourceCharacter вмикає вібратори TargetCharacter's до максимального рівня.",
         ItemVulva更多有线跳蛋_LuziSetn0:
             "SourceCharacter витягує передостанній вібратор з TargetCharacter геніталії, залишаючи останній.",
         ItemVulva更多有线跳蛋_LuziSetn1:
@@ -208,17 +203,27 @@ const dialog = {
         ItemVulva更多有线跳蛋_LuziOptiono2: "Средний",
         ItemVulva更多有线跳蛋_LuziOptiono3: "Высокий",
         ItemVulva更多有线跳蛋_LuziOptiono4: "Максимальный",
-    
-        ItemVulva更多有线跳蛋_LuziSeto0: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter в выключенное состояние.",
-        ItemVulva更多有线跳蛋_LuziSeto1: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на низкую интенсивность.",
-        ItemVulva更多有线跳蛋_LuziSeto2: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на среднюю интенсивность.",
-        ItemVulva更多有线跳蛋_LuziSeto3: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на высокую интенсивность.",
-        ItemVulva更多有线跳蛋_LuziSeto4: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на максимальную интенсивность.",
-        ItemVulva更多有线跳蛋_LuziSetn0: "SourceCharacter вытаскивает вибратор из TargetCharacter, оставляя только 1 шт.",
-        ItemVulva更多有线跳蛋_LuziSetn1: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 2 вибратора.",
-        ItemVulva更多有线跳蛋_LuziSetn2: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 3 вибратора.",
-        ItemVulva更多有线跳蛋_LuziSetn3: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 4 вибратора.",
-        ItemVulva更多有线跳蛋_LuziSetn4: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 5 вибраторов.",
+
+        ItemVulva更多有线跳蛋_LuziSeto0:
+            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter в выключенное состояние.",
+        ItemVulva更多有线跳蛋_LuziSeto1:
+            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на низкую интенсивность.",
+        ItemVulva更多有线跳蛋_LuziSeto2:
+            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на среднюю интенсивность.",
+        ItemVulva更多有线跳蛋_LuziSeto3:
+            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на высокую интенсивность.",
+        ItemVulva更多有线跳蛋_LuziSeto4:
+            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на максимальную интенсивность.",
+        ItemVulva更多有线跳蛋_LuziSetn0:
+            "SourceCharacter вытаскивает вибратор из TargetCharacter, оставляя только 1 шт.",
+        ItemVulva更多有线跳蛋_LuziSetn1:
+            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 2 вибратора.",
+        ItemVulva更多有线跳蛋_LuziSetn2:
+            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 3 вибратора.",
+        ItemVulva更多有线跳蛋_LuziSetn3:
+            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 4 вибратора.",
+        ItemVulva更多有线跳蛋_LuziSetn4:
+            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 5 вибраторов.",
     },
 };
 

@@ -1,4 +1,4 @@
-import ModManager from "@mod-utils/ModManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {_.PRecord<CustomGroupName,Set<string> | "any">} */
 const speakingAssets = {
@@ -18,7 +18,7 @@ const hearingAssets = {
 function validItemCraftingDesc(vAssets) {
     for (const [groupName, assets] of Object.entries(vAssets)) {
         const item = InventoryGet(Player, /** @type{any}*/ (groupName));
-        if (item && (assets == "any" || assets.has(item.Asset.Name)) ) {
+        if (item && (assets == "any" || assets.has(item.Asset.Name))) {
             const m = item.Craft?.Description?.match(/["“](.+)["”]/);
             if (m) return m[1];
         }

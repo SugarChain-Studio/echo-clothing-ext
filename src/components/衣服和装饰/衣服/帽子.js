@@ -1,5 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
-
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -14,7 +13,6 @@ const assets = {
                 {
                     Name: "帽顶",
                     Priority: 55,
-
                 },
                 {
                     Name: "帽身",
@@ -84,4 +82,3 @@ const translations = {
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 }
-

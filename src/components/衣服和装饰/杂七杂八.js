@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 const clothLCSetting = [
@@ -334,10 +334,12 @@ export default function () {
     AssetManager.addImageMapping(
         clothLCSetting.reduce((pv, cv, idx) => {
             ["Panties", "BodyMarkings", "BodyMarkings2_Luzi"].forEach((group) => {
-                pv[`Screens/Inventory/${group}/淫纹_Luzi/${cv.Name}.png`] =
-                    `Screens/Inventory/ItemPelvis/淫纹_Luzi/t${idx}.png`;
-                pv[`Assets/Female3DCG/${group}/淫纹_Luzi_${cv.Name}.png`] =
-                    `Assets/Female3DCG/ItemPelvis/淫纹_Luzi_${cv.Src}.png`;
+                pv[
+                    `Screens/Inventory/${group}/淫纹_Luzi/${cv.Name}.png`
+                ] = `Screens/Inventory/ItemPelvis/淫纹_Luzi/t${idx}.png`;
+                pv[
+                    `Assets/Female3DCG/${group}/淫纹_Luzi_${cv.Name}.png`
+                ] = `Assets/Female3DCG/ItemPelvis/淫纹_Luzi_${cv.Src}.png`;
             });
             return pv;
         }, {})

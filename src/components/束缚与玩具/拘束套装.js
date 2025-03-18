@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { Path } from "@mod-utils/path";
 
 /** @type {CustomAssetDefinition} */

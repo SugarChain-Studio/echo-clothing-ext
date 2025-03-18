@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -17,16 +17,13 @@ const asset = {
     Effect: [E.Freeze, E.BlockWardrobe],
     AllowActivePose: ["KneelingSpread"],
     SetPose: ["KneelingSpread"],
-    ParentGroup: VersionSupport.NoParentGroup, 
-    Layer: [
-        { Name: "杆子"},
-        { Name: "束带", ParentGroup: "BodyLower"},
-    ],
+    ParentGroup: VersionSupport.NoParentGroup,
+    Layer: [{ Name: "杆子" }, { Name: "束带", ParentGroup: "BodyLower" }],
 };
 
 const translations = {
     CN: "分膝杆",
-    EN: "Split knee bar"
+    EN: "Split knee bar",
 };
 
 export default function () {

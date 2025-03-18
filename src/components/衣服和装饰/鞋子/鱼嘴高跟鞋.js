@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -47,7 +47,6 @@ const translations = {
     CN: "鱼嘴高跟鞋",
     EN: "Fish toe high heels",
 };
-
 
 export default function () {
     AssetManager.addAsset("Shoes", asset, undefined, translations);

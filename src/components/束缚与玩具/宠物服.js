@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -132,12 +132,7 @@ const asset2 = {
         KneelingSpread: "KneelingSpread",
         AllFours: "AllFours",
     },
-    Layer: [
-        { Name: "拘束" },
-        { Name: "拘束高光" },
-        { Name: "束带" },
-        { Name: "搭扣" },
-    ],
+    Layer: [{ Name: "拘束" }, { Name: "拘束高光" }, { Name: "束带" }, { Name: "搭扣" }],
 };
 
 /**@type {AssetArchetypeConfig} */
@@ -151,22 +146,24 @@ const extened = {
             Key: "l",
             Options: [
                 {
-                    Property: { 
-                        Difficulty: 8, 
+                    Property: {
+                        Difficulty: 8,
                         Effect: [E.Block, E.BlockWardrobe],
                         AllowActivePose: ["BackElbowTouch", "OverTheHead", "Yoked", "AllFours"],
-                        SetPose: ["BackElbowTouch"] },
+                        SetPose: ["BackElbowTouch"],
+                    },
                     Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
                 {
-                    Property: { 
-                        Difficulty: 8, 
-                        Effect: [E.CuffedArms, E.Mounted], 
-                        SetPose: ["OverTheHead"] },
+                    Property: {
+                        Difficulty: 8,
+                        Effect: [E.CuffedArms, E.Mounted],
+                        SetPose: ["OverTheHead"],
+                    },
                     Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
             ],
-        },    
+        },
         {
             Name: "锁链腿",
             DrawImages: false,
@@ -232,31 +229,30 @@ const dialog = {
         ItemArms宠物服上Optionlll1: "自定义高度",
         ItemArms宠物服上Setlll0: "SourceCharacter还原DestinationCharacter高度",
         ItemArms宠物服上Setlll1: "SourceCharacter调整DestinationCharacter高度",
-
     },
-EN: {
-    ItemArms宠物服上SelectBase: "Add Chains",
-    ItemArms宠物服上Select锁链手: "Add Hand Chains",
-    ItemArms宠物服上Module锁链手: "Hand Cuffs",
-    ItemArms宠物服上Optionl0: "None",
-    ItemArms宠物服上Optionl1: "Add Chains",
-    ItemArms宠物服上Setl0: "SourceCharacter removed chains from DestinationCharacter's arms",
-    ItemArms宠物服上Setl1: "SourceCharacter added chains to DestinationCharacter's arms",
+    EN: {
+        ItemArms宠物服上SelectBase: "Add Chains",
+        ItemArms宠物服上Select锁链手: "Add Hand Chains",
+        ItemArms宠物服上Module锁链手: "Hand Cuffs",
+        ItemArms宠物服上Optionl0: "None",
+        ItemArms宠物服上Optionl1: "Add Chains",
+        ItemArms宠物服上Setl0: "SourceCharacter removed chains from DestinationCharacter's arms",
+        ItemArms宠物服上Setl1: "SourceCharacter added chains to DestinationCharacter's arms",
 
-    ItemArms宠物服上Select锁链腿: "Add Leg Chains",
-    ItemArms宠物服上Module锁链腿: "Leg Cuffs",
-    ItemArms宠物服上Optionll0: "None",
-    ItemArms宠物服上Optionll1: "Add Chains",
-    ItemArms宠物服上Setll0: "SourceCharacter removed chains from DestinationCharacter's legs",
-    ItemArms宠物服上Setll1: "SourceCharacter added chains to DestinationCharacter's legs",
+        ItemArms宠物服上Select锁链腿: "Add Leg Chains",
+        ItemArms宠物服上Module锁链腿: "Leg Cuffs",
+        ItemArms宠物服上Optionll0: "None",
+        ItemArms宠物服上Optionll1: "Add Chains",
+        ItemArms宠物服上Setll0: "SourceCharacter removed chains from DestinationCharacter's legs",
+        ItemArms宠物服上Setll1: "SourceCharacter added chains to DestinationCharacter's legs",
 
-    ItemArms宠物服上Select自定义高度: "Set Height",
-    ItemArms宠物服上Module自定义高度: "Adjust Height",
-    ItemArms宠物服上Optionlll0: "None",
-    ItemArms宠物服上Optionlll1: "Custom Height",
-    ItemArms宠物服上Setlll0: "SourceCharacter restored DestinationCharacter's height",
-    ItemArms宠物服上Setlll1: "SourceCharacter adjusted DestinationCharacter's height",
-},
+        ItemArms宠物服上Select自定义高度: "Set Height",
+        ItemArms宠物服上Module自定义高度: "Adjust Height",
+        ItemArms宠物服上Optionlll0: "None",
+        ItemArms宠物服上Optionlll1: "Custom Height",
+        ItemArms宠物服上Setlll0: "SourceCharacter restored DestinationCharacter's height",
+        ItemArms宠物服上Setlll1: "SourceCharacter adjusted DestinationCharacter's height",
+    },
 };
 
 const translations = {

@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
@@ -130,7 +130,7 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemNeckRestraints"], ["
  */
 
 export default function () {
-    ModManager.globalFunction(
+    HookManager.globalFunction(
         `AssetsItemNeckRestraints${asset.Name}BeforeDraw`,
         /** @type {ExtendedItemCallbacks.BeforeDraw<DataType>} */ (
             (drawData) => {
@@ -200,7 +200,7 @@ export default function () {
         )
     );
 
-    ModManager.globalFunction(
+    HookManager.globalFunction(
         `AssetsItemNeckRestraints${asset.Name}ScriptDraw`,
         /** @type {ExtendedItemCallbacks.ScriptDraw<DataType>} */ (
             ({ C, Item, PersistentData }) => {

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -7,7 +7,7 @@ const assets = {
             Name: "眼睛1",
             Top: 0,
             Left: 0,
-            FullAlpha: false
+            FullAlpha: false,
         },
     ],
     Eyes2: [

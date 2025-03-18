@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { DialogTools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 

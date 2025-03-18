@@ -1,6 +1,6 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { RecordEntries } from "@mod-utils/fp";
-import ModManager from "@mod-utils/ModManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 const assetAdjustments = {
     缩小地上_Luzi: { OverrideZoom: 0.3 },
@@ -119,7 +119,7 @@ export default function () {
     /** @type {CustomGroupName} */
     const groupName = "额外身高_Luzi";
 
-    ModManager.progressiveHook("CharacterAppearanceGetCurrentValue").override((args, next) => {
+    HookManager.progressiveHook("CharacterAppearanceGetCurrentValue").override((args, next) => {
         /** @type {number} */
         const ret = next(args);
         if (args[1] === "Height" && args[2] === "Zoom") {

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -14,7 +14,7 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
-    Priority: 23 
+    Priority: 23,
 };
 
 /** @type {Translation.Entry} */
@@ -24,10 +24,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "Shoes",
-        asset,
-        undefined,
-        translation
-    );
+    AssetManager.addAsset("Shoes", asset, undefined, translation);
 }

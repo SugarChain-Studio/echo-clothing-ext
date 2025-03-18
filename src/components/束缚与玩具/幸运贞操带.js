@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { ChatRoomEvents } from "@mod-utils/Events";
 import { OrgasmEvents } from "@mod-utils/Events/orgasm";
 import { DialogTools, Tools } from "@mod-utils/Tools";

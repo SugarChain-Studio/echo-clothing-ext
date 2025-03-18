@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomGroupedAssetDefinitions }} */
@@ -395,7 +395,7 @@ const translations = {
             前发24: "HairFront 24",
             卷发1: "Curly Hair 1",
             卷发2: "Curly Hair 2",
-            卷发3: "Curly Hair 3"
+            卷发3: "Curly Hair 3",
         },
     },
 };

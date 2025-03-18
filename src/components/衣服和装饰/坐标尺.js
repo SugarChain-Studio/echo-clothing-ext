@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -9,9 +9,7 @@ const asset = {
     Priority: 99,
     Alpha: [
         {
-            Group: [
-                "ItemDevices",
-            ],
+            Group: ["ItemDevices"],
             Masks: [
                 [0, 100, 100, 100], //下
             ],

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomAssetDefinitionItem[] } */
 const head_assets = [
@@ -120,43 +120,40 @@ const assets = [
         SetPose: ["BackElbowTouch", "LegsClosed"],
         Effect: [E.Block, E.BlockWardrobe, E.Slow],
         Prerequisite: ["HasBreasts"],
-        DefaultColor: [
-            "Default",
-            "#841E1E",
-        ],
+        DefaultColor: ["Default", "#841E1E"],
         Layer: [
             {
                 Name: "上",
                 Priority: 24,
                 ParentGroup: "BodyUpper",
-                PoseMapping: { BackElbowTouch: PoseType.DEFAULT }
+                PoseMapping: { BackElbowTouch: PoseType.DEFAULT },
             },
             {
                 Name: "下",
                 Priority: 24,
                 ParentGroup: "BodyLower",
                 CopyLayerColor: "上",
-                PoseMapping: { LegsClosed: PoseType.DEFAULT }
+                PoseMapping: { LegsClosed: PoseType.DEFAULT },
             },
             {
                 Name: "后",
                 Priority: 1,
                 ParentGroup: "BodyLower",
                 CopyLayerColor: "上",
-                PoseMapping: { LegsClosed: PoseType.DEFAULT }
+                PoseMapping: { LegsClosed: PoseType.DEFAULT },
             },
             {
                 Name: "丝带上",
                 Priority: 24,
                 ParentGroup: "BodyUpper",
-                PoseMapping: { BackElbowTouch: PoseType.DEFAULT }
+                PoseMapping: { BackElbowTouch: PoseType.DEFAULT },
             },
             {
                 Name: "丝带下",
                 Priority: 24,
                 ParentGroup: "BodyLower",
                 CopyLayerColor: "丝带上",
-                PoseMapping: { LegsClosed: PoseType.DEFAULT }
+                PoseMapping: { LegsClosed: PoseType.DEFAULT },
             },
         ],
     },

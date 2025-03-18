@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinitionAppearance[]} */
 const assets = [
@@ -60,7 +60,7 @@ const assets = [
         Random: false,
         Top: 0,
         Left: 0,
-        DefaultColor: ["#3B0505",],
+        DefaultColor: ["#3B0505"],
         PoseMapping: {
             Kneel: "Kneel",
             KneelingSpread: "Kneel",

@@ -44,23 +44,26 @@
     "devDependencies": {
         "@rollup/plugin-alias": "^5.1.1",
         "@rollup/plugin-commonjs": "^25.0.8",
-        "@rollup/plugin-node-resolve": "^15.2.4",
+        "@rollup/plugin-node-resolve": "^15.3.1",
         "@rollup/plugin-replace": "^5.0.7",
         "@rollup/plugin-terser": "^0.4.4",
+        "@sugarch/bc-asset-manager": "^0.2.0",
+        "@sugarch/bc-event-handler": "^0.2.0",
+        "@sugarch/bc-mod-hook-manager": "^0.2.0",
         "bc-stubs": "^113.0.0",
         "bondage-club-mod-sdk": "^1.2.0",
         "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
         "eventemitter3": "^5.0.1",
-        "github-markdown-css": "^5.7.0",
+        "github-markdown-css": "^5.8.1",
         "http-server": "^14.1.1",
         "lz-string": "^1.5.0",
         "marked": "^14.1.4",
-        "rollup": "^4.22.4",
+        "rollup": "^4.36.0",
         "rollup-plugin-cleanup": "^3.2.1",
         "rollup-plugin-copy": "^3.5.0",
-        "rollup-plugin-import-css": "^3.5.7",
-        "typescript": "^5.6.2"
+        "rollup-plugin-import-css": "^3.5.8",
+        "typescript": "^5.8.2"
     },
     "packageManager": "pnpm@9.12.2"
 }

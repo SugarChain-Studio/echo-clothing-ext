@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -6,7 +6,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 14, 
+    Priority: 14,
     Layer: [
         {
             Name: "上",
@@ -199,7 +199,6 @@ const asset = {
         },
     ],
 };
-
 
 /** @type {Translation.Entry} */
 const translation = {

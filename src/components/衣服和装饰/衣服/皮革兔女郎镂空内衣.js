@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -66,7 +66,6 @@ const translation = {
     CN: "皮革兔女郎镂空内衣",
     EN: "Leather Bunny Hollow Bra",
 };
-
 
 export default function () {
     AssetManager.addAsset("Bra", asset, null, translation);

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { pickEntry, setupEntries } from "@mod-utils/AssetManager/entries";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
@@ -72,7 +72,7 @@ const assets = [
         Top: 0,
         ParentGroup: VersionSupport.NoParentGroup,
         Extended: true,
-        DefaultColor :["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
+        DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
         Layer: [
             {
                 Name: "左侧夹子",
@@ -102,7 +102,7 @@ const assets = [
         Left: 100,
         Top: 0,
         ParentGroup: VersionSupport.NoParentGroup,
-        DefaultColor :["#D0CF58", "#D0CF58"],
+        DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
             {
@@ -123,7 +123,7 @@ const assets = [
         Left: 100,
         Top: 0,
         ParentGroup: VersionSupport.NoParentGroup,
-        DefaultColor :["#D0CF58", "#D0CF58"],
+        DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
             {
@@ -150,7 +150,7 @@ const translations = {
             心型发卡: "心型发卡",
             星星发卡: "星星发卡",
             星星发卡2: "星星发卡 2",
-        }
+        },
     },
     EN: {
         HairAccessory1: {
@@ -160,12 +160,12 @@ const translations = {
             心型发卡: "Heart Hair Clip",
             星星发卡: "Star Hair Clip",
             星星发卡2: "Star Hair Clip 2",
-        }
+        },
     },
 };
 
 // 为 HairAccessory3 复制相同的翻译
-Object.keys(translations).forEach(lang => {
+Object.keys(translations).forEach((lang) => {
     translations[lang].HairAccessory3 = { ...translations[lang].HairAccessory1 };
 });
 /** @type {AssetArchetypeConfig} */
@@ -198,6 +198,5 @@ export default function () {
         const names2 = DialogTools.pickDialog(translations, "HairAccessory3", asset.Name);
         AssetManager.addAsset("HairAccessory3", asset, extended, names2);
         AssetManager.addCustomDialog(dialogGen(asset.Name));
-       
     });
 }

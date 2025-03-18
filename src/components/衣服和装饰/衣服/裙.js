@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -106,5 +106,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("ClothLower", asset, null, translation,);
+    AssetManager.addAsset("ClothLower", asset, null, translation);
 }

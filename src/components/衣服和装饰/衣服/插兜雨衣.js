@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -25,7 +25,6 @@ const asset = {
     ],
 };
 
-
 const translations = {
     CN: "插兜雨衣",
     EN: "Transparent raincoat",
@@ -36,7 +35,6 @@ const extended = {
     DrawImages: false,
     Options: [{ Name: "透明" }, { Name: "不透" }],
 };
-
 
 /** @type {Translation.Dialog} */
 const dialog = {

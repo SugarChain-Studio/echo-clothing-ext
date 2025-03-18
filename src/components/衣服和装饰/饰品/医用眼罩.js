@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -49,11 +49,7 @@ const translations2 = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "无图案" },
-        { Name: "心" },
-        { Name: "叉" },
-    ],
+    Options: [{ Name: "无图案" }, { Name: "心" }, { Name: "叉" }],
 };
 
 /** @type {Translation.Dialog} */
@@ -77,10 +73,8 @@ const dialog = {
         Glasses医用眼罩右无图案: "No Pattern",
         Glasses医用眼罩右心: "Heart",
         Glasses医用眼罩右叉: "Cross",
-    }
+    },
 };
-
-
 
 export default function () {
     AssetManager.addAsset("Glasses", asset1, extended, translations1);

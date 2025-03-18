@@ -1,6 +1,6 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { Tools } from "@mod-utils/Tools";
-import ModManager from "@mod-utils/ModManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomGroupName} */
@@ -97,8 +97,8 @@ const dialogs = {
 };
 
 export default function () {
-    ModManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);
-    ModManager.globalFunction(`Assets${group}${asset.Name}ScriptDraw`, scriptDraw);
+    HookManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);
+    HookManager.globalFunction(`Assets${group}${asset.Name}ScriptDraw`, scriptDraw);
 
     AssetManager.addAsset(group, asset, extended, { CN: "钻头", UA: "Дриль", EN: "Drill" });
     AssetManager.addCustomDialog(dialogs);

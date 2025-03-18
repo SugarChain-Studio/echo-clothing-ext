@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -17,17 +17,13 @@ const asset = {
     Effect: [E.Block, E.BlockWardrobe],
     AllowActivePose: ["OverTheHead"],
     SetPose: ["OverTheHead"],
-    ParentGroup: VersionSupport.NoParentGroup,  
-    Layer: [
-        { Name: "杆子"},
-        { Name: "颈部"},
-        { Name: "束带"},
-    ],
+    ParentGroup: VersionSupport.NoParentGroup,
+    Layer: [{ Name: "杆子" }, { Name: "颈部" }, { Name: "束带" }],
 };
 
 const translations = {
     CN: "举手杆",
-    EN: "Hand raised bar"
+    EN: "Hand raised bar",
 };
 
 export default function () {

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -24,14 +24,7 @@ const asset = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "1" },
-        { Name: "1a" },
-        { Name: "2" },
-        { Name: "3" },
-        { Name: "4" },
-        { Name: "5" },
-    ],
+    Options: [{ Name: "1" }, { Name: "1a" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
 };
 
 /** @type {Translation.Dialog} */

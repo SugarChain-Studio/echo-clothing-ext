@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomGroupedAssetDefinitions } */
 const assets = {
@@ -11,7 +11,7 @@ const assets = {
             Left: 0,
             Prerequisite: ["HasBreasts"],
             Expose: ["ItemNipples", "ItemBreast", "ItemNipplesPiercings"],
-            DefaultColor: ["#232323", "#000000", "#FFFFFF", "#232323", "#000000", "#FFFFFF",],
+            DefaultColor: ["#232323", "#000000", "#FFFFFF", "#232323", "#000000", "#FFFFFF"],
             Layer: [
                 {
                     Name: "手套底色",
@@ -56,7 +56,7 @@ const assets = {
                     },
                 },
                 {
-                    Name: "上底色", 
+                    Name: "上底色",
                     Priority: 14,
                     PoseMapping: {
                         TapedHands: "TapedHands",
@@ -70,7 +70,7 @@ const assets = {
                     },
                 },
                 {
-                    Name: "上阴影", 
+                    Name: "上阴影",
                     Priority: 14,
                     PoseMapping: {
                         TapedHands: "TapedHands",
@@ -84,7 +84,7 @@ const assets = {
                     },
                 },
                 {
-                    Name: "上高光", 
+                    Name: "上高光",
                     Priority: 14,
                     PoseMapping: {
                         TapedHands: "TapedHands",
@@ -109,16 +109,19 @@ const assets = {
             Left: 0,
             Prerequisite: ["HasVagina"],
             Attribute: ["SuitLower"],
-            DefaultColor: ["#232323", "#000000", "#FFFFFF",],
+            DefaultColor: ["#232323", "#000000", "#FFFFFF"],
             Layer: [
                 {
-                    Name: "下底色", Priority: 14,
+                    Name: "下底色",
+                    Priority: 14,
                 },
                 {
-                    Name: "下阴影", Priority: 14,
+                    Name: "下阴影",
+                    Priority: 14,
                 },
                 {
-                    Name: "下高光", Priority: 14,
+                    Name: "下高光",
+                    Priority: 14,
                 },
             ],
         },

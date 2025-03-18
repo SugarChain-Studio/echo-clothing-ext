@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -7,10 +7,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 31,
-    DefaultColor :[
-        "Default",
-        "#000000",
-    ],
+    DefaultColor: ["Default", "#000000"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,

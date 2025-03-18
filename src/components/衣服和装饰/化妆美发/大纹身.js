@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { (AssetLayerDefinition & {DefaultColor: string, ConfigKey: string}) [] } */
 const LayerSettings = [

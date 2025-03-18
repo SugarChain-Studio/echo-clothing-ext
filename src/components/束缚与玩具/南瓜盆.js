@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -28,15 +28,11 @@ const asset = {
     ],
 };
 
-
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "无" },
-        { Name: "链子" },
-    ],
+    Options: [{ Name: "无" }, { Name: "链子" }],
 };
 
 /** @type {Translation.Dialog} */
@@ -59,9 +55,10 @@ const dialog = {
     },
 };
 
-const translations = { 
-     CN: "南瓜盆",
-     EN: "Pumpkin Pot" };
+const translations = {
+    CN: "南瓜盆",
+    EN: "Pumpkin Pot",
+};
 
 export default function () {
     AssetManager.addAsset("ItemMisc", asset, extended, translations);

@@ -1,7 +1,7 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 import { ChatRoomOrder } from "@mod-utils/ChatRoomOrder/roomOrder";
-import ModManager from "@mod-utils/ModManager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 export default function () {
     AssetManager.addAsset(
@@ -26,7 +26,7 @@ export default function () {
             "Assets/Female3DCG/ItemDevices/Preview/BurlapSack.png",
     });
 
-    ModManager.progressiveHook("InventoryItemHasEffect")
+    HookManager.progressiveHook("InventoryItemHasEffect")
         .inside("ChatRoomCanBeLeashedBy")
         .override((args, next) => {
             const [Item, Effect] = args;
@@ -42,7 +42,8 @@ export default function () {
         if (
             sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "BurlapSack" ||
             sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "扛起来的麻袋_Luzi"
-        ) return arg;
+        )
+            return arg;
 
         if (sharedC.prev.MemberNumber === C.MemberNumber) {
             if (sharedC.next.ActivePose[0] === "Kneel" || sharedC.next.ActivePose[0] === "KneelingSpread") {

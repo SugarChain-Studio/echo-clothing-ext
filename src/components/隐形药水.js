@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -764,7 +764,7 @@ function beforeDraw({ C, Property }) {
 
 export default function () {
     const group = "ItemAddon";
-    ModManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);
+    HookManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);
     AssetManager.addAsset(group, asset, extened, translations);
     AssetManager.addCustomDialog(dialog);
 }

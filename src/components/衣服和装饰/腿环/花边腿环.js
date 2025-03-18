@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -6,16 +6,7 @@ const asset = {
     Random: false,
     Gender: "F",
     Top: 462,
-    DefaultColor : [
-        "Default",
-        "#E3E3E3",
-        "#181818",
-        "#3F3F3F",
-        "Default",
-        "#E3E3E3",
-        "#181818",
-        "#3F3F3F"
-    ],
+    DefaultColor: ["Default", "#E3E3E3", "#181818", "#3F3F3F", "Default", "#E3E3E3", "#181818", "#3F3F3F"],
     Left: {
         BaseLower: 0,
         Kneel: 0,
@@ -34,29 +25,23 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        
-        { Name: "左腿阴影",  AllowTypes: { typed: [0, 2] }},
-        { Name: "左腿花边",  AllowTypes: { typed: [0, 2] }},
-        { Name: "左腿环",  AllowTypes: { typed: [0, 2] }},
-        { Name: "左腿蝴蝶结",  AllowTypes: { typed: [0, 2] }},
-        
-        { Name: "右腿阴影",  AllowTypes: { typed: [1, 2] }},
-        { Name: "右腿花边",  AllowTypes: { typed: [1, 2] }},
-        { Name: "右腿环",  AllowTypes: { typed: [1, 2] }},
-        { Name: "右腿蝴蝶结",  AllowTypes: { typed: [1, 2] }},
+        { Name: "左腿阴影", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿花边", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿环", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿蝴蝶结", AllowTypes: { typed: [0, 2] } },
+
+        { Name: "右腿阴影", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿花边", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿环", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿蝴蝶结", AllowTypes: { typed: [1, 2] } },
     ],
 };
 
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        { Name: "左腿" },
-        { Name: "右腿" },
-        { Name: "双腿" },
-    ],
+    Options: [{ Name: "左腿" }, { Name: "右腿" }, { Name: "双腿" }],
 };
-
 
 const translations = {
     CN: "花边腿环",
@@ -76,9 +61,8 @@ const dialog = {
         Garters花边腿环左腿: "Left leg",
         Garters花边腿环右腿: "Right leg",
         Garters花边腿环双腿: "Both",
-    }
+    },
 };
-
 
 export default function () {
     AssetManager.addAsset("Garters", asset, extended, translations);

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 const Emoticon内容 = ["画稿子_Luzi", "电影_Luzi", "VSCode_Luzi", "PS_Luzi"];
 

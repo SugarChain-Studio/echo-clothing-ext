@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type { {X:number,Y:number, textAlign: CanvasTextAlign}[]} */
 const Positions = [
@@ -186,7 +186,7 @@ const dialogs = {
 const translations = { CN: "身体论文", EN: "Body Treatise", UA: "Трактат про тіло" };
 
 export default function () {
-    // ModManager.globalFunction(`AssetsBodyMarkings2_Luzi身体论文_LuziAfterDraw`, afterDrawHook);
+    // HookManager.globalFunction(`AssetsBodyMarkings2_Luzi身体论文_LuziAfterDraw`, afterDrawHook);
     AssetManager.addAsset("BodyMarkings2_Luzi", asset, extended, translations);
     AssetManager.addImageMapping({
         "Assets/Female3DCG/BodyMarkings/Preview/身体论文_Luzi.png":

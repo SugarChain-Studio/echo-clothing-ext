@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 function scriptDrawHook(data, originalFunction, drawData) {
     originalFunction(drawData);
@@ -412,6 +412,6 @@ export default function () {
     AssetManager.addAsset("ItemTorso", asset, extended, translations);
     AssetManager.addCustomDialog(dialogs);
     // 使用CopyConfig设置后，只需要设置一次
-    ModManager.globalFunction("AssetsItemTorso触手服_LuziBeforeDraw", beforeDraw);
-    ModManager.globalFunction("AssetsItemTorso2触手服_LuziBeforeDraw", beforeDraw);
+    HookManager.globalFunction("AssetsItemTorso触手服_LuziBeforeDraw", beforeDraw);
+    HookManager.globalFunction("AssetsItemTorso2触手服_LuziBeforeDraw", beforeDraw);
 }

@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomGroupedAssetDefinitions} */
@@ -302,7 +302,7 @@ export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
     AssetManager.afterLoad(() => {
-        ModManager.progressiveHook("LoginDoNextThankYou")
+        HookManager.progressiveHook("LoginDoNextThankYou")
             .next()
             .inject((args, next) => {
                 if (CurrentScreen !== "Login") return next(args);

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -6,7 +6,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 20, 
+    Priority: 20,
     Layer: [
         {
             Name: "裤子",
@@ -29,7 +29,7 @@ const asset = {
                 Hogtied: PoseType.HIDE,
                 AllFours: PoseType.HIDE,
             },
-        }
+        },
     ],
 };
 

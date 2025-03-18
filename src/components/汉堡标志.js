@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { ModInfo } from "@mod-utils/rollupHelper";
 import { makeTooltipIcon } from "@mod-utils/Tooltip";
 
@@ -43,13 +43,13 @@ export default function () {
         }
     };
 
-    ModManager.progressiveHook("DrawAssetPreview", 1)
+    HookManager.progressiveHook("DrawAssetPreview", 1)
         .inside("AppearanceRun")
         .next()
         .when(() => CharacterAppearanceMode == "Cloth")
         .inject(func);
 
-    ModManager.hookFunction("ElementButton.CreateForAsset", 0, (args, next) => {
+    HookManager.hookFunction("ElementButton.CreateForAsset", 0, (args, next) => {
         const _args = /** @type {any[]} */ (args);
         const asset = "Asset" in _args[1] ? _args[1].Asset : _args[1];
 

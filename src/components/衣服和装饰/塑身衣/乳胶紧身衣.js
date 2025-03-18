@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -18,13 +18,8 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
     },
-    Layer: [
-        { Name: "衣", },
-        { Name: "阴影", },
-        { Name: "高光", },
-    ],
+    Layer: [{ Name: "衣" }, { Name: "阴影" }, { Name: "高光" }],
 };
-
 
 /** @type {Translation.Entry} */
 const translation = {

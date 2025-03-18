@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -6,7 +6,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    DefaultColor: ["#141414", "#000000",],
+    DefaultColor: ["#141414", "#000000"],
     Layer: [
         {
             Name: "翼膜",

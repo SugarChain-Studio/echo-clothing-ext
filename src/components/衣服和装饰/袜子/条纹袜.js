@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -26,7 +26,8 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Socks",
+    AssetManager.addAsset(
+        "Socks",
         {
             ...asset,
             Left: {
@@ -37,9 +38,12 @@ export default function () {
                 LegsOpen: 0,
                 Spread: 0,
             },
-        }, undefined, translation
+        },
+        undefined,
+        translation
     );
-    AssetManager.addAsset("SocksLeft",
+    AssetManager.addAsset(
+        "SocksLeft",
         {
             ...asset,
             Left: {
@@ -50,9 +54,12 @@ export default function () {
                 LegsOpen: 0,
                 Spread: 0,
             },
-        }, undefined, translation
+        },
+        undefined,
+        translation
     );
-    AssetManager.addAsset("SocksRight",
+    AssetManager.addAsset(
+        "SocksRight",
         {
             ...asset,
             Left: {
@@ -63,6 +70,8 @@ export default function () {
                 LegsOpen: 0,
                 Spread: 0,
             },
-        }, undefined, translation
+        },
+        undefined,
+        translation
     );
-};
+}

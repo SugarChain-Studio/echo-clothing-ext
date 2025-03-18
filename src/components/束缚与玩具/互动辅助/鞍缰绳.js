@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
@@ -88,14 +88,15 @@ export default function () {
         if (
             sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "缰绳_Luzi" ||
             sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "鞍_Luzi"
-        ) return arg;
+        )
+            return arg;
 
         if (sharedC.prev.MemberNumber === C.MemberNumber) {
-            return {C, X: sharedC.center.X, Y: sharedC.center.Y - 50 * Zoom, Zoom};
+            return { C, X: sharedC.center.X, Y: sharedC.center.Y - 50 * Zoom, Zoom };
         }
 
         if (sharedC.next.MemberNumber === C.MemberNumber) {
-            return {C, X: sharedC.center.X, Y: sharedC.center.Y, Zoom};
+            return { C, X: sharedC.center.X, Y: sharedC.center.Y, Zoom };
         }
-    })
+    });
 }

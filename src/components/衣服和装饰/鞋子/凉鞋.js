@@ -1,7 +1,7 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
-const asset =         {
+const asset = {
     Name: "凉鞋_Luzi",
     Random: false,
     Top: 0,
@@ -14,7 +14,7 @@ const asset =         {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    DefaultColor: ["#623B3B", "#181818",],
+    DefaultColor: ["#623B3B", "#181818"],
     Layer: [
         {
             Name: "鞋带",
@@ -31,7 +31,6 @@ const translations = {
     CN: "凉鞋",
     EN: "Sandals",
 };
-
 
 export default function () {
     AssetManager.addAsset("Shoes", asset, undefined, translations);

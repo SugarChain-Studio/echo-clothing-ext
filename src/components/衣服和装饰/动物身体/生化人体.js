@@ -1,5 +1,5 @@
-import AssetManager from "@mod-utils/AssetManager";
-import ModManager from "@mod-utils/ModManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
@@ -168,7 +168,7 @@ const asset = {
 export default function () {
     const assetGroup = "动物身体_Luzi";
 
-    ModManager.globalFunction(`Assets${assetGroup}${asset.Name}AfterDraw`, androidDraw);
+    HookManager.globalFunction(`Assets${assetGroup}${asset.Name}AfterDraw`, androidDraw);
 
     AssetManager.addAsset(assetGroup, asset, undefined, {
         CN: "生化人体",

@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type { CustomGroupedAssetDefinitions } */
 const assets = {
@@ -34,7 +34,7 @@ const assets = {
                 LegsOpen: 0,
                 Spread: 0,
             },
-        }
+        },
     ],
     // SocksLeft: [
     //     {
@@ -108,27 +108,27 @@ const assets = {
 const translations = {
     CN: {
         Gloves: {
-            绷带_Luzi: "绷带"
+            绷带_Luzi: "绷带",
         },
         Socks: {
-            绷带_Luzi: "绷带"
+            绷带_Luzi: "绷带",
         },
         SocksRight: {
-            绷带_Luzi: "绷带"
+            绷带_Luzi: "绷带",
         },
         Bra: {
-            绷带全身_Luzi: "绷带"
+            绷带全身_Luzi: "绷带",
         },
     },
     EN: {
         Gloves: {
-            绷带_Luzi: "Bandage"
+            绷带_Luzi: "Bandage",
         },
         Socks: {
-            绷带_Luzi: "Bandage"
+            绷带_Luzi: "Bandage",
         },
         SocksRight: {
-            绷带_Luzi: "Bandage"
+            绷带_Luzi: "Bandage",
         },
         Bra: {
             绷带全身_Luzi: "Bandage",
@@ -136,13 +136,13 @@ const translations = {
     },
     RU: {
         Gloves: {
-            绷带_Luzi: "повязк"
+            绷带_Luzi: "повязк",
         },
         Socks: {
-            绷带_Luzi: "повязк"
+            绷带_Luzi: "повязк",
         },
         SocksRight: {
-            绷带_Luzi: "повязк"
+            绷带_Luzi: "повязк",
         },
         Bra: {
             绷带全身_Luzi: "повязк",

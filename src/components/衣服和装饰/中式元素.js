@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type {(Name:string, Priority:number) => CustomAssetDefinitionAppearance} */

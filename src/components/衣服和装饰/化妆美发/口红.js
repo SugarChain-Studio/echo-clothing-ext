@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,7 +10,7 @@ const asset = {
     // Extended: true,
     Layer: [
         {
-            Name: "上半身", 
+            Name: "上半身",
             ParentGroup: "BodyUpper",
             PoseMapping: {
                 TapedHands: "TapedHands",
@@ -24,7 +24,7 @@ const asset = {
             },
         },
         {
-            Name: "下半身", 
+            Name: "下半身",
             ParentGroup: "BodyLower",
             PoseMapping: {
                 Kneel: "Kneel",
@@ -91,7 +91,7 @@ const translations = {
     CN: "口红",
     EN: "Lipstick",
     RU: "Помада",
-    UA: "Помада"
+    UA: "Помада",
 };
 export default function () {
     // @ts-ignore

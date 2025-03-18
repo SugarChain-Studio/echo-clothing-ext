@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
@@ -32,7 +32,7 @@ const asset = {
 };
 
 const extended = {
-    Archetype: ExtendedArchetype.VIBRATING
+    Archetype: ExtendedArchetype.VIBRATING,
 };
 
 const translations = {

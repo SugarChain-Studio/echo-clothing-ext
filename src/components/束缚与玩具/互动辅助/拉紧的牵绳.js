@@ -1,4 +1,4 @@
-import AssetManager from "@mod-utils/AssetManager";
+import { AssetManager } from "@sugarch/bc-asset-manager";
 import { DrawCharacterModifier, ChatRoomOrder } from "@mod-utils/ChatRoomOrder";
 
 export default function () {
@@ -32,7 +32,8 @@ export default function () {
         if (
             sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "CollarLeash" ||
             sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "拉紧的牵绳_Luzi"
-        ) return arg;
+        )
+            return arg;
 
         if (sharedC.prev.MemberNumber === C.MemberNumber) {
             return { X: sharedC.center.X - 150 * Zoom, Y: sharedC.center.Y, Zoom };
