@@ -159,6 +159,58 @@ const assets = [
         ],
     },
     {
+        Name: "蝴蝶",
+        Random: false,
+        Left: 100,
+        Top: 0,
+        ParentGroup: VersionSupport.NoParentGroup,
+        DefaultColor: ["#8B87FF", "#8B87FF"],
+        Extended: true,
+        Layer: [
+            {
+                Name: "右",
+                Priority: 54,
+                AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
+            },
+        ],
+    },
+    {
+        Name: "蝴蝶2",
+        Random: false,
+        Left: 100,
+        Top: 0,
+        ParentGroup: VersionSupport.NoParentGroup,
+        DefaultColor: ["#6382FF", "#6382FF", "#6382FF", "#6382FF"],
+        Extended: true,
+        Layer: [
+            {
+                Name: "右后",
+                Priority: 54,
+                AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "右前",
+                Priority: 54,
+                AllowTypes: { typed: [1, 2] },
+            },
+            {
+                Name: "左后",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
+            },
+            {
+                Name: "左前",
+                Priority: 54,
+                AllowTypes: { typed: [0, 2] },
+            }
+        ],
+    },
+    {
         Name: "蝙蝠翼发卡",
         Random: false,
         Left: 100,
@@ -193,6 +245,8 @@ const translations = {
             星星发卡2: "星星发卡 2",
             月亮发饰: "月亮发饰",
             蝙蝠翼发卡: "蝙蝠翼发卡",
+            蝴蝶: "蝴蝶",
+            蝴蝶2: "蝴蝶 2",
         }
     },
     EN: {
@@ -205,6 +259,8 @@ const translations = {
             星星发卡2: "Star Hair Clip 2",
             月亮发饰: "Moon Hair Clip",
             蝙蝠翼发卡: "Bat Wing Hair Clip",
+            蝴蝶: "Butterfly",
+            蝴蝶2: "Butterfly 2",
         }
     },
 };
