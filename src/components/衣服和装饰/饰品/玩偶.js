@@ -88,6 +88,7 @@ const asset = {
         { Name: "xxxx", AllowTypes: { y: 11 } },
         { Name: "果子狸", AllowTypes: { y: 12 } },
         { Name: "雪瑗", AllowTypes: { y: 13 } },
+        { Name: "fu狸", AllowTypes: { y: 14 } },
 
         // 盒子的小黑屋
         { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
@@ -96,6 +97,7 @@ const asset = {
         { Name: "Neko2", AllowTypes: { hz: 4 } },
         { Name: "mizuki池", AllowTypes: { hz: 5 } },
         { Name: "莉娅", AllowTypes: { hz: 6 } },
+        { Name: "艾尔", AllowTypes: { hz: 7 } },
 
         // 吸血鬼城堡
         {
