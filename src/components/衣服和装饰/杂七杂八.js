@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 const clothLCSetting = [
     { Name: "样式0", EN: "Style 0", Src: "淫纹" },
@@ -51,7 +50,7 @@ const assets = {
             Fetish: ["Lingerie"],
             DefaultColor: ["#E975A0"],
             Extended: true,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Layer: clothLCSetting.map((layer, index) => ({
                 Name: layer.Name,
                 AllowColorize: layer.AllowColorize ?? true,
@@ -67,7 +66,7 @@ const assets = {
             Top: 308,
             Left: 54,
             Priority: 9,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             DefaultColor: ["#E975A0"],
             Extended: true,
             PoseMapping: {
@@ -87,7 +86,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 9,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             DefaultColor: ["#000000"],
         },
         {
@@ -96,7 +95,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 9,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
     ],
     ItemHands: [
@@ -104,7 +103,7 @@ const assets = {
             Name: "拳击手套_Luzi",
             Random: false,
             Gender: "F",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
@@ -125,7 +124,7 @@ const assets = {
             Top: -110,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Fetish: ["Sadism"],
             AllowActivity: ["ShockItem"],
             ActivityAudio: ["Shocks"],
@@ -146,7 +145,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Priority: 26,
             PoseMapping: {
                 TapedHands: "BaseUpper",
@@ -173,7 +172,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Priority: 46,
             PoseMapping: {
                 TapedHands: "BaseUpper",
@@ -203,7 +202,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Priority: 46,
             PoseMapping: {
                 TapedHands: "BaseUpper",
@@ -224,7 +223,7 @@ const assets = {
                 OverTheHead: -100,
             },
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",

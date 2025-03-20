@@ -1,6 +1,5 @@
 import { AssetManager } from "../../../assetForward";
 import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -8,7 +7,7 @@ const assets = {
         {
             Name: "鞍_Luzi",
             Random: false,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: ["Leash"],
         },
     ],
@@ -40,7 +39,7 @@ const asset = {
     Left: 0,
     Priority: 50,
     Extended: true,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Layer: [{ Name: "绳子", AllowTypes: { typed: [1] } }],
 };
 

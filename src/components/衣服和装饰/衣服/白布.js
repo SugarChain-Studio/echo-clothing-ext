@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -8,7 +7,7 @@ const asset = {
     Gender: "F",
     Top: 0,
     Left: 0,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Hide: ["HairFront"],
     AllowActivePose: ["BaseUpper", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Yoked", "Hogtied", "AllFours"],
     PoseMapping: {

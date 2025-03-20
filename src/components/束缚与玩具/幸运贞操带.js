@@ -2,7 +2,6 @@ import { AssetManager } from "../../assetForward";
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /**
  * @typedef {Object} ExtendItemPropertiesPart
@@ -39,7 +38,7 @@ const asset = {
     AllowLock: true,
     AllowTighten: false,
     Audio: "CuffsMetal",
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     DefaultColor: ["#000000", "#deedff", "#d28b81", "#f9fbfe"],
     Prerequisite: ["AccessCrotch", "HasVagina", "CanCoverVulva"],
     ExpressionTrigger: [{ Name: "Soft", Group: "Eyebrows", Timer: 10 }],

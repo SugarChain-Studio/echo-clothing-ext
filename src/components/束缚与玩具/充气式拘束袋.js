@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -15,7 +14,7 @@ const asset = {
     RemoveTime: 5,
     Time: 10,
     Extended: true,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Effect: [E.Freeze, E.BlockWardrobe, E.Block, E.Mounted, E.MapImmobile, E.OnBed, E.OneWayEnclose],
     SetPose: ["BackElbowTouch", "LegsClosed"],
     Hide: [],

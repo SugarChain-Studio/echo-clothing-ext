@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -16,7 +15,7 @@ const asset = {
     Layer: [
         {
             Name: "绳子",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
         {
             Name: "裙",
@@ -40,12 +39,12 @@ const asset = {
         },
         {
             Name: "蝴蝶结大",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
 
         {
             Name: "珠",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
     ],
 };

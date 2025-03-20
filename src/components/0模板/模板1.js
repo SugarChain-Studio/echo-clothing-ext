@@ -1,20 +1,20 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "A",
     Random: false,
     Gender: "F",
-    Top: 0, Left: 0,
-    ParentGroup: VersionSupport.NoParentGroup,
+    Top: 0,
+    Left: 0,
+    ParentGroup: {},
     Hide: [],
     AllowActivePose: [],
     SetPose: [],
     PoseMapping: {
         Yoked: PoseType.DEFAULT,
     },
-    DefaultColor: ["#FFFFF",],
+    DefaultColor: ["#FFFFF"],
     Layer: [
         { Name: "", Priority: 0 },
         {
@@ -24,9 +24,7 @@ const asset = {
             Alpha: [
                 {
                     Group: [],
-                    Masks: [
-                        [0, 0, 0, 0],
-                    ],
+                    Masks: [[0, 0, 0, 0]],
                 },
             ],
         },
@@ -54,15 +52,13 @@ const descriptions = {
         ABOptionA0: "",
         ABOptionA1: "",
     },
-    EN: {
-    },
+    EN: {},
 };
 
 const translations = {
     CN: "",
     EN: "",
 };
-
 
 export default function () {
     // AssetManager.addAsset("B", asset, extended, translations);

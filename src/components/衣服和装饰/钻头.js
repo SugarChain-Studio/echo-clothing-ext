@@ -1,7 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";
@@ -14,7 +13,7 @@ const asset = {
     Left: 10,
     Priority: 34,
     Difficulty: -10,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     IsRestraint: false,
     PoseMapping: {
         ...AssetPoseMapping.ItemHandheld,

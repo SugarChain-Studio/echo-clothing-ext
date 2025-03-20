@@ -1,6 +1,5 @@
 import { AssetManager } from "../../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -10,7 +9,7 @@ const asset = {
     Left: 150,
     Priority: 55,
     Difficulty: -10,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     PoseMapping: {
         TapedHands: PoseType.DEFAULT,
         Yoked: PoseType.DEFAULT,

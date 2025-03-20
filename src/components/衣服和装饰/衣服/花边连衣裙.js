@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -48,11 +47,11 @@ const asset = {
         },
         {
             Name: "裙边2",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
         {
             Name: "裙边",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
         {
             Name: "裙",
@@ -80,7 +79,7 @@ const asset = {
         },
         {
             Name: "蝴蝶结",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
     ],
 };

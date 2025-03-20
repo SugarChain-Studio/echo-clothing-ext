@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -9,7 +8,7 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 0,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 BackBoxTie: "Hide",
                 BackCuffs: "Hide",

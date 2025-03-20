@@ -1,7 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
@@ -21,7 +20,7 @@ const asset = {
     Random: false,
     Left: 125,
     Top: 225,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Priority: 50,
     PoseMapping: {},
     Layer: [

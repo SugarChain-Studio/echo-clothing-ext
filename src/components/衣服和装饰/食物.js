@@ -1,6 +1,5 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -11,7 +10,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: [],
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -33,7 +32,7 @@ const assets = {
             Left: 0,
             Priority: 55,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: [],
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -53,7 +52,7 @@ const assets = {
             Left: 0,
             Priority: 55,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: [],
         },
         {
@@ -63,7 +62,7 @@ const assets = {
             Left: 160,
             Priority: 55,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: [],
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -83,7 +82,7 @@ const assets = {
             Left: 0,
             Priority: 55,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Effect: [],
         },
     ],
@@ -94,7 +93,7 @@ const assets = {
             Top: 0,
             Left: 2,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
                 Yoked: PoseType.HIDE,
@@ -112,7 +111,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
                 Yoked: PoseType.HIDE,
@@ -144,7 +143,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
                 Yoked: PoseType.HIDE,
@@ -172,7 +171,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
                 Yoked: PoseType.HIDE,
@@ -190,7 +189,7 @@ const assets = {
             Top: 0,
             Left: 0,
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             Priority: 55,
             DefaultColor: ["#BA9273", "#F9F4E0", "#B4B4B4", "Default", "#878787"],
             AllowActivity: ["RubItem", "SipItem"],
@@ -231,7 +230,7 @@ const assets = {
             Left: 2,
             Block: [],
             Difficulty: -10,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
     ],
 };

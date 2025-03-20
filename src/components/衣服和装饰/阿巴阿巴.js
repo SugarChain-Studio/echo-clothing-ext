@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -8,7 +7,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Difficulty: -10,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Extended: true,
     Fetish: ["Sadism"],
     // AllowActivity: ["ShockItem"],

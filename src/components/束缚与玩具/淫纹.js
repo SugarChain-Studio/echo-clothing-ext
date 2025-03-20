@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
+
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 
 /**
@@ -44,7 +44,7 @@ const asset = {
     Time: 10,
     DynamicScriptDraw: true,
     DynamicBeforeDraw: true,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     DefaultColor: ["#EA3E74"],
     PoseMapping: {
         Hogtied: "Hide",

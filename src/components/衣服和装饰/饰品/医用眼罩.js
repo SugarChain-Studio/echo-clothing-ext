@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset1 = {
@@ -7,7 +6,7 @@ const asset1 = {
     Random: false,
     Top: 0,
     Left: 0,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Priority: 29,
     Extended: true,
     DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],
@@ -29,7 +28,7 @@ const asset2 = {
     Random: false,
     Top: 0,
     Left: 0,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Priority: 29,
     Extended: true,
     DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],

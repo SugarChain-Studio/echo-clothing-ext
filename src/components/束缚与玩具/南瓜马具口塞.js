@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -8,7 +7,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 36,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Fetish: ["Leather"],
     Difficulty: 6,
     Time: 20,

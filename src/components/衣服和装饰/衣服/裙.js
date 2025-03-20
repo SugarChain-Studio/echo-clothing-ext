@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -16,7 +15,7 @@ const asset = {
         {
             Name: "底面",
             Priority: 1,
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 Kneel: "Kneel",
                 LegsClosed: PoseType.DEFAULT,

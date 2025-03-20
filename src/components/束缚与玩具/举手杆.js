@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -17,7 +16,7 @@ const asset = {
     Effect: [E.Block, E.BlockWardrobe],
     AllowActivePose: ["OverTheHead"],
     SetPose: ["OverTheHead"],
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Layer: [{ Name: "杆子" }, { Name: "颈部" }, { Name: "束带" }],
 };
 

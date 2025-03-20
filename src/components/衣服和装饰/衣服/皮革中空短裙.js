@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -12,7 +11,7 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Layer: [
         {
             Name: "底",

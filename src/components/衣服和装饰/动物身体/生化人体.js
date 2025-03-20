@@ -1,7 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 const NamePrefix = ((prefix) => prefix + Math.random().toString(16).substring(2))("生化人体");
 
@@ -93,7 +92,7 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     DynamicAfterDraw: true,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     AllowColorize: true,
     EditOpacity: true,
     Hide: ["BodyUpper", "BodyLower", "Nipples"],

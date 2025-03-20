@@ -1,31 +1,30 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "刀",
     Random: false,
     Gender: "F",
-    Top: -50, Left: -50,
-    ParentGroup: VersionSupport.NoParentGroup,
+    Top: -50,
+    Left: -50,
+    ParentGroup: {},
     // DefaultColor: ["#FFFFF",],
     Layer: [
-        { Name: "A5", Priority: 1, AllowTypes: { A: 0 }, },
-        { Name: "A4", Priority: 1, AllowTypes: { A: 0 }, },
-        { Name: "A3", Priority: 1, AllowTypes: { A: 0 }, },
-        { Name: "A2", Priority: 1, AllowTypes: { A: 0 }, },
-        { Name: "A1", Priority: 1, AllowTypes: { A: 0 }, },
+        { Name: "A5", Priority: 1, AllowTypes: { A: 0 } },
+        { Name: "A4", Priority: 1, AllowTypes: { A: 0 } },
+        { Name: "A3", Priority: 1, AllowTypes: { A: 0 } },
+        { Name: "A2", Priority: 1, AllowTypes: { A: 0 } },
+        { Name: "A1", Priority: 1, AllowTypes: { A: 0 } },
 
-        { Name: "B5", Priority: 26, AllowTypes: { A: 1 }, },
-        { Name: "B4", Priority: 26, AllowTypes: { A: 1 }, },
-        { Name: "B3", Priority: 26, AllowTypes: { A: 1 }, },
-        { Name: "B2", Priority: 26, AllowTypes: { A: 1 }, },
-        { Name: "B1", Priority: 26, AllowTypes: { A: 1 }, },
+        { Name: "B5", Priority: 26, AllowTypes: { A: 1 } },
+        { Name: "B4", Priority: 26, AllowTypes: { A: 1 } },
+        { Name: "B3", Priority: 26, AllowTypes: { A: 1 } },
+        { Name: "B2", Priority: 26, AllowTypes: { A: 1 } },
+        { Name: "B1", Priority: 26, AllowTypes: { A: 1 } },
 
-        { Name: "鞘1", Priority: 1, },
-        { Name: "鞘2", Priority: 1, },
-
+        { Name: "鞘1", Priority: 1 },
+        { Name: "鞘2", Priority: 1 },
     ],
 };
 

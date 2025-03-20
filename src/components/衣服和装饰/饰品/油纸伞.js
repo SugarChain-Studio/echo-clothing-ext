@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -8,7 +7,7 @@ const asset = {
     Top: -100,
     Left: -150,
     Difficulty: -10,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     PoseMapping: {
         TapedHands: PoseType.HIDE,
         Yoked: PoseType.HIDE,

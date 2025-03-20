@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -27,7 +26,7 @@ const asset = {
         { Name: "挂钩" },
         {
             Name: "Lock",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             LockLayer: true,
         },
     ],

@@ -1,12 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "透明身体",
     Random: false,
     Gender: "F",
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Hide: [
         "HandsLeft",
         "HandsRight",

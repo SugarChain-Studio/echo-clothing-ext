@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -16,7 +15,7 @@ const asset = {
     DrawLocks: false,
     Extended: true,
     Prerequisite: [],
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     PoseMapping: { BaseUpper: "BaseUpper" },
     Block: [],
     Layer: [

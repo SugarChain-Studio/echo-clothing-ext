@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -16,11 +15,11 @@ const asset = {
     Layer: [
         {
             Name: "肩带内",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
         },
         {
             Name: "肩带外",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
@@ -57,7 +56,7 @@ const asset = {
         },
         {
             Name: "线下",
-            ParentGroup: VersionSupport.NoParentGroup,
+            ParentGroup: {},
             PoseMapping: {
                 AllFours: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,

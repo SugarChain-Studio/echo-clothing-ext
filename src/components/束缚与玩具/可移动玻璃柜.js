@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -20,20 +19,20 @@ const asset = {
     SetPose: ["BackElbowTouch", "LegsClosed"],
     Priority: 62,
     Layer: [
-        { Name: "框架", ParentGroup: VersionSupport.NoParentGroup },
-        { Name: "颈部护垫", ParentGroup: VersionSupport.NoParentGroup },
+        { Name: "框架", ParentGroup: {} },
+        { Name: "颈部护垫", ParentGroup: {} },
         { Name: "腿部护垫", ParentGroup: "BodyLower" },
-        { Name: "不透明玻璃后", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1 }, Priority: 6 },
-        { Name: "透明玻璃后", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0 }, Priority: 6 },
-        { Name: "分隔", ParentGroup: VersionSupport.NoParentGroup, Priority: 6 },
-        { Name: "不透明玻璃上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1, up: 0 } },
-        { Name: "透明玻璃上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0, up: 0 } },
-        { Name: "不透明玻璃下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 1, down: 0 } },
-        { Name: "透明玻璃下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { t: 0, down: 0 } },
-        { Name: "反光上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { up: 0 } },
-        { Name: "反光下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { down: 0 } },
-        { Name: "铰链上", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { up: 0 } },
-        { Name: "铰链下", ParentGroup: VersionSupport.NoParentGroup, AllowTypes: { down: 0 } },
+        { Name: "不透明玻璃后", ParentGroup: {}, AllowTypes: { t: 1 }, Priority: 6 },
+        { Name: "透明玻璃后", ParentGroup: {}, AllowTypes: { t: 0 }, Priority: 6 },
+        { Name: "分隔", ParentGroup: {}, Priority: 6 },
+        { Name: "不透明玻璃上", ParentGroup: {}, AllowTypes: { t: 1, up: 0 } },
+        { Name: "透明玻璃上", ParentGroup: {}, AllowTypes: { t: 0, up: 0 } },
+        { Name: "不透明玻璃下", ParentGroup: {}, AllowTypes: { t: 1, down: 0 } },
+        { Name: "透明玻璃下", ParentGroup: {}, AllowTypes: { t: 0, down: 0 } },
+        { Name: "反光上", ParentGroup: {}, AllowTypes: { up: 0 } },
+        { Name: "反光下", ParentGroup: {}, AllowTypes: { down: 0 } },
+        { Name: "铰链上", ParentGroup: {}, AllowTypes: { up: 0 } },
+        { Name: "铰链下", ParentGroup: {}, AllowTypes: { down: 0 } },
     ],
 };
 

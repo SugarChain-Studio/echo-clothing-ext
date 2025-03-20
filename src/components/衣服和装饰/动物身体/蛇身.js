@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,7 +9,7 @@ const asset = {
     Left: -100,
     Difficulty: 25,
     Priority: 16,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     SetPose: ["LegsClosed"],
     Layer: [
         {

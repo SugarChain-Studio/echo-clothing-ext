@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,7 +9,7 @@ const asset = {
     Gender: "F",
     Fetish: ["Sadism"],
     Priority: 48,
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Layer: [
         {
             Name: "南瓜",

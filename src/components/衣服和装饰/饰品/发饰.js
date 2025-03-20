@@ -1,6 +1,5 @@
 import { AssetManager } from "../../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {Array<CustomAssetDefinition>}} */
 const assets = [
@@ -9,7 +8,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         Extended: true,
         Layer: [
             {
@@ -29,7 +28,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         Extended: true,
         Layer: [
             {
@@ -49,7 +48,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         Extended: true,
         Layer: [
             {
@@ -69,7 +68,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         Extended: true,
         DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
         Layer: [
@@ -100,7 +99,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
@@ -121,8 +120,8 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
-        DefaultColor :["#D0CF58", "#D0CF58"],
+        ParentGroup: {},
+        DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
             {
@@ -142,7 +141,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         DefaultColor: ["#D0CF58", "#D0CF58"],
         Extended: true,
         Layer: [
@@ -163,7 +162,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         DefaultColor: ["#8B87FF", "#8B87FF"],
         Extended: true,
         Layer: [
@@ -184,7 +183,7 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
+        ParentGroup: {},
         DefaultColor: ["#6382FF", "#6382FF", "#6382FF", "#6382FF"],
         Extended: true,
         Layer: [
@@ -207,7 +206,7 @@ const assets = [
                 Name: "左前",
                 Priority: 54,
                 AllowTypes: { typed: [0, 2] },
-            }
+            },
         ],
     },
     {
@@ -215,8 +214,8 @@ const assets = [
         Random: false,
         Left: 100,
         Top: 0,
-        ParentGroup: VersionSupport.NoParentGroup,
-        DefaultColor :["#232323", "#232323"],
+        ParentGroup: {},
+        DefaultColor: ["#232323", "#232323"],
         Extended: true,
         Layer: [
             {
@@ -247,7 +246,7 @@ const translations = {
             蝙蝠翼发卡: "蝙蝠翼发卡",
             蝴蝶: "蝴蝶",
             蝴蝶2: "蝴蝶 2",
-        }
+        },
     },
     EN: {
         HairAccessory1: {
@@ -261,7 +260,7 @@ const translations = {
             蝙蝠翼发卡: "Bat Wing Hair Clip",
             蝴蝶: "Butterfly",
             蝴蝶2: "Butterfly 2",
-        }
+        },
     },
 };
 
