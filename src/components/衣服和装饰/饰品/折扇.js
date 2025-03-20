@@ -98,13 +98,11 @@ const extended = {
     Modules: [
         {
             Name: "展开",
-            DrawImages: false,
             Key: "n",
             Options: [{}, {}],
         },
         {
             Name: "图案",
-            DrawImages: false,
             Key: "p",
             Options: [{}, {}, {}, {}, {}, {}, {}],
         },
