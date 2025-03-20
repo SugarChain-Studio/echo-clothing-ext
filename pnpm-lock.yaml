@@ -35,6 +35,9 @@ importers:
       '@sugarch/bc-mod-hook-manager':
         specifier: ^0.2.6
         version: 0.2.6(bondage-club-mod-sdk@1.2.0)
+      '@sugarch/bc-mod-types':
+        specifier: ^0.6.0
+        version: 0.6.0
       '@sugarch/bc-mod-utility':
         specifier: ^0.1.9
         version: 0.1.9
@@ -384,6 +387,9 @@ packages:
     resolution: {integrity: sha512-PzoEnCYFIeKcwz1jxNos1BNifU8SwyjlqTjRNPgRaiFwcWhZgAY+hqavDS2jQp0brMsEZVJAAAZ9D3xLhw64YA==}
     peerDependencies:
       bondage-club-mod-sdk: ^1.2.0
+
+  '@sugarch/bc-mod-types@0.6.0':
+    resolution: {integrity: sha512-hloq2ls4dS3/pX5CVhEgINzTVKloWItRHZqphEzT9PPlAd0Ye5X2aRpAyOOU4xhuBboDBqMUSBC8sCF/jygzFg==}
 
   '@sugarch/bc-mod-utility@0.1.9':
     resolution: {integrity: sha512-E7SbG52BPnjSaS1Sgnl7alLKmUHr7HEisZL4MrpHP5X59RE37g1P5YluyEhsO12j2dxYiNGZCApzmXAq5Ph0sA==}
@@ -1689,6 +1695,8 @@ snapshots:
   '@sugarch/bc-mod-types@0.2.0(bondage-club-mod-sdk@1.2.0)':
     dependencies:
       bondage-club-mod-sdk: 1.2.0
+
+  '@sugarch/bc-mod-types@0.6.0': {}
 
   '@sugarch/bc-mod-utility@0.1.9': {}
 

@@ -1,5 +1,12 @@
 import { AssetManager } from "../../assetForward";
 
+/**
+ * @typedef {Object} CopyGroupInfo
+ * @property {CustomGroupBodyName} name
+ * @property {AssetGroupBodyName} mirror
+ * @property {Translation.Entry} description
+ */
+
 /** @type {CopyGroupInfo[]} */
 const copyGroups = [
     {
