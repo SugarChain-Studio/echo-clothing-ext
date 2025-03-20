@@ -65,7 +65,7 @@ const translations = {
 };
 
 /** @type { CustomAssetDefinition } */
-const assetButt = {
+const assetItem = {
     Name: "肛鞭",
     Time: 14,
     Prerequisite: ["AccessButt"],
@@ -105,7 +105,7 @@ const assetButt = {
 };
 
 /** @type {AssetArchetypeConfig} */
-const extendedButt = {
+const extendedItem = {
     Archetype: ExtendedArchetype.TYPED,
     Options: [
         {
@@ -115,11 +115,14 @@ const extendedButt = {
             Name: "全部",
         },
     ],
+    ScriptHooks: {
+        PublishAction: analWhipAction,
+    },
     DrawImages: false,
 };
 
 /** @type {Translation.Dialog} */
-const dialogButt = {
+const dialogItem = {
     CN: {
         ItemButt肛鞭Select: "选择塞入程度",
         ItemButt肛鞭一半: "拔出一半",
@@ -136,28 +139,53 @@ const dialogButt = {
     },
 };
 
-const translationsButt = {
+const translationsItem = {
     CN: "肛鞭",
     EN: "Large pull beads",
 };
 
 /** @type {ExtendedItemScriptHookCallbacks.PublishAction<TypedItemData, TypedItemOption>} */
-function InventoryItemButtAnalWhipHook(data, originalFunction, C, item, newOption, previousOption) {
+function analWhipAction(data, _originalFunction, C, item, newOption, previousOption) {
+    if (data.chatSetting === TypedItemChatSetting.SILENT || newOption.Name === previousOption.Name) {
+        return;
+    }
+
+    /** @type {ExtendedItemChatData<TypedItemOption>} */
+    const chatData = {
+        C,
+        previousOption,
+        newOption,
+        previousIndex: data.options.indexOf(previousOption),
+        newIndex: data.options.indexOf(newOption),
+    };
+    const dictionary = ExtendedItemBuildChatMessageDictionary(chatData, data, item)
+        .performActivity("MasturbateItem", item.Asset.Group, item)
+        .build();
+
+    let msg = data.dialogPrefix.chat;
+    if (typeof msg === "function") {
+        msg = msg(chatData);
+    }
+
+    if (data.chatSetting === TypedItemChatSetting.FROM_TO) msg += `${previousOption.Name}To`;
+    msg += newOption.Name;
+
+    ChatRoomPublishCustomAction(`${msg}${newOption.Name}`, true, dictionary);
+
     if (C.IsPlayer()) {
-        // The Player pulls beads from her own butt
         ActivityArousalItem(C, C, item.Asset);
     }
 }
+
+const itemGroup = "ItemButt";
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
     AssetManager.addImageMapping({
         "Assets/Female3DCG/ItemButt/肛鞭_typed0_一半.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
-    });
-    AssetManager.addImageMapping({
         "Assets/Female3DCG/ItemButt/肛鞭_typed1_全部.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
     });
-    AssetManager.addAsset("ItemButt", assetButt, extendedButt, translationsButt);
-    AssetManager.addCustomDialog(dialogButt);
+    AssetManager.addAsset(itemGroup, assetItem, extendedItem, translationsItem);
+    AssetManager.addCustomDialog(dialogItem);
 }
