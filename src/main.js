@@ -5,7 +5,7 @@ import { assetOverrides, baseURL, ModInfo } from "@mod-utils/rollupHelper";
 import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
-import { Logger } from "./logger";
+import { Logger } from "@mod-utils/log";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
 const message = {

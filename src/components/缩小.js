@@ -1,5 +1,4 @@
 import { AssetManager } from "../assetForward";
-import { RecordEntries } from "@mod-utils/fp";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 const assetAdjustments = {
@@ -115,10 +114,16 @@ const translations = {
     },
 };
 
-export default function () {
-    /** @type {CustomGroupName} */
-    const groupName = "额外身高_Luzi";
+/** @type {CustomGroupName} */
+const groupName = "额外身高_Luzi";
 
+/** @type {Translation.GroupedEntries}*/
+const regroupedTranslations = Object.entries(translations).reduce((acc, [lang, entries]) => {
+    acc[lang] = { [groupName]: entries };
+    return acc;
+}, {});
+
+export default function () {
     HookManager.progressiveHook("CharacterAppearanceGetCurrentValue").override((args, next) => {
         /** @type {number} */
         const ret = next(args);
@@ -134,11 +139,5 @@ export default function () {
         return ret;
     });
 
-    AssetManager.addGroupedAssets(
-        { [groupName]: assets },
-        RecordEntries(translations).reduce((acc, [lang, entries]) => {
-            acc[lang] = { [groupName]: entries };
-            return acc;
-        }, /** @type {Translation.GroupedEntries}*/ ({}))
-    );
+    AssetManager.addGroupedAssets({ [groupName]: assets }, regroupedTranslations);
 }
