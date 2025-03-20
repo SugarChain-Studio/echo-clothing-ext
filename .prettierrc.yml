@@ -4,6 +4,7 @@ bracketSameLine: true
 semi: true
 printWidth: 120
 singleAttributePerLine: false
+quoteProps: "consistent"
 overrides:
   - files: "*.yml"
     options:

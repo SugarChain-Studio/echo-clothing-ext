@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type { {X:number,Y:number, textAlign: CanvasTextAlign}[]} */
 const Positions = [

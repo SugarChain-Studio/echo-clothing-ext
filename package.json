@@ -2,6 +2,7 @@
     "name": "echo-clothing-ext",
     "scripts": {
         "type-check": "tsc --noEmit --allowJs --checkJs -p jsconfig.json",
+        "lint": "eslint --ext .js src utils",
         "build": "rollup -c rollup.config.js",
         "dev:rel": "pnpm type-check && pnpm resources:dev && pnpm build --configBaseURL \"http://localhost:8080/\"",
         "dev": "pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBaseURL \"http://localhost:8080/\"",
@@ -42,6 +43,7 @@
     "author": "Echo",
     "description": "BC视觉表现的美学修正与拓展",
     "devDependencies": {
+        "@eslint/js": "^9.22.0",
         "@rollup/plugin-alias": "^5.1.1",
         "@rollup/plugin-commonjs": "^25.0.8",
         "@rollup/plugin-node-resolve": "^15.3.1",
@@ -55,7 +57,9 @@
         "bondage-club-mod-sdk": "^1.2.0",
         "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
+        "eslint": "^9.22.0",
         "github-markdown-css": "^5.8.1",
+        "globals": "^16.0.0",
         "http-server": "^14.1.1",
         "lz-string": "^1.5.0",
         "marked": "^14.1.4",

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { AssetManager } from "../assetForward";
 
 /** @type {CustomGroupDefinition} */
@@ -61,6 +62,7 @@ const right_eye = {
 };
 
 export default function () {
+    // TODO: 左眼右眼
     // AssetManager.addGroup(left_eye, {
     //     CN: "🍔左眼",
     //     EN: "🍔Left Eye",

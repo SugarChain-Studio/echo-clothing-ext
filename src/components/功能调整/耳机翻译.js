@@ -18,7 +18,7 @@ const hearingAssets = {
 function validItemCraftingDesc(vAssets) {
     for (const [groupName, assets] of Object.entries(vAssets)) {
         const item = InventoryGet(Player, /** @type{any}*/ (groupName));
-        if (item && (assets == "any" || assets.has(item.Asset.Name))) {
+        if (item && (assets === "any" || assets.has(item.Asset.Name))) {
             const m = item.Craft?.Description?.match(/["“](.+)["”]/);
             if (m) return m[1];
         }
@@ -47,7 +47,7 @@ function translateText(sourceText, targetLang) {
 }
 
 export default function () {
-    HookManager.progressiveHook("ChatRoomMessageDisplay").inject((args, next) => {
+    HookManager.progressiveHook("ChatRoomMessageDisplay").inject((args) => {
         const data = args[0];
         if (["Chat", "Whisper", "Emote"].includes(data.Type)) {
             if (Array.isArray(data.Dictionary) && data.Dictionary.find((d) => d["AutoTranslated"])) return;

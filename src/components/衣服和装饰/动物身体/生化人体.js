@@ -51,7 +51,7 @@ function partialDraw(C, TempCanvasAsset, DrawGroupNames) {
 
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
 function androidDraw(drawData) {
-    const { C, A, X, Y, Pose, drawCanvas, drawCanvasBlink, AlphaMasks, L, G } = drawData;
+    const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
 
     if (L === "上身遮罩" || L === "下身遮罩") {
         const { Canvas, CanvasBlink } = partialDraw(C, A, L === "上身遮罩" ? ["BodyUpper"] : ["BodyLower"]);

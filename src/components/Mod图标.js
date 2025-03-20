@@ -135,7 +135,7 @@ export default function () {
 
     CharacterTag.init();
 
-    HookManager.progressiveHook("ChatRoomDrawCharacterStatusIcons", 10).inject((args, next) => {
-        if (ChatRoomHideIconState == 0) drawStatus(args);
+    HookManager.progressiveHook("ChatRoomDrawCharacterStatusIcons", 10).inject((args) => {
+        if (ChatRoomHideIconState === 0) drawStatus(args);
     });
 }

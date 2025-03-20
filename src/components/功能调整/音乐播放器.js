@@ -5,7 +5,7 @@ let scriptLoadDone = false;
 
 const afterload = [];
 
-function loadScript(url) {
+function loadScript() {
     if (scriptLoadDone) return Promise.resolve();
 
     if (scriptLoadStarted) {
@@ -57,7 +57,7 @@ function getContainer() {
  */
 function parseSource(src) {
     /** @type {[RegExp,string,string][]} */
-    let rules = [
+    const rules = [
         [/music\.163\.com.*song.*[\?&]id=(\d+)/, "netease", "song"],
         [/music\.163\.com.*album.*[\?&]id=(\d+)/, "netease", "album"],
         [/music\.163\.com.*artist.*[\?&]id=(\d+)/, "netease", "artist"],
@@ -73,8 +73,8 @@ function parseSource(src) {
         [/xiami.com.*collect\/(\w+)/, "xiami", "playlist"],
     ];
 
-    for (let rule of rules) {
-        let res = rule[0].exec(src);
+    for (const rule of rules) {
+        const res = rule[0].exec(src);
         if (res !== null) {
             return {
                 url: `https://api.i-meto.com/meting/api?server=${rule[1]}&type=${rule[2]}&id=${
@@ -94,7 +94,7 @@ class PlayerManager {
         this.volume = 0;
     }
 
-    createPlayer(data, type) {
+    createPlayer(data, _type) {
         return loadScript().then(() => {
             // @ts-ignore
             this.player = new APlayer({
@@ -127,18 +127,19 @@ class PlayerManager {
                         else resolve(res.json());
                     })
             )
-            .then((data) => {
-                return new Promise((resolve) => {
-                    if (!this.player) this.createPlayer(data, req.type).then(resolve);
-                    else {
-                        getContainer().style.display = "block";
+            .then(
+                (data) =>
+                    new Promise((resolve) => {
+                        if (!this.player) this.createPlayer(data, req.type).then(resolve);
+                        else {
+                            getContainer().style.display = "block";
 
-                        this.player.list.clear();
-                        this.player.list.add(data);
-                        resolve();
-                    }
-                });
-            })
+                            this.player.list.clear();
+                            this.player.list.add(data);
+                            resolve();
+                        }
+                    })
+            )
             .then(() => {
                 const list = this.player.list;
                 if (req.type === "playlist" && list && list.audios.length > 1) {
@@ -188,7 +189,7 @@ export default function () {
             if (player.isHided()) player.resume();
 
             const volume = Player?.AudioSettings?.MusicVolume;
-            if (volume != undefined) player.setVolume(volume);
+            if (volume !== undefined) player.setVolume(volume);
 
             const url = ChatRoomData?.Custom?.MusicURL;
             if (url) player.setUrl(url);

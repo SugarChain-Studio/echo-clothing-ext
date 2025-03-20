@@ -331,26 +331,3 @@ export default function () {
         }
     });
 }
-/**
- * @param {string} groupKey - 分组键
- * @param {string} entryKey - 条目键
- * @returns {Translation.Dialog} - 返回翻译
- */
-function getDialog(groupKey, entryKey) {
-    const dialog = {
-        CN: {},
-        EN: {},
-    };
-
-    dialog["CN"][groupKey + entryKey + "Select"] = "选择外观";
-    dialog["CN"][groupKey + entryKey + "左侧"] = "左侧";
-    dialog["CN"][groupKey + entryKey + "右侧"] = "右侧";
-    dialog["CN"][groupKey + entryKey + "都有"] = "都有";
-
-    dialog["EN"][groupKey + entryKey + "Select"] = "Choose look";
-    dialog["EN"][groupKey + entryKey + "左侧"] = "Left";
-    dialog["EN"][groupKey + entryKey + "右侧"] = "Right";
-    dialog["EN"][groupKey + entryKey + "都有"] = "Both";
-
-    return dialog;
-}

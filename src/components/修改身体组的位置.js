@@ -19,18 +19,18 @@ export default function () {
     );
 
     AssetManager.modifyAssetLayers(
-        (asset) => asset.Group.Name == "Panties",
+        (asset) => asset.Group.Name === "Panties",
         (asset, layer) => {
-            if (asset.Name == "CockSock") {
+            if (asset.Name === "CockSock") {
                 layer.DrawingTop = Tools.topLeftOverride(layer.DrawingTop, 430);
-            } else if (asset.Name == "Jockstrap") {
+            } else if (asset.Name === "Jockstrap") {
                 layer.DrawingTop = Tools.topLeftOverride(layer.DrawingTop, 393);
             }
         }
     );
 
     AssetManager.modifyAssetLayers(
-        (asset) => asset.Name == "StrictPonyBoots",
+        (asset) => asset.Name === "StrictPonyBoots",
         (asset, layer) => {
             // 第二个参数可以指定姿势
             // layer.DrawingTop = Tools.topLeftAdjust(layer.DrawingTop, { BaseLower: -10 });
@@ -41,7 +41,7 @@ export default function () {
     );
 
     AssetManager.modifyAssetLayers(
-        (asset) => asset.Name == "HarnessPanties1",
+        (asset) => asset.Name === "HarnessPanties1",
         (asset, layer) => {
             layer.DrawingTop = Tools.topLeftOverride(layer.DrawingTop, 375);
         }

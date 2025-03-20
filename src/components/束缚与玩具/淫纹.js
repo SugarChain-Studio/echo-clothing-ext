@@ -184,7 +184,7 @@ function updateRuns(player, data, property) {
 function onActionHandler(data) {
     const { Type, Content, Dictionary } = data;
     if (
-        Type == "Action" &&
+        Type === "Action" &&
         Array.isArray(Dictionary) &&
         Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber
     ) {

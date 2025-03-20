@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { AssetManager } from "../../assetForward";
 import { DrawCharacterModifier, ChatRoomOrder } from "@mod-utils/ChatRoomOrder";
 
@@ -57,10 +59,12 @@ const translations = {
 };
 
 export default function () {
+    // TODO: 马车
+
     // AssetManager.addGroupedAssets(asset, translations);
 
     DrawCharacterModifier.addModifier((C, arg) => {
-        const { X, Y, Zoom } = arg;
+        const { Zoom } = arg;
         const sharedC = ChatRoomOrder.requireSharedCenter(C);
         if (!sharedC) return arg;
         if (

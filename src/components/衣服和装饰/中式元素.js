@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {(Name:string, Priority:number) => CustomAssetDefinitionAppearance} */
 const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({

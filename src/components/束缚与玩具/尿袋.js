@@ -53,12 +53,13 @@ const asset = {
 /** @type {Record<string, Rect>} */
 const buttons = {
     ...Object.fromEntries(
-        ["清空", "加一半", "加满"].map((key, idx) => {
-            return /** @type {[string,Rect]}*/ ([
-                key,
-                { X: ExtendedXY[3][idx][0], Y: ExtendedXY[3][idx][1], W: 225, H: 55 },
-            ]);
-        })
+        ["清空", "加一半", "加满"].map(
+            (key, idx) =>
+                /** @type {[string,Rect]}*/ ([
+                    key,
+                    { X: ExtendedXY[3][idx][0], Y: ExtendedXY[3][idx][1], W: 225, H: 55 },
+                ])
+        )
     ),
     自动积累开关: { X: 1260, Y: 570, W: 64, H: 64 },
 };
@@ -166,7 +167,7 @@ function dialogClickHook(Data, originalFunction) {
 
 /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<NoArchItemData>} */
 function afterDraw(data, originalFunction, drawData) {
-    const { C, A, X, Y, Pose, Property, drawCanvas, drawCanvasBlink, AlphaMasks, L, G } = drawData;
+    const { C, A, X, Y, Property, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
     if (L === "尿") {
         const canvas = AnimationGenerateTempCanvas(C, A, 500, 1000);
 

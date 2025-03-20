@@ -203,22 +203,23 @@ function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
  * @returns {string}
  */
 function toDDHHMMSS(seconds) {
+    let result = seconds;
     const twodigit = (number) => {
         const ret = number.toString();
-        if (ret.length < 2) return "0" + ret;
+        if (ret.length < 2) return `0${ret}`;
         return ret;
     };
 
-    seconds = Math.floor(seconds);
+    result = Math.floor(result);
 
-    const days = Math.floor(seconds / 86400);
-    seconds -= days * 86400;
-    const hours = Math.floor(seconds / 3600);
-    seconds -= hours * 3600;
-    const minutes = Math.floor(seconds / 60);
-    seconds -= minutes * 60;
+    const days = Math.floor(result / 86400);
+    result -= days * 86400;
+    const hours = Math.floor(result / 3600);
+    result -= hours * 3600;
+    const minutes = Math.floor(result / 60);
+    result -= minutes * 60;
 
-    return `${days}d ${twodigit(hours)}:${twodigit(minutes)}:${twodigit(seconds)}`;
+    return `${days}d ${twodigit(hours)}:${twodigit(minutes)}:${twodigit(result)}`;
 }
 
 /** @type { ExtendedItemScriptHookCallbacks.Draw<ModularItemData> } */
@@ -271,7 +272,7 @@ function dialogDrawHook(Data, originalFunction) {
  * @param {ServerChatRoomMessage} data
  */
 function onAction(data) {
-    const { Type, Content, Dictionary } = data;
+    const { Type, Dictionary } = data;
 
     const thisItem = InventoryGet(Player, "ItemPelvis");
     if (!thisItem || thisItem.Asset.Name !== asset.Name) return;
@@ -280,7 +281,7 @@ function onAction(data) {
 
     // 对自己使用喜欢的动作会触发惩罚
     if (
-        Type == "Activity" &&
+        Type === "Activity" &&
         Array.isArray(Dictionary) &&
         Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber &&
         Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter === Player.MemberNumber
@@ -435,15 +436,15 @@ export default function () {
     AssetManager.addCustomDialog(custom_dialogs);
     AssetManager.addLayerNames("ItemPelvis", asset, layers);
 
-    OrgasmEvents.on("orgasmed", (data) => {
+    OrgasmEvents.on("orgasmed", () => {
         orgasmFlags.Orgasmed = true;
     });
 
-    OrgasmEvents.on("ruined", (data) => {
+    OrgasmEvents.on("ruined", () => {
         orgasmFlags.Ruined = true;
     });
 
-    OrgasmEvents.on("resisted", (data) => {
+    OrgasmEvents.on("resisted", () => {
         orgasmFlags.Resisted = true;
     });
 }

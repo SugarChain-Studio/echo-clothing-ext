@@ -30,7 +30,8 @@ export default function () {
     const margin = 5;
     const hoverText = ModInfo.name;
 
-    const func = (args, next) => {
+    /** @type {import("@sugarch/bc-mod-hook-manager").HookManagerInterface.InjectFunction<"DrawAssetPreview">} */
+    const func = (args, _) => {
         const [x, y, asset, { Width, Height }] = args;
         if (AssetManager.assetIsCustomed(asset)) {
             const iconX = x + (Width || DrawAssetPreviewDefaultWidth) - iconSize - margin;
@@ -46,7 +47,7 @@ export default function () {
     HookManager.progressiveHook("DrawAssetPreview", 1)
         .inside("AppearanceRun")
         .next()
-        .when(() => CharacterAppearanceMode == "Cloth")
+        .when(() => CharacterAppearanceMode === "Cloth")
         .inject(func);
 
     HookManager.hookFunction("ElementButton.CreateForAsset", 0, (args, next) => {

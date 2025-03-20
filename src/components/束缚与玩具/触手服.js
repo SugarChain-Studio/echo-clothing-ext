@@ -20,7 +20,7 @@ function scriptDrawHook(data, originalFunction, drawData) {
     }
 }
 
-function beforeDraw({ PersistentData, L, X, Y, Property }) {
+function beforeDraw({ PersistentData, L, Y, Property }) {
     const Data = PersistentData();
     if (typeof Data.DildoState !== "number") Data.DildoState = 0;
     if (typeof Data.Modifier !== "number") Data.Modifier = 1;

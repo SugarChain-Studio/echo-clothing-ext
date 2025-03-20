@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { Tools } from "@mod-utils/Tools";
 
 export default function () {
     AssetManager.modifyAsset("ItemMouth", "TonguePiercingGag", (group, asset) => {

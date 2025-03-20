@@ -199,7 +199,7 @@ const predefDialog = {
 // 也就是说，不用手动写描述文字啦，只用写上面的内容就行
 
 // 图层不允许调色
-asset.Layer.forEach((layer, index) => {
+asset.Layer.forEach((layer) => {
     layer.AllowColorize = false;
 });
 
@@ -224,7 +224,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
-    const [k, v] = Object.entries(cv.AllowTypes)[0];
+    const [k] = Object.entries(cv.AllowTypes)[0];
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;

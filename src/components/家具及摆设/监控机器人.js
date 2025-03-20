@@ -203,7 +203,7 @@ export default function () {
     HookManager.globalFunction(
         `AssetsItemNeckRestraints${asset.Name}ScriptDraw`,
         /** @type {ExtendedItemCallbacks.ScriptDraw<DataType>} */ (
-            ({ C, Item, PersistentData }) => {
+            ({ C, PersistentData }) => {
                 const Data = PersistentData();
                 Tools.drawUpdate(C, Data);
             }

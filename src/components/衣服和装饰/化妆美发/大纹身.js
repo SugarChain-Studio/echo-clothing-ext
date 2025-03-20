@@ -270,6 +270,7 @@ const extended = {
 
 /** @type {Translation.Dialog} */
 const dialogs = {
+    /* eslint-disable indent */
     CN: {
         ...["BodyMarkings", "BodyMarkings2_Luzi"].reduce((pv, key) => {
             pv[`${key}大纹身_LuziSelectBase`] = "选择要显示的纹身";
@@ -294,6 +295,7 @@ const dialogs = {
             return pv;
         }, {}),
     },
+    /* eslint-enable indent */
 };
 
 export default function () {

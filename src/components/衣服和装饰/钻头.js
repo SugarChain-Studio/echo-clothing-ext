@@ -53,7 +53,7 @@ const MaxFrame = 10;
 const FrameDef = Array.from({ length: MaxFrame }, (_, i) => i);
 
 /** @type {ExtendedItemCallbacks.BeforeDraw<MyDataType>} */
-function beforeDraw({ PersistentData, L, LayerType }) {
+function beforeDraw({ PersistentData }) {
     const Data = PersistentData();
     Data.Frame = Data.Frame || 0;
 

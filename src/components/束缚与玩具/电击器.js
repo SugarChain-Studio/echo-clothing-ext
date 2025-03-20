@@ -36,7 +36,7 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
     Data.ShockTime = Data.ShockTime ?? 0;
     Data.ShockIsRunning = Data.ShockIsRunning ?? false;
 
-    if (shockL == 1 && !Data.ShockOnOff) {
+    if (shockL === 1 && !Data.ShockOnOff) {
         Data.ShockOnOff = true;
         setNextShockRunTime(C, Item);
     }

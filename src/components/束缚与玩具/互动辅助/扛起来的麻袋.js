@@ -35,7 +35,7 @@ export default function () {
         });
 
     DrawCharacterModifier.addModifier((C, arg) => {
-        const { X, Y, Zoom } = arg;
+        const { Zoom } = arg;
         const sharedC = ChatRoomOrder.requireSharedCenter(C);
         if (!sharedC) return arg;
 
