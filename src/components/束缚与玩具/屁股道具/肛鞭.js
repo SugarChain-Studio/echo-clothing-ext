@@ -48,18 +48,10 @@ const translations = {
     },
     EN: {
         ItemHandheld: {
-            肛鞭: "肛鞭",
+            肛鞭: "Long Anal Plug",
         },
         ItemMouth: {
-            肛鞭: "肛鞭",
-        },
-    },
-    RU: {
-        ItemHandheld: {
-            肛鞭: "肛鞭",
-        },
-        ItemMouth: {
-            肛鞭: "肛鞭",
+            肛鞭: "Long Anal Plug",
         },
     },
 };
