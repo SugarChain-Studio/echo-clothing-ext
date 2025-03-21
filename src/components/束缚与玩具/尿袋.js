@@ -259,12 +259,13 @@ const dialog = {
 
         LuziCustomDialog_尿袋_自动积累按钮: "Auto Accumulation",
 
-        CustomItemAction_尿袋_清空: "SourceCharacter emptied TargetCharacter's urine bag",
-        CustomItemAction_尿袋_加一半: "SourceCharacter added half liquid to TargetCharacter's urine bag",
-        CustomItemAction_尿袋_加满: "SourceCharacter filled TargetCharacter's urine bag",
+        CustomItemAction_尿袋_清空: "SourceCharacter emptied DestinationCharacter urine bag",
+        CustomItemAction_尿袋_加一半: "SourceCharacter added half liquid to DestinationCharacter urine bag",
+        CustomItemAction_尿袋_加满: "SourceCharacter filled DestinationCharacter urine bag",
 
-        CustomItemAction_尿袋_自动积累On: "SourceCharacter turned on TargetCharacter's urine bag auto accumulation",
-        CustomItemAction_尿袋_自动积累Off: "SourceCharacter turned off TargetCharacter's urine bag auto accumulation",
+        CustomItemAction_尿袋_自动积累On: "SourceCharacter turned on DestinationCharacter urine bag auto accumulation",
+        CustomItemAction_尿袋_自动积累Off:
+            "SourceCharacter turned off DestinationCharacter urine bag auto accumulation",
     },
 };
 export default function () {

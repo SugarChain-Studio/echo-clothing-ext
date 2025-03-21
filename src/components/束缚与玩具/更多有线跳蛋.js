@@ -134,25 +134,25 @@ const dialog = {
         ItemVulva更多有线跳蛋_LuziOptiono4: "Maximum",
 
         ItemVulva更多有线跳蛋_LuziSeto0:
-            "SourceCharacter flicks the switch, setting TargetCharacter's vibrator egg to off.",
+            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to off.",
         ItemVulva更多有线跳蛋_LuziSeto1:
-            "SourceCharacter flicks the switch, setting TargetCharacter's vibrator egg to low.",
+            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to low.",
         ItemVulva更多有线跳蛋_LuziSeto2:
-            "SourceCharacter flicks the switch, setting TargetCharacter's vibrator egg to medium.",
+            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to medium.",
         ItemVulva更多有线跳蛋_LuziSeto3:
-            "SourceCharacter flicks the switch, setting TargetCharacter's vibrator egg to high.",
+            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to high.",
         ItemVulva更多有线跳蛋_LuziSeto4:
-            "SourceCharacter flicks the switch, setting TargetCharacter's vibrator egg to maximum.",
+            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to maximum.",
         ItemVulva更多有线跳蛋_LuziSetn0:
-            "SourceCharacter pulls out the vibrator egg from TargetCharacter's genitalia, leaving only one remaining.",
+            "SourceCharacter pulls out the vibrator egg from DestinationCharacter genitalia, leaving only one remaining.",
         ItemVulva更多有线跳蛋_LuziSetn1:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are two vibrator eggs inside TargetCharacter's vagina.",
+            "SourceCharacter fiddles with the wired vibrator egg, now there are two vibrator eggs inside DestinationCharacter vagina.",
         ItemVulva更多有线跳蛋_LuziSetn2:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are three vibrator eggs inside TargetCharacter's vagina.",
+            "SourceCharacter fiddles with the wired vibrator egg, now there are three vibrator eggs inside DestinationCharacter vagina.",
         ItemVulva更多有线跳蛋_LuziSetn3:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are four vibrator eggs inside TargetCharacter's vagina.",
+            "SourceCharacter fiddles with the wired vibrator egg, now there are four vibrator eggs inside DestinationCharacter vagina.",
         ItemVulva更多有线跳蛋_LuziSetn4:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are five vibrator eggs inside TargetCharacter's vagina.",
+            "SourceCharacter fiddles with the wired vibrator egg, now there are five vibrator eggs inside DestinationCharacter vagina.",
     },
     UA: {
         ItemVulva更多有线跳蛋_LuziSelectBase: "Виберіть конфігурацію",
@@ -173,9 +173,10 @@ const dialog = {
 
         ItemVulva更多有线跳蛋_LuziSeto0: "SourceCharacter вимикає вібратори TargetCharacter.",
         ItemVulva更多有线跳蛋_LuziSeto1: "SourceCharacter вмикає вібратори TargetCharacter до низького рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto2: "SourceCharacter вмикає вібратори TargetCharacter's до середнього рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto3: "SourceCharacter вмикає вібратори TargetCharacter's до високого рівня.",
-        ItemVulva更多有线跳蛋_LuziSeto4: "SourceCharacter вмикає вібратори TargetCharacter's до максимального рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto2: "SourceCharacter вмикає вібратори DestinationCharacter до середнього рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto3: "SourceCharacter вмикає вібратори DestinationCharacter до високого рівня.",
+        ItemVulva更多有线跳蛋_LuziSeto4:
+            "SourceCharacter вмикає вібратори DestinationCharacter до максимального рівня.",
         ItemVulva更多有线跳蛋_LuziSetn0:
             "SourceCharacter витягує передостанній вібратор з TargetCharacter геніталії, залишаючи останній.",
         ItemVulva更多有线跳蛋_LuziSetn1:

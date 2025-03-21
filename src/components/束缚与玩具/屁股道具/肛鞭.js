@@ -126,8 +126,8 @@ const dialogItem = {
         ItemButt肛鞭Select: "Select insertion length",
         ItemButt肛鞭一半: "Pull out half.",
         ItemButt肛鞭全部: "Stuff it all in.",
-        ItemButt肛鞭Set一半: "SourceCharacter pulls the anal whip halfway out of TargetCharacter's anus.",
-        ItemButt肛鞭Set全部: "SourceCharacter inserts all the anal whips into TargetCharacter's anus.",
+        ItemButt肛鞭Set一半: "SourceCharacter pulls the anal whip halfway out of DestinationCharacter anus.",
+        ItemButt肛鞭Set全部: "SourceCharacter inserts all the anal whips into DestinationCharacter anus.",
     },
 };
 

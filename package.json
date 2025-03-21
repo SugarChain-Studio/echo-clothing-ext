@@ -5,7 +5,7 @@
         "lint": "eslint --ext .js src utils",
         "build": "rollup -c rollup.config.js",
         "dev:rel": "pnpm type-check && pnpm resources:dev && pnpm build --configBaseURL \"http://localhost:8080/\"",
-        "dev": "pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBaseURL \"http://localhost:8080/\"",
+        "dev": "pnpm lint && pnpm type-check && pnpm resources:dev && pnpm build --configDebug --configBaseURL \"http://localhost:8080/\"",
         "dev:beta": "pnpm type-check && pnpm resources:dev --type beta && pnpm build --configDebug --configBeta --configBaseURL \"http://localhost:8080/\"",
         "changelog": "conventional-changelog -p angular -o CHANGELOG.md -r 0",
         "changelog:stdout": "conventional-changelog -p angular",
