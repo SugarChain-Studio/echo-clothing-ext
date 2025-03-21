@@ -48,8 +48,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["刀"],
         Select刀: "设置",
         OptionA0: "收起",
         OptionA1: "拔出",
-        SetA0: "SourceCharacter收起了TargetCharacter的刀。",
-        SetA1: "SourceCharacter拔出了TargetCharacter的刀。",
+        SetA0: "SourceCharacter收起了TargetCharacter的太刀。",
+        SetA1: "SourceCharacter拔出了TargetCharacter的太刀。",
     },
     EN: {
         SelectBase: "Select Configuration",
@@ -57,8 +57,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["刀"],
         Select刀: "Settings",
         OptionA0: "Sheathe",
         OptionA1: "Draw",
-        SetA0: "SourceCharacter sheathed TargetCharacter's knife.",
-        SetA1: "SourceCharacter drew TargetCharacter's knife.",
+        SetA0: "SourceCharacter sheathed DestinationCharacter tachi.",
+        SetA1: "SourceCharacter drew DestinationCharacter tachi.",
     },
     RU: {
         SelectBase: "Выбор конфигурации",
@@ -66,15 +66,15 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["刀"],
         Select刀: "Настройки",
         OptionA0: "Убрать",
         OptionA1: "Достать",
-        SetA0: "SourceCharacter убрал нож TargetCharacter.",
-        SetA1: "SourceCharacter достал нож TargetCharacter.",
+        SetA0: "SourceCharacter убрал нож у DestinationCharacter.",
+        SetA1: "SourceCharacter достал нож у DestinationCharacter.",
     },
 });
 
 const translations = {
-    CN: "刀",
-    EN: "Knife",
-    RU: "Нож",
+    CN: "太刀",
+    EN: "Tachi",
+    RU: "Тати",
 };
 
 export default function () {
