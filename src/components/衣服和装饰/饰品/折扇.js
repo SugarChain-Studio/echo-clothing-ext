@@ -146,8 +146,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["折扇
         Select展开: "Open Fan",
         Optionn0: "Closed",
         Optionn1: "Opened",
-        Setn0: "SourceCharacter furls TargetCharacter's sandalwood fan, Where moonlit covenant folds back into inkwell night.",
-        Setn1: "SourceCharacter releases TargetCharacter's jade-bamboo fan, Unfolding solar flare across silk-cloud scroll of time.",
+        Setn0: "SourceCharacter furls DestinationCharacter sandalwood fan, Where moonlit covenant folds back into inkwell night.",
+        Setn1: "SourceCharacter releases DestinationCharacter jade-bamboo fan, Unfolding solar flare across silk-cloud scroll of time.",
 
         Select图案: "Select Pattern",
         Optionp0: "None",
@@ -158,13 +158,13 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["折扇
         Optionp5: "Landscape",
         Optionp6: "西溪舟行 part 1",
 
-        Setp0: "With cloud-chasing strokes, SourceCharacter sweeps away worldly traces from TargetCharacter's fan, restoring its parchment to the pristine void.",
-        Setp1: 'SourceCharacter etches "Plum Shadows Dance" upon TargetCharacter\'s silk canvas, floating fragrance under twilight moon.',
-        Setp2: "SourceCharacter weaves \"Orchid Whispers\" through TargetCharacter's bamboo slats, nine meadows' breeze caught in ink-washed grace.",
-        Setp3: 'SourceCharacter carves "Bamboo Sonata" into TargetCharacter\'s folding ribs, with each fold whispering autumn’s song through hollow jade.',
-        Setp4: "SourceCharacter gilds \"Chrysanthemum Armor\" across TargetCharacter's parchment, frost-kissed petals guarding winter's golden throne.",
-        Setp5: 'Celestial strokes swirl "Misty Peaks Voyage" onto TargetCharacter\'s silk canvas, where ink-washed mountains breathe eternal jade.',
-        Setp6: 'SourceCharacter inscribes "Moonlit Ripple Verse" along TargetCharacter\'s jade-bamboo ribs, where silvered oars cleave poetry from the stream.',
+        Setp0: "With cloud-chasing strokes, SourceCharacter sweeps away worldly traces from DestinationCharacter fan, restoring its parchment to the pristine void.",
+        Setp1: 'SourceCharacter etches "Plum Shadows Dance" upon DestinationCharacter silk canvas, floating fragrance under twilight moon.',
+        Setp2: 'SourceCharacter weaves "Orchid Whispers" through DestinationCharacter bamboo slats, nine meadows\' breeze caught in ink-washed grace.',
+        Setp3: 'SourceCharacter carves "Bamboo Sonata" into DestinationCharacter folding ribs, with each fold whispering autumn’s song through hollow jade.',
+        Setp4: 'SourceCharacter gilds "Chrysanthemum Armor" across DestinationCharacter parchment, frost-kissed petals guarding winter\'s golden throne.',
+        Setp5: 'Celestial strokes swirl "Misty Peaks Voyage" onto DestinationCharacter silk canvas, where ink-washed mountains breathe eternal jade.',
+        Setp6: 'SourceCharacter inscribes "Moonlit Ripple Verse" along DestinationCharacter jade-bamboo ribs, where silvered oars cleave poetry from the stream.',
     },
 });
 
