@@ -6,13 +6,13 @@ const asset = {
     Name: "露胸胶衣_Luzi",
     Random: false,
     Gender: "F",
-    Top: 0,
-    Left: 0,
+    Top: 180,
+    Left: 120,
 
     DefaultColor: ["Default", "#000000", "Default", "#000000", "Default"],
     Layer: [
         {
-            Name: "衣服B2", 
+            Name: "衣服B2",
             Priority: 15,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -28,7 +28,7 @@ const asset = {
             AllowTypes: { A: 1 },
         },
         {
-            Name: "衣服B1", 
+            Name: "衣服B1",
             Priority: 14,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -44,7 +44,7 @@ const asset = {
             AllowTypes: { A: 1 },
         },
         {
-            Name: "衣服A2", 
+            Name: "衣服A2",
             Priority: 15,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -59,7 +59,7 @@ const asset = {
             AllowTypes: { A: 0 },
         },
         {
-            Name: "衣服A1", 
+            Name: "衣服A1",
             Priority: 14,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -74,7 +74,7 @@ const asset = {
             AllowTypes: { A: 0 },
         },
         {
-            Name: "皮带A2", 
+            Name: "皮带A2",
             Priority: 17,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -88,7 +88,7 @@ const asset = {
             },
         },
         {
-            Name: "皮带A1", 
+            Name: "皮带A1",
             Priority: 16,
             PoseMapping: {
                 TapedHands: PoseType.DEFAULT,
@@ -131,7 +131,10 @@ const extended = {
     ],
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["Cloth"], ["露胸胶衣_Luzi"], {
+/** @type {CustomGroupName[]} */
+const targetGroups = ["Cloth", "Suit", "Corset", "ItemTorso"];
+
+const dialog = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶衣_Luzi"], {
     CN: {
         SelectBase: "设置",
         Select开裆: "设置",
@@ -162,6 +165,14 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, extended, translations);
+    targetGroups.forEach((name) => {
+        const nAsset = /** @type {CustomAssetDefinition} */ ({
+            ...asset,
+            DynamicGroupName: "Cloth",
+            AllowLock: name === "ItemTorso",
+        });
+
+        AssetManager.addAsset(name, nAsset, extended, translations);
+    });
     AssetManager.addCustomDialog(dialog);
-};
+}
