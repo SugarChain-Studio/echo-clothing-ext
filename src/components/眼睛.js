@@ -66,7 +66,7 @@ export default function () {
 
     AssetManager.addGroup(left_eye, {
         CN: "🍔左眼(覆盖)",
-        EN: "🍔New Left Eye (Over)",
+        EN: "🍔Left Eye (Over)",
     });
     AssetManager.addGroup(right_eye, {
         CN: "🍔右眼(覆盖)",

@@ -11,7 +11,7 @@ const assets = [
         ParentGroup: {},
         Extended: true,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
+
         Layer: [
             {
                 Name: "左侧",
@@ -33,7 +33,6 @@ const assets = [
         ParentGroup: {},
         Extended: true,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Layer: [
             {
                 Name: "左侧",
@@ -55,7 +54,6 @@ const assets = [
         ParentGroup: {},
         Extended: true,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Layer: [
             {
                 Name: "左侧",
@@ -77,7 +75,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 32,
     },
     {
@@ -88,7 +85,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 32,
     },
     {
@@ -99,7 +95,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -110,7 +105,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -121,7 +115,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -132,7 +125,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -143,7 +135,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -154,7 +145,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -165,7 +155,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -176,7 +165,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -187,7 +175,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -198,7 +185,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 32,
     },
     {
@@ -209,7 +195,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -220,7 +205,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -231,7 +215,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
     {
@@ -242,7 +225,6 @@ const assets = [
         ParentGroup: {},
         Extended: false,
         InheritColor: "HairFront",
-        Hide: ["HairBack"],
         Priority: 5,
     },
 ];
