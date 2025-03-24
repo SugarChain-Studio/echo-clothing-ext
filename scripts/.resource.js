@@ -23,20 +23,20 @@ const isRel = args.includes("--rel");
 /** @type {"stable" | "beta"} */
 const buildType = (() => {
     const typeIndex = args.indexOf("--type");
-    
+
     const type = typeIndex === -1 ? "stable" : args[typeIndex + 1];
     if (!["stable", "beta"].includes(type)) {
         throw new Error(`Invalid build type: ${type}`);
     }
-    console.log(`Build type: ${type}`);
+    console.info(`Build type: ${type}`);
     return type;
 })();
 
 const projectDir = getProjectDir();
 const resourcesDir = path.join(projectDir, "resources");
 
-const publicDir = (()=>{
-    if(buildType === "stable") {
+const publicDir = (() => {
+    if (buildType === "stable") {
         return path.join(projectDir, "public");
     } else {
         const pDir = path.join(projectDir, "public");
@@ -46,7 +46,7 @@ const publicDir = (()=>{
 
         return path.join(projectDir, "public", "beta");
     }
-})()
+})();
 
 function createSymlink(src, dest) {
     try {
@@ -54,15 +54,14 @@ function createSymlink(src, dest) {
             const stat = fs.lstatSync(dest);
             if (stat.isDirectory()) {
                 fs.rmSync(dest, { recursive: true });
-                console.log(`Remove existed dir: ${dest}`);
+                console.info(`Remove existed dir: ${dest}`);
             } else if (stat.isSymbolicLink()) {
-                console.log(`Symbolic link existed: ${dest}, skip`);
                 return;
             }
         }
 
         fs.symlinkSync(src, dest, "junction");
-        console.log(`Create symbolic link: ${src} -> ${dest}`);
+        console.info(`Create symbolic link: ${src} -> ${dest}`);
     } catch (err) {
         console.error(`Failed to create symbolic link: ${src} -> ${dest}`, err);
     }
@@ -74,12 +73,12 @@ function copyFiles(src, dest) {
             const stat = fs.lstatSync(dest);
             if (stat.isSymbolicLink()) {
                 fs.unlinkSync(dest);
-                console.log(`Remove symbolic link: ${dest}`);
+                console.info(`Remove symbolic link: ${dest}`);
             }
         }
 
         execSync(`cp -r ${src} ${dest}`);
-        console.log(`Copy files: ${src} -> ${dest}`);
+        console.info(`Copy files: ${src} -> ${dest}`);
     } catch (err) {
         console.error(`Failed to copy files: ${src} -> ${dest}`, err);
     }
@@ -102,8 +101,15 @@ function processDirectories() {
     files.forEach((file) => {
         const srcFile = path.join(resourcesDir, file);
         const destFile = path.join(publicDir, file);
+
+        const srcStat = fs.statSync(srcFile);
+        const destStat = fs.existsSync(destFile) ? fs.statSync(destFile) : null;
+        if (destStat && srcStat.mtimeMs <= destStat.mtimeMs && srcStat.size === destStat.size) {
+            return;
+        }
+
         fs.copyFileSync(srcFile, destFile);
-        console.log(`Copy file: ${srcFile} -> ${destFile}`);
+        console.info(`Copy file: ${srcFile} -> ${destFile}`);
     });
 
     dirs.forEach((dir) => {
