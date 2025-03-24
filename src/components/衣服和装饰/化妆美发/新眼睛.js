@@ -5,17 +5,16 @@ const assets = {
     左眼_Luzi: [
         {
             Name: "眼睛1",
-            Top: 0,
-            Left: 0,
+            Top: 120,
+            Left: 180,
             FullAlpha: false,
         },
     ],
     右眼_Luzi: [
         {
             Name: "眼睛1",
-            ParentItem: "眼睛1",
-            Top: 0,
-            Left: 0,
+            Top: 120,
+            Left: 180,
             FullAlpha: false,
         },
     ],
