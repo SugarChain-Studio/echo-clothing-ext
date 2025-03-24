@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -28,24 +29,24 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["斩标_Luzi"], {
     CN: {
-        ItemMisc斩标_LuziSelect: "选择斩标文字",
-        ItemMisc斩标_Luzi无: "无",
-        ItemMisc斩标_Luzi笨蛋: "笨蛋",
+        Select: "选择斩标文字",
+        无: "无",
+        笨蛋: "笨蛋",
 
-        ItemMisc斩标_LuziSet无: "SourceCharacter擦掉了DestinationCharacter斩标上的字.",
-        ItemMisc斩标_LuziSet笨蛋: "SourceCharacter在DestinationCharacter斩标上写上了笨蛋.",
+        Set无: "SourceCharacter擦掉了DestinationCharacter斩标上的字.",
+        Set笨蛋: "SourceCharacter在DestinationCharacter斩标上写上了笨蛋.",
     },
     EN: {
-        ItemMisc斩标_LuziSelect: "Select Aba Aba",
-        ItemMisc斩标_Luzi无: "None",
-        ItemMisc斩标_Luzi笨蛋: "笨蛋",
+        Select: "Select Aba Aba",
+        无: "None",
+        笨蛋: "笨蛋",
 
-        ItemMisc斩标_LuziSet无: "SourceCharacter erased the words on DestinationCharacter ChanBiao.",
-        ItemMisc斩标_LuziSet笨蛋: "SourceCharacter wrote 'BenDiao' on DestinationCharacter ChanBiao.",
+        Set无: "SourceCharacter erased the words on DestinationCharacter ChanBiao.",
+        Set笨蛋: "SourceCharacter wrote 'BenDiao' on DestinationCharacter ChanBiao.",
     },
-};
+});
 
 const translations = { CN: "斩标", EN: "Behead Marking" };
 

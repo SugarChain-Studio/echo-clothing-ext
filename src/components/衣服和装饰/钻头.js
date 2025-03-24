@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {CustomGroupName} */
@@ -71,29 +71,29 @@ function scriptDraw({ C, Item, PersistentData }) {
     Tools.drawUpdate(C, Data);
 }
 
-const dialogs = {
+const dialogs= DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头_Luzi"], {
     CN: {
-        ItemHandheld钻头_LuziSelect: "转不转",
-        ItemHandheld钻头_Luzi不转: "不转",
-        ItemHandheld钻头_LuziSet不转: "不转",
-        ItemHandheld钻头_Luzi转转转: "转转转",
-        ItemHandheld钻头_LuziSet转转转: "转转转",
+        Select: "转不转",
+        不转: "不转",
+        Set不转: "不转",
+        转转转: "转转转",
+        Set转转转: "转转转",
     },
     EN: {
-        ItemHandheld钻头_LuziSelect: "Spin or Not",
-        ItemHandheld钻头_Luzi不转: "Don't Spin",
-        ItemHandheld钻头_LuziSet不转: "Don't Spin",
-        ItemHandheld钻头_Luzi转转转: "Spinnnnnn",
-        ItemHandheld钻头_LuziSet转转转: "Spinnnnnn",
+        Select: "Spin or Not",
+        不转: "Don't Spin",
+        Set不转: "Don't Spin",
+        转转转: "Spinnnnnn",
+        Set转转转: "Spinnnnnn",
     },
     UA: {
-        ItemHandheld钻头_LuziSelect: "Ввімкнути або ні",
-        ItemHandheld钻头_Luzi不转: "Не вмикати",
-        ItemHandheld钻头_LuziSet不转: "Не вмикати",
-        ItemHandheld钻头_Luzi转转转: "ВЖЖЖЖЖЖЖЖ",
-        ItemHandheld钻头_LuziSet转转转: "ВЖЖЖЖЖЖЖЖ",
+        Select: "Ввімкнути або ні",
+        不转: "Не вмикати",
+        Set不转: "Не вмикати",
+        转转转: "ВЖЖЖЖЖЖЖЖ",
+        Set转转转: "ВЖЖЖЖЖЖЖЖ",
     },
-};
+});
 
 export default function () {
     HookManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);

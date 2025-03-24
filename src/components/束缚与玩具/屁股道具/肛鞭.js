@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -114,22 +115,22 @@ const extendedItem = {
 };
 
 /** @type {Translation.Dialog} */
-const dialogItem = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemButt"], ["肛鞭"], {
     CN: {
-        ItemButt肛鞭Select: "选择塞入程度",
-        ItemButt肛鞭一半: "拔出一半",
-        ItemButt肛鞭全部: "全部塞入",
-        ItemButt肛鞭Set一半: "SourceCharacter将肛鞭从TargetCharacter的肛门拔出了一半.",
-        ItemButt肛鞭Set全部: "SourceCharacter将肛鞭全部塞入TargetCharacter的肛门.",
+        Select: "选择塞入程度",
+        一半: "拔出一半",
+        全部: "全部塞入",
+        Set一半: "SourceCharacter将肛鞭从TargetCharacter的肛门拔出了一半.",
+        Set全部: "SourceCharacter将肛鞭全部塞入TargetCharacter的肛门.",
     },
     EN: {
-        ItemButt肛鞭Select: "Select insertion length",
-        ItemButt肛鞭一半: "Pull out half.",
-        ItemButt肛鞭全部: "Stuff it all in.",
-        ItemButt肛鞭Set一半: "SourceCharacter pulls the anal whip halfway out of DestinationCharacter anus.",
-        ItemButt肛鞭Set全部: "SourceCharacter inserts all the anal whips into DestinationCharacter anus.",
+        Select: "Select insertion length",
+        一半: "Pull out half.",
+        全部: "Stuff it all in.",
+        Set一半: "SourceCharacter pulls the anal whip halfway out of DestinationCharacter anus.",
+        Set全部: "SourceCharacter inserts all the anal whips into DestinationCharacter anus.",
     },
-};
+});
 
 const translationsItem = {
     CN: "肛鞭",
@@ -179,5 +180,5 @@ export default function () {
         "Assets/Female3DCG/ItemButt/肛鞭_typed1_全部.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
     });
     AssetManager.addAsset(itemGroup, assetItem, extendedItem, translationsItem);
-    AssetManager.addCustomDialog(dialogItem);
+    AssetManager.addCustomDialog(dialog);
 }

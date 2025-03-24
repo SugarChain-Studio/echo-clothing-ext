@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -116,41 +117,43 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog1 = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["麻袋_Luzi"], {
     CN: {
-        ItemDevices麻袋_LuziSelect: "选择外观",
-        ItemDevices麻袋_Luzi不透: "不透",
-        ItemDevices麻袋_Luzi透明: "微透明",
-
-        ItemDevices麻袋_LuziSet不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        ItemDevices麻袋_LuziSet透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
-
-        ItemHood麻袋_LuziSelect: "选择外观",
-        ItemHood麻袋_Luzi不透: "不透",
-        ItemHood麻袋_Luzi透明: "微透明",
-
-        ItemHood麻袋_LuziSet不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        ItemHood麻袋_LuziSet透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+        Select: "选择外观",
+        不透: "不透",
+        透明: "微透明",
+        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
     },
     EN: {
-        ItemDevices麻袋_LuziSelect: "选择外观",
-        ItemDevices麻袋_Luzi不透: "不透",
-        ItemDevices麻袋_Luzi透明: "透明",
-
-        ItemDevices麻袋_LuziSet不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        ItemDevices麻袋_LuziSet透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
-
-        ItemHood麻袋_LuziSelect: "选择外观",
-        ItemHood麻袋_Luzi不透: "不透",
-        ItemHood麻袋_Luzi透明: "微透明",
-
-        ItemHood麻袋_LuziSet不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        ItemHood麻袋_LuziSet透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+        Select: "选择外观",
+        不透: "不透",
+        透明: "透明",
+        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
     },
-};
+});
+
+const dialog2 = DialogTools.replicateGroupedItemDialog(["ItemHood"], ["麻袋_Luzi"], {
+    CN: {
+        Select: "选择外观",
+        不透: "不透",
+        透明: "微透明",
+        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+    },
+    EN: {
+        Select: "选择外观",
+        不透: "不透",
+        透明: "透明",
+        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+    },
+});
 
 export default function () {
     AssetManager.addAsset("ItemDevices", asset, extended, translations);
     AssetManager.addAsset("ItemHood", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addCustomDialog(dialog1);
+    AssetManager.addCustomDialog(dialog2);
 }

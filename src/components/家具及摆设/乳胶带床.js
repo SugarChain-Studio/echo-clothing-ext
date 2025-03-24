@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -229,76 +229,76 @@ const extended = {
     ],
 };
 
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["乳胶带床_Luzi"], {
     CN: {
-        ItemDevices乳胶带床_LuziSelect: "选择乳胶带床配置",
-        ItemDevices乳胶带床_LuziSelectBase: "选择配置",
+        Select: "选择乳胶带床配置",
+        SelectBase: "选择配置",
 
-        ItemDevices乳胶带床_LuziSelect盖子: "选择盖子",
-        ItemDevices乳胶带床_LuziModule盖子: "盖子",
-        ItemDevices乳胶带床_LuziOptiong0: "无",
-        ItemDevices乳胶带床_LuziOptiong1: "添加盖子",
-        ItemDevices乳胶带床_LuziOptiong2: "盖上盖子",
-        ItemDevices乳胶带床_LuziOptiong3: "露出腹部",
-        ItemDevices乳胶带床_LuziOptiong4: "露出头部",
+        Select盖子: "选择盖子",
+        Module盖子: "盖子",
+        Optiong0: "无",
+        Optiong1: "添加盖子",
+        Optiong2: "盖上盖子",
+        Optiong3: "露出腹部",
+        Optiong4: "露出头部",
 
-        ItemDevices乳胶带床_LuziSetg0: "SourceCharacter去掉了DestinationCharacterAssetName盖子",
-        ItemDevices乳胶带床_LuziSetg1: "SourceCharacter为DestinationCharacterAssetName添加了盖子",
-        ItemDevices乳胶带床_LuziSetg2: "SourceCharacter关上了DestinationCharacterAssetName的盖子",
-        ItemDevices乳胶带床_LuziSetg3: "SourceCharacter关上了DestinationCharacterAssetName的盖子，但是打开了腹部的盖子",
-        ItemDevices乳胶带床_LuziSetg4: "SourceCharacter关上了DestinationCharacterAssetName的盖子，但是打开了头部的盖子",
+        Setg0: "SourceCharacter去掉了DestinationCharacterAssetName盖子",
+        Setg1: "SourceCharacter为DestinationCharacterAssetName添加了盖子",
+        Setg2: "SourceCharacter关上了DestinationCharacterAssetName的盖子",
+        Setg3: "SourceCharacter关上了DestinationCharacterAssetName的盖子, 但是打开了腹部的盖子.",
+        Setg4: "SourceCharacter关上了DestinationCharacterAssetName的盖子, 但是打开了头部的盖子.",
 
-        ItemDevices乳胶带床_LuziSelect乳胶睡袋: "选择使用默认乳胶衣",
-        ItemDevices乳胶带床_LuziModule乳胶睡袋: "默认乳胶衣",
-        ItemDevices乳胶带床_LuziOptionl0: "使用",
-        ItemDevices乳胶带床_LuziOptionl1: "不使用",
+        Select乳胶睡袋: "选择使用默认乳胶衣",
+        Module乳胶睡袋: "默认乳胶衣",
+        Optionl0: "使用",
+        Optionl1: "不使用",
 
-        ItemDevices乳胶带床_LuziSetl0: "SourceCharacter给TargetCharacter穿上了乳胶衣",
-        ItemDevices乳胶带床_LuziSetl1: "SourceCharacter脱掉了TargetCharacter的乳胶衣",
+        Setl0: "SourceCharacter给TargetCharacter穿上了乳胶衣.",
+        Setl1: "SourceCharacter脱掉了TargetCharacter的乳胶衣.",
     },
     EN: {
-        ItemDevices乳胶带床_LuziSelect: "Select Latex Bed Configuration",
-        ItemDevices乳胶带床_LuziSelectBase: "Select Configuration",
+        Select: "Select Latex Bed Configuration",
+        SelectBase: "Select Configuration",
 
-        ItemDevices乳胶带床_LuziSelect盖子: "Select Cover",
-        ItemDevices乳胶带床_LuziModule盖子: "Cover",
-        ItemDevices乳胶带床_LuziOptiong0: "None",
-        ItemDevices乳胶带床_LuziOptiong1: "Add Cover",
-        ItemDevices乳胶带床_LuziOptiong2: "Close Cover",
-        ItemDevices乳胶带床_LuziOptiong3: "Expose Belly",
-        ItemDevices乳胶带床_LuziOptiong4: "Expose Head",
+        Select盖子: "Select Cover",
+        Module盖子: "Cover",
+        Optiong0: "None",
+        Optiong1: "Add Cover",
+        Optiong2: "Close Cover",
+        Optiong3: "Expose Belly",
+        Optiong4: "Expose Head",
 
-        ItemDevices乳胶带床_LuziSetg0: "SourceCharacter removed DestinationCharacter AssetName Cover",
-        ItemDevices乳胶带床_LuziSetg1: "SourceCharacter added Cover to DestinationCharacter AssetName",
-        ItemDevices乳胶带床_LuziSetg2: "SourceCharacter closed DestinationCharacter AssetName Cover",
-        ItemDevices乳胶带床_LuziSetg3:
+        Setg0: "SourceCharacter removed DestinationCharacter AssetName Cover",
+        Setg1: "SourceCharacter added Cover to DestinationCharacter AssetName",
+        Setg2: "SourceCharacter closed DestinationCharacter AssetName Cover",
+        Setg3:
             "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Belly Cover",
-        ItemDevices乳胶带床_LuziSetg4:
+        Setg4:
             "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Head Cover",
 
-        ItemDevices乳胶带床_LuziSelect乳胶睡袋: "Select Default Latex Sleep Bag",
-        ItemDevices乳胶带床_LuziModule乳胶睡袋: "Latex Sleep Bag",
-        ItemDevices乳胶带床_LuziOptionl0: "Use",
-        ItemDevices乳胶带床_LuziOptionl1: "Don't Use",
+        Select乳胶睡袋: "Select Default Latex Sleep Bag",
+        Module乳胶睡袋: "Latex Sleep Bag",
+        Optionl0: "Use",
+        Optionl1: "Don't Use",
 
-        ItemDevices乳胶带床_LuziSetl0: "SourceCharacter put TargetCharacter in Latex Sleep Bag",
-        ItemDevices乳胶带床_LuziSetl1: "SourceCharacter removed Latex Sleep Bag from TargetCharacter ",
+        Setl0: "SourceCharacter put TargetCharacter in Latex Sleep Bag",
+        Setl1: "SourceCharacter removed Latex Sleep Bag from TargetCharacter ",
     },
     UA: {
-        ItemDevices乳胶带床_LuziSelect: "Виберіть Конфігурацію Латексного Ліжка",
-        ItemDevices乳胶带床_LuziSelectBase: "Виберіть концігурацю",
+        Select: "Виберіть Конфігурацію Латексного Ліжка",
+        SelectBase: "Виберіть концігурацю",
 
-        ItemDevices乳胶带床_LuziSelect盖子: "Виберіть Покриття",
-        ItemDevices乳胶带床_LuziModule盖子: "Накрити",
-        ItemDevices乳胶带床_LuziOptiong0: "Жодного",
-        ItemDevices乳胶带床_LuziOptiong1: "Додати покриття",
-        ItemDevices乳胶带床_LuziOptiong2: "Закрити покриття",
+        Select盖子: "Виберіть Покриття",
+        Module盖子: "Накрити",
+        Optiong0: "Жодного",
+        Optiong1: "Додати покриття",
+        Optiong2: "Закрити покриття",
 
-        ItemDevices乳胶带床_LuziSetg0: "SourceCharacter забрали DestinationCharacter покриття",
-        ItemDevices乳胶带床_LuziSetg1: "SourceCharacter додали покриття DestinationCharacter",
-        ItemDevices乳胶带床_LuziSetg2: "SourceCharacter закрили покриття DestinationCharacter",
+        Setg0: "SourceCharacter забрали DestinationCharacter покриття",
+        Setg1: "SourceCharacter додали покриття DestinationCharacter",
+        Setg2: "SourceCharacter закрили покриття DestinationCharacter",
     },
-};
+});
 
 const translations = {
     CN: "乳胶带床",

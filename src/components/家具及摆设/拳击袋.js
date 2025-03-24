@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -178,36 +179,36 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["拳击袋_Luzi"], {
     CN: {
-        ItemDevices拳击袋_LuziSelect: "选择拳击袋配置",
-        ItemDevices拳击袋_Luzi有照片: "贴上照片",
-        ItemDevices拳击袋_Luzi无照片: "摘掉照片",
-        ItemDevices拳击袋_LuziSet有照片: "SourceCharacter给TargetCharacter贴上了照片",
-        ItemDevices拳击袋_LuziSet无照片: "SourceCharacter从TargetCharacter摘掉了照片",
+        Select: "选择拳击袋配置",
+        有照片: "贴上照片",
+        无照片: "摘掉照片",
+        Set有照片: "SourceCharacter给TargetCharacter贴上了照片",
+        Set无照片: "SourceCharacter从TargetCharacter摘掉了照片",
     },
     EN: {
-        ItemDevices拳击袋_LuziSelect: "Select Punching Bag Configuration",
-        ItemDevices拳击袋_Luzi有照片: "Attach Photo",
-        ItemDevices拳击袋_Luzi无照片: "Remove Photo",
-        ItemDevices拳击袋_LuziSet有照片: "SourceCharacter attaches a photo to TargetCharacter.",
-        ItemDevices拳击袋_LuziSet无照片: "SourceCharacter removes the photo from TargetCharacter.",
+        Select: "Select Punching Bag Configuration",
+        有照片: "Attach Photo",
+        无照片: "Remove Photo",
+        Set有照片: "SourceCharacter attaches a photo to TargetCharacter.",
+        Set无照片: "SourceCharacter removes the photo from TargetCharacter.",
     },
     UA: {
-        ItemDevices拳击袋_LuziSelect: "Виберіть конфігурацію боксерського мішка",
-        ItemDevices拳击袋_Luzi有照片: "Прикріпити фотографію",
-        ItemDevices拳击袋_Luzi无照片: "Зняти фотографію",
-        ItemDevices拳击袋_LuziSet有照片: "SourceCharacter прикріпили фотографію.",
-        ItemDevices拳击袋_LuziSet无照片: "SourceCharacter зняли фотографію.",
+        Select: "Виберіть конфігурацію боксерського мішка",
+        有照片: "Прикріпити фотографію",
+        无照片: "Зняти фотографію",
+        Set有照片: "SourceCharacter прикріпили фотографію.",
+        Set无照片: "SourceCharacter зняли фотографію.",
     },
     RU: {
-        ItemDevices拳击袋_LuziSelect: "Выбор конфигурации боксерской груши",
-        ItemDevices拳击袋_Luzi有照片: "Прикрепить фото",
-        ItemDevices拳击袋_Luzi无照片: "Снять фото",
-        ItemDevices拳击袋_LuziSet有照片: "SourceCharacter прикрепил фото к DestinationCharacter.",
-        ItemDevices拳击袋_LuziSet无照片: "SourceCharacter снял фото с DestinationCharacter.",
+        Select: "Выбор конфигурации боксерской груши",
+        有照片: "Прикрепить фото",
+        无照片: "Снять фото",
+        Set有照片: "SourceCharacter прикрепил фото к DestinationCharacter.",
+        Set无照片: "SourceCharacter снял фото с DestinationCharacter.",
     },
-};
+});
 
 const translations = {
     CN: "拳击袋",
@@ -218,4 +219,4 @@ const translations = {
 export default function () {
     AssetManager.addAsset("ItemDevices", asset, extended, translations);
     AssetManager.addCustomDialog(dialog);
-}
+};

@@ -1,5 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -56,22 +57,22 @@ const translation = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["缰绳_Luzi"], {
     CN: {
-        ItemTorso缰绳_LuziSelect: "设置",
-        ItemTorso缰绳_Luzi1: "无",
-        ItemTorso缰绳_Luzi2: "有绳子",
-        ItemTorso缰绳_LuziSet1: "SourceCharacter把绳子收起来了",
-        ItemTorso缰绳_LuziSet2: "SourceCharacter拿出了绳子",
+        Select: "设置",
+        1: "无",
+        2: "有绳子",
+        Set1: "SourceCharacter把绳子收起来了",
+        Set2: "SourceCharacter拿出了绳子",
     },
     EN: {
-        ItemTorso缰绳_LuziSelect: "Select",
-        ItemTorso缰绳_Luzi1: "None",
-        ItemTorso缰绳_Luzi2: "With Rope",
-        ItemTorso缰绳_LuziSet1: "SourceCharacter put away the rope",
-        ItemTorso缰绳_LuziSet2: "SourceCharacter took out the rope",
+        Select: "Select",
+        1: "None",
+        2: "With Rope",
+        Set1: "SourceCharacter put away the rope",
+        Set2: "SourceCharacter took out the rope",
     },
-};
+});
 
 export default function () {
     AssetManager.addAsset("ItemTorso", asset, extended, translation);

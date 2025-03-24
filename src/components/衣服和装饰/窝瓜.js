@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { PathTools } from "@sugarch/bc-mod-utility";
 
 /** @type {CustomAssetDefinition} */
@@ -82,29 +82,29 @@ const icons = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["窝瓜_Luzi"], {
     CN: {
-        ItemDevices窝瓜_LuziSelect: "选择窝配置",
-        ItemDevices窝瓜_Luzi没盖子: "推开盖子",
-        ItemDevices窝瓜_Luzi有盖子: "盖上盖子",
-        ItemDevices窝瓜_LuziSet没盖子: "SourceCharacter推开了DestinationCharacterAssetName的盖子",
-        ItemDevices窝瓜_LuziSet有盖子: "SourceCharacter为DestinationCharacterAssetName盖上了盖子",
+        Select: "选择窝配置",
+        没盖子: "推开盖子",
+        有盖子: "盖上盖子",
+        Set没盖子: "SourceCharacter推开了DestinationCharacterAssetName的盖子",
+        Set有盖子: "SourceCharacter为DestinationCharacterAssetName盖上了盖子",
     },
     EN: {
-        ItemDevices窝瓜_LuziSelect: "Select Configuration",
-        ItemDevices窝瓜_Luzi没盖子: "Push open the lid",
-        ItemDevices窝瓜_Luzi有盖子: "Close the lid",
-        ItemDevices窝瓜_LuziSet没盖子: "SourceCharacter pushed open the lid of DestinationCharacter AssetName.",
-        ItemDevices窝瓜_LuziSet有盖子: "SourceCharacter closed the lid of DestinationCharacter AssetName.",
+        Select: "Select Configuration",
+        没盖子: "Push open the lid",
+        有盖子: "Close the lid",
+        Set没盖子: "SourceCharacter pushed open the lid of DestinationCharacter AssetName.",
+        Set有盖子: "SourceCharacter closed the lid of DestinationCharacter AssetName.",
     },
     RU: {
-        ItemDevices窝瓜_LuziSelect: "Выбрать конфигурацию",
-        ItemDevices窝瓜_Luzi没盖子: "Открыть крышку",
-        ItemDevices窝瓜_Luzi有盖子: "Закрыть крышку",
-        ItemDevices窝瓜_LuziSet没盖子: "SourceCharacter открыл крышку DestinationCharacter AssetName.",
-        ItemDevices窝瓜_LuziSet有盖子: "SourceCharacter закрыл крышку DestinationCharacter AssetName.",
+        Select: "Выбрать конфигурацию",
+        没盖子: "Открыть крышку",
+        有盖子: "Закрыть крышку",
+        Set没盖子: "SourceCharacter открыл крышку DestinationCharacter AssetName.",
+        Set有盖子: "SourceCharacter закрыл крышку DestinationCharacter AssetName.",
     },
-};
+});
 
 const translations = {
     CN: "窝瓜",

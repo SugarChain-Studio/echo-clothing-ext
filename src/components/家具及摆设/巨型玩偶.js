@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -108,24 +109,24 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["巨型玩偶_Luzi"], {
     CN: {
-        ItemDevices巨型玩偶_Luzi熊熊: "熊熊",
-        ItemDevices巨型玩偶_LuziSelect: "选择巨型玩偶配置",
+        熊熊: "熊熊",
+        Select: "选择巨型玩偶配置",
     },
     EN: {
-        ItemDevices巨型玩偶_Luzi熊熊: "Bear",
-        ItemDevices巨型玩偶_LuziSelect: "Select Giant Doll Configuration",
+        熊熊: "Bear",
+        Select: "Select Giant Doll Configuration",
     },
     RU: {
-        ItemDevices巨型玩偶_Luzi熊熊: "Мишка",
-        ItemDevices巨型玩偶_LuziSelect: "Выбор конфигурации большой игрушки",
+        熊熊: "Мишка",
+        Select: "Выбор конфигурации большой игрушки",
     },
     UA: {
-        ItemDevices巨型玩偶_Luzi熊熊: "Ведмедик",
-        ItemDevices巨型玩偶_LuziSelect: "Виберіть конфігурацію великої іграшки",
+        熊熊: "Ведмедик",
+        Select: "Виберіть конфігурацію великої іграшки",
     },
-};
+});
 
 const translations = {
     CN: "巨型玩偶",

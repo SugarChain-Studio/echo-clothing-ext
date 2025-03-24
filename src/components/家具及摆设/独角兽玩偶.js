@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -176,41 +177,45 @@ const extended = {
     },
 };
 
-/** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["独角兽玩偶_Luzi"], {
     CN: {
-        ItemDevices独角兽玩偶_LuziSelect: "选择独角兽玩偶配置",
-        ItemDevices独角兽玩偶_Luzi戴上头套: "戴上头套",
-        ItemDevices独角兽玩偶_Luzi摘掉头套: "摘掉头套",
-        ItemDevices独角兽玩偶_LuziSet戴上头套: "SourceCharacter为TargetCharacter戴上了头套",
-        ItemDevices独角兽玩偶_LuziSet摘掉头套: "SourceCharacter为TargetCharacter摘掉了头套",
+        Select: "选择独角兽玩偶配置",
+        戴上头套: "戴上头套",
+        摘掉头套: "摘掉头套",
+        Set戴上头套: "SourceCharacter为TargetCharacter戴上了头套",
+        Set摘掉头套: "SourceCharacter为TargetCharacter摘掉了头套",
     },
     EN: {
-        ItemDevices独角兽玩偶_LuziSelect: "Select Unicorn Doll Configuration",
-        ItemDevices独角兽玩偶_Luzi戴上头套: "Put on Headgear",
-        ItemDevices独角兽玩偶_Luzi摘掉头套: "Remove Headgear",
-        ItemDevices独角兽玩偶_LuziSet戴上头套: "SourceCharacter puts on the headgear for TargetCharacter.",
-        ItemDevices独角兽玩偶_LuziSet摘掉头套: "SourceCharacter removes the headgear from TargetCharacter.",
+        Select: "Select Unicorn Doll Configuration",
+        戴上头套: "Put on Headgear",
+        摘掉头套: "Remove Headgear",
+        Set戴上头套: "SourceCharacter puts on the headgear for TargetCharacter.",
+        Set摘掉头套: "SourceCharacter removes the headgear from TargetCharacter.",
     },
     RU: {
-        ItemDevices独角兽玩偶_LuziSelect: "Выберите конфигурацию игрушки единорога",
-        ItemDevices独角兽玩偶_Luzi戴上头套: "Надеть шлем",
-        ItemDevices独角兽玩偶_Luzi摘掉头套: "Снять шлем",
-        ItemDevices独角兽玩偶_LuziSet戴上头套: "SourceCharacter надевает шлем на TargetCharacter.",
-        ItemDevices独角兽玩偶_LuziSet摘掉头套: "SourceCharacter снимает шлем с TargetCharacter.",
+        Select: "Выберите конфигурацию игрушки единорога",
+        戴上头套: "Надеть шлем",
+        摘掉头套: "Снять шлем",
+        Set戴上头套: "SourceCharacter надевает шлем на TargetCharacter.",
+        Set摘掉头套: "SourceCharacter снимает шлем с TargetCharacter.",
     },
     UA: {
-        ItemDevices独角兽玩偶_LuziSelect: "Виберіть конфігурацію лальки",
-        ItemDevices独角兽玩偶_Luzi戴上头套: "Надіти шолом",
-        ItemDevices独角兽玩偶_Luzi摘掉头套: "Зняти шолом",
-        ItemDevices独角兽玩偶_LuziSet戴上头套: "SourceCharacter надіває шолом на DestinationCharacter.",
-        ItemDevices独角兽玩偶_LuziSet摘掉头套: "SourceCharacter знімає шолом з DestinationCharacter.",
+        Select: "Виберіть конфігурацію лальки",
+        戴上头套: "Надіти шолом",
+        摘掉头套: "Зняти шолом",
+        Set戴上头套: "SourceCharacter надіває шолом на DestinationCharacter.",
+        Set摘掉头套: "SourceCharacter знімає шолом з DestinationCharacter.",
     },
-};
+});
 
-const translations = { CN: "独角兽玩偶", EN: "Unicorn Stuffed Toy", UA: "Лялька єдинорога", RU: "Кукла единорога" };
+const translations = {
+    CN: "独角兽玩偶",
+    EN: "Unicorn Stuffed Toy",
+    UA: "Лялька єдинорога",
+    RU: "Кукла единорога",
+};
 
 export default function () {
     AssetManager.addAsset("ItemDevices", asset, extended, translations);
     AssetManager.addCustomDialog(dialog);
-}
+};

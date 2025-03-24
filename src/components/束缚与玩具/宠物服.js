@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -205,54 +206,54 @@ const extened = {
 };
 
 /**@type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemArms"], ["宠物服上"], {
     CN: {
-        ItemArms宠物服上SelectBase: "添加锁链",
-        ItemArms宠物服上Select锁链手: "添加锁链",
-        ItemArms宠物服上Module锁链手: "手部铐子",
-        ItemArms宠物服上Optionl0: "无",
-        ItemArms宠物服上Optionl1: "添加锁链",
-        ItemArms宠物服上Setl0: "SourceCharacter移除了DestinationCharacter身上的锁链",
-        ItemArms宠物服上Setl1: "SourceCharacter在DestinationCharacter手臂加上了锁链",
+        SelectBase: "添加锁链",
+        Select锁链手: "添加锁链",
+        Module锁链手: "手部铐子",
+        Optionl0: "无",
+        Optionl1: "添加锁链",
+        Setl0: "SourceCharacter移除了DestinationCharacter身上的锁链",
+        Setl1: "SourceCharacter在DestinationCharacter手臂加上了锁链",
 
-        ItemArms宠物服上Select锁链腿: "添加锁链",
-        ItemArms宠物服上Module锁链腿: "腿部铐子",
-        ItemArms宠物服上Optionll0: "无",
-        ItemArms宠物服上Optionll1: "添加锁链",
-        ItemArms宠物服上Setll0: "SourceCharacter移除了DestinationCharacter身上的锁链",
-        ItemArms宠物服上Setll1: "SourceCharacter在DestinationCharacter腿上加上了锁链",
+        Select锁链腿: "添加锁链",
+        Module锁链腿: "腿部铐子",
+        Optionll0: "无",
+        Optionll1: "添加锁链",
+        Setll0: "SourceCharacter移除了DestinationCharacter身上的锁链",
+        Setll1: "SourceCharacter在DestinationCharacter腿上加上了锁链",
 
-        ItemArms宠物服上Select自定义高度: "设置高度",
-        ItemArms宠物服上Module自定义高度: "调整高度",
-        ItemArms宠物服上Optionlll0: "无",
-        ItemArms宠物服上Optionlll1: "自定义高度",
-        ItemArms宠物服上Setlll0: "SourceCharacter还原DestinationCharacter高度",
-        ItemArms宠物服上Setlll1: "SourceCharacter调整DestinationCharacter高度",
+        Select自定义高度: "设置高度",
+        Module自定义高度: "调整高度",
+        Optionlll0: "无",
+        Optionlll1: "自定义高度",
+        Setlll0: "SourceCharacter还原DestinationCharacter高度",
+        Setlll1: "SourceCharacter调整DestinationCharacter高度",
     },
     EN: {
-        ItemArms宠物服上SelectBase: "Add Chains",
-        ItemArms宠物服上Select锁链手: "Add Hand Chains",
-        ItemArms宠物服上Module锁链手: "Hand Cuffs",
-        ItemArms宠物服上Optionl0: "None",
-        ItemArms宠物服上Optionl1: "Add Chains",
-        ItemArms宠物服上Setl0: "SourceCharacter removed chains from DestinationCharacter's arms",
-        ItemArms宠物服上Setl1: "SourceCharacter added chains to DestinationCharacter's arms",
+        SelectBase: "Add Chains",
+        Select锁链手: "Add Hand Chains",
+        Module锁链手: "Hand Cuffs",
+        Optionl0: "None",
+        Optionl1: "Add Chains",
+        Setl0: "SourceCharacter removed chains from DestinationCharacter's arms",
+        Setl1: "SourceCharacter added chains to DestinationCharacter's arms",
 
-        ItemArms宠物服上Select锁链腿: "Add Leg Chains",
-        ItemArms宠物服上Module锁链腿: "Leg Cuffs",
-        ItemArms宠物服上Optionll0: "None",
-        ItemArms宠物服上Optionll1: "Add Chains",
-        ItemArms宠物服上Setll0: "SourceCharacter removed chains from DestinationCharacter's legs",
-        ItemArms宠物服上Setll1: "SourceCharacter added chains to DestinationCharacter's legs",
+        Select锁链腿: "Add Leg Chains",
+        Module锁链腿: "Leg Cuffs",
+        Optionll0: "None",
+        Optionll1: "Add Chains",
+        Setll0: "SourceCharacter removed chains from DestinationCharacter's legs",
+        Setll1: "SourceCharacter added chains to DestinationCharacter's legs",
 
-        ItemArms宠物服上Select自定义高度: "Set Height",
-        ItemArms宠物服上Module自定义高度: "Adjust Height",
-        ItemArms宠物服上Optionlll0: "None",
-        ItemArms宠物服上Optionlll1: "Custom Height",
-        ItemArms宠物服上Setlll0: "SourceCharacter restored DestinationCharacter's height",
-        ItemArms宠物服上Setlll1: "SourceCharacter adjusted DestinationCharacter's height",
+        Select自定义高度: "Set Height",
+        Module自定义高度: "Adjust Height",
+        Optionlll0: "None",
+        Optionlll1: "Custom Height",
+        Setlll0: "SourceCharacter restored DestinationCharacter's height",
+        Setlll1: "SourceCharacter adjusted DestinationCharacter's height",
     },
-};
+});
 
 const translations = {
     CN: "宠物服上",

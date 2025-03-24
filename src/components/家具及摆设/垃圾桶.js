@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -167,48 +168,48 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["垃圾桶_Luzi"], {
     CN: {
-        ItemDevices垃圾桶_LuziSelect: "选择垃圾桶配置",
-        ItemDevices垃圾桶_Luzi打开盖子: "打开盖子",
-        ItemDevices垃圾桶_Luzi合上盖子: "合上盖子",
-        ItemDevices垃圾桶_Luzi打开挡板: "打开挡板",
+        Select: "选择垃圾桶配置",
+        打开盖子: "打开盖子",
+        合上盖子: "合上盖子",
+        打开挡板: "打开挡板",
 
-        ItemDevices垃圾桶_LuziSet合上盖子: "SourceCharacter合上了DestinationCharacter盖子",
-        ItemDevices垃圾桶_LuziSet打开盖子: "SourceCharacter打开了DestinationCharacter盖子",
-        ItemDevices垃圾桶_LuziSet打开挡板: "SourceCharacter打开了DestinationCharacter挡板",
+        Set合上盖子: "SourceCharacter合上了DestinationCharacter盖子",
+        Set打开盖子: "SourceCharacter打开了DestinationCharacter盖子",
+        Set打开挡板: "SourceCharacter打开了DestinationCharacter挡板",
     },
     EN: {
-        ItemDevices垃圾桶_LuziSelect: "Select Trash Bin Configuration",
-        ItemDevices垃圾桶_Luzi打开盖子: "Open Lid",
-        ItemDevices垃圾桶_Luzi合上盖子: "Close Lid",
-        ItemDevices垃圾桶_Luzi打开挡板: "Open Flap",
+        Select: "Select Trash Bin Configuration",
+        打开盖子: "Open Lid",
+        合上盖子: "Close Lid",
+        打开挡板: "Open Flap",
 
-        ItemDevices垃圾桶_LuziSet合上盖子: "SourceCharacter closed DestinationCharacter lid",
-        ItemDevices垃圾桶_LuziSet打开盖子: "SourceCharacter opened DestinationCharacter lid",
-        ItemDevices垃圾桶_LuziSet打开挡板: "SourceCharacter opened DestinationCharacter baffle",
+        Set合上盖子: "SourceCharacter closed DestinationCharacter lid",
+        Set打开盖子: "SourceCharacter opened DestinationCharacter lid",
+        Set打开挡板: "SourceCharacter opened DestinationCharacter baffle",
     },
     UA: {
-        ItemDevices垃圾桶_LuziSelect: "Виберіть конфігурацію для смітника",
-        ItemDevices垃圾桶_Luzi打开盖子: "Відкрити накривку",
-        ItemDevices垃圾桶_Luzi合上盖子: "Закрити накривку",
-        ItemDevices垃圾桶_Luzi打开挡板: "Відкрити клапоть",
+        Select: "Виберіть конфігурацію для смітника",
+        打开盖子: "Відкрити накривку",
+        合上盖子: "Закрити накривку",
+        打开挡板: "Відкрити клапоть",
 
-        ItemDevices垃圾桶_LuziSet合上盖子: "SourceCharacter закрили DestinationCharacter накривкою",
-        ItemDevices垃圾桶_LuziSet打开盖子: "SourceCharacter відкрили накривку DestinationCharacter",
-        ItemDevices垃圾桶_LuziSet打开挡板: "SourceCharacter відкрили перегородку DestinationCharacter",
+        Set合上盖子: "SourceCharacter закрили DestinationCharacter накривкою",
+        Set打开盖子: "SourceCharacter відкрили накривку DestinationCharacter",
+        Set打开挡板: "SourceCharacter відкрили перегородку DestinationCharacter",
     },
     RU: {
-        ItemDevices垃圾桶_LuziSelect: "Выбор конфигурации мусорного бака",
-        ItemDevices垃圾桶_Luzi打开盖子: "Открыть крышку",
-        ItemDevices垃圾桶_Luzi合上盖子: "Закрыть крышку",
-        ItemDevices垃圾桶_Luzi打开挡板: "Открыть заслонку",
+        Select: "Выбор конфигурации мусорного бака",
+        打开盖子: "Открыть крышку",
+        合上盖子: "Закрыть крышку",
+        打开挡板: "Открыть заслонку",
 
-        ItemDevices垃圾桶_LuziSet合上盖子: "SourceCharacter закрыл крышку DestinationCharacter",
-        ItemDevices垃圾桶_LuziSet打开盖子: "SourceCharacter открыл крышку DestinationCharacter",
-        ItemDevices垃圾桶_LuziSet打开挡板: "SourceCharacter открыл заслонку DestinationCharacter",
+        Set合上盖子: "SourceCharacter закрыл крышку DestinationCharacter",
+        Set打开盖子: "SourceCharacter открыл крышку DestinationCharacter",
+        Set打开挡板: "SourceCharacter открыл заслонку DestinationCharacter",
     },
-};
+});
 
 const translations = {
     CN: "垃圾桶",

@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -133,32 +134,32 @@ const extended = {
     ],
 };
 
-const descriptions = {
+const dialog = DialogTools.replicateGroupedItemDialog(["动物身体_Luzi"], ["鱼鱼尾_Luzi"], {
     CN: {
-        动物身体_Luzi鱼鱼尾_LuziSelectBase: "选择配置",
-        动物身体_Luzi鱼鱼尾_LuziSelect鱼尾装饰: "设置",
-        动物身体_Luzi鱼鱼尾_LuziModule鱼尾装饰: "鱼尾装饰",
-        动物身体_Luzi鱼鱼尾_LuziOptionq0: "无",
-        动物身体_Luzi鱼鱼尾_LuziOptionq1: "皮带",
-        动物身体_Luzi鱼鱼尾_LuziOptionq2: "珍珠项链",
+        SelectBase: "选择配置",
+        Select鱼尾装饰: "设置",
+        Module鱼尾装饰: "鱼尾装饰",
+        Optionq0: "无",
+        Optionq1: "皮带",
+        Optionq2: "珍珠项链",
     },
     EN: {
-        动物身体_Luzi鱼鱼尾_LuziSelectBase: "Select Configuration",
-        动物身体_Luzi鱼鱼尾_LuziSelect鱼尾装饰: "Settings",
-        动物身体_Luzi鱼鱼尾_LuziModule鱼尾装饰: "Decorations",
-        动物身体_Luzi鱼鱼尾_LuziOptionq0: "None",
-        动物身体_Luzi鱼鱼尾_LuziOptionq1: "Belt",
-        动物身体_Luzi鱼鱼尾_LuziOptionq2: "Pearl Necklace",
+        SelectBase: "Select Configuration",
+        Select鱼尾装饰: "Settings",
+        Module鱼尾装饰: "Decorations",
+        Optionq0: "None",
+        Optionq1: "Belt",
+        Optionq2: "Pearl Necklace",
     },
     RU: {
-        动物身体_Luzi鱼鱼尾_LuziSelectBase: "Выбрать конфигурацию",
-        动物身体_Luzi鱼鱼尾_LuziSelect鱼尾装饰: "Настройки",
-        动物身体_Luzi鱼鱼尾_LuziModule鱼尾装饰: "Декорации хвоста",
-        动物身体_Luzi鱼鱼尾_LuziOptionq0: "Нет",
-        动物身体_Luzi鱼鱼尾_LuziOptionq1: "Ремень",
-        动物身体_Luzi鱼鱼尾_LuziOptionq2: "Жемчужное ожерелье",
+        SelectBase: "Выбрать конфигурацию",
+        Select鱼尾装饰: "Настройки",
+        Module鱼尾装饰: "Декорации хвоста",
+        Optionq0: "Нет",
+        Optionq1: "Ремень",
+        Optionq2: "Жемчужное ожерелье",
     },
-};
+});
 
 const translations = {
     CN: "鱼鱼尾",
@@ -168,5 +169,5 @@ const translations = {
 
 export default function () {
     AssetManager.addAsset("动物身体_Luzi", asset, extended, translations);
-    AssetManager.addCustomDialog(descriptions);
+    AssetManager.addCustomDialog(dialog);
 }

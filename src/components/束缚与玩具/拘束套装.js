@@ -1,5 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
+import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -160,56 +161,56 @@ const icons = {
     "Screens/Inventory/ItemTorso/拘束套装_Luzi/紧身衣.png": PathTools.emptyImage,
 };
 
-const dialogs = {
+const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["拘束套装_Luzi"], {
     CN: {
-        ItemTorso拘束套装_Luzi无: "无",
-        ItemTorso拘束套装_Luzi乳胶衣: "乳胶衣",
-        ItemTorso拘束套装_Luzi透视紧身衣: "透视紧身衣",
-        ItemTorso拘束套装_Luzi紧身衣: "紧身衣",
+        无: "无",
+        乳胶衣: "乳胶衣",
+        透视紧身衣: "透视紧身衣",
+        紧身衣: "紧身衣",
 
-        ItemTorso拘束套装_LuziSelect: "选择配置",
-        ItemTorso拘束套装_LuziSet无: "",
-        ItemTorso拘束套装_LuziSet乳胶衣: "",
-        ItemTorso拘束套装_LuziSet透视紧身衣: "",
-        ItemTorso拘束套装_LuziSet紧身衣: "",
+        Select: "选择配置",
+        Set无: "",
+        Set乳胶衣: "",
+        Set透视紧身衣: "",
+        Set紧身衣: "",
     },
     EN: {
-        ItemTorso拘束套装_Luzi无: "No",
-        ItemTorso拘束套装_Luzi乳胶衣: "Latex Suit",
-        ItemTorso拘束套装_Luzi透视紧身衣: "Sheer Bodysuit",
-        ItemTorso拘束套装_Luzi紧身衣: "Bodysuit",
+        无: "No",
+        乳胶衣: "Latex Suit",
+        透视紧身衣: "Sheer Bodysuit",
+        紧身衣: "Bodysuit",
 
-        ItemTorso拘束套装_LuziSelect: "Select Configuration",
-        ItemTorso拘束套装_LuziSet无: "",
-        ItemTorso拘束套装_LuziSet乳胶衣: "",
-        ItemTorso拘束套装_LuziSet透视紧身衣: "",
-        ItemTorso拘束套装_LuziSet紧身衣: "",
+        Select: "Select Configuration",
+        Set无: "",
+        Set乳胶衣: "",
+        Set透视紧身衣: "",
+        Set紧身衣: "",
     },
     RU: {
-        ItemTorso拘束套装_Luzi无: "Нет",
-        ItemTorso拘束套装_Luzi乳胶衣: "Латексный костюм",
-        ItemTorso拘束套装_Luzi透视紧身衣: "Прозрачный комбинезон",
-        ItemTorso拘束套装_Luzi紧身衣: "Комбинезон",
+        无: "Нет",
+        乳胶衣: "Латексный костюм",
+        透视紧身衣: "Прозрачный комбинезон",
+        紧身衣: "Комбинезон",
 
-        ItemTorso拘束套装_LuziSelect: "Выбор конфигурации",
-        ItemTorso拘束套装_LuziSet无: "",
-        ItemTorso拘束套装_LuziSet乳胶衣: "",
-        ItemTorso拘束套装_LuziSet透视紧身衣: "",
-        ItemTorso拘束套装_LuziSet紧身衣: "",
+        Select: "Выбор конфигурации",
+        Set无: "",
+        Set乳胶衣: "",
+        Set透视紧身衣: "",
+        Set紧身衣: "",
     },
     UA: {
-        ItemTorso拘束套装_Luzi无: "Ні",
-        ItemTorso拘束套装_Luzi乳胶衣: "Латексний костюм",
-        ItemTorso拘束套装_Luzi透视紧身衣: "Напівпрозорий комбінезон",
-        ItemTorso拘束套装_Luzi紧身衣: "Комбінезон",
+        无: "Ні",
+        乳胶衣: "Латексний костюм",
+        透视紧身衣: "Напівпрозорий комбінезон",
+        紧身衣: "Комбінезон",
 
-        ItemTorso拘束套装_LuziSelect: "Виберіть конфігурацію предмету",
-        ItemTorso拘束套装_LuziSet无: "",
-        ItemTorso拘束套装_LuziSet乳胶衣: "",
-        ItemTorso拘束套装_LuziSet透视紧身衣: "",
-        ItemTorso拘束套装_LuziSet紧身衣: "",
+        Select: "Виберіть конфігурацію предмету",
+        Set无: "",
+        Set乳胶衣: "",
+        Set透视紧身衣: "",
+        Set紧身衣: "",
     },
-};
+});
 
 const translations = {
     CN: "拘束套装",
