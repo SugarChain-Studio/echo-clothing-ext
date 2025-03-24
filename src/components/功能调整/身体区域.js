@@ -109,7 +109,7 @@ const groups = [
             MinOpacity: 0,
             MaxOpacity: 1,
             Asset: [],
-            Hide: ["HairBack"],
+            Hide: ["HairFront"],
             Color: ["Default"],
         },
         description: {
