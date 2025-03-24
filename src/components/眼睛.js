@@ -1,74 +1,75 @@
-/* eslint-disable no-unused-vars */
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
+
+/** @type {ExpressionName[]} */
+const eyeExpressions = [
+    "Closed",
+    "Dazed",
+    "Shy",
+    "Sad",
+    "Horny",
+    "Lewd",
+    "VeryLewd",
+    "Heart",
+    "HeartPink",
+    "LewdHeart",
+    "LewdHeartPink",
+    "Dizzy",
+    "Daydream",
+    "ShylyHappy",
+    "Angry",
+    "Surprised",
+    "Scared",
+];
 
 /** @type {CustomGroupDefinition} */
 const left_eye = {
-    Group: "眼睛左_Luzi",
+    Group: "左眼_Luzi",
     Priority: 9,
     Left: 200,
     Top: 140,
     Blink: true,
-    AllowExpression: [
-        "Closed",
-        "Dazed",
-        "Shy",
-        "Sad",
-        "Horny",
-        "Lewd",
-        "VeryLewd",
-        "Heart",
-        "HeartPink",
-        "LewdHeart",
-        "LewdHeartPink",
-        "Dizzy",
-        "Daydream",
-        "ShylyHappy",
-        "Angry",
-        "Surprised",
-        "Scared",
-    ],
+    Random: false,
+    Default: false,
+    Hide: ["Eyes"],
+    AllowExpression: eyeExpressions,
     PreviewZone: [190, 100, 120, 120],
-    Asset: [{ Name: "眼睛1", FullAlpha: false, Hide: ["Eyes"] }],
+    Asset: [],
 };
 
 /** @type {CustomGroupDefinition} */
 const right_eye = {
-    Group: "眼睛右_Luzi",
+    Group: "右眼_Luzi",
     Priority: 9,
     Left: 250,
     Top: 140,
     Blink: true,
-    AllowExpression: [
-        "Closed",
-        "Dazed",
-        "Shy",
-        "Sad",
-        "Horny",
-        "Lewd",
-        "VeryLewd",
-        "Heart",
-        "HeartPink",
-        "LewdHeart",
-        "LewdHeartPink",
-        "Dizzy",
-        "Daydream",
-        "ShylyHappy",
-        "Angry",
-        "Surprised",
-        "Scared",
-    ],
+    Random: false,
+    Default: false,
+    Hide: ["Eyes2"],
+    AllowExpression: eyeExpressions,
     PreviewZone: [190, 100, 120, 120],
-    Asset: [{ Name: "眼睛1", FullAlpha: false, Hide: ["Eyes2"] }],
+    Asset: [],
 };
 
 export default function () {
-    // TODO: 左眼右眼
-    // AssetManager.addGroup(left_eye, {
-    //     CN: "🍔左眼",
-    //     EN: "🍔Left Eye",
-    // });
-    // AssetManager.addGroup(right_eye, {
-    //     CN: "🍔右眼",
-    //     EN: "🍔Right Eye",
-    // });
+    HookManager.progressiveHook("CharacterSetFacialExpression").inject((args) => {
+        const callWithDifferentGroup = (group) => {
+            HookManager.invokeOriginal("CharacterSetFacialExpression", args[0], group, args[2], args[3], args[4]);
+        };
+        if (args[1] === "Eyes1" || args[1] === "Eyes") {
+            callWithDifferentGroup("眼睛左_Luzi");
+        } else if (args[1] === "Eyes2") {
+            callWithDifferentGroup("眼睛右_Luzi");
+        }
+    });
+
+    AssetManager.addGroup(left_eye, {
+        CN: "🍔左眼(覆盖)",
+        EN: "🍔New Left Eye (Over)",
+    });
+    AssetManager.addGroup(right_eye, {
+        CN: "🍔右眼(覆盖)",
+        EN: "🍔Right Eye (Over)",
+    });
 }

@@ -2,7 +2,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
-    Eyes: [
+    左眼_Luzi: [
         {
             Name: "眼睛1",
             Top: 0,
@@ -10,7 +10,7 @@ const assets = {
             FullAlpha: false,
         },
     ],
-    Eyes2: [
+    右眼_Luzi: [
         {
             Name: "眼睛1",
             ParentItem: "眼睛1",
@@ -24,13 +24,19 @@ const assets = {
 /** @type { Translation.GroupedEntries } */
 const translations = {
     CN: {
-        Eyes: {
-            眼睛1: "🍔眼睛 1",
+        左眼_Luzi: {
+            眼睛1: "红宝石",
+        },
+        右眼_Luzi: {
+            眼睛1: "红宝石",
         },
     },
     EN: {
-        Eyes2: {
-            眼睛1: "🍔Eyes 1",
+        左眼_Luzi: {
+            眼睛1: "Ruby",
+        },
+        右眼_Luzi: {
+            眼睛1: "Ruby",
         },
     },
 };

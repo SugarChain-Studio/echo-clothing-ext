@@ -18,8 +18,8 @@ const asset = {
         "Head",
         "Eyes",
         "Eyes2",
-        "眼睛右_Luzi",
-        "眼睛左_Luzi",
+        "右眼_Luzi",
+        "左眼_Luzi",
     ],
 };
 
