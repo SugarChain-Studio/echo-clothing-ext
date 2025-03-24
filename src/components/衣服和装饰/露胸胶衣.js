@@ -8,19 +8,13 @@ const asset = {
     Gender: "F",
     Top: 180,
     Left: 120,
-
+    Expose: ["ItemNipples", "ItemNipplesPiercings", "ItemBreast"],
     DefaultColor: ["Default", "#000000", "Default", "#000000", "Default"],
     Layer: [
         {
             Name: "衣服B2",
             Priority: 15,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hogtied",
                 AllFours: "Hide",
             },
@@ -31,12 +25,6 @@ const asset = {
             Name: "衣服B1",
             Priority: 14,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hogtied",
                 AllFours: "Hide",
             },
@@ -47,12 +35,6 @@ const asset = {
             Name: "衣服A2",
             Priority: 15,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hogtied",
                 AllFours: "Hide",
             },
@@ -62,12 +44,6 @@ const asset = {
             Name: "衣服A1",
             Priority: 14,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hogtied",
                 AllFours: "Hide",
             },
@@ -77,12 +53,6 @@ const asset = {
             Name: "皮带A2",
             Priority: 17,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hide",
                 AllFours: "Hide",
             },
@@ -91,12 +61,6 @@ const asset = {
             Name: "皮带A1",
             Priority: 16,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hide",
                 AllFours: "Hide",
             },
@@ -105,12 +69,6 @@ const asset = {
             Name: "扣子",
             Priority: 18,
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
                 Hogtied: "Hide",
                 AllFours: "Hide",
             },
@@ -169,7 +127,7 @@ export default function () {
         const nAsset = /** @type {CustomAssetDefinition} */ ({
             ...asset,
             DynamicGroupName: "Cloth",
-            AllowLock: name === "ItemTorso",
+            ...(name === "ItemTorso" ? { Difficulty: 6, AllowLock: true, Time: 10 } : {}),
         });
 
         AssetManager.addAsset(name, nAsset, extended, translations);
