@@ -35,8 +35,6 @@ const asset = {
         { Name: "吉娜", AllowTypes: { s: 2 } },
         { Name: "Ada", AllowTypes: { s: 3 } },
         { Name: "Luzi2", AllowTypes: { s: 4 } },
-        { Name: "Reisigure", AllowTypes: { s: 5 } },
-        { Name: "Atlantis", AllowTypes: { s: 6 } },
 
         // 芷窝
         {
@@ -97,7 +95,7 @@ const asset = {
         { Name: "mizuki池", AllowTypes: { hz: 5 } },
         { Name: "莉娅", AllowTypes: { hz: 6 } },
         { Name: "艾尔", AllowTypes: { hz: 7 } },
-        { Name: "小火火", AllowTypes: { hz: 7 } },
+        { Name: "小火火", AllowTypes: { hz: 8 } },
 
         // 吸血鬼城堡
         {
@@ -124,6 +122,20 @@ const asset = {
         { Name: "ZforShort", AllowTypes: { yb: 2 } },
         { Name: "luobo", AllowTypes: { yb: 3 } },
 
+        // EILRSW
+        { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
+        { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
+        { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
+        { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
+        { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
+        {
+            Name: "澈羽枫灵",
+            PoseMapping: specialMapping,
+            AllowTypes: { EILRSW: 6 },
+        },
+        { Name: "希雅", AllowTypes: { EILRSW: 7 } },
+        { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -148,18 +160,14 @@ const asset = {
         { Name: "莉莉丝", AllowTypes: { l: 17 } },
         { Name: "LaBi", AllowTypes: { l: 18 } },
         { Name: "忧绪", AllowTypes: { l: 19 } },
-        {
-            Name: "澈羽枫灵",
-            PoseMapping: specialMapping,
-            AllowTypes: { l: 20 },
-        },
-        { Name: "五十提", AllowTypes: { l: 21 } },
-        { Name: "Shika", AllowTypes: { l: 22 } },
-        { Name: "依伊可", AllowTypes: { l: 23 } },
-        { Name: "白墨鴝", AllowTypes: { l: 24 } },
-        { Name: "希雅", AllowTypes: { l: 25 } },
-        { Name: "墨璃", AllowTypes: { l: 26 } },
-        { Name: "铃奈", AllowTypes: { l: 27 } },
+        { Name: "五十提", AllowTypes: { l: 20 } },
+        { Name: "Shika", AllowTypes: { l: 21 } },
+        { Name: "依伊可", AllowTypes: { l: 22 } },
+        { Name: "白墨鴝", AllowTypes: { l: 23 } },
+        { Name: "墨璃", AllowTypes: { l: 24 } },
+        { Name: "铃奈", AllowTypes: { l: 25 } },
+        { Name: "小雨", AllowTypes: { l: 26 } },
+        
     ],
 };
 
@@ -174,6 +182,7 @@ const typeNames = {
     x: "吸血鬼城堡",
     lihua: "笠花和An'an的家",
     yb: "鸢堡",
+    EILRSW: "EILRSW",
     l: "路过的玩偶",
 };
 
@@ -191,7 +200,7 @@ const predefDialog = {
         ItemMisc玩偶_LuziSetc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
         ItemMisc玩偶_LuziSetx1:
             "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
-        ItemMisc玩偶_LuziSetl23:
+        ItemMisc玩偶_LuziSetl22:
             "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
     },
 };
