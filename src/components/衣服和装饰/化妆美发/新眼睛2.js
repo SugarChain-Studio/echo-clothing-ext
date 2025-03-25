@@ -2,7 +2,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
-    左眼_Luzi: [
+    右眼_Luzi: [
         {
             Name: "眼睛1",
             Top: 120,
@@ -24,7 +24,7 @@ const assets = {
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
-                { Name: "2i", AllowColorize: true },
+                { Name: "2i", AllowColorize: false },
                 { Name: "3", AllowColorize: true },
                 { Name: "4", AllowColorize: true },
                 { Name: "5", AllowColorize: true },
@@ -37,12 +37,12 @@ const assets = {
 /** @type { Translation.GroupedEntries } */
 const translations = {
     CN: {
-        左眼_Luzi: {
+        右眼_Luzi: {
             眼睛1: "红宝石",
         },
     },
     EN: {
-        左眼_Luzi: {
+        右眼_Luzi: {
             眼睛1: "Ruby",
         },
     },
