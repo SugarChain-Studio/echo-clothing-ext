@@ -1,6 +1,6 @@
 import { AssetManager } from "./assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { assetOverrides, baseURL, ModInfo } from "@mod-utils/rollupHelper";
+import { assetOverrides, ModInfo, resourceBaseURL } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
@@ -17,7 +17,7 @@ once(ModInfo.name, () => {
     HookManager.setLogger(Logger);
     AssetManager.setLogger(Logger);
 
-    resolveAssetOverrides(baseURL, assetOverrides).then((overrides) => {
+    resolveAssetOverrides(resourceBaseURL, assetOverrides).then((overrides) => {
         AssetManager.imageMapping.setBasicImgMapping(overrides);
     });
 
