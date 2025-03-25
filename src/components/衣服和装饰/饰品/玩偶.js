@@ -135,6 +135,7 @@ const asset = {
         },
         { Name: "希雅", AllowTypes: { EILRSW: 7 } },
         { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
+        { Name: "酥酥", AllowTypes: { EILRSW: 9 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
