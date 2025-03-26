@@ -13,14 +13,21 @@ const asset = {
         "BodyLower",
         "ArmsLeft",
         "ArmsRight",
+        "HairFront",
+        "HairBack",
+        "Eyebrows",
         "Pussy",
         "Mouth",
         "Head",
         "Eyes",
         "Eyes2",
+        "Nipples",
         "右眼_Luzi",
         "左眼_Luzi",
+        "新前发_Luzi",
+        "新后发_Luzi",
     ],
+    Layer: [],
 };
 
 const translations = {
