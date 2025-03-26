@@ -58,9 +58,9 @@ export default function () {
             HookManager.invokeOriginal("CharacterSetFacialExpression", args[0], group, args[2], args[3], args[4]);
         };
         if (args[1] === "Eyes1" || args[1] === "Eyes") {
-            callWithDifferentGroup("眼睛左_Luzi");
+            callWithDifferentGroup("右眼_Luzi");
         } else if (args[1] === "Eyes2") {
-            callWithDifferentGroup("眼睛右_Luzi");
+            callWithDifferentGroup("左眼_Luzi");
         }
     });
 
