@@ -23,7 +23,7 @@ export default function () {
         "Assets/Female3DCG/ItemHandheld/Preview/拉紧的牵绳_Luzi.png":
             "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
         "Assets/Female3DCG/ItemHandheld/Preview/拉紧的链子_Luzi.png":
-            "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
+            "Assets/Female3DCG/ItemNeckRestraints/Preview/ChainLeash.png",
     });
 
     DrawCharacterModifier.addModifier((C, arg) => {
@@ -31,9 +31,13 @@ export default function () {
         const sharedC = ChatRoomOrder.requireSharedCenter(C);
         if (!sharedC) return arg;
 
-        const assetName = sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset;
+        const prevAssetName = sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset;
+        const nextAssetName = sharedC.next.XCharacterDrawOrder.associatedAsset?.asset;
 
-        if (assetName !== "CollarLeash" && assetName !== "拉紧的牵绳_Luzi" && assetName !== "拉紧的链子_Luzi")
+        if (
+            !(prevAssetName === "CollarLeash" && nextAssetName === "拉紧的牵绳_Luzi") &&
+            !(prevAssetName === "ChainLeash" && nextAssetName === "拉紧的链子_Luzi")
+        )
             return arg;
 
         if (sharedC.prev.MemberNumber === C.MemberNumber) {
