@@ -80,12 +80,11 @@ const asset = {
         { Name: "雫", AllowTypes: { y: 6 } },
         { Name: "小狼", AllowTypes: { y: 7 } },
         { Name: "小果", AllowTypes: { y: 8 } },
-        { Name: "茗子", AllowTypes: { y: 9 } },
-        { Name: "时光光", AllowTypes: { y: 10 } },
-        { Name: "xxxx", AllowTypes: { y: 11 } },
-        { Name: "果子狸", AllowTypes: { y: 12 } },
-        { Name: "雪瑗", AllowTypes: { y: 13 } },
-        { Name: "xiu狸子", AllowTypes: { y: 14 } },
+        { Name: "时光光", AllowTypes: { y: 9 } },
+        { Name: "xxxx", AllowTypes: { y: 10 } },
+        { Name: "果子狸", AllowTypes: { y: 11 } },
+        { Name: "雪瑗", AllowTypes: { y: 12 } },
+        { Name: "xiu狸子", AllowTypes: { y: 13 } },
 
         // 盒子的小黑屋
         { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
@@ -136,6 +135,7 @@ const asset = {
         { Name: "希雅", AllowTypes: { EILRSW: 7 } },
         { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
         { Name: "酥酥", AllowTypes: { EILRSW: 9 } },
+        { Name: "茗子", AllowTypes: { EILRSW: 10 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -168,7 +168,7 @@ const asset = {
         { Name: "墨璃", AllowTypes: { l: 24 } },
         { Name: "铃奈", AllowTypes: { l: 25 } },
         { Name: "小雨", AllowTypes: { l: 26 } },
-        
+
     ],
 };
 
@@ -231,7 +231,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -239,7 +239,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -289,7 +289,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
