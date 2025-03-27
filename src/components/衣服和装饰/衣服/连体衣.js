@@ -61,4 +61,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAsset("Suit", asset, undefined, translation);
+    AssetManager.addAsset("Cloth", asset, undefined, translation);
 }
