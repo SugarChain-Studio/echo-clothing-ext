@@ -12,15 +12,15 @@ const assets = [
         Name: "眼睛2",
         Top: 0,
         Left: 0,
-        DefaultColor: ["Default", "#6B82A2", "Default", "Default", "Default", "#242424"],
         Layer: [
             { Name: "1", AllowColorize: true },
             { Name: "2", AllowColorize: true },
-            { Name: "2i", AllowColorize: true },
             { Name: "3", AllowColorize: true },
             { Name: "4", AllowColorize: true },
             { Name: "5", AllowColorize: true },
             { Name: "6", AllowColorize: true },
+            { Name: "7", AllowColorize: true },
+            { Name: "8", AllowColorize: true },
         ],
     },
 ];
