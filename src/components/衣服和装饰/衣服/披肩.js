@@ -142,6 +142,34 @@ const assets = {
                 },
             ],
         },
+        {
+            Name: "立领披肩_Luzi",
+            Random: false,
+            Gender: "F",
+            Top: 0,
+            Left: 0,
+            Prerequisite: ["HasBreasts"],
+            ParentGroup: "BodyUpper",
+            Layer: [
+                {
+                    Name: "披肩",
+                    Priority: 34,
+                    PoseMapping: {
+                        BackCuffs: "BackCuffs",
+                        BackElbowTouch: "BackElbowTouch",
+                        Yoked: "Yoked",
+                        OverTheHead: "OverTheHead",
+                    },
+                },
+                {
+                    Name: "披肩后",
+                    Priority: 1,
+                    PoseMapping: {
+                        Yoked: "Yoked",
+                    },
+                },
+            ],
+        },
     ],
 };
 
@@ -154,6 +182,7 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "披肩短",
             披肩长_Luzi: "披肩长",
+            立领披肩_Luzi: "立领披肩",
         },
     },
     EN: {
@@ -163,6 +192,7 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "Short Shawl",
             披肩长_Luzi: "Long Shawl",
+            立领披肩_Luzi: "Shawl",
         },
     },
     RU: {
@@ -172,6 +202,7 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Длинный палантин",
+            立领披肩_Luzi: "палантин",
         },
     },
     UA: {
@@ -181,6 +212,7 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Довгий палантин",
+            立领披肩_Luzi: "палантин",
         },
     },
 };
