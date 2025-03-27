@@ -22,6 +22,10 @@ const asset = {
             Name: "裤子A1",
             Priority: 26,
             PoseMapping: {
+                Kneel: "Kneel",
+                KneelingSpread: "KneelingSpread",
+                LegsClosed: "LegsClosed",
+                Spread: "Spread",
                 AllFours: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,
             },
@@ -32,6 +36,8 @@ const asset = {
             PoseMapping: {
                 Kneel: PoseType.HIDE,
                 KneelingSpread: PoseType.HIDE,
+                LegsClosed: "LegsClosed",
+                Spread: "Spread",
                 AllFours: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,
             },

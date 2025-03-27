@@ -9,21 +9,14 @@ const asset = {
     Priority: 26,
     Layer: [
         {
-            Name: "6",
+            Name: "1",
             PoseMapping: {
                 AllFours: PoseType.HIDE,
                 Hogtied: "Hogtied",
             },
         },
         {
-            Name: "5",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "4",
+            Name: "2",
             PoseMapping: {
                 Hogtied: PoseType.HIDE,
                 AllFours: PoseType.HIDE,
@@ -37,14 +30,21 @@ const asset = {
             },
         },
         {
-            Name: "2",
+            Name: "4",
             PoseMapping: {
                 Hogtied: PoseType.HIDE,
                 AllFours: PoseType.HIDE,
             },
         },
         {
-            Name: "1",
+            Name: "5",
+            PoseMapping: {
+                Hogtied: PoseType.HIDE,
+                AllFours: PoseType.HIDE,
+            },
+        },
+        {
+            Name: "6",
             PoseMapping: {
                 AllFours: PoseType.HIDE,
                 Hogtied: "Hogtied",
