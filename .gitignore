@@ -6,3 +6,5 @@ resources/**/*.psd
 /CHANGELOG.md
 /.vscode
 /.idea
+resources/Assets/*空白文件
+resources/Assets/*空白*
