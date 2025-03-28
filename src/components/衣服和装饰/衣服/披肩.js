@@ -177,22 +177,22 @@ const assets = {
 const translations = {
     CN: {
         Cloth: {
-            披肩_Luzi: "披肩",
+            披肩_Luzi: "天主披肩",
         },
         ClothAccessory: {
-            披肩短_Luzi: "披肩短",
-            披肩长_Luzi: "披肩长",
-            立领披肩_Luzi: "立领披肩",
+            披肩短_Luzi: "圣诞披肩短",
+            披肩长_Luzi: "圣诞披肩长",
+            立领披肩_Luzi: "血族斗篷",
         },
     },
     EN: {
         Cloth: {
-            披肩_Luzi: "Shawl",
+            披肩_Luzi: "Christian Shawl",
         },
         ClothAccessory: {
-            披肩短_Luzi: "Short Shawl",
-            披肩长_Luzi: "Long Shawl",
-            立领披肩_Luzi: "Shawl",
+            披肩短_Luzi: "Xmas Short Shawl",
+            披肩长_Luzi: "Xmas Long Shawl",
+            立领披肩_Luzi: "Vampiric Cloak",
         },
     },
     RU: {
@@ -202,7 +202,6 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Длинный палантин",
-            立领披肩_Luzi: "палантин",
         },
     },
     UA: {
@@ -212,7 +211,6 @@ const translations = {
         ClothAccessory: {
             披肩短_Luzi: "Короткий палантин",
             披肩长_Luzi: "Довгий палантин",
-            立领披肩_Luzi: "палантин",
         },
     },
 };
