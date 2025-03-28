@@ -14,3 +14,9 @@ type CustomAssetDefinition = import('@sugarch/bc-asset-manager').CustomAssetDefi
 /** 按照身体组分类的物品定义 */
 type CustomGroupedAssetDefinitions =
     import('@sugarch/bc-asset-manager').CustomGroupedAssetDefinitions<CustomGroupBodyName>;
+
+// src/types/sweetalert2.d.ts
+declare module 'https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm' {
+    import Swal from 'sweetalert2';
+    export default Swal;
+}
