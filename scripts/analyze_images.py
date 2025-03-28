@@ -48,6 +48,25 @@ def analyze_images(file_paths):
         rounded_height = ((max_y - rounded_min_y + 9) // 10) * 10
         print(
             f"取整到10像素的矩形区域: 左上角({rounded_min_x}, {rounded_min_y}), 宽: {rounded_width}, 高: {rounded_height}")
+
+        # 计算取整到10像素且关于原图轴对称的最小矩形区域
+        center_x = 250  # 原图宽度的一半 (500 / 2)
+        center_y = 500  # 原图高度的一半 (1000 / 2)
+
+        symmetric_min_x = center_x - \
+            max(center_x - rounded_min_x, rounded_width // 2)
+        symmetric_min_y = center_y - \
+            max(center_y - rounded_min_y, rounded_height // 2)
+        symmetric_width = max(rounded_width, 2 * (center_x - symmetric_min_x))
+        symmetric_height = max(rounded_height, 2 *
+                               (center_y - symmetric_min_y))
+
+        # 确保对称区域的宽度和高度是10的倍数
+        symmetric_width = ((symmetric_width + 9) // 10) * 10
+        symmetric_height = ((symmetric_height + 9) // 10) * 10
+
+        print(
+            f"取整到10像素且关于原图轴对称的矩形区域: 左上角({symmetric_min_x}, {symmetric_min_y}), 宽: {symmetric_width}, 高: {symmetric_height}")
     else:
         print("未找到任何非透明部分。")
 

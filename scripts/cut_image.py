@@ -32,10 +32,17 @@ matching_files = glob.glob(wildcard_path, recursive=True)
 # 打印找到的文件数量
 print(f"找到 {len(matching_files)} 个匹配文件")
 
+# 初始化计数器
+processed_count = 0
+
 # 裁剪找到的所有图像
 for file_path in matching_files:
     # 确保路径格式正确（使用正斜杠）
     file_path = file_path.replace("\\", "/")
     crop_image(file_path, file_path, crop_width, crop_height, crop_x, crop_y)
+    processed_count += 1
+
+# 输出处理的图片数量
+print(f"实际处理了 {processed_count} 张图片")
 
 print("裁剪完成。")
