@@ -6,7 +6,6 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 26,
     Layer: [
         {
             Name: "1",
@@ -53,13 +52,34 @@ const asset = {
     ],
 };
 
+/** @type {Translation.CustomRecord<string,string>} */
+const layerNames = {
+    CN: {
+        1: "连体衣",
+        2: "腰部内层",
+        3: "腰部结构",
+        4: "胸下内层",
+        5: "胸下结构",
+        6: "胸上结构",
+    },
+    EN: {
+        1: "Suit",
+        2: "Waist Inner Layer",
+        3: "Waist Structure",
+        4: "Under-Bra Inner Layer",
+        5: "Under-Bra Structure",
+        6: "Upper-Bra Structure",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
-    CN: "连体衣",
-    EN: "Jumpsuit",
+    CN: "战斗服",
+    EN: "Plugsuit",
 };
 
 export default function () {
     AssetManager.addAsset("Suit", asset, undefined, translation);
-    AssetManager.addAsset("Cloth", asset, undefined, translation);
+    AssetManager.addAsset("Cloth", { ...asset, DynamicGroupName: "Suit" }, undefined, translation);
+    AssetManager.addLayerNamesByEntry("Suit", "连体衣_Luzi", layerNames);
 }

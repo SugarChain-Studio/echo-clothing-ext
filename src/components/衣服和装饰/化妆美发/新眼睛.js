@@ -33,8 +33,34 @@ const translations = {
         EN: "Ruby",
     },
     眼睛2: {
-        CN: "眼睛 2",
-        EN: "Eye 2",
+        CN: "天狐",
+        EN: "Celestial Vixen",
+    },
+};
+
+/** @type { Record<string,Translation.CustomRecord<string,string>> } */
+const layerNames = {
+    眼睛2: {
+        CN: {
+            1: "下眼睑",
+            2: "上眼睑",
+            3: "眼球",
+            4: "虹膜",
+            5: "虹膜边缘",
+            6: "瞳孔",
+            7: "下睫毛",
+            8: "上睫毛",
+        },
+        EN: {
+            1: "Lower Eyelid",
+            2: "Upper Eyelid",
+            3: "Eyeball",
+            4: "Iris",
+            5: "Iris Edge",
+            6: "Pupil",
+            7: "Lower Lash",
+            8: "Upper Lash",
+        },
     },
 };
 
@@ -44,11 +70,14 @@ const mirroredAssets = {
     右眼_Luzi: assets,
 };
 
+/** @type {CustomGroupName[]} */
+const eyeGroups = ["左眼_Luzi", "右眼_Luzi"];
+
 /** @type { Translation.GroupedEntries } */
 const mirroredTranslations = Object.entries(translations).reduce((acc, [name, value]) => {
     for (const [lang, text] of Object.entries(value)) {
         acc[lang] ??= {};
-        for (const group of ["左眼_Luzi", "右眼_Luzi"]) {
+        for (const group of eyeGroups) {
             acc[lang][group] ??= {};
             acc[lang][group][name] = text;
         }
@@ -58,4 +87,9 @@ const mirroredTranslations = Object.entries(translations).reduce((acc, [name, va
 
 export default function () {
     AssetManager.addGroupedAssets(mirroredAssets, mirroredTranslations);
+    for (const group of eyeGroups) {
+        for (const [name, value] of Object.entries(layerNames)) {
+            AssetManager.addLayerNamesByEntry(group, name, value);
+        }
+    }
 }
