@@ -12,6 +12,7 @@ const assets = [
         Name: "眼睛2",
         Top: 0,
         Left: 0,
+        DefaultColor: ["Default", "Default", "#404040", "#2F0707", "#000000", "#000000", "#000000", "#000000"],
         Layer: [
             { Name: "1", AllowColorize: true },
             { Name: "2", AllowColorize: true },
@@ -30,6 +31,10 @@ const translations = {
     眼睛1: {
         CN: "红宝石",
         EN: "Ruby",
+    },
+    眼睛2: {
+        CN: "眼睛 2",
+        EN: "Eye 2",
     },
 };
 
