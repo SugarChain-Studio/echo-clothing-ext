@@ -53,7 +53,7 @@ const asset = {
         { Name: "Suki", AllowTypes: { z: 10 } },
         { Name: "haru", AllowTypes: { z: 11 } },
         { Name: "兔叽", AllowTypes: { z: 12 } },
-        { Name: "Lux", AllowTypes: { c: 13 } },
+        { Name: "Lux", AllowTypes: { z: 13 } },
 
         // Catnest
         { Name: "XinLian", AllowTypes: { c: 1 } },
