@@ -5,8 +5,8 @@ const asset = {
     Name: "兽蹄鞋_Luzi",
     Random: false,
     Height: 14,
-    Top: 0,
-    Left: 0,
+    Top: 490,
+    Left: 120,
     PoseMapping: {
         Kneel: "Hide",
         KneelingSpread: "Hide",
@@ -28,7 +28,7 @@ const asset = {
 
 const translations = {
     CN: "兽蹄鞋",
-    EN: "Beast hoof shoes",
+    EN: "Hoof Shoe",
 };
 
 export default function () {
