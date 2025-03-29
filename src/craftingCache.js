@@ -1,6 +1,7 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "./assetForward";
 import { showPrompt } from "./prompt";
+import { i18n } from "./i18n";
 
 const dataKey = "EchoClothingCache";
 
@@ -89,17 +90,7 @@ let _Logger = null;
  * @param {...string} args - 格式化参数
  * @returns {string} - 本地化后的消息
  */
-function getMessage(key, ...args) {
-    const lang = TranslationLanguage === "TW" ? "CN" : TranslationLanguage || "EN";
-    let msg = messages[key][lang] || messages[key].EN;
-
-    // 替换格式化参数
-    args.forEach((arg, index) => {
-        msg = msg.replace(`{${index}}`, arg);
-    });
-
-    return msg;
-}
+const getMessage = (key, ...args) => i18n(messages, key, ...args);
 
 /**
  * 获取当前玩家所有模组制作物品

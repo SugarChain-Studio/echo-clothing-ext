@@ -1,4 +1,7 @@
+import { ModInfo } from "@mod-utils/rollupHelper";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { hanburgerIcon } from "../汉堡标志";
+import { i18n } from "../../i18n";
 
 /** @type {Partial<Record<CustomGroupName,Set<string> | "any">>} */
 const speakingAssets = {
@@ -47,6 +50,52 @@ const iso639_1_codes = new Set(
         .filter((x) => x.length > 0)
 );
 
+/** @type {Record<string, Translation.Entry>} */
+const messages = {
+    hearing: {
+        CN: `[${ModInfo.name}] 📞 翻译你听到的话为 {0}`,
+        EN: `[${ModInfo.name}] 📞 Translate what you hear to {0}`,
+    },
+    speaking: {
+        CN: `[${ModInfo.name}] 🔊 翻译你说出的话为 {0}`,
+        EN: `[${ModInfo.name}] 🔊 Translate what you say to {0}`,
+    },
+};
+
+/**
+ * @param {string} key - 消息键值
+ * @param {...string} args - 格式化参数
+ * @returns {string} - 本地化后的消息
+ */
+const getMessage = (key, ...args) => i18n(messages, key, ...args);
+
+/**
+ * @param {Item} item
+ * @returns {string | undefined} language code if valid, undefined if not
+ */
+function fetchLangCode(item) {
+    const m = item.Craft?.Description?.match(/\[(([a-z]{2})(?:-[A-Za-z]{1,4})?)\]/);
+    if (m && iso639_1_codes.has(m[2])) {
+        return m[1];
+    }
+    return undefined;
+}
+
+/**
+ * @param {Partial<Record<CustomGroupName,Set<string> | "any">>} assetFilter
+ * @param {Asset | Item} item
+ * @returns {string | undefined} language code if valid, undefined if not
+ */
+function checkAttr(assetFilter, item) {
+    if (!("Asset" in item)) return undefined;
+    const groupName = item.Asset.Group.Name;
+    if (assetFilter[groupName] === "any" || assetFilter[groupName]?.has(item.Asset.Name)) {
+        const langCode = fetchLangCode(item);
+        if (langCode) return langCode;
+    }
+    return undefined;
+}
+
 /**
  * @param {Partial<Record<CustomGroupName,Set<string> | "any">>} vAssets
  * @returns {string | undefined}
@@ -55,10 +104,8 @@ function validItemCraftingDesc(vAssets) {
     for (const [groupName, assets] of Object.entries(vAssets)) {
         const item = InventoryGet(Player, /** @type{any}*/ (groupName));
         if (item && (assets === "any" || assets.has(item.Asset.Name))) {
-            const m = item.Craft?.Description?.match(/\[(([a-z]{2})(?:-[A-Za-z]{1,4})?)\]/);
-            if (m && iso639_1_codes.has(m[2])) {
-                return m[1];
-            }
+            const langCode = fetchLangCode(item);
+            if (langCode) return langCode;
         }
     }
     return undefined;
@@ -87,6 +134,23 @@ async function translateText(sourceText, targetLang) {
     }
 }
 
+/**
+ * 添加图标属性
+ * @param {string | undefined} code - 语言代码
+ * @param {string} messageKey - 消息键值
+ * @param {ElementButton.CustomIcon[]} iconAttr - 图标属性数组
+ */
+function addIconAttribute(code, messageKey, iconAttr) {
+    if (code) {
+        iconAttr.push({
+            name: `echo-translator-${messageKey}`,
+            iconSrc: hanburgerIcon,
+            tooltipText: getMessage(messageKey, code),
+        });
+    }
+    return iconAttr;
+}
+
 export default function () {
     HookManager.progressiveHook("ChatRoomMessageDisplay").inject((args) => {
         const data = args[0];
@@ -113,5 +177,23 @@ export default function () {
                     });
             }
         }
+    });
+
+    HookManager.hookFunction("ElementButton.CreateForAsset", 0, (args, next) => {
+        const item = args[1];
+        if ("Asset" in item) {
+            const iconAttr = [
+                { code: checkAttr(hearingAssets, item), messageKey: "hearing" },
+                { code: checkAttr(speakingAssets, item), messageKey: "speaking" },
+            ].reduce((acc, { code, messageKey }) => addIconAttribute(code, messageKey, acc), []);
+
+            if (iconAttr.length > 0) {
+                args[4] = {
+                    ...args[4],
+                    icons: [...(args[4].icons ?? []), ...iconAttr],
+                };
+            }
+        }
+        return next(args);
     });
 }
