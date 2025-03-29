@@ -106,8 +106,8 @@ const asset = {
 };
 
 const translations = {
-    CN: "麻袋",
-    EN: "麻袋",
+    CN: "长麻袋",
+    EN: "Long Bag",
 };
 
 const extended = {
