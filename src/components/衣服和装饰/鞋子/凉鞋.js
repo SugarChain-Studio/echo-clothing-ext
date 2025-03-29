@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "凉鞋_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Top: 840,
+    Left: 120,
     PoseMapping: {
         Kneel: "Hide",
         KneelingSpread: "Hide",
