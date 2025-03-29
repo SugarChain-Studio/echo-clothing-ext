@@ -55,8 +55,8 @@ function validItemCraftingDesc(vAssets) {
     for (const [groupName, assets] of Object.entries(vAssets)) {
         const item = InventoryGet(Player, /** @type{any}*/ (groupName));
         if (item && (assets === "any" || assets.has(item.Asset.Name))) {
-            const m = item.Craft?.Description?.match(/\[(([a-z]{2})(?:-[A-Z]{1,3})?)\]/);
-            if (m && iso639_1_codes.has(m[2].toLowerCase())) {
+            const m = item.Craft?.Description?.match(/\[(([a-z]{2})(?:-[A-Za-z]{1,4})?)\]/);
+            if (m && iso639_1_codes.has(m[2])) {
                 return m[1];
             }
         }
@@ -69,8 +69,8 @@ function validItemCraftingDesc(vAssets) {
  * @param {string} targetLang
  * @returns {Promise<{ valid: boolean, translatedText: string }>}
  */
-function translateText(sourceText, targetLang) {
-    return new Promise(async (resolve) => {
+async function translateText(sourceText, targetLang) {
+    try {
         const response = await fetch(
             `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURI(
                 sourceText
@@ -80,8 +80,11 @@ function translateText(sourceText, targetLang) {
         const [translatedText, retSourceText] = data[0][0];
         const retSourceLang = data[2];
         const valid = retSourceLang !== targetLang && retSourceText === sourceText && translatedText !== sourceText;
-        resolve({ valid, translatedText });
-    });
+        return { valid, translatedText };
+    } catch (e) {
+        console.error(e);
+        return;
+    }
 }
 
 export default function () {
