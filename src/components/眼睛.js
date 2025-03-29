@@ -91,34 +91,41 @@ export default function () {
 
     /** @type {EyeExtCharacter} */
     const eyes = {};
-    /** @param {Character} chara */
-    const updateExpressionRef = (chara) => {
-        chara.Appearance.forEach((item) => {
+
+    const updateEyesRef = () => {
+        Player.Appearance.forEach((item) => {
             if (eyeNames.includes(item.Asset.Group.Name)) eyes[item.Asset.Group.Name] = item;
         });
-        if (eyes.Eyes2 && eyes.左眼_Luzi) {
-            eyes.左眼_Luzi.Property.Expression = eyes.Eyes2.Property.Expression;
+    };
+    /**
+     * @param {"Eyes2" | "Eyes"} base
+     * @param {"左眼_Luzi" | "右眼_Luzi"} over
+     */
+    const updateExpressionRef = (base, over) => {
+        if (eyes[base] && eyes[over]) {
+            eyes[over].Property.Expression = eyes[base].Property.Expression;
+            return true;
         }
-        if (eyes.Eyes && eyes.右眼_Luzi) {
-            eyes.右眼_Luzi.Property.Expression = eyes.Eyes.Property.Expression;
-        }
+        return false;
     };
 
     // Fix for WCE animation
     HookManager.hookFunction("CharacterLoadCanvas", 0, (args, next) => {
         if (wceAnimationEnabled() && args[0].IsPlayer()) {
-            updateExpressionRef(Player);
+            updateEyesRef();
+            updateExpressionRef("Eyes2", "左眼_Luzi");
+            updateExpressionRef("Eyes", "右眼_Luzi");
         }
         return next(args);
     });
     HookManager.hookFunction("ServerSend", 0, (args, next) => {
-        if (
-            args[0] === "ChatRoomCharacterExpressionUpdate" &&
-            wceAnimationEnabled() &&
-            ["Eyes2", "Eyes"].includes(args[1].Group)
-        ) {
-            updateExpressionRef(Player);
-            args[1].Group = args[1].Group === "Eyes2" ? left_eye.Group : right_eye.Group;
+        if (args[0] === "ChatRoomCharacterExpressionUpdate" && wceAnimationEnabled()) {
+            updateEyesRef();
+            if (args[1].Group === "Eyes" && updateExpressionRef("Eyes", "右眼_Luzi")) {
+                args[1].Group = right_eye.Group;
+            } else if (args[1].Group === "Eyes2" && updateExpressionRef("Eyes2", "左眼_Luzi")) {
+                args[1].Group = left_eye.Group;
+            }
         }
         return next(args);
     });
