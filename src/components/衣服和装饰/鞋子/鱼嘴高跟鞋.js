@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "鱼嘴高跟鞋_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Top: 850,
+    Left: 90,
     PoseMapping: {
         Kneel: "Hide",
         KneelingSpread: "Hide",
@@ -45,7 +45,7 @@ const asset = {
 
 const translations = {
     CN: "鱼嘴高跟鞋",
-    EN: "Fish toe high heels",
+    EN: "Peep-toe Heels",
 };
 
 export default function () {
