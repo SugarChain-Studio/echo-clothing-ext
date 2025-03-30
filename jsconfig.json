@@ -3,10 +3,8 @@
         "checkJs": true,
         "allowJs": true,
         "lib": ["es2021", "dom"],
-        "baseUrl": ".",
         "paths": {
-            "@mod-utils/*": ["utils/src/*"],
-            "bondage-club-mod-sdk": ["node_modules/bondage-club-mod-sdk"]
+            "@mod-utils/*": ["./utils/src/*"]
         }
     },
     "include": [
