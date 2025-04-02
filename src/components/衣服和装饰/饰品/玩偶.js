@@ -125,15 +125,15 @@ const asset = {
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
         { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
         { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
-        { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
-        { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
-        {
-            Name: "澈羽枫灵",
-            PoseMapping: specialMapping,
-            AllowTypes: { EILRSW: 6 },
-        },
+        // { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
+        // { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
+        // {
+        //     Name: "澈羽枫灵",
+        //     PoseMapping: specialMapping,
+        //     AllowTypes: { EILRSW: 6 },
+        // },
         { Name: "希雅", AllowTypes: { EILRSW: 7 } },
-        { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
+        // { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
         { Name: "酥酥", AllowTypes: { EILRSW: 9 } },
         { Name: "茗子", AllowTypes: { EILRSW: 10 } },
 
