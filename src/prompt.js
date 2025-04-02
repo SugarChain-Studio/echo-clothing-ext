@@ -55,7 +55,7 @@ async function loadSweetAlert() {
             SweetAlert = globalThis.Swal;
         } else {
             // 否则动态加载库
-            const module = await import("https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm");
+            const module = await import("https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/+esm");
             SweetAlert = module.default;
         }
         return SweetAlert;
