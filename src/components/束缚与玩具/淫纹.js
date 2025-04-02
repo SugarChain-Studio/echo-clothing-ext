@@ -100,11 +100,11 @@ function AssetsItemPelvis随机自慰(C) {
     const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
 
     const whenBlocked = () => {
-        ServerSend("ChatRoomChat", {
-            Content: customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
-            Type: "Action",
-            Dictionary: [{ SourceCharacter: Player.MemberNumber }],
-        });
+        ChatRoomPublishCustomAction(
+            customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
+            false,
+            new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build()
+        );
     };
 
     if (!Player.CanInteract()) {
