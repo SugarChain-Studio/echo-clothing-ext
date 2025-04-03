@@ -125,17 +125,25 @@ const asset = {
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
         { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
         { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
-        // { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
-        // { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
-        // {
-        //     Name: "澈羽枫灵",
-        //     PoseMapping: specialMapping,
-        //     AllowTypes: { EILRSW: 6 },
-        // },
+        { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
+        { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
+        {
+            Name: "澈羽枫灵",
+            PoseMapping: specialMapping,
+            AllowTypes: { EILRSW: 6 },
+        },
         { Name: "希雅", AllowTypes: { EILRSW: 7 } },
-        // { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
+        { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
         { Name: "酥酥", AllowTypes: { EILRSW: 9 } },
         { Name: "茗子", AllowTypes: { EILRSW: 10 } },
+
+        // 与伊同辰
+        { Name: "伊斯特", AllowTypes: { yytc: 1 } },
+        { Name: "Pekora-Kino", AllowTypes: { yytc: 2 } },
+        { Name: "幽灵", AllowTypes: { yytc: 3 } },
+        { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
+        { Name: "小沫", AllowTypes: { yytc: 5 } },
+        { Name: "Sive", AllowTypes: { yytc: 6 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -184,6 +192,7 @@ const typeNames = {
     lihua: "笠花和An'an的家",
     yb: "鸢堡",
     EILRSW: "EILRSW",
+    yytc: "yytc",
     l: "路过的玩偶",
 };
 
