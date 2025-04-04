@@ -24,4 +24,9 @@ export default function () {
             );
         });
     });
+
+    AssetManager.modifyAsset("Shoes", "HeellessHoof", (group, asset) => {
+        const alpha = asset.Alpha.find((x) => !x.Pose);
+        /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
+    });
 }
