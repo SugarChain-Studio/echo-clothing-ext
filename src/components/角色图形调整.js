@@ -30,10 +30,10 @@ export default function () {
         "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset),":
             "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset + 250),",
 
-        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 0, alphaMasks),":
-            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 250, alphaMasks),",
-        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset, alphaMasks),":
-            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset + 250, alphaMasks),",
+        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 0, alphaMasks":
+            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 250, alphaMasks",
+        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset, alphaMasks":
+            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset + 250, alphaMasks",
     });
 
     // CommonDrawCanvasPrepare 函数调用时机非常早，修改效果并不能保证生效，通过在 DrawCharacter 中修改Canvas的宽度来保证效果生效
