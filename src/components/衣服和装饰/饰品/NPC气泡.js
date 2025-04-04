@@ -49,7 +49,7 @@ const extended = {
 /** @type {Translation.Dialog} */
 const dialog = DialogTools.replicateGroupedItemDialog(["Hat"], ["NPC气泡_Luzi"], {
     CN: {
-        Select: "选择任务标志样式",
+        Select: "选择NPC气泡样式",
 
         感叹号: "感叹号",
         问号: "问号",
