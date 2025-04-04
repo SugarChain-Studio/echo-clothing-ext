@@ -73,7 +73,8 @@ export default function () {
                     /** @type {any} */ (group),
                     args[2],
                     args[3],
-                    args[4]
+                    undefined,
+                    args[5]
                 );
             };
             if (args[1] === "Eyes1" || args[1] === "Eyes") {
