@@ -103,8 +103,12 @@ export default function () {
      * @param {"左眼_Luzi" | "右眼_Luzi"} over
      */
     const updateExpressionRef = (base, over) => {
-        if (eyes[base]?.Property && eyes[over]?.Property) {
-            eyes[over].Property.Expression = eyes[base].Property.Expression;
+        if (eyes[base]?.Property && eyes[over]) {
+            if (eyes[over].Property) {
+                eyes[over].Property.Expression = eyes[base].Property.Expression;
+            } else {
+                eyes[over].Property = { Expression: eyes[base].Property.Expression };
+            }
             return true;
         }
         return false;
