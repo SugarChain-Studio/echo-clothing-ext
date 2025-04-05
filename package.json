@@ -44,22 +44,22 @@
     "author": "Echo",
     "description": "BC视觉表现的美学修正与拓展",
     "devDependencies": {
-        "@eslint/js": "^9.23.0",
+        "@eslint/js": "^9.24.0",
         "@rollup/plugin-alias": "^5.1.1",
         "@rollup/plugin-commonjs": "^28.0.3",
         "@rollup/plugin-node-resolve": "^16.0.1",
         "@rollup/plugin-replace": "^6.0.2",
         "@rollup/plugin-terser": "^0.4.4",
-        "@sugarch/bc-asset-manager": "^0.4.4",
+        "@sugarch/bc-asset-manager": "^0.4.6",
         "@sugarch/bc-event-handler": "^0.5.1",
         "@sugarch/bc-mod-hook-manager": "^0.2.13",
         "@sugarch/bc-mod-types": "^0.6.0",
-        "@sugarch/bc-mod-utility": "^0.2.7",
+        "@sugarch/bc-mod-utility": "^0.2.8",
         "bc-stubs": "^114.0.0",
         "bondage-club-mod-sdk": "^1.2.0",
         "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
-        "eslint": "^9.23.0",
+        "eslint": "^9.24.0",
         "github-markdown-css": "^5.8.1",
         "globals": "^16.0.0",
         "http-server": "^14.1.1",
@@ -70,7 +70,7 @@
         "rollup-plugin-copy": "^3.5.0",
         "rollup-plugin-import-css": "^3.5.8",
         "sweetalert2": "11.6.13",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.3"
     },
     "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
 }
