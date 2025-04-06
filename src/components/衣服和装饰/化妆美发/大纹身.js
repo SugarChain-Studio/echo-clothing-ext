@@ -1,4 +1,4 @@
-priority: 12,import { DialogTools } from "@mod-utils/Tools";
+import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /**
