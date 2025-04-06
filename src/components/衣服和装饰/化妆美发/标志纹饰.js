@@ -365,7 +365,7 @@ const extended = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "标志纹饰",
-    EN: "Pattern Markings",
+    EN: "Icon Markings",
 };
 
 const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMarkings2_Luzi"], ["标志纹饰_Luzi"], {
@@ -389,10 +389,10 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMar
     },
 
     EN: {
-        SelectBase: "Configure Pattern Markings",
+        SelectBase: "Configure Icon Markings",
 
-        Module图案: "Select Pattern",
-        Select图案: "Select the pattern for the markings",
+        Module图案: "Select Icon",
+        Select图案: "Select the icon for the markings",
         ...layers.reduce((acc, { Localized }, idx) => {
             acc[`Optionp${idx}`] = `${Localized["EN"]}`;
             return acc;
@@ -400,7 +400,7 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMar
 
         ...posModules.reduce((acc, { Name, Localized, Key }) => {
             acc[`Module${Name}`] = `${Localized["EN"]}`;
-            acc[`Select${Name}`] = `Set ${Localized["EN"]} Area Pattern Visible`;
+            acc[`Select${Name}`] = `Set ${Localized["EN"]} Area Icon Visible`;
             acc[`Option${Key}0`] = "None";
             acc[`Option${Key}1`] = "Visible";
             return acc;
