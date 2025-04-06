@@ -1,18 +1,39 @@
+import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
-/** @type { (AssetLayerDefinition & {DefaultColor: string, ConfigKey: string}) [] } */
+/**
+ * @typedef {Object} TattooLayerDefinitionExtension
+ * @property {string} DefaultColor - 默认颜色
+ * @property {Translation.Entry} Localized - 本地化名称
+ * @property {string} ConfigKey - 配置键
+ */
+
+/**
+ * 表示带有默认颜色和配置键的图层定义
+ * @typedef {AssetLayerDefinition & TattooLayerDefinitionExtension} TattooLayerDefinition
+ */
+
+/** @type { TattooLayerDefinition [] } */
 const LayerSettings = [
     {
         Name: "部落胸上",
+        Localized: {
+            CN: "部落胸上",
+            EN: "Tribal Chest",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "Ta",
     },
     {
         Name: "胸上1",
+        Localized: {
+            CN: "胸上1",
+            EN: "Chest 1",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -22,15 +43,23 @@ const LayerSettings = [
     },
     {
         Name: "胸上2",
+        Localized: {
+            CN: "胸上2",
+            EN: "Chest 2",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "UBb",
     },
     {
         Name: "梵花胸骨1",
+        Localized: {
+            CN: "梵花胸骨1",
+            EN: "Sanskrit Chestbone 1",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -41,6 +70,10 @@ const LayerSettings = [
     },
     {
         Name: "梵花胸骨2",
+        Localized: {
+            CN: "梵花胸骨2",
+            EN: "Sanskrit Chestbone 2",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -51,16 +84,24 @@ const LayerSettings = [
     },
     {
         Name: "梵花胸骨3",
+        Localized: {
+            CN: "梵花胸骨3",
+            EN: "Sanskrit Chestbone 3",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         ParentGroup: "BodyUpper",
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "SFSc",
     },
     {
         Name: "石蒜1左",
+        Localized: {
+            CN: "石蒜1左",
+            EN: "Lycoris 1 Left",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -70,6 +111,10 @@ const LayerSettings = [
     },
     {
         Name: "石蒜1右",
+        Localized: {
+            CN: "石蒜1右",
+            EN: "Lycoris 1 Right",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -79,6 +124,10 @@ const LayerSettings = [
     },
     {
         Name: "部落右胸",
+        Localized: {
+            CN: "部落右胸",
+            EN: "Tribal Right Chest",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -89,6 +138,10 @@ const LayerSettings = [
     },
     {
         Name: "部落左胸",
+        Localized: {
+            CN: "部落左胸",
+            EN: "Tribal Left Chest",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -99,11 +152,15 @@ const LayerSettings = [
     },
     {
         Name: "部落右臂",
+        Localized: {
+            CN: "部落右臂",
+            EN: "Tribal Right Arm",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "Tc",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -114,11 +171,15 @@ const LayerSettings = [
     },
     {
         Name: "左肩翅膀",
+        Localized: {
+            CN: "左肩翅膀",
+            EN: "Left Shoulder Wing",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "W",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -130,11 +191,15 @@ const LayerSettings = [
     },
     {
         Name: "部落左锁骨",
+        Localized: {
+            CN: "部落左锁骨",
+            EN: "Tribal Left Collarbone",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "Te",
         PoseMapping: {
             AllFours: PoseType.HIDE,
@@ -143,6 +208,10 @@ const LayerSettings = [
     },
     {
         Name: "梅花1",
+        Localized: {
+            CN: "梅花1",
+            EN: "Plum Blossom 1",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -157,6 +226,10 @@ const LayerSettings = [
     },
     {
         Name: "梅花2",
+        Localized: {
+            CN: "梅花2",
+            EN: "Plum Blossom 2",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
@@ -171,11 +244,15 @@ const LayerSettings = [
     },
     {
         Name: "心经",
+        Localized: {
+            CN: "心经",
+            EN: "Heart Sutra",
+        },
         Priority: 12,
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
+        DefaultColor: "#000000",
         ConfigKey: "SSa",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -185,6 +262,10 @@ const LayerSettings = [
     },
     {
         Name: "右腿花",
+        Localized: {
+            CN: "右腿花",
+            EN: "Right Leg Flower",
+        },
         Left: 100,
         Top: 470,
         Priority: 12,
@@ -202,10 +283,14 @@ const LayerSettings = [
     },
 ];
 
-/** @type { (AssetLayerDefinition & {DefaultColor: string, ConfigKey: string}) [] } */
+/** @type { TattooLayerDefinition [] } */
 const attrLayer = [
     {
         Name: "右腿花_花",
+        Localized: {
+            CN: "右腿花(花)",
+            EN: "Right Leg Flower(Flower)",
+        },
         Left: 100,
         Top: 470,
         Priority: 13,
@@ -223,7 +308,7 @@ const attrLayer = [
     },
 ];
 
-/** @param {AssetLayerDefinition & {DefaultColor: string, ConfigKey: string}} layer */
+/** @param {TattooLayerDefinition} layer */
 function layerMapping(layer) {
     return {
         Name: layer.Name,
@@ -269,34 +354,37 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialogs = {
-    /* eslint-disable indent */
+const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMarkings2_Luzi"], ["大纹身_Luzi"], {
     CN: {
-        ...["BodyMarkings", "BodyMarkings2_Luzi"].reduce((pv, key) => {
-            pv[`${key}大纹身_LuziSelectBase`] = "选择要显示的纹身";
-            LayerSettings.forEach((layer) => {
-                pv[`${key}大纹身_LuziModule${layer.Name}`] = layer.Name;
-                pv[`${key}大纹身_LuziSelect${layer.Name}`] = `设置 "${layer.Name}" 是否显示`;
-                pv[`${key}大纹身_LuziOption${layer.ConfigKey}0`] = "隐藏";
-                pv[`${key}大纹身_LuziOption${layer.ConfigKey}1`] = "显示";
-            });
+        SelectBase: "选择要显示的纹身",
+        ...LayerSettings.reduce((pv, layer) => {
+            pv[`Module${layer.Name}`] = layer.Localized["CN"];
+            pv[`Select${layer.Name}`] = `设置 "${layer.Localized["CN"]}" 是否显示`;
+            pv[`Option${layer.ConfigKey}0`] = "隐藏";
+            pv[`Option${layer.ConfigKey}1`] = "显示";
             return pv;
         }, {}),
     },
     EN: {
-        ...["BodyMarkings", "BodyMarkings2_Luzi"].reduce((pv, key) => {
-            (pv[`${key}大纹身_LuziSelectBase`] = "Select the tattoo to show"),
-                LayerSettings.forEach((layer) => {
-                    pv[`${key}大纹身_LuziModule${layer.Name}`] = layer.Name;
-                    pv[`${key}大纹身_LuziSelect${layer.Name}`] = `Set "${layer.Name}" is shown`;
-                    pv[`${key}大纹身_LuziOption${layer.ConfigKey}0`] = "Hide";
-                    pv[`${key}大纹身_LuziOption${layer.ConfigKey}1`] = "Show";
-                });
+        SelectBase: "Select the tattoo to show",
+        ...LayerSettings.reduce((pv, layer) => {
+            pv[`Module${layer.Name}`] = layer.Localized["EN"];
+            pv[`Select${layer.Name}`] = `Set "${layer.Localized["EN"]}" is shown`;
+            pv[`Option${layer.ConfigKey}0`] = "Hide";
+            pv[`Option${layer.ConfigKey}1`] = "Show";
             return pv;
         }, {}),
     },
-    /* eslint-enable indent */
-};
+});
+
+/** @type {Translation.Dialog} */
+const layerNames = [...LayerSettings, ...attrLayer].reduce((pv, layer) => {
+    for (const [lang, entry] of Object.entries(layer.Localized)) {
+        if (!pv[lang]) pv[lang] = {};
+        pv[lang][layer.Name] = entry;
+    }
+    return pv;
+}, {});
 
 export default function () {
     AssetManager.addAsset("BodyMarkings", asset, extended, {
@@ -304,4 +392,5 @@ export default function () {
         EN: "Large Tattoo",
     });
     AssetManager.addCustomDialog(dialogs);
+    AssetManager.addLayerNamesByEntry("BodyMarkings", "大纹身_Luzi", layerNames);
 }
