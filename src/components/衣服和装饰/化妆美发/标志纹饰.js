@@ -254,8 +254,8 @@ const posModules = [
 const asset = {
     Name: "标志纹饰_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Top: 240,
+    Left: 190,
     Priority: 9,
     Extended: true,
     ParentGroup: {},
