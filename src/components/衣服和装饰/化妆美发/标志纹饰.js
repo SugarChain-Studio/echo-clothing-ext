@@ -256,7 +256,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 12,
+    Priority: 9,
     Extended: true,
     ParentGroup: {},
     PoseMapping: {},
