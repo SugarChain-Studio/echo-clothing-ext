@@ -1,3 +1,4 @@
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../assetForward";
 
 /** @type {ExpressionName[]} */
@@ -217,8 +218,17 @@ const groups = [
     },
 ];
 
+/** @type {Set<CustomGroupName>} */
+const prevGroups = new Set(groups.filter((g) => !!g.groupDef.PreviewZone).map((g) => g.groupDef.Group));
+
 export default function () {
     groups.forEach((definition) => {
         AssetManager.addGroup(definition.groupDef, definition.description);
+    });
+
+    // 眼睛和头发组使用预览图
+    HookManager.hookFunction("AppearancePreviewUseCharacter", 0, (args, next) => {
+        if (args[0] && prevGroups.has(args[0].Name)) return true;
+        return next(args);
     });
 }
