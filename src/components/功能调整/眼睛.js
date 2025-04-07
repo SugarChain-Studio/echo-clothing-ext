@@ -1,5 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../assetForward";
+import { AssetManager } from "../../assetForward";
 
 /** @type {ExpressionName[]} */
 const eyeExpressions = [
