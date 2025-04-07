@@ -1,7 +1,66 @@
 import { AssetManager } from "../../assetForward";
 
+/** @type {ExpressionName[]} */
+const eyeExpressions = [
+    "Closed",
+    "Dazed",
+    "Shy",
+    "Sad",
+    "Horny",
+    "Lewd",
+    "VeryLewd",
+    "Heart",
+    "HeartPink",
+    "LewdHeart",
+    "LewdHeartPink",
+    "Dizzy",
+    "Daydream",
+    "ShylyHappy",
+    "Angry",
+    "Surprised",
+    "Scared",
+];
+
 /** @type { {groupDef: CustomGroupDefinition, description: Translation.Entry }[]} */
 const groups = [
+    {
+        groupDef: {
+            Group: "左眼_Luzi",
+            Priority: 9,
+            Left: 200,
+            Top: 140,
+            Blink: true,
+            Random: false,
+            Default: false,
+            Hide: ["Eyes2"],
+            AllowExpression: eyeExpressions,
+            PreviewZone: [190, 100, 120, 120],
+            Asset: [],
+        },
+        description: {
+            CN: "🍔左眼(覆盖)",
+            EN: "🍔Left Eye (Over)",
+        },
+    },
+    {
+        groupDef: {
+            Group: "右眼_Luzi",
+            Priority: 9,
+            Left: 250,
+            Top: 140,
+            Blink: true,
+            Random: false,
+            Default: false,
+            Hide: ["Eyes"],
+            AllowExpression: eyeExpressions,
+            PreviewZone: [190, 100, 120, 120],
+            Asset: [],
+        },
+        description: {
+            CN: "🍔右眼(覆盖)",
+            EN: "🍔Right Eye (Over)",
+        },
+    },
     {
         groupDef: {
             Group: "新前发_Luzi",

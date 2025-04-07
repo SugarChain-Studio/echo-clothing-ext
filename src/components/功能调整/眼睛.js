@@ -1,56 +1,4 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../../assetForward";
-
-/** @type {ExpressionName[]} */
-const eyeExpressions = [
-    "Closed",
-    "Dazed",
-    "Shy",
-    "Sad",
-    "Horny",
-    "Lewd",
-    "VeryLewd",
-    "Heart",
-    "HeartPink",
-    "LewdHeart",
-    "LewdHeartPink",
-    "Dizzy",
-    "Daydream",
-    "ShylyHappy",
-    "Angry",
-    "Surprised",
-    "Scared",
-];
-
-/** @type {CustomGroupDefinition} */
-const left_eye = {
-    Group: "左眼_Luzi",
-    Priority: 9,
-    Left: 200,
-    Top: 140,
-    Blink: true,
-    Random: false,
-    Default: false,
-    Hide: ["Eyes2"],
-    AllowExpression: eyeExpressions,
-    PreviewZone: [190, 100, 120, 120],
-    Asset: [],
-};
-
-/** @type {CustomGroupDefinition} */
-const right_eye = {
-    Group: "右眼_Luzi",
-    Priority: 9,
-    Left: 250,
-    Top: 140,
-    Blink: true,
-    Random: false,
-    Default: false,
-    Hide: ["Eyes"],
-    AllowExpression: eyeExpressions,
-    PreviewZone: [190, 100, 120, 120],
-    Asset: [],
-};
 
 /**
  * @typedef {Object} EyeExtCharacter
@@ -78,9 +26,9 @@ export default function () {
                 );
             };
             if (args[1] === "Eyes1" || args[1] === "Eyes") {
-                callWithDifferentGroup(right_eye.Group);
+                callWithDifferentGroup("右眼_Luzi");
             } else if (args[1] === "Eyes2") {
-                callWithDifferentGroup(left_eye.Group);
+                callWithDifferentGroup("左眼_Luzi");
             }
         }
         return next(args);
@@ -127,9 +75,9 @@ export default function () {
         if (args[0] === "ChatRoomCharacterExpressionUpdate" && wceAnimationEnabled()) {
             updateEyesRef();
             if (args[1].Group === "Eyes" && updateExpressionRef("Eyes", "右眼_Luzi")) {
-                args[1].Group = right_eye.Group;
+                args[1].Group = "右眼_Luzi";
             } else if (args[1].Group === "Eyes2" && updateExpressionRef("Eyes2", "左眼_Luzi")) {
-                args[1].Group = left_eye.Group;
+                args[1].Group = "左眼_Luzi";
             }
         }
         return next(args);
@@ -141,17 +89,7 @@ export default function () {
         .inject(() => {
             DialogFacialExpressions = DialogFacialExpressions.filter(
                 ({ Group }) =>
-                    /** @type {string}*/ (Group) !== right_eye.Group && /** @type {string}*/ (Group) !== left_eye.Group
+                    /** @type {string}*/ (Group) !== "右眼_Luzi" && /** @type {string}*/ (Group) !== "左眼_Luzi"
             );
         });
-
-    // Add new eye groups
-    AssetManager.addGroup(left_eye, {
-        CN: "🍔左眼(覆盖)",
-        EN: "🍔Left Eye (Over)",
-    });
-    AssetManager.addGroup(right_eye, {
-        CN: "🍔右眼(覆盖)",
-        EN: "🍔Right Eye (Over)",
-    });
 }
