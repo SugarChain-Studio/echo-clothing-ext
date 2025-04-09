@@ -17,6 +17,7 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
+    DefaultColor: ["#141414"],
     Layer: [
         {
             Name: "带子",

@@ -73,7 +73,7 @@ const dialog = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "蕾丝边",
-    EN: "Lace leg strap",
+    EN: "Lace Leg Strap",
 };
 
 export default function () {

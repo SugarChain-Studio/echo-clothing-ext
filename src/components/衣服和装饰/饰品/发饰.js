@@ -10,6 +10,7 @@ const assets = [
         Top: 0,
         ParentGroup: {},
         Extended: true,
+        DefaultColor: ["#621616", "#621616"],
         Layer: [
             {
                 Name: "右",
@@ -30,6 +31,7 @@ const assets = [
         Top: 0,
         ParentGroup: {},
         Extended: true,
+        DefaultColor: ["#621616", "#621616"],
         Layer: [
             {
                 Name: "右",
@@ -50,6 +52,7 @@ const assets = [
         Top: 0,
         ParentGroup: {},
         Extended: true,
+        DefaultColor: ["#621616", "#621616"],
         Layer: [
             {
                 Name: "右",
@@ -236,30 +239,30 @@ const assets = [
 const translations = {
     CN: {
         HairAccessory1: {
-            发卡1: "发卡 1",
-            发卡2: "发卡 2",
+            发卡1: "基础发卡 1",
+            发卡2: "基础发卡 2",
             X发卡: "X发卡",
             心型发卡: "心型发卡",
             星星发卡: "星星发卡",
             星星发卡2: "星星发卡 2",
             月亮发饰: "月亮发饰",
             蝙蝠翼发卡: "蝙蝠翼发卡",
-            蝴蝶: "蝴蝶",
-            蝴蝶2: "蝴蝶 2",
+            蝴蝶: "蝴蝶头饰",
+            蝴蝶2: "蝴蝶头饰2",
         },
     },
     EN: {
         HairAccessory1: {
-            发卡1: "Hair Clip 1",
-            发卡2: "Hair Clip 2",
+            发卡1: "Basic Hair Clip 1",
+            发卡2: "Basic Hair Clip 2",
             X发卡: "X Hair Clip",
             心型发卡: "Heart Hair Clip",
             星星发卡: "Star Hair Clip",
             星星发卡2: "Star Hair Clip 2",
             月亮发饰: "Moon Hair Clip",
             蝙蝠翼发卡: "Bat Wing Hair Clip",
-            蝴蝶: "Butterfly",
-            蝴蝶2: "Butterfly 2",
+            蝴蝶: "Butterfly Hair Clip",
+            蝴蝶2: "Butterfly Hair Clip 2",
         },
     },
 };

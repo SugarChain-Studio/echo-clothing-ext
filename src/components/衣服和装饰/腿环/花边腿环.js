@@ -25,15 +25,15 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        { Name: "左腿阴影", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿花边", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿环", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿蝴蝶结", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿阴影", ColorGroup: "阴影", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿花边", ColorGroup: "花边", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿环", ColorGroup: "环", AllowTypes: { typed: [0, 2] } },
+        { Name: "左腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [0, 2] } },
 
-        { Name: "右腿阴影", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿花边", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿环", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿蝴蝶结", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿阴影", ColorGroup: "阴影", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿花边", ColorGroup: "花边", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿环", ColorGroup: "环", AllowTypes: { typed: [1, 2] } },
+        { Name: "右腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [1, 2] } },
     ],
 };
 
@@ -45,7 +45,7 @@ const extended = {
 
 const translations = {
     CN: "花边腿环",
-    EN: "Lace leg ring",
+    EN: "Lace Leg Ring",
 };
 
 /** @type {Translation.Dialog} */
