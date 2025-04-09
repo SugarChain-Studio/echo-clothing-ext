@@ -82,12 +82,18 @@ export default function () {
 
     if (GameVersion !== "R114") {
         ChatRoomEvents.once("PlayerJoin", () => {
-            ChatRoomSendLocal(
-                i18nEntry({
-                    CN: "[NOTE] 极限束腰 (躯干物品) 已经加入基础BC，服装拓展版本即将退役.",
-                    EN: "[NOTE] Extreme Corset (item on torso) has been added to the base BC, the clothing-ext version will be retired soon.",
-                })
-            );
+            const usedThisItem =
+                Player.Appearance.some(({ Asset }) => Asset.Name === asset.Name && Asset.Group.Name === "ItemTorso") ||
+                Player.Crafting.some((crafting) => crafting.Item === asset.Name);
+
+            if (usedThisItem) {
+                ChatRoomSendLocal(
+                    i18nEntry({
+                        CN: "[NOTE] 极限束腰 (躯干物品) 已经加入基础BC，服装拓展版本即将退役.",
+                        EN: "[NOTE] Extreme Corset (item on torso) has been added to the base BC, the clothing-ext version will be retired soon.",
+                    })
+                );
+            }
         });
     }
 }
