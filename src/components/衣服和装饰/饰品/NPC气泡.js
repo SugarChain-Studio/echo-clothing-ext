@@ -47,7 +47,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["Hat"], ["NPC气泡_Luzi"], {
+const dialog = DialogTools.replicateGroupedItemDialog(["Hat", "Hat_笨笨蛋Luzi"], ["NPC气泡_Luzi"], {
     CN: {
         Select: "选择NPC气泡样式",
 
