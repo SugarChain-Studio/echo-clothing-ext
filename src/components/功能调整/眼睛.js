@@ -83,13 +83,24 @@ export default function () {
         return next(args);
     });
 
-    // Filter unwanted expression menus
-    HookManager.progressiveHook("DialogFacialExpressionsBuild")
-        .next()
-        .inject(() => {
-            DialogFacialExpressions = DialogFacialExpressions.filter(
-                ({ Group }) =>
-                    /** @type {string}*/ (Group) !== "右眼_Luzi" && /** @type {string}*/ (Group) !== "左眼_Luzi"
-            );
+    if (GameVersion === "R114") {
+        // Filter unwanted expression menus
+        HookManager.progressiveHook("DialogFacialExpressionsBuild")
+            .next()
+            .inject(() => {
+                DialogFacialExpressions = DialogFacialExpressions.filter(
+                    ({ Group }) =>
+                        /** @type {string}*/ (Group) !== "右眼_Luzi" && /** @type {string}*/ (Group) !== "左眼_Luzi"
+                );
+            });
+    } else {
+        HookManager.hookFunction("ElementMenu.Create", 0, (args, next) => {
+            const ret = next(args);
+            if (args[0] === "dialog-expression-menu-left") {
+                document.querySelector("#dialog-expression-menu-left-右眼_Luzi")?.remove();
+                document.querySelector("#dialog-expression-menu-left-左眼_Luzi")?.remove();
+            }
+            return ret;
         });
+    }
 }

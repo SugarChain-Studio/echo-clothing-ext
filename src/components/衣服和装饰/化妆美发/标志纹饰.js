@@ -423,5 +423,5 @@ const layerNames = {
 export default function () {
     AssetManager.addAsset("BodyMarkings", asset, extended, translation);
     AssetManager.addCustomDialog(dialogs);
-    AssetManager.addLayerNamesByEntry("BodyMarkings", "标志纹饰_Luzi", layerNames);
+    AssetManager.addLayerNames("BodyMarkings", asset, layerNames);
 }

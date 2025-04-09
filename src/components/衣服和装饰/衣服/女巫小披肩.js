@@ -58,5 +58,5 @@ const translations = {
 
 export default function () {
     AssetManager.addAsset("ClothAccessory", asset, undefined, translations);
-    AssetManager.addLayerNamesByEntry("ClothAccessory", "女巫小披肩_Luzi", layerNames);
+    AssetManager.addLayerNames("ClothAccessory", asset, layerNames);
 }
