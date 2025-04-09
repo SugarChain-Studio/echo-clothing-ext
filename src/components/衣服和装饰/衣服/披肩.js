@@ -42,6 +42,7 @@ const assets = {
             Layer: [
                 {
                     Name: "衣左",
+                    ColorGroup: "衣",
                     Priority: 34,
                     PoseMapping: {
                         Yoked: "Yoked",
@@ -50,6 +51,7 @@ const assets = {
                 },
                 {
                     Name: "衣右",
+                    ColorGroup: "衣",
                     Priority: 34,
                     PoseMapping: {
                         Yoked: "Yoked",
@@ -58,6 +60,7 @@ const assets = {
                 },
                 {
                     Name: "绒左",
+                    ColorGroup: "绒",
                     Priority: 34,
                     PoseMapping: {
                         Yoked: "Yoked",
@@ -66,6 +69,7 @@ const assets = {
                 },
                 {
                     Name: "绒右",
+                    ColorGroup: "绒",
                     Priority: 34,
                     PoseMapping: {
                         Yoked: "Yoked",
@@ -86,6 +90,7 @@ const assets = {
             Layer: [
                 {
                     Name: "衣左",
+                    ColorGroup: "衣",
                     Priority: 32,
                     PoseMapping: {
                         TapedHands: PoseType.DEFAULT,
@@ -100,6 +105,7 @@ const assets = {
                 },
                 {
                     Name: "衣右",
+                    ColorGroup: "衣",
                     Priority: 32,
                     PoseMapping: {
                         TapedHands: PoseType.DEFAULT,
@@ -114,6 +120,7 @@ const assets = {
                 },
                 {
                     Name: "绒左",
+                    ColorGroup: "绒",
                     Priority: 32,
                     PoseMapping: {
                         TapedHands: PoseType.DEFAULT,
@@ -128,6 +135,7 @@ const assets = {
                 },
                 {
                     Name: "绒右",
+                    ColorGroup: "绒",
                     Priority: 32,
                     PoseMapping: {
                         TapedHands: PoseType.DEFAULT,

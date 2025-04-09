@@ -82,5 +82,5 @@ const translation = {
 export default function () {
     AssetManager.addAsset("Suit", asset, undefined, translation);
     AssetManager.addAsset("Cloth", { ...asset, DynamicGroupName: "Suit" }, undefined, translation);
-    AssetManager.addLayerNamesByEntry("Suit", "连体衣_Luzi", layerNames);
+    AssetManager.addLayerNames("Suit", asset, layerNames);
 }
