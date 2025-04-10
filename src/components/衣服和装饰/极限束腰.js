@@ -84,7 +84,7 @@ export default function () {
         ChatRoomEvents.once("PlayerJoin", () => {
             const usedThisItem =
                 Player.Appearance.some(({ Asset }) => Asset.Name === asset.Name && Asset.Group.Name === "ItemTorso") ||
-                Player.Crafting.some((crafting) => crafting.Item === asset.Name);
+                Player.Crafting.some((crafting) => crafting && crafting.Item === asset.Name);
 
             if (usedThisItem) {
                 ChatRoomSendLocal(
