@@ -1,4 +1,3 @@
-import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /**
@@ -371,7 +370,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMarkings2_Luzi"], ["大纹身_Luzi"], {
+const assetDialogs = {
     CN: {
         SelectBase: "选择要显示的纹身",
         ...LayerSettings.reduce((pv, layer) => {
@@ -392,22 +391,46 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMar
             return pv;
         }, {}),
     },
-});
+};
 
 /** @type {Translation.Dialog} */
-const layerNames = [...LayerSettings, ...attrLayer].reduce((pv, layer) => {
-    for (const [lang, entry] of Object.entries(layer.Localized)) {
-        if (!pv[lang]) pv[lang] = {};
-        pv[lang][layer.Name] = entry;
+const layerNames = [...LayerSettings, ...attrLayer].reduce(
+    (pv, layer) => {
+        for (const [lang, entry] of Object.entries(layer.Localized)) {
+            if (!pv[lang]) pv[lang] = {};
+            pv[lang][layer.Name] = entry;
+        }
+        return pv;
+    },
+    {
+        CN: {
+            部落: "部落",
+            胸上: "胸上",
+            梅花: "梅花",
+            梵花胸骨: "梵花胸骨",
+            石蒜: "石蒜",
+        },
+        EN: {
+            部落: "Tribal",
+            胸上: "Upper Chest",
+            梅花: "Plum Blossom",
+            梵花胸骨: "Sanskrit Chestbone",
+            石蒜: "Lycoris",
+        },
     }
-    return pv;
-}, {});
+);
+
+/** @type {Translation.Entry} */
+const description = {
+    CN: "大纹身",
+    EN: "Large Tattoo",
+};
 
 export default function () {
-    AssetManager.addAsset("BodyMarkings", asset, extended, {
-        CN: "大纹身",
-        EN: "Large Tattoo",
+    AssetManager.addAssetWithConfig("BodyMarkings", asset, {
+        description,
+        layerNames,
+        extended,
+        assetDialogs,
     });
-    AssetManager.addCustomDialog(dialogs);
-    AssetManager.addLayerNamesByEntry("BodyMarkings", "大纹身_Luzi", layerNames);
 }
