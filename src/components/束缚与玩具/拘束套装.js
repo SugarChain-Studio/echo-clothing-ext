@@ -19,6 +19,7 @@ const asset = {
     Layer: [
         {
             Name: "下半身",
+            ColorGroup: "皮带",
             Priority: 31,
             ParentGroup: "BodyLower",
             PoseMapping: {
@@ -31,6 +32,7 @@ const asset = {
         },
         {
             Name: "上半身",
+            ColorGroup: "皮带",
             Priority: 31,
             ParentGroup: "BodyUpper",
             PoseMapping: {
@@ -40,6 +42,7 @@ const asset = {
         },
         {
             Name: "下半身圆环",
+            ColorGroup: "环",
             Priority: 31,
             ParentGroup: "BodyLower",
             PoseMapping: {
@@ -52,6 +55,7 @@ const asset = {
         },
         {
             Name: "上半身圆环",
+            ColorGroup: "环",
             Priority: 32,
             ParentGroup: "BodyUpper",
             PoseMapping: {
@@ -61,6 +65,7 @@ const asset = {
         },
         {
             Name: "下半身松紧扣",
+            ColorGroup: "松紧扣",
             Priority: 32,
             ParentGroup: "BodyLower",
             PoseMapping: {
@@ -73,6 +78,7 @@ const asset = {
         },
         {
             Name: "上半身松紧扣",
+            ColorGroup: "松紧扣",
             Priority: 32,
             ParentGroup: "BodyUpper",
             PoseMapping: {

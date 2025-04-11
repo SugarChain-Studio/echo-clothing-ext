@@ -39,24 +39,28 @@ const asset = {
     Layer: [
         {
             Name: "外壳盖子关闭",
+            ColorGroup: "盖子",
             Priority: 63,
             AllowTypes: { g: 2 },
             Visibility: "Others",
         },
         {
             Name: "外壳盖子打开下",
+            ColorGroup: "盖子",
             Priority: 63,
             AllowTypes: { g: 3 },
             Visibility: "AllExceptPlayerDialog",
         },
         {
             Name: "外壳盖子打开上",
+            ColorGroup: "盖子",
             Priority: 63,
             AllowTypes: { g: 4 },
             Visibility: "AllExceptPlayerDialog",
         },
         {
             Name: "盖子关闭边缘",
+            ColorGroup: "盖子",
             Priority: 62,
             AllowTypes: { g: [2, 3, 4] },
             Alpha: [
@@ -74,10 +78,12 @@ const asset = {
         },
         {
             Name: "外壳",
+            ColorGroup: "盖子",
             Priority: 1,
         },
         {
             Name: "外壳盖子打开",
+            ColorGroup: "盖子",
             Priority: 1,
             AllowTypes: { g: 1 },
         },
@@ -87,86 +93,102 @@ const asset = {
         },
         {
             Name: "床带上",
+            ColorGroup: "床带",
             Priority: 1,
             ParentGroup: "BodyUpper",
         },
         {
             Name: "床带下",
+            ColorGroup: "床带",
             Priority: 1,
             ParentGroup: "BodyLower",
         },
         {
             Name: "床环上",
+            ColorGroup: "床环",
             Priority: 1,
             ParentGroup: "BodyUpper",
         },
         {
             Name: "床环下",
+            ColorGroup: "床环",
             Priority: 1,
             ParentGroup: "BodyLower",
         },
         {
             Name: "内衬",
+            ColorGroup: "乳胶睡袋闭合处",
             Priority: 24,
             AllowTypes: { l: 0 },
         },
         {
             Name: "圆环",
+            ColorGroup: "乳胶睡袋闭合处",
             Priority: 25,
             AllowTypes: { l: 0 },
         },
         {
             Name: "绳子",
+            ColorGroup: "乳胶睡袋闭合处",
             Priority: 25,
             AllowTypes: { l: 0 },
         },
         {
             Name: "拉链",
+            ColorGroup: "乳胶睡袋闭合处",
             Priority: 24,
             AllowTypes: { l: 0 },
         },
         {
             Name: "拘束带上",
+            ColorGroup: "拘束带",
             Priority: 53,
             ParentGroup: "BodyUpper",
         },
         {
             Name: "拘束带下",
+            ColorGroup: "拘束带",
             Priority: 53,
             ParentGroup: "BodyLower",
         },
         {
             Name: "乳胶上底色",
+            ColorGroup: "乳胶睡袋底色",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyUpper",
         },
         {
             Name: "乳胶上阴影",
+            ColorGroup: "乳胶睡袋阴影",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyUpper",
         },
         {
             Name: "乳胶上高光",
+            ColorGroup: "乳胶睡袋高光",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyUpper",
         },
         {
             Name: "乳胶下底色",
+            ColorGroup: "乳胶睡袋底色",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyLower",
         },
         {
             Name: "乳胶下阴影",
+            ColorGroup: "乳胶睡袋阴影",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyLower",
         },
         {
             Name: "乳胶下高光",
+            ColorGroup: "乳胶睡袋高光",
             Priority: 23,
             AllowTypes: { l: 0 },
             ParentGroup: "BodyLower",
@@ -271,10 +293,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["乳胶�
         Setg0: "SourceCharacter removed DestinationCharacter AssetName Cover",
         Setg1: "SourceCharacter added Cover to DestinationCharacter AssetName",
         Setg2: "SourceCharacter closed DestinationCharacter AssetName Cover",
-        Setg3:
-            "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Belly Cover",
-        Setg4:
-            "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Head Cover",
+        Setg3: "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Belly Cover",
+        Setg4: "SourceCharacter closed DestinationCharacter AssetName Cover, but opened Head Cover",
 
         Select乳胶睡袋: "Select Default Latex Sleep Bag",
         Module乳胶睡袋: "Latex Sleep Bag",
