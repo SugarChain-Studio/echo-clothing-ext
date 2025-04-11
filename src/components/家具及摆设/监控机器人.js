@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -31,12 +31,14 @@ const asset = {
             Top: 0,
             Left: 0,
             Name: "绳子",
+            ColorGroup: "绳子",
             HasImage: false,
         },
         {
             Top: 0,
             Left: 0,
             Name: "绳子光芒",
+            ColorGroup: "绳子",
             HasImage: false,
         },
         {
@@ -46,25 +48,33 @@ const asset = {
         {
             Name: "眼睛",
             HasImage: false,
-        },
-        {
-            Name: "机器人",
             AllowColorize: false,
         },
         {
+            Name: "机器人",
+        },
+        {
             Name: "跟随模式",
+            ColorGroup: "模式",
             AllowTypes: { typed: 1 },
         },
         {
             Name: "跟随模式_抓住",
+            ColorGroup: "模式",
             AllowTypes: { typed: 1 },
         },
         {
             Name: "固定模式",
+            ColorGroup: "模式",
             AllowTypes: { typed: 2 },
         },
     ],
 };
+
+/**
+ * @typedef { {X:number,Y:number}} Position
+ * @typedef { { EyeTimer:number, TargetOffset: Position, CurOffset:Position, UpdateTimer:number, FrameTimer:number }} DataType
+ */
 
 /** @type {ExtendedItemCallbacks.BeforeDraw<DataType>} */
 function beforeDraw(drawData) {
@@ -137,20 +147,6 @@ function scriptDraw({ C, PersistentData }) {
     Tools.drawUpdate(C, Data);
 }
 
-/**
- * @param {DynamicDrawingData} drawData
- * @param {number} width
- * @param {number} height
- * @param {string} suffix
- */
-function createCanvas({ C, A }, width, height, suffix) {
-    const canvas = document.createElement("canvas");
-    canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A)}__${suffix}`);
-    canvas.width = width;
-    canvas.height = height;
-    return canvas;
-}
-
 /** @type {ExtendedItemCallbacks.AfterDraw<DataType>} */
 function afterDraw(drawData) {
     const { C, A, L, Color, GroupName, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -158,10 +154,7 @@ function afterDraw(drawData) {
         const layer = A.Layer.find((l) => l.Name === L);
         const { fixedYOffset } = CommonDrawComputeDrawingCoordinates(C, A, layer, GroupName);
 
-        const url = Tools.getAssetURL(drawData, "绳子");
-        const img = DrawGetImage(url);
-        if (img.width === 0) return;
-        const tempCanvs = createCanvas(drawData, 500, 1000, L);
+        const tempCanvs = AnimationGenerateTempCanvas(C, A, 500, 1000);
         const canvas2d = tempCanvs.getContext("2d");
 
         if (L === "绳子光芒") canvas2d.globalAlpha = 0.2;
@@ -194,7 +187,7 @@ function afterDraw(drawData) {
 }
 
 /** @type {TypedItemConfig} */
-const config = {
+const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [
@@ -219,7 +212,7 @@ const config = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemNeckRestraints"], ["监控机器人_Luzi"], {
+const assetDialogs = {
     CN: {
         Select: "选择模式",
         跟随模式: "跟随模式",
@@ -238,21 +231,43 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemNeckRestraints"], ["
         Set巡逻模式: "SourceCharacter set the surveillance robot of TargetCharacter to patrol freely.",
         Set固定模式: "SourceCharacter set the surveillance robot of TargetCharacter to stay in place.",
     },
-});
+};
 
-/**
- * @typedef { {X:number,Y:number}} Position
- * @typedef { { EyeTimer:number, TargetOffset: Position, CurOffset:Position, UpdateTimer:number, FrameTimer:number }} DataType
- */
+const description = {
+    CN: "监控机器人",
+    EN: "Surveillance Robot",
+};
+
+const layerNames = {
+    CN: {
+        绳子: "牵引光束",
+        绳子光芒: "牵引光束发光",
+        模式: "模式",
+        机器人: "机器人",
+        跟随模式: "跟随模式",
+        跟随模式_抓住: "跟随模式(抓住)",
+        固定模式: "固定模式",
+    },
+    EN: {
+        绳子: "Leash Beam",
+        绳子光芒: "Leash Beam Glow",
+        模式: "Mode",
+        机器人: "Robot",
+        跟随模式: "Follow Mode",
+        跟随模式_抓住: "Follow Mode (Grab)",
+        固定模式: "Fixed Mode",
+    },
+};
 
 export default function () {
     HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}BeforeDraw`, beforeDraw);
     HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}ScriptDraw`, scriptDraw);
     HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}AfterDraw`, afterDraw);
 
-    AssetManager.addAsset("ItemNeckRestraints", asset, config, {
-        CN: "监控机器人",
-        EN: "Surveillance Robot",
+    AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, {
+        description,
+        layerNames,
+        assetDialogs,
+        extended,
     });
-    AssetManager.addCustomDialog(dialog);
 }
