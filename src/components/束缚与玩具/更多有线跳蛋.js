@@ -6,9 +6,9 @@ const asset = {
     Name: "更多有线跳蛋_Luzi",
     Random: false,
     Gender: "F",
-    Top: 0,
-    Left: 0,
-    Difficulty: 25,
+    Top: 530,
+    Left: 230,
+    Difficulty: 3,
     Prerequisite: ["HasBreasts", "AccessVulva"],
     Priority: 14,
     PoseMapping: {
@@ -18,31 +18,31 @@ const asset = {
         KneelingSpread: "KneelingSpread",
         LegsClosed: "LegsClosed",
     },
-    DefaultColor: ["Default", "Default", "Default", "#3B3B3B", "Default", "Default", "#3B3B3B"],
+    DefaultColor: ["Default", "Default", "Default", "Default", "Default", "#3B3B3B"],
     Layer: [
         {
             Name: "跳蛋1",
+            ColorGroup: "跳蛋",
             AllowTypes: { n: [0, 1, 2, 3, 4] },
         },
         {
             Name: "跳蛋2",
+            ColorGroup: "跳蛋",
             AllowTypes: { n: [1, 2, 3, 4] },
         },
         {
             Name: "跳蛋5",
-            AllowTypes: { n: [4] },
-        },
-        {
-            Name: "绑带5",
-            ParentGroup: "BodyLower",
+            ColorGroup: "跳蛋",
             AllowTypes: { n: [4] },
         },
         {
             Name: "跳蛋3",
+            ColorGroup: "跳蛋",
             AllowTypes: { n: [2, 3, 4] },
         },
         {
             Name: "跳蛋4",
+            ColorGroup: "跳蛋",
             AllowTypes: { n: [3, 4] },
         },
         {
@@ -50,6 +50,28 @@ const asset = {
             ParentGroup: "BodyLower",
         },
     ],
+};
+
+/** @type {Translation.Dialog} */
+const layerNames = {
+    CN: {
+        跳蛋: "跳蛋",
+        跳蛋1: "跳蛋1",
+        跳蛋2: "跳蛋2",
+        跳蛋3: "跳蛋3",
+        跳蛋4: "跳蛋4",
+        跳蛋5: "跳蛋5",
+        绑带: "绑带",
+    },
+    EN: {
+        跳蛋: "Vibrators",
+        跳蛋1: "Vibrator 1",
+        跳蛋2: "Vibrator 2",
+        跳蛋3: "Vibrator 3",
+        跳蛋4: "Vibrator 4",
+        跳蛋5: "Vibrator 5",
+        绑带: "Strap",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -88,7 +110,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemVulva"], ["更多有线跳蛋_Luzi"], {
+const assetDialogs = {
     CN: {
         SelectBase: "选择配置",
         Select跳蛋开关: "跳蛋开关",
@@ -134,26 +156,16 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemVulva"], ["更多有
         Optiono3: "High",
         Optiono4: "Maximum",
 
-        Seto0:
-            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to off.",
-        Seto1:
-            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to low.",
-        Seto2:
-            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to medium.",
-        Seto3:
-            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to high.",
-        Seto4:
-            "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to maximum.",
-        Setn0:
-            "SourceCharacter pulls out the vibrator egg from DestinationCharacter genitalia, leaving only one remaining.",
-        Setn1:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are two vibrator eggs inside DestinationCharacter vagina.",
-        Setn2:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are three vibrator eggs inside DestinationCharacter vagina.",
-        Setn3:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are four vibrator eggs inside DestinationCharacter vagina.",
-        Setn4:
-            "SourceCharacter fiddles with the wired vibrator egg, now there are five vibrator eggs inside DestinationCharacter vagina.",
+        Seto0: "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to off.",
+        Seto1: "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to low.",
+        Seto2: "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to medium.",
+        Seto3: "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to high.",
+        Seto4: "SourceCharacter flicks the switch, setting DestinationCharacter vibrator egg to maximum.",
+        Setn0: "SourceCharacter pulls out the vibrator egg from DestinationCharacter genitalia, leaving only one remaining.",
+        Setn1: "SourceCharacter fiddles with the wired vibrator egg, now there are two vibrator eggs inside DestinationCharacter vagina.",
+        Setn2: "SourceCharacter fiddles with the wired vibrator egg, now there are three vibrator eggs inside DestinationCharacter vagina.",
+        Setn3: "SourceCharacter fiddles with the wired vibrator egg, now there are four vibrator eggs inside DestinationCharacter vagina.",
+        Setn4: "SourceCharacter fiddles with the wired vibrator egg, now there are five vibrator eggs inside DestinationCharacter vagina.",
     },
     UA: {
         SelectBase: "Виберіть конфігурацію",
@@ -176,18 +188,12 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemVulva"], ["更多有
         Seto1: "SourceCharacter вмикає вібратори TargetCharacter до низького рівня.",
         Seto2: "SourceCharacter вмикає вібратори DestinationCharacter до середнього рівня.",
         Seto3: "SourceCharacter вмикає вібратори DestinationCharacter до високого рівня.",
-        Seto4:
-            "SourceCharacter вмикає вібратори DestinationCharacter до максимального рівня.",
-        Setn0:
-            "SourceCharacter витягує передостанній вібратор з TargetCharacter геніталії, залишаючи останній.",
-        Setn1:
-            "SourceCharacter бавиться з вібраторами, залишаючи два вібратори всередині TargetCharacter.",
-        Setn2:
-            "SourceCharacter бавиться з вібраторами, залишаючи три вібратори всередині TargetCharacter.",
-        Setn3:
-            "SourceCharacter бавиться з вібраторами, залишаючи чотири вібратори всередині TargetCharacter.",
-        Setn4:
-            "SourceCharacter бавиться з вібраторами, залишаючи п'ять вібратори всередині TargetCharacter.",
+        Seto4: "SourceCharacter вмикає вібратори DestinationCharacter до максимального рівня.",
+        Setn0: "SourceCharacter витягує передостанній вібратор з TargetCharacter геніталії, залишаючи останній.",
+        Setn1: "SourceCharacter бавиться з вібраторами, залишаючи два вібратори всередині TargetCharacter.",
+        Setn2: "SourceCharacter бавиться з вібраторами, залишаючи три вібратори всередині TargetCharacter.",
+        Setn3: "SourceCharacter бавиться з вібраторами, залишаючи чотири вібратори всередині TargetCharacter.",
+        Setn4: "SourceCharacter бавиться з вібраторами, залишаючи п'ять вібратори всередині TargetCharacter.",
     },
     RU: {
         SelectBase: "Выбор конфигурации",
@@ -206,30 +212,20 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemVulva"], ["更多有
         Optiono3: "Высокий",
         Optiono4: "Максимальный",
 
-        Seto0:
-            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter в выключенное состояние.",
-        Seto1:
-            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на низкую интенсивность.",
-        Seto2:
-            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на среднюю интенсивность.",
-        Seto3:
-            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на высокую интенсивность.",
-        Seto4:
-            "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на максимальную интенсивность.",
-        Setn0:
-            "SourceCharacter вытаскивает вибратор из TargetCharacter, оставляя только 1 шт.",
-        Setn1:
-            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 2 вибратора.",
-        Setn2:
-            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 3 вибратора.",
-        Setn3:
-            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 4 вибратора.",
-        Setn4:
-            "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 5 вибраторов.",
+        Seto0: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter в выключенное состояние.",
+        Seto1: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на низкую интенсивность.",
+        Seto2: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на среднюю интенсивность.",
+        Seto3: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на высокую интенсивность.",
+        Seto4: "SourceCharacter переключает выключатель, устанавливая вибратор TargetCharacter на максимальную интенсивность.",
+        Setn0: "SourceCharacter вытаскивает вибратор из TargetCharacter, оставляя только 1 шт.",
+        Setn1: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 2 вибратора.",
+        Setn2: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 3 вибратора.",
+        Setn3: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 4 вибратора.",
+        Setn4: "SourceCharacter играет с проводными вибраторами, теперь в вагине TargetCharacter находится 5 вибраторов.",
     },
-});
+};
 
-const translations = {
+const description = {
     CN: "更多有线跳蛋",
     EN: "More Wired Vibrators",
     RU: "Больше проводных вибраторов",
@@ -237,6 +233,10 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemVulva", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemVulva", asset, {
+        extended,
+        description,
+        layerNames,
+        assetDialogs,
+    });
 }
