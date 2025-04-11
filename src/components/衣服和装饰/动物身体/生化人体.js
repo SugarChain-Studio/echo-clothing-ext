@@ -2,20 +2,18 @@ import { AssetManager } from "../../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
 
-const NamePrefix = ((prefix) => prefix + Math.random().toString(16).substring(2))("生化人体");
-
 /**
  *
  * @param {Character} C
- * @param {Asset} asset
+ * @param {Asset} A
  * @param {Number} width
  * @param {Number} height
  * @param {string} suffix
  * @returns
  */
-function customTempCanvas(C, asset, width, height, suffix) {
+function customTempCanvas(C, A, width, height, suffix) {
     const canvas = document.createElement("canvas");
-    canvas.setAttribute("name", `${NamePrefix}__${C.CharacterID}__${asset.Group.Name}__${asset.Name}__${suffix}`);
+    canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A)}__${suffix}`);
     canvas.width = width;
     canvas.height = height;
     return canvas;
