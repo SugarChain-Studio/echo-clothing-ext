@@ -24,9 +24,17 @@
 git clone https://github.com/SugarChain-Studio/echo-clothing-ext.git
 ``` 
 
+现在，如果一切正常，在你执行命令的位置应该已经创建了一个目录 `echo-clothing-ext`，使用 `cd` 命令进入该目录：
+
+```bash
+cd ./echo-clothing-ext
+```
+
+这个目录称为项目的**根目录**，多数操作都将在这个目录下进行。
+
 ### 拉取子模块(submodule)
 
-在项目目录下运行以下命令：
+在项目的**根目录**运行以下命令：
 
 ```bash
 git submodule update --init
@@ -38,7 +46,7 @@ git submodule update --init
 ### 准备 Node.js 和 pnpm
 
 1. 确保已安装 [Node.js](https://nodejs.org/)（建议使用 LTS 版本）。
-2. 在项目目录使用以下指令，安装 `pnpm`：
+2. 在项目**根目录**运行以下命令，安装 `pnpm`：
 
 ```bash
 corepack prepare pnpm --activate
@@ -46,7 +54,7 @@ corepack prepare pnpm --activate
 
 ### 安装依赖
 
-在项目根目录下运行以下命令安装依赖：
+在项目**根目录**运行以下命令，安装依赖：
 ```bash
 pnpm install
 ```
@@ -58,7 +66,7 @@ npm config set registry https://registry.npmmirror.com
 
 ## 编译本地版本
 
-运行以下命令以编译本地开发版本：
+在项目**根目录**运行以下命令，编译本地开发版本：
 ```bash
 pnpm dev
 ```
@@ -69,13 +77,13 @@ pnpm dev
 
 ## 启动本地服务器
 
-运行以下命令启动本地服务器：
+在项目**根目录**运行以下命令，启动本地服务器：
 ```bash
 pnpm serve
 ```
 
 默认这会在 `8080` 端口启动一个本地服务器，提供对 `./public` 目录的访问。
-如果 `8080` 端口已被占用，可以临时修改 `package.json` 中的配置以使服务从其他端口启动，但需要注意重新编译本地版本，并且在提交时应当恢复这些修改。
+> 如果 `8080` 端口已被占用，可以临时修改 `package.json` 中的配置以使服务从其他端口启动，但需要注意重新编译本地版本，并且在提交时应当恢复这些修改。
 
 ## 使用油猴进行本地调试
 
