@@ -1,10 +1,10 @@
-import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {(AssetLayerDefinition & {Localized: Translation.Entry})[]} */
 const layers = [
     {
         Name: "狗爪",
+        ColorGroup: "动物",
         Localized: {
             CN: "狗爪",
             EN: "Dog Paw",
@@ -12,6 +12,7 @@ const layers = [
     },
     {
         Name: "猫爪",
+        ColorGroup: "动物",
         Localized: {
             CN: "猫爪",
             EN: "Cat Paw",
@@ -19,6 +20,7 @@ const layers = [
     },
     {
         Name: "马蹄铁",
+        ColorGroup: "动物",
         Localized: {
             CN: "马蹄铁",
             EN: "Horseshoe",
@@ -26,6 +28,7 @@ const layers = [
     },
     {
         Name: "小丑",
+        ColorGroup: "扑克",
         Localized: {
             CN: "小丑",
             EN: "Jester (Poker)",
@@ -33,6 +36,7 @@ const layers = [
     },
     {
         Name: "红桃",
+        ColorGroup: "扑克",
         Localized: {
             CN: "红桃",
             EN: "Heart (Poker)",
@@ -40,6 +44,7 @@ const layers = [
     },
     {
         Name: "方片",
+        ColorGroup: "扑克",
         Localized: {
             CN: "方片",
             EN: "Diamond (Poker)",
@@ -47,6 +52,7 @@ const layers = [
     },
     {
         Name: "黑桃",
+        ColorGroup: "扑克",
         Localized: {
             CN: "黑桃",
             EN: "Spade (Poker)",
@@ -54,6 +60,7 @@ const layers = [
     },
     {
         Name: "草花",
+        ColorGroup: "扑克",
         Localized: {
             CN: "草花",
             EN: "Club (Poker)",
@@ -61,6 +68,7 @@ const layers = [
     },
     {
         Name: "东风",
+        ColorGroup: "麻将",
         Localized: {
             CN: "东风",
             EN: "East Wind (Mahjong)",
@@ -68,6 +76,7 @@ const layers = [
     },
     {
         Name: "南风",
+        ColorGroup: "麻将",
         Localized: {
             CN: "南风",
             EN: "South Wind (Mahjong)",
@@ -75,6 +84,7 @@ const layers = [
     },
     {
         Name: "西风",
+        ColorGroup: "麻将",
         Localized: {
             CN: "西风",
             EN: "West Wind (Mahjong)",
@@ -82,6 +92,7 @@ const layers = [
     },
     {
         Name: "北风",
+        ColorGroup: "麻将",
         Localized: {
             CN: "北风",
             EN: "North Wind (Mahjong)",
@@ -89,6 +100,7 @@ const layers = [
     },
     {
         Name: "红中",
+        ColorGroup: "麻将",
         Localized: {
             CN: "红中",
             EN: "Red Dragon (Mahjong)",
@@ -96,6 +108,7 @@ const layers = [
     },
     {
         Name: "发财",
+        ColorGroup: "麻将",
         Localized: {
             CN: "发财",
             EN: "Green Dragon (Mahjong)",
@@ -103,6 +116,7 @@ const layers = [
     },
     {
         Name: "白板",
+        ColorGroup: "麻将",
         Localized: {
             CN: "白板",
             EN: "White Dragon (Mahjong)",
@@ -284,6 +298,7 @@ const asset = {
         acc.push({
             Name: `${layer.Name}_1`,
             AllowTypes: { p: idx },
+            ColorGroup: layer.ColorGroup,
         });
         acc.push({
             Name: `${layer.Name}_2`,
@@ -363,12 +378,13 @@ const extended = {
 };
 
 /** @type {Translation.Entry} */
-const translation = {
+const description = {
     CN: "标志纹饰",
     EN: "Icon Markings",
 };
 
-const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMarkings2_Luzi"], ["标志纹饰_Luzi"], {
+/** @type {Translation.Dialog} */
+const assetDialogs = {
     CN: {
         SelectBase: "配置标志纹饰",
 
@@ -406,22 +422,39 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["BodyMarkings", "BodyMar
             return acc;
         }, {}),
     },
-});
+};
 
 /** @type {Translation.CustomRecord<string,string>} */
 const layerNames = {
-    CN: layers.reduce((acc, { Name, Localized }) => {
-        acc[`${Name}_1`] = `${Localized["CN"]}`;
-        return acc;
-    }, {}),
-    EN: layers.reduce((acc, { Name, Localized }) => {
-        acc[`${Name}_1`] = `${Localized["EN"]}`;
-        return acc;
-    }, {}),
+    CN: layers.reduce(
+        (acc, { Name, Localized }) => {
+            acc[`${Name}_1`] = `${Localized["CN"]}`;
+            return acc;
+        },
+        {
+            动物: "动物图案",
+            扑克: "扑克图案",
+            麻将: "麻将图案",
+        }
+    ),
+    EN: layers.reduce(
+        (acc, { Name, Localized }) => {
+            acc[`${Name}_1`] = `${Localized["EN"]}`;
+            return acc;
+        },
+        {
+            动物: "Animal Patterns",
+            扑克: "Poker Patterns",
+            麻将: "Mahjong Patterns",
+        }
+    ),
 };
 
 export default function () {
-    AssetManager.addAsset("BodyMarkings", asset, extended, translation);
-    AssetManager.addCustomDialog(dialogs);
-    AssetManager.addLayerNames("BodyMarkings", asset, layerNames);
+    AssetManager.addAssetWithConfig("BodyMarkings", asset, {
+        description,
+        layerNames,
+        extended,
+        assetDialogs,
+    });
 }

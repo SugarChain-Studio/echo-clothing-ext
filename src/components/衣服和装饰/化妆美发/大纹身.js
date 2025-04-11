@@ -17,6 +17,7 @@ import { AssetManager } from "../../../assetForward";
 const LayerSettings = [
     {
         Name: "部落胸上",
+        ColorGroup: "部落",
         Localized: {
             CN: "部落胸上",
             EN: "Tribal Chest",
@@ -30,6 +31,7 @@ const LayerSettings = [
     },
     {
         Name: "胸上1",
+        ColorGroup: "胸上",
         Localized: {
             CN: "胸上1",
             EN: "Chest 1",
@@ -43,6 +45,7 @@ const LayerSettings = [
     },
     {
         Name: "胸上2",
+        ColorGroup: "胸上",
         Localized: {
             CN: "胸上2",
             EN: "Chest 2",
@@ -56,6 +59,7 @@ const LayerSettings = [
     },
     {
         Name: "梵花胸骨1",
+        ColorGroup: "梵花胸骨",
         Localized: {
             CN: "梵花胸骨1",
             EN: "Sanskrit Chestbone 1",
@@ -70,6 +74,7 @@ const LayerSettings = [
     },
     {
         Name: "梵花胸骨2",
+        ColorGroup: "梵花胸骨",
         Localized: {
             CN: "梵花胸骨2",
             EN: "Sanskrit Chestbone 2",
@@ -84,6 +89,7 @@ const LayerSettings = [
     },
     {
         Name: "梵花胸骨3",
+        ColorGroup: "梵花胸骨",
         Localized: {
             CN: "梵花胸骨3",
             EN: "Sanskrit Chestbone 3",
@@ -98,6 +104,7 @@ const LayerSettings = [
     },
     {
         Name: "石蒜1左",
+        ColorGroup: "石蒜",
         Localized: {
             CN: "石蒜1左",
             EN: "Lycoris 1 Left",
@@ -111,6 +118,7 @@ const LayerSettings = [
     },
     {
         Name: "石蒜1右",
+        ColorGroup: "石蒜",
         Localized: {
             CN: "石蒜1右",
             EN: "Lycoris 1 Right",
@@ -124,6 +132,7 @@ const LayerSettings = [
     },
     {
         Name: "部落右胸",
+        ColorGroup: "部落",
         Localized: {
             CN: "部落右胸",
             EN: "Tribal Right Chest",
@@ -138,6 +147,7 @@ const LayerSettings = [
     },
     {
         Name: "部落左胸",
+        ColorGroup: "部落",
         Localized: {
             CN: "部落左胸",
             EN: "Tribal Left Chest",
@@ -152,6 +162,7 @@ const LayerSettings = [
     },
     {
         Name: "部落右臂",
+        ColorGroup: "部落",
         Localized: {
             CN: "部落右臂",
             EN: "Tribal Right Arm",
@@ -191,6 +202,7 @@ const LayerSettings = [
     },
     {
         Name: "部落左锁骨",
+        ColorGroup: "部落",
         Localized: {
             CN: "部落左锁骨",
             EN: "Tribal Left Collarbone",
@@ -208,6 +220,7 @@ const LayerSettings = [
     },
     {
         Name: "梅花1",
+        ColorGroup: "梅花",
         Localized: {
             CN: "梅花1",
             EN: "Plum Blossom 1",
@@ -226,6 +239,7 @@ const LayerSettings = [
     },
     {
         Name: "梅花2",
+        ColorGroup: "梅花",
         Localized: {
             CN: "梅花2",
             EN: "Plum Blossom 2",
@@ -262,6 +276,7 @@ const LayerSettings = [
     },
     {
         Name: "右腿花",
+        ColorGroup: "右腿花",
         Localized: {
             CN: "右腿花",
             EN: "Right Leg Flower",
@@ -287,6 +302,7 @@ const LayerSettings = [
 const attrLayer = [
     {
         Name: "右腿花_花",
+        ColorGroup: "右腿花",
         Localized: {
             CN: "右腿花(花)",
             EN: "Right Leg Flower(Flower)",
@@ -312,6 +328,7 @@ const attrLayer = [
 function layerMapping(layer) {
     return {
         Name: layer.Name,
+        ColorGroup: layer.ColorGroup,
         Priority: layer.Priority,
         BlendingMode: /** @type {GlobalCompositeOperation}*/ (layer.BlendingMode),
         Left: layer.Left || 0,

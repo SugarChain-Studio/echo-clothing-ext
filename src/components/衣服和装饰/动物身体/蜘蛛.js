@@ -23,16 +23,19 @@ const asset = {
         },
         {
             Name: "A5_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 4,
             AllowTypes: { typed: 1 },
         },
         {
             Name: "A4_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 5,
             AllowTypes: { typed: 1 },
         },
         {
             Name: "A3_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 26,
             AllowTypes: { typed: 1 },
         },
@@ -73,16 +76,19 @@ const asset = {
 
         {
             Name: "B3_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
         {
             Name: "B2_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
         {
             Name: "B1_爪",
+            ColorGroup: "蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
