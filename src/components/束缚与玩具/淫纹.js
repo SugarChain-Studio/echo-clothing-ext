@@ -45,6 +45,7 @@ const asset = {
     DynamicScriptDraw: true,
     DynamicBeforeDraw: true,
     ParentGroup: {},
+    Attribute: ["GenitaliaCover"],
     DefaultColor: ["#EA3E74"],
     PoseMapping: {
         Hogtied: "Hide",
@@ -100,11 +101,20 @@ function AssetsItemPelvis随机自慰(C) {
     const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
 
     const whenBlocked = () => {
-        ChatRoomPublishCustomAction(
-            customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
-            false,
-            new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build()
-        );
+        // 产生如同抚摸大腿的动作，仅自己可见
+        const dictionary = new DictionaryBuilder()
+            .sourceCharacter(Player)
+            .targetCharacter(Player)
+            .focusGroup("ItemLegs")
+            .build();
+        dictionary.push({ ActivityName: "Caress" });
+
+        ChatRoomMessage({
+            Sender: Player.MemberNumber,
+            Content: customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
+            Type: "Action",
+            Dictionary: new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build(),
+        });
     };
 
     if (!Player.CanInteract()) {
