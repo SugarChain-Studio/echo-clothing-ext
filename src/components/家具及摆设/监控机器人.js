@@ -23,6 +23,7 @@ const asset = {
     ],
     DynamicBeforeDraw: true,
     DynamicScriptDraw: true,
+    DynamicAfterDraw: true,
     DefaultColor: ["#84DBFF", "#B2E8FF"],
     FixedPosition: true,
     Layer: [
@@ -30,25 +31,13 @@ const asset = {
             Top: 0,
             Left: 0,
             Name: "绳子",
-            PoseMapping: {
-                AllFours: "AllFours",
-                Hogtied: "Hogtied",
-                Kneel: "Kneel",
-                KneelingSpread: "Kneel",
-                Suspension: PoseType.HIDE,
-            },
+            HasImage: false,
         },
         {
             Top: 0,
             Left: 0,
             Name: "绳子光芒",
-            PoseMapping: {
-                AllFours: "AllFours",
-                Hogtied: "Hogtied",
-                Kneel: "Kneel",
-                KneelingSpread: "Kneel",
-                Suspension: PoseType.HIDE,
-            },
+            HasImage: false,
         },
         {
             Name: "眼背景",
@@ -76,6 +65,133 @@ const asset = {
         },
     ],
 };
+
+/** @type {ExtendedItemCallbacks.BeforeDraw<DataType>} */
+function beforeDraw(drawData) {
+    const { C, A, L, X, Y, Property, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
+    const Data = PersistentData();
+
+    if (Property?.TypeRecord?.typed === 1) {
+        if (L === "跟随模式" && C.HasEffect("IsLeashed")) {
+            return { Opacity: 0 };
+        }
+        if (L === "跟随模式_抓住" && !C.HasEffect("IsLeashed")) {
+            return { Opacity: 0 };
+        }
+    }
+
+    const next = (now) => now + (Math.random() * 10 + 2) * 1000;
+
+    if (L === "眼睛") {
+        const now = Date.now();
+        if (!Data.EyeTimer) Data.EyeTimer = next(now);
+        if (!Data.TargetOffset) Data.TargetOffset = { X: 0, Y: 0 };
+        if (!Data.CurOffset) Data.CurOffset = { X: 0, Y: 0 };
+        if (!Data.UpdateTimer) {
+            Data.UpdateTimer = now;
+            return;
+        }
+
+        const delta = now - Data.UpdateTimer;
+        Data.UpdateTimer = now;
+
+        if (now > Data.EyeTimer) {
+            Data.EyeTimer = next(now);
+            const randX = Math.random();
+            const randY = Math.random();
+            Data.TargetOffset = {
+                X: (randX * randX - 0.5) * 8,
+                Y: (randY * randY - 0.5) * 8,
+            };
+        }
+
+        const canvas = AnimationGenerateTempCanvas(C, A, 150, 230);
+        const layerSrc = Tools.getAssetURL(drawData);
+
+        const dx = Data.TargetOffset.X - Data.CurOffset.X;
+        const dy = Data.TargetOffset.Y - Data.CurOffset.Y;
+
+        const hy = Math.hypot(dx, dy);
+
+        if (hy < 0.01) {
+            Data.CurOffset = Data.TargetOffset;
+        } else {
+            // speed = 6;
+            const caphy = Math.min(hy, (6 * delta) / 1000);
+            const mx = (dx / hy) * caphy;
+            const my = (dy / hy) * caphy;
+            Data.CurOffset.X += mx;
+            Data.CurOffset.Y += my;
+        }
+
+        DrawImageEx(layerSrc, canvas.getContext("2d"), Data.CurOffset.X, Data.CurOffset.Y);
+
+        drawCanvas(canvas, X, Y);
+        drawCanvasBlink(canvas, X, Y);
+    }
+}
+
+/** @type {ExtendedItemCallbacks.ScriptDraw<DataType>} */
+function scriptDraw({ C, PersistentData }) {
+    const Data = PersistentData();
+    Tools.drawUpdate(C, Data);
+}
+
+/**
+ * @param {DynamicDrawingData} drawData
+ * @param {number} width
+ * @param {number} height
+ * @param {string} suffix
+ */
+function createCanvas({ C, A }, width, height, suffix) {
+    const canvas = document.createElement("canvas");
+    canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A)}__${suffix}`);
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
+}
+
+/** @type {ExtendedItemCallbacks.AfterDraw<DataType>} */
+function afterDraw(drawData) {
+    const { C, A, L, Color, GroupName, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
+    if (L === "绳子" || L === "绳子光芒") {
+        const layer = A.Layer.find((l) => l.Name === L);
+        const { fixedYOffset } = CommonDrawComputeDrawingCoordinates(C, A, layer, GroupName);
+
+        const url = Tools.getAssetURL(drawData, "绳子");
+        const img = DrawGetImage(url);
+        if (img.width === 0) return;
+        const tempCanvs = createCanvas(drawData, 500, 1000, L);
+        const canvas2d = tempCanvs.getContext("2d");
+
+        if (L === "绳子光芒") canvas2d.globalAlpha = 0.2;
+        canvas2d.fillStyle = Color;
+
+        const startX = 250;
+        const startY = 225;
+        const endX = 420;
+        const endY = 230 + fixedYOffset;
+
+        const controlX = (startX + endX) / 2;
+        const controlY = Math.max(startY, endY) + 50;
+
+        canvas2d.beginPath();
+        canvas2d.moveTo(startX, startY);
+        canvas2d.quadraticCurveTo(controlX, controlY, endX, endY);
+        canvas2d.strokeStyle = Color;
+        canvas2d.lineWidth = L === "绳子" ? 5 : 15;
+        canvas2d.stroke();
+
+        canvas2d.beginPath();
+        canvas2d.arc(startX, startY, canvas2d.lineWidth / 2, 0, Math.PI * 2);
+        canvas2d.arc(endX, endY, canvas2d.lineWidth / 2, 0, Math.PI * 2);
+        canvas2d.fillStyle = Color;
+        canvas2d.fill();
+
+        drawCanvas(tempCanvs, 0, CanvasUpperOverflow, AlphaMasks);
+        drawCanvasBlink(tempCanvs, 0, CanvasUpperOverflow, AlphaMasks);
+    }
+}
 
 /** @type {TypedItemConfig} */
 const config = {
@@ -130,85 +246,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemNeckRestraints"], ["
  */
 
 export default function () {
-    HookManager.globalFunction(
-        `AssetsItemNeckRestraints${asset.Name}BeforeDraw`,
-        /** @type {ExtendedItemCallbacks.BeforeDraw<DataType>} */ (
-            (drawData) => {
-                const { C, A, L, X, Y, Property, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
-                const Data = PersistentData();
-
-                if (Property?.TypeRecord?.typed === 1) {
-                    if (L === "跟随模式" && C.HasEffect("IsLeashed")) {
-                        return { Opacity: 0 };
-                    }
-                    if (L === "跟随模式_抓住" && !C.HasEffect("IsLeashed")) {
-                        return { Opacity: 0 };
-                    }
-                }
-
-                const next = (now) => now + (Math.random() * 10 + 2) * 1000;
-
-                if (L === "眼睛")
-                    (() => {
-                        const now = Date.now();
-                        if (!Data.EyeTimer) Data.EyeTimer = next(now);
-                        if (!Data.TargetOffset) Data.TargetOffset = { X: 0, Y: 0 };
-                        if (!Data.CurOffset) Data.CurOffset = { X: 0, Y: 0 };
-                        if (!Data.UpdateTimer) {
-                            Data.UpdateTimer = now;
-                            return;
-                        }
-
-                        const delta = now - Data.UpdateTimer;
-                        Data.UpdateTimer = now;
-
-                        if (now > Data.EyeTimer) {
-                            Data.EyeTimer = next(now);
-                            const randX = Math.random();
-                            const randY = Math.random();
-                            Data.TargetOffset = {
-                                X: (randX * randX - 0.5) * 8,
-                                Y: (randY * randY - 0.5) * 8,
-                            };
-                        }
-
-                        const canvas = AnimationGenerateTempCanvas(C, A, 150, 230);
-                        const layerSrc = Tools.getAssetURL(drawData);
-
-                        const dx = Data.TargetOffset.X - Data.CurOffset.X;
-                        const dy = Data.TargetOffset.Y - Data.CurOffset.Y;
-
-                        const hy = Math.hypot(dx, dy);
-
-                        if (hy < 0.01) {
-                            Data.CurOffset = Data.TargetOffset;
-                        } else {
-                            // speed = 6;
-                            const caphy = Math.min(hy, (6 * delta) / 1000);
-                            const mx = (dx / hy) * caphy;
-                            const my = (dy / hy) * caphy;
-                            Data.CurOffset.X += mx;
-                            Data.CurOffset.Y += my;
-                        }
-
-                        DrawImageEx(layerSrc, canvas.getContext("2d"), Data.CurOffset.X, Data.CurOffset.Y);
-
-                        drawCanvas(canvas, X, Y);
-                        drawCanvasBlink(canvas, X, Y);
-                    })();
-            }
-        )
-    );
-
-    HookManager.globalFunction(
-        `AssetsItemNeckRestraints${asset.Name}ScriptDraw`,
-        /** @type {ExtendedItemCallbacks.ScriptDraw<DataType>} */ (
-            ({ C, PersistentData }) => {
-                const Data = PersistentData();
-                Tools.drawUpdate(C, Data);
-            }
-        )
-    );
+    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}BeforeDraw`, beforeDraw);
+    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}ScriptDraw`, scriptDraw);
+    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}AfterDraw`, afterDraw);
 
     AssetManager.addAsset("ItemNeckRestraints", asset, config, {
         CN: "监控机器人",
