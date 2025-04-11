@@ -240,13 +240,10 @@ const description = {
 
 const layerNames = {
     CN: {
+        ...Tools.takeLayerNames(asset),
         绳子: "牵引光束",
         绳子光芒: "牵引光束发光",
-        模式: "模式",
-        机器人: "机器人",
-        跟随模式: "跟随模式",
         跟随模式_抓住: "跟随模式(抓住)",
-        固定模式: "固定模式",
     },
     EN: {
         绳子: "Leash Beam",

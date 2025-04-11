@@ -1,3 +1,4 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 /** @type { CustomAssetDefinition } */
@@ -53,15 +54,7 @@ const asset = {
 
 /** @type {Translation.Dialog} */
 const layerNames = {
-    CN: {
-        跳蛋: "跳蛋",
-        跳蛋1: "跳蛋1",
-        跳蛋2: "跳蛋2",
-        跳蛋3: "跳蛋3",
-        跳蛋4: "跳蛋4",
-        跳蛋5: "跳蛋5",
-        绑带: "绑带",
-    },
+    CN: Tools.takeLayerNames(asset),
     EN: {
         跳蛋: "Vibrators",
         跳蛋1: "Vibrator 1",

@@ -1,3 +1,4 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -30,15 +31,7 @@ const asset = {
 
 /** @type {Translation.CustomRecord<string,string> } */
 const layerNames = {
-    CN: {
-        后背: "后背",
-        下半基础: "下半基础",
-        下半纹路: "下半纹路",
-        下半阴影: "下半阴影",
-        上半基础: "上半基础",
-        上半阴影: "上半阴影",
-        环: "环",
-    },
+    CN: Tools.takeLayerNames(asset),
     EN: {
         后背: "Back",
         下半基础: "Lower Base",
@@ -50,13 +43,12 @@ const layerNames = {
     },
 };
 
-const translations = {
+const description = {
     CN: "女巫小披肩",
     EN: "Witch Small Shawl",
     DE: "Hexen kleine Stola",
 };
 
 export default function () {
-    AssetManager.addAsset("ClothAccessory", asset, undefined, translations);
-    AssetManager.addLayerNames("ClothAccessory", asset, layerNames);
+    AssetManager.addAssetWithConfig("ClothAccessory", asset, { description, layerNames });
 }

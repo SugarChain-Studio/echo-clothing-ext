@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
 
 /** @type {TopLeft.Definition} */
@@ -19,6 +19,8 @@ const asset = {
     DefaultColor: [],
     PoseMapping: {},
     AllowLock: true,
+    Time: 30,
+    RemoveTimer: 20,
     Effect: [E.Mounted, E.BlockWardrobe],
     Difficulty: 8,
     Layer: [
@@ -46,11 +48,13 @@ const asset = {
             },
             Left: 300,
             Name: "竖杆",
+            ColorGroup: "金属杆",
             Priority: 5,
         },
         {
             Top: 140,
             Name: "横杆",
+            ColorGroup: "金属杆",
             Priority: 5,
         },
         {
@@ -68,12 +72,14 @@ const asset = {
         {
             Top: 140,
             Name: "横枷铐",
+            ColorGroup: "横枷铐",
             Priority: 5,
             AllowTypes: { y: 1 },
         },
         {
             Top: 140,
             Name: "横枷铐前",
+            ColorGroup: "横枷铐",
             Priority: 34,
             AllowTypes: { y: 1 },
         },
@@ -86,14 +92,36 @@ const asset = {
         {
             Top: 140,
             Name: "项圈",
+            ColorGroup: "项圈",
             Priority: 5,
         },
         {
             Top: 140,
             Name: "项圈前",
+            ColorGroup: "项圈",
             Priority: 34,
         },
     ],
+};
+
+/** @type {Translation.Dialog} */
+const layerNames = {
+    CN: {
+        ...Tools.takeLayerNames(asset),
+        金属杆: "金属杆",
+    },
+    EN: {
+        底座: "Base",
+        螺丝: "Screw",
+        竖杆: "Vertical",
+        横杆: "Horizontal",
+        金属杆: "Metal Bars",
+        横杆扣件: "Horizontal Bar Fastener",
+        横枷铐: "Yoke Cuff",
+        横枷铐前: "Yoke Cuff Front",
+        项圈: "Collar",
+        项圈前: "Collar Front",
+    },
 };
 
 /** @type {ModularItemConfig} */
@@ -139,13 +167,13 @@ const extended = {
 };
 
 /** @type {Translation.Entry} */
-const translations = {
+const description = {
     CN: "铁架台",
     EN: "Buret Stand",
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], [asset.Name], {
+const assetDialogs = {
     CN: {
         SelectBase: "选择铁架台设置",
         Module高度: "高度",
@@ -182,9 +210,13 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], [asset.Na
         Sety0: "SourceCharacter unlocks the yoke on DestinationCharacter AssetName, freeing DestinationCharacter hands.",
         Sety1: "SourceCharacter locks the yoke on DestinationCharacter AssetName, depriving DestinationCharacter hands of freedom.",
     },
-});
+};
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, {
+        extended,
+        layerNames,
+        description,
+        assetDialogs,
+    });
 }
