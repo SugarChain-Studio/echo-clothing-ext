@@ -99,6 +99,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶�
         Module开裆: "设置裆部",
         OptionA0: "封裆",
         OptionA1: "开裆",
+        SetA0: "SourceCharacter将DestinationCharacterAssetName设置为封裆",
+        SetA1: "SourceCharacter将DestinationCharacterAssetName设置为开裆",
     },
     EN: {
         SelectBase: "Settings",
@@ -106,6 +108,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶�
         Module开裆: "Set Crotch",
         OptionA0: "Closed Crotch",
         OptionA1: "Open Crotch",
+        SetA0: "SourceCharacter sets DestinationCharacter AssetName to Closed Crotch",
+        SetA1: "SourceCharacter sets DestinationCharacter AssetName to Open Crotch",
     },
     RU: {
         SelectBase: "Настройки",
