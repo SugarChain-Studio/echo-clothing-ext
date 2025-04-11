@@ -23,6 +23,17 @@ pnpm install
 npm config set registry https://registry.npmmirror.com
 ```
 
+## 拉取子模块(submodule)
+
+在项目根目录下运行以下命令：
+
+```bash
+git submodule init
+git submodule update
+```
+
+将会拉取 [utils 模块](https://github.com/SugarChain-Studio/bc-modding-utilities.git) 到 `/utils` 目录
+
 ## 编译本地版本
 
 运行以下命令以编译本地开发版本：
@@ -49,3 +60,5 @@ pnpm serve
 4. 脚本安装完成后，即可在浏览器中进行本地调试。
 
 通过这种方式，可以快速验证本地修改的效果，而无需每次重新部署到生产环境。
+
+如果 `8080` 端口已被占用，可以临时修改 `package.json` 中的配置以使服务从其他端口启动，但需要注意在提交时恢复。
