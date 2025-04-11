@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -14,8 +13,8 @@ const asset = {
     PoseMapping: {
         AllFours: "Hide",
         Hogtied: "Hide",
-        Kneel: "Kneel",
         KneelingSpread: "KneelingSpread",
+        Kneel: "LegsClosed",
         LegsClosed: "LegsClosed",
     },
     DefaultColor: ["Default", "Default", "Default", "Default", "Default", "#3B3B3B"],
