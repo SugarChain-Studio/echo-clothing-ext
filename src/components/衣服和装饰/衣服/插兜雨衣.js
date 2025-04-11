@@ -1,3 +1,4 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -25,7 +26,15 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    CN: Tools.takeLayerNames(asset),
+    EN: {
+        透明: "Transparent",
+        雨衣: "Raincoat",
+    },
+};
+
+const description = {
     CN: "插兜雨衣",
     EN: "Transparent raincoat",
 };
@@ -37,40 +46,30 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetDialogs = {
     CN: {
-        Cloth插兜雨衣Select: "选择外观",
-        Cloth插兜雨衣不透: "不透",
-        Cloth插兜雨衣透明: "透明",
+        Select: "选择外观",
+        不透: "不透",
+        透明: "透明",
 
-        Cloth_笨笨笨蛋Luzi2插兜雨衣Select: "选择外观",
-        Cloth_笨笨笨蛋Luzi2插兜雨衣不透: "不透",
-        Cloth_笨笨笨蛋Luzi2插兜雨衣透明: "透明",
-        Cloth_笨笨蛋Luzi插兜雨衣Select: "选择外观",
-        Cloth_笨笨蛋Luzi插兜雨衣不透: "不透",
-        Cloth_笨笨蛋Luzi插兜雨衣透明: "透明",
-
-        Cloth插兜雨衣Set不透: "SourceCharacter将DestinationCharacter雨衣换成了不透明的款式.",
-        Cloth插兜雨衣Set透明: "SourceCharacter将DestinationCharacter雨衣换成了透明的款式.",
+        Set不透: "SourceCharacter将DestinationCharacter雨衣换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacter雨衣换成了透明的款式.",
     },
     EN: {
-        Cloth插兜雨衣Select: "Choose look",
-        Cloth插兜雨衣不透: "Opaque",
-        Cloth插兜雨衣透明: "Transparent",
+        Select: "Choose look",
+        不透: "Opaque",
+        透明: "Transparent",
 
-        Cloth_笨笨笨蛋Luzi2插兜雨衣Select: "Choose look",
-        Cloth_笨笨笨蛋Luzi2插兜雨衣不透: "Opaque",
-        Cloth_笨笨笨蛋Luzi2插兜雨衣透明: "Transparent",
-        Cloth_笨笨蛋Luzi插兜雨衣Select: "Choose look",
-        Cloth_笨笨蛋Luzi插兜雨衣不透: "Opaque",
-        Cloth_笨笨蛋Luzi插兜雨衣透明: "Transparent",
-
-        Cloth插兜雨衣Set不透透明: "SourceCharacter changes DestinationCharacter raincoat to an opaque style.",
-        Cloth插兜雨衣Set透明: "SourceCharacter changes DestinationCharacter raincoat to a transparent style.",
+        Set不透透明: "SourceCharacter changes DestinationCharacter raincoat to an opaque style.",
+        Set透明: "SourceCharacter changes DestinationCharacter raincoat to a transparent style.",
     },
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Cloth", asset, {
+        description,
+        layerNames,
+        extended,
+        assetDialogs,
+    });
 }

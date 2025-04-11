@@ -1,3 +1,4 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -20,9 +21,18 @@ const asset = {
         AllFours: "Hide",
     },
     Layer: [
-        { Name: "左", AllowTypes: { typed: 0 } },
-        { Name: "右", AllowTypes: { typed: 1 } },
+        { Name: "左", ColorGroup: "衣服", AllowTypes: { typed: 0 } },
+        { Name: "右", ColorGroup: "衣服", AllowTypes: { typed: 1 } },
     ],
+};
+
+const layerNames = {
+    CN: Tools.takeLayerNames(asset),
+    EN: {
+        左: "Left",
+        右: "Right",
+        衣服: "Cloth",
+    },
 };
 
 const extended = {
@@ -32,31 +42,30 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetDialogs = {
     CN: {
-        Cloth斜肩上衣_LuziSelect: "设置",
-        Cloth斜肩上衣_Luzi左: "左",
-        Cloth斜肩上衣_Luzi右: "右",
+        Select: "设置",
+        左: "左",
+        右: "右",
     },
     EN: {
-        Cloth斜肩上衣_LuziSelect: "Select",
-        Cloth斜肩上衣_Luzi左: "Left",
-        Cloth斜肩上衣_Luzi右: "Right",
+        Select: "Select",
+        左: "Left",
+        右: "Right",
     },
     RU: {
-        Cloth斜肩上衣_LuziSelect: "Выбрать",
-        Cloth斜肩上衣_Luzi左: "Лево",
-        Cloth斜肩上衣_Luzi右: "Право",
+        Select: "Выбрать",
+        左: "Лево",
+        右: "Право",
     },
 };
 
-const translations = {
+const description = {
     CN: "斜肩上衣",
-    EN: "Off-the-shoulder top",
+    EN: "Off-the-shoulder Top",
     RU: "Топ с открытым плечом",
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Cloth", asset, { extended, description, assetDialogs, layerNames });
 }

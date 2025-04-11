@@ -5,7 +5,10 @@ const asset = {
     Name: "皮革中空短裙",
     Random: false,
     Top: 0,
-    Left: 0,
+    Left: {
+        [PoseType.DEFAULT]: 0,
+        KneelingSpread: 90,
+    },
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
@@ -24,23 +27,24 @@ const asset = {
     ],
 };
 
+/** @type {Translation.Dialog} */
+const layerNames = {
+    CN: {
+        底: "底色",
+        反光: "反光",
+    },
+    EN: {
+        底: "Base",
+        反光: "Reflective",
+    },
+};
+
 /** @type {Translation.Entry} */
-const translation = {
+const description = {
     CN: "皮革中空短裙",
-    EN: "Leather midriff skirt",
+    EN: "Leather Sideway Skirt",
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "ClothLower",
-        {
-            ...asset,
-            Left: {
-                [PoseType.DEFAULT]: 0,
-                KneelingSpread: 90,
-            },
-        },
-        undefined,
-        translation
-    );
+    AssetManager.addAssetWithConfig("ClothLower", asset, { description, layerNames });
 }
