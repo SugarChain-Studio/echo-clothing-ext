@@ -1,17 +1,50 @@
 # 开发指南
 
-本项目使用 [`pnpm`](https://pnpm.io/) 作为包管理工具，以下是开发流程的简单介绍。
+本项目使用 [`pnpm`](https://pnpm.io/) 作为包管理工具，并且使用 [`git`](https://git-scm.com/) 进行版本控制。以下是开发流程的简单介绍。
+
+- [开发指南](#开发指南)
+  - [环境准备](#环境准备)
+    - [获取仓库](#获取仓库)
+    - [拉取子模块(submodule)](#拉取子模块submodule)
+    - [准备 Node.js 和 pnpm](#准备-nodejs-和-pnpm)
+    - [安装依赖](#安装依赖)
+  - [编译本地版本](#编译本地版本)
+  - [启动本地服务器](#启动本地服务器)
+  - [使用油猴进行本地调试](#使用油猴进行本地调试)
+
 
 ## 环境准备
 
+### 获取仓库
+
+1. 确保已经安装了 [`git`](https://git-scm.com/)。
+2. 在你的计算机上找到一个合适的目录，使用以下命令克隆仓库：
+
+```bash
+git clone https://github.com/SugarChain-Studio/echo-clothing-ext.git
+``` 
+
+### 拉取子模块(submodule)
+
+在项目目录下运行以下命令：
+
+```bash
+git submodule update --init
+```
+
+将会拉取 [utils 模块](https://github.com/SugarChain-Studio/bc-modding-utilities.git) 到 `/utils` 目录
+
+
+### 准备 Node.js 和 pnpm
+
 1. 确保已安装 [Node.js](https://nodejs.org/)（建议使用 LTS 版本）。
-2. 安装 `pnpm`（如果尚未安装）：
+2. 在项目目录使用以下指令，安装 `pnpm`：
 
 ```bash
 corepack prepare pnpm --activate
 ```
 
-## 安装依赖
+### 安装依赖
 
 在项目根目录下运行以下命令安装依赖：
 ```bash
@@ -22,17 +55,6 @@ pnpm install
 ```bash
 npm config set registry https://registry.npmmirror.com
 ```
-
-## 拉取子模块(submodule)
-
-在项目根目录下运行以下命令：
-
-```bash
-git submodule init
-git submodule update
-```
-
-将会拉取 [utils 模块](https://github.com/SugarChain-Studio/bc-modding-utilities.git) 到 `/utils` 目录
 
 ## 编译本地版本
 
@@ -52,6 +74,9 @@ pnpm dev
 pnpm serve
 ```
 
+默认这会在 `8080` 端口启动一个本地服务器，提供对 `./public` 目录的访问。
+如果 `8080` 端口已被占用，可以临时修改 `package.json` 中的配置以使服务从其他端口启动，但需要注意重新编译本地版本，并且在提交时应当恢复这些修改。
+
 ## 使用油猴进行本地调试
 
 1. 确保浏览器已安装 [Tampermonkey](https://www.tampermonkey.net/) 或其他油猴脚本管理工具。
@@ -60,5 +85,3 @@ pnpm serve
 4. 脚本安装完成后，即可在浏览器中进行本地调试。
 
 通过这种方式，可以快速验证本地修改的效果，而无需每次重新部署到生产环境。
-
-如果 `8080` 端口已被占用，可以临时修改 `package.json` 中的配置以使服务从其他端口启动，但需要注意在提交时恢复。
