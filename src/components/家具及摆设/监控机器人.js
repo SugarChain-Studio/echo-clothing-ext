@@ -155,16 +155,16 @@ function afterDraw(drawData) {
         const layer = A.Layer.find((l) => l.Name === L);
         const { fixedYOffset } = CommonDrawComputeDrawingCoordinates(C, A, layer, GroupName);
 
-        const tempCanvs = AnimationGenerateTempCanvas(C, A, 500, 1000);
+        const tempCanvs = AnimationGenerateTempCanvas(C, A, 500, 1000 + CanvasUpperOverflow);
         const canvas2d = tempCanvs.getContext("2d");
 
         if (L === "绳子光芒") canvas2d.globalAlpha = 0.2;
         canvas2d.fillStyle = Color;
 
         const startX = 250;
-        const startY = 225;
+        const startY = 225 + CanvasUpperOverflow;
         const endX = 420;
-        const endY = 230 + fixedYOffset;
+        const endY = 230 + fixedYOffset + CanvasUpperOverflow;
 
         const controlX = (startX + endX) / 2;
         const controlY = Math.max(startY, endY) + 50;
@@ -182,8 +182,8 @@ function afterDraw(drawData) {
         canvas2d.fillStyle = Color;
         canvas2d.fill();
 
-        drawCanvas(tempCanvs, 0, CanvasUpperOverflow, AlphaMasks);
-        drawCanvasBlink(tempCanvs, 0, CanvasUpperOverflow, AlphaMasks);
+        drawCanvas(tempCanvs, 0, 0, AlphaMasks);
+        drawCanvasBlink(tempCanvs, 0, 0, AlphaMasks);
     }
 }
 
