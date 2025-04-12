@@ -1,5 +1,5 @@
-import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { takeLayerNames } from "../../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -31,7 +31,7 @@ const asset = {
 
 /** @type {Translation.CustomRecord<string,string> } */
 const layerNames = {
-    CN: Tools.takeLayerNames(asset),
+    CN: takeLayerNames(asset),
     EN: {
         后背: "Back",
         下半基础: "Lower Base",

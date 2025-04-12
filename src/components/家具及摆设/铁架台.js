@@ -1,6 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { VersionSupport } from "@mod-utils/VersionSupport";
+import { takeLayerNames } from "../../utils";
 
 /** @type {TopLeft.Definition} */
 const baseTop = {
@@ -107,7 +108,7 @@ const asset = {
 /** @type {Translation.Dialog} */
 const layerNames = {
     CN: {
-        ...Tools.takeLayerNames(asset),
+        ...takeLayerNames(asset),
         金属杆: "金属杆",
     },
     EN: {

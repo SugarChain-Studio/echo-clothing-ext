@@ -1,6 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
+import { takeLayerNames } from "../../utils";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -240,7 +241,7 @@ const description = {
 
 const layerNames = {
     CN: {
-        ...Tools.takeLayerNames(asset),
+        ...takeLayerNames(asset),
         绳子: "牵引光束",
         绳子光芒: "牵引光束发光",
         跟随模式_抓住: "跟随模式(抓住)",

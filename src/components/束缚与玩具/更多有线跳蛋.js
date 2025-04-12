@@ -1,5 +1,5 @@
-import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
+import { takeLayerNames } from "../../utils";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -54,7 +54,7 @@ const asset = {
 
 /** @type {Translation.Dialog} */
 const layerNames = {
-    CN: Tools.takeLayerNames(asset),
+    CN: takeLayerNames(asset),
     EN: {
         跳蛋: "Vibrators",
         跳蛋1: "Vibrator 1",
