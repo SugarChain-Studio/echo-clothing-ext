@@ -20,6 +20,7 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
+    NotVisibleOnScreen: GameVersion === "R114" ? [] : ["LuziScreen"],
     DefaultColor: ["#545454", "#BC8B84"],
     Alpha: [
         {
