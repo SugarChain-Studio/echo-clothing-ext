@@ -12,16 +12,7 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             Effect: [],
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
-                Hogtied: PoseType.DEFAULT,
-                AllFours: PoseType.DEFAULT,
-            },
+            PoseMapping: {},
             Priority: 55,
             Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }],
         },
@@ -34,16 +25,7 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             Effect: [],
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
-                Hogtied: PoseType.DEFAULT,
-                AllFours: PoseType.DEFAULT,
-            },
+            PoseMapping: {},
         },
         {
             Name: "鸡腿_Luzi",
@@ -64,16 +46,7 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             Effect: [],
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.DEFAULT,
-                OverTheHead: PoseType.DEFAULT,
-                BackBoxTie: PoseType.DEFAULT,
-                BackElbowTouch: PoseType.DEFAULT,
-                BackCuffs: PoseType.DEFAULT,
-                Hogtied: PoseType.DEFAULT,
-                AllFours: PoseType.DEFAULT,
-            },
+            PoseMapping: {},
         },
         {
             Name: "蛋糕卷_Luzi",
@@ -94,16 +67,7 @@ const assets = {
             Left: 2,
             Difficulty: -10,
             ParentGroup: {},
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.HIDE,
-                OverTheHead: PoseType.HIDE,
-                BackBoxTie: PoseType.HIDE,
-                BackElbowTouch: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: {},
         },
         {
             Name: "棒棒糖_Luzi",
@@ -112,16 +76,7 @@ const assets = {
             Left: 0,
             Difficulty: -10,
             ParentGroup: {},
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.HIDE,
-                OverTheHead: PoseType.HIDE,
-                BackBoxTie: PoseType.HIDE,
-                BackElbowTouch: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: {},
             Layer: [
                 {
                     Name: "棒子",
@@ -144,16 +99,7 @@ const assets = {
             Left: 0,
             Difficulty: -10,
             ParentGroup: {},
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.HIDE,
-                OverTheHead: PoseType.HIDE,
-                BackBoxTie: PoseType.HIDE,
-                BackElbowTouch: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: {},
             Layer: [
                 {
                     Name: "竹签",
@@ -172,16 +118,7 @@ const assets = {
             Left: 0,
             Difficulty: -10,
             ParentGroup: {},
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.HIDE,
-                OverTheHead: PoseType.HIDE,
-                BackBoxTie: PoseType.HIDE,
-                BackElbowTouch: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: {},
         },
         {
             Name: "奶茶",
@@ -193,16 +130,7 @@ const assets = {
             Priority: 55,
             DefaultColor: ["#BA9273", "#F9F4E0", "#B4B4B4", "Default", "#878787"],
             AllowActivity: ["RubItem", "SipItem"],
-            PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
-                Yoked: PoseType.HIDE,
-                OverTheHead: PoseType.HIDE,
-                BackBoxTie: PoseType.HIDE,
-                BackElbowTouch: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: {},
             Layer: [
                 {
                     Name: "底色",
@@ -297,8 +225,38 @@ const translations = {
     },
 };
 
+const layerNames = {
+    EN: {
+        ItemMouth: {
+            棒棒糖_Luzi: {
+                棒子: "Stick",
+                糖: "Candy",
+                条纹: "Stripes",
+            },
+        },
+        ItemHandheld: {
+            棒棒糖_Luzi: {
+                棒子: "Stick",
+                糖: "Candy",
+                条纹: "Stripes",
+            },
+            烤鱼_Luzi: {
+                竹签: "Bamboo Skewer",
+                鱼: "Fish",
+            },
+            奶茶: {
+                底色: "Base Color",
+                顶色: "Top Color",
+                盖子: "Lid Color",
+                外观: "Appearance Color",
+                吸管: "Straw Color",
+            },
+        },
+    },
+};
+
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
 
     AssetManager.afterLoad(() => {
         HookManager.progressiveHook("LoginDoNextThankYou")

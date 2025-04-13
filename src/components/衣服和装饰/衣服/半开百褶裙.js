@@ -5,7 +5,10 @@ const asset = {
     Name: "半开百褶裙_Luzi",
     Random: false,
     Top: 0,
-    Left: 0,
+    Left: {
+        [PoseType.DEFAULT]: 0,
+        KneelingSpread: 90,
+    },
     DefaultColor: ["#7F1739", "Default", "Default"],
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {
@@ -30,22 +33,20 @@ const asset = {
 };
 
 /** @type {Translation.Entry} */
-const translation = {
+const description = {
     CN: "半开百褶裙",
     EN: "Half pleated skirt",
 };
 
+/** @type {Translation.Dialog} */
+const layerNames = {
+    EN: {
+        裙子: "Skirt",
+        白线: "White line",
+        链子: "Chain",
+    },
+};
+
 export default function () {
-    AssetManager.addAsset(
-        "ClothLower",
-        {
-            ...asset,
-            Left: {
-                [PoseType.DEFAULT]: 0,
-                KneelingSpread: 90,
-            },
-        },
-        undefined,
-        translation
-    );
+    AssetManager.addAssetWithConfig("ClothLower", asset, { description, layerNames });
 }
