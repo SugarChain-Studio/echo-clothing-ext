@@ -8,24 +8,13 @@ const assets = {
             Random: false,
             Top: -18,
             Left: 0,
+            Priority: 55,
             DefaultColor: ["##660606", "#000000", "#C18A34", "#CFAC68"],
             Layer: [
-                {
-                    Name: "帽顶",
-                    Priority: 55,
-                },
-                {
-                    Name: "帽身",
-                    Priority: 55,
-                },
-                {
-                    Name: "纹样",
-                    Priority: 55,
-                },
-                {
-                    Name: "帽帘",
-                    Priority: 55,
-                },
+                { Name: "帽顶" },
+                { Name: "帽身" },
+                { Name: "纹样" },
+                { Name: "帽帘" },
             ],
         },
         {
@@ -36,22 +25,24 @@ const assets = {
             Priority: 55,
             DefaultColor: ["Default", "#FFF260", "#3E5FBB", "#F83A3A"],
             Layer: [
-                {
-                    Name: "底",
-                    Priority: 55,
-                },
-                {
-                    Name: "眼白",
-                    Priority: 55,
-                },
-                {
-                    Name: "瞳孔",
-                    Priority: 55,
-                },
-                {
-                    Name: "涂色",
-                    Priority: 55,
-                },
+                { Name: "底" },
+                { Name: "眼白" },
+                { Name: "瞳孔" },
+                { Name: "涂色" },
+            ],
+        },
+        {
+            Name: "帽子2_Luzi",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Priority: 1,
+            DefaultColor: ["Default", "#302D2D", "#302D2D", "#302D2D",],
+            Layer: [
+                { Name: "A1" },
+                { Name: "A2" },
+                { Name: "A3" },
+                { Name: "A4" },
             ],
         },
     ],
