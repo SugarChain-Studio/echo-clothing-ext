@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "女仆胸罩_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 170,
+    Top: 270,
     Priority: 16,
     Layer: [
         {
