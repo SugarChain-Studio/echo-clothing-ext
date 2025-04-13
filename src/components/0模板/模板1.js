@@ -18,9 +18,9 @@ const asset = {
     },
     DefaultColor: ["#FFFFF"],
     Layer: [
-        { Name: "", Priority: 0 },
+        { Name: "Layer1", Priority: 0 },
         {
-            Name: "",
+            Name: "Layer2",
             Priority: 0,
             AllowTypes: { A: 0 },
             Alpha: [
@@ -46,23 +46,35 @@ const extended = {
     ],
 };
 
-const descriptions = {
+const layerNames = {
     CN: {
-        ABSelectBase: "",
-        ABSelectC: "",
-        ABModuleC: "",
-        ABOptionA0: "",
-        ABOptionA1: "",
+        Layer1: "Layer 1",
+        Layer2: "Layer 2",
     },
     EN: {},
 };
 
-const translations = {
+const assetDialogs = {
+    CN: {
+        SelectBase: "",
+        SelectC: "",
+        ModuleC: "",
+        OptionA0: "",
+        OptionA1: "",
+    },
+    EN: {},
+};
+
+const description = {
     CN: "",
     EN: "",
 };
 
 export default function () {
-    // AssetManager.addAsset("B", asset, extended, translations);
-    // AssetManager.addCustomDialog(descriptions);
+    // AssetManager.addAssetWithConfig("Cloth", asset, {
+    //     description,
+    //     layerNames,
+    //     extended,
+    //     assetDialogs,
+    // });
 }
