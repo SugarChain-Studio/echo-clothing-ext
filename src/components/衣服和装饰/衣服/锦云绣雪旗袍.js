@@ -9,7 +9,6 @@ const asset = {
     Left: 0,
     Prerequisite: ["HasBreasts"],
     Priority: 26,
-    AllowActivePose: ["Kneel", "LegsClosed", "Spread", "BaseLower"],
     Layer: [
         {
             Name: "A1",

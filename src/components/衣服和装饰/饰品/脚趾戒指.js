@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { takeLayerNames } from "../../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
