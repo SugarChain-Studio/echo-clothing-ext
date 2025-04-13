@@ -6,8 +6,8 @@ const assets = {
         {
             Name: "冕旒_Luzi",
             Random: false,
-            Top: -18,
             Left: 0,
+            Top: -18,
             Priority: 55,
             DefaultColor: ["#660606", "#000000", "#C18A34", "#CFAC68"],
             Layer: [{ Name: "帽顶" }, { Name: "帽身" }, { Name: "纹样" }, { Name: "帽帘" }],
@@ -15,8 +15,8 @@ const assets = {
         {
             Name: "狐狸面具",
             Random: false,
-            Top: 0,
             Left: 0,
+            Top: 0,
             Priority: 55,
             DefaultColor: ["Default", "#FFF260", "#3E5FBB", "#F83A3A"],
             Layer: [{ Name: "底" }, { Name: "眼白" }, { Name: "瞳孔" }, { Name: "涂色" }],
@@ -24,8 +24,8 @@ const assets = {
         {
             Name: "帽子2_Luzi",
             Random: false,
-            Top: 0,
-            Left: 0,
+            Left: 160,
+            Top: 20,
             Priority: 7,
             DefaultColor: ["#FFB1B1", "#FFB1B1", "#856757", "#5A4A41"],
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }],

@@ -3,13 +3,13 @@ import glob
 from PIL import Image
 
 # 带有通配符的目录路径
-wildcard_path = "resources/Assets/Female3DCG/右眼_Luzi/**/眼睛1.png"
+wildcard_path = "resources\Assets\Female3DCG\Hat\帽子2_Luzi_A*.png"
 
 # 定义裁剪参数
-crop_width = 140
-crop_height = 100
-crop_x = 180
-crop_y = 120
+crop_x = 160
+crop_y = 20
+crop_width = 180
+crop_height = 170
 
 
 def crop_image(source_path, destination_path, width, height, x, y):

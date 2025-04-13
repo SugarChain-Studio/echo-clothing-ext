@@ -2,7 +2,7 @@ import glob
 from PIL import Image
 
 # 带有通配符的目录路径
-wildcard_path = "resources/Assets/Female3DCG/*眼_Luzi/**/眼睛2*.png"
+wildcard_path = "resources\Assets\Female3DCG\Hat\帽子2_Luzi_A*.png"
 
 
 def analyze_images(file_paths):
