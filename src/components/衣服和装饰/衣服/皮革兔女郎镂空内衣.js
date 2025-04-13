@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "皮革兔女郎镂空内衣",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 160,
+    Top: 210,
     Priority: 21,
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     DefaultColor: [
