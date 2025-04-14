@@ -1,9 +1,10 @@
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../../assetForward";
 
 import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomGroupedAssetDefinitions} */
-const assets = {
+const cAssets = {
     ItemMouth: [
         {
             Name: "大号拉珠",
@@ -25,7 +26,6 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
                 Yoked: "Hide",
                 OverTheHead: "Hide",
                 BackBoxTie: "Hide",
@@ -39,7 +39,7 @@ const assets = {
 };
 
 /** @type { Translation.GroupedEntries } */
-const translations = {
+const cAssetsTranslations = {
     CN: {
         ItemHandheld: {
             大号拉珠: "大号拉珠",
@@ -74,44 +74,64 @@ const assetButt = {
     Effect: [E.IsPlugged],
     ExpressionTrigger: [{ Name: "Low", Group: "Blush", Timer: 10 }],
     Extended: true,
+    DynamicBeforeDraw: true,
     Activity: "MasturbateItem",
-    CreateLayerTypes: ["typed"],
     PoseMapping: {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    Layer: [],
 };
 
 /** @type {AssetArchetypeConfig} */
-const extendedButt = {
+const extended = {
     Archetype: ExtendedArchetype.TYPED,
     ChatTags: Tools.CommonChatTags(),
-    Options: [],
     DrawImages: false,
     ChatSetting: TypedItemChatSetting.SILENT,
     ScriptHooks: {
-        PublishAction: InventoryItemButtLongAnalBeadsPublishActionHook,
+        PublishAction: publishAction,
     },
+    Options: Array.from({ length: 9 }, (_, i) => ({
+        Name: `${i + 1}`,
+        Property: /**@type {ItemProperties}*/ ({ InsertedBeads: i + 1 }),
+    })),
+};
+
+const description = {
+    CN: "大号拉珠",
+    EN: "Large Anal Beads",
 };
 
 /** @type {Translation.Dialog} */
-const dialogButt = {
+const assetDialogs = {
     CN: {
-        ItemButt大号拉珠Select: "选择塞入珠子的数量",
+        Select: "选择塞入珠子的数量",
+        SetIncrease: `SourceCharacter抓住AssetName，慢慢将BCount个珠子塞入TargetCharacter的肛门.`,
+        SetDecrease: `SourceCharacter抓住AssetName，慢慢将BCount个珠子拉出TargetCharacter的肛门.`,
+
+        ...Array.from({ length: 9 }, (_, i) => i).reduce((acc, i) => {
+            const bcount = i + 1;
+            acc[`${bcount}`] = `${bcount}个珠子`;
+
+            return acc;
+        }, /** @type {Translation.Entry} */ ({})),
     },
     EN: {
-        ItemButt大号拉珠Select: "Select number of beads inserted",
-    },
-};
+        Select: "Select number of beads inserted",
+        SetIncrease: `SourceCharacter grabs AssetName, slowly inserts BCount bead(s) in TargetCharacter butt.`,
+        SetDecrease: `SourceCharacter grabs AssetName, slowly pulls BCount bead(s) from TargetCharacter butt.`,
 
-const translationsButt = {
-    CN: "大号拉珠",
-    EN: "Large pull beads",
+        ...Array.from({ length: 9 }, (_, i) => i).reduce((acc, i) => {
+            const bcount = i + 1;
+            const bead = i === 0 ? "Bead" : "Beads";
+            acc[`${bcount}`] = `${bcount} ${bead}`;
+            return acc;
+        }, /** @type {Translation.Entry} */ ({})),
+    },
 };
 
 /** @type {ExtendedItemScriptHookCallbacks.PublishAction<TypedItemData, TypedItemOption>} */
-function InventoryItemButtLongAnalBeadsPublishActionHook(data, originalFunction, C, item, newOption, previousOption) {
+function publishAction(data, originalFunction, C, item, newOption, previousOption) {
     const beadsOld = previousOption.Property.InsertedBeads || 1;
     const beadsNew = newOption.Property.InsertedBeads || 1;
     const beadsChange = beadsNew - beadsOld;
@@ -130,13 +150,14 @@ function InventoryItemButtLongAnalBeadsPublishActionHook(data, originalFunction,
 
     const dictionary = ExtendedItemBuildChatMessageDictionary(chatData, data, item)
         .focusGroup(/** @type {AssetGroupItemName}*/ (item.Asset.Group.Name))
+        .text("BCount", `${beadsChange}`)
         .build();
     dictionary.push({ ActivityName: "MasturbateItem" }, { ActivityCounter: Math.abs(beadsChange) });
 
     const Prefix =
         typeof data.dialogPrefix.chat === "function" ? data.dialogPrefix.chat(chatData) : data.dialogPrefix.chat;
     const Suffix = beadsChange > 0 ? "Increase" : "Decrease";
-    ChatRoomPublishCustomAction(`${Prefix}${Math.abs(beadsChange)}${Suffix}`, true, dictionary);
+    ChatRoomPublishCustomAction(`${Prefix}${Suffix}`, true, dictionary);
 
     if (C.IsPlayer()) {
         // The Player pulls beads from her own butt
@@ -146,56 +167,19 @@ function InventoryItemButtLongAnalBeadsPublishActionHook(data, originalFunction,
     }
 }
 
-function AddAssetButt() {
-    extendedButt["Options"] = [];
-
-    /**  @type {Record<string,string>} */
-    const imageMappings = {};
-
-    for (let i = 0; i < 9; i++) {
-        const bcount = i + 1;
-
-        assetButt["Layer"][i] = {
-            Name: `${bcount}`,
-            Top: i * -44,
-            AllowTypes: { typed: i },
-            Alpha: [{ Group: ["ItemButt"], Masks: [[220, 0, 60, 532]] }],
-        };
-
-        extendedButt["Options"][i] = {
-            Name: `${bcount}`,
-            Property: { InsertedBeads: bcount },
-        };
-
-        imageMappings[`Assets/Female3DCG/ItemButt/大号拉珠_typed${i}_${bcount}.png`] =
-            "Assets/Female3DCG/ItemButt/大号拉珠.png";
-
-        dialogButt["CN"][`ItemButt大号拉珠${bcount}`] = `${bcount}个珠子`;
-        dialogButt["CN"][
-            `ItemButt大号拉珠Set${bcount}Increase`
-        ] = `SourceCharacter抓住AssetName，将${bcount}个珠子塞入TargetCharacter的肛门.`;
-        dialogButt["CN"][
-            `ItemButt大号拉珠Set${bcount}Decrease`
-        ] = `SourceCharacter抓住AssetName，将${bcount}个珠子拉出TargetCharacter的肛门.`;
-
-        const bead = i === 0 ? "Bead" : "Beads";
-        const lower_bead = bead.toLowerCase();
-
-        dialogButt["EN"][`ItemButt大号拉珠${bcount}`] = `${bcount} ${bead}`;
-        dialogButt["EN"][
-            `ItemButt大号拉珠Set${bcount}Increase`
-        ] = `SourceCharacter grabs AssetName, and inserts ${bcount} ${lower_bead} in DestinationCharacter butt.`;
-        dialogButt["EN"][
-            `ItemButt大号拉珠Set${bcount}Decrease`
-        ] = `SourceCharacter grabs AssetName, and pulls ${bcount} ${lower_bead} from DestinationCharacter butt.`;
-    }
-
-    AssetManager.addImageMapping(imageMappings);
-    AssetManager.addAsset("ItemButt", assetButt, extendedButt, translationsButt);
-    AssetManager.addCustomDialog(dialogButt);
+/** @type {ExtendedItemCallbacks.BeforeDraw<TypedItemData>} */
+function beforeDraw({ Y, Property }) {
+    const bcount = Property.InsertedBeads || 1;
+    return { Y: Y - (bcount - 1) * 44, AlphaMasks: [[220, 0, 60, 512]] };
 }
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
-    AddAssetButt();
+    HookManager.globalFunction(`AssetsItemButt${assetButt.Name}BeforeDraw`, beforeDraw);
+    AssetManager.addGroupedAssets(cAssets, cAssetsTranslations);
+    AssetManager.addAssetWithConfig("ItemButt", assetButt, {
+        description,
+        layerNames: {},
+        extended,
+        assetDialogs,
+    });
 }
