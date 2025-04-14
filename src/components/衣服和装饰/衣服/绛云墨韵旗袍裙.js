@@ -1,5 +1,10 @@
 import { AssetManager } from "../../../assetForward";
 
+const hideHogtied = {
+    AllFours: PoseType.HIDE,
+    Hogtied: PoseType.HIDE,
+};
+
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "绛云墨韵旗袍裙_Luzi",
@@ -36,26 +41,31 @@ const asset = {
         "Default",
     ],
     Layer: [
-        { Name: "A1", ColorGroup: "Petticoat", Priority: 6 },
-        { Name: "A2", ColorGroup: "Petticoat" },
-        { Name: "A3", ColorGroup: "Petticoat" },
+        {
+            Name: "A1",
+            ColorGroup: "Petticoat",
+            Priority: 6,
+            PoseMapping: hideHogtied,
+        },
+        { Name: "A2", ColorGroup: "Petticoat", PoseMapping: hideHogtied },
+        { Name: "A3", ColorGroup: "Petticoat", PoseMapping: hideHogtied },
         { Name: "B1", ColorGroup: "Lace" },
         { Name: "B2", ColorGroup: "Cloth" },
         { Name: "B3", ColorGroup: "Darkening" },
-        { Name: "B4", ColorGroup: "Edge" },
+        { Name: "B4", ColorGroup: "Edge", PoseMapping: hideHogtied },
         { Name: "B5", ColorGroup: "Outline" },
         { Name: "B6", ColorGroup: "Edge" },
-        { Name: "C1", ColorGroup: "Cloth" },
-        { Name: "C2", ColorGroup: "Darkening" },
-        { Name: "C3", ColorGroup: "Edge" },
-        { Name: "C4", ColorGroup: "Outline" },
+        { Name: "C1", ColorGroup: "Cloth", PoseMapping: hideHogtied },
+        { Name: "C2", ColorGroup: "Darkening", PoseMapping: hideHogtied },
+        { Name: "C3", ColorGroup: "Edge", PoseMapping: hideHogtied },
+        { Name: "C4", ColorGroup: "Outline", PoseMapping: hideHogtied },
         { Name: "D1", ColorGroup: "Lace" },
         { Name: "D2", ColorGroup: "Cloth" },
         { Name: "D3", ColorGroup: "Darkening" },
         { Name: "D4" },
         { Name: "D5", ColorGroup: "Edge" },
-        { Name: "D6" },
-        { Name: "D7" },
+        { Name: "D6", PoseMapping: hideHogtied },
+        { Name: "D7", PoseMapping: hideHogtied },
     ],
 };
 
