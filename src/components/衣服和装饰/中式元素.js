@@ -1,13 +1,11 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
 
-/** @type {(Name:string, Priority:number) => CustomAssetDefinitionAppearance} */
-const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({
+/** @type {(Name:string, config: Pick<CustomAssetDefinitionAppearance, 'Priority' | 'Top' | 'Left'> ) => CustomAssetDefinitionAppearance} */
+const 茉莉花钿SharedAssetDefinition = (Name, config) => ({
     Name,
     Random: false,
-    Top: 0,
-    Left: 0,
-    Priority,
+    ...config,
     Layer: [
         { Name: "左茉莉花", ColorGroup: "茉莉花", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
         { Name: "左线", ColorGroup: "线", AllowTypes: [{ typed: 0 }, { typed: 2 }] },
@@ -23,8 +21,8 @@ const 茉莉花钿SharedAssetDefinition = (Name, Priority) => ({
     ],
 });
 
-const 茉莉花钿1 = 茉莉花钿SharedAssetDefinition("茉莉花钿1", 55);
-const 茉莉花钿2 = 茉莉花钿SharedAssetDefinition("茉莉花钿2", 40);
+const 茉莉花钿1 = 茉莉花钿SharedAssetDefinition("茉莉花钿1", { Left: 160, Top: 80, Priority: 55 });
+const 茉莉花钿2 = 茉莉花钿SharedAssetDefinition("茉莉花钿2", { Left: 150, Top: 70, Priority: 40 });
 
 /** @type {(DynamicGroup?:CustomGroupName)=>CustomAssetDefinitionAppearance} */
 const 假领子 = (DynamicGroupName) => ({
