@@ -3,14 +3,15 @@ import { AssetManager } from "../../assetForward";
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "举手杆",
-    Left: 0,
-    Top: 0,
+    Left: 130,
+    Top: 60,
     Difficulty: 5,
     Priority: 39,
     Time: 12,
     RemoveTime: 10,
     Extended: false,
     AllowLock: true,
+    DrawLocks: false,
     AllowTighten: true,
     Random: false,
     Effect: [E.Block, E.BlockWardrobe],
