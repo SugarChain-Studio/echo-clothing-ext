@@ -8,42 +8,18 @@ const assets = {
             Random: false,
             Top: -40,
             Left: 90,
+            Priority: 20,
             DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
-            Layer: [
-                {
-                    Name: "内圈",
-                    Priority: 20,
-                },
-                {
-                    Name: "绒毛",
-                    Priority: 20,
-                },
-                {
-                    Name: "外圈",
-                    Priority: 20,
-                },
-            ],
+            Layer: [{ Name: "内圈", }, { Name: "绒毛", }, { Name: "外圈", },],
         },
         {
             Name: "耳朵2_Luzi",
             Random: false,
             Top: 0,
             Left: 90,
+            Priority: 20,
             DefaultColor: ["#916A6A", "#888888", "#917451"],
-            Layer: [
-                {
-                    Name: "内圈",
-                    Priority: 20,
-                },
-                {
-                    Name: "绒毛",
-                    Priority: 20,
-                },
-                {
-                    Name: "外圈",
-                    Priority: 20,
-                },
-            ],
+            Layer: [{ Name: "内圈", }, { Name: "绒毛", }, { Name: "外圈", },],
         },
         {
             Name: "角7_Luzi",
@@ -66,52 +42,44 @@ const assets = {
             Random: false,
             Top: 0,
             Left: 90,
+        },
+        {
+            Name: "鱼鳍耳朵_Luzi",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Priority: 53,
+            DefaultColor: ["#FFFFFF", "#888888", "#000000"],
+            Layer: [{ Name: "A1", }, { Name: "A2", }, { Name: "A3", },],
+        },
+        {
+            Name: "耷拉下来的耳朵_Luzi",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Priority: 1,
         },
     ],
     HairAccessory2: [
         {
             Name: "耳朵1_Luzi",
             Random: false,
+            DynamicGroupName: "HairAccessory1",
             Top: -40,
             Left: 90,
+            Priority: 20,
             DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
-            DynamicGroupName: "HairAccessory1",
-            Layer: [
-                {
-                    Name: "内圈",
-                    Priority: 20,
-                },
-                {
-                    Name: "绒毛",
-                    Priority: 20,
-                },
-                {
-                    Name: "外圈",
-                    Priority: 20,
-                },
-            ],
+            Layer: [{ Name: "内圈", }, { Name: "绒毛", }, { Name: "外圈", },],
         },
         {
             Name: "耳朵2_Luzi",
             Random: false,
+            DynamicGroupName: "HairAccessory1",
             Top: 0,
             Left: 90,
+            Priority: 20,
             DefaultColor: ["#916A6A", "#888888", "#917451"],
-            DynamicGroupName: "HairAccessory1",
-            Layer: [
-                {
-                    Name: "内圈",
-                    Priority: 20,
-                },
-                {
-                    Name: "绒毛",
-                    Priority: 20,
-                },
-                {
-                    Name: "外圈",
-                    Priority: 20,
-                },
-            ],
+            Layer: [{ Name: "内圈", }, { Name: "绒毛", }, { Name: "外圈", },],
         },
         {
             Name: "角7_Luzi",
@@ -134,8 +102,27 @@ const assets = {
         {
             Name: "小马耳2_Luzi",
             Random: false,
+            DynamicGroupName: "HairAccessory1",
             Top: 0,
             Left: 90,
+        },
+        {
+            Name: "鱼鳍耳朵_Luzi",
+            Random: false,
+            DynamicGroupName: "HairAccessory1",
+            Top: 0,
+            Left: 0,
+            Priority: 53,
+            DefaultColor: ["#FFFFFF", "#888888", "#000000"],
+            Layer: [{ Name: "A1", }, { Name: "A2", }, { Name: "A3", },],
+        },
+        {
+            Name: "耷拉下来的耳朵_Luzi",
+            Random: false,
+            DynamicGroupName: "HairAccessory1",
+            Top: 0,
+            Left: 0,
+            Priority: 1,
         },
     ],
 };
