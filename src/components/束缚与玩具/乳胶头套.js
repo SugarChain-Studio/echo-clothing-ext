@@ -101,33 +101,33 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHood"], ["乳胶头�
         SetB1: "SourceCharacter隐藏了DestinationCharacter的后发",
     },
     EN: {
-        SelectBase: "透光度",
-        Select透光度: "透光度",
-        Module透光度: "透光度",
-        Optionl0: "透光",
-        Optionl1: "不透光",
-        Setl0: "SourceCharacter使DestinationCharacter的头套变得透明",
-        Setl1: "SourceCharacter使DestinationCharacter的头套变得不透明",
+        SelectBase: "Visibility",
+        Select透光度: "Hood Transparency",
+        Module透光度: "Transparency Mode",
+        Optionl0: "See-through",
+        Optionl1: "Opaque",
+        Setl0: "SourceCharacter makes DestinationCharacter's latex hood transparent",
+        Setl1: "SourceCharacter makes DestinationCharacter's latex hood opaque",
     
-        Select隐藏前发: "隐藏前发",
-        Module隐藏前发: "隐藏前发",
-        OptionF0: "显示",
-        OptionF1: "隐藏",
-        SetF0: "SourceCharacter显示了DestinationCharacter的前发",
-        SetF1: "SourceCharacter隐藏了DestinationCharacter的前发",
+        Select隐藏前发: "Front Hair",
+        Module隐藏前发: "Front Hair Visibility",
+        OptionF0: "Show",
+        OptionF1: "Hide",
+        SetF0: "SourceCharacter reveals DestinationCharacter's front hair",
+        SetF1: "SourceCharacter covers DestinationCharacter's front hair",
     
-        Select隐藏后发: "隐藏后发",
-        Module隐藏后发: "隐藏后发",
-        OptionB0: "显示",
-        OptionB1: "隐藏",
-        SetB0: "SourceCharacter显示了DestinationCharacter的后发",
-        SetB1: "SourceCharacter隐藏了DestinationCharacter的后发",
+        Select隐藏后发: "Back Hair",
+        Module隐藏后发: "Back Hair Visibility",
+        OptionB0: "Show",
+        OptionB1: "Hide",
+        SetB0: "SourceCharacter reveals DestinationCharacter's back hair",
+        SetB1: "SourceCharacter covers DestinationCharacter's back hair",
     },
 });
 
 const translations = {
     CN: "乳胶头套",
-    EN: "",
+    EN: "Latex Hood",
 };
 
 export default function () {

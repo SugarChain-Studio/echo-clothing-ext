@@ -11,7 +11,6 @@ const asset = {
     AllowLock: true,
     AllowTighten: true,
     Fetish: ["Leather"],
-    Effect: [E.Block, E.BlockWardrobe],
     Priority: 44,
     Layer: [
         { Name: "A1" },
@@ -53,23 +52,23 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHead"], ["乳胶眼�
         "Module透光度": "透光度",
         "Optionl0": "透光",
         "Optionl1": "不透光",
-        "Setl0": "SourceCharacter使DestinationCharacter的头套变得透明",
-        "Setl1": "SourceCharacter使DestinationCharacter的头套变得不透明",
+        "Setl0": "SourceCharacter使DestinationCharacter的眼罩变得透明",
+        "Setl1": "SourceCharacter使DestinationCharacter的眼罩变得不透明",
     },
     EN: {
-        "SelectBase": "透光度",
-        "Select透光度": "透光度",
-        "Module透光度": "透光度",
-        "Optionl0": "透光",
-        "Optionl1": "不透光",
-        "Setl0": "SourceCharacter使DestinationCharacter的头套变得透明",
-        "Setl1": "SourceCharacter使DestinationCharacter的头套变得不透明",
+        "SelectBase": "Transparency",
+        "Select透光度": "Transparency",
+        "Module透光度": "Transparency",
+        "Optionl0": "Transparent",
+        "Optionl1": "Opaque",
+        "Setl0": "SourceCharacter makes DestinationCharacter's blindfold transparent",
+        "Setl1": "SourceCharacter makes DestinationCharacter's blindfold opaque",
     },
 });
 
 const translations = {
     CN: "乳胶眼罩",
-    EN: "",
+    EN: "Latex Blindfold",
 };
 
 export default function () {
