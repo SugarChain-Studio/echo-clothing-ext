@@ -86,7 +86,7 @@ const asset = {
         {
             Name: "上身遮罩",
             ParentGroup: "BodyUpper",
-            PoseMapping: { ...AssetPoseMapping.BodyUpper },
+            PoseMapping: { ...AssetPoseMapping.BodyUpper, Yoked: "Yoked", OverTheHead: "OverTheHead" },
             AllowColorize: false,
             HasImage: false,
         },

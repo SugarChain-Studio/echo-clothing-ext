@@ -1,3 +1,4 @@
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -21,12 +22,7 @@ const asset = {
             InheritColor: "BodyLower",
             HideColoring: true,
             ColorSuffix: { HEX_COLOR: "White" },
-            PoseMapping: {
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-            },
+            PoseMapping: { ...AssetPoseMapping.BodyLower },
         },
         {
             Name: "上半身",
@@ -37,15 +33,7 @@ const asset = {
             InheritColor: "BodyUpper",
             HideColoring: true,
             ColorSuffix: { HEX_COLOR: "White" },
-            PoseMapping: {
-                BackBoxTie: "BackBoxTie",
-                BackCuffs: "BackCuffs",
-                BackElbowTouch: "BackElbowTouch",
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                Hogtied: "Hogtied",
-                AllFours: "AllFours",
-            },
+            PoseMapping: { ...AssetPoseMapping.BodyUpper },
         },
         {
             Name: "手",
@@ -56,15 +44,7 @@ const asset = {
             InheritColor: "BodyUpper",
             HideColoring: true,
             ColorSuffix: { HEX_COLOR: "White" },
-            PoseMapping: {
-                BackBoxTie: "Hide",
-                BackCuffs: "Hide",
-                BackElbowTouch: "Hide",
-                OverTheHead: "Hide",
-                Yoked: "Hide",
-                Hogtied: "Hide",
-                AllFours: "AllFours",
-            },
+            PoseMapping: { ...AssetPoseMapping.HandsLeft },
         },
         {
             Name: "钥匙孔",
@@ -75,12 +55,38 @@ const asset = {
     ],
 };
 
-const translations = {
+const translation = {
     CN: "人偶",
     EN: "Ball Joint Doll",
     RU: "Кукла на шарнирах",
 };
 
+const layerNames = {
+    CN: {
+        钥匙孔: "钥匙孔",
+    },
+    EN: {
+        钥匙孔: "Keyhole",
+    },
+};
+
+/** @type {(C:Character, group: AssetGroupName)=>boolean} */
+const shouldHide = (C, group) =>
+    C.DrawAppearance.some((item) => {
+        if (item.Asset.Name === asset.Name) return false;
+        if (CharacterAppearanceItemIsHidden(item.Asset.Name, item.Asset.Group.Name)) return false;
+        if (item.Asset.Hide?.includes(group)) return true;
+        return false;
+    });
+
+/** @type {ExtendedItemCallbacks.BeforeDraw} */
+function beforeDraw({ C, L }) {
+    if (L === "上半身" && shouldHide(C, "BodyUpper")) return { Opacity: 0 };
+    if (L === "下半身" && shouldHide(C, "BodyLower")) return { Opacity: 0 };
+    if (L === "手" && shouldHide(C, "HandsLeft")) return { Opacity: 0 };
+}
+
 export default function () {
-    AssetManager.addAsset("动物身体_Luzi", asset, undefined, translations);
+    HookManager.globalFunction(`Assets动物身体_Luzi${asset.Name}BeforeDraw`, beforeDraw);
+    AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
 }
