@@ -11,6 +11,7 @@ const asset = {
     AllowLock: true,
     DrawLocks: false,
     Difficulty: 25,
+    DynamicBeforeDraw: true,
     Hide: ["HandsLeft", "HandsRight", "BodyLower", "BodyUpper", "ArmsLeft", "ArmsRight"],
     Layer: [
         {
@@ -76,6 +77,7 @@ const shouldHide = (C, group) =>
         if (item.Asset.Name === asset.Name) return false;
         if (CharacterAppearanceItemIsHidden(item.Asset.Name, item.Asset.Group.Name)) return false;
         if (item.Asset.Hide?.includes(group)) return true;
+        if (item.Property?.Hide?.includes(group)) return true;
         return false;
     });
 
