@@ -1,5 +1,3 @@
-const {} = require("./生化人体");
-
 /**
  * 绘制其他身体部位
  * @param {Character} C
