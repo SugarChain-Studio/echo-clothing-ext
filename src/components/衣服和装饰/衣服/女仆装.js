@@ -1,101 +1,120 @@
 import { AssetManager } from "../../../assetForward";
 
-/** @type {CustomAssetDefinition} */
+/** @type {CustomGroupedAssetDefinitions} */
 const asset = {
-    Name: "女仆装_Luzi",
-    Random: false,
-    Gender: "F",
-    Top: 0,
-    Left: 0,
-    Prerequisite: ["HasBreasts"],
-    ParentGroup: {
-        [PoseType.DEFAULT]: "BodyUpper",
-        TapedHands: "BodyUpper",
-        Yoked: PoseType.DEFAULT,
-        OverTheHead: PoseType.DEFAULT,
-        BackBoxTie: PoseType.DEFAULT,
-        BackElbowTouch: PoseType.DEFAULT,
-        BackCuffs: PoseType.DEFAULT,
-    },
-    PoseMapping: {
-        AllFours: "AllFours",
-        Hogtied: "Hogtied",
-        Yoked: "BackElbowTouch",
-        OverTheHead: "BackElbowTouch",
-        BackBoxTie: "BackElbowTouch",
-        BackElbowTouch: "BackElbowTouch",
-        BackCuffs: "BackElbowTouch",
-    },
-    Layer: [
+    Cloth: [
         {
-            Name: "裙子",
+            Name: "女仆装_Luzi",
+            Random: false,
+            Gender: "F",
+            Top: 0,
+            Left: 0,
             Priority: 26,
-        },
-        {
-            Name: "围裙",
-            Priority: 26,
-        },
-        {
-            PoseMapping: {},
-            ParentGroup: {},
-            Name: "蝴蝶结",
-            Priority: 26,
-        },
-    ],
-};
-
-const translations = {
-    CN: "女仆装",
-    EN: "Maid Costume",
-    RU: "Костюм горничной",
-};
-
-/** @type {CustomAssetDefinition} */
-const asset2 = {
-    Name: "女仆装2_Luzi",
-    Random: false,
-    Gender: "F",
-    Top: 0,
-    Left: 0,
-    Priority: 35,
-    Prerequisite: ["HasBreasts"],
-    DefaultColor: ["#3F3F3F", "#808080"],
-    Layer: [
-        {
-            Name: "裙子",
-            PoseMapping: {
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "BackElbowTouch",
-                BackCuffs: "BackCuffs",
-                AllFours: "Hide",
-                Hogtied: "Hogtied",
+            Prerequisite: ["HasBreasts"],
+            ParentGroup: {
+                [PoseType.DEFAULT]: "BodyUpper",
+                TapedHands: "BodyUpper",
             },
-        },
-        {
-            Name: "围裙",
             PoseMapping: {
-                TapedHands: "TapedHands",
+                AllFours: "AllFours",
+                Hogtied: "Hogtied",
                 Yoked: "BackElbowTouch",
                 OverTheHead: "BackElbowTouch",
                 BackBoxTie: "BackElbowTouch",
                 BackElbowTouch: "BackElbowTouch",
                 BackCuffs: "BackElbowTouch",
-                AllFours: "Hide",
-                Hogtied: "Hogtied",
             },
+            Layer: [
+                {
+                    Name: "裙子",
+                },
+                {
+                    Name: "围裙",
+                },
+                {
+                    PoseMapping: {},
+                    ParentGroup: {},
+                    Name: "蝴蝶结",
+                },
+            ],
+        },
+        {
+            Name: "女仆装2_Luzi",
+            Random: false,
+            Gender: "F",
+            Top: 0,
+            Left: 0,
+            Priority: 35,
+            Prerequisite: ["HasBreasts"],
+            DefaultColor: ["#3F3F3F", "#808080"],
+            Layer: [
+                {
+                    Name: "裙子",
+                    PoseMapping: {
+                        Yoked: "Yoked",
+                        OverTheHead: "OverTheHead",
+                        BackBoxTie: "BackBoxTie",
+                        BackElbowTouch: "BackElbowTouch",
+                        BackCuffs: "BackCuffs",
+                        AllFours: "Hide",
+                        Hogtied: "Hogtied",
+                    },
+                },
+                {
+                    Name: "围裙",
+                    PoseMapping: {
+                        TapedHands: "TapedHands",
+                        Yoked: "BackElbowTouch",
+                        OverTheHead: "BackElbowTouch",
+                        BackBoxTie: "BackElbowTouch",
+                        BackElbowTouch: "BackElbowTouch",
+                        BackCuffs: "BackElbowTouch",
+                        AllFours: "Hide",
+                        Hogtied: "Hogtied",
+                    },
+                },
+            ],
         },
     ],
 };
 
-const translations2 = {
-    CN: "女仆装 2",
-    EN: "Maid Costume 2",
-    RU: "Костюм горничной 2",
+const translations = {
+    CN: {
+        Cloth: {
+            女仆装_Luzi: "女仆装",
+            女仆装2_Luzi: "女仆装 2",
+        },
+    },
+    EN: {
+        Cloth: {
+            女仆装_Luzi: "Maid Costume",
+            女仆装2_Luzi: "Maid Costume 2",
+        },
+    },
+    RU: {
+        Cloth: {
+            女仆装_Luzi: "Костюм горничной",
+            女仆装2_Luzi: "Костюм горничной 2",
+        },
+    },
+};
+
+const layerNames = {
+    EN: {
+        Cloth: {
+            女仆装_Luzi: {
+                裙子: "Skirt",
+                围裙: "Apron",
+                蝴蝶结: "Bow",
+            },
+            女仆装2_Luzi: {
+                裙子: "Skirt",
+                围裙: "Apron",
+            },
+        },
+    },
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, undefined, translations);
-    AssetManager.addAsset("Cloth", asset2, undefined, translations2);
+    AssetManager.addGroupedAssetsWithConfig(asset, translations, layerNames);
 }
