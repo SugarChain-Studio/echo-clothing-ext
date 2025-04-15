@@ -1,28 +1,40 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "乳胶眼罩_Luzi",
     Random: false,
     Gender: "F",
-    Top: 0,
-    Left: 0,
+    Left: 190,
+    Top: 140,
+    Difficulty: 3,
+    Time: 10,
     AllowLock: true,
     AllowTighten: true,
     Fetish: ["Leather"],
     Priority: 44,
-    Layer: [
-        { Name: "A1" },
-        { Name: "A2" },
-        { Name: "A3" },
-    ],
+    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
+};
+
+const layerNames = {
+    CN: {
+        A1: "眼罩",
+        A2: "带子",
+        A3: "扣具",
+    },
+    EN: {
+        A1: "Blindfold",
+        A2: "Belt",
+        A3: "Buckles",
+    },
 };
 
 /**@type {AssetArchetypeConfig} */
-const extened = {
+const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChangeWhenLocked: false,
+    ChatTags: Tools.CommonChatTags(),
     Modules: [
         {
             Name: "透光度",
@@ -32,11 +44,7 @@ const extened = {
                 {},
                 {
                     Property: {
-                        Effect: [
-                            E.BlindHeavy,
-                            E.DeafLight,
-                            E.BlockWardrobe,
-                        ],
+                        Effect: [E.BlindHeavy, E.BlockWardrobe],
                     },
                 },
             ],
@@ -45,33 +53,34 @@ const extened = {
 };
 
 /**@type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemHead"], ["乳胶眼罩_Luzi"], {
+const assetDialogs = {
     CN: {
-        "SelectBase": "透光度",
-        "Select透光度": "透光度",
-        "Module透光度": "透光度",
-        "Optionl0": "透光",
-        "Optionl1": "不透光",
-        "Setl0": "SourceCharacter使DestinationCharacter的眼罩变得透明",
-        "Setl1": "SourceCharacter使DestinationCharacter的眼罩变得不透明",
+        SelectBase: "透光度",
+
+        Module透光度: "透光度",
+        Select透光度: "设置透光度",
+        Optionl0: "透光",
+        Optionl1: "不透光",
+        Setl0: "SourceCharacter使DestinationCharacterAssetName变得透明",
+        Setl1: "SourceCharacter使DestinationCharacterAssetName变得不透明",
     },
     EN: {
-        "SelectBase": "Transparency",
-        "Select透光度": "Transparency",
-        "Module透光度": "Transparency",
-        "Optionl0": "Transparent",
-        "Optionl1": "Opaque",
-        "Setl0": "SourceCharacter makes DestinationCharacter's blindfold transparent",
-        "Setl1": "SourceCharacter makes DestinationCharacter's blindfold opaque",
-    },
-});
+        SelectBase: "Transparency",
 
-const translations = {
+        Module透光度: "Transparency",
+        Select透光度: "Set Transparency",
+        Optionl0: "Transparent",
+        Optionl1: "Opaque",
+        Setl0: "SourceCharacter makes DestinationCharacterAssetName transparent",
+        Setl1: "SourceCharacter makes DestinationCharacterAssetName opaque",
+    },
+};
+
+const translation = {
     CN: "乳胶眼罩",
     EN: "Latex Blindfold",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemHead", asset, extened, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetDialogs });
 }
