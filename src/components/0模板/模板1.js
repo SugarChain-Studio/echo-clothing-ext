@@ -65,14 +65,14 @@ const assetDialogs = {
     EN: {},
 };
 
-const description = {
+const translation = {
     CN: "",
     EN: "",
 };
 
 export default function () {
     // AssetManager.addAssetWithConfig("Cloth", asset, {
-    //     description,
+    //     translation,
     //     layerNames,
     //     extended,
     //     assetDialogs,

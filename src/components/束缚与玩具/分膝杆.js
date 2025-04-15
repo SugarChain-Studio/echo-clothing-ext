@@ -21,7 +21,7 @@ const asset = {
     Layer: [{ Name: "杆子" }, { Name: "束带", ParentGroup: "BodyLower" }, { Name: "Lock", LockLayer: true }],
 };
 
-const description = {
+const translation = {
     CN: "分膝杆",
     EN: "Knee Spreader",
 };
@@ -41,7 +41,7 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemLegs", asset, {
-        description,
+        translation,
         layerNames,
     });
 }

@@ -168,7 +168,7 @@ const extended = {
 };
 
 /** @type {Translation.Entry} */
-const description = {
+const translation = {
     CN: "铁架台",
     EN: "Buret Stand",
 };
@@ -217,7 +217,7 @@ export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, {
         extended,
         layerNames,
-        description,
+        translation,
         assetDialogs,
     });
 }

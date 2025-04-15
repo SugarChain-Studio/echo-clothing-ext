@@ -217,7 +217,7 @@ const assetDialogs = {
     },
 };
 
-const description = {
+const translation = {
     CN: "更多有线跳蛋",
     EN: "More Wired Vibrators",
     RU: "Больше проводных вибраторов",
@@ -227,7 +227,7 @@ const description = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemVulva", asset, {
         extended,
-        description,
+        translation,
         layerNames,
         assetDialogs,
     });

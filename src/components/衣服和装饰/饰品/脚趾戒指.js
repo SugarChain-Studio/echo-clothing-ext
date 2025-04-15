@@ -225,7 +225,7 @@ const assetDialogs = {
     },
 };
 
-const description = {
+const translation = {
     CN: "脚趾戒指",
     EN: "Toe Ring",
     RU: "Кольцо на пальце ноги",
@@ -244,5 +244,5 @@ const layerNames = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Shoes", asset, { description, layerNames, extended, assetDialogs });
+    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames, extended, assetDialogs });
 }

@@ -421,14 +421,14 @@ const layerNames = [...LayerSettings, ...attrLayer].reduce(
 );
 
 /** @type {Translation.Entry} */
-const description = {
+const translation = {
     CN: "大纹身",
     EN: "Large Tattoo",
 };
 
 export default function () {
     AssetManager.addAssetWithConfig("BodyMarkings", asset, {
-        description,
+        translation,
         layerNames,
         extended,
         assetDialogs,

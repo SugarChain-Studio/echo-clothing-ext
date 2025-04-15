@@ -40,11 +40,11 @@ const layerNames = {
 };
 
 /** @type {Translation.Entry} */
-const description = {
+const translation = {
     CN: "皮革中空短裙",
     EN: "Leather Sideway Skirt",
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ClothLower", asset, { description, layerNames });
+    AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
 }

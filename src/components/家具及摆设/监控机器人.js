@@ -234,7 +234,7 @@ const assetDialogs = {
     },
 };
 
-const description = {
+const translation = {
     CN: "监控机器人",
     EN: "Surveillance Robot",
 };
@@ -263,7 +263,7 @@ export default function () {
     HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}AfterDraw`, afterDraw);
 
     AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, {
-        description,
+        translation,
         layerNames,
         assetDialogs,
         extended,

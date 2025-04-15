@@ -34,7 +34,7 @@ const layerNames = {
     },
 };
 
-const description = {
+const translation = {
     CN: "插兜雨衣",
     EN: "Transparent raincoat",
 };
@@ -67,7 +67,7 @@ const assetDialogs = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset, {
-        description,
+        translation,
         layerNames,
         extended,
         assetDialogs,

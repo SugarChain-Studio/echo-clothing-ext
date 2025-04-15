@@ -21,7 +21,7 @@ const asset = {
     Layer: [{ Name: "杆子" }, { Name: "颈部" }, { Name: "束带" }, { Name: "Lock", LockLayer: true }],
 };
 
-const description = {
+const translation = {
     CN: "举手杆",
     EN: "Hand raised bar",
 };
@@ -42,5 +42,5 @@ const layerNames = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemArms", asset, { description, layerNames });
+    AssetManager.addAssetWithConfig("ItemArms", asset, { translation, layerNames });
 }

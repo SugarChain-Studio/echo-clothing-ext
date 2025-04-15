@@ -60,12 +60,12 @@ const assetDialogs = {
     },
 };
 
-const description = {
+const translation = {
     CN: "斜肩上衣",
     EN: "Off-the-shoulder Top",
     RU: "Топ с открытым плечом",
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Cloth", asset, { extended, description, assetDialogs, layerNames });
+    AssetManager.addAssetWithConfig("Cloth", asset, { extended, translation, assetDialogs, layerNames });
 }

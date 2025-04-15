@@ -139,11 +139,11 @@ const layerNames = {
     },
 };
 
-const description = {
+const translation = {
     CN: "绛云墨韵旗袍裙",
     EN: "Crimson Clouds & Ink Rhyme Qipao Dress",
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Cloth", asset, { description, layerNames });
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }

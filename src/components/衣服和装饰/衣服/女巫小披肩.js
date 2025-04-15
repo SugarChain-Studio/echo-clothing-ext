@@ -47,12 +47,12 @@ const layerNames = {
     },
 };
 
-const description = {
+const translation = {
     CN: "女巫小披肩",
     EN: "Witch Small Shawl",
     DE: "Hexen kleine Stola",
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ClothAccessory", asset, { description, layerNames });
+    AssetManager.addAssetWithConfig("ClothAccessory", asset, { translation, layerNames });
 }

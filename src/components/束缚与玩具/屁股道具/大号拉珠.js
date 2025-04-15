@@ -97,7 +97,7 @@ const extended = {
     })),
 };
 
-const description = {
+const translation = {
     CN: "大号拉珠",
     EN: "Large Anal Beads",
 };
@@ -177,7 +177,7 @@ export default function () {
     HookManager.globalFunction(`AssetsItemButt${assetButt.Name}BeforeDraw`, beforeDraw);
     AssetManager.addGroupedAssets(cAssets, cAssetsTranslations);
     AssetManager.addAssetWithConfig("ItemButt", assetButt, {
-        description,
+        translation,
         layerNames: {},
         extended,
         assetDialogs,

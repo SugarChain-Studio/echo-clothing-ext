@@ -378,7 +378,7 @@ const extended = {
 };
 
 /** @type {Translation.Entry} */
-const description = {
+const translation = {
     CN: "标志纹饰",
     EN: "Icon Markings",
 };
@@ -452,7 +452,7 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("BodyMarkings", asset, {
-        description,
+        translation,
         layerNames,
         extended,
         assetDialogs,

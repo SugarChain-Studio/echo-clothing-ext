@@ -1,51 +1,7 @@
 import { AssetManager } from "../../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
-
-/**
- *
- * @param {Character} C
- * @param {Asset} A
- * @param {Number} width
- * @param {Number} height
- * @param {string} suffix
- * @returns
- */
-function customTempCanvas(C, A, width, height, suffix) {
-    const canvas = document.createElement("canvas");
-    canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A)}__${suffix}`);
-    canvas.width = width;
-    canvas.height = height;
-    return canvas;
-}
-
-/**
- * 绘制其他身体部位
- * @param {Character} C
- * @param {Asset} TempCanvasAsset
- * @param {CustomGroupName[]} DrawGroupNames
- */
-function partialDraw(C, TempCanvasAsset, DrawGroupNames) {
-    const oldDrawCanvas = GLDrawCanvas;
-
-    GLDrawCanvas = customTempCanvas(C, TempCanvasAsset, CanvasDrawWidth, CanvasDrawHeight, "GLDrawCanvas");
-    /** @type {Character} */
-    const copyC = {
-        ...C,
-        CharacterID: "npc-partial-draw",
-        Appearance: C.Appearance.filter((a) => DrawGroupNames.includes(a.Asset.Group.Name)),
-    };
-    copyC.Canvas = customTempCanvas(C, TempCanvasAsset, CanvasDrawWidth, CanvasDrawHeight, "Canvas");
-    copyC.CanvasBlink = customTempCanvas(C, TempCanvasAsset, CanvasDrawWidth, CanvasDrawHeight, "CanvasBlink");
-    copyC.DrawAppearance = AppearanceItemParse(CharacterAppearanceStringify(copyC));
-    copyC.AppearanceLayers = CharacterAppearanceSortLayers(copyC);
-    copyC.Appearance = C.Appearance;
-
-    CharacterAppearanceBuildCanvas(copyC);
-
-    GLDrawCanvas = oldDrawCanvas;
-    return { Canvas: copyC.Canvas, CanvasBlink: copyC.CanvasBlink };
-}
+import { partialDraw } from "./metaDraw";
 
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
 function androidDraw(drawData) {
@@ -130,28 +86,14 @@ const asset = {
         {
             Name: "上身遮罩",
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                Kneel: "LegsClosed",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                KneelingSpread: "KneelingSpread",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: { ...AssetPoseMapping.BodyUpper },
             AllowColorize: false,
             HasImage: false,
         },
         {
             Name: "下身遮罩",
             ParentGroup: "BodyLower",
-            PoseMapping: {
-                Kneel: "LegsClosed",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                KneelingSpread: "KneelingSpread",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: { ...AssetPoseMapping.BodyLower },
             AllowColorize: false,
             HasImage: false,
         },
@@ -162,13 +104,28 @@ const asset = {
     ],
 };
 
+const translation = {
+    CN: "生化人体",
+    EN: "Android Body",
+};
+
+const layerNames = {
+    EN: {
+        骨架: "Skeleton",
+        阴道: "Vulva",
+        腹中脑容器: "Stomach Brain Container",
+        腹中脑: "Stomach Brain",
+        网格: "Mesh",
+    },
+};
+
 export default function () {
     const assetGroup = "动物身体_Luzi";
 
     HookManager.globalFunction(`Assets${assetGroup}${asset.Name}AfterDraw`, androidDraw);
 
-    AssetManager.addAsset(assetGroup, asset, undefined, {
-        CN: "生化人体",
-        EN: "Android Body",
+    AssetManager.addAssetWithConfig(assetGroup, asset, {
+        translation,
+        layerNames,
     });
 }
