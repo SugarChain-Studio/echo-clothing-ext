@@ -49,6 +49,14 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        带子: "Strap",
+        左腿: "Left leg",
+        右腿: "Right leg",
+    },
+};
+
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -56,7 +64,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
         GartersX腿带_LuziSelect: "选择",
         GartersX腿带_Luzi左腿: "左腿",
@@ -78,6 +86,10 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Garters", asset, extended, translation);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Garters", asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }
