@@ -1,13 +1,13 @@
 import { AssetManager } from "./assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { assetOverrides, ModInfo, resourceBaseURL } from "@mod-utils/rollupHelper";
+import { ModInfo } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
-import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 import { CraftingCache } from "./craftingCache";
+import { fetchAssetOverrides } from "./fetchAssetOverrides";
 
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",
@@ -20,8 +20,8 @@ once(ModInfo.name, () => {
 
     CraftingCache.setup(Logger);
 
-    resolveAssetOverrides(resourceBaseURL, assetOverrides).then((overrides) => {
-        AssetManager.imageMapping.setBasicImgMapping(overrides);
+    fetchAssetOverrides().catch((error) => {
+        Logger.error(`Failed to fetch asset overrides: ${error.message}`);
     });
 
     HookManager.init(ModInfo);
