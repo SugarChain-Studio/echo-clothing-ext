@@ -29,6 +29,27 @@ export function partialDraw(C, TempCanvasAsset, DrawGroupNames, beforeDraw) {
     GLDrawCanvas = oldDrawCanvas;
     return { Canvas: copyC.Canvas, CanvasBlink: copyC.CanvasBlink };
 }
+
+/**
+ * 调整 Canvas 的透明度
+ * @param {Character} c
+ * @param {Asset} asset
+ * @param {HTMLCanvasElement} canvas - 原始 Canvas
+ * @param {number} alphaMultiplier - 透明度乘数（0 到 1）
+ * @returns {HTMLCanvasElement} - 调整后的 Canvas
+ */
+export function adjustCanvasAlpha(c, asset, canvas, alphaMultiplier) {
+    // 创建一个新的 Canvas
+    const adjustedCanvas = customTempCanvas(c, asset, canvas.width, canvas.height, "adjustedCanvas");
+    const context = adjustedCanvas.getContext("2d");
+
+    // 设置透明度并绘制原始 Canvas
+    context.globalAlpha = alphaMultiplier;
+    context.drawImage(canvas, 0, 0);
+
+    return adjustedCanvas;
+}
+
 /**
  *
  * @param {Character} C
@@ -38,7 +59,6 @@ export function partialDraw(C, TempCanvasAsset, DrawGroupNames, beforeDraw) {
  * @param {string} suffix
  * @returns
  */
-
 export function customTempCanvas(C, A, width, height, suffix) {
     const canvas = document.createElement("canvas");
     canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A)}__${suffix}`);
