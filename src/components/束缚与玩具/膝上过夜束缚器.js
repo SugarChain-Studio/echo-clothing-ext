@@ -3,6 +3,7 @@ import { AssetManager } from "../../assetForward";
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "膝上过夜束缚器",
+    Random: false,
     Fetish: ["Leather"],
     Left: 0,
     Top: 0,
