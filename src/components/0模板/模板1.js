@@ -54,7 +54,7 @@ const layerNames = {
     EN: {},
 };
 
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "",
         SelectC: "",
@@ -75,6 +75,6 @@ export default function () {
     //     translation,
     //     layerNames,
     //     extended,
-    //     assetDialogs,
+    //     assetStrings,
     // });
 }
