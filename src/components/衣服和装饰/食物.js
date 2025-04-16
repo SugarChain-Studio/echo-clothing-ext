@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -257,17 +256,4 @@ const layerNames = {
 
 export default function () {
     AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
-
-    AssetManager.afterLoad(() => {
-        HookManager.progressiveHook("LoginDoNextThankYou")
-            .next()
-            .inject((args, next) => {
-                if (CurrentScreen !== "Login") return next(args);
-                const hood = LoginCharacter.Appearance.find((a) => a.Asset.Group.Name === "ItemHood");
-                if (!hood || hood.Asset.Name !== "汉堡_Luzi") {
-                    InventoryWear(LoginCharacter, "汉堡_Luzi", "ItemHood");
-                    CharacterRefresh(LoginCharacter);
-                }
-            });
-    });
 }

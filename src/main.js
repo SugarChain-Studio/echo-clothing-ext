@@ -20,9 +20,24 @@ once(ModInfo.name, () => {
 
     CraftingCache.setup(Logger);
 
-    fetchAssetOverrides().catch((error) => {
-        Logger.error(`Failed to fetch asset overrides: ${error.message}`);
-    });
+    fetchAssetOverrides()
+        .then(() => {
+            AssetManager.afterLoad(() => {
+                HookManager.progressiveHook("LoginDoNextThankYou")
+                    .next()
+                    .inject((args, next) => {
+                        if (CurrentScreen !== "Login") return next(args);
+                        const hood = LoginCharacter.Appearance.find((a) => a.Asset.Group.Name === "ItemHood");
+                        if (!hood || hood.Asset.Name !== "汉堡_Luzi") {
+                            InventoryWear(LoginCharacter, "汉堡_Luzi", "ItemHood");
+                            CharacterRefresh(LoginCharacter);
+                        }
+                    });
+            });
+        })
+        .catch((error) => {
+            Logger.error(`Failed to fetch asset overrides: ${error.message}`);
+        });
 
     HookManager.init(ModInfo);
     AssetManager.init(setup);
