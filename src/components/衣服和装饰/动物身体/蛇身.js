@@ -21,6 +21,7 @@ const asset = {
         {
             Name: "遮罩",
             AllowColorize: false,
+            HasImage: false,
             Alpha: [
                 {
                     Group: [
