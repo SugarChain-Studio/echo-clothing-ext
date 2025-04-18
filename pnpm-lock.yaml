@@ -42,8 +42,8 @@ importers:
         specifier: ^0.2.11
         version: 0.2.11
       bc-stubs:
-        specifier: ^114.0.0
-        version: 114.0.0
+        specifier: ^115.0.0
+        version: 115.0.0
       bondage-club-mod-sdk:
         specifier: ^1.2.0
         version: 1.2.0
@@ -465,8 +465,8 @@ packages:
     resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
     engines: {node: '>= 0.8'}
 
-  bc-stubs@114.0.0:
-    resolution: {integrity: sha512-o5G1ryUDwOez2GdnpLChGYVRiR8981PHOZNUnWuquSbQf5eNTqdq3sWtEF9vgpyJjlodNPBuoNQj+KlOeWOAjQ==}
+  bc-stubs@115.0.0:
+    resolution: {integrity: sha512-a/480mJU1DAF5eyyHzPSRsDLUR2G8v9bAvJcpcm9fpeiaU0bZIdHhy179Lyrh+FDHPmzbj6ywehVnrEyhdU7mA==}
 
   bondage-club-mod-sdk@1.2.0:
     resolution: {integrity: sha512-S+li+PgX7Qo5yccS/R/eAXC4Opq8lc5AdhTPjC2XhWxDGTieUQKj3QJ4ZLgL8x0ySnK7h+DvlkRZd8+OT5JErQ==}
@@ -1767,7 +1767,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.1.2
 
-  bc-stubs@114.0.0:
+  bc-stubs@115.0.0:
     dependencies:
       socket.io-client: 4.6.1
     transitivePeerDependencies:
