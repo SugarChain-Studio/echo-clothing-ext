@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -15,16 +16,6 @@ const asset = {
     Layer: [
         {
             Name: "裙",
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                BackBoxTie: "BackElbowTouch",
-                BackCuffs: "BackElbowTouch",
-                BackElbowTouch: "BackElbowTouch",
-                OverTheHead: "BackElbowTouch",
-                Yoked: "BackElbowTouch",
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
         },
         {
             Name: "扣子",
@@ -35,9 +26,17 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "女仆围裙 2",
-    EN: "Maid's apron 2",
+    EN: "Maid's Apron 2",
+};
+
+const layerNames = {
+    EN: {
+        裙: "Skirt",
+        扣子: "Button",
+    },
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, undefined, translation);
+    ArmMaskTool.createArmMaskForCloth("Cloth", asset);
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }

@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -15,10 +16,12 @@ const asset = {
     Layer: [
         {
             Name: "肩带内",
+            ColorGroup: "肩带",
             ParentGroup: {},
         },
         {
             Name: "肩带外",
+            ColorGroup: "肩带",
             ParentGroup: {},
             PoseMapping: {
                 Yoked: "Yoked",
@@ -30,12 +33,6 @@ const asset = {
         {
             Name: "裙",
             PoseMapping: {
-                TapedHands: "TapedHands",
-                BackBoxTie: "BackElbowTouch",
-                BackCuffs: "BackElbowTouch",
-                BackElbowTouch: "BackElbowTouch",
-                OverTheHead: "BackElbowTouch",
-                Yoked: "BackElbowTouch",
                 AllFours: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,
             },
@@ -49,6 +46,7 @@ const asset = {
         },
         {
             Name: "线上",
+            ColorGroup: "描边线",
             PoseMapping: {
                 AllFours: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,
@@ -56,6 +54,7 @@ const asset = {
         },
         {
             Name: "线下",
+            ColorGroup: "描边线",
             ParentGroup: {},
             PoseMapping: {
                 AllFours: PoseType.HIDE,
@@ -68,9 +67,35 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "女仆围裙",
-    EN: "Maid's apron",
+    EN: "Maid's Apron",
+};
+
+const layerNames = {
+    CN: {
+        肩带内: "内侧",
+        肩带外: "外侧",
+        肩带: "肩带",
+
+        裙: "裙子",
+        荷叶边: "荷叶边",
+        描边线: "描边线",
+        线下: "下边缘",
+        线上: "上边缘",
+    },
+    EN: {
+        肩带内: "Inner strap",
+        肩带外: "Outer strap",
+        肩带: "Strap",
+
+        裙: "Skirt",
+        荷叶边: "Ruffle",
+        描边线: "Outline",
+        线下: "Bottom edge",
+        线上: "Top edge",
+    },
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, undefined, translation);
+    ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Arm1");
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
