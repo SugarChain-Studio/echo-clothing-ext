@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 import { takeLayerNames } from "../../../utils";
 
@@ -11,8 +12,6 @@ const asset = {
     Extended: true,
     Prerequisite: ["HasBreasts"],
     PoseMapping: {
-        TapedHands: "TapedHands",
-        BackBoxTie: "TapedHands",
         BackCuffs: "BackCuffs",
         BackElbowTouch: "BackElbowTouch",
         OverTheHead: "OverTheHead",
@@ -67,5 +66,6 @@ const translation = {
 };
 
 export default function () {
+    ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { extended, translation, assetDialogs, layerNames });
 }
