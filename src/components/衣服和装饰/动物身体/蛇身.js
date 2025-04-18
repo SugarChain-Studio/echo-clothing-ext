@@ -20,6 +20,7 @@ const asset = {
         },
         {
             Name: "遮罩",
+            AllowColorize: false,
             Alpha: [
                 {
                     Group: [
@@ -54,15 +55,20 @@ const asset = {
     ],
 };
 
-const translations = {
+const translation = {
     CN: "蛇身",
     EN: "Snake",
     RU: "Змея",
 };
 
+const layerNames = {
+    EN: {
+        身体: "Body",
+        肚子: "Belly",
+    },
+};
+
 export default function () {
-    // @ts-ignore
-    AssetManager.addAsset("动物身体_Luzi", asset, null, translations);
-    // @ts-ignore
-    AssetManager.addAsset("Wings", asset, null, translations);
+    AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
+    AssetManager.addAssetWithConfig("Wings", asset, { translation, layerNames });
 }
