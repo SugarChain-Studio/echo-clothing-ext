@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomGroupedAssetDefinitions} */
@@ -9,20 +10,12 @@ const asset = {
             Gender: "F",
             Top: 0,
             Left: 0,
-            Priority: 26,
+            Priority: 30,
             Prerequisite: ["HasBreasts"],
-            ParentGroup: {
-                [PoseType.DEFAULT]: "BodyUpper",
-                TapedHands: "BodyUpper",
-            },
+            ParentGroup: {},
             PoseMapping: {
                 AllFours: "AllFours",
                 Hogtied: "Hogtied",
-                Yoked: "BackElbowTouch",
-                OverTheHead: "BackElbowTouch",
-                BackBoxTie: "BackElbowTouch",
-                BackElbowTouch: "BackElbowTouch",
-                BackCuffs: "BackElbowTouch",
             },
             Layer: [
                 {
@@ -44,7 +37,7 @@ const asset = {
             Gender: "F",
             Top: 0,
             Left: 0,
-            Priority: 35,
+            Priority: 30,
             Prerequisite: ["HasBreasts"],
             DefaultColor: ["#3F3F3F", "#808080"],
             Layer: [
@@ -53,7 +46,6 @@ const asset = {
                     PoseMapping: {
                         Yoked: "Yoked",
                         OverTheHead: "OverTheHead",
-                        BackBoxTie: "BackBoxTie",
                         BackElbowTouch: "BackElbowTouch",
                         BackCuffs: "BackCuffs",
                         AllFours: "Hide",
@@ -64,11 +56,6 @@ const asset = {
                     Name: "围裙",
                     PoseMapping: {
                         TapedHands: "TapedHands",
-                        Yoked: "BackElbowTouch",
-                        OverTheHead: "BackElbowTouch",
-                        BackBoxTie: "BackElbowTouch",
-                        BackElbowTouch: "BackElbowTouch",
-                        BackCuffs: "BackElbowTouch",
                         AllFours: "Hide",
                         Hogtied: "Hogtied",
                     },
@@ -116,5 +103,6 @@ const layerNames = {
 };
 
 export default function () {
+    ArmMaskTool.createArmMaskForGroupedCloth(asset, { Cloth: { 女仆装_Luzi: "Arm1" } });
     AssetManager.addGroupedAssetsWithConfig(asset, translations, layerNames);
 }
