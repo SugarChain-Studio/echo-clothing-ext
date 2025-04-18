@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 const hideHogtied = {
@@ -12,7 +13,7 @@ const asset = {
     Gender: "F",
     Top: 0,
     Left: 0,
-    Priority: 26,
+    Priority: 30,
     Prerequisite: ["HasBreasts"],
     PoseMapping: {
         AllFours: PoseType.HIDE,
@@ -145,5 +146,6 @@ const translation = {
 };
 
 export default function () {
+    ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
