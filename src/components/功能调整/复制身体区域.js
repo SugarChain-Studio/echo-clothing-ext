@@ -137,9 +137,27 @@ const copyGroups = [
         name: "HairAccessory3_笨笨蛋Luzi",
         mirror: "HairAccessory3",
         description: {
-            CN: "🍔发饰 2",
-            EN: "🍔Hair Accessory 2",
-            RU: "🍔Прическа Аксессуар 2",
+            CN: "🍔发饰 +1",
+            EN: "🍔Hair Accessory +1",
+            RU: "🍔Головной убор +1",
+        },
+    },
+    {
+        name: "Luzi_HairAccessory3_1",
+        mirror: "HairAccessory3",
+        description: {
+            CN: "🍔发饰 +2",
+            EN: "🍔Hair Accessory +2",
+            RU: "🍔Головной убор +2",
+        },
+    },
+    {
+        name: "Luzi_HairAccessory3_2",
+        mirror: "HairAccessory3",
+        description: {
+            CN: "🍔发饰 +3",
+            EN: "🍔Hair Accessory +3",
+            RU: "🍔Головной убор +3",
         },
     },
     {
