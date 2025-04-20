@@ -118,8 +118,15 @@ const asset = {
 
         // 鸢堡
         { Name: "鸢", AllowTypes: { yb: 1 } },
-        { Name: "ZforShort", AllowTypes: { yb: 2 } },
-        { Name: "luobo", AllowTypes: { yb: 3 } },
+        { Name: "梓析", AllowTypes: { yb: 2 } },
+        { Name: "梓䒩", AllowTypes: { yb: 3 } },
+        { Name: "梓姌", AllowTypes: { yb: 4 } },
+        { Name: "梓璇", AllowTypes: { yb: 5 } },
+        { Name: "梓爱", AllowTypes: { yb: 6 } },
+        { Name: "ZforShort", AllowTypes: { yb: 7 } },
+        { Name: "小a", AllowTypes: { yb: 7 } },
+        { Name: "透透子", AllowTypes: { yb: 7 } },
+        { Name: "luobo", AllowTypes: { yb: 8 } },
 
         // EILRSW
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
@@ -145,6 +152,14 @@ const asset = {
         { Name: "小沫", AllowTypes: { yytc: 5 } },
         { Name: "Sive", AllowTypes: { yytc: 6 } },
 
+        // 香喷喷酒吧
+        { Name: "依伊可", AllowTypes: { xppjb: 1 } },
+        { Name: "yumi", AllowTypes: { xppjb: 2 } },
+        { Name: "白墨鴝", AllowTypes: { xppjb: 3 } },
+        { Name: "忧绪", AllowTypes: { xppjb: 4 } },
+        { Name: "五十提", AllowTypes: { xppjb: 5 } },   
+        { Name: "狸nux", AllowTypes: { xppjb: 6 } },   
+        
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -168,14 +183,12 @@ const asset = {
         { Name: "小铃铛", AllowTypes: { l: 16 } },
         { Name: "莉莉丝", AllowTypes: { l: 17 } },
         { Name: "LaBi", AllowTypes: { l: 18 } },
-        { Name: "忧绪", AllowTypes: { l: 19 } },
-        { Name: "五十提", AllowTypes: { l: 20 } },
-        { Name: "Shika", AllowTypes: { l: 21 } },
-        { Name: "依伊可", AllowTypes: { l: 22 } },
-        { Name: "白墨鴝", AllowTypes: { l: 23 } },
-        { Name: "墨璃", AllowTypes: { l: 24 } },
-        { Name: "铃奈", AllowTypes: { l: 25 } },
-        { Name: "小雨", AllowTypes: { l: 26 } },
+        { Name: "Shika", AllowTypes: { l: 19 } },
+        { Name: "墨璃", AllowTypes: { l: 20 } },
+        { Name: "铃奈", AllowTypes: { l: 21 } },
+        { Name: "小雨", AllowTypes: { l: 22 } },
+        { Name: "清酒梓", AllowTypes: { l: 23 } },   
+ 
     ],
 };
 
@@ -192,6 +205,7 @@ const typeNames = {
     yb: "鸢堡",
     EILRSW: "EILRSW",
     yytc: "yytc",
+    xppjb: "香喷喷酒吧",
     l: "路过的玩偶",
 };
 
@@ -209,7 +223,7 @@ const predefDialog = {
         ItemMisc玩偶_LuziSetc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
         ItemMisc玩偶_LuziSetx1:
             "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
-        ItemMisc玩偶_LuziSetl22:
+        ItemMisc玩偶_LuziSetxppjb1:
             "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
     },
 };
@@ -239,7 +253,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -247,7 +261,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -297,7 +311,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
