@@ -8,11 +8,24 @@ const bodyLayers = [
     {
         Name: "HairBack",
         PGroups: ["HairBack", "新后发_Luzi"],
+        AllowTypes: { h: 0 },
         Priority: 5,
     },
     {
+        Name: "Head",
+        PGroups: ["Head"],
+        AllowTypes: { h: 0 },
+        Priority: 7,
+    },
+    {
+        Name: "Head2",
+        PGroups: ["HairBack", "新后发_Luzi", "Head", "HairFront", "新前发_Luzi"],
+        AllowTypes: { h: 1 },
+        Priority: 7,
+    },
+    {
         Name: "Body",
-        PGroups: ["Head", "BodyUpper", "BodyLower", "ArmsLeft", "ArmsRight"],
+        PGroups: ["BodyUpper", "BodyLower", "ArmsLeft", "ArmsRight"],
         Priority: 7,
     },
     {
@@ -43,6 +56,7 @@ const bodyLayers = [
     {
         Name: "HairFront",
         PGroups: ["HairFront", "新前发_Luzi"],
+        AllowTypes: { h: 0 },
         Priority: 52,
     },
 ];
@@ -151,6 +165,11 @@ const extended = {
             Key: "f",
             Options: [{}, {}],
         },
+        {
+            Name: "头发遮挡",
+            Key: "h",
+            Options: [{}, {}],
+        },
     ],
 };
 
@@ -159,6 +178,7 @@ const assetDialogs = {
         SelectBase: "选择幽灵身体设置",
         Module眼睛发光: "眼睛发光",
         Module脚渐隐: "脚渐隐",
+        Module头发遮挡: "头发图层",
 
         Select眼睛发光: "选择眼睛发光设置",
         Optionle0: "关闭",
@@ -167,11 +187,16 @@ const assetDialogs = {
         Select脚渐隐: "选择脚渐隐设置",
         Optionf0: "正常",
         Optionf1: "渐隐",
+
+        Select头发遮挡: "选择头发遮挡设置",
+        Optionh0: "显示头轮廓",
+        Optionh1: "结合前发图层",
     },
     EN: {
         SelectBase: "Select Ghost Body Settings",
         Module眼睛发光: "Eye Glow",
         Module脚渐隐: "Foot Fade",
+        Module头发遮挡: "Hair Layering",
 
         Select眼睛发光: "Select Eye Glow Settings",
         Optionle0: "Off",
@@ -180,6 +205,10 @@ const assetDialogs = {
         Select脚渐隐: "Select Foot Fade Settings",
         Optionf0: "Normal",
         Optionf1: "Fade",
+
+        Select头发遮挡: "Select Hair Mask Settings",
+        Optionh0: "Show Head Shape",
+        Optionh1: "Merge Front Hair",
     },
 };
 
