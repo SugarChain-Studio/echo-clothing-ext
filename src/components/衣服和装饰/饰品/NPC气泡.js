@@ -11,8 +11,6 @@ const asset = {
     Priority: 55,
     ParentGroup: {},
     DefaultColor: ["#383838", "#535353", "#FF1A1A", "#FF1A1A", "#FF1A1A", "#FF1A1A"],
-    AllowActivity: ["SpankItem", "RubItem"],
-    ActivityAudio: ["SmackCrop"],
     Layer: [
         {
             Name: "头环",
@@ -47,7 +45,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["Hat", "Hat_笨笨蛋Luzi"], ["NPC气泡_Luzi"], {
+const dialog = {
     CN: {
         Select: "选择NPC气泡样式",
 
@@ -64,14 +62,24 @@ const dialog = DialogTools.replicateGroupedItemDialog(["Hat", "Hat_笨笨蛋Luzi
         心: "Heart",
         箭头: "Arrow",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "NPC气泡",
     EN: "NPC Balloon",
 };
 
+const layerNames = {
+    EN: {
+        头环: "Headband",
+        连接: "Connection",
+        感叹号: "Exclamation Mark",
+        问号: "Question Mark",
+        心: "Heart",
+        箭头: "Arrow",
+    },
+};
+
 export default function () {
-    AssetManager.addAsset("Hat", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Hat", asset, { extended, translation, layerNames, assetDialogs: dialog });
 }
