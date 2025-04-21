@@ -124,9 +124,9 @@ const asset = {
         { Name: "梓璇", AllowTypes: { yb: 5 } },
         { Name: "梓爱", AllowTypes: { yb: 6 } },
         { Name: "ZforShort", AllowTypes: { yb: 7 } },
-        { Name: "小a", AllowTypes: { yb: 7 } },
-        { Name: "透透子", AllowTypes: { yb: 7 } },
-        { Name: "luobo", AllowTypes: { yb: 8 } },
+        { Name: "小a", AllowTypes: { yb: 8 } },
+        { Name: "透透子", AllowTypes: { yb: 9 } },
+        { Name: "luobo", AllowTypes: { yb: 10 } },
 
         // EILRSW
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
