@@ -166,7 +166,6 @@ const extended = {
     Modules: [
         {
             Name: "触手状态",
-            DrawImages: false,
             Key: "d",
             Options: [
                 {
@@ -176,10 +175,10 @@ const extended = {
                 {
                     HasSubscreen: true,
                     Prerequisite: ["AccessVulva", "VulvaEmpty", "AccessButt", "ButtEmpty"],
-                    Block: ["ItemVulva", "ItemButt"],
                     Property: {
                         Effect: [E.VulvaShaft, E.Vibrating, E.IsPlugged],
                         Intensity: 2,
+                        Block: ["ItemVulva", "ItemButt"],
                     },
                     ArchetypeConfig: {
                         Archetype: ExtendedArchetype.VIBRATING,
@@ -204,28 +203,40 @@ const extended = {
                 {},
                 {},
                 {
-                    Property: { Difficulty: 13, SetPose: ["BackElbowTouch"], Effect: ["Block"] },
-                    Block: ["ItemArms", "ItemHands"],
+                    Property: {
+                        Difficulty: 13,
+                        SetPose: ["BackElbowTouch"],
+                        Effect: [E.Block],
+                        Block: ["ItemArms", "ItemHands"],
+                    },
                 },
             ],
         },
         {
             Name: "嘴套开关",
-            DrawImages: false,
             Key: "m",
             Options: [
                 {},
                 {
-                    // 只阻挡最里层的嘴部
-                    Block: ["ItemMouth"],
+                    Property: {
+                        Effect: [E.BlockMouth, E.GagLight],
+                        // 只阻挡最里层的嘴部
+                        Block: ["ItemMouth"],
+                    },
                 },
             ],
         },
         {
             Name: "脚套开关",
-            DrawImages: false,
             Key: "f",
-            Options: [{}, {}],
+            Options: [
+                {},
+                {
+                    Property: {
+                        Effect: [E.Slow],
+                    },
+                },
+            ],
         },
     ],
 };
@@ -259,8 +270,7 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
 
         Setd0: "TargetCharacterName的触手服下部的小口逐渐合上,粘连在一起.",
         Setd1: "TargetCharacterName的触手服下部裂开一个小口,露出阴部.",
-        Setd2:
-            "TargetCharacterName的触手服下部裂开一个小口,露出阴部,触手服下长出一只湿滑的触手插入了阴道.",
+        Setd2: "TargetCharacterName的触手服下部裂开一个小口,露出阴部,触手服下长出一只湿滑的触手插入了阴道.",
         Sets0: "TargetCharacterName的触手服缓慢变化,露出胸部.",
         Sets1: "TargetCharacterName的触手服缓慢变化,生长覆盖了胸部.",
         Seth0: "TargetCharacterName的触手服缓慢变化,露出手臂.",
@@ -296,18 +306,14 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
         Optionf0: "Hide Foot Covers",
         Optionf1: "Display Foot Covers",
 
-        Setd0:
-            "The lower opening of TargetCharacterName's tentacle suit gradually closes and adheres together.",
-        Setd1:
-            "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area.",
-        Setd2:
-            "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area, and a slimy tentacle grows out from the suit and inserts into the vagina.",
+        Setd0: "The lower opening of TargetCharacterName's tentacle suit gradually closes and adheres together.",
+        Setd1: "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area.",
+        Setd2: "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area, and a slimy tentacle grows out from the suit and inserts into the vagina.",
         Sets0: "The tentacle suit on TargetCharacterName slowly changes, revealing the chest.",
         Sets1: "The tentacle suit on TargetCharacterName slowly changes, growing over the chest.",
         Seth0: "The tentacle suit on TargetCharacterName slowly changes, revealing the arms.",
         Seth1: "The tentacle suit on TargetCharacterName slowly changes, growing over the hands.",
-        Seth2:
-            "The tentacle suit on TargetCharacterName slowly changes, forcibly binding the arms behind the back.",
+        Seth2: "The tentacle suit on TargetCharacterName slowly changes, forcibly binding the arms behind the back.",
         Setf0: "The tentacle suit on TargetCharacterName slowly changes, revealing the legs.",
         Setf1: "The tentacle suit on TargetCharacterName slowly changes, growing over the feet.",
         Setm0: "The tentacle suit on TargetCharacterName slowly changes, revealing the mouth.",
@@ -338,30 +344,18 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
         Optionf0: "Зняти",
         Optionf1: "Надіти",
 
-        Setd0:
-            "Нижнє відкриття щупальцевого костюму на тілі TargetCharacterName щільно закривається.",
-        Setd1:
-            "Нижня частина щупальцевого костюму на тілі TargetCharacterName потроху відкривається оголюючи PronounPossessive гетіналю.",
-        Setd2:
-            "Нижня частина щупальцевого костюму на тілі TargetCharacterName потроху відкривається оголюючи PronounPossessive гетіналю, як потім щупальце зростає позаду носія направляючи свій шлях у вагіну.",
-        Sets0:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи груди носія.",
-        Sets1:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на грудях носія.",
-        Seth0:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи руки носія.",
-        Seth1:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на руках носія покриваючи їх в щупальцевому костюмі.",
-        Seth2:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зв'язує руки носія за PronounPossessive спиною.",
-        Setf0:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи ноги носія.",
-        Setf1:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на ногах носія покриваючи їх в щупальцевому костюмі.",
-        Setm0:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи рот носія.",
-        Setm1:
-            "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на роті носія.",
+        Setd0: "Нижнє відкриття щупальцевого костюму на тілі TargetCharacterName щільно закривається.",
+        Setd1: "Нижня частина щупальцевого костюму на тілі TargetCharacterName потроху відкривається оголюючи PronounPossessive гетіналю.",
+        Setd2: "Нижня частина щупальцевого костюму на тілі TargetCharacterName потроху відкривається оголюючи PronounPossessive гетіналю, як потім щупальце зростає позаду носія направляючи свій шлях у вагіну.",
+        Sets0: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи груди носія.",
+        Sets1: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на грудях носія.",
+        Seth0: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи руки носія.",
+        Seth1: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на руках носія покриваючи їх в щупальцевому костюмі.",
+        Seth2: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зв'язує руки носія за PronounPossessive спиною.",
+        Setf0: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи ноги носія.",
+        Setf1: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на ногах носія покриваючи їх в щупальцевому костюмі.",
+        Setm0: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, оголюючи рот носія.",
+        Setm1: "щупальцевий костюм на тілі TargetCharacterName потроху змінюється, як воно зростає на роті носія.",
     },
     RU: {
         SelectBase: "Select Configuration",
@@ -388,18 +382,14 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
         Optionf0: "Hide Foot Covers",
         Optionf1: "Display Foot Covers",
 
-        Setd0:
-            "The lower opening of TargetCharacterName's tentacle suit gradually closes and adheres together.",
-        Setd1:
-            "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area.",
-        Setd2:
-            "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area, and a slimy tentacle grows out from the suit and inserts into the vagina.",
+        Setd0: "The lower opening of TargetCharacterName's tentacle suit gradually closes and adheres together.",
+        Setd1: "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area.",
+        Setd2: "A small opening in the lower part of TargetCharacterName's tentacle suit splits to reveal the genital area, and a slimy tentacle grows out from the suit and inserts into the vagina.",
         Sets0: "The tentacle suit on TargetCharacterName slowly changes, revealing the chest.",
         Sets1: "The tentacle suit on TargetCharacterName slowly changes, growing over the chest.",
         Seth0: "The tentacle suit on TargetCharacterName slowly changes, revealing the arms.",
         Seth1: "The tentacle suit on TargetCharacterName slowly changes, growing over the hands.",
-        Seth2:
-            "The tentacle suit on TargetCharacterName slowly changes, forcibly binding the arms behind the back.",
+        Seth2: "The tentacle suit on TargetCharacterName slowly changes, forcibly binding the arms behind the back.",
         Setf0: "The tentacle suit on TargetCharacterName slowly changes, revealing the legs.",
         Setf1: "The tentacle suit on TargetCharacterName slowly changes, growing over the feet.",
         Setm0: "The tentacle suit on TargetCharacterName slowly changes, revealing the mouth.",
