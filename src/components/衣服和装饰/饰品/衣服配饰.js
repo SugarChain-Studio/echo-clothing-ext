@@ -20,9 +20,9 @@ const assets = {
                 "#92a3a8", // 左_装饰 (ddf7ff * 0.66)
                 "#a888a7", // 左_本体 (ffcefd * 0.66)
                 "#a8a580", // 左_装饰环 (fffac2 * 0.66)
-                "#7699a8"  // 左_装饰珠 (b2e7ff * 0.66)
-            ],  
-            Priority: 34, 
+                "#7699a8", // 左_装饰珠 (b2e7ff * 0.66)
+            ],
+            Priority: 34,
             Layer: [
                 {
                     Name: "右_底色",
@@ -47,28 +47,28 @@ const assets = {
                 },
                 {
                     Name: "左_本体",
-                },  
+                },
                 {
                     Name: "左_装饰环",
                 },
                 {
                     Name: "左_装饰珠",
-                }, 
-            ]
-        }
-    ]
+                },
+            ],
+        },
+    ],
 };
 
 /** @type { Translation.GroupedEntries } */
 const translations = {
     CN: {
         ClothAccessory: {
-            蝴蝶结装饰: "蝴蝶结装饰"        
+            蝴蝶结装饰: "蝴蝶结装饰",
         },
     },
     EN: {
         ClothAccessory: {
-            蝴蝶结装饰: "Butterfly Decoration"
+            蝴蝶结装饰: "Butterfly Decoration",
         },
     },
 };

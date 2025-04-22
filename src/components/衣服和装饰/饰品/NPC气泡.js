@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
