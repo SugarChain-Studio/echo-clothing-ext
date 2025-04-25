@@ -1,27 +1,32 @@
 /**
  * 为物品生成 左/右/两侧 的外观选项
  * @param {CustomAssetDefinition} assetDef
- * @param {"left" | "right" | "both"} preset 物品的默认外观
+ * @param {object} [config]
+ * @param {"left" | "right" | "both"} [config.preset] 物品的默认外观
+ * @param {boolean} [config.mirror] 是否镜像
  */
-function createLeftRightBoth(assetDef, preset = "left") {
+function createLeftRightBoth(assetDef, { preset = "left", mirror = false } = {}) {
     const { Options, leftConfig, rightConfig } = (() => {
+        const config1 = { typed: [0, 1] };
+        const config2 = { typed: [0, 2] };
+        const config3 = { typed: [1, 2] };
         if (preset === "left") {
             return {
                 Options: [{ Name: "left" }, { Name: "right" }, { Name: "both" }],
-                leftConfig: { typed: [0, 2] },
-                rightConfig: { typed: [1, 2] },
+                leftConfig: mirror ? config3 : config2,
+                rightConfig: mirror ? config2 : config3,
             };
         } else if (preset === "right") {
             return {
                 Options: [{ Name: "right" }, { Name: "left" }, { Name: "both" }],
-                leftConfig: { typed: [1, 2] },
-                rightConfig: { typed: [0, 2] },
+                leftConfig: mirror ? config2 : config3,
+                rightConfig: mirror ? config3 : config2,
             };
         }
         return {
             Options: [{ Name: "both" }, { Name: "left" }, { Name: "right" }],
-            leftConfig: { typed: [0, 1] },
-            rightConfig: { typed: [0, 2] },
+            leftConfig: mirror ? config2 : config1,
+            rightConfig: mirror ? config1 : config2,
         };
     })();
 
