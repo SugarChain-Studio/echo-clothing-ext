@@ -1,78 +1,90 @@
 import { AssetManager } from "../../../assetForward";
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    ClothAccessory: [
-        {
-            Name: "蝴蝶结装饰",
-            Random: false,
-            Left: 0,
-            Top: 0,
-            ParentGroup: {},
-            Extended: true,
-            DefaultColor: [
-                "#7d7d7d", // 右_底色 (bdbdbd * 0.66)
-                "#92a3a8", // 右_装饰 (ddf7ff * 0.66)
-                "#a888a7", // 右_本体 (ffcefd * 0.66)
-                "#a8a580", // 右_装饰环 (fffac2 * 0.66)
-                "#7699a8", // 右_装饰珠 (b2e7ff * 0.66)
-                "#7d7d7d", // 左_底色 (bdbdbd * 0.66)
-                "#92a3a8", // 左_装饰 (ddf7ff * 0.66)
-                "#a888a7", // 左_本体 (ffcefd * 0.66)
-                "#a8a580", // 左_装饰环 (fffac2 * 0.66)
-                "#7699a8", // 左_装饰珠 (b2e7ff * 0.66)
-            ],
-            Priority: 34,
-            Layer: [
-                {
-                    Name: "右_底色",
-                },
-                {
-                    Name: "右_装饰",
-                },
-                {
-                    Name: "右_本体",
-                },
-                {
-                    Name: "右_装饰环",
-                },
-                {
-                    Name: "右_装饰珠",
-                },
-                {
-                    Name: "左_底色",
-                },
-                {
-                    Name: "左_装饰",
-                },
-                {
-                    Name: "左_本体",
-                },
-                {
-                    Name: "左_装饰环",
-                },
-                {
-                    Name: "左_装饰珠",
-                },
-            ],
-        },
+/** @type { CustomAssetDefinition }} */
+const asset = {
+    Name: "蝴蝶结装饰",
+    Random: false,
+    Left: 100,
+    Top: 450,
+    ParentGroup: {},
+    DefaultColor: [
+        "#7d7d7d", // 右_底色 (bdbdbd * 0.66)
+        "#92a3a8", // 右_装饰 (ddf7ff * 0.66)
+        "#a888a7", // 右_本体 (ffcefd * 0.66)
+        "#a8a580", // 右_装饰环 (fffac2 * 0.66)
+        "#7699a8", // 右_装饰珠 (b2e7ff * 0.66)
+        "#7d7d7d", // 左_底色 (bdbdbd * 0.66)
+        "#92a3a8", // 左_装饰 (ddf7ff * 0.66)
+        "#a888a7", // 左_本体 (ffcefd * 0.66)
+        "#a8a580", // 左_装饰环 (fffac2 * 0.66)
+        "#7699a8", // 左_装饰珠 (b2e7ff * 0.66)
+    ],
+    Priority: 34,
+    Layer: [
+        { Name: "右_底色", ColorGroup: "底色" },
+        { Name: "右_装饰", ColorGroup: "装饰" },
+        { Name: "右_本体", ColorGroup: "本体" },
+        { Name: "右_装饰环", ColorGroup: "装饰环" },
+        { Name: "右_装饰珠", ColorGroup: "装饰珠" },
+        { Name: "左_底色", ColorGroup: "底色" },
+        { Name: "左_装饰", ColorGroup: "装饰" },
+        { Name: "左_本体", ColorGroup: "本体" },
+        { Name: "左_装饰环", ColorGroup: "装饰环" },
+        { Name: "左_装饰珠", ColorGroup: "装饰珠" },
     ],
 };
 
-/** @type { Translation.GroupedEntries } */
-const translations = {
+/** @type { Translation.Entry } */
+const translation = {
+    CN: "蝴蝶结装饰",
+    EN: "Butterfly Decoration",
+};
+
+/** @type { Translation.Dialog } */
+const layerNames = {
     CN: {
-        ClothAccessory: {
-            蝴蝶结装饰: "蝴蝶结装饰",
-        },
+        底色: "底色",
+        装饰: "装饰",
+        本体: "本体",
+        装饰环: "装饰环",
+        装饰珠: "装饰珠",
+
+        右_底色: "右",
+        右_装饰: "右",
+        右_本体: "右",
+        右_装饰环: "右",
+        右_装饰珠: "右",
+
+        左_底色: "左",
+        左_装饰: "左",
+        左_本体: "左",
+        左_装饰环: "左",
+        左_装饰珠: "左",
     },
     EN: {
-        ClothAccessory: {
-            蝴蝶结装饰: "Butterfly Decoration",
-        },
+        底色: "Base Color",
+        装饰: "Decoration",
+        本体: "Body",
+        装饰环: "Decoration Ring",
+        装饰珠: "Decoration Bead",
+
+        右_底色: "Right Base Color",
+        右_装饰: "Right Decoration",
+        右_本体: "Right Body",
+        右_装饰环: "Right Decoration Ring",
+        右_装饰珠: "Right Decoration Bead",
+
+        左_底色: "Left Base Color",
+        左_装饰: "Left Decoration",
+        左_本体: "Left Body",
+        左_装饰环: "Left Decoration Ring",
+        左_装饰珠: "Left Decoration Bead",
     },
 };
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig("ClothAccessory", asset, {
+        translation,
+        layerNames,
+    });
 }
