@@ -159,6 +159,8 @@ const asset = {
         { Name: "忧绪", AllowTypes: { xppjb: 4 } },
         { Name: "五十提", AllowTypes: { xppjb: 5 } },   
         { Name: "狸nux", AllowTypes: { xppjb: 6 } },   
+        { Name: "番茄炒蛋", AllowTypes: { xppjb: 7 } },   
+        { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },   
         
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
