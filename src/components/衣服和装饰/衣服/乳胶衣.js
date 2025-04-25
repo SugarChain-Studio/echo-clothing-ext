@@ -1,5 +1,29 @@
 import { AssetManager } from "../../../assetForward";
 
+/** @type {AssetPoseMapping} */
+const glovePoseMapping = {
+    TapedHands: "TapedHands",
+    Yoked: "Yoked",
+    OverTheHead: "OverTheHead",
+    BackBoxTie: "Hide",
+    BackElbowTouch: "Hide",
+    BackCuffs: "BackCuffs",
+    Hogtied: "Hide",
+    AllFours: "Hide",
+};
+
+/** @type {AssetPoseMapping} */
+const upperPoseMapping = {
+    TapedHands: "TapedHands",
+    Yoked: "Yoked",
+    OverTheHead: "OverTheHead",
+    BackBoxTie: "BackBoxTie",
+    BackElbowTouch: "BackElbowTouch",
+    BackCuffs: "BackCuffs",
+    Hogtied: "Hogtied",
+    AllFours: "Hide",
+};
+
 /** @type {CustomAssetDefinition} */
 const assetUpper = {
     Name: "乳胶衣_Luzi",
@@ -15,88 +39,34 @@ const assetUpper = {
             Name: "手套底色",
             Priority: 27,
             AllowTypes: { typed: 1 },
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: glovePoseMapping,
         },
         {
             Name: "手套阴影",
             Priority: 27,
             AllowTypes: { typed: 1 },
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: glovePoseMapping,
         },
         {
             Name: "手套高光",
             Priority: 27,
             AllowTypes: { typed: 1 },
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: glovePoseMapping,
         },
         {
             Name: "上底色",
             Priority: 14,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "BackElbowTouch",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            PoseMapping: upperPoseMapping,
         },
         {
             Name: "上阴影",
             Priority: 14,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "BackElbowTouch",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            PoseMapping: upperPoseMapping,
         },
         {
             Name: "上高光",
             Priority: 14,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "BackElbowTouch",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            PoseMapping: upperPoseMapping,
         },
     ],
 };
@@ -123,6 +93,19 @@ const assetLower = {
         {
             Name: "下高光",
             Priority: 14,
+        },
+        {
+            Name: "袜遮罩",
+            AllowTypes: { typed: 0 },
+            BlendingMode: "destination-out",
+            ParentGroup: {},
+            TextureMask: {},
+            PoseMapping: {
+                Kneel: "Hide",
+                KneelingSpread: "Hide",
+                LegsClosed: "LegsClosed",
+                Spread: "Spread",
+            },
         },
     ],
 };
@@ -159,7 +142,7 @@ const layerNamesLower = {
 };
 
 /** @type {AssetArchetypeConfig} */
-const extended = {
+const extendedUpper = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [
@@ -172,7 +155,7 @@ const extended = {
     ],
 };
 
-const assetDialogs = {
+const assetDialogsUpper = {
     CN: {
         Select: "选择是否有手套",
         无: "无",
@@ -185,16 +168,45 @@ const assetDialogs = {
     },
 };
 
+/** @type {AssetArchetypeConfig} */
+const extendedLower = {
+    Archetype: ExtendedArchetype.TYPED,
+    DrawImages: false,
+    Options: [
+        {
+            Name: "无",
+        },
+        {
+            Name: "有",
+        },
+    ],
+};
+
+const assetDialogsLower = {
+    CN: {
+        Select: "选择是否有袜子",
+        无: "无",
+        有: "有",
+    },
+    EN: {
+        Select: "Select whether to have socks",
+        无: "No",
+        有: "Yes",
+    },
+};
+
 export default function () {
     AssetManager.addAssetWithConfig("Suit", assetUpper, {
         translation: translationUpper,
         layerNames: layerNamesUpper,
-        extended,
-        assetDialogs,
+        extended: extendedUpper,
+        assetDialogs: assetDialogsUpper,
     });
 
     AssetManager.addAssetWithConfig("SuitLower", assetLower, {
         translation: translationLower,
         layerNames: layerNamesLower,
+        extended: extendedLower,
+        assetDialogs: assetDialogsLower,
     });
 }
