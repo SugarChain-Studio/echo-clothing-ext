@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -22,6 +21,17 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        牌子: "斩标",
+        笨蛋: "文字",
+    },
+    EN: {
+        牌子: "Marking Panel",
+        笨蛋: "Text",
+    },
+};
+
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -29,7 +39,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["斩标_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择斩标文字",
         无: "无",
@@ -46,11 +56,10 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["斩标_Luz
         Set无: "SourceCharacter erased the words on DestinationCharacter ChanBiao.",
         Set笨蛋: "SourceCharacter wrote 'BenDiao' on DestinationCharacter ChanBiao.",
     },
-});
+};
 
-const translations = { CN: "斩标", EN: "Behead Marking" };
+const translation = { CN: "斩标", EN: "Behead Marking" };
 
 export default function () {
-    AssetManager.addAsset("ItemMisc", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemMisc", asset, { extended, translation, layerNames, assetStrings });
 }
