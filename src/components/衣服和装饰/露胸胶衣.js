@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -91,6 +90,13 @@ const layerNames = {
         皮带A1: "Belt Dark Tone",
         扣子: "Buckle",
     },
+    RU: {
+        衣服A2: "Цвет основы одежды",
+        衣服A1: "Темный тон одежды",
+        皮带A2: "Цвет основы пояса",
+        皮带A1: "Темный тон пояса",
+        扣子: "Застежка",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -109,7 +115,7 @@ const extended = {
 /** @type {CustomGroupName[]} */
 const targetGroups = ["Cloth", "Suit", "Corset", "ItemTorso"];
 
-const assetDialogs = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶衣_Luzi"], {
+const assetDialogs = {
     CN: {
         SelectBase: "设置",
         Select开裆: "设置",
@@ -135,7 +141,7 @@ const assetDialogs = DialogTools.replicateGroupedItemDialog(targetGroups, ["露�
         OptionA0: "Закрытая промежность",
         OptionA1: "Открытая промежность",
     },
-});
+};
 
 const translation = {
     CN: "露胸胶衣",
