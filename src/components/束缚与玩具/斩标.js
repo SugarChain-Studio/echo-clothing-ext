@@ -49,12 +49,12 @@ const assetStrings = {
         Set笨蛋: "SourceCharacter在DestinationCharacter斩标上写上了笨蛋.",
     },
     EN: {
-        Select: "Select Aba Aba",
+        Select: "Select Marking Text",
         无: "None",
-        笨蛋: "笨蛋",
+        笨蛋: "Fool",
 
-        Set无: "SourceCharacter erased the words on DestinationCharacter ChanBiao.",
-        Set笨蛋: "SourceCharacter wrote 'BenDiao' on DestinationCharacter ChanBiao.",
+        Set无: "SourceCharacter erased the words on DestinationCharacter Behead Marking.",
+        Set笨蛋: "SourceCharacter wrote '笨蛋' (Fool) on DestinationCharacter Behead Marking.",
     },
 };
 
