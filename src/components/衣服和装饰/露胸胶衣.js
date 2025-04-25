@@ -76,6 +76,23 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        衣服A2: "衣服底色",
+        衣服A1: "衣服暗色调",
+        皮带A2: "皮带底色",
+        皮带A1: "皮带暗色调",
+        扣子: "搭扣",
+    },
+    EN: {
+        衣服A2: "Cloth Base Color",
+        衣服A1: "Cloth Dark Tone",
+        皮带A2: "Belt Base Color",
+        皮带A1: "Belt Dark Tone",
+        扣子: "Buckle",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -92,7 +109,7 @@ const extended = {
 /** @type {CustomGroupName[]} */
 const targetGroups = ["Cloth", "Suit", "Corset", "ItemTorso"];
 
-const dialog = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶衣_Luzi"], {
+const assetDialogs = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶衣_Luzi"], {
     CN: {
         SelectBase: "设置",
         Select开裆: "设置",
@@ -120,7 +137,7 @@ const dialog = DialogTools.replicateGroupedItemDialog(targetGroups, ["露胸胶�
     },
 });
 
-const translations = {
+const translation = {
     CN: "露胸胶衣",
     EN: "Open-Chest Catsuit",
     RU: "Открытый кожаный костюм",
@@ -134,7 +151,11 @@ export default function () {
             ...(name === "ItemTorso" ? { Difficulty: 6, AllowLock: true, Time: 10 } : {}),
         });
 
-        AssetManager.addAsset(name, nAsset, extended, translations);
+        AssetManager.addAssetWithConfig(name, nAsset, {
+            translation,
+            layerNames,
+            extended,
+            assetDialogs,
+        });
     });
-    AssetManager.addCustomDialog(dialog);
 }
