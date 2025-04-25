@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { ExtendedTools } from "../../../extendedTools";
 
 /** @type { CustomAssetDefinition }} */
 const asset = {
@@ -86,5 +87,6 @@ export default function () {
     AssetManager.addAssetWithConfig("ClothAccessory", asset, {
         translation,
         layerNames,
+        ...ExtendedTools.createLeftRightBoth(asset, { preset: "both", mirror: true }),
     });
 }
