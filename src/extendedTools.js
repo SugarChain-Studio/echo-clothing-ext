@@ -1,42 +1,64 @@
 /**
  * 为物品生成 左/右/两侧 的外观选项
  * @param {CustomAssetDefinition} assetDef
+ * @param {"left" | "right" | "both"} preset 物品的默认外观
  */
-function createLeftRightBoth(assetDef) {
+function createLeftRightBoth(assetDef, preset = "left") {
+    const { Options, leftConfig, rightConfig } = (() => {
+        if (preset === "left") {
+            return {
+                Options: [{ Name: "left" }, { Name: "right" }, { Name: "both" }],
+                leftConfig: { typed: [0, 2] },
+                rightConfig: { typed: [1, 2] },
+            };
+        } else if (preset === "right") {
+            return {
+                Options: [{ Name: "right" }, { Name: "left" }, { Name: "both" }],
+                leftConfig: { typed: [1, 2] },
+                rightConfig: { typed: [0, 2] },
+            };
+        }
+        return {
+            Options: [{ Name: "both" }, { Name: "left" }, { Name: "right" }],
+            leftConfig: { typed: [0, 1] },
+            rightConfig: { typed: [0, 2] },
+        };
+    })();
+
     /** @type {AssetArchetypeConfig} */
     const extended = {
         Archetype: ExtendedArchetype.TYPED,
         DrawImages: false,
-        Options: [{ Name: "左" }, { Name: "右" }, { Name: "两侧" }],
+        Options,
     };
 
     /** @type {Translation.String} */
     const assetStrings = {
         CN: {
             Select: "选择外观",
-            左: "左",
-            右: "右",
-            两侧: "两侧",
+            left: "左",
+            right: "右",
+            both: "两侧",
         },
         EN: {
             Select: "Choose Appearance",
-            左: "Left",
-            右: "Right",
-            两侧: "Both",
+            left: "Left",
+            right: "Right",
+            both: "Both",
         },
         RU: {
             Select: "Выберите внешний вид",
-            左: "Левый",
-            右: "Правый",
-            两侧: "Оба",
+            left: "Левый",
+            right: "Правый",
+            both: "Оба",
         },
     };
 
     for (const layer of assetDef.Layer) {
         if (layer.Name.includes("左")) {
-            layer.AllowTypes = { typed: [0, 2] };
+            layer.AllowTypes = leftConfig;
         } else if (layer.Name.includes("右")) {
-            layer.AllowTypes = { typed: [1, 2] };
+            layer.AllowTypes = rightConfig;
         }
     }
 
