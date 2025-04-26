@@ -160,9 +160,6 @@ function analWhipAction(data, _originalFunction, C, item, newOption, previousOpt
         msg = msg(chatData);
     }
 
-    if (data.chatSetting === TypedItemChatSetting.FROM_TO) msg += `${previousOption.Name}To`;
-    msg += newOption.Name;
-
     ChatRoomPublishCustomAction(`${msg}${newOption.Name}`, true, dictionary);
 
     if (C.IsPlayer()) {
