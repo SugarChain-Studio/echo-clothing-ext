@@ -22,7 +22,7 @@ const asset = {
 
 const translations = {
     CN: "白布",
-    EN: "Transparent raincoat",
+    EN: "Ghost Cloak",
 };
 
 export default function () {

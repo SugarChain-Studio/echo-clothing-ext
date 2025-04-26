@@ -1,4 +1,24 @@
 import { AssetManager } from "../../../assetForward";
+/** @type {Partial<AssetLayerDefinition>} */
+const bottomLayerShared = {
+    ParentGroup: "BodyLower",
+    PoseMapping: {
+        AllFours: PoseType.HIDE,
+        Hogtied: PoseType.HIDE,
+    },
+    AllowTypes: { typed: 0 },
+};
+
+/** @type {Partial<AssetLayerDefinition>} */
+const topLayerShared = {
+    ParentGroup: "BodyUpper",
+    PoseMapping: {
+        OverTheHead: "OverTheHead",
+        Yoked: "Yoked",
+        AllFours: PoseType.HIDE,
+        Hogtied: "Hogtied",
+    },
+};
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,80 +30,14 @@ const asset = {
     Prerequisite: ["HasBreasts"],
     Priority: 26,
     Layer: [
-        {
-            Name: "A1",
-            ParentGroup: "BodyLower",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "A2",
-            ParentGroup: "BodyLower",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "A3",
-            ParentGroup: "BodyLower",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "B1",
-            ParentGroup: "BodyUpper",
-            PoseMapping: {
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
-        {
-            Name: "B2",
-            ParentGroup: "BodyUpper",
-            PoseMapping: {
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
-        {
-            Name: "B3",
-            ParentGroup: "BodyUpper",
-            PoseMapping: {
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
-        {
-            Name: "B4",
-            ParentGroup: "BodyUpper",
-            PoseMapping: {
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
-        {
-            Name: "B5",
-            ParentGroup: "BodyUpper",
-            PoseMapping: {
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
+        { Name: "A1", ...bottomLayerShared },
+        { Name: "A2", ...bottomLayerShared },
+        { Name: "A3", ...bottomLayerShared },
+        { Name: "B1", ...topLayerShared },
+        { Name: "B2", ...topLayerShared },
+        { Name: "B3", ...topLayerShared },
+        { Name: "B4", ...topLayerShared },
+        { Name: "B5", ...topLayerShared },
     ],
 };
 
@@ -115,9 +69,27 @@ const layerNames = {
     },
 };
 
+/** @type {AssetArchetypeConfig} */
+const extended = {
+    Archetype: ExtendedArchetype.TYPED,
+    DrawImages: true,
+    Options: [{ Name: "有" }, { Name: "无" }],
+};
+
+/** @type {Translation.String} */
+const assetStrings = {
+    CN: {
+        Select: "选择内衬裙子",
+        有: "有",
+        无: "无",
+    },
+    EN: {
+        Select: "Select Lining Skirt",
+        有: "Yes",
+        无: "No",
+    },
+};
+
 export default function () {
-    AssetManager.addAssetWithConfig("Cloth", asset, {
-        translation,
-        layerNames,
-    });
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames, extended, assetStrings });
 }

@@ -150,7 +150,7 @@ function publishAction(data, originalFunction, C, item, newOption, previousOptio
 
     const dictionary = ExtendedItemBuildChatMessageDictionary(chatData, data, item)
         .focusGroup(/** @type {AssetGroupItemName}*/ (item.Asset.Group.Name))
-        .text("BCount", `${beadsChange}`)
+        .text("BCount", `${Math.abs(beadsChange)}`)
         .build();
     dictionary.push({ ActivityName: "MasturbateItem" }, { ActivityCounter: Math.abs(beadsChange) });
 
