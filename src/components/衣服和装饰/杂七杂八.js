@@ -50,6 +50,7 @@ const assets = {
             Fetish: ["Lingerie"],
             DefaultColor: ["#E975A0"],
             Extended: true,
+            Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
             ParentGroup: {},
             Layer: clothLCSetting.map((layer, index) => ({
                 Name: layer.Name,
