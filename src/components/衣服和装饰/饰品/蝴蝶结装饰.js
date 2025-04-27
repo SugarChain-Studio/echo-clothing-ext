@@ -38,7 +38,7 @@ const asset = {
 /** @type { Translation.Entry } */
 const translation = {
     CN: "蝴蝶结装饰",
-    EN: "Butterfly Decoration",
+    EN: "Bow Accessory",
 };
 
 /** @type { Translation.Dialog } */
@@ -64,22 +64,22 @@ const layerNames = {
     },
     EN: {
         底色: "Base Color",
-        装饰: "Decoration",
+        装饰: "Accessory",
         本体: "Body",
-        装饰环: "Decoration Ring",
-        装饰珠: "Decoration Bead",
+        装饰环: "Accessory Ring",
+        装饰珠: "Accessory Bead",
 
         右_底色: "Right Base Color",
-        右_装饰: "Right Decoration",
+        右_装饰: "Right Accessory",
         右_本体: "Right Body",
-        右_装饰环: "Right Decoration Ring",
-        右_装饰珠: "Right Decoration Bead",
+        右_装饰环: "Right Accessory Ring",
+        右_装饰珠: "Right Accessory Bead",
 
         左_底色: "Left Base Color",
-        左_装饰: "Left Decoration",
+        左_装饰: "Left Accessory",
         左_本体: "Left Body",
-        左_装饰环: "Left Decoration Ring",
-        左_装饰珠: "Left Decoration Bead",
+        左_装饰环: "Left Accessory Ring",
+        左_装饰珠: "Left Accessory Bead",
     },
 };
 
