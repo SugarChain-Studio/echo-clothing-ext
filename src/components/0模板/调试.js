@@ -5,6 +5,8 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "隐藏身体",
+    Visible: false,
+    Random: false,
     Hide: [
         "BodyLower",
         "BodyUpper",
@@ -30,6 +32,7 @@ export default function load() {
     if (debugFlag) {
         // 一个能隐藏身体的道具
         AssetManager.addAsset("BodyMarkings2_Luzi", asset);
+        AssetManager.addAsset("动物身体_Luzi", asset);
 
         // 聊天室隐藏图标设置为闭眼的时候，截角色图时隐藏背景
         HookManager.patchFunction("DialogDraw", {
