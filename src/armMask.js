@@ -56,6 +56,8 @@ function createLayerDef(mode) {
             Hogtied: PoseType.HIDE,
             TapedHands: "TapedHands",
         },
+        Top: 0,
+        Left: 0,
         TextureMask: {},
         BlendingMode: "destination-out",
     };
