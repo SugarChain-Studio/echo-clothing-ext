@@ -53,8 +53,8 @@ const layerNames = {
 };
 
 export default function () {
+    ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     /**@type {AssetGroupName[]}*/ (["Cloth", "Bra"]).forEach((name) => {
-        ArmMaskTool.createArmMaskForCloth(name, asset);
         AssetManager.addAssetWithConfig(name, { ...asset, DynamicGroupName: "Cloth" }, { translation, layerNames });
     });
 }
