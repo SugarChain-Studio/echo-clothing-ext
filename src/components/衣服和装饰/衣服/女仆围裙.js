@@ -7,7 +7,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 31,
+    Priority: 32,
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
@@ -98,4 +98,9 @@ const layerNames = {
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Arm1");
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
+    AssetManager.addAssetWithConfig(
+        "ClothAccessory",
+        { ...asset, DynamicGroupName: "Cloth" },
+        { translation, layerNames }
+    );
 }
