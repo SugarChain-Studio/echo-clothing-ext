@@ -63,6 +63,7 @@ const asset = {
         { Name: "Caius", AllowTypes: { c: 5 } },
         { Name: "Neko", AllowTypes: { c: 6 } },
         { Name: "居x", AllowTypes: { c: 7 } },
+        { Name: "vaner", AllowTypes: { c: 8 } },
 
         // 猫州猫庭府玩偶
         { Name: "Axa", AllowTypes: { f: 1 } },
@@ -157,11 +158,11 @@ const asset = {
         { Name: "yumi", AllowTypes: { xppjb: 2 } },
         { Name: "白墨鴝", AllowTypes: { xppjb: 3 } },
         { Name: "忧绪", AllowTypes: { xppjb: 4 } },
-        { Name: "五十提", AllowTypes: { xppjb: 5 } },   
-        { Name: "狸nux", AllowTypes: { xppjb: 6 } },   
-        { Name: "番茄炒蛋", AllowTypes: { xppjb: 7 } },   
-        { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },   
-        
+        { Name: "五十提", AllowTypes: { xppjb: 5 } },
+        { Name: "狸nux", AllowTypes: { xppjb: 6 } },
+        { Name: "番茄炒蛋", AllowTypes: { xppjb: 7 } },
+        { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -189,8 +190,10 @@ const asset = {
         { Name: "墨璃", AllowTypes: { l: 20 } },
         { Name: "铃奈", AllowTypes: { l: 21 } },
         { Name: "小雨", AllowTypes: { l: 22 } },
-        { Name: "清酒梓", AllowTypes: { l: 23 } },   
- 
+        { Name: "清酒梓", AllowTypes: { l: 23 } },
+        { Name: "忧绪bride", AllowTypes: { l: 24 } },
+        { Name: "曦芙bride", AllowTypes: { l: 25 } },
+
     ],
 };
 
