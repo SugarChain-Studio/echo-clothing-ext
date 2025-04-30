@@ -5,8 +5,8 @@ const asset = {
     Name: "膝上过夜束缚器",
     Random: false,
     Fetish: ["Leather"],
-    Left: 0,
-    Top: 0,
+    Left: 160,
+    Top: 570,
     Difficulty: 5,
     Priority: 27,
     Time: 12,
@@ -14,51 +14,39 @@ const asset = {
     DefaultColor: ["#505050", "#BBBBBB"],
     Extended: false,
     AllowLock: true,
-    DrawLocks: true,
     AllowTighten: true,
     Block: ["ItemBoots"],
     SetPose: ["LegsClosed"],
     Effect: [E.Slow, E.BlockWardrobe],
     AllowActivePose: ["Kneel", "Hogtied"],
     PoseMapping: {
-        ...AssetPoseMapping.ItemFeet,
         LegsClosed: PoseType.DEFAULT,
-        Kneel: PoseType.HIDE,
+        Kneel: PoseType.DEFAULT,
+        AllFours: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
     },
-    // Alpha: [
-    //     {
-    //         Group: [
-    //             "Socks",
-    //             "SocksRight",
-    //             "SocksLeft",
-    //             "SuitLower",
-    //             "ItemBoots",
-    //         ],
-    //         Masks: [[195, 746, 110, 28]],
-    //     },
-    //     {
-    //         Group: [
-    //             "Socks",
-    //             "SocksRight",
-    //             "SocksLeft",
-    //             "SuitLower",
-    //             "ItemBoots",
-    //         ],
-    //         Masks: [[195, 818, 110, 28]],
-    //     },
-    // ],
     Layer: [
         { Name: "Straps", AllowColorize: true },
         { Name: "Details", ParentGroup: {}, AllowColorize: true },
     ],
 };
 
-const translations = {
+const layerNames = {
+    CN: {
+        Straps: "束缚带",
+        Details: "细节",
+    },
+    EN: {
+        Straps: "Straps",
+        Details: "Details",
+    },
+};
+
+const translation = {
     CN: "膝上过夜束缚器",
-    EN: "Knee Overnighter",
+    EN: "Over Knee Overnighter",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemLegs", asset, null, translations);
+    AssetManager.addAssetWithConfig("ItemLegs", asset, { translation, layerNames });
 }
