@@ -14,6 +14,7 @@ const asset = {
     Hide: ["Mouth", "Glasses", "TailStraps"],
     AllowActivePose: ["BackBoxTie", "BackCuffs", "BackElbowTouch", "LegsClosed"],
     Extended: true,
+    Effect: [E.Block, E.Mounted],
     LayerVisibility: true,
     DefaultColor: [
         "#151515",
@@ -208,8 +209,7 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃�
         Setc1: "SourceCharacter seals DestinationCharacter jar.",
         Sett0: "SourceCharacter removes the restraints from DestinationCharacter legs.",
         Sett1: "SourceCharacter binds DestinationCharacter legs together.",
-        Sets0:
-            "SourceCharacter removes the restraints from DestinationCharacter wrists and elbows.",
+        Sets0: "SourceCharacter removes the restraints from DestinationCharacter wrists and elbows.",
         Sets1: "SourceCharacter binds DestinationCharacter wrists and elbows behind her back.",
         Setgz0: "SourceCharacter removes the tube connected to DestinationCharacter body.",
         Setgz1: "SourceCharacter connects the tube into DestinationCharacter body.",
@@ -221,18 +221,12 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃�
         Setk3: "The vibrating device inside TargetCharacter vibrates fiercely.",
         Setk4: "The vibrating device inside TargetCharacter vibrates at maximum speed.",
         Setd0: "SourceCharacter turns off the vibrating device inside TargetCharacter.",
-        Setd1:
-            "SourceCharacter sets the electric shock device inside TargetCharacter to level 1.",
-        Setd2:
-            "SourceCharacter sets the electric shock device inside TargetCharacter to level 2.",
-        Setd3:
-            "SourceCharacter sets the electric shock device inside TargetCharacter to level 3.",
-        Setg0:
-            "SourceCharacter turns off the orgasm allowance setting of the vibrating device inside TargetCharacter.",
-        Setg1:
-            "SourceCharacter sets the vibrating device inside TargetCharacter to edge play mode.",
-        Setg2:
-            "SourceCharacter sets the vibrating device inside TargetCharacter to denial mode.",
+        Setd1: "SourceCharacter sets the electric shock device inside TargetCharacter to level 1.",
+        Setd2: "SourceCharacter sets the electric shock device inside TargetCharacter to level 2.",
+        Setd3: "SourceCharacter sets the electric shock device inside TargetCharacter to level 3.",
+        Setg0: "SourceCharacter turns off the orgasm allowance setting of the vibrating device inside TargetCharacter.",
+        Setg1: "SourceCharacter sets the vibrating device inside TargetCharacter to edge play mode.",
+        Setg2: "SourceCharacter sets the vibrating device inside TargetCharacter to denial mode.",
 
         SelectBase: "Select Container Configuration",
         Select窗户: "Set Window",
@@ -301,14 +295,10 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃�
         Setk3: "Вібратор в середині TargetCharacter потужно вібрує.",
         Setk4: "Вібратор в середині TargetCharacter вібрує на максимальній швидкості.",
         Setd0: "SourceCharacter виключає TargetCharacter вібратори.",
-        Setd1:
-            "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до першого рівна.",
-        Setd2:
-            "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до другого рівня.",
-        Setd3:
-            "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до третього рівня.",
-        Setg0:
-            "SourceCharacter відключає налаштування дозволення оргазму на вібраторі в середині TargetCharacter.",
+        Setd1: "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до першого рівна.",
+        Setd2: "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до другого рівня.",
+        Setd3: "SourceCharacter налаштовує елеткрошок в середині TargetCharacter до третього рівня.",
+        Setg0: "SourceCharacter відключає налаштування дозволення оргазму на вібраторі в середині TargetCharacter.",
         Setg1: "SourceCharacter налаштовує вібратор в середині TargetCharacter на окантовку.",
         Setg2: "SourceCharacter налаштовує вібратор в середині TargetCharacter на відмову.",
 
