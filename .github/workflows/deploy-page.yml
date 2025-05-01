@@ -10,7 +10,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
-  
+
 jobs:
   build:
     environment:
@@ -31,12 +31,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-          
+
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
@@ -64,7 +64,7 @@ jobs:
 
       - name: Build Beta
         run: pnpm build --configBaseURL $PAGE_URL --configBeta
-      
+
       - name: Create Change Log and Page
         run: |
           git tag | grep 'beta' | xargs -r git tag -d
@@ -82,7 +82,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-  
+
       - name: Build
         run: pnpm build --configBaseURL $PAGE_URL
 
@@ -109,7 +109,7 @@ jobs:
           ref: release
           submodules: 'recursive'
           fetch-depth: 0
-        
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
@@ -139,7 +139,7 @@ jobs:
           echo 'message<<EOF' >> $GITHUB_OUTPUT
           cat temp.txt >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
-          
+
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
