@@ -3,18 +3,19 @@ import { AssetManager } from "./assetForward";
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
 /**
- * @typedef {"" | "Arm1"} ArmMaskMode
+ * @typedef { "" | "Arm1" | "Right" } ArmMaskMode
  */
 
-/** @type {Record<ArmMaskMode,string>} */
+/** @type { Record<ArmMaskMode,string> } */
 const nameRecord = {
     "": "ArmMask",
     "Arm1": "ArmMask1",
+    "Right": "ArmMaskR",
 };
 
 /**
- * @param {CustomGroupName | CustomGroupName []} groupName
- * @param {string} assetName
+ * @param { CustomGroupName | CustomGroupName [] } groupName
+ * @param { string } assetName
  * @param { ArmMaskMode } mode
  */
 function createMappings(groupName, assetName, mode) {
@@ -41,9 +42,10 @@ function createMappings(groupName, assetName, mode) {
 
 /**
  * @param { ArmMaskMode } mode
- * @returns {AssetLayerDefinition}
+ * @param { AllowTypes.Definition } [allowTypes]
+ * @returns { AssetLayerDefinition }
  */
-function createLayerDef(mode) {
+function createLayerDef(mode, allowTypes) {
     return {
         Name: nameRecord[mode],
         ParentGroup: "BodyUpper",
@@ -58,6 +60,7 @@ function createLayerDef(mode) {
         },
         Top: 0,
         Left: 0,
+        AllowTypes: allowTypes,
         TextureMask: {},
         BlendingMode: "destination-out",
     };
@@ -68,12 +71,13 @@ function createLayerDef(mode) {
  *
  * 默认遮罩到Top=367；`mode = "Arm1"` 时，遮罩扩展到Top=353
  *
- * @param {CustomGroupName | CustomGroupName []} groupName
- * @param {CustomAssetDefinition} asset
- * @param {ArmMaskMode} mode
+ * @param { CustomGroupName | CustomGroupName [] } groupName
+ * @param { CustomAssetDefinition } asset
+ * @param { ArmMaskMode } mode
+ * @param { AllowTypes.Definition } [allowTypes]
  */
-function createArmMaskForCloth(groupName, asset, mode = "") {
-    const layerDef = createLayerDef(mode);
+function createArmMaskForCloth(groupName, asset, mode = "", allowTypes) {
+    const layerDef = createLayerDef(mode, allowTypes);
     asset.Layer?.push(layerDef) ?? (asset.Layer = [layerDef]);
     AssetManager.addImageMapping(createMappings(groupName, asset.Name, mode));
 }
