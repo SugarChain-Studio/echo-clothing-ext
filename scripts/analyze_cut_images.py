@@ -3,7 +3,7 @@ import glob
 from PIL import Image
 
 # 带有通配符的目录路径
-wildcard_path = "resources\Assets\Female3DCG\HairAccessory1\耷拉下来的耳朵_Luzi.png"
+wildcard_path = "resources\Assets\Female3DCG\ItemHandheld\分层剑_*.png"
 
 
 def analyze_and_crop_images(file_paths):
@@ -45,14 +45,14 @@ def analyze_and_crop_images(file_paths):
         # 取整到10像素
         rounded_min_x = (min_x // 10) * 10
         rounded_min_y = (min_y // 10) * 10
-        rounded_width = ((max_x - rounded_min_x + 9) // 10) * 10
-        rounded_height = ((max_y - rounded_min_y + 9) // 10) * 10
+        rounded_max_x = ((max_x + 9) // 10) * 10
+        rounded_max_y = ((max_y + 9) // 10) * 10
+        rounded_width = (rounded_max_x - rounded_min_x)
+        rounded_height = (rounded_max_y - rounded_min_y)
 
         # 计算左右对称的矩形区域
-        center_x = image_width // 2
-        symmetric_min_x = center_x - \
-            max(center_x - rounded_min_x, rounded_width // 2)
-        symmetric_width = max(rounded_width, 2 * (center_x - symmetric_min_x))
+        symmetric_min_x = min(rounded_min_x, image_width - rounded_max_x)
+        symmetric_width = image_width - 2 * symmetric_min_x
 
         # 确保对称区域的宽度是10的倍数
         symmetric_width = ((symmetric_width + 9) // 10) * 10
