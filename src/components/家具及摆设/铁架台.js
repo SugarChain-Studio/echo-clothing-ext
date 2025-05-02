@@ -1,6 +1,5 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { VersionSupport } from "@mod-utils/VersionSupport";
 import { takeLayerNames } from "../../utils";
 
 /** @type {TopLeft.Definition} */
@@ -13,7 +12,7 @@ const baseTop = {
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "铁架台",
-    ParentGroup: VersionSupport.NoParentGroup,
+    ParentGroup: {},
     Random: false,
     Left: 0,
     Top: 0,

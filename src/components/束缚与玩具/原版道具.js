@@ -31,14 +31,12 @@ export default function () {
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
 
-    if (GameVersion !== "R114") {
-        AssetManager.modifyAssetLayers(
-            (asset) => asset.Name === "Splatters",
-            (_, layer) => {
-                if (layer.Name === "Internal2" || layer.Name === "Internal3") {
-                    layer.DrawingTop = Tools.topLeftAdjust(layer.DrawingTop, -20);
-                }
+    AssetManager.modifyAssetLayers(
+        (asset) => asset.Name === "Splatters",
+        (_, layer) => {
+            if (layer.Name === "Internal2" || layer.Name === "Internal3") {
+                layer.DrawingTop = Tools.topLeftAdjust(layer.DrawingTop, -20);
             }
-        );
-    }
+        }
+    );
 }

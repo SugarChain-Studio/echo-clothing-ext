@@ -73,7 +73,6 @@ function createLayerDef(mode) {
  * @param {ArmMaskMode} mode
  */
 function createArmMaskForCloth(groupName, asset, mode = "") {
-    if (GameVersion === "R114") return;
     const layerDef = createLayerDef(mode);
     asset.Layer?.push(layerDef) ?? (asset.Layer = [layerDef]);
     AssetManager.addImageMapping(createMappings(groupName, asset.Name, mode));
