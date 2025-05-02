@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {

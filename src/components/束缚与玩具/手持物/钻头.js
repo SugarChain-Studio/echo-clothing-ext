@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
@@ -71,7 +71,7 @@ function scriptDraw({ C, Item, PersistentData }) {
     Tools.drawUpdate(C, Data);
 }
 
-const dialogs= DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头_Luzi"], {
+const dialogs = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头_Luzi"], {
     CN: {
         Select: "转不转",
         不转: "不转",
