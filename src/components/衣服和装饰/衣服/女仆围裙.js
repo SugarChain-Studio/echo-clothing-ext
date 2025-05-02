@@ -9,6 +9,7 @@ const asset = {
     Left: 0,
     Priority: 32,
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
+    ParentGroup: "BodyUpper",
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
