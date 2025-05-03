@@ -1,12 +1,5 @@
 import { AssetManager } from "../../assetForward";
 
-const clothLCSetting = [
-    { Name: "样式0", EN: "Style 0", Src: "淫纹" },
-    { Name: "样式1", EN: "Style 1", Src: "预设淫纹1", AllowColorize: false },
-    { Name: "样式2", EN: "Style 2", Src: "预设淫纹2", AllowColorize: false },
-    { Name: "样式3", EN: "Style 3", Src: "预设淫纹3", AllowColorize: false },
-];
-
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
     Wings: [
@@ -38,48 +31,7 @@ const assets = {
             Layer: [{ Name: "眼镜", Priority: 56 }],
         },
     ],
-    Panties: [
-        {
-            Name: "淫纹_Luzi",
-            Random: false,
-            Gender: "F",
-            Top: 308,
-            Left: 54,
-            Priority: 9,
-            Prerequisite: ["HasVagina"],
-            Fetish: ["Lingerie"],
-            DefaultColor: ["#E975A0"],
-            Extended: true,
-            Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-            ParentGroup: {},
-            Layer: clothLCSetting.map((layer, index) => ({
-                Name: layer.Name,
-                AllowColorize: layer.AllowColorize ?? true,
-                AllowTypes: { typed: index },
-            })),
-        },
-    ],
     BodyMarkings: [
-        {
-            Name: "淫纹_Luzi",
-            Random: false,
-            Gender: "F",
-            Top: 308,
-            Left: 54,
-            Priority: 9,
-            ParentGroup: {},
-            DefaultColor: ["#E975A0"],
-            Extended: true,
-            PoseMapping: {
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-            Layer: clothLCSetting.map((layer, index) => ({
-                Name: layer.Name,
-                AllowColorize: layer.AllowColorize ?? true,
-                AllowTypes: { typed: index },
-            })),
-        },
         {
             Name: "刻度尺_Luzi",
             Random: false,
@@ -99,153 +51,6 @@ const assets = {
             ParentGroup: {},
         },
     ],
-    ItemHands: [
-        {
-            Name: "拳击手套_Luzi",
-            Random: false,
-            Gender: "F",
-            ParentGroup: {},
-            PoseMapping: {
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-            Effect: [E.MergedFingers],
-            Hide: ["ItemHandheld"],
-        },
-    ],
-    ItemHandheld: [
-        {
-            Name: "电蚊拍_Luzi",
-            Random: false,
-            Top: -110,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            Fetish: ["Sadism"],
-            AllowActivity: ["ShockItem"],
-            ActivityAudio: ["Shocks"],
-            PoseMapping: {
-                TapedHands: "BaseUpper",
-                Yoked: "Hide",
-                OverTheHead: "Hide",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-        },
-        {
-            Name: "书",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            Priority: 26,
-            PoseMapping: {
-                TapedHands: "BaseUpper",
-                Yoked: "Hide",
-                OverTheHead: "Hide",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-            Layer: [
-                {
-                    Name: "页",
-                },
-                {
-                    Name: "壳",
-                },
-            ],
-        },
-        {
-            Name: "奶瓶",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            Priority: 46,
-            PoseMapping: {
-                TapedHands: "BaseUpper",
-                Yoked: "Hide",
-                OverTheHead: "Hide",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-            Layer: [
-                {
-                    Name: "奶",
-                },
-                {
-                    Name: "玻璃",
-                },
-                {
-                    Name: "盖子",
-                },
-            ],
-        },
-        {
-            Name: "红包",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            Priority: 46,
-            PoseMapping: {
-                TapedHands: "BaseUpper",
-                Yoked: "Hide",
-                OverTheHead: "Hide",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-        },
-        {
-            Name: "伊偶_Luzi",
-            Random: false,
-            Gender: "F",
-            Top: {
-                OverTheHead: -100,
-            },
-            Difficulty: -10,
-            ParentGroup: {},
-            PoseMapping: {
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "Hide",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
-            Effect: [E.MergedFingers],
-            Hide: ["ItemHandheld"],
-        },
-    ],
-    ItemDevices: [
-        {
-            Name: "树_Luzi",
-            Random: false,
-            Top: -110,
-            Left: -150,
-        },
-    ],
 };
 
 /** @type { Translation.GroupedEntries } */
@@ -263,19 +68,6 @@ const translations = {
             刻度尺_Luzi: "刻度尺",
             番茄酱_Luzi: "番茄酱",
         },
-        ItemHands: {
-            拳击手套_Luzi: "拳击手套",
-        },
-        ItemHandheld: {
-            电蚊拍_Luzi: "电蚊拍",
-            伊偶_Luzi: "伊偶",
-            书: "书",
-            奶瓶: "奶瓶",
-            红包: "红包",
-        },
-        ItemDevices: {
-            树_Luzi: "树",
-        },
     },
     EN: {
         Wings: {
@@ -289,20 +81,6 @@ const translations = {
         BodyMarkings: {
             刻度尺_Luzi: "Ruler",
             番茄酱_Luzi: "Ketchup",
-        },
-        ItemHands: {
-            拳击手套_Luzi: "Boxing Gloves",
-        },
-        ItemHandheld: {
-            电蚊拍_Luzi: "Electric Fly Swatter",
-            书: "Book",
-            奶瓶: "Milk Bottle",
-            红包: "Red Packet",
-            拳击手套_Luzi: "Boxing Gloves",
-            伊偶_Luzi: "Cyäegha Doll",
-        },
-        ItemDevices: {
-            树_Luzi: "Tree",
         },
     },
 };
