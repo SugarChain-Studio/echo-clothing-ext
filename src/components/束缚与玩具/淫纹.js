@@ -27,6 +27,7 @@ import { ChatRoomEvents } from "@sugarch/bc-event-handler";
  * @property {number} H
  */
 
+// #region 拘束
 /** @type { CustomAssetDefinition} */
 const asset = {
     Name: "淫纹_Luzi",
@@ -74,271 +75,19 @@ const asset = {
     ],
 };
 
-/** @type { CustomAssetDefinition} */
-const lock_asset = {
-    Name: "淫纹锁_Luzi_Padlock",
-    Random: false,
-    Wear: false,
-    Enable: false,
-    Effect: [],
-    IsLock: true,
-    ExclusiveUnlock: true,
-    Time: 10,
-    Extended: true,
+const translation = {
+    CN: "淫纹",
+    EN: "Lewd Crest",
+    RU: "Порнографический знак",
+    UA: "Хтивий візерунок",
 };
 
-/**
- * @param {Character} C 玩家自身
- */
-function AssetsItemPelvis随机自慰(C) {
-    if (!C.IsPlayer()) return;
-
-    DrawFlashScreen("#F347B4", 1500, 500);
-
-    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
-
-    const whenBlocked = () => {
-        // 产生如同抚摸大腿的动作，仅自己可见
-        const dictionary = new DictionaryBuilder()
-            .sourceCharacter(Player)
-            .targetCharacter(Player)
-            .focusGroup("ItemLegs")
-            .build();
-        dictionary.push({ ActivityName: "Caress" });
-
-        ChatRoomMessage({
-            Sender: Player.MemberNumber,
-            Content: customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
-            Type: "Action",
-            Dictionary: new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build(),
-        });
-    };
-
-    if (!Player.CanInteract()) {
-        whenBlocked();
-        return;
-    }
-
-    const activity = AssetGetActivity("Female3DCG", "MasturbateHand");
-    if (!activity) {
-        whenBlocked();
-        return;
-    }
-
-    const groups = activity.Target.filter((x) => ActivityCanBeDone(Player, "MasturbateHand", x));
-    if (groups.length === 0) {
-        whenBlocked();
-        return;
-    }
-
-    const targetGroupName = groups[Math.floor(Math.random() * groups.length)];
-    const targetGroup = AssetGroupGet("Female3DCG", targetGroupName);
-    ActivityRun(
-        Player,
-        Player,
-        targetGroup,
-        {
-            Activity: AssetGetActivity("Female3DCG", "MasturbateHand"),
-            Group: targetGroupName,
-        },
-        true
-    );
-}
-
-/**
- * @param {Character} player
- * @param {MyDataType} data
- * @param {ExtendItemProperties} property
- */
-function updateRuns(player, data, property) {
-    if (!player.IsPlayer()) return;
-
-    const now = CommonTime();
-    if (!data.ArousalCheckTimer) data.ArousalCheckTimer = now;
-
-    const delta = now - data.ArousalCheckTimer;
-    data.ArousalCheckTimer += delta;
-
-    // LSCG 联动
-    if (property.TypeRecord.a === 1) {
-        const LSCG = /** @type {any} */ (player).LSCG;
-        if (LSCG && LSCG.InjectorModule && LSCG.InjectorModule.enabled && LSCG.InjectorModule.enableHorny) {
-            const { drugLevelMultiplier, hornyLevelMax, hornyLevel } = LSCG.InjectorModule;
-            LSCG.InjectorModule.hornyLevel = Math.min(
-                hornyLevel + 0.05 * drugLevelMultiplier * (delta / 1000),
-                hornyLevelMax * drugLevelMultiplier
-            );
-        }
-    }
-
-    // 随机自慰
-    const nextTime = () =>
-        now + (Math.random() * 10 + (15 * (100 - (Player.ArousalSettings?.Progress ?? 0))) / 100 + 10) * 1000;
-    if (!data.NextMasturbateTime) data.NextMasturbateTime = nextTime();
-    if (property.Masturbate && ServerPlayerIsInChatRoom()) {
-        if (now > data.NextMasturbateTime) {
-            data.NextMasturbateTime = nextTime();
-            AssetsItemPelvis随机自慰(player);
-        }
-    } else {
-        data.NextMasturbateTime = nextTime();
-    }
-}
-
-/**
- * @param {ServerChatRoomMessage} data
- */
-function onActionHandler(data) {
-    const { Type, Content, Dictionary } = data;
-    if (
-        Type === "Action" &&
-        Array.isArray(Dictionary) &&
-        Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber
-    ) {
-        if (Content.includes("ActionUse")) {
-            const assetName = Dictionary.find((x) => "AssetName" in x)?.AssetName;
-            const groupName = /** @type {any}*/ (Dictionary.find((x) => "FocusGroupName" in x))?.FocusGroupName;
-            if (assetName !== asset.Name || !groupName) return;
-
-            const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
-            const item = InventoryGet(Player, groupName);
-            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", lock_asset.Name) };
-            InventoryLock(Player, item, lock, sourceChara);
-            item.Property.MemberNumberListKeys = CommonConvertArrayToString([sourceChara]);
-            ChatRoomCharacterItemUpdate(Player, groupName);
-        } else if (Content.endsWith(`${asset.Name}淫纹强制高潮`)) {
-            if (!!Player.ArousalSettings) Player.ArousalSettings.Progress = 100;
-            ActivityOrgasmPrepare(Player);
-        } else if (Content.endsWith(`${asset.Name}Seta1`)) {
-            DrawFlashScreen("#F347B4", 1500, 500);
-        }
-    }
-}
-
-/** @type {Record<string, Rect>} */
-const buttons = {
-    电流按钮: { X: 1265, Y: 600, W: 225, H: 55 },
-    高潮按钮: { X: 1510, Y: 600, W: 225, H: 55 },
-
-    发光开关: { X: 1185, Y: 675, W: 64, H: 64 },
-    自慰开关: { X: 1185, Y: 750, W: 64, H: 64 },
+const layerNames = {
+    EN: {
+        淫纹: "Lewd Crest",
+        发光: "Glow",
+    },
 };
-
-/** @type { ExtendedItemScriptHookCallbacks.Draw<ModularItemData> } */
-function dialogDrawHook(Data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem) return;
-    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
-    } else {
-        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
-
-        const prevAlign = MainCanvas.textAlign;
-        MainCanvas.textAlign = "center";
-        ExtendedItemCustomDraw(customDialog("淫纹魔法电流按钮"), buttons.电流按钮.X, buttons.电流按钮.Y);
-        ExtendedItemCustomDraw(customDialog("淫纹强制高潮按钮"), buttons.高潮按钮.X, buttons.高潮按钮.Y);
-
-        MainCanvas.textAlign = "left";
-        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
-        const 强制自慰ON = property.Masturbate;
-        const 发光ON = property.Glow;
-        ExtendedItemDrawCheckbox("GlowSwitch", buttons.发光开关.X, buttons.发光开关.Y, 发光ON, {
-            text: AssetTextGet(customDialog("淫纹发光按钮")),
-            textColor: "White",
-        });
-        ExtendedItemDrawCheckbox("MastSwitch", buttons.自慰开关.X, buttons.自慰开关.Y, 强制自慰ON, {
-            text: AssetTextGet(customDialog("淫纹强制自慰按钮")),
-            textColor: "White",
-        });
-        MainCanvas.textAlign = prevAlign;
-    }
-}
-
-/**
- * @param {Rect} rect
- * @returns {boolean}
- */
-export function RMouseIn(rect) {
-    return MouseIn(rect.X, rect.Y, rect.W, rect.H);
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
-function dialogClickHook(Data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem) return;
-    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
-    } else {
-        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
-
-        const clickPush = (key, func) =>
-            ExtendedItemCustomClickAndPush(CharacterGetCurrent(), DialogFocusItem, key, () => func(), false, false);
-
-        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
-
-        if (RMouseIn(buttons.高潮按钮)) {
-            const Dictionary = new DictionaryBuilder()
-                .sourceCharacter(Player)
-                .targetCharacter(CharacterGetCurrent())
-                .destinationCharacterName(CharacterGetCurrent())
-                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
-                .build();
-            ChatRoomPublishCustomAction(customDialog("淫纹强制高潮"), true, Dictionary);
-        } else if (RMouseIn(buttons.电流按钮)) {
-            ExtendedItemCustomClick("淫纹魔法电流", PropertyShockPublishAction, false, false);
-        } else if (RMouseIn(buttons.发光开关)) {
-            clickPush("Glow", () => {
-                property.Glow = !property.Glow;
-                property.OverridePriority = property.Glow ? 44 : undefined;
-            });
-        } else if (RMouseIn(buttons.自慰开关)) {
-            clickPush("Masturbate", () => (property.Masturbate = !property.Masturbate));
-            const Dictionary = new DictionaryBuilder()
-                .sourceCharacter(Player)
-                .destinationCharacterName(CharacterGetCurrent())
-                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
-                .build();
-            ChatRoomPublishCustomAction(
-                customDialog(`${property.Masturbate ? "开始" : "停止"}淫纹强制自慰`),
-                false,
-                Dictionary
-            );
-        }
-    }
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MyDataType>} */
-function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
-    const Data = PersistentData();
-
-    if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/ (Item.Property));
-
-    if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow) Tools.drawUpdate(C, Data);
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MyDataType>} */
-function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) {
-    if (L === "发光") {
-        const property = /** @type {ExtendItemProperties} */ (Property);
-
-        if (!property.Glow) return { Opacity: 0 };
-
-        const Data = PersistentData();
-
-        const now = Date.now();
-
-        // 闪烁周期时间, 0.5 ~ 5 秒
-        const TwinkleCycleTime = (C.ArousalSettings ? Math.max(10, 110 - C.ArousalSettings.Progress) : 100) * 50;
-
-        // 随机偏移一点时间，避免同步闪烁
-        if (!Data.BlinkCycle) Data.BlinkCycle = Math.floor(Math.random() * 1000);
-        if (!Data.BlinkTimer) Data.BlinkTimer = now;
-
-        const delta = now - Data.BlinkTimer;
-        Data.BlinkTimer = now;
-        Data.BlinkCycle += (delta / TwinkleCycleTime) * Math.PI * 2;
-
-        return { Opacity: 0.7 + 0.3 * Math.cos(Data.BlinkCycle) };
-    }
-}
 
 /** @type {AssetArchetypeConfig} */
 const extended = {
@@ -370,36 +119,6 @@ const extended = {
         Glow: false,
     }),
 };
-
-/** @type {AssetArchetypeConfig} */
-const lock_config = {
-    Archetype: ExtendedArchetype.NOARCH,
-    ScriptHooks: {
-        Init: InventoryItemMiscHighSecurityPadlockInitHook,
-        Load: InventoryItemMiscHighSecurityPadlockLoadHook,
-        Draw: InventoryItemMiscHighSecurityPadlockDrawHook,
-        Click: InventoryItemMiscHighSecurityPadlockClickHook,
-        Exit: InventoryItemMiscHighSecurityPadlockExitHook,
-    },
-    BaselineProperty: {
-        MemberNumberListKeys: "",
-    },
-};
-
-const lock_dialogs = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["淫纹锁_Luzi_Padlock"], {
-    CN: {
-        Intro: "画着复杂的文字",
-    },
-    EN: {
-        Intro: "Inscripted with complex symbols",
-    },
-    RU: {
-        Intro: "Намальовано складними літерами",
-    },
-    UA: {
-        Intro: "Намальовано складними літерами",
-    },
-});
 
 const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
     CN: {
@@ -625,19 +344,20 @@ const item_dialogs = {
         Seta3: "SourceCharacter использует магию на AssetName, чтобы TargetCharacter мог только отвергать оргазм.",
     },
 };
+// #endregion
 
-const translation = {
-    CN: "淫纹",
-    EN: "Lewd Crest",
-    RU: "Порнографический знак",
-    UA: "Хтивий візерунок",
-};
-
-const layerNames = {
-    EN: {
-        淫纹: "Lewd Crest",
-        发光: "Glow",
-    },
+//#region 锁
+/** @type { CustomAssetDefinition} */
+const lock_asset = {
+    Name: "淫纹锁_Luzi_Padlock",
+    Random: false,
+    Wear: false,
+    Enable: false,
+    Effect: [],
+    IsLock: true,
+    ExclusiveUnlock: true,
+    Time: 10,
+    Extended: true,
 };
 
 const lock_translation = {
@@ -647,6 +367,38 @@ const lock_translation = {
     UA: "Замок хтивого візерунку",
 };
 
+/** @type {AssetArchetypeConfig} */
+const lock_config = {
+    Archetype: ExtendedArchetype.NOARCH,
+    ScriptHooks: {
+        Init: InventoryItemMiscHighSecurityPadlockInitHook,
+        Load: InventoryItemMiscHighSecurityPadlockLoadHook,
+        Draw: InventoryItemMiscHighSecurityPadlockDrawHook,
+        Click: InventoryItemMiscHighSecurityPadlockClickHook,
+        Exit: InventoryItemMiscHighSecurityPadlockExitHook,
+    },
+    BaselineProperty: {
+        MemberNumberListKeys: "",
+    },
+};
+
+const lock_dialogs = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["淫纹锁_Luzi_Padlock"], {
+    CN: {
+        Intro: "画着复杂的文字",
+    },
+    EN: {
+        Intro: "Inscripted with complex symbols",
+    },
+    RU: {
+        Intro: "Намальовано складними літерами",
+    },
+    UA: {
+        Intro: "Намальовано складними літерами",
+    },
+});
+//#endregion
+
+//#region 衣服
 const clothLCSetting = [
     { Name: "样式0", EN: "Style 0", Src: "淫纹", ConfigKey: "t0" },
     { Name: "样式1", EN: "Style 1", Src: "预设淫纹1", ConfigKey: "t1" },
@@ -710,6 +462,265 @@ const clothAssetsStrings = {
         { Select: "Select Style" }
     ),
 };
+
+//#endregion
+
+//#region 界面
+/**
+ * @param {Character} C 玩家自身
+ */
+function AssetsItemPelvis随机自慰(C) {
+    if (!C.IsPlayer()) return;
+
+    DrawFlashScreen("#F347B4", 1500, 500);
+
+    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
+
+    const whenBlocked = () => {
+        // 产生如同抚摸大腿的动作，仅自己可见
+        const dictionary = new DictionaryBuilder()
+            .sourceCharacter(Player)
+            .targetCharacter(Player)
+            .focusGroup("ItemLegs")
+            .build();
+        dictionary.push({ ActivityName: "Caress" });
+
+        ChatRoomMessage({
+            Sender: Player.MemberNumber,
+            Content: customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
+            Type: "Action",
+            Dictionary: new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build(),
+        });
+    };
+
+    if (!Player.CanInteract()) {
+        whenBlocked();
+        return;
+    }
+
+    const activity = AssetGetActivity("Female3DCG", "MasturbateHand");
+    if (!activity) {
+        whenBlocked();
+        return;
+    }
+
+    const groups = activity.Target.filter((x) => ActivityCanBeDone(Player, "MasturbateHand", x));
+    if (groups.length === 0) {
+        whenBlocked();
+        return;
+    }
+
+    const targetGroupName = groups[Math.floor(Math.random() * groups.length)];
+    const targetGroup = AssetGroupGet("Female3DCG", targetGroupName);
+    ActivityRun(
+        Player,
+        Player,
+        targetGroup,
+        {
+            Activity: AssetGetActivity("Female3DCG", "MasturbateHand"),
+            Group: targetGroupName,
+        },
+        true
+    );
+}
+
+/**
+ * @param {Character} player
+ * @param {MyDataType} data
+ * @param {ExtendItemProperties} property
+ */
+function updateRuns(player, data, property) {
+    if (!player.IsPlayer()) return;
+
+    const now = CommonTime();
+    if (!data.ArousalCheckTimer) data.ArousalCheckTimer = now;
+
+    const delta = now - data.ArousalCheckTimer;
+    data.ArousalCheckTimer += delta;
+
+    // LSCG 联动
+    if (property.TypeRecord.a === 1) {
+        const LSCG = /** @type {any} */ (player).LSCG;
+        if (LSCG && LSCG.InjectorModule && LSCG.InjectorModule.enabled && LSCG.InjectorModule.enableHorny) {
+            const { drugLevelMultiplier, hornyLevelMax, hornyLevel } = LSCG.InjectorModule;
+            LSCG.InjectorModule.hornyLevel = Math.min(
+                hornyLevel + 0.05 * drugLevelMultiplier * (delta / 1000),
+                hornyLevelMax * drugLevelMultiplier
+            );
+        }
+    }
+
+    // 随机自慰
+    const nextTime = () =>
+        now + (Math.random() * 10 + (15 * (100 - (Player.ArousalSettings?.Progress ?? 0))) / 100 + 10) * 1000;
+    if (!data.NextMasturbateTime) data.NextMasturbateTime = nextTime();
+    if (property.Masturbate && ServerPlayerIsInChatRoom()) {
+        if (now > data.NextMasturbateTime) {
+            data.NextMasturbateTime = nextTime();
+            AssetsItemPelvis随机自慰(player);
+        }
+    } else {
+        data.NextMasturbateTime = nextTime();
+    }
+}
+
+/**
+ * @param {ServerChatRoomMessage} data
+ */
+function onActionHandler(data) {
+    const { Type, Content, Dictionary } = data;
+    if (
+        Type === "Action" &&
+        Array.isArray(Dictionary) &&
+        Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber
+    ) {
+        if (Content.includes("ActionUse")) {
+            const assetName = Dictionary.find((x) => "AssetName" in x)?.AssetName;
+            const groupName = /** @type {any}*/ (Dictionary.find((x) => "FocusGroupName" in x))?.FocusGroupName;
+            if (assetName !== asset.Name || !groupName) return;
+
+            const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
+            const item = InventoryGet(Player, groupName);
+            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", lock_asset.Name) };
+            InventoryLock(Player, item, lock, sourceChara);
+            item.Property.MemberNumberListKeys = CommonConvertArrayToString([sourceChara]);
+            ChatRoomCharacterItemUpdate(Player, groupName);
+        } else if (Content.endsWith(`${asset.Name}淫纹强制高潮`)) {
+            if (!!Player.ArousalSettings) Player.ArousalSettings.Progress = 100;
+            ActivityOrgasmPrepare(Player);
+        } else if (Content.endsWith(`${asset.Name}Seta1`)) {
+            DrawFlashScreen("#F347B4", 1500, 500);
+        }
+    }
+}
+
+/** @type {Record<string, Rect>} */
+const buttons = {
+    电流按钮: { X: 1265, Y: 600, W: 225, H: 55 },
+    高潮按钮: { X: 1510, Y: 600, W: 225, H: 55 },
+
+    发光开关: { X: 1185, Y: 675, W: 64, H: 64 },
+    自慰开关: { X: 1185, Y: 750, W: 64, H: 64 },
+};
+
+/** @type { ExtendedItemScriptHookCallbacks.Draw<ModularItemData> } */
+function dialogDrawHook(Data, originalFunction) {
+    originalFunction();
+    if (!DialogFocusItem) return;
+    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
+    } else {
+        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+
+        const prevAlign = MainCanvas.textAlign;
+        MainCanvas.textAlign = "center";
+        ExtendedItemCustomDraw(customDialog("淫纹魔法电流按钮"), buttons.电流按钮.X, buttons.电流按钮.Y);
+        ExtendedItemCustomDraw(customDialog("淫纹强制高潮按钮"), buttons.高潮按钮.X, buttons.高潮按钮.Y);
+
+        MainCanvas.textAlign = "left";
+        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
+        const 强制自慰ON = property.Masturbate;
+        const 发光ON = property.Glow;
+        ExtendedItemDrawCheckbox("GlowSwitch", buttons.发光开关.X, buttons.发光开关.Y, 发光ON, {
+            text: AssetTextGet(customDialog("淫纹发光按钮")),
+            textColor: "White",
+        });
+        ExtendedItemDrawCheckbox("MastSwitch", buttons.自慰开关.X, buttons.自慰开关.Y, 强制自慰ON, {
+            text: AssetTextGet(customDialog("淫纹强制自慰按钮")),
+            textColor: "White",
+        });
+        MainCanvas.textAlign = prevAlign;
+    }
+}
+
+/**
+ * @param {Rect} rect
+ * @returns {boolean}
+ */
+export function RMouseIn(rect) {
+    return MouseIn(rect.X, rect.Y, rect.W, rect.H);
+}
+
+/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
+function dialogClickHook(Data, originalFunction) {
+    originalFunction();
+    if (!DialogFocusItem) return;
+    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
+    } else {
+        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
+
+        const clickPush = (key, func) =>
+            ExtendedItemCustomClickAndPush(CharacterGetCurrent(), DialogFocusItem, key, () => func(), false, false);
+
+        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+
+        if (RMouseIn(buttons.高潮按钮)) {
+            const Dictionary = new DictionaryBuilder()
+                .sourceCharacter(Player)
+                .targetCharacter(CharacterGetCurrent())
+                .destinationCharacterName(CharacterGetCurrent())
+                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
+                .build();
+            ChatRoomPublishCustomAction(customDialog("淫纹强制高潮"), true, Dictionary);
+        } else if (RMouseIn(buttons.电流按钮)) {
+            ExtendedItemCustomClick("淫纹魔法电流", PropertyShockPublishAction, false, false);
+        } else if (RMouseIn(buttons.发光开关)) {
+            clickPush("Glow", () => {
+                property.Glow = !property.Glow;
+                property.OverridePriority = property.Glow ? 44 : undefined;
+            });
+        } else if (RMouseIn(buttons.自慰开关)) {
+            clickPush("Masturbate", () => (property.Masturbate = !property.Masturbate));
+            const Dictionary = new DictionaryBuilder()
+                .sourceCharacter(Player)
+                .destinationCharacterName(CharacterGetCurrent())
+                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
+                .build();
+            ChatRoomPublishCustomAction(
+                customDialog(`${property.Masturbate ? "开始" : "停止"}淫纹强制自慰`),
+                false,
+                Dictionary
+            );
+        }
+    }
+}
+//#endregion
+
+//#region 动画绘制
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MyDataType>} */
+function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
+    const Data = PersistentData();
+
+    if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/ (Item.Property));
+
+    if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow) Tools.drawUpdate(C, Data);
+}
+
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MyDataType>} */
+function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) {
+    if (L === "发光") {
+        const property = /** @type {ExtendItemProperties} */ (Property);
+
+        if (!property.Glow) return { Opacity: 0 };
+
+        const Data = PersistentData();
+
+        const now = Date.now();
+
+        // 闪烁周期时间, 0.5 ~ 5 秒
+        const TwinkleCycleTime = (C.ArousalSettings ? Math.max(10, 110 - C.ArousalSettings.Progress) : 100) * 50;
+
+        // 随机偏移一点时间，避免同步闪烁
+        if (!Data.BlinkCycle) Data.BlinkCycle = Math.floor(Math.random() * 1000);
+        if (!Data.BlinkTimer) Data.BlinkTimer = now;
+
+        const delta = now - Data.BlinkTimer;
+        Data.BlinkTimer = now;
+        Data.BlinkCycle += (delta / TwinkleCycleTime) * Math.PI * 2;
+
+        return { Opacity: 0.7 + 0.3 * Math.cos(Data.BlinkCycle) };
+    }
+}
+//#endregion
 
 export default function () {
     ChatRoomEvents.on("Action", (data) => onActionHandler(data));
