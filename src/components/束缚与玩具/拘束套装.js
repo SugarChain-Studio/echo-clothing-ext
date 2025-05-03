@@ -1,6 +1,26 @@
 import { AssetManager } from "../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { DialogTools } from "@mod-utils/Tools";
+
+/** @type {AssetPoseMapping} */
+const upperMapping = {
+    BackElbowTouch: "BackElbowTouch",
+    Hogtied: "Hogtied",
+};
+
+/** @type {AssetPoseMapping} */
+const lowerMapping = {
+    Kneel: "Kneel",
+    KneelingSpread: "KneelingSpread",
+    LegsClosed: "LegsClosed",
+    Spread: "Spread",
+    Hogtied: "Hide",
+};
+
+/** @type {AssetPoseMapping} */
+const suitMapping = {
+    BackElbowTouch: "BackElbowTouch",
+    Hogtied: PoseType.DEFAULT,
+};
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -22,119 +42,93 @@ const asset = {
             ColorGroup: "皮带",
             Priority: 31,
             ParentGroup: "BodyLower",
-            PoseMapping: {
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                Hogtied: "Hide",
-            },
+            PoseMapping: lowerMapping,
         },
         {
             Name: "上半身",
             ColorGroup: "皮带",
             Priority: 31,
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: "Hogtied",
-            },
+            PoseMapping: upperMapping,
         },
         {
             Name: "下半身圆环",
             ColorGroup: "环",
             Priority: 31,
             ParentGroup: "BodyLower",
-            PoseMapping: {
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                Hogtied: "Hide",
-            },
+            PoseMapping: lowerMapping,
         },
         {
             Name: "上半身圆环",
             ColorGroup: "环",
             Priority: 32,
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: "Hogtied",
-            },
+            PoseMapping: upperMapping,
         },
         {
             Name: "下半身松紧扣",
             ColorGroup: "松紧扣",
             Priority: 32,
             ParentGroup: "BodyLower",
-            PoseMapping: {
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                Hogtied: "Hide",
-            },
+            PoseMapping: lowerMapping,
         },
         {
             Name: "上半身松紧扣",
             ColorGroup: "松紧扣",
             Priority: 32,
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: "Hogtied",
-            },
+            PoseMapping: upperMapping,
         },
         {
             Name: "链子",
             Priority: 30,
             ParentGroup: "BodyLower",
-            PoseMapping: {
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-                Hogtied: "Hide",
-            },
+            PoseMapping: lowerMapping,
         },
         {
             Name: "手臂",
             Priority: 5,
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: PoseType.DEFAULT,
-            },
+            PoseMapping: suitMapping,
         },
         {
             Name: "乳胶衣",
             Priority: 6,
             AllowTypes: { typed: 1 },
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: PoseType.DEFAULT,
-            },
+            PoseMapping: suitMapping,
         },
         {
             Name: "透视紧身衣",
             Priority: 6,
             AllowTypes: { typed: 2 },
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: PoseType.DEFAULT,
-            },
+            PoseMapping: suitMapping,
         },
         {
             Name: "紧身衣",
             Priority: 6,
             AllowTypes: { typed: 3 },
-            PoseMapping: {
-                BackElbowTouch: "BackElbowTouch",
-                Hogtied: PoseType.DEFAULT,
-            },
+            PoseMapping: suitMapping,
         },
     ],
+};
+
+const layerNames = {
+    EN: {
+        下半身: "Lower Body",
+        上半身: "Upper Body",
+        下半身圆环: "Lower Body",
+        上半身圆环: "Upper Body",
+        下半身松紧扣: "Lower Body Strap",
+        上半身松紧扣: "Upper Body Strap",
+        皮带: "Belt",
+        环: "Ring",
+        松紧扣: "Strap",
+        链子: "Chain",
+        手臂: "Arms",
+        乳胶衣: "Latex Suit",
+        透视紧身衣: "Sheer Bodysuit",
+        紧身衣: "Bodysuit",
+    },
 };
 
 /** @type { TypedItemConfig } */
@@ -143,20 +137,7 @@ const extended = {
     ChangeWhenLocked: false,
     ChatTags: [CommonChatTags.SOURCE_CHAR, CommonChatTags.TARGET_CHAR],
     DrawImages: false,
-    Options: [
-        {
-            Name: "无",
-        },
-        {
-            Name: "乳胶衣",
-        },
-        {
-            Name: "透视紧身衣",
-        },
-        {
-            Name: "紧身衣",
-        },
-    ],
+    Options: [{ Name: "无" }, { Name: "乳胶衣" }, { Name: "透视紧身衣" }, { Name: "紧身衣" }],
 };
 
 /** @type {Record<string, string>} */
@@ -167,18 +148,18 @@ const icons = {
     "Screens/Inventory/ItemTorso/拘束套装_Luzi/紧身衣.png": PathTools.emptyImage,
 };
 
-const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["拘束套装_Luzi"], {
+const assetStrings = {
     CN: {
         无: "无",
         乳胶衣: "乳胶衣",
         透视紧身衣: "透视紧身衣",
         紧身衣: "紧身衣",
 
-        Select: "选择配置",
-        Set无: "",
-        Set乳胶衣: "",
-        Set透视紧身衣: "",
-        Set紧身衣: "",
+        Select: "选择附带服装配置",
+        Set无: "SourceCharacter将DestinationCharacter拘束套装设置为无附带服装",
+        Set乳胶衣: "SourceCharacter将DestinationCharacter拘束套装设置为附带乳胶衣",
+        Set透视紧身衣: "SourceCharacter将DestinationCharacter拘束套装设置为附带透视紧身衣",
+        Set紧身衣: "SourceCharacter将DestinationCharacter拘束套装设置为附带紧身衣",
     },
     EN: {
         无: "No",
@@ -186,46 +167,20 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["拘束�
         透视紧身衣: "Sheer Bodysuit",
         紧身衣: "Bodysuit",
 
-        Select: "Select Configuration",
-        Set无: "",
-        Set乳胶衣: "",
-        Set透视紧身衣: "",
-        Set紧身衣: "",
+        Select: "Select Additional Clothing Configuration",
+        Set无: "SourceCharacter set DestinationCharacter's Restraint Set to No Additional Clothing",
+        Set乳胶衣: "SourceCharacter set DestinationCharacter's Restraint Set to with Latex Suit",
+        Set透视紧身衣: "SourceCharacter set DestinationCharacter's Restraint Set to with Sheer Bodysuit",
+        Set紧身衣: "SourceCharacter set DestinationCharacter's Restraint Set to with Bodysuit",
     },
-    RU: {
-        无: "Нет",
-        乳胶衣: "Латексный костюм",
-        透视紧身衣: "Прозрачный комбинезон",
-        紧身衣: "Комбинезон",
+};
 
-        Select: "Выбор конфигурации",
-        Set无: "",
-        Set乳胶衣: "",
-        Set透视紧身衣: "",
-        Set紧身衣: "",
-    },
-    UA: {
-        无: "Ні",
-        乳胶衣: "Латексний костюм",
-        透视紧身衣: "Напівпрозорий комбінезон",
-        紧身衣: "Комбінезон",
-
-        Select: "Виберіть конфігурацію предмету",
-        Set无: "",
-        Set乳胶衣: "",
-        Set透视紧身衣: "",
-        Set紧身衣: "",
-    },
-});
-
-const translations = {
+const translation = {
     CN: "拘束套装",
     EN: "Restraint Set",
-    UA: "Набір обмежувачів",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translations);
+    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
     AssetManager.addImageMapping(icons);
-    AssetManager.addCustomDialog(dialogs);
 }
