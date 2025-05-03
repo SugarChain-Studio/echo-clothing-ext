@@ -47,10 +47,7 @@ const asset = {
     ParentGroup: {},
     Attribute: ["GenitaliaCover"],
     DefaultColor: ["#EA3E74"],
-    PoseMapping: {
-        Hogtied: "Hide",
-        AllFours: "Hide",
-    },
+    PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
     Layer: [
         {
             Name: "淫纹",
@@ -78,7 +75,7 @@ const asset = {
 };
 
 /** @type { CustomAssetDefinition} */
-const asset_lock = {
+const lock_asset = {
     Name: "淫纹锁_Luzi_Padlock",
     Random: false,
     Wear: false,
@@ -205,7 +202,7 @@ function onActionHandler(data) {
 
             const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
             const item = InventoryGet(Player, groupName);
-            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", asset_lock.Name) };
+            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", lock_asset.Name) };
             InventoryLock(Player, item, lock, sourceChara);
             item.Property.MemberNumberListKeys = CommonConvertArrayToString([sourceChara]);
             ChatRoomCharacterItemUpdate(Player, groupName);
@@ -375,7 +372,7 @@ const extended = {
 };
 
 /** @type {AssetArchetypeConfig} */
-const extended2 = {
+const lock_config = {
     Archetype: ExtendedArchetype.NOARCH,
     ScriptHooks: {
         Init: InventoryItemMiscHighSecurityPadlockInitHook,
@@ -527,7 +524,7 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
     },
 });
 
-const item_dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis", "ItemTorso", "ItemTorso2"], ["淫纹_Luzi"], {
+const item_dialogs = {
     CN: {
         SelectBase: "淫纹设置",
         Module样式: "淫纹样式",
@@ -627,28 +624,120 @@ const item_dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis", "Item
         Seta2: "SourceCharacter использует магию на AssetName, чтобы удерживать TargetCharacter на грани оргазма.",
         Seta3: "SourceCharacter использует магию на AssetName, чтобы TargetCharacter мог только отвергать оргазм.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "淫纹",
     EN: "Lewd Crest",
     RU: "Порнографический знак",
     UA: "Хтивий візерунок",
 };
-const translations2 = {
+
+const layerNames = {
+    EN: {
+        淫纹: "Lewd Crest",
+        发光: "Glow",
+    },
+};
+
+const lock_translation = {
     CN: "魔法刻印",
     EN: "Lewd Crest lock",
     RU: "Порнографический знак",
     UA: "Замок хтивого візерунку",
 };
 
+const clothLCSetting = [
+    { Name: "样式0", EN: "Style 0", Src: "淫纹", ConfigKey: "t0" },
+    { Name: "样式1", EN: "Style 1", Src: "预设淫纹1", ConfigKey: "t1" },
+    { Name: "样式2", EN: "Style 2", Src: "预设淫纹2", ConfigKey: "t2" },
+    { Name: "样式3", EN: "Style 3", Src: "预设淫纹3", ConfigKey: "t3" },
+];
+
+/** @type { CustomAssetDefinition }} */
+const clothAsset = {
+    Name: "淫纹_Luzi",
+    Random: false,
+    Gender: "F",
+    Top: 308,
+    Left: 54,
+    Priority: 9,
+    DefaultColor: ["#E975A0", "Default", "Default", "Default"],
+    Extended: true,
+    PoseMapping: { ...AssetPoseMapping.Panties },
+    Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+    ParentGroup: {},
+    DynamicGroupName: "ItemPelvis",
+    Layer: clothLCSetting.map((layer, index) => ({ Name: layer.Src, AllowTypes: { typed: index } })),
+};
+
+const clothTranslation = {
+    CN: "淫纹",
+    EN: "Lewd Crest",
+};
+
+const clothlayerName = {
+    EN: {
+        样式0: "Style 0",
+        样式1: "Style 1",
+        样式2: "Style 2",
+        样式3: "Style 3",
+    },
+};
+
+/** @type {TypedItemConfig} */
+const clothExtended = {
+    Archetype: ExtendedArchetype.TYPED,
+    Options: clothLCSetting.map((layer, index) => ({
+        Name: layer.ConfigKey,
+        AllowTypes: { typed: index },
+    })),
+};
+
+const clothAssetsStrings = {
+    CN: clothLCSetting.reduce(
+        (acc, layer) => {
+            acc[layer.ConfigKey] = layer.Name;
+            return acc;
+        },
+        { Select: "选择样式" }
+    ),
+    EN: clothLCSetting.reduce(
+        (acc, layer) => {
+            acc[layer.ConfigKey] = layer.EN;
+            return acc;
+        },
+        { Select: "Select Style" }
+    ),
+};
+
 export default function () {
     ChatRoomEvents.on("Action", (data) => onActionHandler(data));
 
-    AssetManager.addAsset("ItemPelvis", asset, extended, translations);
-    AssetManager.addAsset("ItemTorso", { ...asset, DynamicGroupName: "ItemPelvis" }, extended, translations);
-    AssetManager.addAsset("ItemMisc", asset_lock, extended2, translations2);
-    AssetManager.addCustomDialog(item_dialogs);
-    AssetManager.addCustomDialog(custom_dialogs);
-    AssetManager.addCustomDialog(lock_dialogs);
+    /** @type {AssetGroupName[]}*/ (["ItemPelvis", "ItemTorso"]).forEach((name) => {
+        AssetManager.addAssetWithConfig(
+            name,
+            { ...asset, DynamicGroupName: "ItemPelvis" },
+            {
+                extended,
+                translation,
+                layerNames,
+                assetStrings: item_dialogs,
+            }
+        );
+    });
+
+    AssetManager.addCustomAssetString(custom_dialogs);
+
+    AssetManager.addAsset("ItemMisc", lock_asset, lock_config, lock_translation);
+    AssetManager.addCustomAssetString(lock_dialogs);
+
+    /** @type {AssetGroupName[]}*/ (["Panties", "BodyMarkings"]).forEach((name) => {
+        AssetManager.addAssetWithConfig(name, clothAsset, {
+            extended: clothExtended,
+            translation: clothTranslation,
+            layerNames: clothlayerName,
+            assetStrings: clothAssetsStrings,
+        });
+    });
 }

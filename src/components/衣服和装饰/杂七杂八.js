@@ -248,18 +248,6 @@ const assets = {
     ],
 };
 
-/** @type {Partial<Record<CustomGroupName, ExtendedItemGroupConfig>>} */
-const extendedConfig = {
-    ...["Panties", "BodyMarkings"].reduce((pv, group) => {
-        if (!pv[group]) pv[group] = {};
-        pv[group]["淫纹_Luzi"] = {
-            Archetype: ExtendedArchetype.TYPED,
-            Options: clothLCSetting.map((layer) => ({ Name: layer.Name })),
-        };
-        return pv;
-    }, {}),
-};
-
 /** @type { Translation.GroupedEntries } */
 const translations = {
     CN: {
@@ -271,11 +259,7 @@ const translations = {
             单边眼镜右_Luzi: "单边眼镜右",
             眼镜卡_Luzi: "眼镜卡",
         },
-        Panties: {
-            淫纹_Luzi: "淫纹",
-        },
         BodyMarkings: {
-            淫纹_Luzi: "淫纹",
             刻度尺_Luzi: "刻度尺",
             番茄酱_Luzi: "番茄酱",
         },
@@ -302,11 +286,7 @@ const translations = {
             单边眼镜右_Luzi: "Monocle Right",
             眼镜卡_Luzi: "Glasses Card",
         },
-        Panties: {
-            淫纹_Luzi: "Lewd Crest",
-        },
         BodyMarkings: {
-            淫纹_Luzi: "Lewd Crest",
             刻度尺_Luzi: "Ruler",
             番茄酱_Luzi: "Ketchup",
         },
@@ -329,36 +309,4 @@ const translations = {
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
-    AssetManager.addGroupedConfig(extendedConfig);
-
-    AssetManager.addImageMapping(
-        clothLCSetting.reduce((pv, cv, idx) => {
-            ["Panties", "BodyMarkings", "BodyMarkings2_Luzi"].forEach((group) => {
-                pv[
-                    `Screens/Inventory/${group}/淫纹_Luzi/${cv.Name}.png`
-                ] = `Screens/Inventory/ItemPelvis/淫纹_Luzi/t${idx}.png`;
-                pv[
-                    `Assets/Female3DCG/${group}/淫纹_Luzi_${cv.Name}.png`
-                ] = `Assets/Female3DCG/ItemPelvis/淫纹_Luzi_${cv.Src}.png`;
-            });
-            return pv;
-        }, {})
-    );
-
-    AssetManager.addCustomDialog({
-        CN: {
-            ...["Panties", "BodyMarkings", "BodyMarkings2_Luzi"].reduce((acc, group) => {
-                acc[`${group}淫纹_LuziSelect`] = "选择样式";
-                clothLCSetting.forEach((layer) => (acc[`${group}淫纹_Luzi${layer.Name}`] = layer.Name));
-                return acc;
-            }, {}),
-        },
-        EN: {
-            ...["Panties", "BodyMarkings", "BodyMarkings2_Luzi"].reduce((acc, group) => {
-                acc[`${group}淫纹_LuziSelect`] = "Select Style";
-                clothLCSetting.forEach((layer) => (acc[`${group}淫纹_Luzi${layer.Name}`] = layer.EN));
-                return acc;
-            }, {}),
-        },
-    });
 }

@@ -7,6 +7,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 99,
+    DynamicGroupName: "BodyMarkings2_Luzi",
     Alpha: [
         {
             Group: ["ItemDevices"],
@@ -17,8 +18,8 @@ const asset = {
     ],
 };
 
-const translations = { CN: "坐牢尺", EN: "坐牢尺" };
+const translation = { CN: "坐牢尺", EN: "Grid" };
 
 export default function () {
-    AssetManager.addAsset("BodyMarkings2_Luzi", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("BodyMarkings2_Luzi", asset, { translation, layerNames: {} });
 }
