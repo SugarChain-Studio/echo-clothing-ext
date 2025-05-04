@@ -292,7 +292,7 @@ function afterDraw(
 
         if (singleLine) {
             const { Text } = CA.Property;
-            DynamicDrawText(Text, ctx, Width / 2, Height / 2, config);
+            DynamicDrawText(Text, ctx, Width / 2, Height / 2, { ...config, fontSize: 30 });
         } else {
             const { Text, Text2 } = CA.Property;
             DynamicDrawText(Text, ctx, Width / 2, Height / 2 - 14, config);
