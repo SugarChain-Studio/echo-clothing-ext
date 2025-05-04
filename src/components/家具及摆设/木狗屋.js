@@ -30,7 +30,7 @@ const bLConfig = (name) => ({
 
 /** @type { (string)=>Partial<AssetLayerDefinition> } */
 const fLConfig = (name) => ({
-    Name: name,
+    Name: `${name}_F`,
     CopyLayerColor: name,
     Priority: 57,
     PoseMapping: foursMapping,
@@ -63,7 +63,7 @@ const asset = {
         { ...bLConfig("LockArch"), ColorGroup: "Lock", LockLayer: true, AllowTypes: { d: [1, 2] } },
         { ...bLConfig("LockBody"), ColorGroup: "Lock", LockLayer: true, AllowTypes: { d: [1, 2] } },
         { ...bLConfig("Plaque"), ColorGroup: "Front" },
-        { ...bLConfig("Text") },
+        { ...bLConfig("Text"), HasImage: false },
         { ...bLConfig("Stair") },
         {
             Name: "Mask",
@@ -94,7 +94,7 @@ const asset = {
         { ...fLConfig("LockArch"), LockLayer: true, AllowTypes: { d: 1 } },
         { ...fLConfig("LockBody"), LockLayer: true, AllowTypes: { d: 1 } },
         { ...fLConfig("Plaque") },
-        { ...fLConfig("Text") },
+        { ...fLConfig("Text"), HasImage: false },
         { ...fLConfig("Stair") },
     ],
 };
@@ -157,7 +157,7 @@ const extended = {
                 {
                     Difficulty: 6,
                     Property: {
-                        Effect: [E.Enclose, E.BlockWardrobe, E.Mounted, E.MapImmobile],
+                        Effect: [E.Enclose, E.BlockWardrobe, E.Mounted, E.MapImmobile, E.BlindHeavy],
                         SetPose: ["AllFours"],
                         AllowActivePose: ["AllFours", "Hogtied"],
                     },
@@ -165,7 +165,7 @@ const extended = {
                 {
                     Difficulty: 6,
                     Property: {
-                        Effect: [E.OneWayEnclose, E.BlockWardrobe, E.Mounted, E.MapImmobile],
+                        Effect: [E.OneWayEnclose, E.BlockWardrobe, E.Mounted, E.MapImmobile, E.BlindNormal],
                         SetPose: ["AllFours"],
                         AllowActivePose: ["AllFours", "Hogtied"],
                     },
@@ -274,7 +274,7 @@ function afterDraw(
     const Width = 324 - 176;
     const Height = 224 - 131;
 
-    if (L === "Text") {
+    if (L === "Text" || L === "Text_F") {
         const singleLine = (Property.TypeRecord?.t ?? 0) === 0;
         const TempCanvas = AnimationGenerateTempCanvas(C, A, Width, Height);
 
@@ -305,5 +305,15 @@ function afterDraw(
 }
 
 export default function () {
+    /** @type {Record<string,string>} */
+    const mappings = {};
+    for (const layer of asset.Layer) {
+        if (layer.Name.endsWith("_F")) {
+            mappings[
+                `Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.Name}.png`
+            ] = `Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.CopyLayerColor}.png`;
+        }
+    }
+    AssetManager.addImageMapping(mappings);
     AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
 }
