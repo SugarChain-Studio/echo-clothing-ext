@@ -38,29 +38,27 @@ const translations = {
     },
 };
 
-/** @type { Record<string,Translation.CustomRecord<string,string>> } */
+/** @type { Translation.CustomRecord<string,string> } */
 const layerNames = {
-    眼睛2: {
-        CN: {
-            1: "下眼睑",
-            2: "上眼睑",
-            3: "眼球",
-            4: "虹膜",
-            5: "虹膜边缘",
-            6: "瞳孔",
-            7: "下睫毛",
-            8: "上睫毛",
-        },
-        EN: {
-            1: "Lower Eyelid",
-            2: "Upper Eyelid",
-            3: "Eyeball",
-            4: "Iris",
-            5: "Iris Edge",
-            6: "Pupil",
-            7: "Lower Lash",
-            8: "Upper Lash",
-        },
+    CN: {
+        1: "下眼睑",
+        2: "上眼睑",
+        3: "眼球",
+        4: "虹膜",
+        5: "虹膜边缘",
+        6: "瞳孔",
+        7: "下睫毛",
+        8: "上睫毛",
+    },
+    EN: {
+        1: "Lower Eyelid",
+        2: "Upper Eyelid",
+        3: "Eyeball",
+        4: "Iris",
+        5: "Iris Edge",
+        6: "Pupil",
+        7: "Lower Lash",
+        8: "Upper Lash",
     },
 };
 
@@ -68,6 +66,11 @@ const layerNames = {
 const mirroredAssets = {
     左眼_Luzi: assets,
     右眼_Luzi: assets,
+};
+
+const groupedLayerNames = {
+    CN: { 左眼_Luzi: { 眼睛2: layerNames.CN }, 右眼_Luzi: { 眼睛2: layerNames.CN } },
+    EN: { 左眼_Luzi: { 眼睛2: layerNames.EN }, 右眼_Luzi: { 眼睛2: layerNames.EN } },
 };
 
 /** @type {CustomGroupName[]} */
@@ -86,10 +89,5 @@ const mirroredTranslations = Object.entries(translations).reduce((acc, [name, va
 }, /** @type { Translation.GroupedEntries } */ ({}));
 
 export default function () {
-    AssetManager.addGroupedAssets(mirroredAssets, mirroredTranslations);
-    for (const group of eyeGroups) {
-        for (const [name, value] of Object.entries(layerNames)) {
-            AssetManager.addLayerNamesByEntry(group, name, value);
-        }
-    }
+    AssetManager.addGroupedAssetsWithConfig(mirroredAssets, mirroredTranslations, groupedLayerNames);
 }
