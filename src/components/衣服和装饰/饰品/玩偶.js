@@ -124,34 +124,37 @@ const asset = {
         { Name: "梓姌", AllowTypes: { yb: 4 } },
         { Name: "梓璇", AllowTypes: { yb: 5 } },
         { Name: "梓爱", AllowTypes: { yb: 6 } },
-        { Name: "ZforShort", AllowTypes: { yb: 7 } },
-        { Name: "小a", AllowTypes: { yb: 8 } },
-        { Name: "透透子", AllowTypes: { yb: 9 } },
-        { Name: "luobo", AllowTypes: { yb: 10 } },
+        { Name: "呐呐梓", AllowTypes: { yb: 7 } },
+        { Name: "梓咪", AllowTypes: { yb: 8 } },
+        { Name: "馅饼梓", AllowTypes: { yb: 9 } },
+        { Name: "ZforShort", AllowTypes: { yb: 10 } },
+        { Name: "小a", AllowTypes: { yb: 11 } },
+        { Name: "透透子", AllowTypes: { yb: 12 } },
+        { Name: "luobo", AllowTypes: { yb: 13 } },
 
         // EILRSW
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
         { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
         { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
-        { Name: "Reisigure", AllowTypes: { EILRSW: 4 } },
-        { Name: "Atlantis", AllowTypes: { EILRSW: 5 } },
-        {
-            Name: "澈羽枫灵",
-            PoseMapping: specialMapping,
-            AllowTypes: { EILRSW: 6 },
-        },
-        { Name: "希雅", AllowTypes: { EILRSW: 7 } },
-        { Name: "ReiSigureA", AllowTypes: { EILRSW: 8 } },
-        { Name: "酥酥", AllowTypes: { EILRSW: 9 } },
-        { Name: "茗子", AllowTypes: { EILRSW: 10 } },
+        { Name: "Emeia", AllowTypes: { EILRSW: 4 } },
+        { Name: "希雅", AllowTypes: { EILRSW: 8 } },
+        { Name: "酥酥", AllowTypes: { EILRSW: 10 } },
+        { Name: "茗子", AllowTypes: { EILRSW: 11 } },
 
-        // 与伊同辰
+        // 伊友玩偶
         { Name: "伊斯特", AllowTypes: { yytc: 1 } },
         { Name: "Pekora-Kino", AllowTypes: { yytc: 2 } },
         { Name: "幽灵", AllowTypes: { yytc: 3 } },
         { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
         { Name: "小沫", AllowTypes: { yytc: 5 } },
         { Name: "Sive", AllowTypes: { yytc: 6 } },
+        { Name: "40", AllowTypes: { yytc: 7 } },
+        { Name: "焦糖", AllowTypes: { yytc: 8 } },
+        { Name: "早紀", AllowTypes: { yytc: 9 } },
+        { Name: "rin", AllowTypes: { yytc: 10 } },
+        { Name: "W", AllowTypes: { yytc: 11 } },
+        { Name: "OwQ", AllowTypes: { yytc: 12 } },
+        { Name: "绛翎", AllowTypes: { yytc: 13 } },
 
         // 香喷喷酒吧
         { Name: "依伊可", AllowTypes: { xppjb: 1 } },
@@ -160,8 +163,20 @@ const asset = {
         { Name: "忧绪", AllowTypes: { xppjb: 4 } },
         { Name: "五十提", AllowTypes: { xppjb: 5 } },
         { Name: "狸nux", AllowTypes: { xppjb: 6 } },
-        { Name: "番茄炒蛋", AllowTypes: { xppjb: 7 } },
+        { Name: "依", AllowTypes: { xppjb: 7 } },
         { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },
+
+        // 失乐园 sly
+        { Name: "Reisigure", AllowTypes: { sly: 1 } },
+        { Name: "Atlantis", AllowTypes: { sly: 2 } },
+        {
+            Name: "澈羽枫灵",
+            PoseMapping: specialMapping,
+            AllowTypes: { sly: 3 },
+        },
+        { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
+        { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
+        { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -193,7 +208,10 @@ const asset = {
         { Name: "清酒梓", AllowTypes: { l: 23 } },
         { Name: "忧绪bride", AllowTypes: { l: 24 } },
         { Name: "曦芙bride", AllowTypes: { l: 25 } },
-
+        { Name: "小夏", AllowTypes: { l: 26 } },
+        { Name: "玩偶师", AllowTypes: { l: 27 } },
+        { Name: "触手姬", AllowTypes: { l: 28 } },
+        
     ],
 };
 
@@ -205,12 +223,13 @@ const typeNames = {
     f: "猫州猫庭府玩偶",
     y: "小夜家玩偶",
     hz: "盒子的小黑屋玩偶",
-    x: "吸血鬼城堡",
+    x: "吸血鬼城堡玩偶",
     lihua: "笠花和An'an的家",
-    yb: "鸢堡",
-    EILRSW: "EILRSW",
-    yytc: "yytc",
-    xppjb: "香喷喷酒吧",
+    yb: "鸢堡玩偶",
+    EILRSW: "EILRSW玩偶",
+    yytc: "伊友玩偶",
+    xppjb: "香喷喷酒吧玩偶",
+    sly:"失乐园",
     l: "路过的玩偶",
 };
 
@@ -230,6 +249,8 @@ const predefDialog = {
             "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
         ItemMisc玩偶_LuziSetxppjb1:
             "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
+        ItemMisc玩偶_LuziSetxppjb7:
+            "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
     },
 };
 
