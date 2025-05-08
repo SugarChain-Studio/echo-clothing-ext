@@ -152,7 +152,7 @@ const asset = {
         { Name: "焦糖", AllowTypes: { yytc: 8 } },
         { Name: "早紀", AllowTypes: { yytc: 9 } },
         { Name: "rin", AllowTypes: { yytc: 10 } },
-        { Name: "W", AllowTypes: { yytc: 11 } },
+        { Name: "w", AllowTypes: { yytc: 11 } },
         { Name: "OwQ", AllowTypes: { yytc: 12 } },
         { Name: "绛翎", AllowTypes: { yytc: 13 } },
 
