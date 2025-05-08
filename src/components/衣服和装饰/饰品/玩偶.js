@@ -137,9 +137,9 @@ const asset = {
         { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
         { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
         { Name: "Emeia", AllowTypes: { EILRSW: 4 } },
-        { Name: "希雅", AllowTypes: { EILRSW: 8 } },
-        { Name: "酥酥", AllowTypes: { EILRSW: 10 } },
-        { Name: "茗子", AllowTypes: { EILRSW: 11 } },
+        { Name: "希雅", AllowTypes: { EILRSW: 5 } },
+        { Name: "酥酥", AllowTypes: { EILRSW: 6 } },
+        { Name: "茗子", AllowTypes: { EILRSW: 7 } },
 
         // 伊友玩偶
         { Name: "伊斯特", AllowTypes: { yytc: 1 } },
