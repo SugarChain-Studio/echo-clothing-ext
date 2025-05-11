@@ -8,7 +8,6 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 30,
-    DefaultColor: [],
     PoseMapping: {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
