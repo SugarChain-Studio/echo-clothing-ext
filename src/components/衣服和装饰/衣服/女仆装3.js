@@ -33,16 +33,27 @@ const translation = {
 
 /** @type {Translation.String} */
 const layerNames = {
+    CN: {
+        A1: "后背蝴蝶结",
+        A2: "内衬裙",
+        B1: "衬衣色调",
+        B2: "衬衣亮部",
+        B3: "衬衣暗部",
+        C1: "围裙色调",
+        C2: "围裙暗部",
+        C3: "扣子",
+        C4: "衬衣衣领",
+    },
     EN: {
-        A1: "A1",
-        A2: "A2",
-        B1: "B1",
-        B2: "B2",
-        B3: "B3",
-        C1: "C1",
-        C2: "C2",
-        C3: "C3",
-        C4: "C4",
+        A1: "Back Bow",
+        A2: "Lining Skirt",
+        B1: "Shirt Tone",
+        B2: "Shirt Bright Part",
+        B3: "Shirt Dark Part",
+        C1: "Apron Tone",
+        C2: "Apron Dark Part",
+        C3: "Buttons",
+        C4: "Shirt Collar",
     },
 };
 

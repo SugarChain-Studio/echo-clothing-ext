@@ -12,14 +12,7 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
     },
-    Layer: [
-        { Name: "A1" },
-        { Name: "A2" },
-        { Name: "A3" },
-        { Name: "A4" },
-        { Name: "A5" },
-        { Name: "A6" },
-    ],
+    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }, { Name: "A6" }],
 };
 
 /** @type {Translation.Entry} */
@@ -30,17 +23,25 @@ const translation = {
 
 /** @type {Translation.String} */
 const layerNames = {
+    CN: {
+        A1: "内衬裙",
+        A2: "上衣",
+        A3: "裙子",
+        A4: "围裙",
+        A5: "束腰绳",
+        A6: "束腰",
+    },
     EN: {
-        A1: "A1",
-        A2: "A2",
-        A3: "A3",
-        A4: "A4",
-        A5: "A5",
-        A6: "A6",
+        A1: "Lining Skirt",
+        A2: "Top",
+        A3: "Skirt",
+        A4: "Apron",
+        A5: "Waist Rope",
+        A6: "Waist",
     },
 };
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
-} 
+}
