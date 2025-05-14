@@ -25,8 +25,9 @@ const asset = {
         { Name: "束带" },
         { Name: "挂钩" },
         {
-            Name: "Lock",
+            Name: "锁",
             ParentGroup: {},
+            PoseMapping: {},
             LockLayer: true,
         },
     ],
