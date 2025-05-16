@@ -24,6 +24,16 @@ const upperPoseMapping = {
     AllFours: "Hide",
 };
 
+/** @type {AssetPoseMapping} */
+const lowerPoseMapping = {
+    Kneel: "Kneel",
+    KneelingSpread: "KneelingSpread",
+    LegsClosed: "LegsClosed",
+    Spread: "Spread",
+    Hogtied: "Hogtied",
+    AllFours: "Hide",
+};
+
 /** @type {CustomAssetDefinition} */
 const assetUpper = {
     Name: "乳胶衣_Luzi",
@@ -76,7 +86,10 @@ const assetLower = {
     Name: "乳胶衣_Luzi",
     Random: false,
     Gender: "F",
-    Top: 0,
+    Top: {
+        "": 0,
+        "Hogtied": 380,
+    },
     Left: 0,
     Prerequisite: ["HasVagina"],
     Attribute: ["SuitLower"],
@@ -85,14 +98,17 @@ const assetLower = {
         {
             Name: "下底色",
             Priority: 14,
+            PoseMapping: lowerPoseMapping,
         },
         {
             Name: "下阴影",
             Priority: 14,
+            PoseMapping: lowerPoseMapping,
         },
         {
             Name: "下高光",
             Priority: 14,
+            PoseMapping: lowerPoseMapping,
         },
         {
             Name: "袜遮罩",
@@ -105,6 +121,8 @@ const assetLower = {
                 KneelingSpread: "Hide",
                 LegsClosed: "LegsClosed",
                 Spread: "Spread",
+                Hogtied: "Hogtied",
+                AllFours: "Hide",
             },
         },
     ],
