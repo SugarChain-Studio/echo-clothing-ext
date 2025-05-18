@@ -20,3 +20,5 @@ declare module 'https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/+esm' {
     import Swal from 'sweetalert2';
     export default Swal;
 }
+
+type CustomAssetAttribute = AssetAttribute | 'LuziXCross';

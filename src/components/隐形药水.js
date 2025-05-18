@@ -2,8 +2,6 @@ import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
 
 /** @type {AssetPoseName[]} */
-const PoseAllLower = [...PoseAllKneeling, ...PoseAllStanding];
-/** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];
 
 /** @type {CustomAssetDefinition} */
@@ -21,7 +19,8 @@ const asset = {
     Time: 10,
     Effect: [E.Slow, E.Block],
     DynamicBeforeDraw: true,
-    AllowActivePose: [...PoseAllLower, ...PoseAllUpper],
+    AllowActivePose: [...PoseAllStanding, ...PoseAllUpper],
+    SetPose: ["BaseLower"],
     Hide: [
         "ItemHandheld",
         "HandsLeft",
@@ -50,6 +49,8 @@ const asset = {
     ],
     Block: ["ItemLegs", "ItemFeet", "ItemBoots"],
     Extended: true,
+    ParentGroup: {},
+    PoseMapping: {},
     Layer: [
         {
             Name: "身体遮罩",
@@ -59,7 +60,6 @@ const asset = {
             TextureMask: {
                 Groups: ["BodyUpper"],
             },
-            ParentGroup: {},
             PoseMapping: {
                 BaseUpper: "Hide",
                 TapedHands: "Hide",
@@ -98,9 +98,9 @@ const asset = {
                 "Yoked": "",
             },
             PoseMapping: {
-                TapedHands: "BaseUpper",
-                BackCuffs: "BaseUpper",
-                BackElbowTouch: "BaseUpper",
+                TapedHands: "",
+                BackCuffs: "",
+                BackElbowTouch: "",
                 OverTheHead: "OverTheHead",
                 Yoked: "Yoked",
                 Hogtied: "Hide",
@@ -127,7 +127,6 @@ const asset = {
                     "BodyMarkings2_Luzi",
                 ],
             },
-            ParentGroup: {},
             PoseMapping: {
                 Kneel: "",
                 KneelingSpread: "KneelingSpread",
@@ -138,12 +137,75 @@ const asset = {
             },
         },
         {
+            Name: "臂环",
+            Priority: 6,
+            Top: 0,
+            Left: 0,
+            ColorGroup: "固定环",
+            PoseMapping: {
+                BackBoxTie: "",
+                BackCuffs: "BackCuffs",
+                BackElbowTouch: "Hide",
+                OverTheHead: "OverTheHead",
+                Yoked: "Yoked",
+                Hogtied: "Hide",
+                AllFours: "Hide",
+            },
+        },
+        {
+            Name: "腿环",
+            Priority: 6,
+            Top: 460,
+            Left: 0,
+            ColorGroup: "固定环",
+            PoseMapping: {
+                Kneel: "LegsClosed",
+                KneelingSpread: "KneelingSpread",
+                LegsClosed: "LegsClosed",
+                Spread: "Spread",
+                Hogtied: "Hide",
+                AllFours: "Hide",
+            },
+        },
+        {
+            Name: "腿杆",
+            Priority: 6,
+            Top: 460,
+            Left: 0,
+            AllowTypes: { l: [4, 5] },
+        },
+        {
+            Name: "腿杆链",
+            Priority: 6,
+            Top: 460,
+            Left: 0,
+            ColorGroup: "锁链",
+            AllowTypes: { l: 5 },
+        },
+        {
+            Name: "Cross链",
+            Priority: 31,
+            Top: 0,
+            Left: 0,
+            ColorGroup: "锁链",
+            ShowForAttribute: [/** @type {AssetAttribute}*/ ("LuziXCross")],
+            AllowTypes: { a: 0, l: 0 },
+        },
+        {
+            Name: "Cross锚",
+            Priority: 31,
+            Top: 0,
+            Left: 0,
+            ShowForAttribute: [/** @type {AssetAttribute}*/ ("LuziXCross")],
+            AllowTypes: { a: 0, l: 0 },
+        },
+        {
             Name: "脚链",
             Priority: 31,
             Top: 460,
             Left: 0,
-            CopyLayerColor: "手链",
             ParentGroup: "BodyLower",
+            ColorGroup: "传送器",
             PoseMapping: {
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
@@ -159,6 +221,7 @@ const asset = {
             Top: 0,
             Left: 0,
             ParentGroup: "BodyUpper",
+            ColorGroup: "传送器",
             PoseMapping: {
                 BackBoxTie: "BackBoxTie",
                 BackCuffs: "BackCuffs",
@@ -175,7 +238,7 @@ const asset = {
             AllowTypes: { a: 1 },
             Top: -430,
             Left: 0,
-            CopyLayerColor: "吊顶链",
+            ColorGroup: "锁链",
         },
         {
             Name: "脚链链子",
@@ -183,7 +246,7 @@ const asset = {
             AllowTypes: { l: 1 },
             Top: -430,
             Left: 0,
-            CopyLayerColor: "吊顶链",
+            ColorGroup: "锁链",
         },
         {
             Name: "脚链链子反",
@@ -191,39 +254,53 @@ const asset = {
             AllowTypes: { l: [2, 3] },
             Top: 530,
             Left: 0,
-            CopyLayerColor: "吊顶链",
-        },
-        {
-            Name: "脚链拘束",
-            Priority: 30,
-            AllowTypes: { l: 4 },
-            Top: 460,
-            Left: 0,
-            CopyLayerColor: "吊顶链",
+            CopyLayerColor: "脚链链子",
         },
         {
             Name: "吊顶链",
-            Priority: 1,
-            AllowTypes: { c: [1] },
+            Priority: 6,
+            AllowTypes: { a: 3 },
             Top: -400,
             Left: -10,
+            CopyLayerColor: "手链链子",
         },
     ],
-    OverrideHeight: {
-        Height: -450,
-        Priority: 9,
-        HeightRatioProportion: 0,
-    },
 };
 
 const layerNames = {
     CN: {
-        手链: "四肢传送器",
-        吊顶链: "锁链",
+        固定环: "固定环",
+        锁链: "锁链",
+        传送器: "传送器",
+
+        臂环: "臂环",
+        腿环: "腿环",
+        腿杆: "腿杆",
+
+        手链链子: "手臂链",
+        脚链链子: "腿部链",
+
+        Cross链: "X字架连接链",
+        Cross锚: "X字架连接锚",
+        手链: "手臂传送器",
+        脚链: "腿部传送器",
     },
     EN: {
-        手链: "Limb Teleportation Device",
-        吊顶链: "Chains",
+        固定环: "Fixed Ring",
+        锁链: "Chain",
+        传送器: "Teleporter",
+
+        臂环: "Arm Ring",
+        腿环: "Leg Ring",
+        腿杆: "Leg Rod",
+
+        手链链子: "Arm Chain",
+        脚链链子: "Leg Chain",
+
+        Cross链: "X-Cross Connection Chain",
+        Cross锚: "X-Cross Connection Anchor",
+        手链: "Arm Teleporter",
+        脚链: "Leg Teleporter",
     },
 };
 
@@ -235,62 +312,87 @@ const extended = {
     Modules: [
         {
             Name: "臂链",
-            DrawImages: false,
             Key: "a",
             Options: [
-                { Property: { Effect: [E.CuffedArms] } },
                 {
-                    Prerequisite: ["NotSuspended"],
-                    Property: { Effect: [E.Suspended], SetPose: ["OverTheHead"] },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
+                    Property: {
+                        Effect: [E.CuffedArms],
+                        OverrideHeight: {
+                            Height: -350,
+                            Priority: 9,
+                            HeightRatioProportion: 0,
+                        },
+                    },
                 },
                 {
-                    Property: { SetPose: ["BackElbowTouch"] },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
+                    Property: {
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["OverTheHead"],
+                        AllowActivePose: ["OverTheHead"],
+                    },
+                },
+                {
+                    Property: {
+                        SetPose: ["BackElbowTouch"],
+                        AllowActivePose: ["BackElbowTouch"],
+                        OverrideHeight: {
+                            Height: -350,
+                            Priority: 9,
+                            HeightRatioProportion: 0,
+                        },
+                    },
+                },
+                {
+                    Property: {
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["BackElbowTouch"],
+                        AllowActivePose: ["BackElbowTouch"],
+                    },
                 },
             ],
         },
         {
             Name: "腿链",
-            DrawImages: false,
             Key: "l",
             Options: [
-                { Property: { Effect: [E.CuffedFeet] } },
+                { Property: { Effect: [E.Slow, E.CuffedFeet] } },
                 {
                     Property: {
-                        Effect: [E.Suspended],
-                        SetPose: ["BackBoxTie", "KneelingSpread"],
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["KneelingSpread"],
+                        AllowActivePose: ["KneelingSpread"],
                     },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
                 {
                     Property: {
-                        Effect: [E.Suspended],
-                        SetPose: ["BackBoxTie", "KneelingSpread"],
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["Spread"],
+                        AllowActivePose: ["Spread"],
                     },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
                 {
                     Property: {
-                        Effect: [E.Suspended],
-                        SetPose: ["BackBoxTie", "KneelingSpread", "Suspension"],
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["Spread", "Suspension"],
+                        AllowActivePose: ["Spread"],
                     },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
                 },
+                { Property: { Effect: [E.Slow], SetPose: ["LegsClosed"], AllowActivePose: ["LegsClosed"] } },
                 {
-                    Property: { SetPose: ["Kneel"] },
-                    Expression: [{ Group: "Blush", Name: "Medium", Timer: 10 }],
+                    Property: {
+                        Effect: [E.Tethered, E.Suspended],
+                        SetPose: ["LegsClosed", "Suspension"],
+                        AllowActivePose: ["LegsClosed"],
+                    },
                 },
             ],
         },
         {
-            Name: "中链",
-            DrawImages: false,
-            Key: "c",
+            Name: "高度",
+            Key: "h",
             Options: [
                 {},
                 {
-                    Property: { Effect: [E.Suspended] },
                     HasSubscreen: true,
                     ArchetypeConfig: {
                         Archetype: ExtendedArchetype.VARIABLEHEIGHT,
@@ -316,15 +418,17 @@ const dialog = {
         Module臂链: "手部锁链",
         Module腿链: "腿部锁链",
         Module中链: "中间锁链",
-        Module自定义高度: "调整高度",
+        Module高度: "调整高度",
 
         Select臂链: "选择手臂锁链",
         Optiona0: "无",
         Optiona1: "添加铁链(向上吊起来)",
         Optiona2: "添加铁链(背后连接)",
+        Optiona3: "添加铁链(背后吊起来)",
         Seta0: "SourceCharacter移除了附加在DestinationCharacterAssetName手臂装置上的锁链",
         Seta1: "SourceCharacter在DestinationCharacterAssetName手臂装置上添加了锁链，把TargetCharacter吊起来",
         Seta2: "SourceCharacter在DestinationCharacterAssetName手臂装置上添加了锁链，把DestinationCharacter手臂连接在一起",
+        Seta3: "SourceCharacter在DestinationCharacterAssetName手臂装置上添加了锁链，把DestinationCharacter手臂连接在一起，并把TargetCharacter吊起来",
 
         Select腿链: "选择腿部锁链",
         Optionl0: "无",
@@ -332,50 +436,56 @@ const dialog = {
         Optionl2: "添加铁链(向下)",
         Optionl3: "添加铁链(向下倒吊)",
         Optionl4: "添加铁链(并腿)",
+        Optionl5: "添加铁链(并腿倒吊)",
         Setl0: "SourceCharacter移除了附加在DestinationCharacterAssetName腿部装置上的锁链",
         Setl1: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，把TargetCharacter吊起来",
         Setl2: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，把DestinationCharacter腿连接到地板上",
-        Setl3: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，将TargetCharacter倒吊起来",
+        Setl3: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，把TargetCharacter倒吊起来",
         Setl4: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，把DestinationCharacter腿连接在一起",
+        Setl5: "SourceCharacter在DestinationCharacterAssetName腿部装置上添加了锁链，把DestinationCharacter腿连接在一起并倒吊起来",
 
-        Select中链: "中间锁链",
-        Optionc0: "无",
-        Optionc1: "添加铁链",
-        Setc0: "SourceCharacter移除了DestinationCharacter身体中间的悬挂链",
-        Setc1: "SourceCharacter在DestinationCharacter身体中间添加了悬挂链",
+        Select高度: "调整高度",
+        Optionh0: "无",
+        Optionh1: "调整高度",
+        Seth0: "SourceCharacter取消了DestinationCharacter高度调整",
+        Seth1: "SourceCharacter调整了DestinationCharacter悬挂高度",
     },
     EN: {
-        SelectBase: "Select Limb Teleportation Device Configuration",
+        SelectBase: "Select Invisibility Potion Config",
         Module臂链: "Arm Chain",
         Module腿链: "Leg Chain",
         Module中链: "Middle Chain",
-        Module自定义高度: "Adjust Height",
+        Module高度: "Adjust Height",
 
         Select臂链: "Select Arm Chain",
         Optiona0: "None",
-        Optiona1: "Add Chain (Suspended)",
+        Optiona1: "Add Chain (Suspension)",
         Optiona2: "Add Chain (Back)",
-        Seta0: "SourceCharacter removed the chain from DestinationCharacter AssetName arm device",
-        Seta1: "SourceCharacter added a chain to DestinationCharacter AssetName arm device, suspending TargetCharacter",
-        Seta2: "SourceCharacter added a chain to DestinationCharacter AssetName arm device, connecting DestinationCharacter arms together",
+        Optiona3: "Add Chain (Back Suspension)",
+        Seta0: "SourceCharacter removed the chain from DestinationCharacterAssetName arm device",
+        Seta1: "SourceCharacter added a chain to DestinationCharacterAssetName arm device and suspended TargetCharacter",
+        Seta2: "SourceCharacter added a chain to DestinationCharacterAssetName arm device and connected DestinationCharacter arms together",
+        Seta3: "SourceCharacter added a chain to DestinationCharacterAssetName arm device and connected DestinationCharacter arms together and suspended TargetCharacter",
 
         Select腿链: "Select Leg Chain",
         Optionl0: "None",
         Optionl1: "Add Chain (Up)",
         Optionl2: "Add Chain (Down)",
-        Optionl3: "Add Chain (Upside Down)",
+        Optionl3: "Add Chain (Down Suspension)",
         Optionl4: "Add Chain (Legs Together)",
-        Setl0: "SourceCharacter removed the chain from DestinationCharacter AssetName leg device",
-        Setl1: "SourceCharacter added a chain to DestinationCharacter AssetName leg device, suspending TargetCharacter",
-        Setl2: "SourceCharacter added a chain to DestinationCharacter AssetName leg device, connecting DestinationCharacter legs to the floor",
-        Setl3: "SourceCharacter added a chain to DestinationCharacter AssetName leg device, suspending TargetCharacter upside down",
-        Setl4: "SourceCharacter added a chain to DestinationCharacter AssetName leg device, connecting DestinationCharacter legs together",
+        Optionl5: "Add Chain (Legs Together Suspension)",
+        Setl0: "SourceCharacter removed the chain from DestinationCharacterAssetName leg device",
+        Setl1: "SourceCharacter added a chain to DestinationCharacterAssetName leg device and suspended TargetCharacter",
+        Setl2: "SourceCharacter added a chain to DestinationCharacterAssetName leg device and connected DestinationCharacter legs to the floor",
+        Setl3: "SourceCharacter added a chain to DestinationCharacterAssetName leg device and suspended TargetCharacter upside down",
+        Setl4: "SourceCharacter added a chain to DestinationCharacterAssetName leg device and connected DestinationCharacter legs together",
+        Setl5: "SourceCharacter added a chain to DestinationCharacterAssetName leg device and connected DestinationCharacter legs together and suspended upside down",
 
-        Select中链: "Middle Chain",
-        Optionc0: "None",
-        Optionc1: "Add Chain",
-        Setc0: "SourceCharacter removed the suspension chain from the middle of DestinationCharacter body",
-        Setc1: "SourceCharacter added a suspension chain to the middle of DestinationCharacter body",
+        Select高度: "Adjust Height",
+        Optionh0: "None",
+        Optionh1: "Adjust Height",
+        Seth0: "SourceCharacter removed the height adjustment from DestinationCharacter",
+        Seth1: "SourceCharacter adjusted the suspension height of DestinationCharacter",
     },
 };
 
@@ -386,6 +496,8 @@ const translation = {
 };
 
 export default function () {
-    const group = "ItemAddon";
-    AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings: dialog });
+    AssetManager.addAssetWithConfig("ItemAddon", asset, { translation, layerNames, extended, assetStrings: dialog });
+    AssetManager.modifyAsset("ItemDevices", "X-Cross", (group, asset) => {
+        asset.Attribute = /** @type {AssetAttribute[]}*/ ([...asset.Attribute, "LuziXCross"]);
+    });
 }
