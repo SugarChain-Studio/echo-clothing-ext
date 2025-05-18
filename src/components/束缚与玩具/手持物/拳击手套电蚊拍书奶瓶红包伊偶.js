@@ -74,7 +74,7 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             Priority: 46,
-            PoseMapping: { ...AssetPoseMapping.ItemHandheld },
+            PoseMapping: { ...AssetPoseMapping.ItemHandheld, Yoked: "Yoked", OverTheHead: "OverTheHead" },
         },
     ],
 };
