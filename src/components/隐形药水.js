@@ -393,6 +393,7 @@ const extended = {
             Options: [
                 {},
                 {
+                    Property: { Effect: [E.Suspended] },
                     HasSubscreen: true,
                     ArchetypeConfig: {
                         Archetype: ExtendedArchetype.VARIABLEHEIGHT,
