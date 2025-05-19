@@ -6,7 +6,13 @@ const assets = [
         Name: "眼睛1",
         Top: 120,
         Left: 180,
-        FullAlpha: false,
+        // FullAlpha: false,
+        Layer: [
+            { Name: "1", AllowColorize: true },
+            { Name: "2", AllowColorize: true },
+            { Name: "3", AllowColorize: true },
+            { Name: "4", AllowColorize: true },
+        ],
     },
     {
         Name: "眼睛2",
@@ -86,7 +92,7 @@ const mirroredTranslations = Object.entries(translations).reduce((acc, [name, va
         }
     }
     return acc;
-}, /** @type { Translation.GroupedEntries } */ ({}));
+}, /** @type { Translation.GroupedEntries } */({}));
 
 export default function () {
     AssetManager.addGroupedAssetsWithConfig(mirroredAssets, mirroredTranslations, groupedLayerNames);
