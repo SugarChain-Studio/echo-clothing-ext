@@ -184,7 +184,7 @@ const asset = {
         },
         {
             Name: "Cross链",
-            Priority: 31,
+            Priority: 26,
             Top: 0,
             Left: 0,
             ColorGroup: "锁链",
@@ -193,7 +193,7 @@ const asset = {
         },
         {
             Name: "Cross锚",
-            Priority: 31,
+            Priority: 26,
             Top: 0,
             Left: 0,
             ShowForAttribute: [/** @type {AssetAttribute}*/ ("LuziXCross")],
@@ -201,7 +201,7 @@ const asset = {
         },
         {
             Name: "脚链",
-            Priority: 31,
+            Priority: 25,
             Top: 460,
             Left: 0,
             ParentGroup: "BodyLower",
@@ -217,7 +217,7 @@ const asset = {
         },
         {
             Name: "手链",
-            Priority: 31,
+            Priority: 25,
             Top: 0,
             Left: 0,
             ParentGroup: "BodyUpper",
