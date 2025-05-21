@@ -3,7 +3,7 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { Tools } from "@mod-utils/Tools";
 
-/** @type {(AssetLayerDefinition & {PGroups:CustomGroupName[]})[]} */
+/** @type {(AssetLayerDefinition & {PGroups:CustomGroupName[], PGShow?:boolean})[]} */
 const bodyLayers = [
     {
         Name: "HairBack",
@@ -16,6 +16,12 @@ const bodyLayers = [
         PGroups: ["Head"],
         AllowTypes: { h: 0 },
         Priority: 7,
+    },
+    {
+        Name: "HairFront",
+        PGroups: ["HairFront", "新前发_Luzi"],
+        AllowTypes: { h: 0 },
+        Priority: 52,
     },
     {
         Name: "Head2",
@@ -54,10 +60,18 @@ const bodyLayers = [
         Priority: 12,
     },
     {
-        Name: "HairFront",
-        PGroups: ["HairFront", "新前发_Luzi"],
-        AllowTypes: { h: 0 },
-        Priority: 52,
+        Name: "Ears",
+        PGroups: ["HairAccessory2"],
+        PGShow: true,
+        AllowTypes: { et: 1 },
+        Priority: 53,
+    },
+    {
+        Name: "Tail",
+        PGroups: ["TailStraps"],
+        PGShow: true,
+        AllowTypes: { et: 1 },
+        Priority: 4,
     },
 ];
 
@@ -127,7 +141,12 @@ const asset = {
     EditOpacity: true,
     DefaultColor: ["#DDDDDD", "#DDDDDD"],
     OverrideHeight: { Height: 30, Priority: 0 },
-    Hide: /**@type {CustomGroupBodyName[]}*/ (bodyLayers.map((layer) => layer.PGroups ?? [layer.Name]).flat()),
+    Hide: /**@type {CustomGroupBodyName[]}*/ (
+        bodyLayers
+            .filter((l) => !l.PGShow)
+            .map((layer) => layer.PGroups ?? [layer.Name])
+            .flat()
+    ),
     Layer: [
         ...bodyLayers.map((l) => ({
             ...l,
@@ -170,6 +189,18 @@ const extended = {
             Key: "h",
             Options: [{}, {}],
         },
+        {
+            Name: "耳朵尾巴",
+            Key: "et",
+            Options: [
+                {},
+                {
+                    Property: {
+                        Hide: ["TailStraps", "HairAccessory2"],
+                    },
+                },
+            ],
+        },
     ],
 };
 
@@ -179,6 +210,7 @@ const assetDialogs = {
         Module眼睛发光: "眼睛发光",
         Module脚渐隐: "脚渐隐",
         Module头发遮挡: "头发图层",
+        Module耳朵尾巴: "耳朵尾巴",
 
         Select眼睛发光: "选择眼睛发光设置",
         Optionle0: "关闭",
@@ -191,12 +223,17 @@ const assetDialogs = {
         Select头发遮挡: "选择头发遮挡设置",
         Optionh0: "显示头轮廓",
         Optionh1: "结合前发图层",
+
+        Select耳朵尾巴: "选择耳朵尾巴设置",
+        Optionet0: "实体化",
+        Optionet1: "幽灵化",
     },
     EN: {
         SelectBase: "Select Ghost Body Settings",
         Module眼睛发光: "Eye Glow",
         Module脚渐隐: "Foot Fade",
         Module头发遮挡: "Hair Layering",
+        Module耳朵尾巴: "Ear and Tail",
 
         Select眼睛发光: "Select Eye Glow Settings",
         Optionle0: "Off",
@@ -209,6 +246,10 @@ const assetDialogs = {
         Select头发遮挡: "Select Hair Mask Settings",
         Optionh0: "Show Head Shape",
         Optionh1: "Merge Front Hair",
+
+        Select耳朵尾巴: "Select Ear and Tail Settings",
+        Optionet0: "Physical",
+        Optionet1: "Ghostly",
     },
 };
 
