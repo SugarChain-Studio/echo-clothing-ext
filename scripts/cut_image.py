@@ -3,13 +3,22 @@ import glob
 from PIL import Image
 
 # 带有通配符的目录路径
-wildcard_path = "resources\Assets\Female3DCG\Hat\帽子2_Luzi_A*.png"
+wildcard_paths = [
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛3_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛4_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛5_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛6_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛7_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛8_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛9_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛10_*.png",
+]
 
 # 定义裁剪参数
-crop_x = 160
-crop_y = 20
-crop_width = 180
-crop_height = 170
+crop_x = 180
+crop_y = 120
+crop_width = 140
+crop_height = 100
 
 
 def crop_image(source_path, destination_path, width, height, x, y):
@@ -26,8 +35,9 @@ def crop_image(source_path, destination_path, width, height, x, y):
         print(f"处理图像时出错 {source_path}: {e}")
 
 
-# 使用glob获取匹配通配符的所有文件
-matching_files = glob.glob(wildcard_path, recursive=True)
+matching_files = []
+for wildcard in wildcard_paths:
+    matching_files.extend(glob.glob(wildcard, recursive=True))
 
 # 打印找到的文件数量
 print(f"找到 {len(matching_files)} 个匹配文件")
