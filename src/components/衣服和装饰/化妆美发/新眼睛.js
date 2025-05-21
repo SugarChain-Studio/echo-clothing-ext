@@ -1,3 +1,4 @@
+import { PathTools } from "@sugarch/bc-mod-utility";
 import { AssetManager } from "../../../assetForward";
 
 /**
@@ -11,22 +12,11 @@ import { AssetManager } from "../../../assetForward";
  * @property {CustomAssetDefinitionAppearance} asset
  * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["translation"]} translation
  * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["layerNames"]} layerNames
- * @property {SpecialExpressionDefinition} [specials]
+ * @property {SpecialExpressionDefinition} specials
  */
 
-/**
- * @param {EyeDefinition} eyeDef
- */
-export function addEyeAsset(eyeDef) {
-    for (const group of /** @type {CustomGroupBodyName[]} */ (["左眼_Luzi", "右眼_Luzi"])) {
-        AssetManager.addAssetWithConfig(group, eyeDef.asset, {
-            translation: eyeDef.translation,
-            layerNames: eyeDef.layerNames,
-        });
-    }
-}
-
-const layerNames = {
+/** @type {EyeDefinition["layerNames"]}*/
+const commonLayerNames = {
     CN: {
         1: "眼睑",
         2: "眼球",
@@ -45,6 +35,12 @@ const layerNames = {
     },
 };
 
+/** @type {EyeDefinition["specials"]}*/
+const commonSpecials = {
+    dizzy: "5",
+    daydream: "5",
+};
+
 /** @type {EyeDefinition[]} */
 const assets = [
     {
@@ -59,6 +55,10 @@ const assets = [
                 { Name: "3", AllowColorize: true },
                 { Name: "4", AllowColorize: true },
             ],
+        },
+        specials: {
+            dizzy: "4",
+            daydream: "4",
         },
         translation: {
             CN: "红宝石",
@@ -95,6 +95,10 @@ const assets = [
                 { Name: "7", AllowColorize: true },
                 { Name: "8", AllowColorize: true },
             ],
+        },
+        specials: {
+            dizzy: "7",
+            daydream: "7",
         },
         translation: {
             CN: "天狐",
@@ -141,7 +145,8 @@ const assets = [
             CN: "青玉",
             EN: "Jade",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -161,7 +166,8 @@ const assets = [
             CN: "水晶",
             EN: "Crystal",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -181,7 +187,8 @@ const assets = [
             CN: "水晶（长睫毛）",
             EN: "Crystal (Long Lash)",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -202,7 +209,8 @@ const assets = [
             CN: "黄玉",
             EN: "Topaz",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -223,7 +231,8 @@ const assets = [
             CN: "水晶（锐利）",
             EN: "Crystal (Sharp)",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -243,7 +252,8 @@ const assets = [
             CN: "青玉（睁大）",
             EN: "Jade (Wide Open)",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -263,7 +273,8 @@ const assets = [
             CN: "青玉（眼影）",
             EN: "Jade (Eyeshadow)",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
     {
         asset: {
@@ -283,7 +294,8 @@ const assets = [
             CN: "青玉（眼影2）",
             EN: "Jade (Eyeshadow 2)",
         },
-        layerNames,
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
     },
 ];
 
@@ -292,6 +304,26 @@ export default function () {
     const mappings = {};
 
     for (const asset of assets) {
-        addEyeAsset(asset);
+        for (const group of /** @type {CustomGroupBodyName[]} */ (["左眼_Luzi", "右眼_Luzi"])) {
+            AssetManager.addAssetWithConfig(group, asset.asset, {
+                translation: asset.translation,
+                layerNames: asset.layerNames,
+            });
+
+            asset.asset.Layer.forEach((layer) => {
+                const daydreamKey = `Assets/Female3DCG/${group}/Daydream/${asset.asset.Name}_${layer.Name}.png`;
+                const dizzyKey = `Assets/Female3DCG/${group}/Dizzy/${asset.asset.Name}_${layer.Name}.png`;
+
+                mappings[daydreamKey] =
+                    layer.Name === asset.specials.dizzy
+                        ? `Assets/Female3DCG/${group}/daydream.png`
+                        : PathTools.emptyImage;
+
+                mappings[dizzyKey] =
+                    layer.Name === asset.specials.dizzy ? `Assets/Female3DCG/${group}/dizzy.png` : PathTools.emptyImage;
+            });
+        }
     }
+
+    AssetManager.addImageMapping(mappings);
 }
