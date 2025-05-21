@@ -1,10 +1,17 @@
 import { AssetManager } from "../../../assetForward";
 
 /**
+ * @typedef {object} SpecialExpressionDefinition
+ * @property {string} dizzy
+ * @property {string} daydream
+ */
+
+/**
  * @typedef {object} EyeDefinition
  * @property {CustomAssetDefinitionAppearance} asset
  * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["translation"]} translation
  * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["layerNames"]} layerNames
+ * @property {SpecialExpressionDefinition} [specials]
  */
 
 /**
@@ -26,7 +33,7 @@ const layerNames = {
         3: "虹膜",
         4: "亮斑",
         5: "睫毛",
-        6: "睫毛（扩展）",
+        6: "睫毛（次要）",
     },
     EN: {
         1: "Eyelid",
@@ -34,7 +41,7 @@ const layerNames = {
         3: "Iris",
         4: "Highlight",
         5: "Lash",
-        6: "Lash (Extended)",
+        6: "Lash (Secondary)",
     },
 };
 
@@ -43,8 +50,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛1",
-            Top: 120,
             Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -74,8 +82,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛2",
-            Top: 120,
             Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "Default", "Default", "Default", "Default", "#111", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -117,9 +126,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛3",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -137,9 +146,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛4",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -157,9 +166,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛5",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -177,9 +186,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛6",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#FFE695", "Default", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#FFE695", "Default", "#111", "Default"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -198,9 +207,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛7",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -219,9 +228,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛8",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -239,9 +248,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛9",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -259,9 +268,9 @@ const assets = [
     {
         asset: {
             Name: "眼睛10",
-            Top: 0,
-            Left: 0,
-            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "Default"],
+            Left: 180,
+            Top: 120,
+            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -279,6 +288,9 @@ const assets = [
 ];
 
 export default function () {
+    /** @type {Record<string,string>} */
+    const mappings = {};
+
     for (const asset of assets) {
         addEyeAsset(asset);
     }
