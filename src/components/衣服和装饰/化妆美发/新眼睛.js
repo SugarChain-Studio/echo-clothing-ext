@@ -47,7 +47,7 @@ const assets = [
         asset: {
             Name: "眼睛1",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -83,7 +83,7 @@ const assets = [
         asset: {
             Name: "眼睛2",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "Default", "Default", "Default", "Default", "#111", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -131,7 +131,7 @@ const assets = [
         asset: {
             Name: "眼睛3",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -152,7 +152,7 @@ const assets = [
         asset: {
             Name: "眼睛4",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -173,7 +173,7 @@ const assets = [
         asset: {
             Name: "眼睛5",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -194,7 +194,7 @@ const assets = [
         asset: {
             Name: "眼睛6",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#FFE695", "Default", "#111", "Default"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -216,7 +216,7 @@ const assets = [
         asset: {
             Name: "眼睛7",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -238,7 +238,7 @@ const assets = [
         asset: {
             Name: "眼睛8",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -259,7 +259,7 @@ const assets = [
         asset: {
             Name: "眼睛9",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
@@ -280,7 +280,7 @@ const assets = [
         asset: {
             Name: "眼睛10",
             Left: 180,
-            Top: 120,
+            Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
             Layer: [
                 { Name: "1", AllowColorize: true },
