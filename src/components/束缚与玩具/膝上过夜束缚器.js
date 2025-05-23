@@ -15,7 +15,6 @@ const asset = {
     Extended: false,
     AllowLock: true,
     AllowTighten: true,
-    Block: ["ItemBoots"],
     SetPose: ["LegsClosed"],
     Effect: [E.Slow, E.BlockWardrobe],
     AllowActivePose: ["Kneel", "Hogtied"],
