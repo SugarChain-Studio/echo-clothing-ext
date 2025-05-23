@@ -34,20 +34,31 @@ const asset = {
         },
         {
             Name: "鞋垫",
-            Priority: 1,
+            Priority: 7,
         },
         {
             Name: "鞋底",
-            Priority: 1,
+            Priority: 7,
         },
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        高光: "Highlight",
+        卡扣: "Buckle",
+        绑带: "Straps",
+        鞋面: "Upper",
+        鞋垫: "Insole",
+        鞋底: "Sole",
+    },
+};
+
+const translation = {
     CN: "鱼嘴高跟鞋",
     EN: "Peep-toe Heels",
 };
 
 export default function () {
-    AssetManager.addAsset("Shoes", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames });
 }
