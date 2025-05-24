@@ -177,7 +177,6 @@ function compareCraftingItem(item1, item2) {
         item1.Item === item2.Item &&
         item1.Name === item2.Name &&
         item1.Description === item2.Description &&
-        item1.Property === item2.Property &&
         item1.Lock === item2.Lock &&
         item1.Private === item2.Private
     );
