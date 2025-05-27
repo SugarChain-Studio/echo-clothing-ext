@@ -14,3 +14,16 @@ export function takeLayerNames(assetDef) {
     );
     return ret;
 }
+
+/**
+ * 将自定义物品属性转换为AssetAttribute数组。
+ * @param {CustomAssetAttribute[]} attrs
+ * @returns {AssetAttribute[]}
+ */
+function attributes(attrs) {
+    return /** @type {AssetAttribute[]} */ (attrs);
+}
+
+export const Typing = {
+    attributes,
+};

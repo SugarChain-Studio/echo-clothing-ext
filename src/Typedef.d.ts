@@ -21,4 +21,4 @@ declare module 'https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/+esm' {
     export default Swal;
 }
 
-type CustomAssetAttribute = AssetAttribute | 'LuziXCross';
+type CustomAssetAttribute = AssetAttribute | 'LuziXCross' | 'LuziLimbTeleDevice';

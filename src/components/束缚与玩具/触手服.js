@@ -1,6 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { DialogTools } from "@mod-utils/Tools";
+import { Typing } from "../../utils";
 
 function scriptDrawHook(data, originalFunction, drawData) {
     originalFunction(drawData);
@@ -100,6 +101,7 @@ const asset = {
             ParentGroup: "BodyUpper",
             Name: "触手服手套",
             Priority: 27,
+            HideForAttribute: Typing.attributes(["LuziLimbTeleDevice"]),
             PoseMapping: {
                 AllFours: "Hide",
                 Hogtied: "Hide",

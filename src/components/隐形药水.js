@@ -1,5 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
+import { Typing } from "../utils";
 
 /** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];
@@ -20,9 +21,13 @@ const asset = {
     Effect: [E.Slow, E.Block],
     DynamicBeforeDraw: true,
     AllowActivePose: [...PoseAllStanding, ...PoseAllUpper],
+    Attribute: Typing.attributes(["LuziLimbTeleDevice"]),
     SetPose: ["BaseLower"],
     Hide: [
         "ItemHandheld",
+        "ItemLegs",
+        "ItemFeet",
+        "ItemBoots",
         "HandsLeft",
         "HandsRight",
         "Bracelet",
@@ -188,7 +193,7 @@ const asset = {
             Top: 0,
             Left: 0,
             ColorGroup: "锁链",
-            ShowForAttribute: [/** @type {AssetAttribute}*/ ("LuziXCross")],
+            ShowForAttribute: Typing.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
         },
         {
@@ -196,7 +201,7 @@ const asset = {
             Priority: 26,
             Top: 0,
             Left: 0,
-            ShowForAttribute: [/** @type {AssetAttribute}*/ ("LuziXCross")],
+            ShowForAttribute: Typing.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
         },
         {
@@ -499,6 +504,6 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemAddon", asset, { translation, layerNames, extended, assetStrings: dialog });
     AssetManager.modifyAsset("ItemDevices", "X-Cross", (group, asset) => {
-        asset.Attribute = /** @type {AssetAttribute[]}*/ ([...asset.Attribute, "LuziXCross"]);
+        asset.Attribute = Typing.attributes([...asset.Attribute, "LuziXCross"]);
     });
 }
