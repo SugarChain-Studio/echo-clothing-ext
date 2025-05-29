@@ -155,6 +155,7 @@ const asset = {
         { Name: "w", AllowTypes: { yytc: 11 } },
         { Name: "OwQ", AllowTypes: { yytc: 12 } },
         { Name: "绛翎", AllowTypes: { yytc: 13 } },
+        { Name: "玖儿", AllowTypes: { yytc: 14 } },
 
         // 香喷喷酒吧
         { Name: "依伊可", AllowTypes: { xppjb: 1 } },
