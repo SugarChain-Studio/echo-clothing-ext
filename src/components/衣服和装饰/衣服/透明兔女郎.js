@@ -1,19 +1,18 @@
-import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "透明兔女郎_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
-    Priority: 30,
+    Left: 160,
+    Top: 300,
+    Priority: 20,
     PoseMapping: {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        { Name: "A1" },
+        { Name: "A1", Opacity: 0.4 },
         { Name: "A2" },
         { Name: "B1" },
         { Name: "B2" },
@@ -50,24 +49,25 @@ const translation = {
 /** @type {Translation.String} */
 const layerNames = {
     CN: {
-        A1: "底色 1",
-        A2: "底色 2",
-        B1: "高光 1",
-        B2: "高光 2",
-        B3: "高光 3",
+        A1: "中间底色",
+        A2: "两侧底色",
+        B1: "色调亮部",
+        B2: "腹部高光",
+        B3: "胸反光",
         C1: "边缘线",
     },
     EN: {
-        A1: "Base color 1",
-        A2: "Base Color 2",
-        B1: "Highlight 1",
-        B2: "Highlight 2",
-        B3: "Highlight 3",
+        A1: "Middle Base Color",
+        A2: "Side Base Color",
+        B1: "Tone Highlight",
+        B2: "Abdomen Highlight",
+        B3: "Chest Reflection",
         C1: "Edge Line",
     },
 };
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth("Suit", asset);
-    AssetManager.addAssetWithConfig("Suit", asset, { translation, layerNames });
+    for (const n of /** @type {CustomGroupBodyName[]}*/ (["Suit", "Bra", "Cloth"])) {
+        AssetManager.addAssetWithConfig(n, { ...asset, DynamicGroupName: "Suit" }, { translation, layerNames });
+    }
 }

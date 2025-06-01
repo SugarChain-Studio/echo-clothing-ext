@@ -6,8 +6,8 @@ const asset = {
     Gender: "F",
     Prerequisite: ["HasVagina"],
     Fetish: ["Leather"],
-    Left: 0,
-    Top: 0,
+    Left: 160,
+    Top: 390,
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
@@ -18,7 +18,7 @@ const asset = {
 };
 
 const translations = {
-    CN: "铅笔裙 2", 
+    CN: "铅笔裙 2",
     EN: "PencilSkirt 2",
 };
 
