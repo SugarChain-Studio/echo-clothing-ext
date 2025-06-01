@@ -44,26 +44,26 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "透明兔女郎",
-    EN: "透明兔女郎",
+    EN: "Transparent Bunny Girl",
 };
 
 /** @type {Translation.String} */
 const layerNames = {
     CN: {
-        A1: "A1",
-        A2: "A2",
-        B1: "B1",
-        B2: "B2",
-        B3: "B3",
-        C1: "C1",
+        A1: "底色 1",
+        A2: "底色 2",
+        B1: "高光 1",
+        B2: "高光 2",
+        B3: "高光 3",
+        C1: "边缘线",
     },
     EN: {
-        A1: "",
-        A2: "",
-        B1: "",
-        B2: "",
-        B3: "",
-        C1: "",
+        A1: "Base color 1",
+        A2: "Base Color 2",
+        B1: "Highlight 1",
+        B2: "Highlight 2",
+        B3: "Highlight 3",
+        C1: "Edge Line",
     },
 };
 
