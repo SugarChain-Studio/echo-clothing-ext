@@ -1,3 +1,4 @@
+import { debugFlag } from "@mod-utils/rollupHelper";
 import { AssetManager } from "../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -21,5 +22,7 @@ const asset = {
 const translation = { CN: "坐牢尺", EN: "Grid" };
 
 export default function () {
-    AssetManager.addAssetWithConfig("BodyMarkings2_Luzi", asset, { translation, layerNames: {} });
+    if (debugFlag) {
+        AssetManager.addAssetWithConfig("BodyMarkings2_Luzi", asset, { translation, layerNames: {} });
+    }
 }
