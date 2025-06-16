@@ -184,7 +184,7 @@ const asset = {
         {
             Name: "幽",
             PoseMapping: specialMapping,
-            AllowTypes: { lilian: 2 }
+            AllowTypes: { lilian: 2 },
         },
         { Name: "墨璃", AllowTypes: { lilian: 19 } },
         { Name: "Linnn", AllowTypes: { lilian: 28 } },
@@ -198,7 +198,7 @@ const asset = {
         {
             Name: "Poi",
             PoseMapping: specialMapping,
-            AllowTypes: { l: 5 }
+            AllowTypes: { l: 5 },
         },
         { Name: "Pokemon", AllowTypes: { l: 6 } },
         { Name: "Clara", AllowTypes: { l: 7 } },
