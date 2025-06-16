@@ -264,6 +264,9 @@ const predefDialog = {
             "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
         ItemMisc玩偶_LuziSetxppjb7:
             "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
+        ItemMisc玩偶_LuziSetf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
+        ItemMisc玩偶_LuziSetf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
+
     },
 };
 
