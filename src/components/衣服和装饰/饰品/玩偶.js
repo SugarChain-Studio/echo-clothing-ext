@@ -212,6 +212,8 @@ const asset = {
         { Name: "小夏", AllowTypes: { l: 26 } },
         { Name: "玩偶师", AllowTypes: { l: 27 } },
         { Name: "触手姬", AllowTypes: { l: 28 } },
+        { Name: "Linnn", AllowTypes: { l: 29 } },
+        { Name: "天使Linnn", AllowTypes: { l: 30 } },
 
     ],
 };
