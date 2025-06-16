@@ -71,6 +71,7 @@ const asset = {
         { Name: "Nail", AllowTypes: { f: 3 } },
         { Name: "Nekonya蓝", AllowTypes: { f: 4 } },
         { Name: "小果", AllowTypes: { f: 5 } },
+        { Name: "埃菲尔徳", AllowTypes: { f: 6 } },
 
         // 小夜家玩偶
         { Name: "向归夜", AllowTypes: { y: 1 } },
