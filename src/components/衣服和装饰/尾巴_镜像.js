@@ -68,6 +68,49 @@ const assets = [
             AllFours: "Kneel",
         },
     },
+    {
+        Name: "尾巴2_Luzi",
+        Random: false,
+        Top: 0,
+        Left: 0,
+        DefaultColor: ["#3B0505", "#3B0505"],
+        Layer: [
+            { Name: "1", Priority: 1 },
+            { Name: "2", Priority: 40 },
+        ],
+    },
+    {
+        Name: "尾巴3_Luzi",
+        Random: false,
+        Top: 0,
+        Left: 0,
+        DefaultColor: ["#3B0505", "#3B0505"],
+        Layer: [
+            { Name: "1", Priority: 1 },
+            { Name: "2", Priority: 40 },
+        ],
+    },
+    {
+        Name: "雪豹尾巴_Luzi",
+        Random: false,
+        Top: 0,
+        Left: 0,
+        Layer: [
+            { Name: "1" },
+            { Name: "2" },
+        ],
+    },
+    {
+        Name: "雪豹尾巴镜像_Luzi",
+        Random: false,
+        Top: 0,
+        Left: 0,
+        Layer: [
+            { Name: "1" },
+            { Name: "2" },
+        ],
+    },
+
 ];
 
 /** @type { Record<string,string> } */
@@ -104,6 +147,10 @@ const translations = {
             穿戴式猫尾镜像_Luzi: "穿戴式猫尾镜像",
             穿戴式浣熊尾镜像_Luzi: "穿戴式猫尾镜像",
             尾巴1_Luzi: "尾巴 1",
+            尾巴2_Luzi: "尾巴 2",
+            尾巴3_Luzi: "尾巴 3",
+            雪豹尾巴_Luzi: "雪豹尾巴",
+            雪豹尾巴镜像_Luzi: "雪豹尾巴镜像",
         },
     },
     EN: {
@@ -118,6 +165,10 @@ const translations = {
             穿戴式猫尾镜像_Luzi: "Wearable Cat Tail",
             穿戴式浣熊尾镜像_Luzi: "RaccoonTailStrap Tail",
             尾巴1_Luzi: "Tail 1",
+            尾巴2_Luzi: "Tail 2",
+            尾巴3_Luzi: "Tail 3",
+            雪豹尾巴_Luzi: "Wearable Snow Leopard Tail",
+            雪豹尾巴镜像_Luzi: "Wearable Snow Leopard Tail",
         },
     },
     RU: {
