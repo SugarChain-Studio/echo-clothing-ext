@@ -186,9 +186,9 @@ const asset = {
             PoseMapping: specialMapping,
             AllowTypes: { lilian: 2 },
         },
-        { Name: "墨璃", AllowTypes: { lilian: 19 } },
-        { Name: "Linnn", AllowTypes: { lilian: 28 } },
-        { Name: "天使Linnn", AllowTypes: { lilian: 29 } },
+        { Name: "墨璃", AllowTypes: { lilian: 3 } },
+        { Name: "Linnn", AllowTypes: { lilian: 4 } },
+        { Name: "天使Linnn", AllowTypes: { lilian: 5 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
