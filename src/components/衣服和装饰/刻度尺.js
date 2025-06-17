@@ -34,7 +34,7 @@ const layerNames = {
 function afterDraw(
     data,
     originalFunction,
-    { C, A, CA, X, Y, Property, AlphaMasks, L, Color, drawCanvas, drawCanvasBlink }
+    { C, A, X, Y, Property, AlphaMasks, L, Color, drawCanvas, drawCanvasBlink }
 ) {
     const tempCanvs = AnimationGenerateTempCanvas(C, A, 200, 120);
     const ctx = tempCanvs.getContext("2d");
