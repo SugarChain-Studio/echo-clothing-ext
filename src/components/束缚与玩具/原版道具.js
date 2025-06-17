@@ -1,4 +1,3 @@
-import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 export default function () {
@@ -30,13 +29,4 @@ export default function () {
         const alpha = asset.Alpha.find((x) => !x.Pose);
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
-
-    AssetManager.modifyAssetLayers(
-        (asset) => asset.Name === "Splatters",
-        (_, layer) => {
-            if (layer.Name === "Internal2" || layer.Name === "Internal3") {
-                layer.DrawingTop = Tools.topLeftAdjust(layer.DrawingTop, -20);
-            }
-        }
-    );
 }

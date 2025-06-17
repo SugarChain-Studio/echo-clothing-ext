@@ -5,9 +5,9 @@ export default function () {
 
     HookManager.hookFunction("CommonDrawComputeDrawingCoordinates", 0, (args, next) => {
         const ret = next(args);
-        const [C, asset] = args;
+        const [C, asset, layer] = args;
 
-        const bodyStyleItem = InventoryGet(C, /** @type {AssetGroupBodyName}*/ ("BodyStyle"));
+        const bodyStyleItem = InventoryGet(C, "BodyStyle");
         if (bodyStyleItem?.Asset?.Name !== "Original") return ret;
 
         if (["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"].includes(asset.Group.Name)) {
@@ -25,10 +25,23 @@ export default function () {
                 ret.Y -= 20;
             }
         } else if (asset.Name === "StrictPonyBoots") {
-            if (C.PoseMapping.BodyUpper === "BaseLower") {
+            if (C.PoseMapping.BodyLower === "BaseLower") {
                 ret.Y -= 10;
             }
+        } else if (asset.Name === "Splatters") {
+            if (["Internal2", "Internal3"].includes(layer.Name)) {
+                ret.Y -= 20;
+            }
         }
+
+        return ret;
+    });
+
+    HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
+        const ret = next(args);
+
+        const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
+        if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
 
         return ret;
     });
