@@ -8,7 +8,7 @@ export default function () {
         const [C, asset, layer] = args;
 
         const bodyStyleItem = InventoryGet(C, "BodyStyle");
-        if (bodyStyleItem?.Asset?.Name !== "Original") return ret;
+        if (bodyStyleItem?.Asset?.Name === "EchoV1") return ret;
 
         if (["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"].includes(asset.Group.Name)) {
             if (["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].includes(asset.Name)) {
