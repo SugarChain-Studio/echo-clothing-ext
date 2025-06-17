@@ -37,12 +37,14 @@ export default function () {
         return ret;
     });
 
-    HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
-        const ret = next(args);
+    if (GameVersion !== "R116") {
+        HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
+            const ret = next(args);
 
-        const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
-        if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
+            const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
+            if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
 
-        return ret;
-    });
+            return ret;
+        });
+    }
 }
