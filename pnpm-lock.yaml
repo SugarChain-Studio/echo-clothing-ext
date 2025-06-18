@@ -15,8 +15,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(rollup@4.43.0)
       '@rollup/plugin-commonjs':
-        specifier: ^28.0.5
-        version: 28.0.5(rollup@4.43.0)
+        specifier: ^28.0.6
+        version: 28.0.6(rollup@4.43.0)
       '@rollup/plugin-node-resolve':
         specifier: ^16.0.1
         version: 16.0.1(rollup@4.43.0)
@@ -27,8 +27,8 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.43.0)
       '@sugarch/bc-asset-manager':
-        specifier: ^0.5.11
-        version: 0.5.11(@sugarch/bc-mod-hook-manager@0.2.15(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
+        specifier: ^0.5.12
+        version: 0.5.12(@sugarch/bc-mod-hook-manager@0.2.15(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-event-handler':
         specifier: ^0.6.3
         version: 0.6.3(@sugarch/bc-mod-hook-manager@0.2.15(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
@@ -220,8 +220,8 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-commonjs@28.0.5':
-    resolution: {integrity: sha512-lytLp2JgAMwqJY6ve3OSROXr2XuEYHjnsQN3hmnxC+w11dI91LuUw4Yc1kk2FqKXeMG8psoFejFgK+znoij0cg==}
+  '@rollup/plugin-commonjs@28.0.6':
+    resolution: {integrity: sha512-XSQB1K7FUU5QP+3lOQmVCE3I0FcbbNvmNT4VJSj93iUjayaARrTQeoRdiYQoftAJBLrR9t2agwAd3ekaTgHNlw==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
@@ -256,8 +256,8 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/pluginutils@5.1.4':
-    resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
+  '@rollup/pluginutils@5.2.0':
+    resolution: {integrity: sha512-qWJ2ZTbmumwiLFomfzTyt5Kng4hwPi9rwCYN4SHb6eaRU1KNO4ccxINHr/VhH4GgPlt1XfSTLX2LBTme8ne4Zw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
@@ -368,8 +368,8 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
-  '@sugarch/bc-asset-manager@0.5.11':
-    resolution: {integrity: sha512-hrwHqXlbwqFMgrTsd2BHqQrrR46mYlhtvbFHAcLoIHQ1G5pFskdsIym1vWanej0Qnqwm9cF5tn7SYA3xY34tRA==}
+  '@sugarch/bc-asset-manager@0.5.12':
+    resolution: {integrity: sha512-VIoRg28ifFdIksqRGjL4qvu5OJfkC7DbHx6483MdgIul3MJg7k4nL42NcvzIZPiTvK9u+a8BsTfSbHZ6osVOrQ==}
     peerDependencies:
       '@sugarch/bc-mod-hook-manager': 0.2.15
       bondage-club-mod-sdk: ^1.2.0
@@ -1335,8 +1335,8 @@ packages:
     resolution: {integrity: sha512-bX655WZI/F7EoTDw9JvQURqAXiPHi8o8+yFxPF2lWYyz1aHnmMRuXWqL6YB6GmeO0o4DIYWHLgGNi/X64T+X4Q==}
     engines: {node: '>=14.18'}
 
-  terser@5.42.0:
-    resolution: {integrity: sha512-UYCvU9YQW2f/Vwl+P0GfhxJxbUGLwd+5QrrGgLajzWAtC/23AX0vcise32kkP7Eu0Wu9VlzzHAXkLObgjQfFlQ==}
+  terser@5.43.0:
+    resolution: {integrity: sha512-CqNNxKSGKSZCunSvwKLTs8u8sGGlp27sxNZ4quGh0QeNuyHM0JSEM/clM9Mf4zUp6J+tO2gUXhgXT2YMMkwfKQ==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1574,9 +1574,9 @@ snapshots:
     optionalDependencies:
       rollup: 4.43.0
 
-  '@rollup/plugin-commonjs@28.0.5(rollup@4.43.0)':
+  '@rollup/plugin-commonjs@28.0.6(rollup@4.43.0)':
     dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.43.0)
+      '@rollup/pluginutils': 5.2.0(rollup@4.43.0)
       commondir: 1.0.1
       estree-walker: 2.0.2
       fdir: 6.4.6(picomatch@4.0.2)
@@ -1588,7 +1588,7 @@ snapshots:
 
   '@rollup/plugin-node-resolve@16.0.1(rollup@4.43.0)':
     dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.43.0)
+      '@rollup/pluginutils': 5.2.0(rollup@4.43.0)
       '@types/resolve': 1.20.2
       deepmerge: 4.3.1
       is-module: 1.0.0
@@ -1598,7 +1598,7 @@ snapshots:
 
   '@rollup/plugin-replace@6.0.2(rollup@4.43.0)':
     dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.43.0)
+      '@rollup/pluginutils': 5.2.0(rollup@4.43.0)
       magic-string: 0.30.17
     optionalDependencies:
       rollup: 4.43.0
@@ -1607,11 +1607,11 @@ snapshots:
     dependencies:
       serialize-javascript: 6.0.2
       smob: 1.5.0
-      terser: 5.42.0
+      terser: 5.43.0
     optionalDependencies:
       rollup: 4.43.0
 
-  '@rollup/pluginutils@5.1.4(rollup@4.43.0)':
+  '@rollup/pluginutils@5.2.0(rollup@4.43.0)':
     dependencies:
       '@types/estree': 1.0.8
       estree-walker: 2.0.2
@@ -1681,7 +1681,7 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@sugarch/bc-asset-manager@0.5.11(@sugarch/bc-mod-hook-manager@0.2.15(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-asset-manager@0.5.12(@sugarch/bc-mod-hook-manager@0.2.15(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
     dependencies:
       '@sugarch/bc-mod-hook-manager': 0.2.15(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-mod-types': 0.6.2
@@ -2521,7 +2521,7 @@ snapshots:
 
   rollup-plugin-import-css@3.5.8(rollup@4.43.0):
     dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.43.0)
+      '@rollup/pluginutils': 5.2.0(rollup@4.43.0)
       rollup: 4.43.0
 
   rollup-pluginutils@2.8.2:
@@ -2685,7 +2685,7 @@ snapshots:
     dependencies:
       temp-dir: 3.0.0
 
-  terser@5.42.0:
+  terser@5.43.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
       acorn: 8.15.0
