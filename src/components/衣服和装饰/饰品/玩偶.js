@@ -179,6 +179,7 @@ const asset = {
         { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
         { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
         { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
+        { Name: "红熙", AllowTypes: { sly: 7 } },
 
         // Lilian的大杂烩
         { Name: "Lilian", AllowTypes: { lilian: 1 } },
