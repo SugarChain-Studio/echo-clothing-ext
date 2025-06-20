@@ -191,6 +191,7 @@ const asset = {
         { Name: "墨璃", AllowTypes: { lilian: 3 } },
         { Name: "Linnn", AllowTypes: { lilian: 4 } },
         { Name: "天使Linnn", AllowTypes: { lilian: 5 } },
+        { Name: "兔战Linnn", AllowTypes: { lilian: 6 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
