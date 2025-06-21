@@ -8,9 +8,11 @@ const asset = {
     Gender: "F",
     Top: 0,
     Left: 0,
-    Extended: true,
+    Priority: 35,
     AllowActivePose: ["BaseUpper", "TapedHands", "BackBoxTie", "BackElbowTouch", "Hogtied", "AllFours"],
     SetPose: ["BackElbowTouch"],
+    LayerVisibility: true,
+    DynamicGroupName: "Cloth",
     PoseMapping: {
         BackCuffs: "Hide",
         OverTheHead: "Hide",
@@ -21,8 +23,9 @@ const asset = {
         KneelingSpread: "Kneel",
     },
     Layer: [
-        { Name: "透明", Priority: 42, AllowTypes: { typed: 0 } },
-        { Name: "雨衣", Priority: 42, AllowTypes: { typed: 1 } },
+        { Name: "透明", AllowTypes: { typed: [0, 2] } },
+        { Name: "雨衣", AllowTypes: { typed: 1 } },
+        { Name: "雨衣", AllowTypes: { typed: 2 }, Visibility: "Others" },
     ],
 };
 
@@ -42,7 +45,7 @@ const translation = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [{ Name: "透明" }, { Name: "不透" }],
+    Options: [{ Name: "透明" }, { Name: "不透" }, { Name: "自己" }],
 };
 
 /** @type {Translation.Dialog} */
@@ -51,25 +54,32 @@ const assetDialogs = {
         Select: "选择外观",
         不透: "不透",
         透明: "透明",
+        自己: "自己透明",
 
         Set不透: "SourceCharacter将DestinationCharacter雨衣换成了不透明的款式.",
         Set透明: "SourceCharacter将DestinationCharacter雨衣换成了透明的款式.",
+        Set自己: "SourceCharacter将DestinationCharacter雨衣换成了不透明的款式，但似乎有一些区别。",
     },
     EN: {
         Select: "Choose look",
         不透: "Opaque",
         透明: "Transparent",
+        自己: "Self Transparent",
 
-        Set不透透明: "SourceCharacter changes DestinationCharacter raincoat to an opaque style.",
+        Set不透: "SourceCharacter changes DestinationCharacter raincoat to an opaque style.",
         Set透明: "SourceCharacter changes DestinationCharacter raincoat to a transparent style.",
+        Set自己:
+            "SourceCharacter changes DestinationCharacter raincoat to an opaque style, but it seems to be a bit different.",
     },
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Cloth", asset, {
-        translation,
-        layerNames,
-        extended,
-        assetDialogs,
-    });
+    for (const group of /** @type {AssetGroupBodyName[]} */ (["Cloth", "ClothOuter"])) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            translation,
+            layerNames,
+            extended,
+            assetDialogs,
+        });
+    }
 }
