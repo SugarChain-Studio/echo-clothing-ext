@@ -1,17 +1,18 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools, Tools } from "@mod-utils/Tools";
-import { PathTools } from "@sugarch/bc-mod-utility";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "穿环胸牌",
     Random: false,
     Fetish: ["Masochism"],
-    Value: -1,
     Difficulty: 10,
     Time: 15,
+    Left: 150,
+    Top: 200,
     AllowLock: true,
     Prerequisite: ["AccessBreast", "AccessBreastSuitZip"],
+    DynamicGroupName: "ItemNipplesPiercings",
     // ParentGroup: {},
     ExpressionTrigger: [
         { Name: "Closed", Group: "Eyes", Timer: 5 },
@@ -20,10 +21,12 @@ const asset = {
     Layer: [
         {
             Name: "右胸",
+            ColorGroup: "胸牌",
             AllowTypes: { typed: 0 },
         },
         {
             Name: "左胸",
+            ColorGroup: "胸牌",
             AllowTypes: { typed: 1 },
         },
     ],
@@ -37,13 +40,13 @@ const extended = {
     Options: [{ Name: "右胸" }, { Name: "左胸" }],
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemNipplesPiercings"], ["穿环胸牌"], {
+const assetStrings = {
     CN: {
         Select: "选择佩戴位置",
         右胸: "右胸",
         左胸: "左胸",
-        Set右胸: "SourceCharacter将DestinationCharacter的AssetName挂在了右胸上",
-        Set左胸: "SourceCharacter将DestinationCharacter的AssetName挂在了左胸上",
+        Set右胸: "SourceCharacter将DestinationCharacterAssetName挂在了右胸上",
+        Set左胸: "SourceCharacter将DestinationCharacterAssetName挂在了左胸上",
     },
     EN: {
         Select: "Select The Wearing Position",
@@ -52,21 +55,32 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemNipplesPiercings"], 
         Set右胸: "SourceCharacter put DestinationCharacter AssetName on the right breast",
         Set左胸: "SourceCharacter put DestinationCharacter AssetName on the left breast",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "穿环胸牌",
     EN: "Piercing Name Badge",
 };
 
-/** @type {Record<string, string>} */
-const icons = {
-    "Screens/Inventory/ItemNipplesPiercings/穿环胸牌/右胸.png": PathTools.emptyImage,
-    "Screens/Inventory/ItemNipplesPiercings/穿环胸牌/左胸.png": PathTools.emptyImage,
+const layerNames = {
+    CN: {
+        胸牌: "胸牌",
+        右胸: "右乳头",
+        左胸: "左乳头",
+    },
+    EN: {
+        右胸: "Right Nipple",
+        左胸: "Left Nipple",
+    },
 };
 
 export default function () {
-    AssetManager.addAsset("ItemNipplesPiercings", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
-    AssetManager.addImageMapping(icons);
+    for (const group of /** @type {AssetGroupItemName[]} */ (["ItemNipples", "ItemNipplesPiercings"])) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            extended,
+            translation,
+            layerNames,
+            assetStrings,
+        });
+    }
 }
