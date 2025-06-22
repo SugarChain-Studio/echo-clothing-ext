@@ -169,17 +169,17 @@ const asset = {
         { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },
 
         // 失乐园 sly
-        { Name: "Reisigure", AllowTypes: { sly: 1 } },
-        { Name: "Atlantis", AllowTypes: { sly: 2 } },
-        {
-            Name: "澈羽枫灵",
-            PoseMapping: specialMapping,
-            AllowTypes: { sly: 3 },
-        },
-        { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
-        { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
-        { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
-        { Name: "红熙", AllowTypes: { sly: 7 } },
+        // { Name: "Reisigure", AllowTypes: { sly: 1 } },
+        // { Name: "Atlantis", AllowTypes: { sly: 2 } },
+        // {
+        //     Name: "澈羽枫灵",
+        //     PoseMapping: specialMapping,
+        //     AllowTypes: { sly: 3 },
+        // },
+        // { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
+        // { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
+        // { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
+        { Name: "红熙", AllowTypes: { sly: 1 } },
 
         // Lilian的大杂烩
         { Name: "Lilian", AllowTypes: { lilian: 1 } },
@@ -192,6 +192,22 @@ const asset = {
         { Name: "Linnn", AllowTypes: { lilian: 4 } },
         { Name: "天使Linnn", AllowTypes: { lilian: 5 } },
         { Name: "兔战Linnn", AllowTypes: { lilian: 6 } },
+
+        // 莉柯莉絲家與她的朋友
+        { Name: "莉柯莉絲1", AllowTypes: { lkls: 1 } },
+        { Name: "莉柯莉絲2", AllowTypes: { lkls: 2 } },
+        { Name: "六月", AllowTypes: { lkls: 3 } },
+        { Name: "晓璃", AllowTypes: { lkls: 4 } },
+        { Name: "約爾", AllowTypes: { lkls: 5 } },
+        { Name: "mai", AllowTypes: { lkls: 6 } },
+        { Name: "kiseki", AllowTypes: { lkls: 7 } },
+        { Name: "madoka", AllowTypes: { lkls: 8 } },
+        { Name: "mamotta", AllowTypes: { lkls: 9 } },
+        { Name: "sunny", AllowTypes: { lkls: 10 } },
+        { Name: "marina", AllowTypes: { lkls: 11 } },
+        { Name: "橙汁", AllowTypes: { lkls: 12 } },
+        { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
+        { Name: "MIZU", AllowTypes: { lkls: 14 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -245,6 +261,7 @@ const typeNames = {
     xppjb: "香喷喷酒吧",
     sly: "失乐园",
     lilian: "Lilian的大杂烩",
+    lkls: "莉柯莉絲家與她的朋友",
     l: "路过的玩偶",
 };
 
