@@ -3,6 +3,7 @@ name: Deploy to Github Pages
 on:
   push:
     branches:
+      - beta
       - release
   workflow_dispatch:
 
@@ -18,10 +19,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
+      - name: Checkout beta
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: beta
           submodules: 'recursive'
           fetch-depth: 0
 
@@ -42,7 +43,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.2
         with:
           release_branches: 'release'
-          pre_release_branches: 'main'
+          pre_release_branches: 'beta'
           append_to_pre_release_tag: 'beta'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
