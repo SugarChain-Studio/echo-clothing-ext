@@ -179,7 +179,6 @@ const asset = {
         // { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
         // { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
         // { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
-        { Name: "红熙", AllowTypes: { sly: 1 } },
 
         // Lilian的大杂烩
         { Name: "Lilian", AllowTypes: { lilian: 1 } },
@@ -241,6 +240,7 @@ const asset = {
         { Name: "玩偶师", AllowTypes: { l: 25 } },
         { Name: "触手姬", AllowTypes: { l: 26 } },
         { Name: "雪琪", AllowTypes: { l: 27 } },
+        { Name: "红熙", AllowTypes: { sly: 28 } },
 
     ],
 };
@@ -259,7 +259,7 @@ const typeNames = {
     EILRSW: "EILRSW",
     yytc: "伊友",
     xppjb: "香喷喷酒吧",
-    sly: "失乐园",
+    // sly: "失乐园",
     lilian: "Lilian的大杂烩",
     lkls: "莉柯莉絲家與她的朋友",
     l: "路过的玩偶",
