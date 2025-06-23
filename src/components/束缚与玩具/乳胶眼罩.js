@@ -14,6 +14,7 @@ const asset = {
     AllowTighten: true,
     Fetish: ["Leather"],
     Priority: 44,
+    DynamicGroupName: "ItemHead",
     Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
 };
 
@@ -83,4 +84,7 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetDialogs });
+    for (const g of /** @type {AssetGroupBodyName[]} */ (["Glasses", "Mask"])) {
+        AssetManager.addAssetWithConfig(g, asset, { translation, layerNames });
+    }
 }
