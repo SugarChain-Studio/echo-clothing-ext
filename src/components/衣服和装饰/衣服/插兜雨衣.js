@@ -25,7 +25,7 @@ const asset = {
     Layer: [
         { Name: "透明", AllowTypes: { typed: [0, 2] } },
         { Name: "雨衣", AllowTypes: { typed: 1 } },
-        { Name: "雨衣", AllowTypes: { typed: 2 }, Visibility: "Others" },
+        { Name: "雨衣_cp", AllowTypes: { typed: 2 }, Visibility: "Others", CopyLayerColor: "雨衣" },
     ],
 };
 
@@ -74,6 +74,16 @@ const assetDialogs = {
 };
 
 export default function () {
+    const mappings = asset.Layer.filter((layer) => layer.Name.endsWith("_cp")).reduce((acc, layer) => {
+        for (const size of ["Small", "Normal", "Large", "XLarge"]) {
+            acc[
+                `Assets/Female3DCG/Cloth/${asset.Name}_${size}_${layer.Name}.png`
+            ] = `Assets/Female3DCG/Cloth/${asset.Name}_${size}_${layer.CopyLayerColor}.png`;
+        }
+        return acc;
+    }, /** @type {Record<string,string>} */ ({}));
+    AssetManager.addImageMapping(mappings);
+
     for (const group of /** @type {AssetGroupBodyName[]} */ (["Cloth", "ClothOuter"])) {
         AssetManager.addAssetWithConfig(group, asset, {
             translation,
