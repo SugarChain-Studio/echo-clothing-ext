@@ -1,4 +1,4 @@
-import { sleepUntil } from "@mod-utils/sleep";
+import { sleepUntil } from "@sugarch/bc-mod-utility";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 export default function () {

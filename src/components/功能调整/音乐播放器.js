@@ -1,4 +1,4 @@
-import { sleepFor } from "@mod-utils/sleep";
+import { sleepFor } from "@sugarch/bc-mod-utility";
 
 let scriptLoadStarted = false;
 let scriptLoadDone = false;
