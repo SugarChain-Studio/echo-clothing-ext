@@ -157,6 +157,7 @@ const asset = {
         { Name: "OwQ", AllowTypes: { yytc: 12 } },
         { Name: "绛翎", AllowTypes: { yytc: 13 } },
         { Name: "玖儿", AllowTypes: { yytc: 14 } },
+        { Name: "白澜諪", AllowTypes: { yytc: 15 } },
 
         // 香喷喷酒吧
         { Name: "依伊可", AllowTypes: { xppjb: 1 } },
@@ -208,6 +209,28 @@ const asset = {
         { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
         { Name: "MIZU", AllowTypes: { lkls: 14 } },
 
+        // Celestial Enchants
+        { Name: "Celiko", AllowTypes: { ce: 1 } },
+        { Name: "Lavender", AllowTypes: { ce: 2 } },
+        { Name: "Siscuit", AllowTypes: { ce: 3 } },
+        { Name: "Sabie", AllowTypes: { ce: 4 } },
+
+        // Den of Sin
+        { Name: "Sin", AllowTypes: { ds: 1 } },
+        { Name: "Cassandra Lee", AllowTypes: { ds: 2 } },
+        { Name: "Gangriel", AllowTypes: { ds: 3 } },
+        { Name: "Roslin", AllowTypes: { ds: 4 } },
+        { Name: "Rika", AllowTypes: { ds: 5 } },
+ 
+        // Latex Lab
+        { Name: "XDress", AllowTypes: { ll: 1 } },
+        { Name: "Khloe", AllowTypes: { ll: 2 } },
+        { Name: "Aeri", AllowTypes: { ll: 3 } },
+        { Name: "Lillian", AllowTypes: { ll: 4 } },
+        { Name: "Minerva", AllowTypes: { ll: 5 } },
+        { Name: "delta", AllowTypes: { ll: 6 } },
+        { Name: "Nabi", AllowTypes: { ll: 7 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -240,7 +263,10 @@ const asset = {
         { Name: "玩偶师", AllowTypes: { l: 25 } },
         { Name: "触手姬", AllowTypes: { l: 26 } },
         { Name: "雪琪", AllowTypes: { l: 27 } },
-        { Name: "红熙", AllowTypes: { sly: 28 } },
+        { Name: "红熙", AllowTypes: { l: 28 } },
+        { Name: "喵头嘤", AllowTypes: { l: 29 } },
+        { Name: "溜溜猫", AllowTypes: { l: 30 } },
+        { Name: "芋圆", AllowTypes: { l: 31 } },
 
     ],
 };
@@ -262,6 +288,9 @@ const typeNames = {
     // sly: "失乐园",
     lilian: "Lilian的大杂烩",
     lkls: "莉柯莉絲家與她的朋友",
+    ce: "Celestial Enchants",
+    ds: "Den of Sin",
+    ll: "Latex Lab",
     l: "路过的玩偶",
 };
 
