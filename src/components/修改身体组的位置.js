@@ -37,11 +37,14 @@ export default function () {
         return ret;
     });
 
+    // 能够兼容 Echo V1 的资产
+    const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi"]);
+
     if (GameVersion !== "R116") {
         HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
             const ret = next(args);
 
-            if (args[4].Name === "汉堡_Luzi") return ret;
+            if (v1CompatibleAssets.has(args[4].Name)) return ret;
 
             const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
             if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
