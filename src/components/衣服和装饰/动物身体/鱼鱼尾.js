@@ -31,6 +31,7 @@ const asset = {
         },
         {
             Name: "皮带大腿下",
+            ColorGroup: "大腿皮带",
             Top: -110,
             Left: 0,
             Priority: 22,
@@ -45,6 +46,7 @@ const asset = {
         },
         {
             Name: "皮带大腿上",
+            ColorGroup: "大腿皮带",
             Top: -110,
             Left: 0,
             Priority: 22,
@@ -59,6 +61,7 @@ const asset = {
         },
         {
             Name: "皮带小腿上",
+            ColorGroup: "小腿皮带",
             Top: -110,
             Left: 0,
             Priority: 22,
@@ -73,6 +76,7 @@ const asset = {
         },
         {
             Name: "皮带小腿下",
+            ColorGroup: "小腿皮带",
             Top: -110,
             Left: 0,
             Priority: 22,
@@ -121,6 +125,37 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        鱼尾下半身: "鱼尾",
+
+        大腿皮带: "大腿皮带",
+        皮带大腿上: "上",
+        皮带大腿下: "下",
+
+        小腿皮带: "小腿皮带",
+        皮带小腿上: "上",
+        皮带小腿下: "下",
+
+        鱼尾皮带: "鱼尾皮带",
+        珍珠项链: "珍珠项链",
+    },
+    EN: {
+        鱼尾下半身: "Fish Tail",
+
+        大腿皮带: "Thigh Belt",
+        皮带大腿上: "Upper",
+        皮带大腿下: "Lower",
+
+        小腿皮带: "Calf Belt",
+        皮带小腿上: "Upper",
+        皮带小腿下: "Lower",
+
+        鱼尾皮带: "Fish Tail Belt",
+        珍珠项链: "Pearl Necklace",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -134,7 +169,7 @@ const extended = {
     ],
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["动物身体_Luzi"], ["鱼鱼尾_Luzi"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
         Select鱼尾装饰: "设置",
@@ -159,15 +194,14 @@ const dialog = DialogTools.replicateGroupedItemDialog(["动物身体_Luzi"], ["�
         Optionq1: "Ремень",
         Optionq2: "Жемчужное ожерелье",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "鱼鱼尾",
     EN: "Fishy Tail",
     RU: "Рыбий хвост",
 };
 
 export default function () {
-    AssetManager.addAsset("动物身体_Luzi", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { extended, layerNames, translation, assetStrings });
 }
