@@ -96,7 +96,7 @@ const asset = {
         {
             Name: "下身遮罩",
             ParentGroup: "BodyLower",
-            PoseMapping: { ...AssetPoseMapping.BodyLower },
+            PoseMapping: { ...AssetPoseMapping.BodyLower, Kneel: "LegsClosed" },
             AllowColorize: false,
             HasImage: false,
         },
