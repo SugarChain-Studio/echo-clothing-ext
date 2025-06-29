@@ -1,6 +1,5 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
-import { Typing } from "../utils";
 
 /** @type {AssetPoseName[]} */
 /** @type {CustomAssetDefinition} */
@@ -14,14 +13,6 @@ const asset = {
     ParentGroup: {},
     PoseMapping: {},
 };
-
-const layerNames = {
-    CN: {
-    },
-    EN: {
-    },
-};
-
 /**@type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -82,5 +73,10 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemAddon", asset, { translation, layerNames, extended, assetStrings: dialog });
+    AssetManager.addAssetWithConfig("ItemAddon", asset, {
+        translation,
+        layerNames: {},
+        extended,
+        assetStrings: dialog,
+    });
 }
