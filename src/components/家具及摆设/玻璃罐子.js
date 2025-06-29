@@ -37,17 +37,17 @@ const asset = {
         { Name: "舌头", AllowColorize: false, Priority: 7 },
         { Name: "身体衔接", Priority: 30 },
         { Name: "管道衔接", Priority: 40, AllowTypes: { gz: 1 } },
-        { Name: "管道", Priority: 38, AllowTypes: { gz: 1 } },
-        { Name: "管道2", Priority: 5, AllowTypes: { gz: 1 } },
-        { Name: "上1", Priority: 56 },
-        { Name: "上2", Priority: 4 },
-        { Name: "下1", Priority: 56 },
-        { Name: "下2", Priority: 4 },
+        { Name: "管道", ColorGroup: "管道g", Priority: 38, AllowTypes: { gz: 1 } },
+        { Name: "管道2", ColorGroup: "管道g", Priority: 5, AllowTypes: { gz: 1 } },
+        { Name: "上1", ColorGroup: "顶部", Priority: 56 },
+        { Name: "上2", ColorGroup: "顶部", Priority: 4 },
+        { Name: "下1", ColorGroup: "底部", Priority: 56 },
+        { Name: "下2", ColorGroup: "底部", Priority: 4 },
         { Name: "面板", Priority: 56 },
-        { Name: "液体", Priority: 39, AllowTypes: { yt: 1 } },
-        { Name: "液体2", Priority: 6, AllowTypes: { yt: 1 } },
-        { Name: "玻璃罐液体前", Priority: 56, AllowTypes: { yt: 1 } },
-        { Name: "玻璃罐液体后", Priority: 4, AllowTypes: { yt: 1 } },
+        { Name: "液体", ColorGroup: "管道g", Priority: 39, AllowTypes: { yt: 1 } },
+        { Name: "液体2", ColorGroup: "管道g", Priority: 6, AllowTypes: { yt: 1 } },
+        { Name: "玻璃罐液体前", ColorGroup: "罐液体", Priority: 56, AllowTypes: { yt: 1 } },
+        { Name: "玻璃罐液体后", ColorGroup: "罐液体", Priority: 4, AllowTypes: { yt: 1 } },
         { Name: "玻璃外层", Priority: 57, AllowTypes: { c: 0 } },
         { Name: "发光", Priority: 31 },
         { Name: "玻璃关闭", Priority: 57, AllowTypes: { c: 1 }, Visibility: "Others" },
@@ -55,6 +55,71 @@ const asset = {
         { Name: "腿部拘束", Priority: 35, AllowTypes: { t: 1 } },
         { Name: "吊顶链", Priority: 5, AllowTypes: { s: 1 } },
     ],
+};
+
+const layerNames = {
+    CN: {
+        舌头: "舌头",
+        身体衔接: "身体衔接",
+        管道衔接: "管道衔接",
+        面板: "面板",
+
+        玻璃外层: "玻璃外层",
+        玻璃关闭: "封闭门",
+        发光: "发光",
+        手臂拘束: "手臂拘束",
+        腿部拘束: "腿部拘束",
+        吊顶链: "吊顶链",
+
+        管道g: "管道",
+        管道: "管道前",
+        管道2: "管道后",
+        液体: "液体前",
+        液体2: "液体后",
+
+        罐液体: "罐子液体",
+        玻璃罐液体前: "前",
+        玻璃罐液体后: "后",
+
+        顶部: "顶盖",
+        上1: "外侧",
+        上2: "内侧",
+
+        底部: "底座",
+        下1: "外侧",
+        下2: "内侧",
+    },
+
+    EN: {
+        舌头: "Tongue",
+        身体衔接: "Body Connector",
+        管道衔接: "Pipe Connector",
+        面板: "Panel",
+        玻璃外层: "Glass Outer Layer",
+        玻璃关闭: "Glass Closed",
+        发光: "Glow",
+        手臂拘束: "Arm Restraint",
+        腿部拘束: "Leg Restraint",
+        吊顶链: "Ceiling Chain",
+
+        管道g: "Pipe",
+        管道: "Pipe Front",
+        管道2: "Pipe Back",
+        液体: "Liquid Front",
+        液体2: "Liquid Back",
+
+        罐液体: "Jar Liquid",
+        玻璃罐液体前: "Jar Liquid Front",
+        玻璃罐液体后: "Jar Liquid Back",
+
+        顶部: "Top Lid",
+        上1: "Outer",
+        上2: "Inner",
+
+        底部: "Base",
+        下1: "Outer",
+        下2: "Inner",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -139,7 +204,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃罐子_Luzi"], {
+const assetStrings = {
     CN: {
         Setc0: "SourceCharacter打开了DestinationCharacter罐子",
         Setc1: "SourceCharacter封上了DestinationCharacter罐子",
@@ -255,6 +320,7 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃�
         Optionk1: "Low",
         Optionk2: "Moderate",
         Optionk3: "High",
+        Optionk4: "Maximum",
         Select声音模块: "Set Sound Module",
         Module声音模块: "Sound Module",
         Optionsd0: "Silent",
@@ -352,9 +418,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["玻璃�
         Optiong1: "Окантовка",
         Optiong2: "Відмова",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "玻璃罐子",
     EN: "Glass Jar",
     RU: "Стеклянная банка",
@@ -362,6 +428,5 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { extended, translation, layerNames, assetStrings });
 }
