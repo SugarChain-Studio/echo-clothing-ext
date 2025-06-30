@@ -79,6 +79,9 @@ export default function () {
             acc[
                 `Assets/Female3DCG/Cloth/${asset.Name}_${size}_${layer.Name}.png`
             ] = `Assets/Female3DCG/Cloth/${asset.Name}_${size}_${layer.CopyLayerColor}.png`;
+            acc[
+                `Assets/Female3DCG/Cloth/Kneel/${asset.Name}_${size}_${layer.Name}.png`
+            ] = `Assets/Female3DCG/Cloth/Kneel/${asset.Name}_${size}_${layer.CopyLayerColor}.png`;
         }
         return acc;
     }, /** @type {Record<string,string>} */ ({}));
