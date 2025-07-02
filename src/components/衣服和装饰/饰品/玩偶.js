@@ -72,6 +72,7 @@ const asset = {
         { Name: "Nekonya蓝", AllowTypes: { f: 4 } },
         { Name: "小果", AllowTypes: { f: 5 } },
         { Name: "埃菲尔徳", AllowTypes: { f: 6 } },
+        { Name: "小寒", AllowTypes: { f: 7 } },
 
         // 小夜家玩偶
         { Name: "向归夜", AllowTypes: { y: 1 } },
@@ -148,16 +149,15 @@ const asset = {
         { Name: "幽灵", AllowTypes: { yytc: 3 } },
         { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
         { Name: "小沫", AllowTypes: { yytc: 5 } },
-        { Name: "Sive", AllowTypes: { yytc: 6 } },
-        { Name: "40", AllowTypes: { yytc: 7 } },
-        { Name: "焦糖", AllowTypes: { yytc: 8 } },
-        { Name: "早紀", AllowTypes: { yytc: 9 } },
-        { Name: "rin", AllowTypes: { yytc: 10 } },
-        { Name: "w", AllowTypes: { yytc: 11 } },
-        { Name: "OwQ", AllowTypes: { yytc: 12 } },
-        { Name: "绛翎", AllowTypes: { yytc: 13 } },
-        { Name: "玖儿", AllowTypes: { yytc: 14 } },
-        { Name: "白澜諪", AllowTypes: { yytc: 15 } },
+        { Name: "40", AllowTypes: { yytc: 6 } },
+        { Name: "焦糖", AllowTypes: { yytc: 7 } },
+        { Name: "早紀", AllowTypes: { yytc: 8 } },
+        { Name: "rin", AllowTypes: { yytc: 9 } },
+        { Name: "w", AllowTypes: { yytc: 10 } },
+        { Name: "OwQ", AllowTypes: { yytc: 11 } },
+        { Name: "绛翎", AllowTypes: { yytc: 12 } },
+        { Name: "玖儿", AllowTypes: { yytc: 13 } },
+        { Name: "白澜諪", AllowTypes: { yytc: 14 } },
 
         // 香喷喷酒吧
         { Name: "依伊可", AllowTypes: { xppjb: 1 } },
@@ -167,7 +167,8 @@ const asset = {
         { Name: "五十提", AllowTypes: { xppjb: 5 } },
         { Name: "狸nux", AllowTypes: { xppjb: 6 } },
         { Name: "依", AllowTypes: { xppjb: 7 } },
-        { Name: "暴狸龙", AllowTypes: { xppjb: 8 } },
+        { Name: "珥九", AllowTypes: { xppjb: 8 } },
+        { Name: "暴狸龙", AllowTypes: { xppjb: 9 } },
 
         // 失乐园 sly
         // { Name: "Reisigure", AllowTypes: { sly: 1 } },
@@ -221,7 +222,7 @@ const asset = {
         { Name: "Gangriel", AllowTypes: { ds: 3 } },
         { Name: "Roslin", AllowTypes: { ds: 4 } },
         { Name: "Rika", AllowTypes: { ds: 5 } },
- 
+
         // Latex Lab
         { Name: "XDress", AllowTypes: { ll: 1 } },
         { Name: "Khloe", AllowTypes: { ll: 2 } },
@@ -267,6 +268,7 @@ const asset = {
         { Name: "喵头嘤", AllowTypes: { l: 29 } },
         { Name: "溜溜猫", AllowTypes: { l: 30 } },
         { Name: "芋圆", AllowTypes: { l: 31 } },
+        { Name: "Sive", AllowTypes: { l: 32 } },
 
     ],
 };
