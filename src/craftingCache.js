@@ -117,7 +117,6 @@ function getCurrentModCraftItems() {
  */
 function saveCurrentCraftingToSettings() {
     const modItems = getCurrentModCraftItems();
-    if (modItems.length === 0) return;
 
     // 确保设置对象存在
     if (!Player.ExtensionSettings) Player.ExtensionSettings = {};
