@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "SND项链_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 190,
+    Top: 210,
     PoseMapping: {},
     ParentGroup: {},
     DynamicGroupName: "Necklace",

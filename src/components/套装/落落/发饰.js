@@ -3,8 +3,6 @@ import { DialogTools } from "@mod-utils/Tools";
 
 const hairAccShared = {
     Random: false,
-    Left: 0,
-    Top: 0,
     Priority: 54,
     ParentGroup: {},
     DynamicGroupName: /** @type {AssetGroupBodyName}*/ ("HairAccessory1"),
@@ -15,10 +13,14 @@ const assets = [
     {
         Name: "树叶发饰_Luzi",
         ...hairAccShared,
+        Left: 170,
+        Top: 80,
     },
     {
         Name: "金属发卡_Luzi",
         ...hairAccShared,
+        Left: 170,
+        Top: 60,
     },
 ];
 

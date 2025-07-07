@@ -5,8 +5,8 @@ const hairFront = "HairFront";
 
 const hairAttrShared = {
     Random: false,
-    Left: 0,
-    Top: 0,
+    Left: 120,
+    Top: 50,
     Priority: 52,
     ParentGroup: {},
     Extended: false,

@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "枪套_Luzi",
     Random: false,
-    Left: 0,
-    Top: 0,
+    Left: 110,
+    Top: 430,
     Priority: 20,
     ParentGroup: "BodyLower",
     DynamicGroupName: "Garters",
