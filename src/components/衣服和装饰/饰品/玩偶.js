@@ -118,6 +118,7 @@ const asset = {
         { Name: "雨笠银花", AllowTypes: { lihua: 3 } },
         { Name: "dudu", AllowTypes: { lihua: 4 } },
         { Name: "卜卜", AllowTypes: { lihua: 5 } },
+        { Name: "秋巧", AllowTypes: { lihua: 6 } },
 
         // 鸢堡
         { Name: "鸢", AllowTypes: { yb: 1 } },
@@ -232,6 +233,12 @@ const asset = {
         { Name: "delta", AllowTypes: { ll: 6 } },
         { Name: "Nabi", AllowTypes: { ll: 7 } },
 
+        // 月见里的海边
+        { Name: "蝶灵忧凪", AllowTypes: { hb: 1 } },
+        { Name: "蛇灵忧凪", AllowTypes: { hb: 2 } },
+        { Name: "忧咲", AllowTypes: { hb: 3 } },
+        { Name: "红熙", AllowTypes: { hb: 4 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -264,11 +271,17 @@ const asset = {
         { Name: "玩偶师", AllowTypes: { l: 25 } },
         { Name: "触手姬", AllowTypes: { l: 26 } },
         { Name: "雪琪", AllowTypes: { l: 27 } },
-        { Name: "红熙", AllowTypes: { l: 28 } },
-        { Name: "喵头嘤", AllowTypes: { l: 29 } },
-        { Name: "溜溜猫", AllowTypes: { l: 30 } },
-        { Name: "芋圆", AllowTypes: { l: 31 } },
-        { Name: "Sive", AllowTypes: { l: 32 } },
+        { Name: "喵头嘤", AllowTypes: { l: 28 } },
+        { Name: "溜溜猫", AllowTypes: { l: 29 } },
+        { Name: "芋圆", AllowTypes: { l: 30 } },
+        { Name: "Sive", AllowTypes: { l: 31 } },
+        { Name: "月", AllowTypes: { l: 32 } },
+        { Name: "er", AllowTypes: { l: 33 } },
+        {
+            Name: "Personas",
+            PoseMapping: specialMapping,
+            AllowTypes: { l: 34 }
+        },
 
     ],
 };
@@ -293,6 +306,7 @@ const typeNames = {
     ce: "Celestial Enchants",
     ds: "Den of Sin",
     ll: "Latex Lab",
+    hb: "月见里的海边",
     l: "路过的玩偶",
 };
 
