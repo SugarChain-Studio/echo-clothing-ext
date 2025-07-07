@@ -2,40 +2,33 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "羽毛内衣",
+    Name: "西装露肩_Luzi",
     Random: false,
     Left: 0,
     Top: 0,
-    Priority: 20,
+    Priority: 30,
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Cloth",
-    Layer: [{ Name: "1" }, { Name: "2" }],
+    PoseMapping: {
+        ...AssetPoseMapping.Cloth,
+        AllFours: PoseType.HIDE,
+        BackCuffs: PoseType.HIDE,
+        Hogtied: PoseType.HIDE,
+    },
 };
 
 const translation = {
-    CN: "羽毛内衣",
-    EN: "Feather Lingerie",
-};
-
-/** @type { Translation.String } */
-const layerNames = {
-    CN: {
-        1: "左",
-        2: "右",
-    },
-    EN: {
-        1: "Left",
-        2: "Right",
-    },
+    CN: "随意滑落西装",
+    EN: "Casual Dropped Suit",
 };
 
 export default function () {
     /** @type {AssetGroupBodyName[]} */
-    const groups = ["Cloth", "Bra", "Suit"];
+    const groups = ["Cloth", "ClothOuter"];
     for (const group of groups) {
         AssetManager.addAssetWithConfig(group, asset, {
             translation,
-            layerNames,
+            layerNames: {},
         });
     }
 }

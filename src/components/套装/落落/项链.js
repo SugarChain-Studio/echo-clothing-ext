@@ -7,6 +7,8 @@ const asset = {
     Top: 0,
     Left: 0,
     PoseMapping: {},
+    ParentGroup: {},
+    DynamicGroupName: "Necklace",
     Priority: 31,
 };
 
@@ -17,5 +19,12 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Necklace", asset, undefined, translation);
+    /** @type {AssetGroupBodyName[]} */
+    const groups = ["Necklace", "ClothAccessory"];
+    for (const group of groups) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            translation,
+            layerNames: {},
+        });
+    }
 }

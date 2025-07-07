@@ -2,7 +2,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "套01靴",
+    Name: "拉链皮靴",
     Random: false,
     Top: 0,
     Left: 0,
