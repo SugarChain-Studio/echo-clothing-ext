@@ -20,6 +20,7 @@ const asset = {
         {
             Name: "A_底盘", ParentGroup: null,
             Priority: 1,
+            ColorGroup: "金属主体",
         },
         {
             Name: "A_柱子伸缩", ParentGroup: null,
@@ -32,81 +33,100 @@ const asset = {
         {
             Name: "A_柱子1", ParentGroup: null,
             Priority: 1,
+            ColorGroup: "金属主体",
         },
         {
             Name: "A_柱子2", ParentGroup: null,
             Priority: 1,
+            ColorGroup: "金属主体",
         },
         {
             Name: "A_柱子3", ParentGroup: null,
             Priority: 1,
+            ColorGroup: "金属主体",
         },
 
         {
             Name: "B_默认1", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属主体",
         },
         {
             Name: "B_默认2", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属主体",
         },
         {
             Name: "B_默认3", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "B_默认4", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
         {
             Name: "B_默认5", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "B_默认6", AllowTypes: { o: 0 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
 
         {
             Name: "C_并腿1", AllowTypes: { o: 1 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "C_并腿2", AllowTypes: { o: 1 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
         {
             Name: "C_并腿3", AllowTypes: { o: 1 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "C_并腿4", AllowTypes: { o: 1 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
 
         {
             Name: "D_开腿1", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属主体",
         },
         {
             Name: "D_开腿2", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属主体",
         },
         {
             Name: "D_开腿3", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "D_开腿4", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
         {
             Name: "D_开腿5", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属左腿",
         },
         {
             Name: "D_开腿6", AllowTypes: { o: 2 },
             Priority: 40, ParentGroup: "BodyLower",
+            ColorGroup: "金属右腿",
         },
     ],
 };
@@ -130,7 +150,10 @@ const extended = {
             Name: "姿势2",
             DrawImages: false,
             Key: "g",
-            Options: [{}, {}],
+            Options: [
+                {},
+                { Property: { SetPose: ["BackElbowTouch"] } },
+            ],
         },
     ],
 };
@@ -149,12 +172,14 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["单监_
         Select姿势2: "选择手部拘束",
         Module姿势2: "手部姿势",
         Optiong0: "无",
-        Optiong1: "添加嘴部拘束",
-        Optiong2: "添加嘴部拘束",
+        Optiong1: "不知道叫什么",
 
         Seto0: "SourceCharacter修改了DestinationCharacter腿部姿势",
         Seto1: "SourceCharacter修改了DestinationCharacter腿部姿势",
         Seto2: "SourceCharacter修改了DestinationCharacter腿部姿势",
+
+        Setg0: "SourceCharacter修改了DestinationCharacter手部姿势",
+        Setg1: "SourceCharacter修改了DestinationCharacter手部姿势",
     },
     EN: {
     },
