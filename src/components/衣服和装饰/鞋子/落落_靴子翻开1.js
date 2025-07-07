@@ -28,7 +28,7 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "靴子翻开 1",
-    EN: "Lace-up shoes",
+    EN: "Boots 1",
 };
 
 export default function () {

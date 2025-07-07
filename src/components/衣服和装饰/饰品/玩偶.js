@@ -280,7 +280,7 @@ const asset = {
         {
             Name: "Personas",
             PoseMapping: specialMapping,
-            AllowTypes: { l: 34 }
+            AllowTypes: { l: 34 },
         },
 
     ],
