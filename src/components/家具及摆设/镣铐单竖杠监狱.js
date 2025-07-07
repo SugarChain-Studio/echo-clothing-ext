@@ -127,7 +127,7 @@ const extended = {
             ],
         },
         {
-            Name: "嘴巴固定",
+            Name: "姿势2",
             DrawImages: false,
             Key: "g",
             Options: [{}, {}],
@@ -146,8 +146,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["单监_
         Optiono1: "并腿",
         Optiono2: "开腿",
 
-        Select嘴巴固定: "选择嘴部拘束",
-        Module嘴巴固定: "嘴部拘束",
+        Select姿势2: "选择手部拘束",
+        Module姿势2: "手部姿势",
         Optiong0: "无",
         Optiong1: "添加嘴部拘束",
         Optiong2: "添加嘴部拘束",
@@ -157,51 +157,12 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["单监_
         Seto2: "SourceCharacter修改了DestinationCharacter腿部姿势",
     },
     EN: {
-        SelectBase: "Select Leg Spread Display Configuration",
-
-        Select姿势: "Select Pose",
-        Module姿势: "Pose",
-        Optiono0: "Behind Back",
-        Optiono1: "Lift Hands",
-
-        Select嘴巴固定: "Select Mouth Restraint",
-        Module嘴巴固定: "Mouth Restraint",
-        Optiong0: "None",
-        Optiong1: "Add Mouth Restraint",
-
-        Select下体棒子: "Select Genital Prop",
-        Module下体棒子: "Genital Prop",
-        Optionv0: "None",
-        Optionv1: "Add Genital Prop",
-
-        Select自定义高度: "Set Height",
-        Module自定义高度: "Adjust Height",
-        Optiond0: "None",
-        Optiond1: "Custom Height",
-
-        Seto1: "SourceCharacter modifies DestinationCharacter hand restraints",
-        Seto0: "SourceCharacter modifies DestinationCharacter hand restraints",
-
-        Setg0: "SourceCharacter removes DestinationCharacter mouth restraint",
-        Setg1: "SourceCharacter adds DestinationCharacter mouth restraint",
-
-        Setv0: "SourceCharacter removes DestinationCharacter genital prop",
-        Setv1: "SourceCharacter adds DestinationCharacter genital prop",
-
-        Setd0: "SourceCharacter resets DestinationCharacter height",
-        Setd1: "SourceCharacter adjusts DestinationCharacter height",
-    },
-    RU: {
-    },
-    UA: {
     },
 });
 
 const translations = {
     CN: "镣铐单竖杠监狱",
-    EN: "Leg-Spread Display Stand",
-    UA: "Розширювач ніг",
-    RU: "Leg-Spread Display Stand",
+    EN: "",
 };
 
 export default function () {
