@@ -10,6 +10,9 @@ const asset = {
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Cloth",
     Layer: [{ Name: "1" }, { Name: "2" }],
+    PoseMapping: {
+        Yoked: PoseType.DEFAULT,
+    },
 };
 
 const translation = {
