@@ -48,7 +48,7 @@ const assets = [
             Name: "眼睛11",
             Left: 190,
             Top: 140,
-            DefaultColor: ["Default", "Default", "#DFA22F", "Default", "Default"],
+            DefaultColor: ["Default", "Default", "Default", "Default", "Default"],
             Layer: [
                 { Name: "1", AllowColorize: true },
                 { Name: "2", AllowColorize: true },
@@ -58,7 +58,7 @@ const assets = [
             ],
         },
         translation: {
-            CN: "瑚珀",
+            CN: "夜色",
             EN: "Amber",
         },
         layerNames: commonLayerNames,
