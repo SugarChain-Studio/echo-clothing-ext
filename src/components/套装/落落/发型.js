@@ -28,6 +28,18 @@ const assets = {
             Layer: [{ Name: "A" }, { Name: "B" }],
         },
     ],
+    新后发_Luzi: [
+        {
+            Name: "蓬松卷发1",
+            ...hairAttrShared,
+            Layer: [{ Name: "A" }, { Name: "B" }],
+        },
+        {
+            Name: "蓬松卷发2",
+            ...hairAttrShared,
+            Layer: [{ Name: "A" }, { Name: "B" }],
+        },
+    ],
 };
 
 /** @type { Translation.GroupedEntries } */
@@ -37,9 +49,17 @@ const translations = {
             蓬松卷发1: "蓬松卷发1",
             蓬松卷发2: "蓬松卷发2",
         },
+        新后发_Luzi: {
+            蓬松卷发1: "蓬松卷发1",
+            蓬松卷发2: "蓬松卷发2",
+        },
     },
     EN: {
         新前发_Luzi: {
+            蓬松卷发1: "Fluffy Curls 1",
+            蓬松卷发2: "Fluffy Curls 2",
+        },
+        新后发_Luzi: {
             蓬松卷发1: "Fluffy Curls 1",
             蓬松卷发2: "Fluffy Curls 2",
         },
