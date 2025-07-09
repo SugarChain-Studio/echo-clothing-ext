@@ -46,8 +46,8 @@ const assets = [
     {
         asset: {
             Name: "眼睛11",
-            Left: 190,
-            Top: 140,
+            Left: 180,
+            Top: 120,
             DefaultColor: ["Default", "Default", "Default", "Default", "Default"],
             Layer: [
                 { Name: "1", AllowColorize: true },
