@@ -32,11 +32,13 @@ const assets = {
         {
             Name: "蓬松卷发1",
             ...hairAttrShared,
+            DynamicGroupName: "新前发_Luzi",
             Layer: [{ Name: "A" }, { Name: "B" }],
         },
         {
             Name: "蓬松卷发2",
             ...hairAttrShared,
+            DynamicGroupName: "新前发_Luzi",
             Layer: [{ Name: "A" }, { Name: "B" }],
         },
     ],
