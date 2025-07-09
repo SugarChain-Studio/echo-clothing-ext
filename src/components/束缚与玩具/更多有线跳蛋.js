@@ -85,7 +85,7 @@ const extended = {
                     Property: { Intensity: 1, Effect: ["Egged", "Vibrating"] },
                 },
                 {
-                    Property: { Intensity: 3, Effect: ["Egged", "Vibrating"] },
+                    Property: { Intensity: 2, Effect: ["Egged", "Vibrating"] },
                 },
                 {
                     Property: { Intensity: 3, Effect: ["Egged", "Vibrating"] },
