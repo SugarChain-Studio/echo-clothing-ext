@@ -66,15 +66,15 @@ const translations = {
     EN: {
         Gloves: {
             袖手套_Luzi: "Sleeve Gloves",
-            丝手套2_Luzi: "丝手套 2",
-            手套渐变_Luzi: "手套渐变",
+            丝手套2_Luzi: "Silk Gloves 2",
+            手套渐变_Luzi: "Gloves Gradient",
         },
     },
     RU: {
         Gloves: {
             袖手套_Luzi: "Перчатки-рукава",
-            丝手套2_Luzi: "丝手套 2",
-            手套渐变_Luzi: "手套渐变",
+            丝手套2_Luzi: "Перчатки из шелка 2",
+            手套渐变_Luzi: "Градиент перчаток",
         },
     },
 };
