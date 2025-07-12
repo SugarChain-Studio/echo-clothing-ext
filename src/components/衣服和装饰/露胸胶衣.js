@@ -145,8 +145,8 @@ const assetDialogs = {
 
 const translation = {
     CN: "露胸胶衣",
-    EN: "Open-Chest Catsuit",
-    RU: "Открытый кожаный костюм",
+    EN: "Open-Chest Leotard",
+    RU: "Открытый леотард",
 };
 
 export default function () {
