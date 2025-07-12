@@ -6,6 +6,7 @@ supplement the main [LICENSE](LICENSE) file.
 ## Special Circumstances
 
 1. The asset "玩偶" ( aka "Plushies" )  is anthorized displays of player original characters, and is not covered by the license above. 
+
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
 2. The asset for new eyes are not covered by the license above, as listed below:
@@ -19,9 +20,11 @@ supplement the main [LICENSE](LICENSE) file.
    - "青玉（睁大）" ( asset name: "眼睛8" )
    - "青玉（眼影）" ( asset name: "眼睛9" )
    - "青玉（眼影2）" ( asset name: "眼睛10" )
+
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
 3. The assets related with [this folder](src/components/套装/落落) are not covered by the license above. 
+
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
 4. The following assets are not covered by the license above:
@@ -50,13 +53,14 @@ supplement the main [LICENSE](LICENSE) file.
    - 烤鸡腿 (asset name: "鸡腿_Luzi")
    - 烤鱼 (asset name: "烤鱼_Luzi")
    - 棒棒糖 (asset name: "棒棒糖_Luzi")
-   - 蛋糕卷 (asset name: "蛋糕卷_Luzi")
+   - 蛋糕卷 (asset name: "蛋糕卷_Luzi")  
+
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
 ## Additional Terms
 
 ## Clarifications
 
-1. In principle, all code and assets in this project are licensed under the CC BY SA 4.0 license, unless otherwise specified above.
+1. In principle, all code and assets in this project are licensed under the license above, unless otherwise specified.
    
 2. Due to limited development resources and in order to facilitate community development without being hindered by copyright concerns, the main maintainers have chosen to immediately implement the CC4 license. However, at the time of this implementation, not all contributors had provided explicit consent. As responses from relevant contributors are gradually collected, any exceptions will be added to the "Special Circumstances" section above.
