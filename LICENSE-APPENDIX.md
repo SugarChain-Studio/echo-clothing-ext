@@ -45,3 +45,7 @@ supplement the main [LICENSE](LICENSE) file.
 ## Additional Terms
 
 ## Clarifications
+
+1. In principle, all code and assets in this project are licensed under the CC BY SA 4.0 license, unless otherwise specified above.
+   
+2. Due to limited development resources and in order to facilitate community development without being hindered by copyright concerns, the main maintainers have chosen to immediately implement the CC4 license. However, at the time of this implementation, not all contributors had provided explicit consent. As responses from relevant contributors are gradually collected, any exceptions will be added to the "Special Circumstances" section above.
