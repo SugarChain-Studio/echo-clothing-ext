@@ -40,6 +40,17 @@ supplement the main [LICENSE](LICENSE) file.
    - 尿袋 (asset name: "尿袋")
    - 镣铐单竖杠监狱 (asset name: "单监_Luzi")
    - 四肢传送装置 (asset name: "隐形药水_Luzi")
+   - 丝袜2 (asset name: "丝袜2_Luzi")
+   - 丝袜3 (asset name: "丝袜3_Luzi")
+   - 条纹袜 (asset name: "条纹袜_Luzi")
+   - 条纹袜2 (asset name: "条纹袜2_Luzi")
+   - 丝手套 (asset name: "丝手套2_Luzi")
+   - 猪猪 (asset name: "猪猪_Luzi")
+   - 乳胶带床 (asset name: "乳胶带床_Luzi")
+   - 烤鸡腿 (asset name: "鸡腿_Luzi")
+   - 烤鱼 (asset name: "烤鱼_Luzi")
+   - 棒棒糖 (asset name: "棒棒糖_Luzi")
+   - 蛋糕卷 (asset name: "蛋糕卷_Luzi")
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
 ## Additional Terms
