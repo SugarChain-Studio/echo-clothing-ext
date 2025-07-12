@@ -12,8 +12,8 @@ const asset = {
     DynamicGroupName: "Cloth",
     PoseMapping: {
         ...AssetPoseMapping.ClothLower,
-        Kneel: PoseType.HIDE,
-        KneelingSpread: PoseType.HIDE,
+        Kneel: "LegsClosed",
+        KneelingSpread: PoseType.DEFAULT,
     },
     Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }],
 };
