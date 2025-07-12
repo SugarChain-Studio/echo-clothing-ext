@@ -55,13 +55,13 @@ const asset = {
             Name: "上腿杆",
             Priority: 22,
             ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed" },
+            PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
         },
         {
             Name: "下腿杆",
             Priority: 22,
             ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed" },
+            PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
         },
         {
             Name: "左小腿",
