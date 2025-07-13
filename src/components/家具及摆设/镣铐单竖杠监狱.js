@@ -7,7 +7,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Difficulty: 8,
+    Difficulty: 4,
     AllowLock: true,
     AllowTighten: true,
     DrawLocks: false,
@@ -205,7 +205,7 @@ const extended = {
             Options: [
                 {},
                 {
-                    Property: { Intensity: 0, Effect: ["Egged"], Difficulty: 4 },
+                    Property: { Intensity: 0, Effect: ["Egged"], Difficulty: 5 },
                 },
                 {
                     Property: { Intensity: 1, Effect: ["Egged", "Vibrating"], Difficulty: 4 },
