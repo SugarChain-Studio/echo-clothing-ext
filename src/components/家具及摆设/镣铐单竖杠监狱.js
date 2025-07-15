@@ -25,7 +25,7 @@ const asset = {
         {
             Name: "A_柱子伸缩",
             ParentGroup: null,
-            Priority: 1,
+            Priority: 5,
         },
         {
             Name: "A_阳具",
@@ -35,19 +35,19 @@ const asset = {
         {
             Name: "A_柱子1",
             ParentGroup: null,
-            Priority: 4,
+            Priority: 6,
             ColorGroup: "金属主体",
         },
         {
             Name: "A_柱子2",
             ParentGroup: null,
-            Priority: 4,
+            Priority: 6,
             ColorGroup: "金属主体",
         },
         {
             Name: "A_柱子3",
             ParentGroup: null,
-            Priority: 4,
+            Priority: 6,
             ColorGroup: "金属主体",
         },
 
