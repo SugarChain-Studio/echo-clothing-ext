@@ -11,6 +11,7 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
     },
+    DefaultColor: ["#111", "#111", "Default", "Default", "Default", "Default"],
     Layer: [
         { Name: "A1", Opacity: 0.4 },
         { Name: "A2" },
