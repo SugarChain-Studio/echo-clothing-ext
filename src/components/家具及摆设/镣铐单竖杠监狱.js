@@ -1,6 +1,9 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 
+/** @type {RectTuple} */
+const mask = [200, 423, 100, 100];
+
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "单监_Luzi",
@@ -31,6 +34,16 @@ const asset = {
             Name: "A_阳具",
             ParentGroup: null,
             Priority: 22,
+        },
+        {
+            HasImage: false,
+            AllowTypes: { d: [1, 2, 3, 4, 5] },
+            Alpha: [
+                {
+                    Group: ["ItemDevices"],
+                    Masks: [mask],
+                },
+            ],
         },
         {
             Name: "A_柱子1",
@@ -140,9 +153,6 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     if (type?.d && type.d !== 0) Tools.drawUpdate(C, Data);
 }
 
-/** @type {RectTuple} */
-const mask = [200, 423, 100, 100];
-
 const lFunction = (freq) => {
     const time = Date.now();
     const value = (1.2 * (Math.sin(((time * freq) / 1000) * 2 * Math.PI) + 1)) / 2;
@@ -173,7 +183,7 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
                         return 0;
                 }
             })();
-            return { Y: Y - dY, AlphaMasks: [mask] };
+            return { Y: Y - dY };
         }
     }
 }
