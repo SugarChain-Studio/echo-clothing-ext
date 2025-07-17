@@ -6,7 +6,7 @@ const asset = {
     Random: false,
     Left: 30,
     Top: 50,
-    Priority: 30,
+    Priority: 35,
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Cloth",
     PoseMapping: {
