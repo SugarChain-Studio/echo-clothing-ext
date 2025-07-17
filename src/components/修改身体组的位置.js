@@ -68,18 +68,25 @@ export default function () {
     // 能够兼容 Echo V1 的资产
     const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi", "开腿展示架_Luzi"]);
 
-    if (GameVersion !== "R116") {
+    if (GameVersion === "R117") {
         HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
             const ret = next(args);
 
-            // NOTE: args[4].Group might be undefined in some cases
-            if (!args[4] || !args[4].Group) {
-                console.warn("AssetBaseURL called with invalid Asset arg:", args[4]);
-                return ret;
-            }
-
-            if (v1CompatibleGroups.has(args[4].Group.Name)) return ret;
+            if (v1CompatibleGroups.has(args[1].Name)) return ret;
             if (v1CompatibleAssets.has(args[4].Name)) return ret;
+
+            const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
+            if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
+
+            return ret;
+        });
+    } else {
+        HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
+            // args is [Character, AssetGroup, AssetGroupName, AssetPoseName | PoseType, AssetLayer, string, Asset]
+            const ret = next(args);
+
+            if (v1CompatibleGroups.has(args[1].Name)) return ret;
+            if (v1CompatibleAssets.has(/** @type {any} */ (args)[6].Name)) return ret;
 
             const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
             if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
