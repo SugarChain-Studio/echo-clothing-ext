@@ -5,52 +5,62 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "黑曜蝶翼裙_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 60,
+    Top: 380,
     Priority: 30,
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        { Name: "A1" },
-        { Name: "A2" },
-        { Name: "B1" },
-        { Name: "B2" },
-        { Name: "C1" },
-        { Name: "C2" },
-        { Name: "D1" },
-        { Name: "D2" },
+        { Name: "A1", ColorGroup: "A" },
+        { Name: "A2", ColorGroup: "A" },
+        { Name: "B1", ColorGroup: "B" },
+        { Name: "B2", ColorGroup: "B" },
+        { Name: "C1", ColorGroup: "C" },
+        { Name: "C2", ColorGroup: "C" },
+        { Name: "D1", ColorGroup: "D" },
+        { Name: "D2", ColorGroup: "D" },
     ],
 };
 
 /** @type {Translation.Entry} */
 const translation = {
     CN: "黑曜蝶翼裙",
-    EN: "Neme",
+    EN: "Black Butterfly Skirt",
 };
 
 /** @type {Translation.String} */
 const layerNames = {
     CN: {
-        A1: "A1",
-        A2: "A2",
-        B1: "B1",
-        B2: "B2",
-        C1: "C1",
-        C2: "C2",
-        D1: "D1",
-        D2: "D2",
+        A: "底部裙衬",
+        B: "蝶翼裙摆",
+        C: "前裙摆",
+        D: "腰封",
+
+        A1: "左",
+        A2: "右",
+        B1: "左",
+        B2: "右",
+        C1: "左",
+        C2: "右",
+        D1: "左",
+        D2: "右",
     },
     EN: {
-        A1: "A1",
-        A2: "A2",
-        B1: "B1",
-        B2: "B2",
-        C1: "C1",
-        C2: "C2",
-        D1: "D1",
-        D2: "D2",
+        A: "Bottom Skirt Lining",
+        B: "Butterfly Skirt Hem",
+        C: "Front Skirt Hem",
+        D: "Waistband",
+
+        A1: "Left",
+        A2: "Right",
+        B1: "Left",
+        B2: "Right",
+        C1: "Left",
+        C2: "Right",
+        D1: "Left",
+        D2: "Right",
     },
 };
 
