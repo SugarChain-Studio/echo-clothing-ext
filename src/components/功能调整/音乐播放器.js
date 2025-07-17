@@ -193,7 +193,7 @@ export default function () {
 
             const url = ChatRoomData?.Custom?.MusicURL;
             if (url) player.setUrl(url);
-            else player.player?.pause();
+            else player.hide();
         }
     })();
 }
