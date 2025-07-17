@@ -155,8 +155,8 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
 
 const lFunction = (freq) => {
     const time = Date.now();
-    const value = (1.2 * (Math.sin(((time * freq) / 1000) * 2 * Math.PI) + 1)) / 2;
-    return Math.max(0, Math.min(1, value));
+    const ncosv = (Math.cos(((time * freq) / 1000) * 2 * Math.PI) + 1) / 2; // Normalize to [0, 1]
+    return 1 - ncosv * ncosv; // slow around 1, fastest around 0
 };
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, SOBPData>} */
@@ -164,25 +164,11 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
     if (L === "A_柱子伸缩" || L === "A_阳具") {
         const type = Property?.TypeRecord;
         if (type && type.d) {
-            if (type.d === 0) return { Y };
-            const dY = (() => {
-                const minDY = 60;
-                const len = 40;
-                switch (type.d) {
-                    case 1:
-                        return minDY + len;
-                    case 2:
-                        return minDY + len * lFunction(0.2);
-                    case 3:
-                        return minDY + len * lFunction(0.5);
-                    case 4:
-                        return minDY + len * lFunction(0.8);
-                    case 5:
-                        return minDY + len * lFunction(1.2);
-                    default:
-                        return 0;
-                }
-            })();
+            const minDY = 60;
+            const len = 40;
+            if (type.d === 1) return { Y: Y - minDY - len };
+            const freq = [0, 1, 0.2, 0.5, 0.8, 1.2][type.d] ?? undefined;
+            const dY = freq ? Math.round(minDY + len * lFunction(freq)) : 0;
             return { Y: Y - dY };
         }
     }
