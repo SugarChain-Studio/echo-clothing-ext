@@ -37,13 +37,42 @@ export default function () {
         return ret;
     });
 
+    // 兼容 Echo V1 的自定义组名
+    const v1CompatibleGroups = new Set(
+        /** @type {CustomGroupName[]} */ ([
+            "左眼_Luzi",
+            "右眼_Luzi",
+            "新前发_Luzi",
+            "新后发_Luzi",
+            "HairAccessory1",
+            "HairAccessory2",
+            "HairAccessory3",
+            "HairAccessory1",
+            "HairAccessory3_笨笨蛋Luzi",
+            "Luzi_HairAccessory3_1",
+            "Luzi_HairAccessory3_2",
+            "Mask",
+            "Mask_笨笨蛋Luzi",
+            "Wings",
+            "Wings_笨笨蛋Luzi",
+            "Hat",
+            "Hat_笨笨蛋Luzi",
+            "Glasses",
+            "ItemHandheld",
+            "ItemMouth",
+            "ItemMouth2",
+            "ItemMouth3",
+        ])
+    );
+
     // 能够兼容 Echo V1 的资产
-    const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi"]);
+    const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi", "开腿展示架_Luzi"]);
 
     if (GameVersion !== "R116") {
         HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
             const ret = next(args);
 
+            if (v1CompatibleGroups.has(args[4].Group.Name)) return ret;
             if (v1CompatibleAssets.has(args[4].Name)) return ret;
 
             const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
