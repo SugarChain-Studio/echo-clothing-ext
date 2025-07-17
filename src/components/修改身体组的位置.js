@@ -72,6 +72,12 @@ export default function () {
         HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
             const ret = next(args);
 
+            // NOTE: args[4].Group might be undefined in some cases
+            if (!args[4] || !args[4].Group) {
+                console.warn("AssetBaseURL called with invalid Asset arg:", args[4]);
+                return ret;
+            }
+
             if (v1CompatibleGroups.has(args[4].Group.Name)) return ret;
             if (v1CompatibleAssets.has(args[4].Name)) return ret;
 
