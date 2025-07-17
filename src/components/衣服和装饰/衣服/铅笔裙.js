@@ -8,6 +8,7 @@ const asset = {
     Fetish: ["Leather"],
     Left: 160,
     Top: 390,
+    Random: false,
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
