@@ -1,8 +1,66 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { AssetManager } from "../assetForward";
 
-export default function () {
-    // 在加载完成之后，图层位置都直接写在图层属性里面了，所以这里直接调整图层位置
+/**
+ * @param {CustomGroupName[]} obj
+ * @returns {AssetGroupName[]}
+ */
+function groupList(obj) {
+    return /** @type {AssetGroupName[]} */ (obj);
+}
 
+/**
+ * @param {AssetDefinitionBase["DrawOffset"][0]} obj
+ * @returns {AssetDefinitionBase["DrawOffset"][0]}
+ */
+function drawOffset(obj) {
+    return obj;
+}
+
+/** @type {AssetDefinitionBase["DrawOffset"]} */
+const customOffset = [
+    ...["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].map((Asset) =>
+        drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
+    ),
+    ...groupList(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
+        drawOffset({ Group, Y: -16 })
+    ),
+    ...["CockSock", "Jockstrap"].map((Asset) => drawOffset({ Asset, Y: -20 })),
+    { Asset: "Splatters", Layer: ["Internal2", "Internal3"], Y: -20 },
+];
+
+// 兼容 Echo V1 的自定义组名
+const v1CompatibleGroups = new Set(
+    groupList([
+        "左眼_Luzi",
+        "右眼_Luzi",
+        "新前发_Luzi",
+        "新后发_Luzi",
+        "HairAccessory1",
+        "HairAccessory2",
+        "HairAccessory3",
+        "HairAccessory1",
+        "HairAccessory3_笨笨蛋Luzi",
+        "Luzi_HairAccessory3_1",
+        "Luzi_HairAccessory3_2",
+        "Mask",
+        "Mask_笨笨蛋Luzi",
+        "Wings",
+        "Wings_笨笨蛋Luzi",
+        "Hat",
+        "Hat_笨笨蛋Luzi",
+        "Glasses",
+        "ItemHandheld",
+        "ItemMouth",
+        "ItemMouth2",
+        "ItemMouth3",
+    ])
+);
+
+// 能够兼容 Echo V1 的资产
+const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi", "开腿展示架_Luzi"]);
+
+function R117() {
     HookManager.hookFunction("CommonDrawComputeDrawingCoordinates", 0, (args, next) => {
         const ret = next(args);
         const [C, asset, layer] = args;
@@ -37,61 +95,61 @@ export default function () {
         return ret;
     });
 
-    // 兼容 Echo V1 的自定义组名
-    const v1CompatibleGroups = new Set(
-        /** @type {CustomGroupName[]} */ ([
-            "左眼_Luzi",
-            "右眼_Luzi",
-            "新前发_Luzi",
-            "新后发_Luzi",
-            "HairAccessory1",
-            "HairAccessory2",
-            "HairAccessory3",
-            "HairAccessory1",
-            "HairAccessory3_笨笨蛋Luzi",
-            "Luzi_HairAccessory3_1",
-            "Luzi_HairAccessory3_2",
-            "Mask",
-            "Mask_笨笨蛋Luzi",
-            "Wings",
-            "Wings_笨笨蛋Luzi",
-            "Hat",
-            "Hat_笨笨蛋Luzi",
-            "Glasses",
-            "ItemHandheld",
-            "ItemMouth",
-            "ItemMouth2",
-            "ItemMouth3",
-        ])
-    );
+    HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
+        const ret = next(args);
 
-    // 能够兼容 Echo V1 的资产
-    const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi", "开腿展示架_Luzi"]);
+        if (v1CompatibleGroups.has(args[1].Name)) return ret;
+        if (v1CompatibleAssets.has(args[4].Name)) return ret;
 
+        const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
+        if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
+
+        return ret;
+    });
+}
+
+export default function () {
     if (GameVersion === "R117") {
-        HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
-            const ret = next(args);
+        R117();
+        return;
+    }
 
-            if (v1CompatibleGroups.has(args[1].Name)) return ret;
-            if (v1CompatibleAssets.has(args[4].Name)) return ret;
+    HookManager.patchFunction("CommonDrawComputeDrawingCoordinates", {
+        "offset.Group === groupName &&": "(offset.Group === undefined || offset.Group === groupName) &&",
+    });
 
-            const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
-            if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
+    HookManager.hookFunction("CommonDrawComputeDrawingCoordinates", 0, (args, next) => {
+        const ret = next(args);
+        const [C, asset] = args;
 
-            return ret;
-        });
-    } else {
-        HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
-            // args is [Character, AssetGroup, AssetGroupName, AssetPoseName | PoseType, AssetLayer, string, Asset]
-            const ret = next(args);
+        const bodyStyleItem = InventoryGet(C, "BodyStyle");
+        if (bodyStyleItem?.Asset?.Name === "EchoV1") return ret;
 
-            if (v1CompatibleGroups.has(args[1].Name)) return ret;
-            if (v1CompatibleAssets.has(/** @type {any} */ (args)[6].Name)) return ret;
+        if (asset.Name === "StrictPonyBoots") {
+            if (C.PoseMapping.BodyLower === "BaseLower") {
+                ret.Y -= 10;
+            }
+        }
+        return ret;
+    });
 
-            const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
-            if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
-
-            return ret;
+    for (const body of ["Original", "EchoV2"]) {
+        AssetManager.modifyAsset("BodyStyle", body, (group, asset) => {
+            asset.DrawOffset = customOffset;
         });
     }
+
+    HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
+        // args is [Character, AssetGroup, AssetGroupName, AssetPoseName | PoseType, AssetLayer, string, Asset]
+        const ret = next(args);
+
+        const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
+        if (bodyStyleItem?.Asset?.Name === "EchoV1") {
+            if (v1CompatibleGroups.has(args[1].Name)) return ret;
+            if (v1CompatibleAssets.has(args[6].Name)) return ret;
+            return `@nomap/${ret}`;
+        }
+
+        return ret;
+    });
 }
