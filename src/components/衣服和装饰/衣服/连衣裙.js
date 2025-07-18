@@ -51,8 +51,8 @@ const asset = {
 
 /** @type {Translation.Entry} */
 const translation = {
-    CN: "连衣裙",
-    EN: "Satin Bow Dress",
+    CN: "交叉吊带连衣裙",
+    EN: "Cross Strap Dress",
 };
 
 export default function () {

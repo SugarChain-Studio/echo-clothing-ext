@@ -54,11 +54,35 @@ const v1CompatibleGroups = new Set(
         "ItemMouth",
         "ItemMouth2",
         "ItemMouth3",
+        "ItemNipplesPiercings",
+        "ClothOuter",
     ])
 );
 
 // 能够兼容 Echo V1 的资产
-const v1CompatibleAssets = new Set(["玩偶_Luzi", "汉堡_Luzi", "开腿展示架_Luzi"]);
+const v1CompatibleAssets = new Set([
+    "玩偶_Luzi",
+    "汉堡_Luzi",
+    "开腿展示架_Luzi",
+    "举手杆",
+    "铁架台",
+    "白布_Luzi",
+    "蕾丝文胸睡裙",
+    "假领子_Luzi",
+    "女仆装_Luzi",
+    "女仆装2_Luzi",
+    "女仆装3_Luzi",
+    "女仆装4_Luzi",
+    "女仆围裙_Luzi",
+    "斜肩上衣_Luzi",
+    "花边连衣裙",
+    "连衣裙_Luzi",
+    "插兜雨衣",
+    "蝴蝶结装饰",
+    "围脖_Luzi",
+    "立领披肩_Luzi",
+    "女巫小披肩_Luzi",
+]);
 
 function R117() {
     HookManager.hookFunction("CommonDrawComputeDrawingCoordinates", 0, (args, next) => {

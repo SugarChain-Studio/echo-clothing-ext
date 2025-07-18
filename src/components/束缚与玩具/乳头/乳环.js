@@ -17,9 +17,7 @@ const asset = {
 
 const translations = {
     CN: "短穿环",
-    EN: "Crossed Straight Piercings",
-    RU: "Crossed Straight Piercings",
-    UA: "Crossed Straight Piercings",
+    EN: "Short Straight Piercings",
 };
 
 export default function () {

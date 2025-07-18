@@ -68,7 +68,7 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "女仆围裙",
-    EN: "Maid's Apron",
+    EN: "Maid Apron",
 };
 
 const layerNames = {

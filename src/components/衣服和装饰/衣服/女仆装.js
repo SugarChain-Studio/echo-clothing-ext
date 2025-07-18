@@ -74,8 +74,8 @@ const translations = {
     },
     EN: {
         Cloth: {
-            女仆装_Luzi: "Maid Costume",
-            女仆装2_Luzi: "Maid Costume 2",
+            女仆装_Luzi: "Maid Dress",
+            女仆装2_Luzi: "Maid Dress 2",
         },
     },
     RU: {
