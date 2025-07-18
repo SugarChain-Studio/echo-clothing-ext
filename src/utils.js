@@ -15,15 +15,19 @@ export function takeLayerNames(assetDef) {
     return ret;
 }
 
+/** @type {(arg:any)=>any} */
+const identity = (arg) => arg;
+
 /**
- * 将自定义物品属性转换为AssetAttribute数组。
- * @param {CustomAssetAttribute[]} attrs
- * @returns {AssetAttribute[]}
+ * @typedef {AssetDefinitionBase["DrawOffset"][0]} DrawOffsetItem
  */
-function attributes(attrs) {
-    return /** @type {AssetAttribute[]} */ (attrs);
-}
 
 export const Typing = {
-    attributes,
+    attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
+    groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
+    drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),
+    asset: /** @type {(arg:CustomAssetDefinition) => CustomAssetDefinition}*/ (identity),
+    assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
+    modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),
+    typedItem: /** @type {(arg:TypedItemConfig) => TypedItemConfig}*/ (identity),
 };

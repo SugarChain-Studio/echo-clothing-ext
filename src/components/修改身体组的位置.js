@@ -1,37 +1,22 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
-
-/**
- * @param {CustomGroupName[]} obj
- * @returns {AssetGroupName[]}
- */
-function groupList(obj) {
-    return /** @type {AssetGroupName[]} */ (obj);
-}
-
-/**
- * @param {AssetDefinitionBase["DrawOffset"][0]} obj
- * @returns {AssetDefinitionBase["DrawOffset"][0]}
- */
-function drawOffset(obj) {
-    return obj;
-}
+import { Typing } from "../utils";
 
 /** @type {AssetDefinitionBase["DrawOffset"]} */
 const customOffset = [
     ...["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].map((Asset) =>
-        drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
+        Typing.drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
     ),
-    ...groupList(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
-        drawOffset({ Group, Y: -16 })
+    ...Typing.groups(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
+        Typing.drawOffset({ Group, Y: -16 })
     ),
-    ...["CockSock", "Jockstrap"].map((Asset) => drawOffset({ Asset, Y: -20 })),
+    ...["CockSock", "Jockstrap"].map((Asset) => Typing.drawOffset({ Asset, Y: -20 })),
     { Asset: "Splatters", Layer: ["Internal2", "Internal3"], Y: -20 },
 ];
 
 // 兼容 Echo V1 的自定义组名
 const v1CompatibleGroups = new Set(
-    groupList([
+    Typing.groups([
         "左眼_Luzi",
         "右眼_Luzi",
         "新前发_Luzi",
