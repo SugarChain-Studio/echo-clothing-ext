@@ -37,8 +37,8 @@ const assets = {
         {
             Name: "书",
             Random: false,
-            Top: 0,
-            Left: 0,
+            Left: 180,
+            Top: 340,
             Difficulty: -10,
             ParentGroup: {},
             Priority: 26,
@@ -48,8 +48,8 @@ const assets = {
         {
             Name: "奶瓶",
             Random: false,
-            Top: 0,
-            Left: 0,
+            Left: 200,
+            Top: 350,
             Difficulty: -10,
             ParentGroup: {},
             Priority: 46,

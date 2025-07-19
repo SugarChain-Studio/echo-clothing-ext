@@ -122,8 +122,8 @@ const assets = {
         {
             Name: "奶茶",
             Random: false,
-            Top: 0,
-            Left: 0,
+            Left: 220,
+            Top: 350,
             Difficulty: -10,
             ParentGroup: {},
             Priority: 55,
