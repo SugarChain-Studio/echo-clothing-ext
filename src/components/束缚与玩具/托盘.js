@@ -6,7 +6,7 @@ const asset = {
     Name: "托盘",
     Random: false,
     Gender: "F",
-    Left: 70,
+    Left: 80,
     Top: 300,
     Difficulty: 5,
     Time: 10,
