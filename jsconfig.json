@@ -11,7 +11,7 @@
         "utils/src/**/*.js",
         "src/**/*.js",
         "src/Typedef.d.ts",
-        "utils/src/Typedef.d.ts",
+        "utils/src/**/Typedef.d.ts",
         "node_modules/bc-stubs/bc/**/*.d.ts"
     ]
 }
