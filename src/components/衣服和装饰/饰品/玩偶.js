@@ -35,6 +35,11 @@ const asset = {
         { Name: "吉娜", AllowTypes: { s: 2 } },
         { Name: "Ada", AllowTypes: { s: 3 } },
         { Name: "Luzi2", AllowTypes: { s: 4 } },
+        {
+            Name: "xin2",
+            PoseMapping: specialMapping,
+            AllowTypes: { s: 5 },
+        },
 
         // 芷窝
         {
@@ -98,6 +103,7 @@ const asset = {
         { Name: "莉娅", AllowTypes: { hz: 6 } },
         { Name: "艾尔", AllowTypes: { hz: 7 } },
         { Name: "小火火", AllowTypes: { hz: 8 } },
+        { Name: "梦语诗", AllowTypes: { hz: 9 } },
 
         // 吸血鬼城堡
         {
