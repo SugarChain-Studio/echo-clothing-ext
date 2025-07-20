@@ -288,7 +288,7 @@ const asset = {
             PoseMapping: specialMapping,
             AllowTypes: { l: 34 },
         },
-
+        { Name: "LilSoph", AllowTypes: { l: 35 } },
     ],
 };
 
@@ -336,7 +336,6 @@ const predefDialog = {
             "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
         ItemMisc玩偶_LuziSetf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         ItemMisc玩偶_LuziSetf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
-
     },
 };
 
@@ -365,7 +364,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -373,7 +372,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -423,7 +422,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
