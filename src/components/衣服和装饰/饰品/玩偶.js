@@ -288,7 +288,7 @@ const asset = {
             PoseMapping: specialMapping,
             AllowTypes: { l: 34 },
         },
-        { Name: "LilSoph", AllowTypes: { l: 35 } },
+        { Name: "Soph", AllowTypes: { l: 35 } },
     ],
 };
 
