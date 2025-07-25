@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomGroupedAssetDefinitions }} */
@@ -79,24 +78,4 @@ export default function () {
     AssetManager.addCustomDialog(dialog);
 
     AssetManager.addGroupedAssets(assets, translations);
-
-    DrawCharacterModifier.addModifier((C, arg) => {
-        const { Zoom } = arg;
-        const sharedC = ChatRoomOrder.requireSharedCenter(C);
-        if (!sharedC) return arg;
-
-        if (
-            sharedC.prev.XCharacterDrawOrder.associatedAsset?.asset !== "缰绳_Luzi" ||
-            sharedC.next.XCharacterDrawOrder.associatedAsset?.asset !== "鞍_Luzi"
-        )
-            return arg;
-
-        if (sharedC.prev.MemberNumber === C.MemberNumber) {
-            return { C, X: sharedC.center.X, Y: sharedC.center.Y - 50 * Zoom, Zoom };
-        }
-
-        if (sharedC.next.MemberNumber === C.MemberNumber) {
-            return { C, X: sharedC.center.X, Y: sharedC.center.Y, Zoom };
-        }
-    });
 }

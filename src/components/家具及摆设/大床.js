@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { ChatRoomOrder, DrawCharacterModifier } from "@mod-utils/ChatRoomOrder";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -137,18 +136,4 @@ const translations = {
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
-
-    DrawCharacterModifier.addModifier((C, arg) => {
-        const { Zoom } = arg;
-        const sharedC = ChatRoomOrder.requireSharedCenter(C);
-        if (!sharedC) return arg;
-
-        if (sharedC.prev.MemberNumber === C.MemberNumber && InventoryIsItemInList(C, "ItemDevices", ["床左边_Luzi"])) {
-            return { X: sharedC.center.X - 100 * Zoom, Y: sharedC.center.Y, Zoom };
-        }
-
-        if (sharedC.next.MemberNumber === C.MemberNumber && InventoryIsItemInList(C, "ItemDevices", ["床右边_Luzi"])) {
-            return { X: sharedC.center.X + 100 * Zoom, Y: sharedC.center.Y, Zoom };
-        }
-    });
 }
