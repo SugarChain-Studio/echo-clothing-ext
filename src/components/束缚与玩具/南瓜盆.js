@@ -5,8 +5,8 @@ import { DialogTools } from "@mod-utils/Tools";
 const asset = {
     Name: "南瓜盆",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 170,
+    Top: 310,
     Gender: "F",
     Fetish: ["Sadism"],
     Priority: 48,
@@ -28,6 +28,15 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        南瓜: "Pumpkin",
+        糖果: "Candy",
+        眼睛: "Eyes",
+        链子: "Chain",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
@@ -36,7 +45,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["南瓜盆"], {
+const assetStrings = {
     CN: {
         Select: "设置",
         无: "无",
@@ -61,15 +70,19 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["南瓜盆"
         Set无: "SourceCharacter снимает цепь с тыквенного горшка DestinationCharacter.",
         Set链子: "SourceCharacter прикрепляет цепь к тыквенному горшку DestinationCharacter.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "南瓜盆",
     EN: "Pumpkin Pot",
     RU: "Тыквенный горшок",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemMisc", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemMisc", asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }
