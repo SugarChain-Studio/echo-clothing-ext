@@ -1,5 +1,5 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -67,6 +67,7 @@ const translation = {
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChangeWhenLocked: false,
+    ChatTags: Tools.CommonChatTags(),
     Modules: [
         {
             Name: "玻璃类型",

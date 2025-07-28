@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 import { PathTools } from "@sugarch/bc-mod-utility";
 
 /** @type {CustomAssetDefinition} */
