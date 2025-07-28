@@ -21,18 +21,31 @@ const asset = {
         { Name: "7", AllowTypes: { typed: 7 }, Left: 50 },
         { Name: "8", AllowTypes: { typed: 8 }, Left: 50, Priority: 51 },
         { Name: "9", AllowTypes: { typed: 9 }, Left: 50 },
-        { Name: "10", AllowTypes: { typed: 10 }, Left: 50 }
+        { Name: "10", AllowTypes: { typed: 10 }, Left: 50 },
     ],
 };
 
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [{ Name: "1" }, { Name: "1a" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }, { Name: "6" }, { Name: "7" }, { Name: "8" }, { Name: "9" }, { Name: "10" }],
+    Options: [
+        { Name: "1" },
+        { Name: "1a" },
+        { Name: "2" },
+        { Name: "3" },
+        { Name: "4" },
+        { Name: "5" },
+        { Name: "6" },
+        { Name: "7" },
+        { Name: "8" },
+        { Name: "9" },
+        { Name: "10" },
+    ],
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
         额外头发_Luzi呆毛Select: "设置",
         额外头发_Luzi呆毛1: "1",
@@ -77,7 +90,7 @@ const dialog = {
     },
 };
 
-const translations = {
+const translation = {
     CN: "呆毛",
     EN: "Ahoge",
     RU: "Ахоге",
@@ -85,7 +98,10 @@ const translations = {
 };
 
 export default function () {
-    // @ts-ignore
-    AssetManager.addAsset("额外头发_Luzi", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("额外头发_Luzi", asset, {
+        translation,
+        layerNames: {},
+        extended,
+        assetStrings,
+    });
 }

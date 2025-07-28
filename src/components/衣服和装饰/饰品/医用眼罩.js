@@ -51,32 +51,42 @@ const extended = {
     Options: [{ Name: "无图案" }, { Name: "心" }, { Name: "叉" }],
 };
 
+const layerNames = {
+    EN: {
+        线: "Line",
+        底: "Base",
+        心: "Heart",
+        X: "Cross",
+    },
+};
+
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        Glasses医用眼罩左Select: "图案",
-        Glasses医用眼罩左无图案: "无图案",
-        Glasses医用眼罩左心: "心",
-        Glasses医用眼罩左叉: "叉",
-        Glasses医用眼罩右Select: "图案",
-        Glasses医用眼罩右无图案: "无图案",
-        Glasses医用眼罩右心: "心",
-        Glasses医用眼罩右叉: "叉",
+        Select: "选择图案",
+        无图案: "无图案",
+        心: "心",
+        叉: "叉",
     },
     EN: {
-        Glasses医用眼罩左Select: "Pattern",
-        Glasses医用眼罩左无图案: "No Pattern",
-        Glasses医用眼罩左心: "Heart",
-        Glasses医用眼罩左叉: "Cross",
-        Glasses医用眼罩右Select: "Pattern",
-        Glasses医用眼罩右无图案: "No Pattern",
-        Glasses医用眼罩右心: "Heart",
-        Glasses医用眼罩右叉: "Cross",
+        Select: "Select Pattern",
+        无图案: "No Pattern",
+        心: "Heart",
+        叉: "Cross",
     },
 };
 
 export default function () {
-    AssetManager.addAsset("Glasses", asset1, extended, translations1);
-    AssetManager.addAsset("Glasses", asset2, extended, translations2);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Glasses", asset1, {
+        layerNames,
+        translation: translations1,
+        extended,
+        assetStrings,
+    });
+    AssetManager.addAssetWithConfig("Glasses", asset2, {
+        layerNames,
+        translation: translations2,
+        extended,
+        assetStrings,
+    });
 }

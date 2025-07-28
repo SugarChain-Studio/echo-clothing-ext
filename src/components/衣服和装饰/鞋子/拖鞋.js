@@ -17,11 +17,11 @@ const asset = {
     Priority: 23,
 };
 
-const translations = {
+const translation = {
     CN: "拖鞋",
     EN: "Slippers",
 };
 
 export default function () {
-    AssetManager.addAsset("Shoes", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("Shoes", asset, { layerNames: {}, translation });
 }

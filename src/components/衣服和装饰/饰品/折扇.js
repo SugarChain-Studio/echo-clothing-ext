@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -82,6 +81,18 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        折叠扇面: "Fan Surface",
+        折叠扇面边缘: "Fan Edge",
+        折叠扇骨: "Folding Ribs",
+
+        展开扇骨后: "Open Ribs Back",
+        展开扇骨: "Open Ribs",
+        展开扇面阴影: "Open Shadow",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -100,7 +111,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["折扇_Luzi"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
         Module展开: "展开扇子",
@@ -156,9 +167,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["折扇
         Setp5: 'Celestial strokes swirl "Misty Peaks Voyage" onto DestinationCharacter silk canvas, where ink-washed mountains breathe eternal jade.',
         Setp6: 'SourceCharacter inscribes "Moonlit Ripple Verse" along DestinationCharacter jade-bamboo ribs, where silvered oars cleave poetry from the stream.',
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "折扇",
     EN: "Folding fan",
     RU: "Складной веер",
@@ -166,6 +177,10 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemHandheld", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemHandheld", asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }

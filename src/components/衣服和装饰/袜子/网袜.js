@@ -5,7 +5,14 @@ const asset = {
     Name: "网袜_Luzi",
     Random: false,
     Top: 0,
-    Left: 0,
+    Left: {
+        BaseLower: 0,
+        Kneel: 0,
+        KneelingSpread: 30,
+        LegsClosed: 0,
+        LegsOpen: 0,
+        Spread: 0,
+    },
     Priority: 12,
     DefaultColor: ["#351C1C", "#351C1C", "#1C1111", "#1C1111", "#170E0E", "#170E0E", "#000000"],
     Layer: [
@@ -89,6 +96,18 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        上袜: "Upper Socks",
+        下袜: "Lower Socks",
+        上网: "Upper Net",
+        下网: "Lower Net",
+        上图案: "Upper Pattern",
+        下图案: "Lower Pattern",
+        腰线: "Waistline",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "网袜",
@@ -97,20 +116,8 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "Socks",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
+    AssetManager.addAssetWithConfig("Socks", asset, {
+        layerNames,
+        translation,
+    });
 }

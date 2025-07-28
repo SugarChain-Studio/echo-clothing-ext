@@ -1,11 +1,19 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "条纹袜_Luzi",
     Random: false,
     Top: 0,
-    Left: 0,
+    Left: {
+        BaseLower: 0,
+        Kneel: 0,
+        KneelingSpread: 30,
+        LegsClosed: 0,
+        LegsOpen: 0,
+        Spread: 0,
+    },
     Layer: [
         {
             Name: "袜子",
@@ -18,6 +26,13 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        袜子: "Socks",
+        条纹: "Stripes",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "条纹袜",
@@ -26,52 +41,10 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "Socks",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
-    AssetManager.addAsset(
-        "SocksLeft",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
-    AssetManager.addAsset(
-        "SocksRight",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
+    for (const group of Typing.groups(["Socks", "SocksLeft", "SocksRight"])) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            layerNames,
+            translation,
+        });
+    }
 }

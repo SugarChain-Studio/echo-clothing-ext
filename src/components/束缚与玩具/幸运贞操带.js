@@ -341,7 +341,7 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["幸运贞操带"], {
     },
 });
 
-const dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis"], ["幸运贞操带"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
         ModuleShield: "选择护盾",
@@ -406,14 +406,14 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemPelvis"], ["幸运�
         Sett1: "SourceCharacter sets DestinationCharacterAssetName to shock punishment for struggling in protected area",
         Sett2: "SourceCharacter sets DestinationCharacterAssetName to shock punishment for struggling and activity in protected area",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "幸运贞操带",
     EN: "Fortune Chastity Belt",
 };
 
-const layers = {
+const layerNames = {
     CN: {
         底色: "底色",
         色调: "色调",
@@ -431,10 +431,8 @@ const layers = {
 export default function () {
     ChatRoomEvents.on("Activity", (data) => onAction(data));
 
-    AssetManager.addAsset("ItemPelvis", asset, extended, translations);
-    AssetManager.addCustomDialog(dialogs);
-    AssetManager.addCustomDialog(custom_dialogs);
-    AssetManager.addLayerNames("ItemPelvis", asset, layers);
+    AssetManager.addAssetWithConfig("ItemPelvis", asset, { layerNames, translation, extended, assetStrings });
+    AssetManager.addCustomAssetString(custom_dialogs);
 
     OrgasmEvents.on("orgasmed", () => {
         orgasmFlags.Orgasmed = true;

@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -196,6 +196,68 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        外壳盖子关闭: "关闭",
+        外壳盖子打开下: "打开下",
+        外壳盖子打开上: "打开上",
+        盖子关闭边缘: "边缘",
+
+        床带上: "上",
+        床带下: "下",
+
+        床环上: "上",
+        床环下: "下",
+
+        拘束带上: "上",
+        拘束带下: "下",
+
+        乳胶上高光: "上",
+        乳胶上阴影: "上",
+        乳胶上底色: "上",
+        乳胶下高光: "下",
+        乳胶下阴影: "下",
+        乳胶下底色: "下",
+    },
+    EN: {
+        床带: "Bed Straps",
+        床环: "Bed Rings",
+        乳胶睡袋闭合处: "Bag Closure",
+        拘束带: "Restraint Straps",
+        乳胶睡袋底色: "Bag Base",
+        乳胶睡袋阴影: "Bag Shadow",
+        乳胶睡袋高光: "Bag Highlight",
+        床垫: "Mattress",
+
+        盖子: "Cover",
+        外壳盖子关闭: "Closed Cover",
+        外壳盖子打开下: "Open Lower",
+        外壳盖子打开上: "Open Upper",
+        盖子关闭边缘: "Edge",
+
+        内衬: "Lining",
+        圆环: "Ring",
+        绳子: "Rope",
+        拉链: "Zipper",
+
+        床带上: "Upper",
+        床带下: "Lower",
+
+        床环上: "Upper",
+        床环下: "Lower",
+
+        拘束带上: "Upper",
+        拘束带下: "Lower",
+
+        乳胶上高光: "Upper",
+        乳胶上阴影: "Upper",
+        乳胶上底色: "Upper",
+        乳胶下高光: "Lower",
+        乳胶下阴影: "Lower",
+        乳胶下底色: "Lower",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -251,7 +313,7 @@ const extended = {
     ],
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["乳胶带床_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择乳胶带床配置",
         SelectBase: "选择配置",
@@ -318,9 +380,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["乳胶�
         Setg1: "SourceCharacter додали покриття DestinationCharacter",
         Setg2: "SourceCharacter закрили покриття DestinationCharacter",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "乳胶带床",
     EN: "Latex-belt Bed",
     RU: "Кровать с латексным ремнем",
@@ -328,6 +390,5 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { layerNames, translation, extended, assetStrings });
 }

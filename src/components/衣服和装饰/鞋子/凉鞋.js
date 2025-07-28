@@ -27,11 +27,18 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        鞋带: "Laces",
+        鞋底: "Sole",
+    },
+};
+
+const translation = {
     CN: "凉鞋",
     EN: "Sandals",
 };
 
 export default function () {
-    AssetManager.addAsset("Shoes", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation });
 }

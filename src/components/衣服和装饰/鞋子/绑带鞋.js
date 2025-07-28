@@ -24,5 +24,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Shoes", asset, undefined, translation);
+    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames: {} });
 }

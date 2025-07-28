@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -23,6 +24,14 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        袜子: "Socks",
+        条纹: "Stripes",
+        袜边: "SockEdge",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "条纹袜 2",
@@ -31,52 +40,10 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "Socks",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
-    AssetManager.addAsset(
-        "SocksLeft",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
-    AssetManager.addAsset(
-        "SocksRight",
-        {
-            ...asset,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-        undefined,
-        translation
-    );
+    for (const group of Typing.groups(["Socks", "SocksLeft", "SocksRight"])) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            layerNames,
+            translation,
+        });
+    }
 }
