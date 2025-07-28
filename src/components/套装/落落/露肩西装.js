@@ -7,7 +7,7 @@ const asset = {
     Left: 30,
     Top: 50,
     Priority: 35,
-    ParentGroup: "BodyUpper",
+    ParentGroup: {},
     DynamicGroupName: "Cloth",
     PoseMapping: {
         ...AssetPoseMapping.Cloth,
@@ -15,11 +15,35 @@ const asset = {
         BackCuffs: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
     },
+    Layer: [
+        { Name: "base", AllowTypes: { typed: 0 } },
+        { Name: "plain", CopyLayerColor: "base", AllowTypes: { typed: 1 } },
+        { Name: "shadow", AllowColorize: false, AllowTypes: { typed: 1 } },
+    ],
 };
 
 const translation = {
     CN: "随意滑落西装",
     EN: "Casual Dropped Suit",
+};
+
+const extended = {
+    Archetype: ExtendedArchetype.TYPED,
+    DrawImages: false,
+    Options: [{ Name: "B" }, { Name: "L" }],
+};
+
+const assetStrings = {
+    CN: {
+        Select: "选择西装图层模式",
+        B: "基础",
+        L: "分层(较亮)",
+    },
+    EN: {
+        Select: "Select Suit Layer Mode",
+        B: "Base (Colored)",
+        L: "Layered (Lighter)",
+    },
 };
 
 export default function () {
@@ -29,6 +53,8 @@ export default function () {
         AssetManager.addAssetWithConfig(group, asset, {
             translation,
             layerNames: {},
+            extended,
+            assetStrings,
         });
     }
 }
