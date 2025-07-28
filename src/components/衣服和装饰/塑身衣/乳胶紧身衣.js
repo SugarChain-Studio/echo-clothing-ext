@@ -21,6 +21,14 @@ const asset = {
     Layer: [{ Name: "衣" }, { Name: "阴影" }, { Name: "高光" }],
 };
 
+const layerNames = {
+    EN: {
+        衣: "Cloth",
+        阴影: "Shadow",
+        高光: "Highlight",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "乳胶紧身衣",
@@ -28,5 +36,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Suit", asset, null, translation);
+    AssetManager.addAssetWithConfig("Suit", asset, { translation, layerNames });
 }

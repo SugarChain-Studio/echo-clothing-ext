@@ -30,12 +30,19 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        衣服: "Clothes",
+        边缘: "Edge",
+    },
+};
+
+const translation = {
     CN: "奶牛",
     EN: "Cow",
     RU: "Корова",
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }

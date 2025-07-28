@@ -30,11 +30,18 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        乳夹: "Nipple Clamps",
+        链子: "Chain",
+    },
+};
+
 const extended = {
     Archetype: ExtendedArchetype.VIBRATING,
 };
 
-const translations = {
+const translation = {
     CN: "乳夹",
     EN: "Nipple Clamps",
     RU: "Зажимы для сосков",
@@ -42,5 +49,9 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemNipples", asset, extended, translations);
+    AssetManager.addAssetWithConfig("ItemNipples", asset, {
+        extended,
+        translation,
+        layerNames,
+    });
 }

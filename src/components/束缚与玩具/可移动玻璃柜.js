@@ -37,7 +37,26 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        框架: "Frame",
+        颈部护垫: "Neck Pad",
+        腿部护垫: "Leg Pad",
+        不透明玻璃后: "Opaque Glass Back",
+        透明玻璃后: "Transparent Glass Back",
+        分隔: "Divider",
+        不透明玻璃上: "Opaque Glass Top",
+        透明玻璃上: "Transparent Glass Top",
+        不透明玻璃下: "Opaque Glass Bottom",
+        透明玻璃下: "Transparent Glass Bottom",
+        反光上: "Reflective Top",
+        反光下: "Reflective Bottom",
+        铰链上: "Hinge Top",
+        铰链下: "Hinge Bottom",
+    },
+};
+
+const translation = {
     CN: "可移动玻璃柜",
     EN: "Movable glass cabinet",
     RU: "Перемещаемый стеклянный шкаф",
@@ -93,15 +112,15 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["可移动玻璃柜"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择状态",
         Select玻璃类型: "选择玻璃类型",
         Module玻璃类型: "玻璃类型",
         Optiont0: "透明玻璃",
         Optiont1: "不透明玻璃",
-        Sett0: "SourceCharacter将DestinationCharacter身上的玻璃柜换成了透明玻璃",
-        Sett1: "SourceCharacter将DestinationCharacter身上的玻璃柜换成了不透明玻璃",
+        Sett0: "SourceCharacter将DestinationCharacter身上的AssetName换成了透明玻璃",
+        Sett1: "SourceCharacter将DestinationCharacter身上的AssetName换成了不透明玻璃",
         Select胸部玻璃门: "选择胸部玻璃门",
         Module胸部玻璃门: "胸部玻璃门",
         Optionup0: "关上",
@@ -121,21 +140,20 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["可移动
         Module玻璃类型: "Glass Type",
         Optiont0: "Transparent Glass",
         Optiont1: "Opaque Glass",
-        Sett0:
-            "SourceCharacter replaced DestinationCharacter's glass cabinet with transparent glass",
-        Sett1: "SourceCharacter replaced DestinationCharacter's glass cabinet with opaque glass",
+        Sett0: "SourceCharacter replaced DestinationCharacter AssetName with transparent glass",
+        Sett1: "SourceCharacter replaced DestinationCharacter AssetName with opaque glass",
         Select胸部玻璃门: "Select Breast Glass Door",
         Module胸部玻璃门: "Breast Glass Door",
         Optionup0: "Close",
         Optionup1: "Open",
-        Setup0: "SourceCharacter closed DestinationCharacter's breast glass door",
-        Setup1: "SourceCharacter opened DestinationCharacter's breast glass door",
+        Setup0: "SourceCharacter closed the glass door at DestinationCharacter chest",
+        Setup1: "SourceCharacter opened the glass door at DestinationCharacter chest",
         Select腹部玻璃门: "Select Abdominal Glass Door",
         Module腹部玻璃门: "Abdominal Glass Door",
         Optiondown0: "Close",
         Optiondown1: "Open",
-        Setdown0: "SourceCharacter closed DestinationCharacter's abdominal glass door",
-        Setdown1: "SourceCharacter opened DestinationCharacter's abdominal glass door",
+        Setdown0: "SourceCharacter closed the glass door at DestinationCharacter abdomen",
+        Setdown1: "SourceCharacter opened the glass door at DestinationCharacter abdomen",
     },
     RU: {
         SelectBase: "Выберите крепление",
@@ -143,10 +161,8 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["可移动
         Module玻璃类型: "Тип стекла",
         Optiont0: "Прозрачное стекло",
         Optiont1: "Непрозрачное стекло",
-        Sett0:
-            "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на прозрачное стекло",
-        Sett1:
-            "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на непрозрачное стекло",
+        Sett0: "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на прозрачное стекло",
+        Sett1: "SourceCharacter заменил(а) стеклянный шкаф DestinationCharacter на непрозрачное стекло",
         Select胸部玻璃门: "Выберите стеклянную дверцу груди",
         Module胸部玻璃门: "Стеклянная дверца груди",
         Optionup0: "Закрыть",
@@ -181,9 +197,14 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["可移动
         Setdown0: "SourceCharacter закрив(ла) скляні дверцята живота DestinationCharacter",
         Setdown1: "SourceCharacter відкрив(ла) скляні дверцята живота DestinationCharacter",
     },
-});
+};
 
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translations, true);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemTorso", asset, {
+        extended,
+        layerNames,
+        translation,
+        assetStrings,
+        noMirror: true,
+    });
 }

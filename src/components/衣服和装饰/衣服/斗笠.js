@@ -31,6 +31,6 @@ const translations2 = {
 };
 
 export default function () {
-    AssetManager.addAsset("Hat", asset1, null, translations1);
-    AssetManager.addAsset("Hat", asset2, null, translations2);
+    AssetManager.addAssetWithConfig("Hat", asset1, { translation: translations1, layerNames: {} });
+    AssetManager.addAssetWithConfig("Hat", asset2, { translation: translations2, layerNames: {} });
 }

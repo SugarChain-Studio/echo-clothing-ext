@@ -40,9 +40,18 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        哥布林: "Goblin",
+        链条: "Chain",
+    },
+};
+
+const translation = {
+    CN: "哥布哥布",
+    EN: "Goblin Statue",
+};
+
 export default function () {
-    AssetManager.addAsset("ItemNeckRestraints", asset, undefined, {
-        CN: "哥布林雕像",
-        EN: "Goblin Statue",
-    });
+    AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, { translation, layerNames });
 }

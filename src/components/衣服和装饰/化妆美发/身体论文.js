@@ -91,6 +91,15 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        Text: "文本",
+    },
+    EN: {
+        Text: "Text",
+    },
+};
+
 /** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -131,65 +140,72 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialogs = {
+const assetStrings = {
     CN: {
-        BodyMarkings2_Luzi身体论文_LuziSelectBase: "选择文本位置",
-        BodyMarkings2_Luzi身体论文_LuziModuleText0: "右侧锁骨",
-        BodyMarkings2_Luzi身体论文_LuziModuleText1: "中间锁骨",
-        BodyMarkings2_Luzi身体论文_LuziModuleText2: "左侧锁骨",
-        BodyMarkings2_Luzi身体论文_LuziModuleText3: "右胸口",
-        BodyMarkings2_Luzi身体论文_LuziModuleText4: "中间胸口",
-        BodyMarkings2_Luzi身体论文_LuziModuleText5: "左侧胸口",
-        BodyMarkings2_Luzi身体论文_LuziModuleText6: "右侧肋",
-        BodyMarkings2_Luzi身体论文_LuziModuleText7: "中间肋",
-        BodyMarkings2_Luzi身体论文_LuziModuleText8: "左侧肋",
-        BodyMarkings2_Luzi身体论文_LuziModuleText9: "右侧腰",
-        BodyMarkings2_Luzi身体论文_LuziModuleText10: "中间腰",
-        BodyMarkings2_Luzi身体论文_LuziModuleText11: "左侧腰",
-        BodyMarkings2_Luzi身体论文_LuziModuleText12: "右侧髋",
-        BodyMarkings2_Luzi身体论文_LuziModuleText13: "中间髋",
-        BodyMarkings2_Luzi身体论文_LuziModuleText14: "左侧髋",
+        SelectBase: "选择文本位置",
+        ModuleText0: "右侧锁骨",
+        ModuleText1: "中间锁骨",
+        ModuleText2: "左侧锁骨",
+        ModuleText3: "右胸口",
+        ModuleText4: "中间胸口",
+        ModuleText5: "左侧胸口",
+        ModuleText6: "右侧肋",
+        ModuleText7: "中间肋",
+        ModuleText8: "左侧肋",
+        ModuleText9: "右侧腰",
+        ModuleText10: "中间腰",
+        ModuleText11: "左侧腰",
+        ModuleText12: "右侧髋",
+        ModuleText13: "中间髋",
+        ModuleText14: "左侧髋",
         ...Options.reduce((pv, name, index) => {
-            pv[`BodyMarkings2_Luzi身体论文_LuziSelectText${index}`] = "设置文本";
-            pv[`BodyMarkings2_Luzi身体论文_LuziOption${name}0`] = "无";
-            pv[`BodyMarkings2_Luzi身体论文_LuziOption${name}1`] = "有";
+            pv[`SelectText${index}`] = "设置文本";
+            pv[`Option${name}0`] = "无";
+            pv[`Option${name}1`] = "有";
             return pv;
         }, {}),
     },
     EN: {
-        BodyMarkings2_Luzi身体论文_LuziSelectBase: "Select Text Position",
-        BodyMarkings2_Luzi身体论文_LuziModuleText0: "Collarbone Right",
-        BodyMarkings2_Luzi身体论文_LuziModuleText1: "Collarbone Center",
-        BodyMarkings2_Luzi身体论文_LuziModuleText2: "Collarbone Left",
-        BodyMarkings2_Luzi身体论文_LuziModuleText3: "Chest Right",
-        BodyMarkings2_Luzi身体论文_LuziModuleText4: "Chest Center",
-        BodyMarkings2_Luzi身体论文_LuziModuleText5: "Chest Left",
-        BodyMarkings2_Luzi身体论文_LuziModuleText6: "Ribs Right",
-        BodyMarkings2_Luzi身体论文_LuziModuleText7: "Ribs Center",
-        BodyMarkings2_Luzi身体论文_LuziModuleText8: "Ribs Left",
-        BodyMarkings2_Luzi身体论文_LuziModuleText9: "Waist Right",
-        BodyMarkings2_Luzi身体论文_LuziModuleText10: "Waist Center",
-        BodyMarkings2_Luzi身体论文_LuziModuleText11: "Waist Left",
-        BodyMarkings2_Luzi身体论文_LuziModuleText12: "Hips Right",
-        BodyMarkings2_Luzi身体论文_LuziModuleText13: "Hips Center",
-        BodyMarkings2_Luzi身体论文_LuziModuleText14: "Hips Left",
+        SelectBase: "Select Text Position",
+        ModuleText0: "Collarbone Right",
+        ModuleText1: "Collarbone Center",
+        ModuleText2: "Collarbone Left",
+        ModuleText3: "Chest Right",
+        ModuleText4: "Chest Center",
+        ModuleText5: "Chest Left",
+        ModuleText6: "Ribs Right",
+        ModuleText7: "Ribs Center",
+        ModuleText8: "Ribs Left",
+        ModuleText9: "Waist Right",
+        ModuleText10: "Waist Center",
+        ModuleText11: "Waist Left",
+        ModuleText12: "Hips Right",
+        ModuleText13: "Hips Center",
+        ModuleText14: "Hips Left",
         ...Options.reduce((pv, name, index) => {
-            pv[`BodyMarkings2_Luzi身体论文_LuziSelectText${index}`] = "Set Text";
-            pv[`BodyMarkings2_Luzi身体论文_LuziOption${name}0`] = "No";
-            pv[`BodyMarkings2_Luzi身体论文_LuziOption${name}1`] = "Yes";
+            pv[`SelectText${index}`] = "Set Text";
+            pv[`Option${name}0`] = "No";
+            pv[`Option${name}1`] = "Yes";
             return pv;
         }, {}),
     },
 };
 
-const translations = { CN: "身体论文", EN: "Body Treatise", UA: "Трактат про тіло" };
+const translation = {
+    CN: "身体论文",
+    EN: "Body Treatise",
+    UA: "Трактат про тіло",
+};
 
 export default function () {
-    // HookManager.globalFunction(`AssetsBodyMarkings2_Luzi身体论文_LuziAfterDraw`, afterDrawHook);
-    AssetManager.addAsset("BodyMarkings2_Luzi", asset, extended, translations);
+    AssetManager.addAssetWithConfig("BodyMarkings2_Luzi", asset, {
+        layerNames,
+        extended,
+        translation,
+        assetStrings,
+    });
     AssetManager.addImageMapping({
         "Assets/Female3DCG/BodyMarkings/Preview/身体论文_Luzi.png":
             "Assets/Female3DCG/BodyMarkings/Preview/BodyWritings.png",
     });
-    AssetManager.addCustomDialog(dialogs);
 }

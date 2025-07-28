@@ -152,6 +152,25 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        上: "Top",
+        下: "Bottom",
+        上蕾丝边: "Top Lace Edge",
+        下蕾丝边: "Bottom Lace Edge",
+        上蕾丝中: "Top Lace Middle",
+        下蕾丝中: "Bottom Lace Middle",
+        上边线: "Top Edge Line",
+        下边线: "Bottom Edge Line",
+        上中线: "Top Middle Line",
+        下中线: "Bottom Middle Line",
+        下底边: "Bottom Edge",
+        上蕾丝上: "Top Lace Top",
+        上钢圈: "Top Steel Ring",
+        上肩带: "Top Shoulder Strap",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "束身衣 1",
@@ -159,5 +178,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Bra", asset, null, translation);
+    AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation });
 }

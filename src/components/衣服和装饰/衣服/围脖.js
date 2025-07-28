@@ -16,5 +16,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("ClothAccessory", asset, undefined, translation);
+    AssetManager.addAssetWithConfig("ClothAccessory", asset, { translation, layerNames: {} });
 }

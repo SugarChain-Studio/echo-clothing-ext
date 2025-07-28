@@ -15,11 +15,11 @@ const asset = {
     ],
 };
 
-const translations = {
+const translation = {
     CN: "短穿环",
     EN: "Short Straight Piercings",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemNipplesPiercings", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("ItemNipplesPiercings", asset, { translation, layerNames: {} });
 }

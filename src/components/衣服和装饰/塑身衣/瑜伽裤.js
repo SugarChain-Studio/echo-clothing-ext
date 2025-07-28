@@ -33,6 +33,13 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        上: "Top",
+        下: "Bottom",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "瑜伽裤",
@@ -40,7 +47,7 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
+    AssetManager.addAssetWithConfig(
         "ClothLower",
         {
             ...asset,
@@ -49,9 +56,7 @@ export default function () {
                 KneelingSpread: 90,
             },
         },
-        undefined,
-        translation
+        { layerNames, translation }
     );
-
-    AssetManager.addAsset("SuitLower", asset, null, translation);
+    AssetManager.addAssetWithConfig("SuitLower", asset, { layerNames, translation });
 }

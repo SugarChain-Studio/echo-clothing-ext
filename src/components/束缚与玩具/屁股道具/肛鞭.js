@@ -85,6 +85,7 @@ const assetItem = {
         },
         {
             Name: "全部",
+            CopyLayerColor: "一半",
             Top: -364,
             AllowTypes: { typed: 1 },
             Alpha: [
@@ -115,7 +116,7 @@ const extendedItem = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemButt"], ["肛鞭"], {
+const dialog = {
     CN: {
         Select: "选择塞入程度",
         一半: "拔出一半",
@@ -130,7 +131,7 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemButt"], ["肛鞭"], 
         Set一半: "SourceCharacter pulls the anal whip halfway out of DestinationCharacter anus.",
         Set全部: "SourceCharacter inserts all the anal whips into DestinationCharacter anus.",
     },
-});
+};
 
 const translationsItem = {
     CN: "肛鞭",
@@ -167,8 +168,6 @@ function analWhipAction(data, _originalFunction, C, item, newOption, previousOpt
     }
 }
 
-const itemGroup = "ItemButt";
-
 export default function () {
     AssetManager.addGroupedAssets(assets, translations);
 
@@ -176,6 +175,10 @@ export default function () {
         "Assets/Female3DCG/ItemButt/肛鞭_typed0_一半.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
         "Assets/Female3DCG/ItemButt/肛鞭_typed1_全部.png": "Assets/Female3DCG/ItemButt/肛鞭.png",
     });
-    AssetManager.addAsset(itemGroup, assetItem, extendedItem, translationsItem);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemButt", assetItem, {
+        extended: extendedItem,
+        translation: translationsItem,
+        layerNames: {},
+        assetStrings: dialog,
+    });
 }

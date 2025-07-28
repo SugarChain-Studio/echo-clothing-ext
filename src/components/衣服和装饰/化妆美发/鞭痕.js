@@ -47,43 +47,43 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        身体痕迹_Luzi鞭痕_LuziSelect: "设置",
-        身体痕迹_Luzi鞭痕_Luzi1: "1",
-        身体痕迹_Luzi鞭痕_Luzi2: "2",
-        身体痕迹_Luzi鞭痕_Luzi3: "3",
-        身体痕迹_Luzi鞭痕_Luzi4: "4",
-        身体痕迹_Luzi鞭痕_Luzi5: "5",
-        身体痕迹_Luzi鞭痕_Luzi6: "6",
-        身体痕迹_Luzi鞭痕_Luzi7: "7",
-        身体痕迹_Luzi鞭痕_Luzi8: "8",
+        Select: "设置",
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
+        7: "7",
+        8: "8",
     },
     EN: {
-        身体痕迹_Luzi鞭痕_LuziSelect: "Select",
-        身体痕迹_Luzi鞭痕_Luzi1: "1",
-        身体痕迹_Luzi鞭痕_Luzi2: "2",
-        身体痕迹_Luzi鞭痕_Luzi3: "3",
-        身体痕迹_Luzi鞭痕_Luzi4: "4",
-        身体痕迹_Luzi鞭痕_Luzi5: "5",
-        身体痕迹_Luzi鞭痕_Luzi6: "6",
-        身体痕迹_Luzi鞭痕_Luzi7: "7",
-        身体痕迹_Luzi鞭痕_Luzi8: "8",
+        Select: "Select",
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
+        7: "7",
+        8: "8",
     },
     UA: {
-        身体痕迹_Luzi鞭痕_LuziSelect: "Виберіть кількість знаків",
-        身体痕迹_Luzi鞭痕_Luzi1: "1",
-        身体痕迹_Luzi鞭痕_Luzi2: "2",
-        身体痕迹_Luzi鞭痕_Luzi3: "3",
-        身体痕迹_Luzi鞭痕_Luzi4: "4",
-        身体痕迹_Luzi鞭痕_Luzi5: "5",
-        身体痕迹_Luzi鞭痕_Luzi6: "6",
-        身体痕迹_Luzi鞭痕_Luzi7: "7",
-        身体痕迹_Luzi鞭痕_Luzi8: "8",
+        Select: "Виберіть кількість знаків",
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
+        7: "7",
+        8: "8",
     },
 };
 
-const translations = {
+const translation = {
     CN: "鞭痕",
     EN: "Whip marks",
     RU: "След удар плет",
@@ -91,7 +91,10 @@ const translations = {
 };
 
 export default function () {
-    // @ts-ignore
-    AssetManager.addAsset("身体痕迹_Luzi", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("身体痕迹_Luzi", asset, {
+        translation,
+        layerNames: {},
+        extended,
+        assetStrings,
+    });
 }

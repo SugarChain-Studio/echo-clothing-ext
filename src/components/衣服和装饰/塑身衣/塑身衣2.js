@@ -88,12 +88,25 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        上: "Top",
+        下: "Bottom",
+        上图案: "Top Pattern",
+        下图案: "Bottom Pattern",
+        上中线: "Top Center",
+        下中线: "Bottom Center",
+        上线: "Top Line",
+        下线: "Bottom Line",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "束身衣 2",
-    EN: "Satin Corset 2",
+    EN: "Shapewear 2",
 };
 
 export default function () {
-    AssetManager.addAsset("ClothLower", asset, null, translation);
+    AssetManager.addAssetWithConfig("ClothLower", asset, { layerNames, translation });
 }

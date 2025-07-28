@@ -37,34 +37,47 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        左腿阴影: "Left Leg Shadow",
+        左腿花边: "Left Leg Lace",
+        左腿环: "Left Leg Ring",
+        左腿蝴蝶结: "Left Leg Bow",
+
+        右腿阴影: "Right Leg Shadow",
+        右腿花边: "Right Leg Lace",
+        右腿环: "Right Leg Ring",
+        右腿蝴蝶结: "Right Leg Bow",
+    },
+};
+
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "左腿" }, { Name: "右腿" }, { Name: "双腿" }],
 };
 
-const translations = {
+const translation = {
     CN: "花边腿环",
     EN: "Lace Leg Ring",
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        Garters花边腿环Select: "选择",
-        Garters花边腿环左腿: "左腿",
-        Garters花边腿环右腿: "右腿",
-        Garters花边腿环双腿: "都有",
+        Select: "选择",
+        左腿: "左腿",
+        右腿: "右腿",
+        双腿: "都有",
     },
     EN: {
-        Garters花边腿环Select: "Select",
-        Garters花边腿环左腿: "Left leg",
-        Garters花边腿环右腿: "Right leg",
-        Garters花边腿环双腿: "Both",
+        Select: "Select",
+        左腿: "Left leg",
+        右腿: "Right leg",
+        双腿: "Both",
     },
 };
 
 export default function () {
-    AssetManager.addAsset("Garters", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Garters", asset, { extended, translation, layerNames, assetStrings });
 }

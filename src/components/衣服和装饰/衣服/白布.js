@@ -20,11 +20,19 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        前: "Front",
+        后: "Back",
+        图案: "Pattern",
+    },
+};
+
+const translation = {
     CN: "白布",
     EN: "Ghost Cloak",
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, null, translations);
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }

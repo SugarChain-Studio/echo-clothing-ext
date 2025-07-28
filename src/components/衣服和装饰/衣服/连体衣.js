@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -7,6 +8,7 @@ const asset = {
     Top: 200,
     Left: 170,
     Priority: 14,
+    DynamicGroupName: "Suit",
     Layer: [
         {
             Name: "1",
@@ -80,7 +82,7 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Suit", asset, undefined, translation);
-    AssetManager.addAsset("Cloth", { ...asset, DynamicGroupName: "Suit" }, undefined, translation);
-    AssetManager.addLayerNames("Suit", asset, layerNames);
+    for (const group of Typing.groups(["Suit", "Cloth"])) {
+        AssetManager.addAssetWithConfig(group, asset, { translation, layerNames });
+    }
 }

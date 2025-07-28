@@ -18,11 +18,11 @@ const asset = {
     Attribute: ["Skirt"],
 };
 
-const translations = {
+const translation = {
     CN: "铅笔裙 2",
     EN: "PencilSkirt 2",
 };
 
 export default function () {
-    AssetManager.addAsset("ClothLower", asset, null, translations);
+    AssetManager.addAssetWithConfig("ClothLower", asset, { layerNames: {}, translation });
 }

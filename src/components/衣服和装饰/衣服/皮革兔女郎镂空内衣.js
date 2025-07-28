@@ -60,6 +60,21 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        圆环: "Ring",
+        连接: "Connector",
+        连接反光: "Connector Reflective",
+        胸罩带: "Bra Strap",
+        胸罩带反光: "Bra Strap Reflective",
+        胸罩: "Bra",
+        胸罩反光: "Bra Reflective",
+        皮革带: "Leather Strap",
+        皮革带反光: "Leather Strap Reflective",
+        拉链: "Zipper",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "皮革兔女郎镂空内衣",
@@ -67,5 +82,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Bra", asset, null, translation);
+    AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation });
 }

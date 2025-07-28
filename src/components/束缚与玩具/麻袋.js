@@ -1,5 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
+import { Typing } from "../../utils";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -105,7 +106,16 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        透明: "Transparent",
+        麻袋: "Bag",
+        绳子: "Rope",
+        背面: "Back",
+    },
+};
+
+const translation = {
     CN: "长麻袋",
     EN: "Long Bag",
 };
@@ -117,43 +127,30 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog1 = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["麻袋_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择外观",
         不透: "不透",
         透明: "微透明",
-        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+        Set不透: "SourceCharacter将DestinationCharacterAssetName换成了不透明的款式.",
+        Set透明: "SourceCharacter将DestinationCharacterAssetName换成了微透明的款式.",
     },
     EN: {
-        Select: "选择外观",
-        不透: "不透",
-        透明: "透明",
-        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
+        Select: "Select Appearance",
+        不透: "Opaque",
+        透明: "Translucent",
+        Set不透: "SourceCharacter changed DestinationCharacter AssetName to opaque.",
+        Set透明: "SourceCharacter changed DestinationCharacter AssetName to translucent.",
     },
-});
-
-const dialog2 = DialogTools.replicateGroupedItemDialog(["ItemHood"], ["麻袋_Luzi"], {
-    CN: {
-        Select: "选择外观",
-        不透: "不透",
-        透明: "微透明",
-        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
-    },
-    EN: {
-        Select: "选择外观",
-        不透: "不透",
-        透明: "透明",
-        Set不透: "SourceCharacter将DestinationCharacter麻袋换成了不透明的款式.",
-        Set透明: "SourceCharacter将DestinationCharacter麻袋换成了微透明的款式.",
-    },
-});
+};
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addAsset("ItemHood", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog1);
-    AssetManager.addCustomDialog(dialog2);
+    for (const group of Typing.groups(["ItemDevices", "ItemHood"])) {
+        AssetManager.addAssetWithConfig(group, asset, {
+            layerNames,
+            extended,
+            translation,
+            assetStrings,
+        });
+    }
 }

@@ -37,6 +37,16 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        后: "Back",
+        前: "Front",
+        灯: "Light",
+        盖: "Lid",
+        盖1: "Lid 1",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
@@ -82,7 +92,7 @@ const icons = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["窝瓜_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择窝配置",
         没盖子: "推开盖子",
@@ -104,16 +114,21 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["窝瓜_
         Set没盖子: "SourceCharacter открыл крышку DestinationCharacter AssetName.",
         Set有盖子: "SourceCharacter закрыл крышку DestinationCharacter AssetName.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "窝瓜",
     EN: "Pumpkin",
     RU: "Тыква",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, {
+        layerNames,
+        extended,
+        translation,
+        assetStrings,
+    });
+
     AssetManager.addImageMapping(icons);
 }

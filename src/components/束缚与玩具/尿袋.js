@@ -50,6 +50,14 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        尿: "Urine",
+        袋: "Bag",
+        管: "Tube",
+    },
+};
+
 /** @type {Record<string, Rect>} */
 const buttons = {
     ...Object.fromEntries(
@@ -225,7 +233,7 @@ const extended = {
     },
 };
 
-const translations = {
+const translation = {
     CN: "尿袋",
     EN: "Urine Bag",
     RU: "Мочеприемник",
@@ -269,6 +277,10 @@ const dialog = {
     },
 };
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemTorso", asset, {
+        layerNames,
+        extended,
+        translation,
+    });
+    AssetManager.addCustomAssetString(dialog);
 }

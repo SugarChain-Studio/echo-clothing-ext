@@ -5,7 +5,10 @@ const asset = {
     Name: "蕾丝裤_Luzi",
     Random: false,
     Top: 0,
-    Left: 0,
+    Left: {
+        [PoseType.DEFAULT]: 0,
+        KneelingSpread: 90,
+    },
     Priority: 20,
     Layer: [
         {
@@ -33,6 +36,13 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        裤子: "Pants",
+        图案: "Pattern",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "蕾丝裤",
@@ -41,16 +51,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset(
-        "ClothLower",
-        {
-            ...asset,
-            Left: {
-                [PoseType.DEFAULT]: 0,
-                KneelingSpread: 90,
-            },
-        },
-        undefined,
-        translation
-    );
+    AssetManager.addAssetWithConfig("ClothLower", asset, { layerNames, translation });
 }

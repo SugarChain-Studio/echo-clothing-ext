@@ -27,6 +27,13 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        花边: "Lace",
+        胸罩: "Bra",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "女仆胸罩",
@@ -34,5 +41,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Bra", asset, null, translation);
+    AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation });
 }

@@ -45,6 +45,14 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        上: "Top",
+        下: "Bottom",
+        扣子: "Buttons",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "呢子高腰裙子",
@@ -52,5 +60,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("ClothLower", asset, undefined, translation);
+    AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
 }

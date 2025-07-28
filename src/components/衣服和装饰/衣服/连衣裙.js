@@ -49,6 +49,16 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        绳子: "Rope",
+        裙: "Dress",
+        蝴蝶结小: "Bow Small",
+        蝴蝶结大: "Bow Large",
+        珠: "Beads",
+    },
+};
+
 /** @type {Translation.Entry} */
 const translation = {
     CN: "交叉吊带连衣裙",
@@ -56,5 +66,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Cloth", asset, undefined, translation);
+    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }

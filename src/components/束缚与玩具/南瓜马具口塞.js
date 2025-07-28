@@ -32,19 +32,19 @@ const asset = {
             Name: "眼睛",
         },
     ],
-    PoseMapping: {
-        TapedHands: PoseType.DEFAULT,
-        Yoked: PoseType.DEFAULT,
-        OverTheHead: PoseType.DEFAULT,
-        BackBoxTie: PoseType.DEFAULT,
-        BackElbowTouch: PoseType.DEFAULT,
-        BackCuffs: PoseType.DEFAULT,
-        Hogtied: PoseType.DEFAULT,
-        AllFours: PoseType.DEFAULT,
+    PoseMapping: {},
+};
+
+const layerNames = {
+    EN: {
+        带子: "Straps",
+        金属: "Metal",
+        南瓜: "Pumpkin",
+        眼睛: "Eyes",
     },
 };
 
-const translations = {
+const translation = {
     CN: "南瓜马具口塞",
     EN: "Pumpkin Harness Gag",
     RU: "кляп из тыквы",
@@ -52,5 +52,5 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemMouth", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("ItemMouth", asset, { translation, layerNames });
 }

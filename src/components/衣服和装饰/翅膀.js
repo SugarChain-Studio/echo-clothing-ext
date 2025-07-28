@@ -17,7 +17,14 @@ const asset = {
     ],
 };
 
-const translations = {
+const layerNames = {
+    EN: {
+        翼膜: "Wing Membrane",
+        翼骨: "Wing Bone",
+    },
+};
+
+const translation = {
     CN: "翅膀 1",
     EN: "Wing 1",
     RU: "Крыло 1",
@@ -25,5 +32,5 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("Wings", asset, undefined, translations);
+    AssetManager.addAssetWithConfig("Wings", asset, { translation, layerNames });
 }
