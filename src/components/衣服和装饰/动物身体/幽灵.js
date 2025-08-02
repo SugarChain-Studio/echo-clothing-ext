@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { Tools } from "@mod-utils/Tools";
 
@@ -134,7 +133,6 @@ const asset = {
     Priority: 10,
     Gender: "F",
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    DynamicAfterDraw: true,
     ParentGroup: {},
     PoseMapping: {},
     AllowColorize: true,
@@ -271,8 +269,6 @@ const layerNames = {
 
 export default function () {
     const assetGroup = "动物身体_Luzi";
-
-    HookManager.globalFunction(`Assets${assetGroup}${asset.Name}AfterDraw`, afterDraw);
 
     AssetManager.addAssetWithConfig(assetGroup, asset, {
         translation,
