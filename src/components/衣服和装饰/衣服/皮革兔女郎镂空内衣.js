@@ -31,27 +31,35 @@ const asset = {
         },
         {
             Name: "连接",
+            ColorGroup: "底色",
         },
         {
             Name: "连接反光",
+            ColorGroup: "反光",
         },
         {
             Name: "胸罩带",
+            ColorGroup: "底色",
         },
         {
             Name: "胸罩带反光",
+            ColorGroup: "反光",
         },
         {
             Name: "胸罩",
+            ColorGroup: "底色",
         },
         {
             Name: "胸罩反光",
+            ColorGroup: "反光",
         },
         {
             Name: "皮革带",
+            ColorGroup: "底色",
         },
         {
             Name: "皮革带反光",
+            ColorGroup: "反光",
         },
         {
             Name: "拉链",
@@ -72,6 +80,9 @@ const layerNames = {
         皮革带: "Leather Strap",
         皮革带反光: "Leather Strap Reflective",
         拉链: "Zipper",
+
+        底色: "Base Color",
+        反光: "Reflective",
     },
 };
 

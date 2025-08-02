@@ -1,3 +1,4 @@
+import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
 
@@ -17,15 +18,38 @@ const asset = {
         { Name: "A2", Priority: 1, AllowTypes: { A: 0 } },
         { Name: "A1", Priority: 1, AllowTypes: { A: 0 } },
 
-        { Name: "B5", Priority: 26, AllowTypes: { A: 1 } },
-        { Name: "B4", Priority: 26, AllowTypes: { A: 1 } },
-        { Name: "B3", Priority: 26, AllowTypes: { A: 1 } },
-        { Name: "B2", Priority: 26, AllowTypes: { A: 1 } },
-        { Name: "B1", Priority: 26, AllowTypes: { A: 1 } },
+        { Name: "B5", Priority: 34, AllowTypes: { A: 1 } },
+        { Name: "B4", Priority: 34, AllowTypes: { A: 1 } },
+        { Name: "B3", Priority: 34, AllowTypes: { A: 1 } },
+        { Name: "B2", Priority: 34, AllowTypes: { A: 1 } },
+        { Name: "B1", Priority: 34, AllowTypes: { A: 1 } },
 
         { Name: "鞘1", Priority: 1 },
         { Name: "鞘2", Priority: 1 },
     ],
+};
+
+const layerNames = {
+    CN: {
+        A5: "刃",
+        A4: "缘",
+        A3: "镡",
+        A2: "柄卷",
+        A1: "头",
+
+        鞘1: "鞘",
+        鞘2: "鞘尻",
+    },
+    EN: {
+        A5: "Yaiba",
+        A4: "Fuchi",
+        A3: "Tsuba",
+        A2: "Tsukamaki",
+        A1: "Kashira",
+
+        鞘1: "Kiya",
+        鞘2: "Kiyajiri",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -41,7 +65,7 @@ const extended = {
     ],
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["刀"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
         Module刀: "设置",
@@ -69,15 +93,20 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["刀"],
         SetA0: "SourceCharacter убрал нож у DestinationCharacter.",
         SetA1: "SourceCharacter достал нож у DestinationCharacter.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "太刀",
     EN: "Tachi",
     RU: "Тати",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemHandheld", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
+    AssetManager.addAssetWithConfig("ItemHandheld", asset, {
+        layerNames,
+        assetStrings,
+        extended,
+        translation,
+    });
 }
