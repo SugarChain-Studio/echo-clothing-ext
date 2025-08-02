@@ -2,33 +2,25 @@ import { AssetManager } from "../../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
+import { monadic } from "@mod-utils/monadic";
+
+const drawConfig = {
+    上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩" },
+    下身遮罩: { partial: ["BodyLower"], mask: "身体遮罩" },
+    底部: { partial: ["BodyUpper", "BodyLower"], mask: "底部遮罩" },
+};
 
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
 function androidDraw(drawData) {
     const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
-
-    if (L === "上身遮罩" || L === "下身遮罩") {
-        const { Canvas, CanvasBlink } = partialDraw(C, A, L === "上身遮罩" ? ["BodyUpper"] : ["BodyLower"]);
-
-        const maskURL = Tools.getAssetURL(drawData, "身体遮罩");
-
+    monadic(drawConfig[L]).then(({ partial, mask }) => {
+        const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
+        const maskURL = Tools.getAssetURL(drawData, mask);
         DrawImageEx(maskURL, Canvas.getContext("2d"), X, Y, { BlendingMode: "destination-out" });
         DrawImageEx(maskURL, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: "destination-out" });
-
         drawCanvas(Canvas, 0, 0, AlphaMasks);
         drawCanvasBlink(CanvasBlink, 0, 0, AlphaMasks);
-    }
-    if (L === "底部") {
-        const { Canvas, CanvasBlink } = partialDraw(C, A, ["BodyUpper", "BodyLower"]);
-
-        const maskURL = Tools.getAssetURL(drawData, "底部遮罩");
-
-        DrawImageEx(maskURL, Canvas.getContext("2d"), X, Y, { BlendingMode: "destination-in" });
-        DrawImageEx(maskURL, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: "destination-in" });
-
-        drawCanvas(Canvas, 0, 0, AlphaMasks);
-        drawCanvasBlink(CanvasBlink, 0, 0, AlphaMasks);
-    }
+    });
 }
 
 /** @type {CustomAssetDefinition} */
