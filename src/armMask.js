@@ -95,10 +95,7 @@ function createArmMaskForCloth(groupName, asset, mode = "", allowTypes) {
  * @param {ArmMaskMode | GroupedAssetMaskMode} mode
  */
 function createArmMaskForGroupedCloth(assets, mode = "") {
-    if (GameVersion === "R114") return;
-
     const resolveMode = typeof mode === "string" ? (_1, _2) => mode : (group, asset) => mode[group][asset.Name] ?? "";
-
     for (const [group, assetArr] of Object.entries(assets)) {
         for (const asset of assetArr) {
             createArmMaskForCloth(/**@type {CustomGroupName}*/ (group), asset, resolveMode(group, asset));
