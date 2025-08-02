@@ -93,6 +93,7 @@ const asset = {
         { Name: "果子狸", AllowTypes: { y: 11 } },
         { Name: "雪瑗", AllowTypes: { y: 12 } },
         { Name: "xiu狸子", AllowTypes: { y: 13 } },
+        { Name: "布菈", AllowTypes: { y: 14 } },
 
         // 盒子的小黑屋
         { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
@@ -289,6 +290,12 @@ const asset = {
             AllowTypes: { l: 34 },
         },
         { Name: "Soph", AllowTypes: { l: 35 } },
+        { Name: "羽", AllowTypes: { l: 36 } },
+        { Name: "Milim", AllowTypes: { l: 37 } },
+        { Name: "柴柴", AllowTypes: { l: 38 } },
+        { Name: "爱丽丝梦游仙境", AllowTypes: { l: 39 } },
+        { Name: "希尔薇娅", AllowTypes: { l: 40 } },
+
     ],
 };
 
@@ -364,7 +371,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -372,7 +379,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -422,7 +429,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
