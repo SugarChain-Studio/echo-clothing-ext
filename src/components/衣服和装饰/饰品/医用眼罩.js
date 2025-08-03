@@ -1,92 +1,70 @@
 import { AssetManager } from "../../../assetForward";
 
-/** @type {CustomAssetDefinition} */
-const asset1 = {
-    Name: "医用眼罩左",
-    Random: false,
-    Top: 0,
-    Left: 0,
-    ParentGroup: {},
-    Priority: 29,
-    Extended: true,
-    DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],
-    Layer: [
-        { Name: "线" },
-        { Name: "底" },
-        { Name: "心", AllowTypes: { typed: 1 } },
-        { Name: "X", AllowTypes: { typed: 2 } },
-    ],
+const ENlang = {
+    左: "Left",
+    右: "Right",
 };
 
-const translations1 = {
-    CN: "医用眼罩左",
-    EN: "Medical Eye Mask Left",
-};
-
-const asset2 = {
-    Name: "医用眼罩右",
-    Random: false,
-    Top: 0,
-    Left: 0,
-    ParentGroup: {},
-    Priority: 29,
-    Extended: true,
-    DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],
-    Layer: [
-        { Name: "线" },
-        { Name: "底" },
-        { Name: "心", AllowTypes: { typed: 1 } },
-        { Name: "X", AllowTypes: { typed: 2 } },
-    ],
-};
-
-const translations2 = {
-    CN: "医用眼罩右",
-    EN: "Medical Eye Mask Right",
-};
-
-const extended = {
-    Archetype: ExtendedArchetype.TYPED,
-    DrawImages: false,
-    Options: [{ Name: "无图案" }, { Name: "心" }, { Name: "叉" }],
-};
-
-const layerNames = {
-    EN: {
-        线: "Line",
-        底: "Base",
-        心: "Heart",
-        X: "Cross",
+const assets = ["左", "右"].map((side) => ({
+    /** @type {CustomAssetDefinition} */ asset: {
+        Name: `医用眼罩${side}`,
+        Random: false,
+        Left: 190,
+        Top: 130,
+        ParentGroup: {},
+        Priority: 29,
+        Extended: true,
+        DynamicGroupName: "Glasses",
+        DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],
+        Layer: [
+            { Name: "线" },
+            { Name: "底" },
+            { Name: "心", AllowTypes: { typed: 1 } },
+            { Name: "X", AllowTypes: { typed: 2 } },
+        ],
     },
-};
-
-/** @type {Translation.Dialog} */
-const assetStrings = {
-    CN: {
-        Select: "选择图案",
-        无图案: "无图案",
-        心: "心",
-        叉: "叉",
-    },
-    EN: {
-        Select: "Select Pattern",
-        无图案: "No Pattern",
-        心: "Heart",
-        叉: "Cross",
-    },
-};
+    translation: /** @type {Translation.Entry}*/ ({
+        CN: `医用眼罩${side}`,
+        EN: `Medical Eye Mask ${ENlang[side]}`,
+    }),
+    extended: /** @type {TypedItemConfig}*/ ({
+        Archetype: ExtendedArchetype.TYPED,
+        DrawImages: false,
+        Options: [{ Name: "无图案" }, { Name: "心" }, { Name: "叉" }],
+    }),
+    layerNames: /** @type {Translation.String}*/ ({
+        EN: {
+            线: "Line",
+            底: "Base",
+            心: "Heart",
+            X: "Cross",
+        },
+    }),
+    assetStrings: /** @type {Translation.String}*/ ({
+        CN: {
+            Select: "选择图案",
+            无图案: "无图案",
+            心: "心",
+            叉: "叉",
+        },
+        EN: {
+            Select: "Select Pattern",
+            无图案: "No Pattern",
+            心: "Heart",
+            叉: "Cross",
+        },
+    }),
+}));
 
 export default function () {
-    AssetManager.addAssetWithConfig("Glasses", asset1, {
-        layerNames,
-        translation: translations1,
-        extended,
-        assetStrings,
-    });
-    AssetManager.addAssetWithConfig("Glasses", asset2, {
-        layerNames,
-        translation: translations2,
-        extended,
-        assetStrings,
-    });
+    for (const { asset, translation, extended, layerNames, assetStrings } of assets) {
+        for (const group of /**@type {AssetGroupBodyName[]}*/ (["Glasses", "Mask"])) {
+            AssetManager.addAssetWithConfig(group, asset, {
+                translation,
+                extended,
+                layerNames,
+                assetStrings,
+            });
+        }
+    }
 }
