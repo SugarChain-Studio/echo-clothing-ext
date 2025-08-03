@@ -2,7 +2,7 @@ import glob
 import os
 from PIL import Image
 import colorsys
-from typing import List, TypedDict, Callable
+from typing import List, TypedDict, Callable, Tuple
 
 # 通配符数组
 wildcard_paths = [
@@ -14,8 +14,13 @@ class BrightnessRange(TypedDict):
     min: float
     max: float
 
-# 目标亮度范围配置
-TARGET_BRIGHTNESS_RANGE: BrightnessRange = {'min': 0.5, 'max': 0.6}
+CLAMP_BRIGHTNESS_CURVE: List[Tuple[float,float]] = [
+    (0, 1),
+    (0.15, 0.5),
+    (1, 0),
+]
+
+SHADOW_GRAY_COLOR = 128  # 中性灰色值 (0-255)
 
 
 def get_brightness_range(file_paths: List[str]) -> BrightnessRange:
@@ -47,29 +52,37 @@ def get_brightness_range(file_paths: List[str]) -> BrightnessRange:
     return brightness_range
 
 
-def linear_normalize_brightness(source_range: BrightnessRange, 
-                               target_range: BrightnessRange) -> Callable[[float], float]:
-    """返回一个将亮度值从源范围线性映射到目标范围的闭包函数"""
+def create_alpha_mapper(source_range: BrightnessRange) -> Callable[[float], float]:
+    """
+    根据CLAMP_BRIGHTNESS_CURVE创建一个将亮度值映射到透明度的函数。
+    CLAMP_BRIGHTNESS_CURVE列表中的每个元组表示一个点，格式为 (源亮度，映射亮度)。
+    处理完映射亮度后，将其转换为透明度值，越低的亮度越不透明。
+    """
+    
     source_width = source_range['max'] - source_range['min']
-    target_width = target_range['max'] - target_range['min']
     
-    if source_width == 0:
-        # 如果源范围为0，返回固定值
-        return lambda _: target_range['min']
+    def map_brightness_to_alpha(brightness: float) -> float:
+        """将亮度值映射到透明度值"""
+        if source_width == 0:
+            return 1.0
+        # 线性插值计算
+        normalized_brightness = (brightness - source_range['min']) / source_width
+        for i in range(len(CLAMP_BRIGHTNESS_CURVE) - 1):
+            x0, y0 = CLAMP_BRIGHTNESS_CURVE[i]
+            x1, y1 = CLAMP_BRIGHTNESS_CURVE[i + 1]
+            if x0 <= normalized_brightness <= x1:
+                # 线性插值
+                alpha = y0 + (y1 - y0) * (normalized_brightness - x0) / (x1 - x0)
+                return max(0.0, min(1.0, alpha))
+        # 如果不在任何区间内，返回默认值
+        return 1.0
     
-    # 预计算转换参数
-    scale = target_width / source_width
-    offset = target_range['min'] - source_range['min'] * scale
-    
-    def normalize(value: float) -> float:
-        return max(0, min(1, value * scale + offset))
-    
-    return normalize
+    return map_brightness_to_alpha
 
 
-def process_images(file_paths: List[str], brightness_normalizer: Callable[[float], float]) -> None:
-    """处理图片，应用灰度化和亮度归一化"""
-    print(f"\n开始处理图片...")
+def create_shadow_masks(file_paths: List[str], alpha_mapper: Callable[[float], float]) -> None:
+    """创建阴影遮罩文件"""
+    print(f"\n开始创建阴影遮罩...")
     
     for i, file_path in enumerate(file_paths):
         try:
@@ -78,30 +91,37 @@ def process_images(file_paths: List[str], brightness_normalizer: Callable[[float
                 pixels = img.load()
                 width, height = img.size
 
+                # 创建新的图像用于阴影遮罩
+                shadow_mask = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+                shadow_pixels = shadow_mask.load()
+
                 # 处理所有像素
                 for y in range(height):
                     for x in range(width):
                         r, g, b, a = pixels[x, y]
                         if a > 0:  # 只处理不透明像素
-                            # 转换到HSV
+                            # 转换到HSV获取亮度
                             h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
                             
-                            # 使用闭包函数归一化亮度
-                            new_v = brightness_normalizer(v)
+                            # 根据亮度计算新的透明度
+                            brightness_alpha = alpha_mapper(v)
                             
-                            # 转换为灰度 (S=0) 并转回RGB
-                            nr, ng, nb = colorsys.hsv_to_rgb(h, 0, new_v)
-                            pixels[x, y] = (int(nr * 255), int(ng * 255), int(nb * 255), a)
+                            # 保持原图片透明度（相乘）
+                            final_alpha = int((a / 255) * brightness_alpha * 255)
+                            
+                            # 使用中性灰色
+                            shadow_pixels[x, y] = (0, 0, 0, final_alpha)
 
+                # 生成输出文件名
                 dir_name = os.path.dirname(file_path)
                 base_name = os.path.splitext(os.path.basename(file_path))[0]
-                base_name = base_name.replace("_base", "_plain")
+                base_name = base_name.replace("_base", "_shadow")
                 output_path = os.path.join(dir_name, f"{base_name}.png")
-                img.save(output_path)
-                print(f"已处理: {i+1}/{len(file_paths)} - {file_path}")
+                shadow_mask.save(output_path)
+                print(f"已创建: {i+1}/{len(file_paths)} - {output_path}")
                 
         except Exception as e:
-            print(f"处理图像时出错 {file_path}: {e}")
+            print(f"创建阴影遮罩时出错 {file_path}: {e}")
 
 
 def main() -> None:
@@ -124,16 +144,15 @@ def main() -> None:
         return
     
     print(f"原始亮度范围: {source_brightness_range['min']:.3f} ~ {source_brightness_range['max']:.3f}")
-    print(f"目标亮度范围: {TARGET_BRIGHTNESS_RANGE['min']:.3f} ~ {TARGET_BRIGHTNESS_RANGE['max']:.3f}")
+
+    # 创建亮度到透明度的映射函数
+    alpha_mapper = create_alpha_mapper(source_brightness_range)
     
-    # 创建亮度归一化函数
-    brightness_normalizer = linear_normalize_brightness(source_brightness_range, TARGET_BRIGHTNESS_RANGE)
-    
-    # 第二遍：应用归一化处理
-    process_images(all_files, brightness_normalizer)
+    # 第二遍：创建阴影遮罩
+    create_shadow_masks(all_files, alpha_mapper)
     
     print(f"\n处理完成！")
-    print(f"已将 {len(all_files)} 个图片的亮度归一化处理")
+    print(f"已为 {len(all_files)} 个图片创建阴影遮罩")
 
 
 if __name__ == "__main__":
