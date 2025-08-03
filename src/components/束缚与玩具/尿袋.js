@@ -132,44 +132,20 @@ function dialogClickHook(Data, originalFunction) {
 
     if (!property.Auto) {
         if (RMouseIn(buttons.清空)) {
-            clickPush(
-                "清空",
-                () => {
-                    property.Liquid = 0;
-                },
-                true
-            );
+            clickPush("清空", () => (property.Liquid = 0), true);
         }
 
         if (RMouseIn(buttons.加一半)) {
-            clickPush(
-                "加一半",
-                () => {
-                    property.Liquid = 0.5;
-                },
-                true
-            );
+            clickPush("加一半", () => (property.Liquid = 0.5), true);
         }
 
         if (RMouseIn(buttons.加满)) {
-            clickPush(
-                "加满",
-                () => {
-                    property.Liquid = 1;
-                },
-                true
-            );
+            clickPush("加满", () => (property.Liquid = 1), true);
         }
     }
 
     if (RMouseIn(buttons.自动积累开关)) {
-        clickPush(
-            `自动积累${property.Auto ? "Off" : "On"}`,
-            () => {
-                property.Auto = !property.Auto;
-            },
-            true
-        );
+        clickPush(`自动积累${property.Auto ? "Off" : "On"}`, () => (property.Auto = !property.Auto), true);
     }
 }
 

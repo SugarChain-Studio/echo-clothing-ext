@@ -22,6 +22,19 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        base: "基础",
+        plain: "分层基础",
+        shadow: "分层阴影",
+    },
+    EN: {
+        base: "Normal Base (Colored)",
+        plain: "Layered Base",
+        shadow: "Layered Shadow",
+    },
+};
+
 const translation = {
     CN: "随意滑落西装",
     EN: "Casual Dropped Suit",
@@ -52,7 +65,7 @@ export default function () {
     for (const group of groups) {
         AssetManager.addAssetWithConfig(group, asset, {
             translation,
-            layerNames: {},
+            layerNames,
             extended,
             assetStrings,
         });

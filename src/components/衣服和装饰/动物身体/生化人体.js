@@ -5,19 +5,19 @@ import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
 
 const drawConfig = {
-    上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩" },
-    下身遮罩: { partial: ["BodyLower"], mask: "身体遮罩" },
-    底部: { partial: ["BodyUpper", "BodyLower"], mask: "底部遮罩" },
+    上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩", blend: "destination-out" },
+    下身遮罩: { partial: ["BodyLower"], mask: "身体遮罩", blend: "destination-out" },
+    底部: { partial: ["BodyUpper", "BodyLower"], mask: "底部遮罩", blend: "destination-in" },
 };
 
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
 function androidDraw(drawData) {
     const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
-    monadic(drawConfig[L]).then(({ partial, mask }) => {
+    monadic(drawConfig[L]).then(({ partial, mask, blend }) => {
         const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
         const maskURL = Tools.getAssetURL(drawData, mask);
-        DrawImageEx(maskURL, Canvas.getContext("2d"), X, Y, { BlendingMode: "destination-out" });
-        DrawImageEx(maskURL, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: "destination-out" });
+        DrawImageEx(maskURL, Canvas.getContext("2d"), X, Y, { BlendingMode: blend });
+        DrawImageEx(maskURL, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: blend });
         drawCanvas(Canvas, 0, 0, AlphaMasks);
         drawCanvasBlink(CanvasBlink, 0, 0, AlphaMasks);
     });
