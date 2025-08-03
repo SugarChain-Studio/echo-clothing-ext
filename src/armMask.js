@@ -3,14 +3,15 @@ import { AssetManager } from "./assetForward";
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
 /**
- * @typedef { "" | "Arm1" | "Right" } ArmMaskMode
+ * @typedef { "" | "Arm1" | "Right" | "Hand" } ArmMaskMode
  */
 
-/** @type { Record<ArmMaskMode,string> } */
+/** @type { Record<ArmMaskMode,Pick<AssetLayerDefinition, "Name"|"ParentGroup">> } */
 const nameRecord = {
-    "": "ArmMask",
-    "Arm1": "ArmMask1",
-    "Right": "ArmMaskR",
+    "": { Name: "ArmMask", ParentGroup: "BodyUpper" },
+    "Arm1": { Name: "ArmMask1", ParentGroup: "BodyUpper" },
+    "Right": { Name: "ArmMaskR", ParentGroup: "BodyUpper" },
+    "Hand": { Name: "ArmMaskH", ParentGroup: {} },
 };
 
 /**
@@ -23,17 +24,21 @@ function createMappings(groupName, assetName, mode) {
     const ret = {};
     const groupNames = Array.isArray(groupName) ? groupName : [groupName];
 
-    const maskName = nameRecord[mode];
+    const { Name, ParentGroup } = nameRecord[mode];
 
     for (const group of groupNames) {
-        for (const size of bodySizes) {
-            // Assets/Female3DCG/Cloth/绛云墨韵旗袍裙_Luzi_Normal_ArmMask.png
-            ret[
-                `Assets/Female3DCG/${group}/${assetName}_${size}_${maskName}.png`
-            ] = `Assets/Female3DCG/LuziArmMask/${maskName}_${size}.png`;
-            ret[
-                `Assets/Female3DCG/${group}/TapedHands/${assetName}_${size}_${maskName}.png`
-            ] = `Assets/Female3DCG/LuziArmMask/TapedHands/${maskName}_${size}.png`;
+        if (ParentGroup === "BodyUpper") {
+            for (const size of bodySizes) {
+                // Assets/Female3DCG/Cloth/绛云墨韵旗袍裙_Luzi_Normal_ArmMask.png
+                ret[
+                    `Assets/Female3DCG/${group}/${assetName}_${size}_${Name}.png`
+                ] = `Assets/Female3DCG/LuziArmMask/${Name}_${size}.png`;
+                ret[
+                    `Assets/Female3DCG/${group}/TapedHands/${assetName}_${size}_${Name}.png`
+                ] = `Assets/Female3DCG/LuziArmMask/TapedHands/${Name}_${size}.png`;
+            }
+        } else {
+            ret[`Assets/Female3DCG/${group}/${assetName}_${Name}.png`] = `Assets/Female3DCG/LuziArmMask/${Name}.png`;
         }
     }
 
@@ -47,8 +52,7 @@ function createMappings(groupName, assetName, mode) {
  */
 function createLayerDef(mode, allowTypes) {
     return {
-        Name: nameRecord[mode],
-        ParentGroup: "BodyUpper",
+        ...nameRecord[mode],
         PoseMapping: {
             BackBoxTie: PoseType.HIDE,
             BackCuffs: PoseType.HIDE,
