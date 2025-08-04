@@ -5,9 +5,9 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "黑曜蝶翼裙_Luzi",
     Random: false,
-    Left: 60,
+    Left: { "": 60, "KneelingSpread": 150 },
     Top: 380,
-    Priority: 30,
+    Priority: 24,
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
