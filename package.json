@@ -45,7 +45,7 @@
     "author": "Echo",
     "description": "BC视觉表现的美学修正与拓展",
     "devDependencies": {
-        "@eslint/js": "^9.29.0",
+        "@eslint/js": "^9.32.0",
         "@rollup/plugin-alias": "^5.1.1",
         "@rollup/plugin-commonjs": "^28.0.6",
         "@rollup/plugin-node-resolve": "^16.0.1",
@@ -60,18 +60,18 @@
         "bondage-club-mod-sdk": "^1.2.0",
         "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
-        "eslint": "^9.29.0",
+        "eslint": "^9.32.0",
         "github-markdown-css": "^5.8.1",
-        "globals": "^16.2.0",
+        "globals": "^16.3.0",
         "http-server": "^14.1.1",
         "lz-string": "^1.5.0",
         "marked": "^15.0.12",
-        "rollup": "^4.43.0",
+        "rollup": "^4.46.2",
         "rollup-plugin-cleanup": "^3.2.1",
         "rollup-plugin-copy": "^3.5.0",
         "rollup-plugin-import-css": "^3.5.8",
         "sweetalert2": "11.6.13",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.2"
     },
     "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }
