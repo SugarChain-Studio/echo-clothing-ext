@@ -27,7 +27,11 @@ supplement the main [LICENSE](LICENSE) file.
 
    They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
 
-4. The following assets are not covered by the license above:
+4. The assets related with [this folder](src/components/套装/世界) are not covered by the license above.
+
+   They are authorized for limited distribution with echo-clothing-ext, and are not to be used in any other context without explicit permission from the copyright holders.
+
+5. The following assets are not covered by the license above:
    - 战斗服 (asset name: "连体衣_Luzi")
    - 女仆围裙 (asset name: "女仆围裙_Luzi")
    - 露胸胶衣 (asset name: "露胸胶衣_Luzi")
