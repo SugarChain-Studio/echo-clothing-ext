@@ -25,46 +25,16 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        {
-            Name: "圆环",
-            ParentGroup: {},
-        },
-        {
-            Name: "连接",
-            ColorGroup: "底色",
-        },
-        {
-            Name: "连接反光",
-            ColorGroup: "反光",
-        },
-        {
-            Name: "胸罩带",
-            ColorGroup: "底色",
-        },
-        {
-            Name: "胸罩带反光",
-            ColorGroup: "反光",
-        },
-        {
-            Name: "胸罩",
-            ColorGroup: "底色",
-        },
-        {
-            Name: "胸罩反光",
-            ColorGroup: "反光",
-        },
-        {
-            Name: "皮革带",
-            ColorGroup: "底色",
-        },
-        {
-            Name: "皮革带反光",
-            ColorGroup: "反光",
-        },
-        {
-            Name: "拉链",
-            ParentGroup: {},
-        },
+        { Name: "圆环", ParentGroup: {} },
+        { Name: "连接", ColorGroup: "底色" },
+        { Name: "连接反光", ColorGroup: "反光" },
+        { Name: "胸罩带", ColorGroup: "底色" },
+        { Name: "胸罩带反光", ColorGroup: "反光" },
+        { Name: "胸罩", ColorGroup: "底色" },
+        { Name: "胸罩反光", ColorGroup: "反光" },
+        { Name: "皮革带", ColorGroup: "底色" },
+        { Name: "皮革带反光", ColorGroup: "反光" },
+        { Name: "拉链", ParentGroup: {} },
     ],
 };
 
