@@ -9,7 +9,7 @@ const asset = {
     Priority: 20,
     ParentGroup: "BodyLower",
     DynamicGroupName: "Garters",
-    PoseMapping: { ...AssetPoseMapping.Garters },
+    PoseMapping: { ...AssetPoseMapping.Garters, Kneel: "Kneel", KneelingSpread: "KneelingSpread" },
 };
 
 const translation = {
