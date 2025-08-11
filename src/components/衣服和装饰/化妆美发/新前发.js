@@ -13,6 +13,7 @@ const 前发shared = {
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
     新前发_Luzi: [
+        { Name: "前发1", Left: 50, Top: 0, ...前发shared },
         { Name: "前发2", Left: 50, Top: 0, ...前发shared },
         { Name: "前发3", Left: 50, Top: 0, ...前发shared },
         { Name: "前发4", Left: 50, Top: 0, ...前发shared },
