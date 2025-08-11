@@ -59,10 +59,14 @@ const assets = {
         makeFH("前发34B"),
         makeFH("前发35"),
         makeFH("前发36"),
+        makeFH("前发37A"),
+        makeFH("前发37B"),
+        makeFH("前发38"),
+        makeFH("前发39"),
     ],
 };
 
-const 前发数量 = 36;
+const 前发数量 = 39;
 
 /** @type { (func: (idx: number) => string) => Record<string,string> } */
 const genTrans = (func) => Object.fromEntries(Array.from({ length: 前发数量 }, (_, i) => [`前发${i + 1}`, func(i)]));
@@ -79,6 +83,8 @@ const translations = {
             前发33_R: "前发 33B",
             前发34A: "前发 34A",
             前发34B: "前发 34B",
+            前发37A: "前发 37A",
+            前发37B: "前发 37B",
         },
     },
     EN: {
@@ -91,6 +97,8 @@ const translations = {
             前发33_R: "Front Hair 33B",
             前发34A: "Front Hair 34A",
             前发34B: "Front Hair 34B",
+            前发37A: "Front Hair 37A",
+            前发37B: "Front Hair 37B",
         },
     },
 };
