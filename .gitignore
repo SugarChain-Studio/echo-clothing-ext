@@ -9,3 +9,4 @@ resources/**/*.psd
 .DS_Store
 resources/Assets/*空白文件
 resources/Assets/*空白*
+__pycache__

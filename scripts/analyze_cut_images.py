@@ -1,19 +1,24 @@
 import glob
 from PIL import Image
-from scripts.common import regulateXYWH
+from common import regulateXYWH
 
 # 带有通配符的目录路径
 wildcard_paths = [
-    "resources/Assets/Female3DCG/新前发_Luzi/前发28.png",
+    "resources/Assets/Female3DCG/新前发_Luzi/前发37*.png",
+    "resources/Assets/Female3DCG/新前发_Luzi/前发38.png",
+    "resources/Assets/Female3DCG/新前发_Luzi/前发39.png",
 ]
 
+# 新前发参数
+reference_topleft = [50, 0]
+minimum_height = 400
+
 # 参考左上角，如果设置，则会以此作为裁剪区域的左上角
-# reference_topleft = [0, 0]
-reference_topleft = None
+# reference_topleft = None
 
 # 最小高度，如果设置，则会以此作为裁剪区域的最小高度
-# minimum_height = 400
-minimum_height = None
+# minimum_height = None
+
 
 def analyze_and_crop_images(file_paths):
     """分析图片并裁剪到左右对称的最小矩形区域。"""
