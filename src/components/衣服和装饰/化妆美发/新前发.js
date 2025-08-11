@@ -63,10 +63,13 @@ const assets = {
         makeFH("前发37B"),
         makeFH("前发38"),
         makeFH("前发39"),
+        makeFH("前发40"),
+        makeFH("前发41"),
+        makeFH("前发42"),
     ],
 };
 
-const 前发数量 = 39;
+const 前发数量 = assets.新前发_Luzi.length;
 
 /** @type { (func: (idx: number) => string) => Record<string,string> } */
 const genTrans = (func) => Object.fromEntries(Array.from({ length: 前发数量 }, (_, i) => [`前发${i + 1}`, func(i)]));
