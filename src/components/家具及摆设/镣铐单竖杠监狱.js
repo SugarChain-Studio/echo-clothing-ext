@@ -66,36 +66,42 @@ const asset = {
 
         {
             Name: "上腿杆",
+            ColorGroup: "大腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
         },
         {
             Name: "下腿杆",
+            ColorGroup: "小腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
         },
         {
             Name: "左小腿",
+            ColorGroup: "小腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
         },
         {
             Name: "右小腿",
+            ColorGroup: "小腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
         },
         {
             Name: "左大腿",
+            ColorGroup: "大腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
         },
         {
             Name: "右大腿",
+            ColorGroup: "大腿金属",
             Priority: 22,
             ParentGroup: "BodyLower",
             PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
@@ -113,13 +119,15 @@ const layerNames = {
         A_柱子3: "柱子3",
 
         金属主体: "金属主体",
+        小腿金属: "小腿金属",
+        大腿金属: "大腿金属",
 
-        上腿杆: "上腿杆",
-        下腿杆: "下腿杆",
-        左小腿: "左小腿",
-        右小腿: "右小腿",
-        左大腿: "左大腿",
-        右大腿: "右大腿",
+        上腿杆: "杆",
+        下腿杆: "杆",
+        左小腿: "铐左",
+        右小腿: "铐右",
+        左大腿: "铐左",
+        右大腿: "铐右",
     },
     EN: {
         A_底盘: "Base",
@@ -129,14 +137,16 @@ const layerNames = {
         A_柱子2: "Column2",
         A_柱子3: "Column3",
 
-        金属主体: "Metal Body",
+        金属主体: "Metal Main",
+        小腿金属: "Metal Calf",
+        大腿金属: "Metal Thigh",
 
-        上腿杆: "Upper Leg",
-        下腿杆: "Lower Leg",
-        左小腿: "Left Calf",
-        右小腿: "Right Calf",
-        左大腿: "Left Thigh",
-        右大腿: "Right Thigh",
+        上腿杆: "Bar",
+        下腿杆: "Bar",
+        左小腿: "Cuff Left",
+        右小腿: "Cuff Right",
+        左大腿: "Cuff Left",
+        右大腿: "Cuff Right",
     },
 };
 
