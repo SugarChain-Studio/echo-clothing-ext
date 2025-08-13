@@ -12,7 +12,12 @@ const 前发shared = {
 
 const 前发X50Y0 = { Left: 50, Top: 0, ...前发shared };
 
-/** @type {(name:string, args?: Partial<CustomAssetDefinitionAppearance>) => CustomAssetDefinitionAppearance} */
+/**
+ * 创建前发发型，注意使用这个方法创建的前发必须以 [50, 0] 作为左上角
+ * @param {string} name 资源名称
+ * @param {Partial<CustomAssetDefinitionAppearance>} [args] 额外补充其他资源参数
+ * @returns {CustomAssetDefinitionAppearance}
+ */
 const makeFH = (name, args) => ({ Name: name, ...前发X50Y0, ...args });
 
 /** @type { CustomGroupedAssetDefinitions }} */
@@ -66,6 +71,9 @@ const assets = {
         makeFH("前发40"),
         makeFH("前发41"),
         makeFH("前发42"),
+        makeFH("前发43"),
+        makeFH("前发44"),
+        makeFH("前发45"),
     ],
 };
 
