@@ -8,8 +8,8 @@ const mask = [200, 423, 100, 100];
 const asset = {
     Name: "单监_Luzi",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 120,
+    Top: 550,
     Difficulty: 4,
     AllowLock: true,
     AllowTighten: true,
