@@ -11,6 +11,7 @@ const asset = {
     },
     Priority: 26,
     DefaultColor: ["#560E0E", "#560E0E", "#1F1F1F"],
+    Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,

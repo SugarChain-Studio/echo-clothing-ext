@@ -12,6 +12,7 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
+    Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     Layer: [
         { Name: "A1", ColorGroup: "A" },
         { Name: "A2", ColorGroup: "A" },
@@ -65,6 +66,5 @@ const layerNames = {
 };
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth("ClothLower", asset);
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
 }
