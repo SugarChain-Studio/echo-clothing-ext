@@ -16,25 +16,18 @@ const asset = {
     DrawLocks: false,
     RemoveTime: 5,
     Time: 10,
+    ParentGroup: {},
     Effect: [E.Freeze, E.BlockWardrobe, E.Mounted, E.MapImmobile],
     Hide: [],
     Layer: [
         {
+            Top: 560,
             Name: "A_底盘",
-            ParentGroup: null,
             Priority: 3,
             ColorGroup: "金属主体",
         },
-        {
-            Name: "A_柱子伸缩",
-            ParentGroup: null,
-            Priority: 5,
-        },
-        {
-            Name: "A_阳具",
-            ParentGroup: null,
-            Priority: 22,
-        },
+        { Name: "A_柱子伸缩", Priority: 5 },
+        { Name: "A_阳具", Priority: 22 },
         {
             HasImage: false,
             AllowTypes: { d: [1, 2, 3, 4, 5] },
@@ -45,21 +38,11 @@ const asset = {
                 },
             ],
         },
-        {
-            Name: "A_柱子1",
-            ParentGroup: null,
-            Priority: 6,
-            ColorGroup: "金属主体",
-        },
-        {
-            Name: "A_柱子2",
-            ParentGroup: null,
-            Priority: 6,
-            ColorGroup: "金属主体",
-        },
+        { Name: "A_柱子1", Priority: 6, ColorGroup: "金属主体" },
+        { Name: "A_柱子2", Priority: 6, ColorGroup: "金属主体" },
         {
             Name: "A_柱子3",
-            ParentGroup: null,
+
             Priority: 6,
             ColorGroup: "金属主体",
         },

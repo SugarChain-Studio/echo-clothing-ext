@@ -1,4 +1,3 @@
-import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
