@@ -295,6 +295,14 @@ const asset = {
         { Name: "柴柴", AllowTypes: { l: 38 } },
         { Name: "爱丽丝梦游仙境", AllowTypes: { l: 39 } },
         { Name: "希尔薇娅", AllowTypes: { l: 40 } },
+        { Name: "UMI", AllowTypes: { l: 41 } },
+        { Name: "姜海琳", AllowTypes: { l: 42 } },
+        { Name: "云喵", AllowTypes: { l: 43 } },
+        { Name: "枳", AllowTypes: { l: 44 } },
+        { Name: "Lana", AllowTypes: { l: 45 } },
+        { Name: "柴柴1", AllowTypes: { l: 46} },
+        { Name: "柴柴2", AllowTypes: { l: 47 } },
+        { Name: "柴柴3", AllowTypes: { l: 48 } },
 
     ],
 };
