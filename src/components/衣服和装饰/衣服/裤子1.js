@@ -11,6 +11,7 @@ const asset = {
     },
     Priority: 26,
     DynamicGroupName: "ClothLower",
+    Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     Layer: [
         { Name: "右_A0", ColorGroup: "吊带" },
         { Name: "右_A1", ColorGroup: "内侧", Priority: 3 },
