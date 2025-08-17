@@ -74,6 +74,12 @@ const assets = {
         makeFH("前发43"),
         makeFH("前发44"),
         makeFH("前发45"),
+        makeFH("前发46", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+        makeFH("前发47", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+        makeFH("前发48", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+        makeFH("前发49", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+        makeFH("前发50", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+        makeFH("前发51", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     ],
 };
 
