@@ -69,17 +69,17 @@ const layerNames = {
         装饰环: "Accessory Ring",
         装饰珠: "Accessory Bead",
 
-        右_底色: "Right Base Color",
-        右_装饰: "Right Accessory",
-        右_本体: "Right Body",
-        右_装饰环: "Right Accessory Ring",
-        右_装饰珠: "Right Accessory Bead",
+        右_底色: "Right",
+        右_装饰: "Right",
+        右_本体: "Right",
+        右_装饰环: "Right",
+        右_装饰珠: "Right",
 
-        左_底色: "Left Base Color",
-        左_装饰: "Left Accessory",
-        左_本体: "Left Body",
-        左_装饰环: "Left Accessory Ring",
-        左_装饰珠: "Left Accessory Bead",
+        左_底色: "Left",
+        左_装饰: "Left",
+        左_本体: "Left",
+        左_装饰环: "Left",
+        左_装饰珠: "Left",
     },
 };
 
