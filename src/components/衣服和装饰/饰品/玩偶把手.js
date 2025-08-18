@@ -42,11 +42,32 @@ const asset = {
     DefaultColor: ["#111111", "#FFFFFF"],
     Layer: [
         ...["base", "hlight"].flatMap((s) => [
-            { Name: `s_${s}`, ...propsS },
-            { Name: `t_${s}`, ...propsT, CopyLayerColor: `s_${s}` },
-            { Name: `af_${s}`, ...propsAf, CopyLayerColor: `s_${s}` },
+            { Name: `s_${s}`, ...propsS, AllowTypes: { typed: [0, 1] } },
+            { Name: `t_${s}`, ...propsT, CopyLayerColor: `s_${s}`, AllowTypes: { typed: [0, 2] } },
+            { Name: `af_${s}`, ...propsAf, CopyLayerColor: `s_${s}`, AllowTypes: { typed: [0, 2] } },
         ]),
     ],
+};
+
+const extended = {
+    Archetype: ExtendedArchetype.TYPED,
+    DrawImages: false,
+    Options: [{ Name: "B" }, { Name: "S" }, { Name: "T" }],
+};
+
+const assetStrings = {
+    CN: {
+        Select: "选择玩偶把手样式",
+        B: "肩和髋",
+        S: "仅肩部",
+        T: "仅髋部",
+    },
+    EN: {
+        Select: "Select Doll Handle Style",
+        B: "Shoulder and Hip",
+        S: "Shoulder Only",
+        T: "Hip Only",
+    },
 };
 
 const translation = {
@@ -60,5 +81,5 @@ const layerNames = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ClothAccessory", asset, { translation, layerNames });
+    AssetManager.addAssetWithConfig("ClothAccessory", asset, { translation, layerNames, assetStrings, extended });
 }
