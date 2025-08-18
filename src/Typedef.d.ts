@@ -21,4 +21,9 @@ declare module 'https://cdn.jsdelivr.net/npm/sweetalert2@11.6.13/+esm' {
     export default Swal;
 }
 
+declare module 'https://cdn.jsdelivr.net/npm/bondage-club-mod-sdk@1.2.0/dist/bcmodsdk.js' {
+    import bcModSdk from 'bondage-club-mod-sdk';
+    export default bcModSdk;
+}
+
 type CustomAssetAttribute = AssetAttribute | 'LuziXCross' | 'LuziLimbTeleDevice';

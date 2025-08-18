@@ -28,11 +28,20 @@ function wearHamburgerOnThankYou() {
         });
 }
 
-once(ModInfo.name, () => {
+once(ModInfo.name, async () => {
     HookManager.setLogger(Logger);
     AssetManager.setLogger(Logger);
 
     CraftingCache.setup(Logger);
+
+    const bcModSdk = await (async () => {
+        if (globalThis.bcModSdk) {
+            return globalThis.bcModSdk;
+        } else {
+            const module = await import("https://cdn.jsdelivr.net/npm/bondage-club-mod-sdk@1.2.0/dist/bcmodsdk.js");
+            return module.default;
+        }
+    })();
 
     fetchAssetOverrides()
         .then((override) => resolveAssetOverrides(resourceBaseURL, override))
@@ -42,7 +51,8 @@ once(ModInfo.name, () => {
             Logger.error(`Failed to fetch asset overrides: ${error.message}`);
         });
 
-    HookManager.init(ModInfo);
+    const mod = bcModSdk.registerMod(ModInfo);
+    HookManager.initWithMod(mod);
     AssetManager.init(setup);
 
     AssetManager.enableValidation((param) => {
