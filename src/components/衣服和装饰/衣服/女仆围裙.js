@@ -1,3 +1,4 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
@@ -10,10 +11,7 @@ const asset = {
     Priority: 32,
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
     ParentGroup: "BodyUpper",
-    PoseMapping: {
-        Hogtied: PoseType.HIDE,
-        AllFours: PoseType.HIDE,
-    },
+    PoseMapping: PoseMapTools.HideFullBody(),
     Layer: [
         {
             Name: "肩带内",
@@ -24,43 +22,29 @@ const asset = {
             Name: "肩带外",
             ColorGroup: "肩带",
             ParentGroup: {},
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            }),
         },
         {
             Name: "裙",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             Name: "荷叶边",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             Name: "线上",
             ColorGroup: "描边线",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             Name: "线下",
             ColorGroup: "描边线",
             ParentGroup: {},
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
     ],
 };

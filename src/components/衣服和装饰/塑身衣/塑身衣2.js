@@ -1,4 +1,21 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+
+/** @type {AssetLayerDefinition} */
+const base = {
+    PoseMapping: PoseMapTools.HideFullBody({
+        LegsClosed: PoseType.DEFAULT,
+        Kneel: PoseType.DEFAULT,
+    }),
+};
+
+/** @type {AssetLayerDefinition} */
+const baseLC = {
+    PoseMapping: PoseMapTools.HideFullBody({
+        LegsClosed: "LegsClosed",
+        Kneel: "LegsClosed",
+    }),
+};
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -13,78 +30,14 @@ const asset = {
     SetPose: ["LegsClosed", "Kneel"],
     AllowActivePose: ["LegsClosed", "Kneel"],
     Layer: [
-        {
-            Name: "上",
-            PoseMapping: {
-                LegsClosed: PoseType.DEFAULT,
-                Kneel: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下",
-            PoseMapping: {
-                LegsClosed: "LegsClosed",
-                Kneel: "LegsClosed",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上图案",
-            PoseMapping: {
-                LegsClosed: PoseType.DEFAULT,
-                Kneel: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下图案",
-            PoseMapping: {
-                LegsClosed: "LegsClosed",
-                Kneel: "LegsClosed",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上中线",
-            PoseMapping: {
-                LegsClosed: PoseType.DEFAULT,
-                Kneel: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下中线",
-            PoseMapping: {
-                LegsClosed: "LegsClosed",
-                Kneel: "LegsClosed",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上线",
-            PoseMapping: {
-                LegsClosed: PoseType.DEFAULT,
-                Kneel: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下线",
-            PoseMapping: {
-                LegsClosed: "LegsClosed",
-                Kneel: "LegsClosed",
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
+        { Name: "上", ...base },
+        { Name: "下", ...baseLC },
+        { Name: "上图案", ...base },
+        { Name: "下图案", ...baseLC },
+        { Name: "上中线", ...base },
+        { Name: "下中线", ...baseLC },
+        { Name: "上线", ...base },
+        { Name: "下线", ...baseLC },
     ],
 };
 
@@ -103,7 +56,7 @@ const layerNames = {
 
 /** @type {Translation.Entry} */
 const translation = {
-    CN: "束身衣 2",
+    CN: "塑身衣 2",
     EN: "Shapewear 2",
 };
 

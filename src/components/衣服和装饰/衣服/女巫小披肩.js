@@ -1,3 +1,4 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -8,12 +9,10 @@ const asset = {
     Left: 100,
     Top: 180,
     ParentGroup: {},
-    PoseMapping: {
+    PoseMapping: PoseMapTools.HideFullBody({
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
-        AllFours: PoseType.HIDE,
-        Hogtied: PoseType.HIDE,
-    },
+    }),
     EditOpacity: true,
     MinOpacity: 0,
     MaxOpacity: 1,

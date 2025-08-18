@@ -1,4 +1,4 @@
-import { Tools } from "@mod-utils/Tools";
+import { PoseMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 /** @type {AssetPoseMapping} */
@@ -8,19 +8,7 @@ const baseMapping = {
 };
 
 /** @type {AssetPoseMapping} */
-const foursMapping = {
-    BaseUpper: PoseType.HIDE,
-    BaseLower: PoseType.HIDE,
-    Yoked: PoseType.HIDE,
-    OverTheHead: PoseType.HIDE,
-    BackBoxTie: PoseType.HIDE,
-    BackElbowTouch: PoseType.HIDE,
-    BackCuffs: PoseType.HIDE,
-    Spread: PoseType.HIDE,
-    Kneel: PoseType.HIDE,
-    KneelingSpread: PoseType.HIDE,
-    LegsClosed: PoseType.HIDE,
-};
+const foursMapping = PoseMapTools.FromHide({ AllFours: "", Hogtied: "" });
 
 /** @type { (string)=>Partial<AssetLayerDefinition> } */
 const bLConfig = (name) => ({

@@ -1,9 +1,10 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "../../../armMask";
 import { AssetManager } from "../../../assetForward";
 
-const hideHogtied = {
-    AllFours: PoseType.HIDE,
-    Hogtied: PoseType.HIDE,
+/** @type {AssetLayerDefinition} */
+const hideFB = {
+    PoseMapping: PoseMapTools.HideFullBody(),
 };
 
 /** @type {CustomAssetDefinition} */
@@ -42,31 +43,26 @@ const asset = {
         "Default",
     ],
     Layer: [
-        {
-            Name: "A1",
-            ColorGroup: "Petticoat",
-            Priority: 6,
-            PoseMapping: hideHogtied,
-        },
-        { Name: "A2", ColorGroup: "Petticoat", PoseMapping: hideHogtied },
-        { Name: "A3", ColorGroup: "Petticoat", PoseMapping: hideHogtied },
+        { Name: "A1", ColorGroup: "Petticoat", Priority: 6, ...hideFB },
+        { Name: "A2", ColorGroup: "Petticoat", ...hideFB },
+        { Name: "A3", ColorGroup: "Petticoat", ...hideFB },
         { Name: "B1", ColorGroup: "Lace" },
         { Name: "B2", ColorGroup: "Cloth" },
         { Name: "B3", ColorGroup: "Darkening" },
-        { Name: "B4", ColorGroup: "Edge", PoseMapping: hideHogtied },
+        { Name: "B4", ColorGroup: "Edge", ...hideFB },
         { Name: "B5", ColorGroup: "Outline" },
         { Name: "B6", ColorGroup: "Edge" },
-        { Name: "C1", ColorGroup: "Cloth", PoseMapping: hideHogtied },
-        { Name: "C2", ColorGroup: "Darkening", PoseMapping: hideHogtied },
-        { Name: "C3", ColorGroup: "Edge", PoseMapping: hideHogtied },
-        { Name: "C4", ColorGroup: "Outline", PoseMapping: hideHogtied },
+        { Name: "C1", ColorGroup: "Cloth", ...hideFB },
+        { Name: "C2", ColorGroup: "Darkening", ...hideFB },
+        { Name: "C3", ColorGroup: "Edge", ...hideFB },
+        { Name: "C4", ColorGroup: "Outline", ...hideFB },
         { Name: "D1", ColorGroup: "Lace" },
         { Name: "D2", ColorGroup: "Cloth" },
         { Name: "D3", ColorGroup: "Darkening" },
         { Name: "D4", ColorGroup: "Acc" },
         { Name: "D5", ColorGroup: "Edge" },
-        { Name: "D6", ColorGroup: "Acc", PoseMapping: hideHogtied },
-        { Name: "D7", ColorGroup: "Acc", PoseMapping: hideHogtied },
+        { Name: "D6", ColorGroup: "Acc", ...hideFB },
+        { Name: "D7", ColorGroup: "Acc", ...hideFB },
     ],
 };
 

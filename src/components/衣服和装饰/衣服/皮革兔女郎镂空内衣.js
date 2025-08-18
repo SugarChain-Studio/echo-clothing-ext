@@ -1,3 +1,4 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -20,10 +21,7 @@ const asset = {
         "Default",
         "Default",
     ],
-    PoseMapping: {
-        Hogtied: PoseType.HIDE,
-        AllFours: PoseType.HIDE,
-    },
+    PoseMapping: PoseMapTools.HideFullBody(),
     Layer: [
         { Name: "圆环", ParentGroup: {} },
         { Name: "连接", ColorGroup: "底色" },

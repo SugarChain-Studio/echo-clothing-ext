@@ -1,3 +1,4 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -13,34 +14,27 @@ const asset = {
         {
             Name: "扣子",
             Priority: 27,
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             Name: "裤子A1",
             Priority: 26,
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 Kneel: "Kneel",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
                 Spread: "Spread",
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            }),
         },
         {
             Name: "裤子A2",
             Priority: 1,
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 Kneel: PoseType.HIDE,
                 KneelingSpread: PoseType.HIDE,
                 LegsClosed: "LegsClosed",
                 Spread: "Spread",
-                AllFours: PoseType.HIDE,
-                Hogtied: PoseType.HIDE,
-            },
+            }),
         },
     ],
 };

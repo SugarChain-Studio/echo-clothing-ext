@@ -1,3 +1,4 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -10,10 +11,7 @@ const asset = {
         KneelingSpread: 90,
     },
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    PoseMapping: {
-        Hogtied: PoseType.HIDE,
-        AllFours: PoseType.HIDE,
-    },
+    PoseMapping: PoseMapTools.HideFullBody(),
     ParentGroup: {},
     Layer: [
         {
@@ -29,14 +27,8 @@ const asset = {
 
 /** @type {Translation.Dialog} */
 const layerNames = {
-    CN: {
-        底: "底色",
-        反光: "反光",
-    },
-    EN: {
-        底: "Base",
-        反光: "Reflective",
-    },
+    CN: { 底: "底色", 反光: "反光" },
+    EN: { 底: "Base", 反光: "Reflective" },
 };
 
 /** @type {Translation.Entry} */
