@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinitionAppearance[]} */
 const assets = [
@@ -95,40 +95,28 @@ const assets = [
         Random: false,
         Top: 0,
         Left: 0,
-        Layer: [
-            { Name: "1" },
-            { Name: "2" },
-        ],
+        Layer: [{ Name: "1" }, { Name: "2" }],
     },
     {
         Name: "雪豹尾巴镜像_Luzi",
         Random: false,
         Top: 0,
         Left: 0,
-        Layer: [
-            { Name: "1" },
-            { Name: "2" },
-        ],
+        Layer: [{ Name: "1" }, { Name: "2" }],
     },
     {
         Name: "鱼尾1_Luzi",
         Random: false,
         Top: 0,
         Left: 0,
-        Layer: [
-            { Name: "1" },
-            { Name: "2" },
-        ],
+        Layer: [{ Name: "1" }, { Name: "2" }],
     },
     {
         Name: "鱼尾2_Luzi",
         Random: false,
         Top: 0,
         Left: 0,
-        Layer: [
-            { Name: "1" },
-            { Name: "2" },
-        ],
+        Layer: [{ Name: "1" }, { Name: "2" }],
     },
 ];
 
