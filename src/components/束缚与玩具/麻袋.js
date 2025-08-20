@@ -1,5 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Typing } from "../../utils";
+import { FullMask } from "../fullMask";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -16,75 +17,12 @@ const asset = {
     AllowActivePose: ["BackBoxTie", "BackElbowTouch", "LegsClosed", "Kneel"],
     SetPose: ["BackBoxTie", "LegsClosed"],
     Layer: [
-        { Name: "透明", Priority: 62, AllowTypes: { typed: 0 } },
-        { Name: "麻袋", Priority: 62, AllowTypes: { typed: 1 } },
-        { Name: "绳子", Priority: 62 },
         {
-            Name: "背面",
-            Priority: 1,
+            Name: "麻袋遮罩",
+            AllowColorize: false,
+            HasImage: false,
             Alpha: [
                 {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        // "ItemHeads",
-                        // "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                        "额外头发_Luzi",
-                        "新后发_Luzi",
-                        "新前发_Luzi",
-
-                        "BodyLower",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "SuitLower",
-                    ],
                     Masks: [
                         [100, 0, 300, 64],
 
@@ -102,6 +40,10 @@ const asset = {
                 },
             ],
         },
+        { Name: "透明", Priority: 62, AllowTypes: { typed: 0 } },
+        { Name: "麻袋", Priority: 62, AllowTypes: { typed: 1 } },
+        { Name: "绳子", Priority: 62 },
+        { Name: "背面", Priority: 1 },
     ],
 };
 
@@ -151,5 +93,6 @@ export default function () {
             translation,
             assetStrings,
         });
+        FullMask.push(group, asset.Name, ["麻袋遮罩"]);
     }
 }

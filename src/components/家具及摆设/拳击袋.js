@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { FullMask } from "./fullMask";
+import { FullMask } from "../fullMask";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
