@@ -3,7 +3,7 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Random: false,
     Visible: false,
-    NotVisibleOnScreen: ["LuziScreen"], // 使用这个数据来让物品在列表不显示
+    Value: -1, // 使用这个数据来让物品在列表不显示
 };
 
 const translations = {
@@ -16,7 +16,7 @@ const translations = {
 const groups = ["ItemMisc", "ItemHandheld"];
 
 export default function () {
-    for(const group of groups) {
+    for (const group of groups) {
         ["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]
             .map((Name) => ({ ...asset, Name }))
             .forEach((asset) => {

@@ -4,7 +4,6 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "乳夹_Luzi",
     Fetish: ["Metal"],
-    Value: -1,
     Difficulty: 10,
     Time: 15,
     Top: 0,

@@ -4,7 +4,7 @@ const asset = {
     Name: "抓住推车",
     Random: false,
     Visible: false,
-    NotVisibleOnScreen: ["LuziScreen"], // 使用这个数据来让物品在列表不显示
+    Value: -1, // 使用这个数据来让物品在列表不显示
 };
 
 const translation = {

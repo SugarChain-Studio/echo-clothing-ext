@@ -66,7 +66,6 @@ function afterDrawHook(data, originalFunction, { C, A, CA, X, Y, drawCanvas, dra
 const asset = {
     Name: "身体论文_Luzi",
     Priority: 13,
-    Value: -1,
     DynamicGroupName: "BodyMarkings",
     PoseMapping: {
         BackBoxTie: PoseType.DEFAULT,

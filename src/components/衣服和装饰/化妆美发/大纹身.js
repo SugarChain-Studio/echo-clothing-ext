@@ -341,7 +341,6 @@ function layerMapping(layer) {
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "大纹身_Luzi",
-    Value: -1,
     Time: 5,
     RemoveTime: 5,
     IsRestraint: false,

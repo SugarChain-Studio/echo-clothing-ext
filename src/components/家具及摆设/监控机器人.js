@@ -9,7 +9,6 @@ const asset = {
     Random: false,
     Top: 100,
     Left: 350,
-    Value: -1,
     Time: 15,
     Fetish: ["Metal"],
     Category: ["SciFi"],
