@@ -4,18 +4,29 @@ from common import regulateXYWH
 
 # 带有通配符的目录路径
 wildcard_paths = [
-    "resources/Assets/Female3DCG/ItemDevices/**/单监_Luzi_*.png",
+    "resources/Assets/Female3DCG/ItemHandheld/棒棒糖_Luzi_*.png",
+    "resources/Assets/Female3DCG/ItemHandheld/烤鱼_Luzi_*.png",
+    "resources/Assets/Female3DCG/ItemHandheld/鸡腿_Luzi.png",
+    "resources/Assets/Female3DCG/ItemHandheld/曲奇.png"
 ]
 
 # 新前发参数
 reference_topleft = [50, 0]
 minimum_height = 400
 
+# 口中食物参数
+reference_topleft = [160, 160]
+minimum_height = 200
+
+# 手中食物参数
+reference_topleft = [160, 300]
+minimum_height = 200
+
 # 参考左上角，如果设置，则会以此作为裁剪区域的左上角
-reference_topleft = None
+# reference_topleft = None
 
 # 最小高度，如果设置，则会以此作为裁剪区域的最小高度
-minimum_height = None
+# minimum_height = None
 
 
 def analyze_and_crop_images(file_paths):

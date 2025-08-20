@@ -1,62 +1,44 @@
 import { AssetManager } from "../../../assetForward";
 
+/** @type {Partial<CustomAssetDefinitionItem>} */
+const mouthFood = {
+    Top: 160,
+    Left: 160,
+    Random: false,
+    Difficulty: -10,
+    ParentGroup: {},
+    PoseMapping: {},
+    Priority: 55,
+};
+
+/** @type {Partial<CustomAssetDefinitionItem>} */
+const handFood = {
+    Random: false,
+    Left: 160,
+    Top: 300,
+    Difficulty: -10,
+    Priority: 55,
+    ParentGroup: {},
+    PoseMapping: {},
+};
+
+/**
+ * 创建食物，注意使用这个方法创建的食物必须以 [160, 160] 作为左上角
+ * @param {string} name 资源名称
+ * @param {Partial<CustomAssetDefinitionItem>} [args] 额外补充其他资源参数
+ * @returns {CustomAssetDefinitionItem}
+ */
+const makeFood = (name, args) => ({ Name: name, ...mouthFood, ...args });
+
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
     ItemMouth: [
-        {
-            Name: "棒棒糖_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            Effect: [],
-            PoseMapping: {},
-            Priority: 55,
-            Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }],
-        },
-        {
-            Name: "烤鱼_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Priority: 55,
-            Difficulty: -10,
-            ParentGroup: {},
-            Effect: [],
-            PoseMapping: {},
-        },
-        {
-            Name: "鸡腿_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Priority: 55,
-            Difficulty: -10,
-            ParentGroup: {},
-            Effect: [],
-        },
-        {
-            Name: "煎包_Luzi",
-            Random: false,
-            Top: 160,
-            Left: 160,
-            Priority: 55,
-            Difficulty: -10,
-            ParentGroup: {},
-            Effect: [],
-            PoseMapping: {},
-        },
-        {
-            Name: "蛋糕卷_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Priority: 55,
-            Difficulty: -10,
-            ParentGroup: {},
-            Effect: [],
-        },
+        makeFood("棒棒糖_Luzi", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
+        makeFood("烤鱼_Luzi"),
+        makeFood("鸡腿_Luzi"),
+        makeFood("煎包_Luzi"),
+        makeFood("蛋糕卷_Luzi"),
+        makeFood("曲奇"),
     ],
     ItemHandheld: [
         {
@@ -70,55 +52,15 @@ const assets = {
         },
         {
             Name: "棒棒糖_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            PoseMapping: {},
-            Layer: [
-                {
-                    Name: "棒子",
-                    Priority: 55,
-                },
-                {
-                    Name: "糖",
-                    Priority: 55,
-                },
-                {
-                    Name: "条纹",
-                    Priority: 55,
-                },
-            ],
+            ...handFood,
+            Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }],
         },
         {
             Name: "烤鱼_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            PoseMapping: {},
-            Layer: [
-                {
-                    Name: "竹签",
-                    Priority: 55,
-                },
-                {
-                    Name: "鱼",
-                    Priority: 55,
-                },
-            ],
+            ...handFood,
+            Layer: [{ Name: "竹签" }, { Name: "鱼" }],
         },
-        {
-            Name: "鸡腿_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Difficulty: -10,
-            ParentGroup: {},
-            PoseMapping: {},
-        },
+        { Name: "鸡腿_Luzi", ...handFood },
         {
             Name: "奶茶",
             Random: false,
@@ -130,24 +72,9 @@ const assets = {
             DefaultColor: ["#BA9273", "#F9F4E0", "#B4B4B4", "Default", "#878787"],
             AllowActivity: ["RubItem", "SipItem"],
             PoseMapping: {},
-            Layer: [
-                {
-                    Name: "底色",
-                },
-                {
-                    Name: "顶色",
-                },
-                {
-                    Name: "盖子",
-                },
-                {
-                    Name: "外观",
-                },
-                {
-                    Name: "吸管",
-                },
-            ],
+            Layer: [{ Name: "底色" }, { Name: "顶色" }, { Name: "盖子" }, { Name: "外观" }, { Name: "吸管" }],
         },
+        { Name: "曲奇", ...handFood },
     ],
     ItemHood: [
         {
@@ -179,6 +106,7 @@ const translations = {
             鸡腿_Luzi: "烤鸡腿",
             煎包_Luzi: "煎包",
             蛋糕卷_Luzi: "蛋糕卷",
+            曲奇: "曲奇",
         },
         ItemHood: {
             汉堡_Luzi: "汉堡",
@@ -199,6 +127,7 @@ const translations = {
             鸡腿_Luzi: "Roasted Chicken Leg",
             煎包_Luzi: "Fried Bun",
             蛋糕卷_Luzi: "Cake Roll",
+            曲奇: "Cookie",
         },
         ItemHood: {
             汉堡_Luzi: "Hamburger",
@@ -255,5 +184,12 @@ const layerNames = {
 };
 
 export default function () {
+    const iconMapping = assets.ItemMouth.reduce((prev, item) => {
+        prev[`Assets/Female3DCG/ItemHandheld/${item.Name}`] = `Assets/Female3DCG/ItemMouth/${item.Name}`;
+        return prev;
+    }, {});
+
+    AssetManager.addImageMapping(iconMapping);
+
     AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
 }
