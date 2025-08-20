@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { FullMask } from "../fullMask";
+import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

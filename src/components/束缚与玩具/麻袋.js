@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Typing } from "../../utils";
-import { FullMask } from "../fullMask";
+import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

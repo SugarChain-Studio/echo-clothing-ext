@@ -1,4 +1,4 @@
-import { AssetManager } from "../assetForward";
+import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 const assetAdjustments = {
