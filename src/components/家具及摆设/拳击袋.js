@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
+import { FullMask } from "./fullMask";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -9,74 +9,18 @@ const asset = {
     Left: 0,
     AllowLock: true,
     Extended: true,
+    EditOpacity: true,
     MinOpacity: 0,
     Opacity: 0,
     SetPose: ["BackElbowTouch", "Kneel"],
     Layer: [
-        { Name: "链条前", Priority: 67, Top: -800 },
-        { Name: "带子", Priority: 66 },
-        { Name: "链条环", Priority: 66 },
         {
-            Name: "沙袋前",
-            Priority: 64,
+            Name: "前遮罩",
+            AllowColorize: false,
+            HasImage: false,
             AllowTypes: { typed: 0 },
             Alpha: [
                 {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        "ItemHead",
-                        "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                        "额外头发_Luzi",
-                        "新后发_Luzi",
-                        "新前发_Luzi",
-                    ],
                     Masks: [
                         [0, -100, 500, 135], //上
                         [0, 717, 500, 120], //下
@@ -86,66 +30,13 @@ const asset = {
                 },
             ],
         },
-        { Name: "沙袋后", Priority: 1, MinOpacity: 1 },
-        { Name: "链条后", Priority: 0, Top: -800, MinOpacity: 1 },
         {
-            Name: "沙袋前框",
-            Priority: 65,
+            Name: "前框遮罩",
+            AllowColorize: false,
+            HasImage: false,
             AllowTypes: { typed: 1 },
             Alpha: [
                 {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        "ItemHead",
-                        "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                    ],
                     Masks: [
                         [0, -100, 500, 135],
                         [0, 717, 500, 120],
@@ -155,6 +46,13 @@ const asset = {
                 },
             ],
         },
+        { Name: "链条前", ColorGroup: "链条", Priority: 67, Top: -800 },
+        { Name: "带子", Priority: 66 },
+        { Name: "链条环", ColorGroup: "链条", Priority: 66 },
+        { Name: "沙袋前", ColorGroup: "沙袋", Priority: 64, AllowTypes: { typed: 0 } },
+        { Name: "沙袋后", ColorGroup: "沙袋", Priority: 1, MinOpacity: 1 },
+        { Name: "链条后", ColorGroup: "链条", Priority: 0, Top: -800, MinOpacity: 1 },
+        { Name: "沙袋前框", Priority: 65, AllowTypes: { typed: 1 } },
         { Name: "照片框", Priority: 65, AllowTypes: { typed: 1 } },
         { Name: "胶带", Priority: 65, AllowTypes: { typed: 1 } },
     ],
@@ -165,6 +63,37 @@ const asset = {
     },
 };
 
+const layerNames = {
+    CN: {
+        链条前: "前",
+        链条后: "后",
+        链条环: "环",
+
+        沙袋前: "前",
+        沙袋后: "后",
+        沙袋前框: "沙袋前框",
+        照片框: "照片框",
+        胶带: "胶带",
+
+        链条: "链条",
+        沙袋: "沙袋",
+    },
+    EN: {
+        链条前: "Front",
+        链条后: "Back",
+        链条环: "Link",
+        沙袋前: "Front",
+        沙袋后: "Back",
+        沙袋前框: "Sack Front Frame",
+        照片框: "Photo Frame",
+        胶带: "Tape",
+
+        链条: "Chain",
+        沙袋: "Sack",
+    },
+};
+
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -176,10 +105,11 @@ const extended = {
         Draw: PropertyOpacityDraw,
         Exit: PropertyOpacityExit,
     },
+    DrawData: { elementData: ExtendedXYClothes[2].map((tuple) => ({ position: [tuple[0], tuple[1] + 100] })) },
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["拳击袋_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择拳击袋配置",
         有照片: "贴上照片",
@@ -208,15 +138,15 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["拳击�
         Set有照片: "SourceCharacter прикрепил фото к DestinationCharacter.",
         Set无照片: "SourceCharacter снял фото с DestinationCharacter.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "拳击袋",
     EN: "Boxing Bag",
     UA: "Боксерський мішок",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
-};
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
+    FullMask.push("ItemDevices", asset.Name, ["前遮罩", "前框遮罩"]);
+}

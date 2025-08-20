@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
+import { FullMask } from "./fullMask";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -12,138 +12,25 @@ const asset = {
     Top: -45,
     AllowLock: true,
     Extended: true,
+    EditOpacity: true,
     MinOpacity: 0,
     Opacity: 0,
     SetPose: ["AllFours"],
     Effect: [E.BlockWardrobe, E.Freeze],
     Layer: [
         {
-            Name: "身体",
-            AllowTypes: { typed: [0, 1] },
-            Alpha: [
-                {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        "ItemHead",
-                        "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                    ],
-                    Masks: [
-                        [0, 388, 500, 200], //下
-                    ],
-                },
-            ],
+            Name: "身体遮罩",
+            AllowColorize: false,
+            HasImage: false,
+            Alpha: [{ Masks: [[0, 388, 500, 200]] }],
         },
-
-        { Name: "背景", Priority: 6, MinOpacity: 1, AllowTypes: { typed: [0, 1] } },
-        { Name: "脚", AllowTypes: { typed: [0, 1] } },
-        { Name: "头背景", Priority: 6, MinOpacity: 1, AllowTypes: { typed: 0 } },
-        { Name: "头发后", AllowTypes: { typed: 0 } },
-        { Name: "耳朵外", AllowTypes: { typed: 0 } },
-        { Name: "耳朵内", AllowTypes: { typed: 0 } },
         {
-            Name: "头",
+            Name: "头部遮罩",
+            AllowColorize: false,
+            HasImage: false,
             AllowTypes: { typed: 0 },
             Alpha: [
                 {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        "ItemHead",
-                        "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                    ],
                     Masks: [
                         [0, -200, 500, 270], //上
                         [0, 0, 154, 400], //左
@@ -154,7 +41,15 @@ const asset = {
                 },
             ],
         },
-        { Name: "头发前", AllowTypes: { typed: 0 } },
+        { Name: "身体", ColorGroup: "前", AllowTypes: { typed: [0, 1] } },
+        { Name: "背景", ColorGroup: "后", Priority: 4, MinOpacity: 1, AllowTypes: { typed: [0, 1] } },
+        { Name: "脚", AllowTypes: { typed: [0, 1] } },
+        { Name: "头背景", ColorGroup: "后", Priority: 4, MinOpacity: 1, AllowTypes: { typed: 0 } },
+        { Name: "头发后", ColorGroup: "头发", AllowTypes: { typed: 0 } },
+        { Name: "耳朵外", ColorGroup: "前", AllowTypes: { typed: 0 } },
+        { Name: "耳朵内", AllowTypes: { typed: 0 } },
+        { Name: "头", ColorGroup: "前", AllowTypes: { typed: 0 } },
+        { Name: "头发前", ColorGroup: "头发", AllowTypes: { typed: 0 } },
         { Name: "眼白", AllowTypes: { typed: 0 } },
         { Name: "瞳孔", AllowTypes: { typed: 0 } },
         { Name: "眉毛", AllowTypes: { typed: 0 } },
@@ -164,6 +59,39 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    CN: {
+        前: "前",
+        背景: "身体",
+        头背景: "头",
+        后: "后",
+        头发前: "前",
+        头发后: "后",
+    },
+    EN: {
+        身体: "Body",
+        背景: "Body",
+        脚: "Feet",
+        头背景: "Head",
+        头发后: "Back",
+        耳朵外: "Ear Outer",
+        耳朵内: "Ear Inner",
+        头: "Head",
+        头发前: "Front",
+        眼白: "Sclera",
+        瞳孔: "Pupil",
+        眉毛: "Eyebrow",
+        睫毛: "Eyelash",
+        角: "Horn",
+        高光: "Highlight",
+
+        头发: "Hair",
+        前: "Front",
+        后: "Back",
+    },
+};
+
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -175,9 +103,10 @@ const extended = {
         Draw: PropertyOpacityDraw,
         Exit: PropertyOpacityExit,
     },
+    DrawData: { elementData: ExtendedXYClothes[2].map((tuple) => ({ position: [tuple[0], tuple[1] + 100] })) },
 };
 
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["独角兽玩偶_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "选择独角兽玩偶配置",
         戴上头套: "戴上头套",
@@ -206,9 +135,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["独角�
         Set戴上头套: "SourceCharacter надіває шолом на DestinationCharacter.",
         Set摘掉头套: "SourceCharacter знімає шолом з DestinationCharacter.",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "独角兽玩偶",
     EN: "Unicorn Stuffed Toy",
     UA: "Лялька єдинорога",
@@ -216,6 +145,6 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
-};
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
+    FullMask.push("ItemDevices", asset.Name, ["身体遮罩", "头部遮罩"]);
+}

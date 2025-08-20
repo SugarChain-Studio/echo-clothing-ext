@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
+import { FullMask } from "./fullMask";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -12,75 +12,18 @@ const asset = {
     Top: 0,
     AllowLock: true,
     Extended: true,
+    EditOpacity: true,
     MinOpacity: 0,
     Opacity: 0,
     SetPose: ["Kneel"],
     Effect: [E.BlockWardrobe, E.Freeze],
     Layer: [
         {
-            Name: "背景",
-            Priority: 1,
-            MinOpacity: 1,
-        },
-        {
-            Name: "玩偶",
+            Name: "遮罩",
+            HasImage: false,
+            AllowColorize: false,
             Alpha: [
                 {
-                    Group: [
-                        "HairFront",
-                        "HairBack",
-                        "Bracelet",
-                        "Cloth",
-                        "ClothAccessory",
-                        "ClothLower",
-                        "Corset",
-                        "Fluids",
-                        "Garters",
-                        "Gloves",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Hat",
-                        "ItemArms",
-                        "ItemBreast",
-                        "ItemButt",
-                        "ItemHandheld",
-                        "ItemHead",
-                        "ItemHood",
-                        "ItemLegs",
-                        "ItemMisc",
-                        "ItemNeck",
-                        "ItemNose",
-                        "ItemPelvis",
-                        "ItemTorso",
-                        "AnkletLeft",
-                        "HandsLeft",
-                        "Mask",
-                        "Mouth",
-                        "Nipples",
-                        "Panties",
-                        "AnkletRight",
-                        "HandsRight",
-                        "Shoes",
-                        "Socks",
-                        "SocksLeft",
-                        "SocksRight",
-                        "Suit",
-                        "SuitLower",
-                        "TailStraps",
-                        "Wings",
-                        "Bra",
-                        "HairAccessory1",
-                        "HairAccessory2",
-                        "HairAccessory3",
-                        "Cloth_笨笨笨蛋Luzi2",
-                        "Cloth_笨笨蛋Luzi",
-                        "ClothLower_笨笨笨蛋Luzi2",
-                        "ClothLower_笨笨蛋Luzi",
-                        "额外头发_Luzi",
-                        "新后发_Luzi",
-                        "新前发_Luzi",
-                    ],
                     Masks: [
                         [0, 0, 155, 750],
                         [350, 0, 150, 750],
@@ -91,10 +34,21 @@ const asset = {
                 },
             ],
         },
+        { Name: "背景", Priority: 4, MinOpacity: 1 },
+        { Name: "玩偶" },
         { Name: "围巾" },
     ],
 };
 
+const layerNames = {
+    EN: {
+        背景: "Back",
+        玩偶: "Doll",
+        围巾: "Scarf",
+    },
+};
+
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -106,10 +60,11 @@ const extended = {
         Draw: PropertyOpacityDraw,
         Exit: PropertyOpacityExit,
     },
+    DrawData: { elementData: ExtendedXYClothes[1].map((tuple) => ({ position: [tuple[0], tuple[1] + 100] })) },
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["巨型玩偶_Luzi"], {
+const assetStrings = {
     CN: {
         熊熊: "熊熊",
         Select: "选择巨型玩偶配置",
@@ -126,15 +81,15 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["巨型�
         熊熊: "Ведмедик",
         Select: "Виберіть конфігурацію великої іграшки",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "巨型玩偶",
     EN: "Giant Stuffed Toy",
     UA: "Гіганська Іграшка",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
+    FullMask.push("ItemDevices", asset.Name, ["遮罩"]);
 }
