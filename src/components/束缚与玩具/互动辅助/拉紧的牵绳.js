@@ -12,19 +12,22 @@ const translations = {
     RU: "Потянутый повод",
 };
 
+/** @type {AssetGroupItemName[]} */
+const groups = ["ItemMisc", "ItemHandheld"];
+
 export default function () {
-    const group = "ItemMisc";
+    for(const group of groups) {
+        ["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]
+            .map((Name) => ({ ...asset, Name }))
+            .forEach((asset) => {
+                AssetManager.addAsset(group, asset, undefined, translations);
+            });
 
-    ["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]
-        .map((Name) => ({ ...asset, Name }))
-        .forEach((asset) => {
-            AssetManager.addAsset(group, asset, undefined, translations);
+        AssetManager.addImageMapping({
+            [`Assets/Female3DCG/${group}/Preview/拉紧的牵绳_Luzi.png`]:
+                "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
+            [`Assets/Female3DCG/${group}/Preview/拉紧的链子_Luzi.png`]:
+                "Assets/Female3DCG/ItemNeckRestraints/Preview/ChainLeash.png",
         });
-
-    AssetManager.addImageMapping({
-        [`Assets/Female3DCG/${group}/Preview/拉紧的牵绳_Luzi.png`]:
-            "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
-        [`Assets/Female3DCG/${group}/Preview/拉紧的链子_Luzi.png`]:
-            "Assets/Female3DCG/ItemNeckRestraints/Preview/ChainLeash.png",
-    });
+    }
 }
