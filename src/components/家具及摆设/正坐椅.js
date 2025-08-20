@@ -4,8 +4,8 @@ import { AssetManager } from "../../assetForward";
 const asset = {
     Name: "正坐椅",
     Random: false,
-    Left: 140,
-    Top: 490,
+    Left: 110,
+    Top: 500,
     Gender: "F",
     SetPose: ["Kneel"],
     Priority: 2,
