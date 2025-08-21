@@ -10,7 +10,7 @@ const asset = {
     Left: 230,
     Difficulty: 3,
     Prerequisite: ["HasBreasts", "AccessVulva"],
-    Priority: 14,
+    Priority: 16,
     PoseMapping: {
         AllFours: "Hide",
         Hogtied: "Hide",
