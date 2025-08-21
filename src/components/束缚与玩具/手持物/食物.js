@@ -40,6 +40,7 @@ const assets = {
         makeFood("煎包_Luzi"),
         makeFood("蛋糕卷_Luzi"),
         makeFood("曲奇"),
+        makeFood("吐司"),
     ],
     ItemHandheld: [
         {
@@ -76,6 +77,7 @@ const assets = {
             Layer: [{ Name: "底色" }, { Name: "顶色" }, { Name: "盖子" }, { Name: "外观" }, { Name: "吸管" }],
         },
         { Name: "曲奇", ...handFood },
+        { Name: "吐司", ...handFood },
     ],
     ItemHood: [
         {
@@ -100,6 +102,8 @@ const translations = {
             鸡腿_Luzi: "烤鸡腿",
             蛋糕卷_Luzi: "蛋糕卷",
             奶茶: "奶茶",
+            曲奇: "曲奇",
+            吐司: "吐司",
         },
         ItemMouth: {
             棒棒糖_Luzi: "棒棒糖",
@@ -108,6 +112,7 @@ const translations = {
             煎包_Luzi: "煎包",
             蛋糕卷_Luzi: "蛋糕卷",
             曲奇: "曲奇",
+            吐司: "吐司",
         },
         ItemHood: {
             汉堡_Luzi: "汉堡",
@@ -121,6 +126,8 @@ const translations = {
             鸡腿_Luzi: "Roasted Chicken Leg",
             蛋糕卷_Luzi: "Cake Roll",
             奶茶: "Milk Tea",
+            曲奇: "Cookie",
+            吐司: "Toast",
         },
         ItemMouth: {
             棒棒糖_Luzi: "Lollipop",
@@ -129,6 +136,7 @@ const translations = {
             煎包_Luzi: "Fried Bun",
             蛋糕卷_Luzi: "Cake Roll",
             曲奇: "Cookie",
+            吐司: "Toast",
         },
         ItemHood: {
             汉堡_Luzi: "Hamburger",
@@ -185,8 +193,8 @@ const layerNames = {
 };
 
 export default function () {
-    const iconMapping = assets.ItemMouth.reduce((prev, item) => {
-        prev[`Assets/Female3DCG/ItemHandheld/${item.Name}`] = `Assets/Female3DCG/ItemMouth/${item.Name}`;
+    const iconMapping = ["曲奇", "吐司"].reduce((prev, item) => {
+        prev[`Assets/Female3DCG/ItemHandheld/Preview/${item}.png`] = `Assets/Female3DCG/ItemMouth/Preview/${item}.png`;
         return prev;
     }, {});
 
