@@ -6,6 +6,7 @@ const mouthFood = {
     Left: 160,
     Random: false,
     Difficulty: -10,
+    Effect: [],
     ParentGroup: {},
     PoseMapping: {},
     Priority: 55,
