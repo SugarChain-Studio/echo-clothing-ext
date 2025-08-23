@@ -20,7 +20,7 @@ const handFood = {
     Difficulty: -10,
     Priority: 55,
     ParentGroup: {},
-    PoseMapping: {},
+    InheritPoseMappingFields: true,
 };
 
 /**
