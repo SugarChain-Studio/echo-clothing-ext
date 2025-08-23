@@ -30,4 +30,19 @@ export const Typing = {
     assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
     modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),
     typedItem: /** @type {(arg:TypedItemConfig) => TypedItemConfig}*/ (identity),
+    /**
+     * @template {string} K
+     * @template {any} V
+     * @param {Record<K,V>} arg
+     * @returns {Record<K,V>}
+     */
+    record: (arg) => identity(arg),
+    /**
+     * @template T
+     * @template R
+     * @param {T} obj
+     * @param {(arg: T) => R} func
+     * @returns {R}
+     */
+    transform: (obj, func) => func(obj),
 };
