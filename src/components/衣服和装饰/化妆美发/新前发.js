@@ -7,7 +7,6 @@ const 前发shared = {
     ParentGroup: {},
     Extended: false,
     InheritColor: "HairFront",
-    Hide: ["HairFront"],
 };
 
 const 前发X50Y0 = { Left: 50, Top: 0, ...前发shared };

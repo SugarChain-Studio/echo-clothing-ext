@@ -33,7 +33,6 @@ const groups = [
             Blink: true,
             Random: false,
             Default: false,
-            Hide: ["Eyes2"],
             AllowExpression: eyeExpressions,
             PreviewZone: [190, 100, 120, 120],
             Asset: [],
@@ -52,7 +51,6 @@ const groups = [
             Blink: true,
             Random: false,
             Default: false,
-            Hide: ["Eyes"],
             AllowExpression: eyeExpressions,
             PreviewZone: [190, 100, 120, 120],
             Asset: [],
@@ -73,7 +71,6 @@ const groups = [
             MinOpacity: 0,
             MaxOpacity: 1,
             Asset: [],
-            Hide: ["HairFront"],
             Color: ["Default"],
         },
         description: {
@@ -93,7 +90,6 @@ const groups = [
             MinOpacity: 0,
             MaxOpacity: 1,
             Asset: [],
-            Hide: ["HairBack"],
             Color: ["Default"],
         },
         description: {
@@ -221,6 +217,9 @@ const groups = [
 /** @type {Set<CustomGroupName>} */
 const prevGroups = new Set(groups.filter((g) => !!g.groupDef.PreviewZone).map((g) => g.groupDef.Group));
 
+const 新前发_Luzi = /** @type {AssetGroupName} */ ("新前发_Luzi");
+const 新后发_Luzi = /** @type {AssetGroupName} */ ("新后发_Luzi");
+
 export default function () {
     groups.forEach((definition) => {
         AssetManager.addGroup(definition.groupDef, definition.description);
@@ -229,6 +228,42 @@ export default function () {
     // 眼睛和头发组使用预览图
     HookManager.hookFunction("AppearancePreviewUseCharacter", 0, (args, next) => {
         if (args[0] && prevGroups.has(args[0].Name)) return true;
+        return next(args);
+    });
+
+    const overrides = {
+        HairFront: 新前发_Luzi,
+        HairBack: 新后发_Luzi,
+        Eyes: "右眼_Luzi",
+        Eyes2: "左眼_Luzi",
+    };
+
+    const backOverrides = /** @type {Record<AssetGroupName, AssetGroupName>} */ (
+        Object.fromEntries(Object.entries(overrides).map(([key, value]) => [value, key]))
+    );
+
+    HookManager.hookFunction("CharacterAppearanceVisible", 0, (args, next) => {
+        const [C, _, GroupName] = args;
+
+        if (GroupName in overrides && C.Appearance.some((i) => i.Asset.Group.Name === overrides[GroupName])) {
+            return false;
+        } else if (GroupName in backOverrides) {
+            args[2] = backOverrides[GroupName];
+            return next(args);
+        }
+
+        if (GroupName === "HairFront" && C.Appearance.some((i) => i.Asset.Group.Name === 新前发_Luzi)) {
+            return false;
+        } else if (GroupName === "HairBack" && C.Appearance.some((i) => i.Asset.Group.Name === 新后发_Luzi)) {
+            return false;
+        } else if (GroupName === 新前发_Luzi) {
+            args[2] = "HairFront";
+            return next(args);
+        } else if (GroupName === 新后发_Luzi) {
+            args[2] = "HairBack";
+            return next(args);
+        }
+
         return next(args);
     });
 }
