@@ -48,7 +48,7 @@ const asset = {
         { Name: "背景", Priority: 2, MinOpacity: 1 },
         { Name: "外框", MinOpacity: 1 },
         { Name: "垃圾桶" },
-        { Name: "盖子" },
+        { Name: "盖子", AllowTypes: { typed: [1, 2] } },
         { Name: "挡板", AllowTypes: { typed: 1 } },
         { Name: "图案", AllowTypes: { typed: 1 } },
     ],
