@@ -14,6 +14,7 @@ const asset = {
     Difficulty: -10,
     ParentGroup: {},
     IsRestraint: false,
+    Fetish: ["Sadism"],
     PoseMapping: {
         ...AssetPoseMapping.ItemHandheld,
     },
@@ -66,7 +67,7 @@ const extended = {
             Name: "Sheathe",
             Key: "s",
             DrawImages: false,
-            Options: [{}, {}],
+            Options: [{}, { Property: { AllowActivity: ["RubItem", "SpankItem"] } }],
         },
     ],
 };

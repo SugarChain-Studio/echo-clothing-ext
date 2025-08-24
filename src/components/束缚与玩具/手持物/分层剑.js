@@ -14,6 +14,8 @@ const asset = {
     Difficulty: -10,
     ParentGroup: {},
     IsRestraint: false,
+    Fetish: ["Sadism"],
+    AllowActivity: ["SpankItem", "RubItem"],
     PoseMapping: { ...AssetPoseMapping.ItemHandheld },
     DefaultColor: ["Default", "#292d33", "#0f0a00", "#ffffff", "#ffe5ca"],
     Layer: [{ Name: "Handle" }, { Name: "Metal1" }, { Name: "Metal2" }, { Name: "Shine1" }, { Name: "Shine2" }],

@@ -9,7 +9,7 @@ const asset = {
     Top: -50,
     Left: -50,
     ParentGroup: {},
-    // DefaultColor: ["#FFFFF",],
+    Fetish: ["Sadism"],
     Layer: [
         { Name: "A5", Priority: 1, AllowTypes: { A: 0 } },
         { Name: "A4", Priority: 1, AllowTypes: { A: 0 } },
@@ -59,7 +59,7 @@ const extended = {
             Name: "刀",
             Key: "A",
             DrawImages: false,
-            Options: [{}, {}],
+            Options: [{}, { Property: { AllowActivity: ["RubItem", "SpankItem"] } }],
         },
     ],
 };
