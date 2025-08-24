@@ -65,6 +65,13 @@ const assets = [
         Left: 0,
         Layer: [{ Name: "1" }, { Name: "2" }],
     },
+    {
+        Name: "蝎子尾巴",
+        Random: false,
+        Left: 50,
+        Top: 170,
+        Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
+    },
 ];
 
 /** @type { Translation.GroupedEntries } */
@@ -93,6 +100,27 @@ const translations = {
     },
 };
 
+const layerNames = {
+    CN: {
+        TailStraps: {
+            蝎子尾巴: {
+                A1: "底色",
+                A2: "高光",
+                A3: "描边",
+            },
+        },
+    },
+    EN: {
+        Cloth: {
+            蝎子尾巴: {
+                A1: "底色",
+                A2: "高光",
+                A3: "描边",
+            },
+        },
+    },
+};
+
 export default function () {
-    AssetManager.addGroupedAssets({ TailStraps: assets }, translations);
+    AssetManager.addGroupedAssetsWithConfig({ TailStraps: assets }, translations, layerNames);
 }
