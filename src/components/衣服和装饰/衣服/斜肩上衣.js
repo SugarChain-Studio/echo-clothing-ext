@@ -1,6 +1,6 @@
-import { ArmMaskTool } from "../../../armMask";
+import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { takeLayerNames } from "../../../utils";
+import { takeLayerNames } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

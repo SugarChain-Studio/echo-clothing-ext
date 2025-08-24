@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../utils";
+import { Typing } from "../../lib";
 import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */

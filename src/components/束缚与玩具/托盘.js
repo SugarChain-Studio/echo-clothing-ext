@@ -1,7 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
-import { Typing } from "../../utils";
+import { Typing } from "../../lib";
 import { monadic } from "@mod-utils/monadic";
 
 /** @type {CustomAssetDefinition} */

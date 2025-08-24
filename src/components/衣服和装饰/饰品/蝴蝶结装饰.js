@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { ExtendedTools } from "../../../extendedTools";
+import { ExtendedTools } from "../../../lib";
 
 /** @type { CustomAssetDefinition }} */
 const asset = {

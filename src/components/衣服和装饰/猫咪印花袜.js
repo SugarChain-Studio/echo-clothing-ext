@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../utils";
+import { Typing } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

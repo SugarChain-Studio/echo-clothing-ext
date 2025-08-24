@@ -1,7 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { DialogTools } from "@mod-utils/Tools";
-import { Typing } from "../../utils";
+import { Typing } from "../../lib";
 
 function scriptDrawHook(data, originalFunction, drawData) {
     originalFunction(drawData);

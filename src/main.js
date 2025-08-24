@@ -6,7 +6,7 @@ import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
-import { CraftingCache } from "./craftingCache";
+import { CraftingCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 

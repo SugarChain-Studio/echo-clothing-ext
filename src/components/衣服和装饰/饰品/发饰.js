@@ -1,6 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { DialogTools } from "@mod-utils/Tools";
-import { ExtendedTools } from "../../../extendedTools";
+import { ExtendedTools } from "../../../lib";
 
 const hairAccShared = {
     Random: false,

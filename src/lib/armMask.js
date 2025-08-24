@@ -1,4 +1,4 @@
-import { AssetManager } from "./assetForward";
+import { AssetManager } from "../assetForward";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 

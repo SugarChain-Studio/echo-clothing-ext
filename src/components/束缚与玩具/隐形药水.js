@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../utils";
+import { Typing } from "../../lib";
 
 /** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];

@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { takeLayerNames } from "../../utils";
+import { takeLayerNames } from "../../lib";
 
 /** @type {TopLeft.Definition} */
 const baseTop = {

@@ -1,4 +1,4 @@
-import { ArmMaskTool } from "../../../armMask";
+import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 /** @type {<T>(arg0: number, arg1: (number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));

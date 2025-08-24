@@ -1,7 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
-import { takeLayerNames } from "../../utils";
+import { takeLayerNames } from "../../lib";
 
 /** @type { CustomAssetDefinition} */
 const asset = {

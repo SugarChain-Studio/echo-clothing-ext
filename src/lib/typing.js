@@ -19,6 +19,15 @@ export function takeLayerNames(assetDef) {
 const identity = (arg) => arg;
 
 /**
+ * @template {string} K
+ * @template V
+ * @param {Record<K,V>} record
+ */
+function recordEntries(record) {
+    return /** @type {Array<[K,V]>} */ (Object.entries(record));
+}
+
+/**
  * @typedef {AssetDefinitionBase["DrawOffset"][0]} DrawOffsetItem
  */
 
@@ -45,4 +54,5 @@ export const Typing = {
      * @returns {R}
      */
     transform: (obj, func) => func(obj),
+    entries: recordEntries,
 };

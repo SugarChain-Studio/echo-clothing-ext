@@ -1,6 +1,6 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
-import { Typing } from "../utils";
+import { Typing } from "../lib";
 
 /** @type {AssetDefinitionBase["DrawOffset"]} */
 const customOffset = [
