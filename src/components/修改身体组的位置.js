@@ -69,60 +69,7 @@ const v1CompatibleAssets = new Set([
     "女巫小披肩_Luzi",
 ]);
 
-function R117() {
-    HookManager.hookFunction("CommonDrawComputeDrawingCoordinates", 0, (args, next) => {
-        const ret = next(args);
-        const [C, asset, layer] = args;
-
-        const bodyStyleItem = InventoryGet(C, "BodyStyle");
-        if (bodyStyleItem?.Asset?.Name === "EchoV1") return ret;
-
-        if (["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"].includes(asset.Group.Name)) {
-            if (["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].includes(asset.Name)) {
-                ret.Y -= 20;
-            } else {
-                ret.Y -= 16;
-            }
-        } else if (asset.Group.Name === "Panties") {
-            if (["CockSock", "Jockstrap"].includes(asset.Name)) {
-                ret.Y -= 20;
-            }
-        } else if (asset.Group.Name === "ItemPelvis") {
-            if (asset.Name === "HarnessPanties1") {
-                ret.Y -= 20;
-            }
-        } else if (asset.Name === "StrictPonyBoots") {
-            if (C.PoseMapping.BodyLower === "BaseLower") {
-                ret.Y -= 10;
-            }
-        } else if (asset.Name === "Splatters") {
-            if (["Internal2", "Internal3"].includes(layer.Name)) {
-                ret.Y -= 20;
-            }
-        }
-
-        return ret;
-    });
-
-    HookManager.hookFunction("AssetBaseURL", 0, (args, next) => {
-        const ret = next(args);
-
-        if (v1CompatibleGroups.has(args[1].Name)) return ret;
-        if (v1CompatibleAssets.has(args[4].Name)) return ret;
-
-        const bodyStyleItem = InventoryGet(args[0], "BodyStyle");
-        if (bodyStyleItem?.Asset?.Name === "EchoV1") return `@nomap/${ret}`;
-
-        return ret;
-    });
-}
-
 export default function () {
-    if (GameVersion === "R117") {
-        R117();
-        return;
-    }
-
     HookManager.patchFunction("CommonDrawComputeDrawingCoordinates", {
         "offset.Group === groupName &&": "(offset.Group === undefined || offset.Group === groupName) &&",
     });
