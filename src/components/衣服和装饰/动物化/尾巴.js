@@ -20,10 +20,10 @@ const assets = [
         Random: false,
         Top: 0,
         Left: 0,
-        DefaultColor: ["#3B0505", "#3B0505"],
+        DefaultColor: ["#3B0505"],
         Layer: [
             { Name: "1", Priority: 1 },
-            { Name: "2", Priority: 40 },
+            { Name: "2", Priority: 40, CopyLayerColor: "1" },
         ],
     },
     {
@@ -31,10 +31,10 @@ const assets = [
         Random: false,
         Top: 0,
         Left: 0,
-        DefaultColor: ["#3B0505", "#3B0505"],
+        DefaultColor: ["#3B0505"],
         Layer: [
             { Name: "1", Priority: 1 },
-            { Name: "2", Priority: 40 },
+            { Name: "2", Priority: 40, CopyLayerColor: "1" },
         ],
     },
     {
