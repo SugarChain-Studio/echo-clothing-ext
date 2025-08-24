@@ -20,6 +20,7 @@ const handFood = {
     Difficulty: -10,
     Priority: 55,
     ParentGroup: {},
+    AllowActivity: ["RubItem"],
     InheritPoseMappingFields: true,
 };
 
