@@ -8,6 +8,7 @@ const asset = {
     Random: false,
     Top: 500,
     Left: { "": 100, "KneelingSpread": 130 },
+    DynamicGroupName: "Socks",
     Layer: [
         { Name: "基础" },
         { Name: "红" },

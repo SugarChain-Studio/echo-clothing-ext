@@ -236,7 +236,7 @@ function dialogDrawHook(Data, originalFunction) {
 
     const prevAlign = MainCanvas.textAlign;
     MainCanvas.textAlign = "center";
-    DrawText(customDialogText("Base"), 1385, 460, "White");
+    DrawText(AssetTextGet(customDialogText("Base")), 1385, 460, "White");
 
     for (const btn of buttonProps) {
         if (btn.enable(DialogFocusItem)) {
