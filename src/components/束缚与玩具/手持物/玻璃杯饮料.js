@@ -17,12 +17,11 @@ const asset = {
     IsRestraint: false,
     PoseMapping: { ...AssetPoseMapping.ItemHandheld },
     AllowActivity: ["RubItem"],
-    DefaultColor: ["#888888"],
     Layer: [
         { Name: "空杯", AllowTypes: { typed: 0 } },
-        { Name: "橙汁", AllowTypes: { typed: 1 }, CopyLayerColor: "空杯" },
-        { Name: "可乐", AllowTypes: { typed: 2 }, CopyLayerColor: "空杯" },
-        { Name: "牛奶", AllowTypes: { typed: 3 }, CopyLayerColor: "空杯" },
+        { Name: "橙汁", AllowTypes: { typed: 1 } },
+        { Name: "可乐", AllowTypes: { typed: 2 } },
+        { Name: "牛奶", AllowTypes: { typed: 3 } },
     ],
 };
 
