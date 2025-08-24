@@ -4,10 +4,7 @@ from common import regulateXYWH
 
 # 带有通配符的目录路径
 wildcard_paths = [
-    "resources/Assets/Female3DCG/ItemHandheld/棒棒糖_Luzi_*.png",
-    "resources/Assets/Female3DCG/ItemHandheld/烤鱼_Luzi_*.png",
-    "resources/Assets/Female3DCG/ItemHandheld/鸡腿_Luzi.png",
-    "resources/Assets/Female3DCG/ItemHandheld/曲奇.png"
+    "resources/Assets/Female3DCG/TailStraps/蝎子尾巴_*.png"
 ]
 
 # 新前发参数
@@ -23,10 +20,13 @@ reference_topleft = [160, 300]
 minimum_height = 200
 
 # 参考左上角，如果设置，则会以此作为裁剪区域的左上角
-# reference_topleft = None
+reference_topleft = None
 
 # 最小高度，如果设置，则会以此作为裁剪区域的最小高度
-# minimum_height = None
+minimum_height = None
+
+# 是否要求水平对称
+axisym = True
 
 
 def analyze_and_crop_images(file_paths):
@@ -72,7 +72,7 @@ def analyze_and_crop_images(file_paths):
     else:
         ref_x, ref_y = min_x, min_y
 
-    x,y,w,h = regulateXYWH(ref_x, ref_y, max_x, max_y, image_width)
+    x,y,w,h = regulateXYWH(ref_x, ref_y, max_x, max_y, image_width, axisym)
     h = minimum_height if (not minimum_height is None) and h < minimum_height else h
     
     print(f"裁剪区域: 左上角({x}, {y}), 宽: {w}, 高: {h}")
