@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { SockLRTool } from "../../lib/sockLR";
 import { Typing } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
@@ -69,4 +70,8 @@ export default function () {
     for (const group of Typing.groups(["Socks", "SuitLower"])) {
         AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings });
     }
+
+    SockLRTool.createSockLR(asset).forEach(([key, value]) => {
+        AssetManager.addAssetWithConfig(key, value, { translation, layerNames, extended, assetStrings });
+    });
 }
