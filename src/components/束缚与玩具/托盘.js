@@ -298,7 +298,7 @@ function afterDraw(data, originalFunction, drawData) {
         const idx = property.Luzi_InventoryContent.length.toString().padStart(2, "0");
         const imgURL = Tools.getAssetURL(drawData, `曲奇${idx}`);
         const ctx = canvas.getContext("2d");
-        DrawImageCanvas(imgURL, ctx, 0, 0);
+        DrawImageEx(imgURL, ctx, 0, 0);
         drawCanvas(canvas, X, Y, AlphaMasks);
         drawCanvasBlink(canvas, X, Y, AlphaMasks);
     } else if (L === "饮料" && property.Luzi_InventoryType === "饮料") {
@@ -311,7 +311,7 @@ function afterDraw(data, originalFunction, drawData) {
             if (!name) continue;
             const imgURL = Tools.getAssetURL(drawData, name);
             const margin = 170;
-            DrawImageCanvas(imgURL, ctx, margin + (i * (500 - margin * 2 - 40)) / (maxv.饮料 - 1), 0);
+            DrawImageEx(imgURL, ctx, margin + (i * (500 - margin * 2 - 40)) / (maxv.饮料 - 1), 0);
         }
         drawCanvas(canvas, X, Y, AlphaMasks);
         drawCanvasBlink(canvas, X, Y, AlphaMasks);

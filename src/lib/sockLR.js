@@ -12,8 +12,6 @@ const mask = {
  */
 function createSockLR(asset, group = "Socks") {
     if (!Array.isArray(asset.Layer)) asset.Layer = [{}];
-    const assetR = { ...asset };
-
     return /** @type {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]} */ (
         /** @type {["SocksLeft", "SocksRight"]}*/ (["SocksLeft", "SocksRight"]).map((grp) => {
             const ret = { ...asset, DynamicGroupName: group };
