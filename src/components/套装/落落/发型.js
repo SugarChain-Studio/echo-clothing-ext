@@ -11,7 +11,6 @@ const hairAttrShared = {
     ParentGroup: {},
     Extended: false,
     InheritColor: hairFront,
-    Hide: [hairFront],
 };
 
 /** @type { CustomGroupedAssetDefinitions }} */

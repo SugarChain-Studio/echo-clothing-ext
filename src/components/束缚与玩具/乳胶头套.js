@@ -39,18 +39,7 @@ const extended = {
             Name: "隐藏前发",
             DrawImages: false,
             Key: "F",
-            Options: [
-                {},
-                {
-                    Property: {
-                        Hide: [
-                            "HairFront",
-                            // @ts-ignore
-                            "新前发_Luzi",
-                        ],
-                    },
-                },
-            ],
+            Options: [{}, { Property: { Hide: ["HairFront"] } }],
         },
         {
             Name: "隐藏后发",
