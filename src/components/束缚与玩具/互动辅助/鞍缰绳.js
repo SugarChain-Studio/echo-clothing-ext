@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type { CustomGroupedAssetDefinitions }} */
 const assets = {
@@ -56,7 +55,7 @@ const translation = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["缰绳_Luzi"], {
+const assetStrings = {
     CN: {
         Select: "设置",
         1: "无",
@@ -71,11 +70,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["缰绳_Lu
         Set1: "SourceCharacter put away the rope",
         Set2: "SourceCharacter took out the rope",
     },
-});
+};
 
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translation);
-    AssetManager.addCustomDialog(dialog);
-
+    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames: {}, assetStrings });
     AssetManager.addGroupedAssets(assets, translations);
 }

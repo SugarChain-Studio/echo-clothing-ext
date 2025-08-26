@@ -18,9 +18,7 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        {
-            Name: "带子",
-        },
+        { Name: "带子" },
         {
             Name: "左腿",
             HasImage: false,
@@ -48,6 +46,14 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        带子: "Strap",
+        左腿: "Left Leg",
+        右腿: "Right Leg",
+    },
+};
+
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
@@ -55,18 +61,18 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        Garters蕾丝边_LuziSelect: "选择",
-        Garters蕾丝边_Luzi左腿: "左腿",
-        Garters蕾丝边_Luzi右腿: "右腿",
-        Garters蕾丝边_Luzi双腿: "都有",
+        Select: "选择",
+        左腿: "左腿",
+        右腿: "右腿",
+        双腿: "都有",
     },
     EN: {
-        Garters蕾丝边_LuziSelect: "Select",
-        Garters蕾丝边_Luzi左腿: "Left leg",
-        Garters蕾丝边_Luzi右腿: "Right leg",
-        Garters蕾丝边_Luzi双腿: "Both",
+        Select: "Select",
+        左腿: "Left leg",
+        右腿: "Right leg",
+        双腿: "Both",
     },
 };
 
@@ -77,6 +83,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAsset("Garters", asset, extended, translation);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("Garters", asset, { extended, translation, layerNames, assetStrings });
 }

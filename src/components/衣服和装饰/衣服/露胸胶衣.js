@@ -115,7 +115,7 @@ const extended = {
 /** @type {CustomGroupName[]} */
 const targetGroups = ["Cloth", "Suit", "Corset", "ItemTorso"];
 
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "设置",
         Select开裆: "设置",
@@ -161,7 +161,7 @@ export default function () {
             translation,
             layerNames,
             extended,
-            assetDialogs,
+            assetStrings,
         });
     });
 }

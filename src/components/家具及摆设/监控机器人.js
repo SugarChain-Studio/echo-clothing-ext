@@ -212,7 +212,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         Select: "选择模式",
         跟随模式: "跟随模式",
@@ -264,7 +264,7 @@ export default function () {
     AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, {
         translation,
         layerNames,
-        assetDialogs,
+        assetStrings,
         extended,
     });
 }

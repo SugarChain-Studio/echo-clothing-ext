@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,6 +11,7 @@ const asset = {
     Difficulty: 25,
     ParentGroup: {},
     Extended: true,
+    DynamicGroupName: "动物身体_Luzi",
     Layer: [
         {
             Name: "A1_肚衔接",
@@ -23,25 +25,27 @@ const asset = {
         },
         {
             Name: "A5_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "蛛形蜘蛛爪",
             Priority: 4,
             AllowTypes: { typed: 1 },
         },
         {
             Name: "A4_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "蛛形蜘蛛爪",
             Priority: 5,
             AllowTypes: { typed: 1 },
         },
         {
             Name: "A3_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "蛛形蜘蛛爪",
             Priority: 26,
             AllowTypes: { typed: 1 },
         },
         {
             Name: "遮罩",
             Priority: 26,
+            HasImage: false,
+            AllowColorize: false,
             AllowTypes: { typed: 1 },
             Alpha: [
                 {
@@ -76,32 +80,61 @@ const asset = {
 
         {
             Name: "B3_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "双足蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
         {
             Name: "B2_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "双足蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
         {
             Name: "B1_爪",
-            ColorGroup: "蜘蛛爪",
+            ColorGroup: "双足蜘蛛爪",
             Priority: 2,
             AllowTypes: { typed: 0 },
         },
     ],
 };
 
+const layerNames = {
+    CN: {
+        A1_肚衔接: "肚子连接(蛛形)",
+        A2_肚: "肚子(蛛形)",
+        蛛形蜘蛛爪: "蜘蛛爪(蛛形)",
+
+        A5_爪: "后",
+        A4_爪: "中",
+        A3_爪: "前",
+
+        双足蜘蛛爪: "双足蜘蛛爪",
+        B3_爪: "后",
+        B2_爪: "中",
+        B1_爪: "前",
+    },
+    EN: {
+        A1_肚衔接: "Belly Connection (Arachnid)",
+        A2_肚: "Belly (Arachnid)",
+        蛛形蜘蛛爪: "Claw (Arachnid)",
+        A5_爪: "Back",
+        A4_爪: "Middle",
+        A3_爪: "Front",
+
+        双足蜘蛛爪: "Claw (Biped)",
+        B3_爪: "Back",
+        B2_爪: "Middle",
+        B1_爪: "Front",
+    },
+};
+
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [
-        {
-            Name: "1",
-        },
+        { Name: "1" },
         {
             Name: "2",
             Property: {
@@ -117,46 +150,32 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        动物身体_Luzi蜘蛛_LuziSelect: "设置",
-        动物身体_Luzi蜘蛛_Luzi1: "左",
-        动物身体_Luzi蜘蛛_Luzi2: "右",
-
-        Wings蜘蛛_LuziSelect: "设置",
-        Wings蜘蛛_Luzi1: "左",
-        Wings蜘蛛_Luzi2: "右",
+        Select: "设置",
+        1: "双足站立",
+        2: "蜘蛛下半身",
     },
     EN: {
-        动物身体_Luzi蜘蛛_LuziSelect: "Select",
-        动物身体_Luzi蜘蛛_Luzi1: "Left",
-        动物身体_Luzi蜘蛛_Luzi2: "Right",
-
-        Wings蜘蛛_LuziSelect: "Select",
-        Wings蜘蛛_Luzi1: "Left",
-        Wings蜘蛛_Luzi2: "Right",
+        Select: "Select",
+        1: "Biped",
+        2: "Arachnid",
     },
     RU: {
-        动物身体_Luzi蜘蛛_LuziSelect: "Выбрать",
-        动物身体_Luzi蜘蛛_Luzi1: "Лево",
-        动物身体_Luzi蜘蛛_Luzi2: "Право",
-
-        Wings蜘蛛_LuziSelect: "Выбрать",
-        Wings蜘蛛_Luzi1: "Лево",
-        Wings蜘蛛_Luzi2: "Право",
+        Select: "Выбрать",
+        1: "Двуногий",
+        2: "Арахнид",
     },
 };
 
-const translations = {
+const translation = {
     CN: "蜘蛛",
     EN: "Spider",
     RU: "Паук",
 };
 
 export default function () {
-    // @ts-ignore
-    AssetManager.addAsset("动物身体_Luzi", asset, extended, translations);
-    // @ts-ignore
-    AssetManager.addAsset("Wings", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    for (const g of Typing.groups(["动物身体_Luzi", "Wings"])) {
+        AssetManager.addAssetWithConfig(g, asset, { extended, translation, layerNames, assetStrings });
+    }
 }

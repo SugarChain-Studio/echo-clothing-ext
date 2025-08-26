@@ -103,7 +103,7 @@ const translation = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         Select: "选择塞入珠子的数量",
         SetIncrease: `SourceCharacter抓住AssetName，慢慢将BCount个珠子塞入TargetCharacter的肛门.`,
@@ -180,6 +180,6 @@ export default function () {
         translation,
         layerNames: {},
         extended,
-        assetDialogs,
+        assetStrings,
     });
 }

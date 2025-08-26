@@ -44,7 +44,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
         Select: "选择NPC气泡样式",
 
@@ -80,5 +80,5 @@ const layerNames = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Hat", asset, { extended, translation, layerNames, assetDialogs: dialog });
+    AssetManager.addAssetWithConfig("Hat", asset, { extended, translation, layerNames, assetStrings });
 }

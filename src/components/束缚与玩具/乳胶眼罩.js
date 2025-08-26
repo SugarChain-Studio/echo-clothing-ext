@@ -54,7 +54,7 @@ const extended = {
 };
 
 /**@type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "透光度",
 
@@ -83,7 +83,7 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetDialogs });
+    AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetStrings });
     for (const g of /** @type {AssetGroupBodyName[]} */ (["Glasses", "Mask"])) {
         AssetManager.addAssetWithConfig(g, asset, { translation, layerNames });
     }

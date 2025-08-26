@@ -181,32 +181,26 @@ const asset = {
         LegsClosed: "LegsClosed",
     },
     Layer: [
-        {
-            Name: "绑带",
-        },
-        {
-            Name: "本体",
-        },
-        {
-            Name: "电击肛塞",
-            AllowTypes: [{ a: 1 }],
-        },
-        {
-            Name: "阴部",
-            AllowTypes: [{ p: 1 }],
-        },
-        {
-            Name: "大腿内侧",
-            AllowTypes: [{ u: 1 }],
-        },
-        {
-            Name: "小腹",
-            AllowTypes: [{ d: 1 }],
-        },
-        {
-            Name: "闪光",
-        },
+        { Name: "绑带" },
+        { Name: "本体" },
+        { Name: "电击肛塞", AllowTypes: [{ a: 1 }] },
+        { Name: "阴部", AllowTypes: [{ p: 1 }] },
+        { Name: "大腿内侧", AllowTypes: [{ u: 1 }] },
+        { Name: "小腹", AllowTypes: [{ d: 1 }] },
+        { Name: "闪光" },
     ],
+};
+
+const layerNames = {
+    EN: {
+        绑带: "Straps",
+        本体: "Body",
+        电击肛塞: "Electro Butt Plug",
+        阴部: "Vulva",
+        大腿内侧: "Inner Thigh",
+        小腹: "Lower Abdomen",
+        闪光: "Glow",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -270,55 +264,98 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        ItemLegs电击器_LuziSelectBase: "选择配置",
-        ItemLegs电击器_LuziSelect电击肛塞: "配置电击肛塞",
-        ItemLegs电击器_LuziModule电击肛塞: "电击肛塞",
-        ItemLegs电击器_LuziOptiona0: "无",
-        ItemLegs电击器_LuziOptiona1: "有",
-        ItemLegs电击器_LuziSeta0: "SourceCharacter在TargetCharacter身上使用了电击肛塞",
-        ItemLegs电击器_LuziSeta1: "SourceCharacter从TargetCharacter身上移除了电击肛塞",
+        SelectBase: "选择配置",
+        Module电击肛塞: "电击肛塞",
+        Module阴部: "阴部",
+        Module大腿内侧: "大腿内侧",
+        Module小腹: "小腹",
 
-        ItemLegs电击器_LuziSelect阴部: "配置阴部",
-        ItemLegs电击器_LuziModule阴部: "阴部",
-        ItemLegs电击器_LuziOptionp0: "无",
-        ItemLegs电击器_LuziOptionp1: "有",
-        ItemLegs电击器_LuziSetp0: "SourceCharacter在TargetCharacter身上使用了阴部电击器",
-        ItemLegs电击器_LuziSetp1: "SourceCharacter从TargetCharacter身上移除了阴部电击器",
+        Select电击肛塞: "配置电击肛塞",
+        Optiona0: "无",
+        Optiona1: "有",
+        Seta0: "SourceCharacter在TargetCharacter身上使用了电击肛塞",
+        Seta1: "SourceCharacter从TargetCharacter身上移除了电击肛塞",
 
-        ItemLegs电击器_LuziSelect大腿内侧: "配置大腿内侧",
-        ItemLegs电击器_LuziModule大腿内侧: "大腿内侧",
-        ItemLegs电击器_LuziOptionu0: "无",
-        ItemLegs电击器_LuziOptionu1: "有",
-        ItemLegs电击器_LuziSetu0: "SourceCharacter在TargetCharacter身上使用了大腿内侧电击器",
-        ItemLegs电击器_LuziSetu1: "SourceCharacter从TargetCharacter身上移除了大腿内侧电击器",
+        Select阴部: "配置阴部",
+        Optionp0: "无",
+        Optionp1: "有",
+        Setp0: "SourceCharacter在TargetCharacter身上使用了阴部电击器",
+        Setp1: "SourceCharacter从TargetCharacter身上移除了阴部电击器",
 
-        ItemLegs电击器_LuziSelect小腹: "配置小腹",
-        ItemLegs电击器_LuziModule小腹: "小腹",
-        ItemLegs电击器_LuziOptiond0: "无",
-        ItemLegs电击器_LuziOptiond1: "有",
-        ItemLegs电击器_LuziSetd0: "SourceCharacter在TargetCharacter身上使用了小腹电击器",
-        ItemLegs电击器_LuziSetd1: "SourceCharacter从TargetCharacter身上移除了小腹电击器",
+        Select大腿内侧: "配置大腿内侧",
+        Optionu0: "无",
+        Optionu1: "有",
+        Setu0: "SourceCharacter在TargetCharacter身上使用了大腿内侧电击器",
+        Setu1: "SourceCharacter从TargetCharacter身上移除了大腿内侧电击器",
 
-        ItemLegs电击器_Luzi持续电击开关: "持续电击",
+        Select小腹: "配置小腹",
+        Optiond0: "无",
+        Optiond1: "有",
+        Setd0: "SourceCharacter在TargetCharacter身上使用了小腹电击器",
+        Setd1: "SourceCharacter从TargetCharacter身上移除了小腹电击器",
 
-        电击器_Luzi设置开始间歇持续电击: "SourceCharacter让TargetCharacter身上的AssetName会间歇持续电击",
-        电击器_Luzi设置停止间歇持续电击: "SourceCharacter让TargetCharacter身上的AssetName不再间歇持续电击",
+        持续电击开关: "持续电击",
+
+        电击器_Luzi设置开始间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName会间歇持续电击",
+        电击器_Luzi设置停止间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName不再间歇持续电击",
 
         电击器_Luzi开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
         电击器_Luzi停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
 
-        ItemLegs电击器_Luzi触发电击: "触发电击",
+        触发电击: "触发电击",
+    },
+    EN: {
+        SelectBase: "Select configuration",
+        Module电击肛塞: "Electro Butt Plug",
+        Module阴部: "Vulva",
+        Module大腿内侧: "Inner Thigh",
+        Module小腹: "Lower Abdomen",
+
+        Select电击肛塞: "Configure Electro Butt Plug",
+        Optiona0: "None",
+        Optiona1: "Present",
+        Seta0: "SourceCharacter used an Electro Butt Plug on TargetCharacter",
+        Seta1: "SourceCharacter removed an Electro Butt Plug from TargetCharacter",
+
+        Select阴部: "Configure Vulva",
+        Optionp0: "None",
+        Optionp1: "Present",
+        Setp0: "SourceCharacter used a Vulva Shock Device on TargetCharacter",
+        Setp1: "SourceCharacter removed a Vulva Shock Device from TargetCharacter",
+
+        Select大腿内侧: "Configure Inner Thigh",
+        Optionu0: "None",
+        Optionu1: "Present",
+        Setu0: "SourceCharacter used an Inner Thigh Shock Device on TargetCharacter",
+        Setu1: "SourceCharacter removed an Inner Thigh Shock Device from TargetCharacter",
+
+        Select小腹: "Configure Lower Abdomen",
+        Optiond0: "None",
+        Optiond1: "Present",
+        Setd0: "SourceCharacter used a Lower Abdomen Shock Device on TargetCharacter",
+        Setd1: "SourceCharacter removed a Lower Abdomen Shock Device from TargetCharacter",
+
+        持续电击开关: "Continuous",
+
+        电击器_Luzi设置开始间歇持续电击:
+            "SourceCharacter enabled intermittent continuous shocks on DestinationCharacter AssetName",
+        电击器_Luzi设置停止间歇持续电击:
+            "SourceCharacter disabled intermittent continuous shocks on DestinationCharacter AssetName",
+
+        电击器_Luzi开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
+        电击器_Luzi停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
+
+        触发电击: "Trigger Shock",
     },
 };
 
-const translations = {
+const translation = {
     CN: "电击器",
     EN: "Shock Device",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemLegs", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemLegs", asset, { extended, translation, layerNames, assetStrings });
 }

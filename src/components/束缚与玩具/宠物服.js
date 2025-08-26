@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -106,6 +105,18 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        手臂: "Arm Color",
+        拘束: "Bondage",
+        拘束高光: "Bondage Highlight",
+        束带: "Belt",
+        搭扣: "Buckle",
+        手链链子: "Wrist Chain",
+        脚链链子: "Ankle Chain",
+    },
+};
+
 /** @type {CustomAssetDefinition} */
 const asset2 = {
     Name: "宠物服下",
@@ -135,8 +146,17 @@ const asset2 = {
     Layer: [{ Name: "拘束" }, { Name: "拘束高光" }, { Name: "束带" }, { Name: "搭扣" }],
 };
 
-/**@type {AssetArchetypeConfig} */
-const extened = {
+const layerNames2 = {
+    EN: {
+        拘束: "Bondage",
+        拘束高光: "Bondage Highlight",
+        束带: "Belt",
+        搭扣: "Buckle",
+    },
+};
+
+/**@type {ModularItemConfig} */
+const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChangeWhenLocked: false,
     Modules: [
@@ -206,7 +226,7 @@ const extened = {
 };
 
 /**@type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemArms"], ["宠物服上"], {
+const assetStrings = {
     CN: {
         SelectBase: "添加锁链",
         Select锁链手: "添加锁链",
@@ -253,16 +273,16 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemArms"], ["宠物服�
         Setlll0: "SourceCharacter restored DestinationCharacter's height",
         Setlll1: "SourceCharacter adjusted DestinationCharacter's height",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "宠物服上",
     EN: "Pet Upper Suit",
     RU: "Верхний костюм для питомца",
     UA: "Верхній костюм для вихованця",
 };
 
-const translations2 = {
+const translation2 = {
     CN: "宠物服下",
     EN: "Pet Lower Suit",
     RU: "Нижний костюм для питомца",
@@ -270,7 +290,6 @@ const translations2 = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemArms", asset, extened, translations);
-    AssetManager.addAsset("ItemLegs", asset2, undefined, translations2);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemArms", asset, { extended, translation, assetStrings, layerNames });
+    AssetManager.addAssetWithConfig("ItemLegs", asset2, { translation: translation2, layerNames: layerNames2 });
 }

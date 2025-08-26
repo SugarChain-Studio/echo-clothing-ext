@@ -88,7 +88,7 @@ const extended = {
 };
 
 /**@type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "透光度",
         Module透光度: "透光度",
@@ -177,6 +177,6 @@ export default function () {
         translation,
         layerNames: {},
         extended,
-        assetDialogs,
+        assetStrings,
     });
 }

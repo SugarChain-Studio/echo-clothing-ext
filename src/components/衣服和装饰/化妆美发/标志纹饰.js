@@ -384,7 +384,7 @@ const translation = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "配置标志纹饰",
 
@@ -455,6 +455,6 @@ export default function () {
         translation,
         layerNames,
         extended,
-        assetDialogs,
+        assetStrings,
     });
 }

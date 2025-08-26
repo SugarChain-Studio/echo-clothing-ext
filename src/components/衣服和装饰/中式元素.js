@@ -144,5 +144,5 @@ const customDialog = DialogTools.replicateGroupedItemDialog(
 
 export default function () {
     AssetManager.addGroupedAssets(assets, translations, extended);
-    AssetManager.addCustomDialog(customDialog);
+    AssetManager.addCustomAssetString(customDialog);
 }

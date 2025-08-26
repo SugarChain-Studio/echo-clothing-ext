@@ -120,6 +120,17 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        下半身: "Lower Body",
+        上半身: "Upper Body",
+        纸袋: "Paper Bag",
+        纸: "Paper",
+        胶带: "Tape",
+        麻袋头罩: "Sack Hood",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
@@ -151,31 +162,30 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = {
+const assetStrings = {
     CN: {
-        ItemAddon后背_LuziSelect: "选择后背配置",
-        ItemAddon后背_LuziSet纸袋: "SourceCharacter在DestinationCharacter头上套上了纸袋",
-        ItemAddon后背_LuziSet麻袋头罩: "SourceCharacter在DestinationCharacter头上套上了麻袋",
+        Select: "选择后背配置",
+        纸袋: "SourceCharacter在DestinationCharacter头上套上了纸袋",
+        麻袋头罩: "SourceCharacter在DestinationCharacter头上套上了麻袋",
     },
     EN: {
-        ItemAddon后背_LuziSelect: "Select back configuration",
-        ItemAddon后背_LuziSet纸袋: "SourceCharacter placed a paper bag over DestinationCharacter head",
-        ItemAddon后背_LuziSet麻袋头罩: "SourceCharacter placed a sack hood over DestinationCharacter head",
+        Select: "Select back configuration",
+        纸袋: "SourceCharacter placed a paper bag over DestinationCharacter head",
+        麻袋头罩: "SourceCharacter placed a sack hood over DestinationCharacter head",
     },
     RU: {
-        ItemAddon后背_LuziSelect: "Выберите конфигурацию спины",
-        ItemAddon后背_LuziSet纸袋: "SourceCharacter надел бумажный мешок на голову DestinationCharacter",
-        ItemAddon后背_LuziSet麻袋头罩: "SourceCharacter надел мешковинную маску на голову DestinationCharacter",
+        Select: "Выберите конфигурацию спины",
+        纸袋: "SourceCharacter надел бумажный мешок на голову DestinationCharacter",
+        麻袋头罩: "SourceCharacter надел мешковинную маску на голову DestinationCharacter",
     },
 };
 
-const translations = {
+const translation = {
     CN: "后背",
     EN: "Back-body",
     RU: "Спина",
 };
 
 export default function () {
-    AssetManager.addAsset("ItemAddon", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemAddon", asset, { extended, translation, layerNames, assetStrings });
 }

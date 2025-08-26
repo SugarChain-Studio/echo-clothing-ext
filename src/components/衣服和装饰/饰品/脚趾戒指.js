@@ -128,7 +128,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "选择脚趾戒指配置",
         Select左1: "设置左大拇指戒指",
@@ -244,5 +244,5 @@ const layerNames = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames, extended, assetDialogs });
+    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames, extended, assetStrings });
 }

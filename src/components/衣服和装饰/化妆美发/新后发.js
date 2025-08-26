@@ -338,7 +338,7 @@ const assets = [
 ];
 
 /** @type { Translation.GroupedEntries } */
-const translations = {
+const translationSrc = {
     CN: {
         新后发_Luzi: {
             侧马尾1: "侧马尾 1",
@@ -401,37 +401,40 @@ const translations = {
     },
 };
 
-/** @type {AssetArchetypeConfig} */
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "左侧" }, { Name: "右侧" }, { Name: "都有" }],
 };
 
-const dialogGen = (name) =>
-    DialogTools.replicateGroupedItemDialog(["新后发_Luzi"], [name], {
-        CN: {
-            Select: "选择外观",
-            左侧: "左侧",
-            右侧: "右侧",
-            都有: "都有",
-        },
-        EN: {
-            Select: "Choose look",
-            左侧: "Left",
-            右侧: "Right",
-            都有: "Both",
-        },
-    });
+const assetStrings = {
+    CN: {
+        Select: "选择外观",
+        左侧: "左侧",
+        右侧: "右侧",
+        都有: "都有",
+    },
+    EN: {
+        Select: "Choose look",
+        左侧: "Left",
+        右侧: "Right",
+        都有: "Both",
+    },
+};
 
 export default function () {
     assets.forEach((asset) => {
-        const names = DialogTools.pickDialog(translations, "新后发_Luzi", asset.Name);
+        const translation = DialogTools.pickDialog(translationSrc, "新后发_Luzi", asset.Name);
         if (asset.Extended === true) {
-            AssetManager.addAsset("新后发_Luzi", asset, extended, names);
-            AssetManager.addCustomDialog(dialogGen(asset.Name));
+            AssetManager.addAssetWithConfig("新后发_Luzi", asset, {
+                translation,
+                extended,
+                layerNames: {},
+                assetStrings,
+            });
         } else {
-            AssetManager.addAsset("新后发_Luzi", asset, null, names);
+            AssetManager.addAssetWithConfig("新后发_Luzi", asset, { translation, layerNames: {} });
         }
     });
 }

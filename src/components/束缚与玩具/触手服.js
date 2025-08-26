@@ -403,7 +403,7 @@ const translations = { CN: "触手服", EN: "Tentacle Suit", UA: "Щупальц
 
 export default function () {
     AssetManager.addAsset("ItemTorso", asset, extended, translations);
-    AssetManager.addCustomDialog(dialogs);
+    AssetManager.addCustomAssetString(dialogs);
     // 使用CopyConfig设置后，只需要设置一次
     HookManager.globalFunction("AssetsBeforeDraw", beforeDraw);
     HookManager.globalFunction("AssetsItemTorso2触手服_LuziBeforeDraw", beforeDraw);

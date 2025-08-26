@@ -49,7 +49,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         Select: "选择外观",
         不透: "不透",
@@ -92,7 +92,7 @@ export default function () {
             translation,
             layerNames,
             extended,
-            assetDialogs,
+            assetStrings,
         });
     }
 }

@@ -202,7 +202,7 @@ const extended = {
     ],
 };
 
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "选择幽灵身体设置",
         Module眼睛发光: "眼睛发光",
@@ -274,6 +274,6 @@ export default function () {
         translation,
         layerNames,
         extended,
-        assetDialogs,
+        assetStrings,
     });
 }

@@ -369,7 +369,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "选择要显示的纹身",
         ...LayerSettings.reduce((pv, layer) => {
@@ -430,6 +430,6 @@ export default function () {
         translation,
         layerNames,
         extended,
-        assetDialogs,
+        assetStrings,
     });
 }

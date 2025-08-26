@@ -102,7 +102,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
         Select跳蛋开关: "跳蛋开关",
@@ -229,6 +229,6 @@ export default function () {
         extended,
         translation,
         layerNames,
-        assetDialogs,
+        assetStrings,
     });
 }

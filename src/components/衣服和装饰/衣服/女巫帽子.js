@@ -75,6 +75,19 @@ const asset = {
     ],
 };
 
+const layerNames = {
+    EN: {
+        帽尖: "Hat Tip",
+        帽尖2: "Hat Tip 2",
+        帽檐: "Hat Brim",
+        帽里: "Hat Lining",
+        帽里装饰: "Hat Lining Decoration",
+        蝴蝶结: "Bow",
+        绑带: "Strap",
+        吊坠: "Pendant",
+    },
+};
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -88,30 +101,29 @@ const extended = {
     ],
 };
 
-const descriptions = {
+const assetStrings = {
     CN: {
-        Hat女巫帽子_LuziSelectBase: "选择配置",
-        Hat女巫帽子_LuziSelect遮罩头发: "设置遮罩头发",
-        Hat女巫帽子_LuziModule遮罩头发: "遮罩头发",
-        Hat女巫帽子_LuziOptionz0: "无",
-        Hat女巫帽子_LuziOptionz1: "有",
+        SelectBase: "选择配置",
+        Select遮罩头发: "设置遮罩头发",
+        Module遮罩头发: "遮罩头发",
+        Optionz0: "无",
+        Optionz1: "遮挡部分头发",
     },
     EN: {
-        Hat女巫帽子_LuziSelectBase: "Select Configuration",
-        Hat女巫帽子_LuziSelect遮罩头发: "Set 遮罩头发",
-        Hat女巫帽子_LuziModule遮罩头发: "遮罩头发",
-        Hat女巫帽子_LuziOptionz0: "None",
-        Hat女巫帽子_LuziOptionz1: "Present",
+        SelectBase: "Select Configuration",
+        Module遮罩头发: "Hair Masking",
+        Select遮罩头发: "Set Hair Masking",
+        Optionz0: "None",
+        Optionz1: "Mask Part of Hair",
     },
 };
 
-const translations = {
+const translation = {
     CN: "女巫帽子",
     EN: "Witch Hat",
     RU: "Шляпа ведьмы",
 };
 
 export default function () {
-    AssetManager.addAsset("Hat", asset, extended, translations);
-    AssetManager.addCustomDialog(descriptions);
+    AssetManager.addAssetWithConfig("Hat", asset, { extended, translation, layerNames, assetStrings });
 }

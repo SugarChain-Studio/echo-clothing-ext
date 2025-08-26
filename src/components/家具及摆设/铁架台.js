@@ -173,7 +173,7 @@ const translation = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "选择铁架台设置",
         Module高度: "高度",
@@ -217,6 +217,6 @@ export default function () {
         extended,
         layerNames,
         translation,
-        assetDialogs,
+        assetStrings,
     });
 }

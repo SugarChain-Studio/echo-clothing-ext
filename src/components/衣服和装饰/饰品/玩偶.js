@@ -300,10 +300,9 @@ const asset = {
         { Name: "云喵", AllowTypes: { l: 43 } },
         { Name: "枳", AllowTypes: { l: 44 } },
         { Name: "Lana", AllowTypes: { l: 45 } },
-        { Name: "柴柴1", AllowTypes: { l: 46} },
+        { Name: "柴柴1", AllowTypes: { l: 46 } },
         { Name: "柴柴2", AllowTypes: { l: 47 } },
         { Name: "柴柴3", AllowTypes: { l: 48 } },
-
     ],
 };
 
@@ -328,29 +327,49 @@ const typeNames = {
     ds: "Den of Sin",
     ll: "Latex Lab",
     hb: "月见里的海边",
-    l: "路过的玩偶",
+    l: "(路过的玩偶)",
 };
 
-const translations = { CN: "玩偶", EN: "Plushies" };
+const typeNamesEN = {
+    d: "Nights at Saotome",
+    // s: "Wolf's Den",
+    z: "Mie",
+    c: "Catnest",
+    f: "Nekopara",
+    y: "Home of Saya",
+    hz: "xiaoheiwu",
+    x: "Vampire Castle",
+    lihua: "Kasaki's room",
+    // yb: "Yuan Castle",
+    // EILRSW: "EILRSW",
+    yytc: "Friends of Yi",
+    xppjb: "xiangpenpen",
+    // lilian: "Lilian's Medley",
+    lkls: "Licolis",
+    // ce: "Celestial Enchants",
+    // ds: "Den of Sin",
+    // ll: "Latex Lab",
+    // hb: "月见里的海边",
+    l: "(Wanderers)",
+};
+
+const translation = { CN: "玩偶", EN: "Plushies" };
 
 /** @type {Translation.Dialog} */
 const predefDialog = {
     CN: {
-        ItemMisc玩偶_LuziOptionhz4: "Neko",
-        ItemMisc玩偶_LuziOptionlihua2: "An'an",
+        Optionhz4: "Neko",
+        Optionlihua2: "An'an",
 
-        ItemMisc玩偶_LuziSetd2: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
-        ItemMisc玩偶_LuziSets4: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
-        ItemMisc玩偶_LuziSetc3: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
-        ItemMisc玩偶_LuziSetc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
-        ItemMisc玩偶_LuziSetx1:
-            "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
-        ItemMisc玩偶_LuziSetxppjb1:
-            "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
-        ItemMisc玩偶_LuziSetxppjb7:
-            "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
-        ItemMisc玩偶_LuziSetf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
-        ItemMisc玩偶_LuziSetf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
+        Setd2: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
+        Sets4: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
+        Setc3: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
+        Setc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
+        Setx1: "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
+        Setxppjb1: "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
+        Setxppjb7: "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
+        Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
+        Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
     },
 };
 
@@ -379,7 +398,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -387,7 +406,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -437,15 +456,15 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: ["ItemMisc"],
-        itemNames: ["玩偶_Luzi"],
+        groups: [""],
+        itemNames: [""],
         selectBase: "选择玩偶房间",
-        module: ({ Name }) => ({ Select: `选择${Name}`, Module: `${Name}` }),
+        module: ({ Name, Key }) => ({ Select: `选择${Name}`, Module: `${typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName) return { Option: "空", Set: "SourceCharacter移除了DestinationCharacter手上的玩偶." };
@@ -461,10 +480,10 @@ const cnDialog = DialogTools.dialogGenerator(
 const enDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: ["ItemMisc"],
-        itemNames: ["玩偶_Luzi"],
+        groups: [""],
+        itemNames: [""],
         selectBase: "Select Plushies Room",
-        module: ({ Name }) => ({ Select: `Select ${Name}`, Module: `${Name}` }),
+        module: ({ Name, Key }) => ({ Select: `Select ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName)
@@ -481,10 +500,10 @@ const enDialog = DialogTools.dialogGenerator(
 const ruDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: ["ItemMisc"],
-        itemNames: ["玩偶_Luzi"],
+        groups: [""],
+        itemNames: [""],
         selectBase: "Выбрать комнату с куклами",
-        module: ({ Name }) => ({ Select: `Выбрать ${Name}`, Module: `${Name}` }),
+        module: ({ Name, Key }) => ({ Select: `Выбрать ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName)
@@ -499,13 +518,12 @@ const ruDialog = DialogTools.dialogGenerator(
 );
 
 /** @type {Translation.Dialog} */
-const dialogs = {
+const assetStrings = {
     CN: cnDialog,
     EN: enDialog,
     RU: ruDialog,
 };
 
 export default function () {
-    AssetManager.addAsset("ItemMisc", asset, extended, translations);
-    AssetManager.addCustomDialog(dialogs);
+    AssetManager.addAssetWithConfig("ItemMisc", asset, { extended, translation, layerNames, assetStrings });
 }

@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -31,16 +30,8 @@ const asset = {
         "SuitLower",
     ],
     Layer: [
-        {
-            Name: "框架抬手",
-            Priority: 1,
-            AllowTypes: { o: 1 },
-        },
-        {
-            Name: "框架",
-            Priority: 1,
-            AllowTypes: { o: 0 },
-        },
+        { Name: "框架抬手", Priority: 1, AllowTypes: { o: 1 } },
+        { Name: "框架", Priority: 1, AllowTypes: { o: 0 } },
         {
             Name: "下半身开腿",
             Priority: 7,
@@ -49,43 +40,29 @@ const asset = {
             HideColoring: true,
             ColorSuffix: { HEX_COLOR: "White" },
         },
-        {
-            Name: "手固定",
-            Priority: 50,
-            AllowTypes: { o: 1 },
-            ParentGroup: "BodyUpper",
-        },
-        {
-            Name: "腿固定",
-            Priority: 50,
-            ParentGroup: "BodyLower",
-        },
-        {
-            Name: "身体固定",
-            Priority: 50,
-            ParentGroup: "BodyUpper",
-        },
-        {
-            Name: "嘴巴固定",
-            Priority: 50,
-            AllowTypes: { g: 1 },
-        },
-        {
-            Name: "脖子固定",
-            Priority: 50,
-        },
-        {
-            Name: "下体棒子",
-            Priority: 13,
-            AllowTypes: { v: 1 },
-        },
-        {
-            Name: "链条",
-            Priority: 1,
-            Top: -760,
-            Left: 0,
-        },
+        { Name: "手固定", Priority: 50, AllowTypes: { o: 1 }, ParentGroup: "BodyUpper" },
+        { Name: "腿固定", Priority: 50, ParentGroup: "BodyLower" },
+        { Name: "身体固定", Priority: 50, ParentGroup: "BodyUpper" },
+        { Name: "嘴巴固定", Priority: 50, AllowTypes: { g: 1 } },
+        { Name: "脖子固定", Priority: 50 },
+        { Name: "下体棒子", Priority: 13, AllowTypes: { v: 1 } },
+        { Name: "链条", Priority: 1, Top: -760, Left: 0 },
     ],
+};
+
+const layerNames = {
+    EN: {
+        框架抬手: "Frame(Hand Lift)",
+        框架: "Frame",
+        下半身开腿: "Lower Body(Leg Spread)",
+        手固定: "Hand Restraint",
+        腿固定: "Leg Restraint",
+        身体固定: "Body Restraint",
+        嘴巴固定: "Mouth Restraint",
+        脖子固定: "Neck Restraint",
+        下体棒子: "Genital Prop",
+        链条: "Chain",
+    },
 };
 
 /** @type {AssetArchetypeConfig} */
@@ -140,7 +117,7 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["开腿展示架_Luzi"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择开腿展示架配置",
 
@@ -281,9 +258,9 @@ const dialog = DialogTools.replicateGroupedItemDialog(["ItemDevices"], ["开腿�
         Setd0: "SourceCharacter скинув конфігураю висоти на тілі DestinationCharacter",
         Setd1: "SourceCharacter налаштовує висоту DestinationCharacter",
     },
-});
+};
 
-const translations = {
+const translation = {
     CN: "开腿展示架",
     EN: "Leg-Spread Display Stand",
     UA: "Розширювач ніг",
@@ -291,6 +268,5 @@ const translations = {
 };
 
 export default function () {
-    AssetManager.addAsset("ItemDevices", asset, extended, translations);
-    AssetManager.addCustomDialog(dialog);
+    AssetManager.addAssetWithConfig("ItemDevices", asset, { extended, translation, layerNames, assetStrings });
 }

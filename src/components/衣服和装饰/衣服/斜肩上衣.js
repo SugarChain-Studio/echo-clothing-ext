@@ -41,22 +41,10 @@ const extended = {
 };
 
 /** @type {Translation.Dialog} */
-const assetDialogs = {
-    CN: {
-        Select: "设置",
-        左: "左",
-        右: "右",
-    },
-    EN: {
-        Select: "Select",
-        左: "Left",
-        右: "Right",
-    },
-    RU: {
-        Select: "Выбрать",
-        左: "Лево",
-        右: "Право",
-    },
+const assetStrings = {
+    CN: { Select: "设置", 左: "左", 右: "右" },
+    EN: { Select: "Select", 左: "Left", 右: "Right" },
+    RU: { Select: "Выбрать", 左: "Лево", 右: "Право" },
 };
 
 const translation = {
@@ -67,5 +55,5 @@ const translation = {
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
-    AssetManager.addAssetWithConfig("Cloth", asset, { extended, translation, assetDialogs, layerNames });
+    AssetManager.addAssetWithConfig("Cloth", asset, { extended, translation, assetStrings, layerNames });
 }

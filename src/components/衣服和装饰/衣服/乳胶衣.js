@@ -139,7 +139,7 @@ const upper = [
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
         },
-        assetDialogs: {
+        assetStrings: {
             CN: { Select: "选择是否有手套", 无: "无", 有: "有" },
             EN: { Select: "Select whether to have gloves", 无: "No", 有: "Yes" },
         },
@@ -167,7 +167,7 @@ const lower = [
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
         },
-        assetDialogs: {
+        assetStrings: {
             CN: { Select: "选择是否有袜子", 无: "无", 有: "有" },
             EN: { Select: "Select whether to have socks", 无: "No", 有: "Yes" },
         },
