@@ -1,5 +1,5 @@
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../assetForward";
+import { GroupConfig } from "./身体组调整";
 
 /** @type {ExpressionName[]} */
 const eyeExpressions = [
@@ -218,38 +218,17 @@ const groups = [
     },
 ];
 
-/** @type {Set<CustomGroupName>} */
-const prevGroups = new Set(groups.filter((g) => !!g.groupDef.PreviewZone).map((g) => g.groupDef.Group));
-
 export default function () {
     groups.forEach((definition) => {
         AssetManager.addGroup(definition.groupDef, definition.description);
     });
 
-    // 眼睛和头发组使用预览图
-    HookManager.hookFunction("AppearancePreviewUseCharacter", 0, (args, next) => {
-        if (args[0] && prevGroups.has(args[0].Name)) return true;
-        return next(args);
-    });
+    GroupConfig.forceCharaPreview(groups.filter((g) => !!g.groupDef.PreviewZone).map((g) => g.groupDef.Group));
 
-    const backOverrides = {
+    GroupConfig.spHideAs({
         新前发_Luzi: "HairFront",
         新后发_Luzi: "HairBack",
         右眼_Luzi: "Eyes",
         左眼_Luzi: "Eyes2",
-    };
-
-    HookManager.hookFunction("CharacterAppearanceVisible", 0, (args, next) => {
-        const [C, _, GroupName] = args;
-
-        if (GroupName in backOverrides) {
-            const oldda = C.DrawAppearance;
-            C.DrawAppearance = oldda.filter((i) => i.Asset.Group.Name !== GroupName);
-            args[2] = backOverrides[GroupName];
-            const result = next(args);
-            C.DrawAppearance = oldda;
-            return result;
-        }
-        return next(args);
     });
 }

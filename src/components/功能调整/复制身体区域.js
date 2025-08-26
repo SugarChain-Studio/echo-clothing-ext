@@ -1,14 +1,34 @@
 import { AssetManager } from "../../assetForward";
+import { GroupConfig } from "./身体组调整";
 
 /**
  * @typedef {Object} CopyGroupInfo
  * @property {CustomGroupBodyName} name
- * @property {AssetGroupBodyName} mirror
+ * @property {CustomGroupBodyName} mirror
  * @property {Translation.Entry} description
+ * @property {Partial<CustomGroupDefinition>} [overrides]
  */
 
 /** @type {CopyGroupInfo[]} */
 const copyGroups = [
+    {
+        name: "新前发_Luzi_stack",
+        mirror: "新前发_Luzi",
+        description: {
+            CN: "🍔前发(叠加)",
+            EN: "🍔Front Hair (Stack)",
+        },
+        overrides: { Hide: undefined },
+    },
+    {
+        name: "新后发_Luzi_stack",
+        mirror: "新后发_Luzi",
+        description: {
+            CN: "🍔后发(叠加)",
+            EN: "🍔Back Hair (Stack)",
+        },
+        overrides: { Hide: undefined },
+    },
     {
         name: "BodyMarkings2_Luzi",
         mirror: "BodyMarkings",
@@ -190,7 +210,16 @@ const copyGroups = [
 ];
 
 export default function () {
+    GroupConfig.forceCharaPreview(["新前发_Luzi_stack", "新后发_Luzi_stack"]);
+
+    GroupConfig.spHideAs({
+        新前发_Luzi: "HairFront",
+        新后发_Luzi: "HairBack",
+        右眼_Luzi: "Eyes",
+        左眼_Luzi: "Eyes2",
+    });
+
     copyGroups.forEach((definition) => {
-        AssetManager.addCopyGroup(definition.name, definition.mirror, definition.description);
+        AssetManager.addCopyGroup(definition.name, definition.mirror, definition.description, definition.overrides);
     });
 }
