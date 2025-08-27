@@ -36,28 +36,13 @@ const assets = {
             Top: 0,
             Left: 0,
             Priority: 56,
-            Layer: [
-                { Name: "1" },
-                { Name: "2" },
-                { Name: "3" },
-                { Name: "4" },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }],
         },
         {
             Name: "下半框眼镜_Luzi",
             Random: false,
             Top: 0,
             Left: 0,
-        },
-    ],
-    BodyMarkings: [
-        {
-            Name: "番茄酱_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Priority: 9,
-            ParentGroup: {},
         },
     ],
 };
@@ -75,9 +60,6 @@ const translations = {
             爱心眼镜_Luzi: "爱心眼镜",
             下半框眼镜_Luzi: "下半框眼镜",
         },
-        BodyMarkings: {
-            番茄酱_Luzi: "番茄酱",
-        },
     },
     EN: {
         Wings: {
@@ -89,9 +71,6 @@ const translations = {
             眼镜卡_Luzi: "Glasses Card",
             爱心眼镜_Luzi: "Heart-shaped glasses",
             下半框眼镜_Luzi: "Semi-rimless glasses",
-        },
-        BodyMarkings: {
-            番茄酱_Luzi: "Ketchup",
         },
     },
 };
