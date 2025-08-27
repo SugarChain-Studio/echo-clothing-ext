@@ -331,7 +331,7 @@ const typeNames = {
 };
 
 const typeNamesEN = {
-    d: "Nights at Saotome",
+    d: "Night at Saotome",
     // s: "Wolf's Den",
     z: "Mie",
     c: "Catnest",
@@ -344,7 +344,7 @@ const typeNamesEN = {
     // EILRSW: "EILRSW",
     yytc: "Friends of Yi",
     xppjb: "xiangpenpen",
-    // lilian: "Lilian's Medley",
+    lilian: "Lilian Home",
     lkls: "Licolis",
     // ce: "Celestial Enchants",
     // ds: "Den of Sin",
@@ -461,8 +461,6 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
 const cnDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: [""],
-        itemNames: [""],
         selectBase: "选择玩偶房间",
         module: ({ Name, Key }) => ({ Select: `选择${Name}`, Module: `${typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
@@ -480,8 +478,6 @@ const cnDialog = DialogTools.dialogGenerator(
 const enDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: [""],
-        itemNames: [""],
         selectBase: "Select Plushies Room",
         module: ({ Name, Key }) => ({ Select: `Select ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
@@ -500,8 +496,6 @@ const enDialog = DialogTools.dialogGenerator(
 const ruDialog = DialogTools.dialogGenerator(
     modules,
     {
-        groups: [""],
-        itemNames: [""],
         selectBase: "Выбрать комнату с куклами",
         module: ({ Name, Key }) => ({ Select: `Выбрать ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
         option: (option, optionIndex, { Name }) => {
