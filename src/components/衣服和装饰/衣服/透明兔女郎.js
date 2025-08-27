@@ -11,6 +11,7 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: PoseType.HIDE,
     },
+    DynamicGroupName: "Suit",
     DefaultColor: ["#111", "#111", "Default", "Default", "Default", "Default"],
     Layer: [
         { Name: "A1", Opacity: 0.4 },
@@ -67,8 +68,38 @@ const layerNames = {
     },
 };
 
+function generate(n, def, src = {}) {
+    return Array.from({ length: n }, (_, i) => (src[i] === undefined ? def : src[i]));
+}
+
+/** @type {TypedItemConfig} */
+const extended = {
+    Archetype: ExtendedArchetype.TYPED,
+    DrawImages: false,
+    Options: [
+        { Name: "Op1", Property: { Opacity: generate(asset.Layer.length, 1, { 0: 0.4 }) } },
+        { Name: "Op2", Property: { Opacity: generate(asset.Layer.length, 1, { 0: 0.4, 1: 0 }) } },
+        { Name: "NoOp", Property: { Opacity: generate(asset.Layer.length, 1) } },
+    ],
+};
+
+const assetStrings = {
+    CN: {
+        Select: "选择透明兔女郎样式",
+        Op1: "中间透明",
+        Op2: "整体透明",
+        NoOp: "不透明",
+    },
+    EN: {
+        Select: "Select Transparent Bunny Girl Style",
+        Op1: "Middle Trans",
+        Op2: "Overall Trans",
+        NoOp: "Opaque",
+    },
+};
+
 export default function () {
-    for (const n of /** @type {CustomGroupBodyName[]}*/ (["Suit", "Bra", "Cloth"])) {
-        AssetManager.addAssetWithConfig(n, { ...asset, DynamicGroupName: "Suit" }, { translation, layerNames });
+    for (const g of /** @type {CustomGroupBodyName[]}*/ (["Suit", "Bra", "Cloth"])) {
+        AssetManager.addAssetWithConfig(g, asset, { translation, layerNames, extended, assetStrings });
     }
 }
