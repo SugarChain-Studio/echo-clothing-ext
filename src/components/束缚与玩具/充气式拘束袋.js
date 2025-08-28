@@ -353,12 +353,10 @@ const translation = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["ItemDevices", "ItemArms"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            layerNames,
-            translation,
-            extended,
-            assetStrings,
-        });
-    }
+    AssetManager.addAssetWithConfig(["ItemDevices", "ItemArms"], asset, {
+        layerNames,
+        translation,
+        extended,
+        assetStrings,
+    });
 }

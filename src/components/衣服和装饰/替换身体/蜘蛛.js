@@ -175,7 +175,10 @@ const translation = {
 };
 
 export default function () {
-    for (const g of Typing.groups(["动物身体_Luzi", "Wings"])) {
-        AssetManager.addAssetWithConfig(g, asset, { extended, translation, layerNames, assetStrings });
-    }
+    AssetManager.addAssetWithConfig(["动物身体_Luzi", "Wings"], asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }

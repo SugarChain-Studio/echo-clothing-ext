@@ -85,8 +85,6 @@ const defs = [
 
 export default function () {
     for (const { groups, asset, translation, layerNames } of defs) {
-        for (const g of groups) {
-            AssetManager.addAssetWithConfig(g, asset, { translation, layerNames });
-        }
+        AssetManager.addAssetWithConfig(groups, asset, { translation, layerNames });
     }
 }

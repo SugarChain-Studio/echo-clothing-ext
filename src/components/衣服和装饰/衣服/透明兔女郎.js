@@ -99,7 +99,10 @@ const assetStrings = {
 };
 
 export default function () {
-    for (const g of /** @type {CustomGroupBodyName[]}*/ (["Suit", "Bra", "Cloth"])) {
-        AssetManager.addAssetWithConfig(g, asset, { translation, layerNames, extended, assetStrings });
-    }
+    AssetManager.addAssetWithConfig(["Suit", "Bra", "Cloth"], asset, {
+        translation,
+        layerNames,
+        extended,
+        assetStrings,
+    });
 }

@@ -137,12 +137,10 @@ export default function () {
     const groups = ["HairAccessory1", "HairAccessory3"];
     for (const asset of assets) {
         const translation = DialogTools.pickEntry(translations, asset.Name);
-        for (const group of groups) {
-            AssetManager.addAssetWithConfig(group, asset, {
-                translation,
-                layerNames,
-                ...ExtendedTools.createLeftRightBoth(asset),
-            });
-        }
+        AssetManager.addAssetWithConfig(groups, asset, {
+            translation,
+            layerNames,
+            ...ExtendedTools.createLeftRightBoth(asset),
+        });
     }
 }

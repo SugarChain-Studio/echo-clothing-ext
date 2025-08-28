@@ -24,10 +24,8 @@ const translation = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["Socks", "SocksLeft", "SocksRight"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            layerNames: {},
-            translation,
-        });
-    }
+    AssetManager.addAssetWithConfig(["Socks", "SocksLeft", "SocksRight"], asset, {
+        layerNames: {},
+        translation,
+    });
 }

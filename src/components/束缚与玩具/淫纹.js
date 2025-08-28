@@ -48,6 +48,7 @@ const asset = {
     ParentGroup: {},
     Attribute: ["GenitaliaCover"],
     DefaultColor: ["#EA3E74"],
+    DynamicGroupName: "ItemPelvis",
     PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
     Layer: [
         {
@@ -725,17 +726,11 @@ function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) 
 export default function () {
     ChatRoomEvents.on("Action", (data) => onActionHandler(data));
 
-    /** @type {AssetGroupName[]}*/ (["ItemPelvis", "ItemTorso"]).forEach((name) => {
-        AssetManager.addAssetWithConfig(
-            name,
-            { ...asset, DynamicGroupName: "ItemPelvis" },
-            {
-                extended,
-                translation,
-                layerNames,
-                assetStrings: item_dialogs,
-            }
-        );
+    AssetManager.addAssetWithConfig(["ItemPelvis", "ItemTorso"], asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings: item_dialogs,
     });
 
     AssetManager.addCustomAssetString(custom_dialogs);
@@ -743,12 +738,10 @@ export default function () {
     AssetManager.addAsset("ItemMisc", lock_asset, lock_config, lock_translation);
     AssetManager.addCustomAssetString(lock_dialogs);
 
-    /** @type {AssetGroupName[]}*/ (["Panties", "BodyMarkings"]).forEach((name) => {
-        AssetManager.addAssetWithConfig(name, clothAsset, {
-            extended: clothExtended,
-            translation: clothTranslation,
-            layerNames: clothlayerName,
-            assetStrings: clothAssetsStrings,
-        });
+    AssetManager.addAssetWithConfig(["Panties", "BodyMarkings"], clothAsset, {
+        extended: clothExtended,
+        translation: clothTranslation,
+        layerNames: clothlayerName,
+        assetStrings: clothAssetsStrings,
     });
 }

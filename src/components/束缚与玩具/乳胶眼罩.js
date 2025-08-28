@@ -84,7 +84,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetStrings });
-    for (const g of /** @type {AssetGroupBodyName[]} */ (["Glasses", "Mask"])) {
-        AssetManager.addAssetWithConfig(g, asset, { translation, layerNames });
-    }
+    AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset, { translation, layerNames });
 }

@@ -58,13 +58,11 @@ const assets = ["左", "右"].map((side) => ({
 
 export default function () {
     for (const { asset, translation, extended, layerNames, assetStrings } of assets) {
-        for (const group of /**@type {AssetGroupBodyName[]}*/ (["Glasses", "Mask"])) {
-            AssetManager.addAssetWithConfig(group, asset, {
-                translation,
-                extended,
-                layerNames,
-                assetStrings,
-            });
-        }
+        AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset, {
+            translation,
+            extended,
+            layerNames,
+            assetStrings,
+        });
     }
 }
