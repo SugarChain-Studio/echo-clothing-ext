@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

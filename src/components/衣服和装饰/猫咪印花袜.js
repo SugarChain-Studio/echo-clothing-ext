@@ -1,6 +1,5 @@
 import { AssetManager } from "../../assetForward";
 import { SockLRTool } from "../../lib/sockLR";
-import { Typing } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
