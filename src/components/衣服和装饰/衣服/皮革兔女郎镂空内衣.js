@@ -30,8 +30,8 @@ const asset = {
         { Name: "胸罩带反光", ColorGroup: "胸反光", AllowTypes: { typed: [0, 1, 2] } },
         { Name: "胸罩", ColorGroup: "胸底色", AllowTypes: { typed: [0, 1, 2] } },
         { Name: "胸罩反光", ColorGroup: "胸反光", AllowTypes: { typed: [0, 1, 2] } },
-        { Name: "皮革带", ColorGroup: "裤底色", AllowTypes: { typed: [0, 1, 3] } },
-        { Name: "皮革带反光", ColorGroup: "裤反光", AllowTypes: { typed: [0, 1, 3] } },
+        { Name: "皮革带", AllowTypes: { typed: [0, 1, 3] } },
+        { Name: "皮革带反光", AllowTypes: { typed: [0, 1, 3] } },
         { Name: "拉链", ParentGroup: {}, AllowTypes: { typed: [0, 1, 3] } },
     ],
 };
