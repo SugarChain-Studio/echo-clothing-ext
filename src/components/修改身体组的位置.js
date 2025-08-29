@@ -14,6 +14,15 @@ const customOffset = [
     { Asset: "Splatters", Layer: ["Internal2", "Internal3"], Y: -20 },
 ];
 
+/** @type {["Original", "EchoV2"]} */
+const bodyStyles = ["Original", "EchoV2"];
+
+/** @type {Record<bodyStyles[number], AssetDefinitionBase["DrawOffset"]>} */
+const bodyOffset = {
+    Original: customOffset,
+    EchoV2: [...customOffset, { Group: "Bra", Asset: "LeatherBunnyHollowBra", X: 160, Y: 208 }],
+};
+
 export default function () {
     HookManager.patchFunction("CommonDrawComputeDrawingCoordinates", {
         "offset.Group === groupName &&": "(offset.Group === undefined || offset.Group === groupName) &&",
@@ -34,9 +43,9 @@ export default function () {
         return ret;
     });
 
-    for (const body of ["Original", "EchoV2"]) {
+    for (const body of bodyStyles) {
         AssetManager.modifyAsset("BodyStyle", body, (group, asset) => {
-            asset.DrawOffset = customOffset;
+            asset.DrawOffset = bodyOffset[body];
         });
     }
 }
