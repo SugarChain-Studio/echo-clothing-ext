@@ -15,5 +15,6 @@ export function customFixup(fixup) {
 export default function () {
     HookManager.hookFunction("LoginPerformInventoryFixups", 0, (args, next) => {
         LoginInventoryFixups.push(...myFixups);
+        return next(args);
     });
 }
