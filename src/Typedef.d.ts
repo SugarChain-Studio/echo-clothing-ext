@@ -27,3 +27,9 @@ declare module 'https://cdn.jsdelivr.net/npm/bondage-club-mod-sdk@1.2.0/dist/bcm
 }
 
 type CustomAssetAttribute = AssetAttribute | 'LuziXCross' | 'LuziLimbTeleDevice';
+
+type ExtendType<T, From, To> = {
+    [K in keyof T]: T[K] extends From ? To : ExtendType<T[K], From, To>;
+};
+
+type CustomLoginInventoryFixup = ExtendType<typeof LoginInventoryFixups[number], AssetGroupName, CustomGroupName>;

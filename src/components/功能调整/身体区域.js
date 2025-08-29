@@ -216,6 +216,20 @@ const groups = [
             RU: "🍔Длинные рукава",
         },
     },
+    {
+        groupDef: {
+            Group: "外观工具",
+            Priority: 0,
+            AllowNone: true,
+            AllowColorize: false,
+            Asset: [],
+            Color: ["Default"],
+        },
+        description: {
+            CN: "🍔外观工具",
+            EN: "🍔Appearance Tool",
+        },
+    },
 ];
 
 export default function () {

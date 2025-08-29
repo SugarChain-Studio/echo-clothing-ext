@@ -1,5 +1,6 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../../assetForward";
+import { customFixup } from "../../fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -30,7 +31,9 @@ function scriptDraw({ C }) {
 }
 
 export default function () {
-    const group = "动物身体_Luzi";
+    customFixup({ Old: { Group: "动物身体_Luzi", Name: asset.Name }, New: { Group: "外观工具", Name: asset.Name } });
+
+    const group = "外观工具";
     HookManager.globalFunction(`Assets${group}${asset.Name}ScriptDraw`, scriptDraw);
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames: {} });
 }
