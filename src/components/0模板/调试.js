@@ -31,8 +31,7 @@ const asset = {
 export default function load() {
     if (debugFlag) {
         // 一个能隐藏身体的道具
-        AssetManager.addAsset("BodyMarkings2_Luzi", asset);
-        AssetManager.addAsset("动物身体_Luzi", asset);
+        AssetManager.addAsset("外观工具", asset);
 
         // 聊天室隐藏图标设置为闭眼的时候，截角色图时隐藏背景
         HookManager.patchFunction("DialogDraw", {

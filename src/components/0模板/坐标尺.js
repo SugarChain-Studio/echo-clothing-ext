@@ -23,6 +23,6 @@ const translation = { CN: "坐牢尺", EN: "Grid" };
 
 export default function () {
     if (debugFlag) {
-        AssetManager.addAssetWithConfig("BodyMarkings2_Luzi", asset, { translation, layerNames: {} });
+        AssetManager.addAssetWithConfig("外观工具", asset, { translation, layerNames: {} });
     }
 }
