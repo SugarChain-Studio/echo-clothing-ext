@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 
 /** @type {AssetPoseMapping} */
 const upper = { Kneel: "Kneel", KneelingSpread: "KneelingSpread", AllFours: "AllFours" };
