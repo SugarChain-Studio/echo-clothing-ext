@@ -1,56 +1,39 @@
 import { AssetManager } from "../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { DialogTools } from "@mod-utils/Tools";
+import { PoseMapTools, Tools } from "@mod-utils/Tools";
 import { Typing } from "../../lib";
 
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<VibratingItemData, {}>} */
 function scriptDrawHook(data, originalFunction, drawData) {
     originalFunction(drawData);
-
     const Data = drawData.PersistentData();
-    const Properties = drawData.Item.Property || {};
-    const FrameTime = Player.GraphicsSettings ? Math.max(30, Player.GraphicsSettings.AnimationQuality * 0.6) : 30;
-    const Intensity = typeof Properties.Intensity === "number" ? Properties.Intensity : -1;
-    const FuckLength = 32;
-
-    if (typeof Data.FuckChangeTime !== "number") Data.FuckChangeTime = CommonTime() + FrameTime;
-    if (typeof Data.DildoState !== "number") Data.DildoState = 0;
-
-    if (Data.FuckChangeTime < CommonTime() && !(Intensity === -1 && FuckLength <= Data.DildoState)) {
-        Data.FuckChangeTime = CommonTime() + FrameTime;
-        AnimationRequestRefreshRate(drawData.C, FrameTime);
-        AnimationRequestDraw(drawData.C);
+    const Intensity = drawData.Item?.Property?.Intensity;
+    if (typeof Intensity === "number" && Intensity >= 0) {
+        Tools.drawUpdate(drawData.C, Data);
     }
 }
 
-function beforeDraw({ PersistentData, L, Y, Property }) {
-    const Data = PersistentData();
-    if (typeof Data.DildoState !== "number") Data.DildoState = 0;
-    if (typeof Data.Modifier !== "number") Data.Modifier = 1;
+/** @type {RectTuple[]} */
+const mask = [
+    [240, 400, 6, 118],
+    [246, 400, 8, 114],
+    [254, 400, 6, 118],
+];
 
-    //if (L === "DevicePleasureHolder") return { Y: Y + Data.DildoState };
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
+function beforeDraw(data, originalFunction, { L, Y, Property }) {
     if (L !== "触手" && L !== "触手背后") return;
 
-    const Properties = Property || {};
-    const Intensity = typeof Properties.Intensity === "number" ? Properties.Intensity : -1;
+    /** @type {DynamicBeforeDrawOverrides} */
+    const pdata = L === "触手" ? { AlphaMasks: mask } : {};
 
-    const FuckLength = 15;
-    const TimeModifier = 0.007;
-    const AnimationQualityRatio =
-        (Player.GraphicsSettings ? Math.max(Player.GraphicsSettings.AnimationQuality * 0.6, 30) : 30) / 30;
-    Data.Speed = (Intensity + 1) * 2;
-    if (Data.DildoState >= 1 && Intensity > -1) {
-        Data.Modifier = -1;
-    } else if (Data.DildoState <= 0) {
-        Data.Modifier = 1;
-    } else if (Data.DildoState <= 1 && Intensity === -1) {
-        Data.Modifier = 1;
-        Data.Speed = 1;
-    }
+    const Intensity = Property?.Intensity;
+    if (Intensity === undefined || Intensity < 0) return { Y, ...pdata };
 
-    Data.DildoState += Data.Modifier * Data.Speed * AnimationQualityRatio * TimeModifier;
-    if (AnimationQualityRatio > FuckLength) Data.DildoState = Math.random();
-
-    return { Y: Y + FuckLength * -Math.cos(Data.DildoState * 2 * Math.PI) };
+    const time = Date.now();
+    const freq = [0.2, 0.5, 1.2, 1.8][Intensity] ?? undefined;
+    const ratio = freq ? (Math.cos(((time * freq) / 1000) * 2 * Math.PI) + 1) / 2 : 0;
+    const dY = Math.round(ratio * 30);
+    return { Y: Y + dY, ...pdata };
 }
 
 /** @type {CustomAssetDefinition} */
@@ -65,36 +48,69 @@ const asset = {
     AllowTighten: true,
     DrawLocks: false,
     Prerequisite: ["HasBreasts"],
-    DynamicBeforeDraw: true,
-    DynamicScriptDraw: true,
     RemoveTime: 5,
     Extended: true,
     Time: 10,
+    Priority: 15,
+    ParentGroup: {},
     Layer: [
+        {
+            Name: "触手背后",
+            CopyLayerColor: "触手",
+            Priority: 4,
+            Left: 220,
+            Top: 470,
+            AllowTypes: { d: 2 },
+            PoseMapping: PoseMapTools.HideFullBody(),
+        },
+        {
+            Name: "P",
+            Priority: 13,
+            Left: 240,
+            Top: 500,
+            AllowColorize: false,
+            AllowTypes: { d: 2 },
+            PoseMapping: PoseMapTools.HideFullBody(),
+        },
+        {
+            Name: "触手",
+            Priority: 13,
+            Left: 220,
+            Top: 470,
+            AllowTypes: { d: 2 },
+            PoseMapping: PoseMapTools.HideFullBody(),
+        },
         {
             AllowTypes: { d: 0 },
             Name: "触手服",
-            Priority: 15,
-            PoseMapping: { AllFours: "Hide", Hogtied: "Hogtied" },
-        },
-        {
-            AllowTypes: { s: 1 },
-            Name: "上衣",
-            Priority: 16,
-            PoseMapping: { AllFours: "Hide", Hogtied: "Hogtied" },
+            ParentGroup: "BodyUpper",
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             AllowTypes: { d: [1, 2] },
             Name: "触手服开",
-            Priority: 15,
-            PoseMapping: { AllFours: "Hide", Hogtied: "Hogtied" },
+            CopyLayerColor: "触手服",
+            ParentGroup: "BodyUpper",
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
-            AllowTypes: { m: 1 },
-            Name: "触手服嘴套",
-            Priority: 15,
-            ParentGroup: "ItemHood",
-            PoseMapping: { AllFours: PoseType.DEFAULT, Hogtied: PoseType.DEFAULT },
+            AllowTypes: { f: 1 },
+            Name: "触手服脚套",
+            ParentGroup: "BodyLower",
+            PoseMapping: {
+                AllFours: "Hide",
+                Hogtied: "Hide",
+                Kneel: "Kneel",
+                KneelingSpread: "KneelingSpread",
+                LegsClosed: "LegsClosed",
+                Spread: "Spread",
+            },
+        },
+        {
+            AllowTypes: { s: 1 },
+            Name: "上衣",
+            ParentGroup: "BodyUpper",
+            PoseMapping: PoseMapTools.HideFullBody(),
         },
         {
             AllowTypes: { h: [1, 2] },
@@ -114,57 +130,38 @@ const asset = {
             },
         },
         {
-            AllowTypes: { f: 1 },
-            Name: "触手服脚套",
-            Priority: 15,
-            ParentGroup: "BodyLower",
-            PoseMapping: {
-                AllFours: "Hide",
-                Hogtied: "Hide",
-                Kneel: "Kneel",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "LegsClosed",
-                Spread: "Spread",
-            },
-        },
-        {
-            ParentGroup: "ItemVulva",
-            AllowTypes: { d: 2 },
-            Name: "Pussy",
-            Priority: 13,
-            PoseMapping: { AllFours: "Hide" },
-        },
-        {
-            ParentGroup: "ItemVulva",
-            AllowTypes: { d: 2 },
-            Name: "PussyMask",
-            Priority: 14,
-            PoseMapping: { AllFours: "Hide" },
-            InheritColor: "BodyLower",
-            HideColoring: true,
-            ColorSuffix: { HEX_COLOR: "White" },
-        },
-        {
-            Name: "触手",
-            Priority: 13,
-            AllowTypes: { d: 2 },
-            ParentGroup: "ItemVulva",
-            PoseMapping: { AllFours: "Hide" },
-        },
-        {
-            Name: "触手背后",
-            Priority: 2,
-            AllowTypes: { d: 2 },
-            ParentGroup: "ItemVulva",
-            PoseMapping: { AllFours: "Hide" },
+            AllowTypes: { m: 1 },
+            Name: "触手服嘴套",
+            Priority: 35,
+            PoseMapping: {},
         },
     ],
+};
+
+const layerNames = {
+    CN: {
+        触手: "插入触手",
+        触手服: "触手服",
+        触手服手套: "手套",
+        触手服嘴套: "嘴套",
+        触手服脚套: "脚套",
+        上衣: "胸口触手服",
+    },
+    EN: {
+        触手: "Inserting Tentacle",
+        触手服: "Suit",
+        触手服手套: "Gloves",
+        触手服嘴套: "Mouth Cover",
+        触手服脚套: "Leggings",
+        上衣: "Breast Cover",
+    },
 };
 
 /** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChangeWhenLocked: false,
+    ScriptHooks: { BeforeDraw: beforeDraw },
     Modules: [
         {
             Name: "触手状态",
@@ -178,8 +175,7 @@ const extended = {
                     HasSubscreen: true,
                     Prerequisite: ["AccessVulva", "VulvaEmpty", "AccessButt", "ButtEmpty"],
                     Property: {
-                        Effect: [E.VulvaShaft, E.Vibrating, E.IsPlugged],
-                        Intensity: 2,
+                        Effect: [E.VulvaShaft],
                         Block: ["ItemVulva", "ItemButt"],
                     },
                     ArchetypeConfig: {
@@ -193,13 +189,11 @@ const extended = {
         },
         {
             Name: "上衣开关",
-            // DrawImages: false,
             Key: "s",
             Options: [{}, {}],
         },
         {
             Name: "手套开关",
-            // DrawImages: false,
             Key: "h",
             Options: [
                 {},
@@ -231,32 +225,28 @@ const extended = {
         {
             Name: "脚套开关",
             Key: "f",
-            Options: [
-                {},
-                {
-                    Property: {
-                        Effect: [E.Slow],
-                    },
-                },
-            ],
+            Options: [{}, { Property: { Effect: [E.Slow] } }],
         },
     ],
 };
 
 /** @type {Translation.Dialog} */
-const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手服_Luzi"], {
+const assetStrings = {
     CN: {
         SelectBase: "选择配置",
+
+        Module手套开关: "手套状态",
+        Module嘴套开关: "嘴套状态",
+        Module脚套开关: "脚套状态",
+        Module触手状态: "触手状态",
+        Module上衣开关: "上衣状态",
+
         Select触手状态: "选择触手状态",
         Select上衣开关: "选择上衣状态",
         Select手套开关: "选择手套状态",
         Select嘴套开关: "选择嘴套状态",
         Select脚套开关: "选择脚套状态",
-        Module手套开关: "选择手套状态",
-        Module嘴套开关: "选择嘴套状态",
-        Module脚套开关: "选择脚套状态",
-        Module触手状态: "选择触手状态",
-        Module上衣开关: "选择上衣状态",
+
         Optiond0: "封闭阴部",
         Optiond1: "暴露阴部",
         Optiond2: "触手插入",
@@ -285,16 +275,18 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
     },
     EN: {
         SelectBase: "Select Configuration",
+        Module手套开关: "Glove Status",
+        Module嘴套开关: "Mouth Cover Status",
+        Module脚套开关: "Foot Cover Status",
+        Module触手状态: "Tentacle Status",
+        Module上衣开关: "Top Status",
+
         Select触手状态: "Select Tentacle Status",
         Select上衣开关: "Select Top Status",
         Select手套开关: "Select Glove Status",
         Select嘴套开关: "Select Mouth Cover Status",
         Select脚套开关: "Select Foot Cover Status",
-        Module手套开关: "Select Glove Status",
-        Module嘴套开关: "Select Mouth Cover Status",
-        Module脚套开关: "Select Foot Cover Status",
-        Module触手状态: "Select Tentacle Status",
-        Module上衣开关: "Select Top Status",
+
         Optiond0: "Seal Genital Area",
         Optiond1: "Expose Genital Area",
         Optiond2: "Insert Tentacle",
@@ -397,14 +389,10 @@ const dialogs = DialogTools.replicateGroupedItemDialog(["ItemTorso"], ["触手�
         Setm0: "The tentacle suit on TargetCharacterName slowly changes, revealing the mouth.",
         Setm1: "The tentacle suit on TargetCharacterName slowly changes, growing over the mouth.",
     },
-});
+};
 
-const translations = { CN: "触手服", EN: "Tentacle Suit", UA: "Щупальцевий костюм", RU: "Костюм для щупальца" };
+const translation = { CN: "触手服", EN: "Tentacle Suit", UA: "Щупальцевий костюм", RU: "Костюм для щупальца" };
 
 export default function () {
-    AssetManager.addAsset("ItemTorso", asset, extended, translations);
-    AssetManager.addCustomAssetString(dialogs);
-    // 使用CopyConfig设置后，只需要设置一次
-    HookManager.globalFunction("AssetsBeforeDraw", beforeDraw);
-    HookManager.globalFunction("AssetsItemTorso2触手服_LuziBeforeDraw", beforeDraw);
+    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
 }
