@@ -126,8 +126,8 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
         淫纹发光按钮: "淫纹发光",
         淫纹强制自慰按钮: "淫纹强制自慰",
 
-        淫纹魔法电流按钮: "淫纹魔法电流",
-        淫纹强制高潮按钮: "淫纹强制高潮",
+        淫纹魔法电流按钮: "魔法点击",
+        淫纹强制高潮按钮: "强制高潮",
 
         开始淫纹强制自慰: "SourceCharacter通过AssetName上的魔法令TargetCharacter开始不停地自慰.",
         停止淫纹强制自慰: "SourceCharacter通过AssetName上的魔法解除了TargetCharacter的强制自慰.",
@@ -147,10 +147,10 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
     },
     EN: {
         淫纹发光按钮: "Lewd Crest Glowing",
-        淫纹强制自慰按钮: "Lewd Crest Forced Masturbation",
+        淫纹强制自慰按钮: "Forced Masturbation",
 
-        淫纹魔法电流按钮: "Lewd Crest Magical Shock",
-        淫纹强制高潮按钮: "Lust Pattern Magical Orgasm",
+        淫纹魔法电流按钮: "Magical Shock",
+        淫纹强制高潮按钮: "Force Orgasm",
 
         开始淫纹强制自慰:
             "SourceCharacter uses magic on AssetName to make TargetCharacter start continuous masturbation.",
@@ -261,7 +261,7 @@ const item_dialogs = {
         Sett3: "SourceCharacter将DestinationCharacter淫纹设置为样式3.",
 
         Select性刺激: "淫纹性刺激设置",
-        Optiona0: "正常",
+        Optiona0: "无",
         Optiona1: "持续发情",
         Optiona2: "寸止",
         Optiona3: "拒绝",
@@ -286,7 +286,7 @@ const item_dialogs = {
         Sett3: "SourceCharacter sets DestinationCharacter Lust Pattern to Style 3.",
 
         Select性刺激: "Lewd Crest Sexual Stimulation Settings",
-        Optiona0: "Normal",
+        Optiona0: "Idle",
         Optiona1: "Continuous Heat",
         Optiona2: "Edge",
         Optiona3: "Deny",

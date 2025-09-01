@@ -19,6 +19,7 @@ const asset = {
     ParentGroup: {},
     Effect: [E.Freeze, E.BlockWardrobe, E.Mounted, E.MapImmobile],
     Hide: [],
+    ArousalZone: "ItemVulva",
     Layer: [
         {
             Top: 560,
@@ -167,6 +168,9 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
     }
 }
 
+/** @type {EffectName[]} */
+const shaftEffects = [E.Egged, E.Vibrating, E.FillVulva, E.VulvaShaft];
+
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
@@ -193,18 +197,10 @@ const extended = {
             Key: "d",
             Options: [
                 {},
-                {
-                    Property: { Intensity: 0, Effect: ["Egged"], Difficulty: 5 },
-                },
-                {
-                    Property: { Intensity: 1, Effect: ["Egged", "Vibrating"], Difficulty: 4 },
-                },
-                {
-                    Property: { Intensity: 2, Effect: ["Egged", "Vibrating"], Difficulty: 4 },
-                },
-                {
-                    Property: { Intensity: 3, Effect: ["Egged", "Vibrating"], Difficulty: 4 },
-                },
+                { Property: { Intensity: 0, Effect: [E.Egged, E.FillVulva, E.VulvaShaft], Difficulty: 5 } },
+                { Property: { Intensity: 1, Effect: shaftEffects, Difficulty: 4 } },
+                { Property: { Intensity: 2, Effect: shaftEffects, Difficulty: 4 } },
+                { Property: { Intensity: 3, Effect: shaftEffects, Difficulty: 4 } },
             ],
         },
     ],

@@ -75,6 +75,29 @@ const translations = {
     },
 };
 
+const layerNames = {
+    CN: {
+        Glasses: {
+            爱心眼镜_Luzi: {
+                1: "镜片",
+                2: "镜框",
+                3: "高光",
+                4: "暗色",
+            },
+        },
+    },
+    EN: {
+        Glasses: {
+            爱心眼镜_Luzi: {
+                1: "Lens",
+                2: "Frame",
+                3: "Highlight",
+                4: "Shadow",
+            },
+        },
+    },
+};
+
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
 }
