@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
@@ -11,7 +10,7 @@ const drawConfig = {
 };
 
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
-function androidDraw(drawData) {
+function afterDraw(drawData) {
     const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
     monadic(drawConfig[L]).then(({ partial, mask, blend }) => {
         const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
@@ -116,9 +115,7 @@ const layerNames = {
 
 export default function () {
     const assetGroup = "动物身体_Luzi";
-
-    HookManager.globalFunction(`Assets${assetGroup}${asset.Name}AfterDraw`, androidDraw);
-
+    Tools.drawHook(asset, assetGroup, { afterDraw });
     AssetManager.addAssetWithConfig(assetGroup, asset, {
         translation,
         layerNames,

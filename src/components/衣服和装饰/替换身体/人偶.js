@@ -1,5 +1,5 @@
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../../assetForward";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -89,6 +89,6 @@ function beforeDraw({ C, L }) {
 }
 
 export default function () {
-    HookManager.globalFunction(`Assets动物身体_Luzi${asset.Name}BeforeDraw`, beforeDraw);
+    Tools.drawHook(asset, "动物身体_Luzi", { beforeDraw });
     AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
 }

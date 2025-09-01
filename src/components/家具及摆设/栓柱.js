@@ -1,6 +1,6 @@
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../assetForward";
 import { ChainCanvasCacheWSide } from "../chain";
+import { Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -94,9 +94,6 @@ function afterDraw(drawData) {
 
 export default function () {
     const groups = /** @type {AssetGroupItemName[]} */ (["ItemNeckRestraints", "ItemDevices", "ItemMisc"]);
-
-    for (const g of groups) {
-        HookManager.globalFunction(`Assets${g}${asset.Name}AfterDraw`, afterDraw);
-        AssetManager.addAssetWithConfig(g, asset, { translation, layerNames });
-    }
+    Tools.drawHook(asset, groups, { afterDraw });
+    AssetManager.addAssetWithConfig(groups, asset, { translation, layerNames });
 }

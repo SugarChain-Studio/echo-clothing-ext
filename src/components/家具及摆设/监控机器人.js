@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { Tools } from "@mod-utils/Tools";
 import { takeLayerNames } from "../../lib";
 
@@ -76,8 +75,8 @@ const asset = {
  * @typedef { { EyeTimer:number, TargetOffset: Position, CurOffset:Position, UpdateTimer:number, FrameTimer:number }} DataType
  */
 
-/** @type {ExtendedItemCallbacks.BeforeDraw<DataType>} */
-function beforeDraw(drawData) {
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, DataType>} */
+function beforeDraw(data, originalFunction, drawData) {
     const { C, A, L, X, Y, Property, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
     const Data = PersistentData();
 
@@ -141,14 +140,14 @@ function beforeDraw(drawData) {
     }
 }
 
-/** @type {ExtendedItemCallbacks.ScriptDraw<DataType>} */
-function scriptDraw({ C, PersistentData }) {
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<TypedItemData, DataType>} */
+function scriptDraw(data, originalFunction, { C, PersistentData }) {
     const Data = PersistentData();
     Tools.drawUpdate(C, Data);
 }
 
-/** @type {ExtendedItemCallbacks.AfterDraw<DataType>} */
-function afterDraw(drawData) {
+/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<TypedItemData, DataType>} */
+function afterDraw(data, originalFunction, drawData) {
     const { C, A, L, Color, GroupName, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
     if (L === "绳子" || L === "绳子光芒") {
         const layer = A.Layer.find((l) => l.Name === L);
@@ -209,6 +208,11 @@ const extended = {
         },
     ],
     ChangeWhenLocked: false,
+    ScriptHooks: {
+        BeforeDraw: beforeDraw,
+        AfterDraw: afterDraw,
+        ScriptDraw: scriptDraw,
+    },
 };
 
 /** @type {Translation.Dialog} */
@@ -257,10 +261,6 @@ const layerNames = {
 };
 
 export default function () {
-    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}BeforeDraw`, beforeDraw);
-    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}ScriptDraw`, scriptDraw);
-    HookManager.globalFunction(`AssetsItemNeckRestraints${asset.Name}AfterDraw`, afterDraw);
-
     AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, {
         translation,
         layerNames,

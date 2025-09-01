@@ -1,4 +1,3 @@
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../../assetForward";
 
 import { Tools } from "@mod-utils/Tools";
@@ -90,6 +89,7 @@ const extended = {
     ChatSetting: TypedItemChatSetting.SILENT,
     ScriptHooks: {
         PublishAction: publishAction,
+        BeforeDraw: beforeDraw,
     },
     Options: Array.from({ length: 9 }, (_, i) => ({
         Name: `${i + 1}`,
@@ -167,14 +167,13 @@ function publishAction(data, originalFunction, C, item, newOption, previousOptio
     }
 }
 
-/** @type {ExtendedItemCallbacks.BeforeDraw<TypedItemData>} */
-function beforeDraw({ Y, Property }) {
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, any>} */
+function beforeDraw(data, originalFunction, { Y, Property }) {
     const bcount = Property.InsertedBeads || 1;
     return { Y: Y - (bcount - 1) * 44, AlphaMasks: [[220, 0, 60, 512]] };
 }
 
 export default function () {
-    HookManager.globalFunction(`AssetsItemButt${assetButt.Name}BeforeDraw`, beforeDraw);
     AssetManager.addGroupedAssets(cAssets, cAssetsTranslations);
     AssetManager.addAssetWithConfig("ItemButt", assetButt, {
         translation,
