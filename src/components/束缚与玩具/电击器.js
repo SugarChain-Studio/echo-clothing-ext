@@ -150,7 +150,7 @@ function dialogClick(Data, originalFunction) {
             .build();
 
         ChatRoomPublishCustomAction(
-            `${asset.Name}设置${property.ShockLevel ? "开始" : "停止"}间歇持续电击`,
+            `${DialogFocusItem.Asset.Group.Name}${asset.Name}设置${property.ShockLevel ? "开始" : "停止"}间歇持续电击`,
             false,
             Dictionary
         );
@@ -297,14 +297,13 @@ const assetStrings = {
         Setd1: "SourceCharacter从TargetCharacter身上移除了小腹电击器",
 
         持续电击开关: "持续电击",
-
-        电击器_Luzi设置开始间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName会间歇持续电击",
-        电击器_Luzi设置停止间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName不再间歇持续电击",
-
-        电击器_Luzi开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
-        电击器_Luzi停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
-
         触发电击: "触发电击",
+
+        设置开始间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName会间歇持续电击",
+        设置停止间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName不再间歇持续电击",
+
+        开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
+        停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
     },
     EN: {
         SelectBase: "Select configuration",
@@ -338,16 +337,15 @@ const assetStrings = {
         Setd1: "SourceCharacter removed a Lower Abdomen Shock Device from TargetCharacter",
 
         持续电击开关: "Continuous",
+        触发电击: "Trigger Shock",
 
-        电击器_Luzi设置开始间歇持续电击:
+        设置开始间歇持续电击:
             "SourceCharacter enabled intermittent continuous shocks on DestinationCharacter AssetName",
-        电击器_Luzi设置停止间歇持续电击:
+        设置停止间歇持续电击:
             "SourceCharacter disabled intermittent continuous shocks on DestinationCharacter AssetName",
 
-        电击器_Luzi开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
-        电击器_Luzi停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
-
-        触发电击: "Trigger Shock",
+        开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
+        停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
     },
 };
 
