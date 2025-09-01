@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
@@ -53,7 +53,10 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
         }
 
         if (C.IsPlayer()) {
-            const chatRoomMsg = (Content) => {
+            const dialogKey = DialogTools.dialogKey(Item);
+
+            const chatRoomMsg = (Key) => {
+                const Content = dialogKey(Key);
                 const Dictionary = new DictionaryBuilder()
                     .sourceCharacter(C)
                     .asset(Item.Asset, "AssetName", Item.Craft && Item.Craft.Name)
@@ -69,7 +72,7 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
             if (runBeginTime < now && now < runEndTime) {
                 if (!Data.ShockIsRunning) {
                     Data.ShockIsRunning = true;
-                    chatRoomMsg("电击器_Luzi开始间歇持续电击");
+                    chatRoomMsg("开始间歇持续电击");
                 }
 
                 if (Data.ShockTime < Data.LastBlink) {
@@ -79,7 +82,7 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
             } else if (now > runEndTime) {
                 Data.ShockIsRunning = false;
                 if (Item.Property.NextShockTime + 20 * 60 * 1000 > CommonTime()) {
-                    chatRoomMsg("电击器_Luzi停止间歇持续电击");
+                    chatRoomMsg("停止间歇持续电击");
                 }
                 setNextShockRunTime(C, Item);
             }
@@ -131,6 +134,8 @@ function dialogClick(Data, originalFunction) {
     } else if (MouseIn(持续电击开关.X, 持续电击开关.Y, 持续电击开关.W, 持续电击开关.H)) {
         const property = DialogFocusItem.Property || {};
 
+        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
+
         ExtendedItemCustomClickAndPush(
             CharacterGetCurrent(),
             DialogFocusItem,
@@ -148,9 +153,8 @@ function dialogClick(Data, originalFunction) {
             .destinationCharacterName(CharacterGetCurrent())
             .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
             .build();
-
         ChatRoomPublishCustomAction(
-            `${DialogFocusItem.Asset.Group.Name}${asset.Name}设置${property.ShockLevel ? "开始" : "停止"}间歇持续电击`,
+            dialogKey(`设置${property.ShockLevel ? "开始" : "停止"}间歇持续电击`),
             false,
             Dictionary
         );
