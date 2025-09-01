@@ -12,8 +12,7 @@ const asset = {
     AllowLock: true,
     AllowTighten: true,
     DrawLocks: true,
-    Fetish: ["Leather", "Metal", "Gagged"],
-    Hide: ["Mouth"],
+    Fetish: ["Leather", "Metal"],
     Block: [],
     Layer: [
         { Name: "Band", CreateLayerTypes: ["typed"] },
@@ -28,16 +27,8 @@ const translation = {
 };
 
 const layerNames = {
-    CN: {
-        Lips: "嘴唇",
-        Teeth: "牙齿",
-        Retractor: "开口器",
-    },
-    EN: {
-        Lips: "Lips",
-        Teeth: "Teeth",
-        Retractor: "Retractor",
-    },
+    CN: { Band: "绑带", Hook: "钩子", Nose: "鼻子" },
+    EN: { Band: "Band", Hook: "Hook", Nose: "Nose" },
 };
 
 /** @type {TypedItemConfig} */
