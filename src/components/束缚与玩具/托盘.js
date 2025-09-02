@@ -226,8 +226,8 @@ const buttonProps = [
 function dialogDrawHook(Data, originalFunction) {
     originalFunction();
     if (!DialogFocusItem) return;
-    const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
-    const customDialogText = (t) => customDialog("D", t);
+    const dialogKey = DialogTools.dialogKey(DialogFocusItem);
+    const customDialogText = (t) => dialogKey(`D${t}`);
     const drawButton = (id, location) => ExtendedItemCustomDraw(customDialogText(id), location.x, location.y);
     const drawButtonDisable = (id, location) => {
         const rect = /** @type {RectTuple} */ (Object.values(location));
@@ -266,8 +266,8 @@ function dialogClickHook(Data, originalFunction) {
         CharacterRefresh(C);
         ChatRoomCharacterItemUpdate(C, DialogFocusItem.Asset.Group.Name);
     };
-    const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
-    const customDialogAction = (t) => customDialog("A", t);
+    const dialogKey = DialogTools.dialogKey(DialogFocusItem);
+    const customDialogAction = (t) => dialogKey(`A${t}`);
 
     monadic(buttonProps.find((btn) => RMouseIn(btn.location) && btn.enable(DialogFocusItem))).then((btn) => {
         btn.onclick(DialogFocusItem);
@@ -324,7 +324,7 @@ const translation = {
     EN: "Tray",
 };
 
-const customDialogs = DialogTools.replicateCustomDialog([asset.Name], {
+const assetStrings = {
     CN: {
         DBase: "配置托盘的内容物",
 
@@ -362,6 +362,12 @@ const customDialogs = DialogTools.replicateCustomDialog([asset.Name], {
         D曲奇加满: "Fill Cookies",
         D曲奇减一: "Remove one Cookie",
 
+        A曲奇加一: "SourceCharacter added a Cookie to DestinationCharacter AssetName, now there are TCounter Cookies.",
+        A曲奇加满:
+            "SourceCharacter filled DestinationCharacter AssetName with Cookies, now there are TCounter Cookies.",
+        A曲奇减一:
+            "SourceCharacter removed a Cookie from DestinationCharacter AssetName, now there are TCounter Cookies.",
+
         D加牛奶: "Add Milk",
         D加可乐: "Add Cola",
         D加橙汁: "Add Orange Juice",
@@ -381,9 +387,8 @@ const customDialogs = DialogTools.replicateCustomDialog([asset.Name], {
         D清空: "Clear the tray",
         A清空: "SourceCharacter cleared the contents of DestinationCharacter AssetName.",
     },
-});
+};
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames });
-    AssetManager.addCustomAssetString(customDialogs);
+    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
 }
