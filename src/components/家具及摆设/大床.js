@@ -10,6 +10,7 @@ const assets = {
             Left: 0,
             Difficulty: 1,
             SelfBondage: 0,
+            Value: -1,
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
@@ -20,6 +21,7 @@ const assets = {
             Left: -210,
             Difficulty: 1,
             SelfBondage: 0,
+            Value: -1,
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
@@ -36,6 +38,7 @@ const assets = {
             Time: 5,
             RemoveTime: 5,
             RemoveAtLogin: true,
+            Value: -1,
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             DefaultColor: ["#523629", "#888990", "#808284"],
             RemoveItemOnRemove: [
@@ -67,6 +70,8 @@ const assets = {
             Time: 5,
             RemoveTime: 5,
             RemoveAtLogin: true,
+            Visible: false,
+            Value: -1,
             DefaultColor: ["#523629", "#888990", "#808284"],
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             RemoveItemOnRemove: [
@@ -85,7 +90,6 @@ const assets = {
                 { Group: "ItemFeet", Name: "MedicalBedRestraints" },
             ],
             Effect: [E.Mounted, E.OnBed],
-            Layer: [{ Name: "骨架" }, { Name: "床垫" }, { Name: "枕头" }],
         },
     ],
 };
@@ -135,5 +139,10 @@ const translations = {
 };
 
 export default function () {
+    AssetManager.addImageMapping({
+        "Assets/Female3DCG/ItemDevices/Preview/床右边_Luzi.png":
+            "Assets/Female3DCG/ItemDevices/Preview/床左边_Luzi.png",
+    });
+
     AssetManager.addGroupedAssets(assets, translations);
 }
