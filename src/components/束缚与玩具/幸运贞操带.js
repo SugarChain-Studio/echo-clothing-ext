@@ -194,6 +194,8 @@ function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
  * @returns {string}
  */
 function toDDHHMMSS(seconds) {
+    if (typeof seconds !== "number" || isNaN(seconds)) return "<invalid>";
+
     let result = seconds;
     const twodigit = (number) => {
         const ret = number.toString();
@@ -220,8 +222,8 @@ function dialogDrawHook(Data, originalFunction) {
     const Item = DialogFocusItem;
     if (!Item || Item.Asset.Name !== asset.Name) return;
 
-    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
-    const customDialogText = (...keys) => AssetTextGet(customDialog(...keys));
+    const dialogKey = DialogTools.dialogKey(Item);
+    const customDialogText = (...keys) => AssetTextGet(dialogKey(keys.join("")));
 
     const property = /**@type {ExtendItemProperties}*/ (Item.Property);
 
@@ -287,7 +289,7 @@ function onAction(data) {
     }
 }
 
-const custom_dialogs = DialogTools.replicateCustomDialog(["幸运贞操带"], {
+const custom_dialogs = {
     CN: {
         ShieldState0: "都打开",
         ShieldState1: "前部关闭",
@@ -330,7 +332,7 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["幸运贞操带"], {
 
         NeverTime: "Never Occurred",
     },
-});
+};
 
 const assetStrings = {
     CN: {
@@ -364,6 +366,8 @@ const assetStrings = {
         Sett0: "SourceCharacter关闭了DestinationCharacterAssetName上的电击惩罚",
         Sett1: "SourceCharacter设置DestinationCharacterAssetName会用电击惩罚保护区域的挣扎行为",
         Sett2: "SourceCharacter设置DestinationCharacterAssetName会用电击惩罚保护区域的挣扎行为和动作",
+
+        ...custom_dialogs.CN,
     },
     EN: {
         SelectBase: "Select Configuration",
@@ -396,6 +400,8 @@ const assetStrings = {
         Sett0: "SourceCharacter deactivates the shock punishment on DestinationCharacter AssetName",
         Sett1: "SourceCharacter sets DestinationCharacterAssetName to shock punishment for struggling in protected area",
         Sett2: "SourceCharacter sets DestinationCharacterAssetName to shock punishment for struggling and activity in protected area",
+
+        ...custom_dialogs.EN,
     },
 };
 

@@ -2,6 +2,7 @@ import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
+import { 淫纹锁_Name } from "./魔法刻印";
 
 /**
  * @typedef { { Masturbate:boolean, Glow: boolean } } LewdCrestData
@@ -57,17 +58,14 @@ const asset = {
         },
         {
             Name: "预设淫纹1",
-            AllowColorize: false,
             AllowTypes: { t: 1 },
         },
         {
             Name: "预设淫纹2",
-            AllowColorize: false,
             AllowTypes: { t: 2 },
         },
         {
             Name: "预设淫纹3",
-            AllowColorize: false,
             AllowTypes: { t: 3 },
         },
         {
@@ -86,6 +84,9 @@ const translation = {
 const layerNames = {
     EN: {
         淫纹: "Lewd Crest",
+        预设淫纹1: "Preset Lewd Crest 1",
+        预设淫纹2: "Preset Lewd Crest 2",
+        预设淫纹3: "Preset Lewd Crest 3",
         发光: "Glow",
     },
 };
@@ -121,7 +122,7 @@ const extended = {
     }),
 };
 
-const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
+const custom_dialogs = {
     CN: {
         淫纹发光按钮: "淫纹发光",
         淫纹强制自慰按钮: "淫纹强制自慰",
@@ -242,9 +243,9 @@ const custom_dialogs = DialogTools.replicateCustomDialog(["淫纹_Luzi"], {
         自慰BlockP4:
             "SourceCharacter urgently wanted to comfort himself, and in vain, his arm groped towards his penis, but the joy that was so close at hand was so unattainable at this moment.",
     },
-});
+};
 
-const item_dialogs = {
+const assetStrings = {
     CN: {
         SelectBase: "淫纹设置",
         Module样式: "淫纹样式",
@@ -269,6 +270,8 @@ const item_dialogs = {
         Seta1: "SourceCharacter通过AssetName上的魔法令TargetCharacter的小穴保持湿润,持续处于发情状态.",
         Seta2: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够处于高潮边缘.",
         Seta3: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够拒绝高潮.",
+
+        ...custom_dialogs.CN,
     },
     EN: {
         SelectBase: "Lewd Crest Settings",
@@ -294,6 +297,8 @@ const item_dialogs = {
         Seta1: "SourceCharacter uses magic on AssetName to keep DestinationCharacter intimate area moist and in a continuous state of heat.",
         Seta2: "SourceCharacter uses magic on AssetName to keep TargetCharacter at the edge of orgasm.",
         Seta3: "SourceCharacter uses magic on AssetName to make TargetCharacter able to only reject orgasm.",
+
+        ...custom_dialogs.EN,
     },
     UA: {
         SelectBase: "Налаштування Lewd Crest",
@@ -318,6 +323,8 @@ const item_dialogs = {
         Seta1: "SourceCharacter використовує магію на AssetName, щоб підтримувати інтимну зону TargetCharacter вологою та постійно нагріватись.",
         Seta2: "SourceCharacter використовує магію на AssetName, щоб утримувати TargetCharacter на межі оргазму.",
         Seta3: "SourceCharacter використовує магію на AssetName, щоб зробити TargetCharacter здатним лише відкидати оргазм.",
+
+        ...custom_dialogs.UA,
     },
     RU: {
         SelectBase: "Настройки Lewd Crest",
@@ -343,61 +350,11 @@ const item_dialogs = {
         Seta1: "SourceCharacter использует магию на AssetName, чтобы поддерживать интимную зону TargetCharacter влажной и в постоянном состоянии тепла.",
         Seta2: "SourceCharacter использует магию на AssetName, чтобы удерживать TargetCharacter на грани оргазма.",
         Seta3: "SourceCharacter использует магию на AssetName, чтобы TargetCharacter мог только отвергать оргазм.",
+
+        ...custom_dialogs.RU,
     },
 };
 // #endregion
-
-//#region 锁
-/** @type { CustomAssetDefinition} */
-const lock_asset = {
-    Name: "淫纹锁_Luzi_Padlock",
-    Random: false,
-    Wear: false,
-    Enable: false,
-    Effect: [],
-    IsLock: true,
-    ExclusiveUnlock: true,
-    Time: 10,
-    Extended: true,
-};
-
-const lock_translation = {
-    CN: "魔法刻印",
-    EN: "Lewd Crest lock",
-    RU: "Порнографический знак",
-    UA: "Замок хтивого візерунку",
-};
-
-/** @type {AssetArchetypeConfig} */
-const lock_config = {
-    Archetype: ExtendedArchetype.NOARCH,
-    ScriptHooks: {
-        Init: InventoryItemMiscHighSecurityPadlockInitHook,
-        Load: InventoryItemMiscHighSecurityPadlockLoadHook,
-        Draw: InventoryItemMiscHighSecurityPadlockDrawHook,
-        Click: InventoryItemMiscHighSecurityPadlockClickHook,
-        Exit: InventoryItemMiscHighSecurityPadlockExitHook,
-    },
-    BaselineProperty: {
-        MemberNumberListKeys: "",
-    },
-};
-
-const lock_dialogs = DialogTools.replicateGroupedItemDialog(["ItemMisc"], ["淫纹锁_Luzi_Padlock"], {
-    CN: {
-        Intro: "画着复杂的文字",
-    },
-    EN: {
-        Intro: "Inscripted with complex symbols",
-    },
-    RU: {
-        Intro: "Намальовано складними літерами",
-    },
-    UA: {
-        Intro: "Намальовано складними літерами",
-    },
-});
-//#endregion
 
 //#region 衣服
 const clothLCSetting = [
@@ -469,13 +426,14 @@ const clothAssetsStrings = {
 //#region 界面
 /**
  * @param {Character} C 玩家自身
+ * @param {Item} item 物品
  */
-function AssetsItemPelvis随机自慰(C) {
+function randomMastur(C, item) {
     if (!C.IsPlayer()) return;
 
     DrawFlashScreen("#F347B4", 1500, 500);
 
-    const customDialog = DialogTools.makeCustomDialogGenerator(asset.Name);
+    const customDialog = DialogTools.dialogKey(item);
 
     const whenBlocked = () => {
         // 产生如同抚摸大腿的动作，仅自己可见
@@ -488,7 +446,7 @@ function AssetsItemPelvis随机自慰(C) {
 
         ChatRoomMessage({
             Sender: Player.MemberNumber,
-            Content: customDialog("自慰Block", Player.HasPenis() ? "P" : "V", `${Math.floor(Math.random() * 5)}`),
+            Content: customDialog(`自慰Block${Player.HasPenis() ? "P" : "V"}${Math.floor(Math.random() * 5)}`),
             Type: "Action",
             Dictionary: new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build(),
         });
@@ -528,10 +486,12 @@ function AssetsItemPelvis随机自慰(C) {
 /**
  * @param {Character} player
  * @param {MyDataType} data
- * @param {ExtendItemProperties} property
+ * @param {Item} item
  */
-function updateRuns(player, data, property) {
+function updateRuns(player, data, item) {
     if (!player.IsPlayer()) return;
+
+    const property = /**@type {ExtendItemProperties}*/ (item.Property);
 
     const now = CommonTime();
     if (!data.ArousalCheckTimer) data.ArousalCheckTimer = now;
@@ -558,7 +518,7 @@ function updateRuns(player, data, property) {
     if (property.Masturbate && ServerPlayerIsInChatRoom()) {
         if (now > data.NextMasturbateTime) {
             data.NextMasturbateTime = nextTime();
-            AssetsItemPelvis随机自慰(player);
+            randomMastur(player, item);
         }
     } else {
         data.NextMasturbateTime = nextTime();
@@ -582,7 +542,7 @@ function onActionHandler(data) {
 
             const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
             const item = InventoryGet(Player, groupName);
-            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", lock_asset.Name) };
+            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", 淫纹锁_Name) };
             InventoryLock(Player, item, lock, sourceChara);
             item.Property.MemberNumberListKeys = CommonConvertArrayToString([sourceChara]);
             ChatRoomCharacterItemUpdate(Player, groupName);
@@ -610,23 +570,23 @@ function dialogDrawHook(Data, originalFunction) {
     if (!DialogFocusItem) return;
     if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
     } else {
-        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
 
         const prevAlign = MainCanvas.textAlign;
         MainCanvas.textAlign = "center";
-        ExtendedItemCustomDraw(customDialog("淫纹魔法电流按钮"), buttons.电流按钮.X, buttons.电流按钮.Y);
-        ExtendedItemCustomDraw(customDialog("淫纹强制高潮按钮"), buttons.高潮按钮.X, buttons.高潮按钮.Y);
+        ExtendedItemCustomDraw(dialogKey("淫纹魔法电流按钮"), buttons.电流按钮.X, buttons.电流按钮.Y);
+        ExtendedItemCustomDraw(dialogKey("淫纹强制高潮按钮"), buttons.高潮按钮.X, buttons.高潮按钮.Y);
 
         MainCanvas.textAlign = "left";
         const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
         const 强制自慰ON = property.Masturbate;
         const 发光ON = property.Glow;
         ExtendedItemDrawCheckbox("GlowSwitch", buttons.发光开关.X, buttons.发光开关.Y, 发光ON, {
-            text: AssetTextGet(customDialog("淫纹发光按钮")),
+            text: AssetTextGet(dialogKey("淫纹发光按钮")),
             textColor: "White",
         });
         ExtendedItemDrawCheckbox("MastSwitch", buttons.自慰开关.X, buttons.自慰开关.Y, 强制自慰ON, {
-            text: AssetTextGet(customDialog("淫纹强制自慰按钮")),
+            text: AssetTextGet(dialogKey("淫纹强制自慰按钮")),
             textColor: "White",
         });
         MainCanvas.textAlign = prevAlign;
@@ -652,7 +612,7 @@ function dialogClickHook(Data, originalFunction) {
         const clickPush = (key, func) =>
             ExtendedItemCustomClickAndPush(CharacterGetCurrent(), DialogFocusItem, key, () => func(), false, false);
 
-        const customDialog = DialogTools.makeCustomDialogGenerator(DialogFocusItem.Asset.Name);
+        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
 
         if (RMouseIn(buttons.高潮按钮)) {
             const Dictionary = new DictionaryBuilder()
@@ -661,7 +621,7 @@ function dialogClickHook(Data, originalFunction) {
                 .destinationCharacterName(CharacterGetCurrent())
                 .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
                 .build();
-            ChatRoomPublishCustomAction(customDialog("淫纹强制高潮"), true, Dictionary);
+            ChatRoomPublishCustomAction(dialogKey("淫纹强制高潮"), true, Dictionary);
         } else if (RMouseIn(buttons.电流按钮)) {
             ExtendedItemCustomClick("淫纹魔法电流", PropertyShockPublishAction, false, false);
         } else if (RMouseIn(buttons.发光开关)) {
@@ -677,7 +637,7 @@ function dialogClickHook(Data, originalFunction) {
                 .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
                 .build();
             ChatRoomPublishCustomAction(
-                customDialog(`${property.Masturbate ? "开始" : "停止"}淫纹强制自慰`),
+                dialogKey(`${property.Masturbate ? "开始" : "停止"}淫纹强制自慰`),
                 false,
                 Dictionary
             );
@@ -691,7 +651,7 @@ function dialogClickHook(Data, originalFunction) {
 function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     const Data = PersistentData();
 
-    if (C.IsPlayer()) updateRuns(C, Data, /**@type {ExtendItemProperties}*/ (Item.Property));
+    if (C.IsPlayer()) updateRuns(C, Data, Item);
 
     if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow) Tools.drawUpdate(C, Data);
 }
@@ -730,13 +690,8 @@ export default function () {
         extended,
         translation,
         layerNames,
-        assetStrings: item_dialogs,
+        assetStrings,
     });
-
-    AssetManager.addCustomAssetString(custom_dialogs);
-
-    AssetManager.addAsset("ItemMisc", lock_asset, lock_config, lock_translation);
-    AssetManager.addCustomAssetString(lock_dialogs);
 
     AssetManager.addAssetWithConfig(["Panties", "BodyMarkings"], clothAsset, {
         extended: clothExtended,
