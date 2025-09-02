@@ -30,7 +30,7 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
     if (Intensity === undefined || Intensity < 0) return { Y, ...pdata };
 
     const time = Date.now();
-    const freq = [0.2, 0.5, 1.2, 1.8][Intensity] ?? undefined;
+    const freq = [0.2, 0.6, 1.2, 1.8][Intensity] ?? undefined;
     const ratio = freq ? (Math.cos(((time * freq) / 1000) * 2 * Math.PI) + 1) / 2 : 0;
     const dY = Math.round(ratio * 30);
     return { Y: Y + dY, ...pdata };

@@ -1,7 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { DialogTools, Tools } from "@mod-utils/Tools";
+import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
 
 /**
  * @typedef {Object} ExtendItemPropertiesPart
@@ -117,11 +117,7 @@ const extended = {
 /** @type {AssetGroupItemName[]} */
 const tamperArea = ["ItemPelvis", "ItemVulva", "ItemVulvaPiercings", "ItemButt"];
 
-const orgasmFlags = {
-    Orgasmed: false,
-    Ruined: false,
-    Resisted: false,
-};
+const orgasmState = new StateTools.OrgasmState();
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, FortuneChastityBeltPersistentData>} */
 function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
@@ -132,9 +128,7 @@ function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
     // 初始化数据
     if (typeof data.Timer !== "number") data.Timer = Date.now();
     if (!data.Initiated) {
-        orgasmFlags.Orgasmed = false;
-        orgasmFlags.Ruined = false;
-        orgasmFlags.Resisted = false;
+        orgasmState.reset();
         data.Initiated = true;
     }
 
@@ -155,24 +149,21 @@ function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
     data.Timer = Date.now();
 
     // 检测高潮
-    if (orgasmFlags.Orgasmed) {
+    if (orgasmState.take("Orgasmed")) {
         property.LastOrgasmTime = Date.now();
         property.OrgasmCount++;
-        orgasmFlags.Orgasmed = false;
         need_push = true;
     }
 
     // 检测拒绝
-    if (orgasmFlags.Ruined) {
+    if (orgasmState.take("Ruined")) {
         property.RuinedOrgasmCount++;
-        orgasmFlags.Ruined = false;
         need_push = true;
     }
 
     // 检测忍耐
-    if (orgasmFlags.Resisted) {
+    if (orgasmState.take("Resisted")) {
         property.ResistedOrgasmCount++;
-        orgasmFlags.Resisted = false;
         need_push = true;
     }
 
@@ -433,16 +424,5 @@ export default function () {
 
     AssetManager.addAssetWithConfig("ItemPelvis", asset, { layerNames, translation, extended, assetStrings });
     AssetManager.addCustomAssetString(custom_dialogs);
-
-    OrgasmEvents.on("orgasmed", () => {
-        orgasmFlags.Orgasmed = true;
-    });
-
-    OrgasmEvents.on("ruined", () => {
-        orgasmFlags.Ruined = true;
-    });
-
-    OrgasmEvents.on("resisted", () => {
-        orgasmFlags.Resisted = true;
-    });
+    orgasmState.watch(OrgasmEvents);
 }

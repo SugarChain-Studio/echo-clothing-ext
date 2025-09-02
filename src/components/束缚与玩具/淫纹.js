@@ -273,7 +273,7 @@ const item_dialogs = {
     EN: {
         SelectBase: "Lewd Crest Settings",
         Module样式: "Lewd Crest Style",
-        Module性刺激: "Lewd Crest Sexual Stimulation",
+        Module性刺激: "Sexual Stimulation",
 
         Select样式: "Select Lewd Crest Style",
         Optiont0: "Default Style",
