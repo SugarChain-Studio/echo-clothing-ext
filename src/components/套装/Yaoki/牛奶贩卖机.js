@@ -1,6 +1,7 @@
-import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
+import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
+import { createAfterDrawProcess, createItemDialog, Typing } from "../../../lib";
 
 // Milk Vending by Yaoki
 
@@ -15,6 +16,7 @@ const asset = {
     AllowLock: true,
     DrawLocks: false,
     Time: 10,
+    RemoveTime: 10,
     Prerequisite: ["NotSuspended", "NotLifted", "HasBreasts"],
     ArousalZone: "ItemBreast",
     SetPose: ["Hogtied"],
@@ -44,6 +46,9 @@ const asset = {
         { Name: "前面板", Left: 30, Top: -115 },
         { Name: "灯条", Left: 150, Top: 395 },
         { Name: "玻璃", Left: 30, Top: -115, AllowTypes: { w: 0 } },
+        { Name: "出液", Left: 190, Top: 435, HasImage: false },
+        { Name: "杯液", Left: 190, Top: 435, HasImage: false },
+        { Name: "杯半", Left: 190, Top: 435, HasImage: false },
     ],
 };
 
@@ -94,7 +99,16 @@ const layerNames = {
 };
 
 /**
- * @typedef {ItemProperties & {Luzi_MilkTotal?:number}} MilkingVendorProperties
+ * @typedef {Object} MilkingVendorCustomProperties
+ * @property {number} Luzi_MilkTotal
+ * @property {number} [Luzi_OutputStartLeft]
+ * @property {number} [Luzi_OutputStartRight]
+ * @property {true} [Luzi_OutputDoneLeft]
+ * @property {true} [Luzi_OutputDoneRight]
+ */
+
+/**
+ * @typedef {ItemProperties & MilkingVendorCustomProperties} MilkingVendorProperties
  */
 
 /**
@@ -108,6 +122,9 @@ const layerNames = {
  * @property {number} RandomOffsetRight
  * @property {HTMLCanvasElement} [CupCanvas]
  * @property {HTMLCanvasElement} [HoseCanvas]
+ * @property {HTMLCanvasElement} [OutputFlowCanvas]
+ * @property {HTMLCanvasElement} [OutputContentCanvas]
+ * @property {HTMLCanvasElement} [OutputCupCanvas]
  */
 
 const maxProdFlow = 10;
@@ -155,8 +172,9 @@ function flowText(value) {
  * @param {number} delta
  * @param {MilkCupData} data
  * @param {DynamicScriptCallbackData<MilkCupData>} arg0
+ * @returns {boolean} 是否需要推送
  */
-function playerStateUpdate(delta, data, { C, Item }) {
+function milkerStateUpdate(delta, data, { Item }) {
     let need_push = false;
 
     Item.Property ??= {};
@@ -181,9 +199,7 @@ function playerStateUpdate(delta, data, { C, Item }) {
         data.MilkUpdateTimer = now;
     }
 
-    if (need_push) {
-        ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
-    }
+    return need_push;
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MilkCupData>} */
@@ -197,23 +213,57 @@ function scriptDraw(data, originalFunction, drawData) {
         Data.MilkCupAmount = 0;
     }
     Data.MilkProdFlow ??= 0;
-    Tools.drawUpdate(C, Data);
 
-    Data.MilkTimer ??= Date.now();
-    Data.MilkCupAmount ??= 0;
-    Data.RandomOffsetLeft ??= Math.floor(Math.random() * 100);
-    Data.RandomOffsetRight ??= Math.floor(Math.random() * 100);
+    const property = /** @type {MilkingVendorProperties} */ (Item.Property);
 
-    const delta = (Date.now() - Data.MilkTimer) / 1000;
-    Data.MilkTimer = Date.now();
+    if (
+        property?.TypeRecord?.m === 1 ||
+        typeof property.Luzi_OutputStartLeft === "number" ||
+        typeof property.Luzi_OutputStartRight === "number"
+    ) {
+        Tools.drawUpdate(C, Data);
+    }
 
-    Data.MilkProdFlow = flowAlgorithm(C, Item);
+    const now = Date.now();
 
-    // 每秒钟杯内值都会变成上一秒的 0.8
-    const reductioned = Data.MilkCupAmount * Math.pow(0.8, delta);
-    Data.MilkCupAmount = Math.min(Math.max(reductioned + Data.MilkProdFlow * delta, 0), 100);
+    let need_push = false;
 
-    if (C.IsPlayer()) playerStateUpdate(delta, Data, drawData);
+    if (property?.TypeRecord?.m === 1) {
+        Data.MilkTimer ??= now;
+        Data.MilkCupAmount ??= 0;
+        Data.RandomOffsetLeft ??= Math.floor(Math.random() * 100);
+        Data.RandomOffsetRight ??= Math.floor(Math.random() * 100);
+
+        const delta = (now - Data.MilkTimer) / 1000;
+        Data.MilkTimer = now;
+        Data.MilkProdFlow = flowAlgorithm(C, Item);
+
+        // 每秒钟杯内值都会变成上一秒的 0.8
+        const reductioned = Data.MilkCupAmount * Math.pow(0.8, delta);
+        Data.MilkCupAmount = Math.min(Math.max(reductioned + Data.MilkProdFlow * delta, 0), 100);
+        if (C.IsPlayer()) {
+            if (milkerStateUpdate(delta, Data, drawData)) need_push = true;
+        }
+    }
+
+    if (typeof property.Luzi_OutputStartLeft === "number") {
+        if (now - property.Luzi_OutputStartLeft > 2000) {
+            property.Luzi_OutputStartLeft = null;
+            property.Luzi_OutputDoneLeft = true;
+            need_push = true;
+        }
+    }
+
+    if (typeof property.Luzi_OutputStartRight === "number") {
+        if (now - property.Luzi_OutputStartRight > 2000) {
+            property.Luzi_OutputStartRight = null;
+            property.Luzi_OutputDoneRight = true;
+            need_push = true;
+        }
+    }
+    if (need_push) {
+        ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
+    }
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MilkCupData>} */
@@ -231,39 +281,52 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
     return ret;
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, MilkCupData>} */
-function afterDraw(data, originalFunction, drawData) {
-    const { C, A, PersistentData, L, X, Y, drawCanvas, drawCanvasBlink } = drawData;
-    const Data = PersistentData();
-
-    if (L === "奶杯液") {
-        if (!Data.CupCanvas) Data.CupCanvas = AnimationGenerateTempCanvas(C, A, 500, 200);
+const afterDrawProcess = createAfterDrawProcess(
+    "modular",
+    /**@type {MilkCupData}*/ ({}),
+    (data, { Property, PersistentData }) => {
+        const property = /** @type {MilkingVendorProperties} */ (Property ?? {});
+        return {
+            property,
+            data: PersistentData(),
+            fillingLeft: typeof property.Luzi_OutputStartLeft === "number",
+            fillingRight: typeof property.Luzi_OutputStartRight === "number",
+            filledLeft: property.Luzi_OutputDoneLeft === true,
+            filledRight: property.Luzi_OutputDoneRight === true,
+        };
+    }
+).onLayers({
+    奶杯液: ({ data }, drawData) => {
+        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        data.CupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const source = Tools.getAssetURL(drawData);
-        const canvas = Data.CupCanvas.getContext("2d");
+        const canvas = data.CupCanvas.getContext("2d");
         const canvasY = CanvasUpperOverflow + 200;
         // Y范围: 200 ~ 400
 
-        if (typeof Data.MilkCupAmount === "number") {
+        if (typeof data.MilkCupAmount === "number") {
             canvas.clearRect(0, 0, 500, 200);
             DrawImageEx(source, canvas, X, Y - canvasY);
-            canvas.clearRect(0, 0, 500, 150 - Math.round((Data.MilkCupAmount / 100) * 45));
+            canvas.clearRect(0, 0, 500, 150 - Math.round((data.MilkCupAmount / 100) * 45));
 
-            drawCanvas(Data.CupCanvas, 0, canvasY);
-            drawCanvasBlink(Data.CupCanvas, 0, canvasY);
+            drawCanvas(data.CupCanvas, 0, canvasY);
+            drawCanvasBlink(data.CupCanvas, 0, canvasY);
         }
-    } else if (L === "管液") {
+    },
+    管液: ({ data }, drawData) => {
+        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
         const ratio1 = ((350 - 327) / (350 - 305)) * 100;
-        if (!Data.HoseCanvas) Data.HoseCanvas = AnimationGenerateTempCanvas(C, A, 500, 200);
+        data.HoseCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const source = Tools.getAssetURL(drawData);
-        const canvas = Data.HoseCanvas.getContext("2d");
+        const canvas = data.HoseCanvas.getContext("2d");
         const canvasY = CanvasUpperOverflow + 300;
         // Y范围: 300 ~ 500
 
-        if (typeof Data.MilkCupAmount === "number" && typeof Data.MilkProdFlow === "number") {
+        if (typeof data.MilkCupAmount === "number" && typeof data.MilkProdFlow === "number") {
             // 327 ~ 440
             const pLen = 440 - 327;
             // 使用产量流速和杯内液体量的较大者，产量流速大和杯内液体多都会让液柱更长，液柱长度至少30
-            const kRatio = Math.min(Math.max(Data.MilkCupAmount / ratio1, Data.MilkProdFlow / maxProdFlow), 1);
+            const kRatio = Math.min(Math.max(data.MilkCupAmount / ratio1, data.MilkProdFlow / maxProdFlow), 1);
 
             // 低于 0.1 管子清空
             if (kRatio > 0.1) {
@@ -271,14 +334,14 @@ function afterDraw(data, originalFunction, drawData) {
                 DrawImageEx(source, canvas, X, Y - canvasY);
 
                 // 产生液柱动画
-                if (Data.MilkCupAmount < ratio1 * 100) {
+                if (data.MilkCupAmount < ratio1 * 100) {
                     const len = Math.round(kRatio * (pLen - 10) + 10);
                     const sep = pLen - len;
 
                     const flowSpeed = 3;
                     const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
-                    const startL = 27 + Math.round((start + Data.RandomOffsetLeft) % pLen);
-                    const startR = 27 + Math.round((start + Data.RandomOffsetRight) % pLen);
+                    const startL = 27 + Math.round((start + data.RandomOffsetLeft) % pLen);
+                    const startR = 27 + Math.round((start + data.RandomOffsetRight) % pLen);
 
                     for (let i = 0; i < 2; i++) {
                         const start = [startL, startR][i];
@@ -288,39 +351,184 @@ function afterDraw(data, originalFunction, drawData) {
                     }
                 }
 
-                drawCanvas(Data.HoseCanvas, 0, canvasY);
-                drawCanvasBlink(Data.HoseCanvas, 0, canvasY);
+                drawCanvas(data.HoseCanvas, 0, canvasY);
+                drawCanvasBlink(data.HoseCanvas, 0, canvasY);
             }
         }
-    }
+    },
+    出液: ({ data, fillingLeft, fillingRight }, drawData) => {
+        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        data.OutputFlowCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
+        const source = Tools.getAssetURL(drawData);
+        const canvas = data.OutputFlowCanvas.getContext("2d");
+        const canvasY = CanvasUpperOverflow + 400;
+
+        if (fillingLeft || fillingRight) {
+            canvas.clearRect(0, 0, 500, 200);
+            DrawImageEx(source, canvas, X, Y - canvasY);
+            if (!fillingLeft) canvas.clearRect(0, 0, 250, 200);
+            if (!fillingRight) canvas.clearRect(250, 0, 250, 200);
+
+            drawCanvas(data.OutputFlowCanvas, 0, canvasY);
+            drawCanvasBlink(data.OutputFlowCanvas, 0, canvasY);
+        }
+    },
+    杯液: ({ data, property, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
+        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        data.OutputContentCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
+        const source = Tools.getAssetURL(drawData);
+        const canvas = data.OutputContentCanvas.getContext("2d");
+        const canvasY = CanvasUpperOverflow + 400;
+
+        if (fillingLeft || fillingRight || filledLeft || filledRight) {
+            canvas.clearRect(0, 0, 500, 200);
+            DrawImageEx(source, canvas, X, Y - canvasY);
+
+            // 495 ~ 530
+            const now = Date.now();
+            const clearTop = (start) => 135 - Math.round(Math.min((now - start) / 2000, 1) * (530 - 495));
+
+            if (fillingLeft) canvas.clearRect(0, 0, 250, clearTop(property.Luzi_OutputStartLeft));
+            else if (!filledLeft) canvas.clearRect(0, 0, 250, 200);
+            if (fillingRight) canvas.clearRect(250, 0, 250, clearTop(property.Luzi_OutputStartRight));
+            else if (!filledRight) canvas.clearRect(250, 0, 250, 200);
+
+            drawCanvas(data.OutputContentCanvas, 0, canvasY);
+            drawCanvasBlink(data.OutputContentCanvas, 0, canvasY);
+        }
+    },
+    杯半: ({ data, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
+        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        data.OutputCupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
+        const source = Tools.getAssetURL(drawData);
+        const canvas = data.OutputContentCanvas.getContext("2d");
+        const canvasY = CanvasUpperOverflow + 400;
+
+        if (fillingLeft || fillingRight || filledLeft || filledRight) {
+            canvas.clearRect(0, 0, 500, 200);
+            DrawImageEx(source, canvas, X, Y - canvasY);
+            if (!filledLeft && !fillingLeft) canvas.clearRect(0, 0, 250, 200);
+            if (!filledRight && !fillingRight) canvas.clearRect(250, 0, 250, 200);
+            drawCanvas(data.OutputContentCanvas, 0, canvasY);
+            drawCanvasBlink(data.OutputContentCanvas, 0, canvasY);
+        }
+    },
+});
+
+/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, MilkCupData>} */
+function afterDraw(_, originalFunction, drawData) {
+    afterDrawProcess.afterDraw(_, originalFunction, drawData);
 }
 
+const buttons = Typing.record({
+    左: { x: 1265, y: 600, w: 225, h: 55 },
+    右: { x: 1510, y: 600, w: 225, h: 55 },
+});
+
+/**
+ * @param {Rect} rect
+ * @returns {boolean}
+ */
+export function RMouseIn(rect) {
+    return MouseIn(rect.x, rect.y, rect.w, rect.h);
+}
+
+/** @type {(item:Item, cb: (p : MilkingVendorProperties) => boolean ) => boolean} */
+const propTest = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
+
+/**
+ * @template T
+ * @param {Item} item
+ * @param {(p: MilkingVendorProperties) => T} cb
+ * @returns T
+ */
+const propValue = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
+
+const itemDialog = createItemDialog(
+    "modular",
+    [
+        {
+            location: buttons.左,
+            key: "拿左杯",
+            show: (data, item) =>
+                data.currentModule === "Base" &&
+                propTest(item, (p) => p.Luzi_OutputDoneLeft === true || typeof p.Luzi_OutputStartLeft === "number"),
+            enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneLeft === true),
+            onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneLeft = null)),
+            update: true,
+            actionKey: "A拿左杯",
+        },
+        {
+            location: buttons.左,
+            key: "开始左杯",
+            show: (data, item) =>
+                data.currentModule === "Base" &&
+                propTest(item, (p) => p.Luzi_OutputDoneLeft !== true && typeof p.Luzi_OutputStartLeft !== "number"),
+            enable: (item) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
+            hover: (item) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            onclick: (item) =>
+                propValue(item, (p) => {
+                    p.Luzi_OutputStartLeft = Date.now();
+                    p.Luzi_MilkTotal -= 200;
+                }),
+            update: true,
+            actionKey: "A开始左杯",
+        },
+        {
+            location: buttons.右,
+            key: "拿右杯",
+            show: (data, item) =>
+                data.currentModule === "Base" &&
+                propTest(item, (p) => p.Luzi_OutputDoneRight === true || typeof p.Luzi_OutputStartRight === "number"),
+            enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneRight === true),
+            onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneRight = null)),
+            update: true,
+            actionKey: "A拿右杯",
+        },
+        {
+            location: buttons.右,
+            key: "开始右杯",
+            show: (data, item) =>
+                data.currentModule === "Base" &&
+                propTest(item, (p) => p.Luzi_OutputDoneRight !== true && typeof p.Luzi_OutputStartRight !== "number"),
+            enable: (item) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
+            hover: (item) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            onclick: (item) =>
+                propValue(item, (p) => {
+                    p.Luzi_OutputStartRight = Date.now();
+                    p.Luzi_MilkTotal -= 200;
+                }),
+            update: true,
+            actionKey: "A开始右杯",
+        },
+    ],
+    [
+        {
+            Y: 700,
+            key: "产率",
+            show: (data) => data.currentModule === "Base",
+            value: (item, chara) => flowText(flowAlgorithm(chara, item)),
+        },
+        {
+            Y: 775,
+            key: "存量",
+            show: (data) => data.currentModule === "Base",
+            value: (item) => propValue(item, (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL`),
+        },
+    ]
+);
+
 /** @type {ExtendedItemScriptHookCallbacks.Draw<ModularItemData>} */
-function drawHook(data, originalFunction) {
+function dialogDrawHook(data, originalFunction) {
+    originalFunction();
+    itemDialog.draw(data, originalFunction);
+}
+
+/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
+function dialogClickHook(data, originalFunction) {
     originalFunction();
     if (!DialogFocusItem || !CurrentCharacter) return;
-    if (data.currentModule === "Base") {
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
-        const customDialogText = (keys) => AssetTextGet(dialogKey(keys));
-
-        const oldAlign = MainCanvas.textAlign;
-        MainCanvas.textAlign = "right";
-
-        const property = /** @type {MilkingVendorProperties}*/ (DialogFocusItem.Property ?? {});
-
-        const LeftPartX = 1470;
-        DrawTextFit(customDialogText("产率"), LeftPartX, 650, 300, "White", "Gray");
-        DrawTextFit(customDialogText("存量"), LeftPartX, 725, 300, "White", "Gray");
-
-        MainCanvas.textAlign = "left";
-        const RightPartX = 1530;
-        const prodflow = flowAlgorithm(CurrentCharacter, DialogFocusItem);
-
-        DrawTextFit(flowText(prodflow), RightPartX, 650, 300, "White", "Gray");
-        DrawTextFit(`${(property.Luzi_MilkTotal ?? 0).toFixed(2)} mL`, RightPartX, 725, 300, "White", "Gray");
-
-        MainCanvas.textAlign = oldAlign;
-    }
+    itemDialog.click(data, originalFunction);
 }
 
 /** @type {ModularItemConfig} */
@@ -331,7 +539,8 @@ const extended = {
         ScriptDraw: scriptDraw,
         BeforeDraw: beforeDraw,
         AfterDraw: afterDraw,
-        Draw: drawHook,
+        Draw: dialogDrawHook,
+        Click: dialogClickHook,
     },
     BaselineProperty: /** @type {MilkingVendorProperties} */ ({
         Luzi_MilkTotal: 0,
@@ -362,6 +571,11 @@ const extended = {
     ],
 };
 
+function capitalizeFirst(str) {
+    if (str.length === 0) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const assetStrings = {
     CN: {
         SelectBase: "配置牛奶贩卖机",
@@ -382,6 +596,19 @@ const assetStrings = {
 
         产率: "产率",
         存量: "机器存量",
+        牛奶存量不足: "需要至少200 mL牛奶",
+
+        ...Object.fromEntries(
+            ["左", "右"].flatMap((lr) => [
+                [`拿${lr}杯`, `拿走${lr}边杯子`],
+                [`开始${lr}杯`, `灌满${lr}边杯子`],
+                [`A拿${lr}杯`, `SourceCharacter从DestinationCharacterAssetName${lr}边拿走一满杯牛奶`],
+                [
+                    `A开始${lr}杯`,
+                    `SourceCharacter在DestinationCharacterAssetName${lr}边放了一个空玻璃杯，并开始注入牛奶`,
+                ],
+            ])
+        ),
     },
     EN: {
         SelectBase: "Configure Milk Vending Machine",
@@ -389,6 +616,7 @@ const assetStrings = {
         Module挤奶: "Milking",
 
         Select窗户: "Set Window",
+
         Optionw0: "Close Window",
         Optionw1: "Open Window",
         Setw0: "SourceCharacter opens window on DestinationCharacter AssetName",
@@ -402,6 +630,25 @@ const assetStrings = {
 
         产率: "Production Rate",
         存量: "Machine Storage",
+        牛奶存量不足: "At least 200 mL of milk is required",
+
+        ...Object.fromEntries(
+            [
+                ["左", "left"],
+                ["右", "right"],
+            ].flatMap(([zh, en]) => [
+                [`拿${zh}杯`, `Take ${capitalizeFirst(en)} Cup`],
+                [`开始${zh}杯`, `Fill ${capitalizeFirst(en)} Cup`],
+                [
+                    `A拿${zh}杯`,
+                    `SourceCharacter takes a full cup of milk from ${en} side of DestinationCharacter AssetName`,
+                ],
+                [
+                    `A开始${zh}杯`,
+                    `SourceCharacter places an empty glass on ${en} side of DestinationCharacter AssetName and starts filling it with milk`,
+                ],
+            ])
+        ),
     },
 };
 
