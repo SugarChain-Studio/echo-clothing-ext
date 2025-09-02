@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { customFixup } from "../../fixups";
+import { AssetManager } from "../../assetForward";
+import { customFixup } from "../fixups";
 import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
