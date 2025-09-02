@@ -1,5 +1,5 @@
 import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 
 // Milk Vending by Yaoki
@@ -14,6 +14,7 @@ const asset = {
     Difficulty: 30,
     AllowLock: true,
     DrawLocks: false,
+    Time: 10,
     Prerequisite: ["NotSuspended", "NotLifted", "HasBreasts"],
     ArousalZone: "ItemBreast",
     SetPose: ["Hogtied"],
@@ -103,6 +104,8 @@ const layerNames = {
  * @property {number} MilkProdFlow
  * @property {number} MilkUpdateTimer
  * @property {true} [OrgasmCheckInit]
+ * @property {number} RandomOffsetLeft
+ * @property {number} RandomOffsetRight
  * @property {HTMLCanvasElement} [CupCanvas]
  * @property {HTMLCanvasElement} [HoseCanvas]
  */
@@ -112,6 +115,7 @@ const maxProdFlow = 10;
 const orgasmState = new StateTools.OrgasmState();
 
 /**
+ * 产量计算
  * @param {Character} C
  * @param {Item} Item
  */
@@ -185,17 +189,20 @@ function playerStateUpdate(delta, data, { C, Item }) {
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MilkCupData>} */
 function scriptDraw(data, originalFunction, drawData) {
     const { C, Item, PersistentData } = drawData;
-    if (Item.Property?.TypeRecord?.m !== 1) return;
     const Data = PersistentData();
+    if (Item.Property?.TypeRecord?.m !== 1) {
+        delete Data.RandomOffsetLeft;
+        delete Data.RandomOffsetRight;
+        Data.MilkProdFlow = 0;
+        Data.MilkCupAmount = 0;
+    }
     Data.MilkProdFlow ??= 0;
     Tools.drawUpdate(C, Data);
 
-    if (!Data.MilkTimer) {
-        Data.MilkTimer = Date.now();
-        return;
-    }
-
+    Data.MilkTimer ??= Date.now();
     Data.MilkCupAmount ??= 0;
+    Data.RandomOffsetLeft ??= Math.floor(Math.random() * 100);
+    Data.RandomOffsetRight ??= Math.floor(Math.random() * 100);
 
     const delta = (Date.now() - Data.MilkTimer) / 1000;
     Data.MilkTimer = Date.now();
@@ -268,11 +275,17 @@ function afterDraw(data, originalFunction, drawData) {
                     const len = Math.round(kRatio * (pLen - 10) + 10);
                     const sep = pLen - len;
 
-                    const start = Math.round((((Date.now() / 1000) % 3) * pLen) / 3);
+                    const flowSpeed = 3;
+                    const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
+                    const startL = 27 + Math.round((start + Data.RandomOffsetLeft) % pLen);
+                    const startR = 27 + Math.round((start + Data.RandomOffsetRight) % pLen);
 
-                    canvas.clearRect(0, 27 + start - pLen, 500, sep);
-                    canvas.clearRect(0, 27 + start, 500, sep);
-                    canvas.clearRect(0, 27 + start + pLen, 500, sep);
+                    for (let i = 0; i < 2; i++) {
+                        const start = [startL, startR][i];
+                        canvas.clearRect(250 * i, start - pLen, 250, sep);
+                        canvas.clearRect(250 * i, start, 250, sep);
+                        canvas.clearRect(250 * i, start + pLen, 250, sep);
+                    }
                 }
 
                 drawCanvas(Data.HoseCanvas, 0, canvasY);
