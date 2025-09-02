@@ -53,13 +53,39 @@ export function RMouseIn(rect) {
  * @template {ExtendedItemData<any>} DataType
  */
 class DialogButtons {
+    /**
+     * @typedef {(data:DataType, item: Item, character: Character) => void} CallbackType
+     */
+
     constructor() {
         this._buttons = /** @type {ButtonProperty<DataType>[]} */ ([]);
         this._params = /** @type {ParameterProperty<DataType>[]} */ ([]);
+        this._draw = /** @type {CallbackType | undefined} */ (undefined);
+        this._load = /** @type {CallbackType | undefined} */ (undefined);
+        this._exit = /** @type {CallbackType | undefined} */ (undefined);
     }
 
-    /** @type {ExtendedItemScriptHookCallbacks.Draw<DataType>} */
-    draw(data, _) {
+    /** @param {ButtonProperty<DataType>[]} buttons */
+    addButtons(buttons) {
+        this._buttons.push(...buttons);
+        return this;
+    }
+
+    /** @param {ParameterProperty<DataType>[]} params */
+    addParams(params) {
+        this._params.push(...params);
+        return this;
+    }
+
+    /**
+     * @param {CallbackType} draw
+     */
+    onDraw(draw) {
+        this._draw = draw;
+    }
+
+    /** @param {DataType} data*/
+    draw(data) {
         if (!DialogFocusItem || !CurrentCharacter) return;
 
         const dialogKey = DialogTools.dialogKey(DialogFocusItem);
@@ -92,22 +118,12 @@ class DialogButtons {
         }
 
         MainCanvas.textAlign = oldAlign;
+
+        this._draw?.(data, DialogFocusItem, CurrentCharacter);
     }
 
-    /** @param {ButtonProperty<DataType>[]} buttons */
-    buttons(buttons) {
-        this._buttons.push(...buttons);
-        return this;
-    }
-
-    /** @param {ParameterProperty<DataType>[]} params */
-    params(params) {
-        this._params.push(...params);
-        return this;
-    }
-
-    /** @type {ExtendedItemScriptHookCallbacks.Click<DataType>} */
-    click(data, _) {
+    /** @param {DataType} data*/
+    click(data) {
         if (!DialogFocusItem || !CurrentCharacter) return;
 
         const update = () => {
@@ -142,6 +158,28 @@ class DialogButtons {
             DialogLeave();
         }
     }
+
+    /**
+     * @param {Object} arg0
+     * @param {CallbackType} [arg0.load]
+     * @param {CallbackType} [arg0.exit]
+     */
+    onLoadExit({ load, exit }) {
+        this._load = load;
+        this._exit = exit;
+    }
+
+    /** @param {DataType} data*/
+    load(data) {
+        if (!DialogFocusItem || !CurrentCharacter) return;
+        this._load?.(data, DialogFocusItem, CurrentCharacter);
+    }
+
+    /** @param {DataType} data*/
+    exit(data) {
+        if (!DialogFocusItem || !CurrentCharacter) return;
+        this._exit?.(data, DialogFocusItem, CurrentCharacter);
+    }
 }
 
 /**
@@ -170,8 +208,7 @@ class DialogButtons {
  * @param {"modular" | "typed" | "noarch"} _
  * @param {ButtonProperty<DataType>[]} buttons
  * @param {ParameterProperty<DataType>[]} params
- * @returns {DialogButtons<DataType>}
  */
 export function createItemDialog(_, buttons, params) {
-    return new DialogButtons().buttons(buttons).params(params);
+    return /** @type {DialogButtons<DataType>}*/ (new DialogButtons()).addButtons(buttons).addParams(params);
 }

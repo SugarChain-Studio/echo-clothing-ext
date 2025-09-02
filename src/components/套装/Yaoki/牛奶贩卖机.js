@@ -284,7 +284,7 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
 const afterDrawProcess = createAfterDrawProcess(
     "modular",
     /**@type {MilkCupData}*/ ({}),
-    (data, { Property, PersistentData }) => {
+    ({ Property, PersistentData }) => {
         const property = /** @type {MilkingVendorProperties} */ (Property ?? {});
         return {
             property,
@@ -521,14 +521,14 @@ const itemDialog = createItemDialog(
 /** @type {ExtendedItemScriptHookCallbacks.Draw<ModularItemData>} */
 function dialogDrawHook(data, originalFunction) {
     originalFunction();
-    itemDialog.draw(data, originalFunction);
+    itemDialog.draw(data);
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
 function dialogClickHook(data, originalFunction) {
     originalFunction();
     if (!DialogFocusItem || !CurrentCharacter) return;
-    itemDialog.click(data, originalFunction);
+    itemDialog.click(data);
 }
 
 /** @type {ModularItemConfig} */
