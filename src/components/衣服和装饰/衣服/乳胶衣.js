@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { createItemDialog } from "../../../lib";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const gloveLayerInfo = {
@@ -99,6 +100,53 @@ const assetLower = {
     ],
 };
 
+/** @type {Partial<Record<CustomGroupBodyName, CustomGroupBodyName>>} */
+const itemGroupPairing = {
+    Suit: "SuitLower",
+    Suit_笨笨蛋Luzi: "SuitLower_笨笨蛋Luzi",
+    SuitLower: "Suit",
+    SuitLower_笨笨蛋Luzi: "Suit_笨笨蛋Luzi",
+};
+
+const itemPairing = {
+    [assetLower.Name]: assetUpper.Name,
+    [assetUpper.Name]: assetLower.Name,
+};
+
+/**
+ * @param {Item} item
+ * @param {Character} chara
+ * @return {Item|undefined}
+ */
+function findPairItem(item, chara) {
+    const other = itemGroupPairing[item.Asset.Group.Name];
+    return (
+        other &&
+        chara.Appearance.find((a) => a.Asset.Group.Name === other && a.Asset.Name === itemPairing[a.Asset.Name])
+    );
+}
+
+const itemDialog = createItemDialog("typed", [
+    {
+        location: { x: 1385, y: 650, w: 225, h: 55 },
+        key: "复制颜色",
+        enable: (item, chara) => !!findPairItem(item, chara),
+        onclick: (item, chara) => {
+            const other = findPairItem(item, chara);
+            if (!other) return;
+            if (!Array.isArray(item.Color)) return;
+
+            const otherLayerLen = other.Asset.Layer.filter((l) => l.AllowColorize).length;
+            if (otherLayerLen === 3) {
+                other.Color = item.Color.slice(0, 3);
+            } else if (otherLayerLen === 6) {
+                other.Color = [...item.Color, ...item.Color];
+            }
+        },
+        leaveDialog: false,
+    },
+]);
+
 /** @type {[CustomAssetDefinition, Parameters<typeof AssetManager["addAssetWithConfig"]>[2]]} */
 const upper = [
     assetUpper,
@@ -138,10 +186,20 @@ const upper = [
             Archetype: ExtendedArchetype.TYPED,
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
+            ScriptHooks: {
+                Draw: (data, origin) => {
+                    origin();
+                    itemDialog.draw(data);
+                },
+                Click: (data, origin) => {
+                    origin();
+                    itemDialog.click(data);
+                },
+            },
         },
         assetStrings: {
-            CN: { Select: "选择是否有手套", 无: "无", 有: "有" },
-            EN: { Select: "Select whether to have gloves", 无: "No", 有: "Yes" },
+            CN: { Select: "选择是否有手套", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },
+            EN: { Select: "Select whether to have gloves", 无: "No", 有: "Yes", 复制颜色: "Apply matching item color" },
         },
     },
 ];
@@ -166,10 +224,20 @@ const lower = [
             Archetype: ExtendedArchetype.TYPED,
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
+            ScriptHooks: {
+                Draw: (data, origin) => {
+                    origin();
+                    itemDialog.draw(data);
+                },
+                Click: (data, origin) => {
+                    origin();
+                    itemDialog.click(data);
+                },
+            },
         },
         assetStrings: {
-            CN: { Select: "选择是否有袜子", 无: "无", 有: "有" },
-            EN: { Select: "Select whether to have socks", 无: "No", 有: "Yes" },
+            CN: { Select: "选择是否有袜子", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },
+            EN: { Select: "Select whether to have socks", 无: "No", 有: "Yes", 复制颜色: "Apply matching item color" },
         },
     },
 ];

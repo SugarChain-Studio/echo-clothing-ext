@@ -8,7 +8,7 @@
  * @property {string} key 按钮文本键值
  * @property {(item:Item, chara:Character) => string | undefined} [hover] 按钮悬停时显示的文本，如果未定义则不显示
  * @property {(item:Item, chara:Character) => void} [onclick] 按钮点击时的回调，必须显示的可用按钮才会触发，留空则不触发
- * @property {true} [update] 按钮点击触发后是否要更新物品，留空则不更新
+ * @property {boolean | "full" | AssetGroupItemName} [update] 按钮点击触发后是否要更新物品，留空则不更新
  * @property {string} [actionKey] 按钮点击触发后要发送的动作文本键值，留空则不发送
  * @property {boolean} [leaveDialog] 按钮点击触发后，是否关闭Dialog，默认为true
  * @property {((dict:DictionaryBuilder, item:Item)=>DictionaryBuilder)} [actionProcess] 按钮点击触发后要发送的动作文本的额外处理步骤
@@ -86,18 +86,19 @@ class DialogButtons {
 
     /** @param {DataType} data*/
     draw(data) {
-        if (!DialogFocusItem || !CurrentCharacter) return;
+        const C = CharacterGetCurrent();
+        if (!DialogFocusItem || !C) return;
 
         const dialogKey = DialogTools.dialogKey(DialogFocusItem);
 
         const oldAlign = MainCanvas.textAlign;
         MainCanvas.textAlign = "center";
         for (const button of this._buttons) {
-            if (button.show && !button.show(data, DialogFocusItem, CurrentCharacter)) continue;
+            if (button.show && !button.show(data, DialogFocusItem, C)) continue;
 
-            const hover = button.hover?.(DialogFocusItem, CurrentCharacter);
+            const hover = button.hover?.(DialogFocusItem, C);
 
-            if (!button.enable || button.enable(DialogFocusItem, CurrentCharacter)) {
+            if (!button.enable || button.enable(DialogFocusItem, C)) {
                 drawButton(dialogKey, button.key, button.location, hover);
             } else {
                 drawButtonDisable(dialogKey, button.key, button.location, hover);
@@ -107,28 +108,32 @@ class DialogButtons {
         const LeftPartX = 1470;
         const RightPartX = 1530;
         for (const param of this._params) {
-            if (!param.show(data, DialogFocusItem, CurrentCharacter)) continue;
+            if (!param.show(data, DialogFocusItem, C)) continue;
 
             MainCanvas.textAlign = "right";
             DrawTextFit(AssetTextGet(dialogKey(param.key)), LeftPartX, param.Y, 300, "White", "Gray");
 
             MainCanvas.textAlign = "left";
-            const text = param.value(DialogFocusItem, CurrentCharacter);
+            const text = param.value(DialogFocusItem, C);
             DrawTextFit(text, RightPartX, param.Y, 300, "White", "Gray");
         }
 
         MainCanvas.textAlign = oldAlign;
 
-        this._draw?.(data, DialogFocusItem, CurrentCharacter);
+        this._draw?.(data, DialogFocusItem, C);
     }
 
     /** @param {DataType} data*/
     click(data) {
-        if (!DialogFocusItem || !CurrentCharacter) return;
+        const C = CharacterGetCurrent();
+        if (!DialogFocusItem || !C) return;
 
-        const update = () => {
-            CharacterRefresh(CurrentCharacter);
-            ChatRoomCharacterItemUpdate(CurrentCharacter, DialogFocusItem.Asset.Group.Name);
+        /** @type {(arg0:ButtonProperty<DataType>["update"])=>void} */
+        const update = (arg0) => {
+            CharacterRefresh(C);
+            if (arg0 === true) ChatRoomCharacterItemUpdate(C, DialogFocusItem.Asset.Group.Name);
+            else if (arg0 === "full") ChatRoomCharacterUpdate(C);
+            else if (typeof arg0 === "string") ChatRoomCharacterItemUpdate(C, /** @type {AssetGroupName} */ (arg0));
         };
         const dialogKey = DialogTools.dialogKey(DialogFocusItem);
 
@@ -136,19 +141,20 @@ class DialogButtons {
             (btn) =>
                 btn.onclick &&
                 RMouseIn(btn.location) &&
-                (!btn.show || btn.show(data, DialogFocusItem, CurrentCharacter)) &&
-                (!btn.enable || btn.enable(DialogFocusItem, CurrentCharacter))
+                (!btn.show || btn.show(data, DialogFocusItem, C)) &&
+                (!btn.enable || btn.enable(DialogFocusItem, C))
         );
 
         if (!clicked) return;
 
-        clicked.onclick(DialogFocusItem, CurrentCharacter);
-        if (clicked.update) update();
+        clicked.onclick(DialogFocusItem, C);
+        if (clicked.update) update(clicked.update);
+        else CharacterRefresh(C, false);
         if (clicked.actionKey) {
             const builder = new DictionaryBuilder()
                 .sourceCharacter(Player)
-                .targetCharacter(CharacterGetCurrent())
-                .destinationCharacterName(CharacterGetCurrent())
+                .targetCharacter(C)
+                .destinationCharacterName(C)
                 .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name);
             const Dictionary = (
                 typeof clicked.actionProcess === "function" ? clicked.actionProcess(builder, DialogFocusItem) : builder
@@ -171,14 +177,16 @@ class DialogButtons {
 
     /** @param {DataType} data*/
     load(data) {
-        if (!DialogFocusItem || !CurrentCharacter) return;
-        this._load?.(data, DialogFocusItem, CurrentCharacter);
+        const C = CharacterGetCurrent();
+        if (!DialogFocusItem || !C) return;
+        this._load?.(data, DialogFocusItem, C);
     }
 
     /** @param {DataType} data*/
     exit(data) {
-        if (!DialogFocusItem || !CurrentCharacter) return;
-        this._exit?.(data, DialogFocusItem, CurrentCharacter);
+        const C = CharacterGetCurrent();
+        if (!DialogFocusItem || !C) return;
+        this._exit?.(data, DialogFocusItem, C);
     }
 }
 
@@ -186,29 +194,31 @@ class DialogButtons {
  * @overload
  * @param {"modular"} mode
  * @param {ButtonProperty<ModularItemData>[]} buttons
- * @param {ParameterProperty<ModularItemData>[]} params
+ * @param {ParameterProperty<ModularItemData>[]} [params]
  * @returns {DialogButtons<ModularItemData>}
  */
 /**
  * @overload
  * @param {"typed"} mode
  * @param {ButtonProperty<TypedItemData>[]} buttons
- * @param {ParameterProperty<TypedItemData>[]} params
+ * @param {ParameterProperty<TypedItemData>[]} [params]
  * @returns {DialogButtons<TypedItemData>}
  */
 /**
  * @overload
  * @param {"noarch"} mode
  * @param {ButtonProperty<NoArchItemData>[]} buttons
- * @param {ParameterProperty<NoArchItemData>[]} params
+ * @param {ParameterProperty<NoArchItemData>[]} [params]
  * @returns {DialogButtons<NoArchItemData>}
  */
 /**
  * @template {ExtendedItemData<any>} DataType
  * @param {"modular" | "typed" | "noarch"} _
  * @param {ButtonProperty<DataType>[]} buttons
- * @param {ParameterProperty<DataType>[]} params
+ * @param {ParameterProperty<DataType>[]} [params]
  */
 export function createItemDialog(_, buttons, params) {
-    return /** @type {DialogButtons<DataType>}*/ (new DialogButtons()).addButtons(buttons).addParams(params);
+    const ret = /** @type {DialogButtons<DataType>}*/ (new DialogButtons()).addButtons(buttons);
+    if (params) ret.addParams(params);
+    return ret;
 }
