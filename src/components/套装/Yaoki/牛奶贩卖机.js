@@ -456,6 +456,7 @@ const itemDialog = createItemDialog(
             enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneLeft === true),
             onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneLeft = null)),
             update: true,
+            leaveDialog: false,
             actionKey: "A拿左杯",
         },
         {
@@ -472,6 +473,7 @@ const itemDialog = createItemDialog(
                     p.Luzi_MilkTotal -= 200;
                 }),
             update: true,
+            leaveDialog: false,
             actionKey: "A开始左杯",
         },
         {
@@ -483,6 +485,7 @@ const itemDialog = createItemDialog(
             enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneRight === true),
             onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneRight = null)),
             update: true,
+            leaveDialog: false,
             actionKey: "A拿右杯",
         },
         {
@@ -499,6 +502,7 @@ const itemDialog = createItemDialog(
                     p.Luzi_MilkTotal -= 200;
                 }),
             update: true,
+            leaveDialog: false,
             actionKey: "A开始右杯",
         },
     ],
@@ -542,6 +546,7 @@ const extended = {
         Draw: dialogDrawHook,
         Click: dialogClickHook,
     },
+    ChatTags: Tools.CommonChatTags(),
     BaselineProperty: /** @type {MilkingVendorProperties} */ ({
         Luzi_MilkTotal: 0,
     }),
