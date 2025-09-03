@@ -18,15 +18,17 @@ const translation = {
 
 /** @type {ExtendedItemCallbacks.ScriptDraw} */
 function scriptDraw({ C }) {
-    if (C.IsPlayer()) {
-        if (!Player.PoseMapping.BodyLower || Player.PoseMapping.BodyLower === "LegsClosed") {
-            return;
-        }
+    if (C.IsPlayer()) runAutoCloseLegs();
+}
 
-        if (!Player.IsKneeling() && Player.CanChangeToPose("LegsClosed")) {
-            PoseSetActive(Player, "LegsClosed");
-            if (ServerPlayerIsInChatRoom()) ServerSend("ChatRoomCharacterPoseUpdate", { Pose: Player.ActivePose });
-        }
+export function runAutoCloseLegs() {
+    if (!Player.PoseMapping.BodyLower || Player.PoseMapping.BodyLower === "LegsClosed") {
+        return;
+    }
+
+    if (!Player.IsKneeling() && Player.CanChangeToPose("LegsClosed")) {
+        PoseSetActive(Player, "LegsClosed");
+        if (ServerPlayerIsInChatRoom()) ServerSend("ChatRoomCharacterPoseUpdate", { Pose: Player.ActivePose });
     }
 }
 
