@@ -465,59 +465,51 @@ const itemDialog = createItemDialog(
         {
             location: buttons.左,
             key: "拿左杯",
-            show: (data, item) =>
+            show: ({ data, item }) =>
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneLeft === true || typeof p.Luzi_OutputStartLeft === "number"),
-            enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneLeft === true),
-            onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneLeft = null)),
-            update: true,
-            leaveDialog: false,
+            enable: ({ item }) => propTest(item, (p) => p.Luzi_OutputDoneLeft === true),
+            onclick: ({ item }) => propValue(item, (p) => (p.Luzi_OutputDoneLeft = null)),
             actionKey: "A拿左杯",
         },
         {
             location: buttons.左,
             key: "开始左杯",
-            show: (data, item) =>
+            show: ({ data, item }) =>
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneLeft !== true && typeof p.Luzi_OutputStartLeft !== "number"),
-            enable: (item) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
-            hover: (item) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
-            onclick: (item) =>
+            enable: ({ item }) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
+            hover: ({ item }) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            onclick: ({ item }) =>
                 propValue(item, (p) => {
                     p.Luzi_OutputStartLeft = Date.now();
                     p.Luzi_MilkTotal -= 200;
                 }),
-            update: true,
-            leaveDialog: false,
             actionKey: "A开始左杯",
         },
         {
             location: buttons.右,
             key: "拿右杯",
-            show: (data, item) =>
+            show: ({ data, item }) =>
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneRight === true || typeof p.Luzi_OutputStartRight === "number"),
-            enable: (item) => propTest(item, (p) => p.Luzi_OutputDoneRight === true),
-            onclick: (item) => propValue(item, (p) => (p.Luzi_OutputDoneRight = null)),
-            update: true,
-            leaveDialog: false,
+            enable: ({ item }) => propTest(item, (p) => p.Luzi_OutputDoneRight === true),
+            onclick: ({ item }) => propValue(item, (p) => (p.Luzi_OutputDoneRight = null)),
             actionKey: "A拿右杯",
         },
         {
             location: buttons.右,
             key: "开始右杯",
-            show: (data, item) =>
+            show: ({ data, item }) =>
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneRight !== true && typeof p.Luzi_OutputStartRight !== "number"),
-            enable: (item) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
-            hover: (item) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
-            onclick: (item) =>
+            enable: ({ item }) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
+            hover: ({ item }) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            onclick: ({ item }) =>
                 propValue(item, (p) => {
                     p.Luzi_OutputStartRight = Date.now();
                     p.Luzi_MilkTotal -= 200;
                 }),
-            update: true,
-            leaveDialog: false,
             actionKey: "A开始右杯",
         },
     ],
@@ -525,42 +517,27 @@ const itemDialog = createItemDialog(
         {
             Y: 700,
             key: "产率",
-            show: (data) => data.currentModule === "Base",
-            value: (item, chara) => flowText(flowAlgorithm(chara, item)),
+            show: ({ data }) => data.currentModule === "Base",
+            value: ({ item, chara }) => flowText(flowAlgorithm(chara, item)),
         },
         {
             Y: 775,
             key: "存量",
-            show: (data) => data.currentModule === "Base",
-            value: (item) => propValue(item, (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL`),
+            show: ({ data }) => data.currentModule === "Base",
+            value: ({ item }) => propValue(item, (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL`),
         },
     ]
 );
-
-/** @type {ExtendedItemScriptHookCallbacks.Draw<ModularItemData>} */
-function dialogDrawHook(data, originalFunction) {
-    originalFunction();
-    itemDialog.draw(data);
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
-function dialogClickHook(data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem || !CurrentCharacter) return;
-    itemDialog.click(data);
-}
 
 /** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     DrawImages: false,
-    ScriptHooks: {
+    ScriptHooks: itemDialog.createHooks(["Draw", "Click"], {
         ScriptDraw: scriptDraw,
         BeforeDraw: beforeDraw,
         AfterDraw: afterDraw,
-        Draw: dialogDrawHook,
-        Click: dialogClickHook,
-    },
+    }),
     ChatTags: Tools.CommonChatTags(),
     BaselineProperty: /** @type {MilkingVendorProperties} */ ({
         Luzi_MilkTotal: 0,

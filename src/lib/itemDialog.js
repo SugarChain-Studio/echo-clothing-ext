@@ -1,44 +1,17 @@
-/**
- * 物品互动对话的按钮
- * @template {ExtendedItemData<any>} DataType
- * @typedef {Object} ButtonProperty
- * @property {Rect} location 按钮位置
- * @property {(data: DataType, item:Item, chara:Character) => boolean} [show] 按钮是否显示，留空则默认为显示
- * @property {(item:Item, chara:Character) => boolean} [enable] 按钮是否可用，留空则默认为可用（显示的按钮才可用）
- * @property {string} key 按钮文本键值
- * @property {(item:Item, chara:Character) => string | undefined} [hover] 按钮悬停时显示的文本，如果未定义则不显示
- * @property {(item:Item, chara:Character) => void} [onclick] 按钮点击时的回调，必须显示的可用按钮才会触发，留空则不触发
- * @property {boolean | "full" | AssetGroupItemName} [update] 按钮点击触发后是否要更新物品，留空则不更新
- * @property {string} [actionKey] 按钮点击触发后要发送的动作文本键值，留空则不发送
- * @property {boolean} [leaveDialog] 按钮点击触发后，是否关闭Dialog，默认为true
- * @property {((dict:DictionaryBuilder, item:Item)=>DictionaryBuilder)} [actionProcess] 按钮点击触发后要发送的动作文本的额外处理步骤
- */
-
-/**
- * 物品互动对话的属性文本
- * @template {ExtendedItemData<any>} DataType
- * @typedef {Object} ParameterProperty
- * @property {number} Y 属性文本的Y坐标
- * @property {(data: DataType, item:Item, chara:Character) => boolean} [show] 文本是否显示，留空则默认为显示
- * @property {string} key 属性文本键值
- * @property {(item:Item, chara:Character) => string} value 属性文本的值
- */
-
 import { DialogTools } from "@mod-utils/Tools";
 
-/**
- * @typedef {(dialogKey: (id: string) => string, id: string, location: { x: number, y: number }, hover?: string) => void} DrawButtonFunction
- */
+/** @type {(dialogKey:(id:string)=>string) => (id:string) => string} */
+const createText = (dialogKey) => (id) => AssetTextGet(dialogKey(id));
 
-/** @type {DrawButtonFunction} */
-const drawButton = (dialogKey, id, location, hover) => {
+/** @type {ItemDialog.DrawButtonFunction} */
+const drawButton = (text, id, location, hover) => {
     const rect = /** @type {RectTuple} */ (Object.values(location));
-    DrawButton(...rect, AssetTextGet(dialogKey(id)), "White", null, hover && AssetTextGet(dialogKey(hover)), false);
+    DrawButton(...rect, text(id), "White", null, hover && text(hover), false);
 };
-/** @type {DrawButtonFunction} */
-const drawButtonDisable = (dialogKey, id, location, hover) => {
+/** @type {ItemDialog.DrawButtonFunction} */
+const drawButtonDisable = (text, id, location, hover) => {
     const rect = /** @type {RectTuple} */ (Object.values(location));
-    DrawButton(...rect, AssetTextGet(dialogKey(id)), "Gray", null, hover && AssetTextGet(dialogKey(hover)), true);
+    DrawButton(...rect, text(id), "Gray", null, hover && text(hover), true);
 };
 
 /**
@@ -58,22 +31,37 @@ class DialogButtons {
      */
 
     constructor() {
-        this._buttons = /** @type {ButtonProperty<DataType>[]} */ ([]);
-        this._params = /** @type {ParameterProperty<DataType>[]} */ ([]);
+        this._buttons = /** @type {ItemDialog.ButtonConfig<DataType>[]} */ ([]);
+        this._params = /** @type {ItemDialog.ParameterConfig<DataType>[]} */ ([]);
+        this._texts = /** @type {ItemDialog.TextConfig<DataType>[]} */ ([]);
+        this._checkboxes = /** @type {ItemDialog.CheckBoxConfig<DataType>[]} */ ([]);
+
         this._draw = /** @type {CallbackType | undefined} */ (undefined);
         this._load = /** @type {CallbackType | undefined} */ (undefined);
         this._exit = /** @type {CallbackType | undefined} */ (undefined);
     }
 
-    /** @param {ButtonProperty<DataType>[]} buttons */
+    /** @param {ItemDialog.ButtonConfig<DataType>[]} buttons */
     addButtons(buttons) {
         this._buttons.push(...buttons);
         return this;
     }
 
-    /** @param {ParameterProperty<DataType>[]} params */
+    /** @param {ItemDialog.ParameterConfig<DataType>[]} params */
     addParams(params) {
         this._params.push(...params);
+        return this;
+    }
+
+    /** @param {ItemDialog.TextConfig<DataType>[]} texts */
+    addTexts(texts) {
+        this._texts.push(...texts);
+        return this;
+    }
+
+    /** @param {ItemDialog.CheckBoxConfig<DataType>[]} checkboxes */
+    addCheckBoxes(checkboxes) {
+        this._checkboxes.push(...checkboxes);
         return this;
     }
 
@@ -86,82 +74,140 @@ class DialogButtons {
 
     /** @param {DataType} data*/
     draw(data) {
-        const C = CharacterGetCurrent();
-        if (!DialogFocusItem || !C) return;
+        const chara = CharacterGetCurrent();
+        const item = DialogFocusItem;
+        if (!item || !chara) return;
 
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
+        const text = createText(DialogTools.dialogKey(item));
+
+        const ctx = { data, item, chara };
+        const ctxText = { data, item, chara, text };
 
         const oldAlign = MainCanvas.textAlign;
         MainCanvas.textAlign = "center";
         for (const button of this._buttons) {
-            if (button.show && !button.show(data, DialogFocusItem, C)) continue;
+            if (button.show && !button.show(ctx)) continue;
 
-            const hover = button.hover?.(DialogFocusItem, C);
+            const hover = button.hover?.(ctx);
 
-            if (!button.enable || button.enable(DialogFocusItem, C)) {
-                drawButton(dialogKey, button.key, button.location, hover);
+            if (!button.enable || button.enable(ctx)) {
+                drawButton(text, button.key, button.location, hover);
             } else {
-                drawButtonDisable(dialogKey, button.key, button.location, hover);
+                drawButtonDisable(text, button.key, button.location, hover);
             }
         }
 
         const LeftPartX = 1470;
         const RightPartX = 1530;
         for (const param of this._params) {
-            if (!param.show(data, DialogFocusItem, C)) continue;
+            if (!param.show(ctx)) continue;
 
             MainCanvas.textAlign = "right";
-            DrawTextFit(AssetTextGet(dialogKey(param.key)), LeftPartX, param.Y, 300, "White", "Gray");
+            DrawTextFit(text(param.key), LeftPartX, param.Y, 300, "White", "Gray");
 
             MainCanvas.textAlign = "left";
-            const text = param.value(DialogFocusItem, C);
-            DrawTextFit(text, RightPartX, param.Y, 300, "White", "Gray");
+            const valueText = param.value(ctxText);
+            DrawTextFit(valueText, RightPartX, param.Y, 300, "White", "Gray");
         }
 
+        for (const param of this._texts) {
+            const textValue = param.text(ctxText);
+            if (!textValue) continue;
+
+            const oldAlign = MainCanvas.textAlign;
+            MainCanvas.textAlign = param.align ?? "center";
+            const { x, y, w } = param.location;
+            DrawTextFit(textValue, x, y, w, "White", param.backColor);
+            MainCanvas.textAlign = oldAlign;
+        }
+
+        const oldBaseline = MainCanvas.textBaseline;
+        MainCanvas.textBaseline = "middle";
+        MainCanvas.textAlign = "left";
+        for (const box of this._checkboxes) {
+            if (box.show && !box.show(box.checkData, ctx)) continue;
+            const enable = !box.enable || box.enable(box.checkData, ctx);
+            const { x, y } = box.location;
+            const { w, h } = /**@type {Partial<Rect>} */ (box.location);
+            const checked = box.checked(box.checkData, ctx);
+            const textValue = box.text(box.checkData, ctxText);
+
+            const X = x + (w ?? 64) + 5;
+            const Y = y + (h ?? 64) / 2;
+
+            DrawCheckbox(x, y, w ?? 64, h ?? 64, "", checked, !enable);
+            if (box.textWidth) DrawTextFit(textValue, X, Y, box.textWidth, "White", "Gray");
+            else DrawText(textValue, X, Y, "White", "Gray");
+        }
+        MainCanvas.textBaseline = oldBaseline;
         MainCanvas.textAlign = oldAlign;
 
-        this._draw?.(data, DialogFocusItem, C);
+        this._draw?.(data, item, chara);
     }
 
     /** @param {DataType} data*/
     click(data) {
-        const C = CharacterGetCurrent();
-        if (!DialogFocusItem || !C) return;
+        const chara = CharacterGetCurrent();
+        const item = DialogFocusItem;
+        if (!item || !chara) return;
 
-        /** @type {(arg0:ButtonProperty<DataType>["update"])=>void} */
+        const ctx = { data, item, chara };
+
+        /** @type {(arg0:ItemDialog.ButtonConfig<DataType>["update"])=>void} */
         const update = (arg0) => {
-            CharacterRefresh(C);
-            if (arg0 === true) ChatRoomCharacterItemUpdate(C, DialogFocusItem.Asset.Group.Name);
-            else if (arg0 === "full") ChatRoomCharacterUpdate(C);
-            else if (typeof arg0 === "string") ChatRoomCharacterItemUpdate(C, /** @type {AssetGroupName} */ (arg0));
+            CharacterRefresh(chara);
+            if (arg0 === true) ChatRoomCharacterItemUpdate(chara, item.Asset.Group.Name);
+            else if (arg0 === "full") ChatRoomCharacterUpdate(chara);
+            else if (typeof arg0 === "string") ChatRoomCharacterItemUpdate(chara, /** @type {AssetGroupName} */ (arg0));
         };
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
+        const dialogKey = DialogTools.dialogKey(item);
 
-        const clicked = this._buttons.find(
-            (btn) =>
-                btn.onclick &&
-                RMouseIn(btn.location) &&
-                (!btn.show || btn.show(data, DialogFocusItem, C)) &&
-                (!btn.enable || btn.enable(DialogFocusItem, C))
-        );
+        /** @type {ItemDialog.InteractableConfig<DataType>} */
+        const clicked = (() => {
+            const btn = this._buttons.find(
+                (btn) =>
+                    btn.onclick &&
+                    RMouseIn(btn.location) &&
+                    (!btn.show || btn.show(ctx)) &&
+                    (!btn.enable || btn.enable(ctx))
+            );
+            if (btn) {
+                btn.onclick(ctx);
+                return btn;
+            }
 
-        if (!clicked) return;
+            const box = this._checkboxes.find(
+                (box) =>
+                    box.onclick &&
+                    RMouseIn({ w: 64, h: 64, ...box.location }) &&
+                    (!box.show || box.show(box.checkData, ctx)) &&
+                    (!box.enable || box.enable(box.checkData, ctx))
+            );
+            if (box) {
+                box.onclick(box.checkData, ctx);
+                return box;
+            }
+        })();
 
-        clicked.onclick(DialogFocusItem, C);
-        if (clicked.update) update(clicked.update);
-        else CharacterRefresh(C, false);
-        if (clicked.actionKey) {
-            const builder = new DictionaryBuilder()
-                .sourceCharacter(Player)
-                .targetCharacter(C)
-                .destinationCharacterName(C)
-                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name);
-            const Dictionary = (
-                typeof clicked.actionProcess === "function" ? clicked.actionProcess(builder, DialogFocusItem) : builder
-            ).build();
-            ChatRoomPublishCustomAction(dialogKey(clicked.actionKey), clicked.leaveDialog !== false, Dictionary);
-        } else if (clicked.leaveDialog !== false) {
-            DialogLeave();
+        if (clicked) {
+            if (clicked.update) update(clicked.update);
+            else if (clicked.update === undefined) {
+                if (item.Asset.Group.Category === "Item") update(true);
+                else CharacterRefresh(chara, false);
+            }
+            if (clicked.actionKey) {
+                const builder = new DictionaryBuilder()
+                    .sourceCharacter(Player)
+                    .targetCharacter(chara)
+                    .destinationCharacterName(chara)
+                    .asset(item.Asset, "AssetName", item.Craft && item.Craft.Name);
+                const Dictionary = (
+                    typeof clicked.actionProcess === "function" ? clicked.actionProcess(builder, item) : builder
+                ).build();
+                ChatRoomPublishCustomAction(dialogKey(clicked.actionKey), !!clicked.leaveDialog, Dictionary);
+            } else if (!!clicked.leaveDialog) {
+                DialogLeave();
+            }
         }
     }
 
@@ -178,47 +224,79 @@ class DialogButtons {
     /** @param {DataType} data*/
     load(data) {
         const C = CharacterGetCurrent();
-        if (!DialogFocusItem || !C) return;
-        this._load?.(data, DialogFocusItem, C);
+        const Item = DialogFocusItem;
+        if (!Item || !C) return;
+        this._load?.(data, Item, C);
     }
 
     /** @param {DataType} data*/
     exit(data) {
         const C = CharacterGetCurrent();
-        if (!DialogFocusItem || !C) return;
-        this._exit?.(data, DialogFocusItem, C);
+        const Item = DialogFocusItem;
+        if (!Item || !C) return;
+        this._exit?.(data, Item, C);
+    }
+    /**
+     * @param {("Load" | "Exit" |"Draw"|"Click")[]} [keys] 要启用的hook名称，默认为["Click", "Draw"]
+     * @param {ExtendedItemCapsScriptHooksStruct<DataType, any>} [base] 基础hook
+     * @return {ExtendedItemCapsScriptHooksStruct<DataType, any>}
+     */
+    createHooks(keys = ["Click", "Draw"], base = {}) {
+        const hooks = { ...base };
+        const originThen = (func) => (data, originalFunction) => {
+            originalFunction?.();
+            func(data);
+        };
+        for (const key of keys) {
+            hooks[key] = (() => {
+                switch (key) {
+                    case "Load":
+                        return originThen((data) => this.load(data));
+                    case "Exit":
+                        return originThen((data) => this.exit(data));
+                    case "Click":
+                        return originThen((data) => this.click(data));
+                    case "Draw":
+                        return originThen((data) => this.draw(data));
+                    default:
+                        return () => {};
+                }
+            })();
+        }
+        return hooks;
     }
 }
 
 /**
  * @overload
  * @param {"modular"} mode
- * @param {ButtonProperty<ModularItemData>[]} buttons
- * @param {ParameterProperty<ModularItemData>[]} [params]
+ * @param {ItemDialog.ButtonConfig<ModularItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<ModularItemData>[]} [params]
  * @returns {DialogButtons<ModularItemData>}
  */
 /**
  * @overload
  * @param {"typed"} mode
- * @param {ButtonProperty<TypedItemData>[]} buttons
- * @param {ParameterProperty<TypedItemData>[]} [params]
+ * @param {ItemDialog.ButtonConfig<TypedItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<TypedItemData>[]} [params]
  * @returns {DialogButtons<TypedItemData>}
  */
 /**
  * @overload
  * @param {"noarch"} mode
- * @param {ButtonProperty<NoArchItemData>[]} buttons
- * @param {ParameterProperty<NoArchItemData>[]} [params]
+ * @param {ItemDialog.ButtonConfig<NoArchItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<NoArchItemData>[]} [params]
  * @returns {DialogButtons<NoArchItemData>}
  */
 /**
  * @template {ExtendedItemData<any>} DataType
  * @param {"modular" | "typed" | "noarch"} _
- * @param {ButtonProperty<DataType>[]} buttons
- * @param {ParameterProperty<DataType>[]} [params]
+ * @param {ItemDialog.ButtonConfig<DataType>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<DataType>[]} [params]
  */
 export function createItemDialog(_, buttons, params) {
-    const ret = /** @type {DialogButtons<DataType>}*/ (new DialogButtons()).addButtons(buttons);
+    const ret = /** @type {DialogButtons<DataType>}*/ (new DialogButtons());
+    if (buttons) ret.addButtons(buttons);
     if (params) ret.addParams(params);
     return ret;
 }
