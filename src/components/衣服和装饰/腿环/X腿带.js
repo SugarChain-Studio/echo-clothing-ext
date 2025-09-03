@@ -66,16 +66,16 @@ const extended = {
 /** @type {Translation.Dialog} */
 const assetStrings = {
     CN: {
-        GartersX腿带_LuziSelect: "选择",
-        GartersX腿带_Luzi左腿: "左腿",
-        GartersX腿带_Luzi右腿: "右腿",
-        GartersX腿带_Luzi双腿: "都有",
+        Select: "选择",
+        左腿: "左腿",
+        右腿: "右腿",
+        双腿: "都有",
     },
     EN: {
-        GartersX腿带_LuziSelect: "Select",
-        GartersX腿带_Luzi左腿: "Left leg",
-        GartersX腿带_Luzi右腿: "Right leg",
-        GartersX腿带_Luzi双腿: "Both",
+        Select: "Select",
+        左腿: "Left leg",
+        右腿: "Right leg",
+        双腿: "Both",
     },
 };
 
