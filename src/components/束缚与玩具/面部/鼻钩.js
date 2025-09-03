@@ -36,7 +36,7 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     ChatTags: Tools.CommonChatTags(),
-    Options: [{ Name: "A" }, { Name: "B" }, { Name: "C" }, { Name: "D" }, { Name: "E" }],
+    Options: [{ Name: "A" }, { Name: "B" }, { Name: "C" }, { Name: "D" }, { Name: "E" }, { Name: "F" }],
 };
 
 const assetStrings = DialogTools.autoItemStrings(
@@ -48,6 +48,7 @@ const assetStrings = DialogTools.autoItemStrings(
             C: "双钩",
             D: "双钩扩大",
             E: "三钩",
+            F: "三钩扩大",
         },
         EN: {
             Select: "Select Nose Hook Expansion Style",
@@ -56,6 +57,7 @@ const assetStrings = DialogTools.autoItemStrings(
             C: "Double Hook",
             D: "Double Hook (Expanded)",
             E: "Triple Hook",
+            F: "Triple Hook (Expanded)",
         },
     },
     extended
