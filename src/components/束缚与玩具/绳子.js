@@ -1,5 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
+import { TypedOptionCombiner } from "../../lib";
 
 const modeText = {
     CN: (idx) => `模式${idx}`,
@@ -85,30 +86,7 @@ const modeDisplayFlatten = Object.fromEntries(
     ])
 );
 
-console.debug("Complex Hemp Rope modeDisplayFlatten:", modeDisplayFlatten);
-
-class OptionCombine {
-    constructor() {
-        /** @type {Partial<Record<keyof typeof modeDisplay, Omit<TypedItemOptionConfig,"Name">>> } */
-        this.modeExtra = {};
-    }
-
-    /**
-     *
-     * @param {(keyof typeof modeDisplay)[]} options
-     * @param {Omit<TypedItemOptionConfig,"Name">} extraConfig
-     */
-    combine(options, extraConfig) {
-        for (const option of options) {
-            const nProperty = this.modeExtra[option]?.Property
-                ? { ...this.modeExtra[option].Property, ...extraConfig.Property }
-                : {};
-            this.modeExtra[option] = { ...this.modeExtra[option], ...extraConfig, Property: nProperty };
-        }
-    }
-}
-
-const options = new OptionCombine();
+const options = new TypedOptionCombiner(Object.keys(modeDisplay));
 options.combine(["mode1", "mode2", "mode6", "mode7", "mode8", "mode9"], { BondageLevel: 4 });
 options.combine(["mode1", "mode2", "mode6", "mode7", "mode8", "mode9"], { BondageLevel: 4 });
 options.combine(["mode4", "mode5"], { BondageLevel: 5 });
@@ -126,7 +104,7 @@ options.combine(["mode3", "mode10"], {
     },
 });
 
-const modeExtra = options.modeExtra;
+const modeExtra = options.Options;
 
 const groupModes = {
     ItemTorso: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => `mode${i}`),
@@ -193,9 +171,9 @@ function modes2TypedOption(modes) {
 const assetStrings = {
     CN: {
         Select: "选择复杂麻绳样式",
-        ...Object.fromEntries(Object.entries(modeDisplay).map(([key, value], i) => [key, modeText.CN(i + 1)])),
+        ...Object.fromEntries(Object.entries(modeDisplay).map(([key], i) => [key, modeText.CN(i + 1)])),
         ...Object.fromEntries(
-            Object.entries(modeDisplay).map(([key, value], i) => [
+            Object.entries(modeDisplay).map(([key], i) => [
                 `Set${key}`,
                 `SourceCharacter将DestinationCharacterAssetName设置为${modeText.CN(i + 1)}.`,
             ])
@@ -203,9 +181,9 @@ const assetStrings = {
     },
     EN: {
         Select: "Select Complex Hemp Rope Style",
-        ...Object.fromEntries(Object.entries(modeDisplay).map(([key, value], i) => [key, modeText.EN(i + 1)])),
+        ...Object.fromEntries(Object.entries(modeDisplay).map(([key], i) => [key, modeText.EN(i + 1)])),
         ...Object.fromEntries(
-            Object.entries(modeDisplay).map(([key, value], i) => [
+            Object.entries(modeDisplay).map(([key], i) => [
                 `Set${key}`,
                 `SourceCharacter set DestinationCharacter AssetName to ${modeText.EN(i + 1)}.`,
             ])

@@ -6,3 +6,4 @@ export { SockLRTool } from "./sockLR.js";
 export { takeLayerNames } from "./takeLayerName.js";
 export { createItemDialog } from "./itemDialog.js";
 export { createAfterDrawProcess } from "./afterDraw.js";
+export { TypedOptionCombiner } from "./optionCombiner.js";
