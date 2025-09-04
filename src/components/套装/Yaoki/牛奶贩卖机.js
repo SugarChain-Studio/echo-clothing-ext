@@ -25,15 +25,21 @@ const asset = {
     ParentGroup: {},
     Hide: ["SuitLower", "ClothLower", "Socks", "SocksLeft", "SocksRight", "Shoes", "TailStraps"],
     Layer: [
-        { Name: "通风口", Left: 40, Top: 485, ColorGroup: "装饰", Priority: 2 },
-        { Name: "纸卷", Left: 30, Top: 335, ColorGroup: "装饰", Priority: 2 },
+        { Name: "通风口", Left: 40, Top: 485, ColorGroup: "装饰" },
+        { Name: "纸卷", Left: 30, Top: 335, ColorGroup: "装饰" },
         { Name: "箱背", Left: 30, Top: -115, ColorGroup: "箱子", Priority: 2 },
         { Name: "拘束", Left: 170, Top: 255, Priority: 2 },
         {
             Name: "箱轮廓",
             AllowColorize: false,
             Alpha: [
-                { Masks: [[0, -CanvasUpperOverflow, 500, CanvasUpperOverflow - 90]] },
+                {
+                    Masks: [
+                        [0, -CanvasUpperOverflow, 500, CanvasUpperOverflow - 90],
+                        [0, 280, 60, 1000],
+                        [440, 280, 60, 1000],
+                    ],
+                },
                 {
                     Masks: [
                         [0, -CanvasUpperOverflow, 60, CanvasUpperOverflow + 280],
