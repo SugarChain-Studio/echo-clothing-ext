@@ -15,6 +15,7 @@ const asset = {
     EditOpacity: true,
     MinOpacity: 0,
     Opacity: 0,
+    AllowActivePose: ["AllFours"],
     SetPose: ["AllFours"],
     Effect: [E.BlockWardrobe, E.Freeze],
     Layer: [

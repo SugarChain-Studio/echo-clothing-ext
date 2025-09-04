@@ -13,6 +13,7 @@ const asset = {
     MinOpacity: 0,
     Opacity: 0,
     Priority: 58,
+    AllowActivePose: ["Kneel"],
     SetPose: ["Kneel"],
     Layer: [
         {
