@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
+import { registerDrawHook } from "../../lib/afterDraw";
 import { ChainCanvasCacheWSide } from "../chain";
-import { Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -94,6 +94,6 @@ function afterDraw(drawData) {
 
 export default function () {
     const groups = /** @type {AssetGroupItemName[]} */ (["ItemNeckRestraints", "ItemDevices", "ItemMisc"]);
-    Tools.drawHook(asset, groups, { afterDraw });
+    registerDrawHook(asset, groups, { afterDraw });
     AssetManager.addAssetWithConfig(groups, asset, { translation, layerNames });
 }

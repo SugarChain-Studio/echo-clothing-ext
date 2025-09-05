@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { registerDrawHook } from "../../../lib/afterDraw";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -89,6 +89,6 @@ function beforeDraw({ C, L }) {
 }
 
 export default function () {
-    Tools.drawHook(asset, "动物身体_Luzi", { beforeDraw });
+    registerDrawHook(asset, "动物身体_Luzi", { beforeDraw });
     AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
 }

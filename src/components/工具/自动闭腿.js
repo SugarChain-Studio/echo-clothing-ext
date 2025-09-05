@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
+import { registerDrawHook } from "../../lib/afterDraw";
 import { customFixup } from "../fixups";
-import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -36,6 +36,6 @@ export default function () {
     customFixup({ Old: { Group: "动物身体_Luzi", Name: asset.Name }, New: { Group: "外观工具", Name: asset.Name } });
 
     const group = "外观工具";
-    Tools.drawHook(asset, group, { scriptDraw });
+    registerDrawHook(asset, group, { scriptDraw });
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames: {} });
 }

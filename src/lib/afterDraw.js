@@ -1,3 +1,5 @@
+import { Logger } from "@mod-utils/log";
+
 /**
  * @template {object} PreDataType
  * @template {ExtendedItemData<any>} DataType
@@ -91,4 +93,28 @@ class AfterDrawProcess {
  */
 export function createAfterDrawProcess(_1, _2, pre) {
     return new AfterDrawProcess(pre);
+}
+
+/**
+ * @template {Record<string, any>} PersistentData
+ * @param { CustomAssetDefinition } asset
+ * @param { CustomGroupName | CustomGroupName[] } groupName
+ * @param { {beforeDraw?: ExtendedItemCallbacks.BeforeDraw<PersistentData>, afterDraw?: ExtendedItemCallbacks.AfterDraw<PersistentData>, scriptDraw?: ExtendedItemCallbacks.ScriptDraw<PersistentData>} } hooks
+ */
+export function registerDrawHook(asset, groupName, hooks) {
+    const map = {
+        beforeDraw: "BeforeDraw",
+        afterDraw: "AfterDraw",
+        scriptDraw: "ScriptDraw",
+    };
+
+    const groups = Array.isArray(groupName) ? groupName : [groupName];
+    for (const [key, func] of Object.entries(hooks)) {
+        for (const g of groups) {
+            if (globalThis[`Assets${g}${asset.Name}${map[key]}`]) {
+                Logger.warn(`Overriding existing hook: "Assets${g}${asset.Name}${map[key]}"`);
+            }
+            globalThis[`Assets${g}${asset.Name}${map[key]}`] = func;
+        }
+    }
 }

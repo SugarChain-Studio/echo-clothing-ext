@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
+import { registerDrawHook } from "../../lib/afterDraw";
 import { ChainCanvasCache } from "../chain";
-import { Tools } from "@mod-utils/Tools";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -64,6 +64,6 @@ function afterDraw(drawData) {
 }
 
 export default function () {
-    Tools.drawHook(asset, "ItemNeckRestraints", { afterDraw });
+    registerDrawHook(asset, "ItemNeckRestraints", { afterDraw });
     AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, { translation, layerNames });
 }

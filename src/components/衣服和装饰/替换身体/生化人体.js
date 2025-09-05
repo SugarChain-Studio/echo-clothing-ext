@@ -2,6 +2,7 @@ import { AssetManager } from "../../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
+import { registerDrawHook } from "../../../lib/afterDraw";
 
 const drawConfig = {
     上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩", blend: "destination-out" },
@@ -115,7 +116,7 @@ const layerNames = {
 
 export default function () {
     const assetGroup = "动物身体_Luzi";
-    Tools.drawHook(asset, assetGroup, { afterDraw });
+    registerDrawHook(asset, assetGroup, { afterDraw });
     AssetManager.addAssetWithConfig(assetGroup, asset, {
         translation,
         layerNames,
