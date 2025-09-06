@@ -36,16 +36,6 @@ const asset = {
         {
             Name: "鞋底",
             Priority: 22,
-            AllowTypes: { b: 0 },
-            InheritPoseMappingFields: true,
-            PoseMapping: { Hogtied: "Hide" },
-        },
-        {
-            Name: "鞋底_薄",
-            Priority: 22,
-            Top: 863,
-            CopyLayerColor: "鞋底",
-            AllowTypes: { b: 1 },
             InheritPoseMappingFields: true,
             PoseMapping: { Hogtied: "Hide" },
         },
@@ -90,8 +80,17 @@ const translation = {
     EN: "Mary Jane Shoes",
 };
 
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
+function beforeDraw(data, original, { L, Y, Property }) {
+    if (L === "鞋底" && Property?.TypeRecord?.b === 1) {
+        return { Y: Y - 7 };
+    }
+}
+
+/** @type {ModularItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
+    ScriptHooks: { BeforeDraw: beforeDraw },
     Modules: [
         {
             Name: "鞋底",
@@ -137,36 +136,6 @@ const assetStrings = {
     },
 };
 
-const imageMapping = Object.entries({ Normal: ["Small", "Large", "XLarge"] })
-    .flatMap(([key, values]) => values.map((size) => /** @type {[string,string]} */ ([key, size])))
-    .reduce((pv, [from, to]) => {
-        for (const pose of ["", "LegsClosed/", "Spread/"]) {
-            for (const l of asset.Layer) {
-                const fromLayerName = l.Name === "鞋底_薄" ? "鞋底" : l.Name; // 省几份薄鞋底的图层
-                if (to === "XLarge" && pose !== "LegsClosed/" || l.Name === "h") {
-                    if (l.Name === "鞋底_薄") {
-                        pv[
-                            `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${to}_${l.Name}.png`
-                        ] = `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${to}_${fromLayerName}.png`;
-                    }
-                    continue;
-                };
-                pv[
-                    `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${to}_${l.Name}.png`
-                ] = `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${from}_${fromLayerName}.png`;
-            }
-            pv[
-                `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${from}_鞋底_薄.png`
-            ] = `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${from}_鞋底.png`;
-        }
-        pv[
-            `Assets/Female3DCG/Shoes/Hogtied/${asset.Name}_${to}_h.png`
-        ] = `Assets/Female3DCG/Shoes/Hogtied/${asset.Name}_${from}_h.png`;
-        return pv;
-    }, /**@type{Record<string,string>}*/ ({}));
-
-
 export default function () {
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation, extended, assetStrings });
-    AssetManager.addImageMapping(imageMapping);
 }
