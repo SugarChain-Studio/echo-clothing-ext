@@ -39,7 +39,6 @@ const asset = {
         "Shoes_笨笨蛋Luzi",
         "Garters",
         "Socks",
-        "Socks_笨笨蛋Luzi",
         "SocksRight",
         "SocksLeft",
     ],

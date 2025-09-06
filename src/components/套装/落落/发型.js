@@ -67,25 +67,37 @@ const translations = {
     },
 };
 
+/** @type {Translation.String} */
+const layerNameBase = {
+    CN: {
+        A: "两侧",
+        B: "头顶",
+    },
+    EN: {
+        A: "Sides",
+        B: "Top",
+    },
+};
+
 const layerNames = {
     CN: {
-        蓬松卷发1: {
-            A: "两侧",
-            B: "头顶",
+        新前发_Luzi: {
+            蓬松卷发1: layerNameBase.CN,
+            蓬松卷发2: layerNameBase.CN,
         },
-        蓬松卷发2: {
-            A: "两侧",
-            B: "头顶",
+        新后发_Luzi: {
+            蓬松卷发1: layerNameBase.CN,
+            蓬松卷发2: layerNameBase.CN,
         },
     },
     EN: {
-        蓬松卷发1: {
-            A: "Sides",
-            B: "Top",
+        新前发_Luzi: {
+            蓬松卷发1: layerNameBase.EN,
+            蓬松卷发2: layerNameBase.EN,
         },
-        蓬松卷发2: {
-            A: "Sides",
-            B: "Top",
+        新后发_Luzi: {
+            蓬松卷发1: layerNameBase.EN,
+            蓬松卷发2: layerNameBase.EN,
         },
     },
 };
