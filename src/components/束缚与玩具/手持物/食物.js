@@ -1,3 +1,4 @@
+import { PathTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
@@ -195,7 +196,7 @@ const layerNames = {
 
 export default function () {
     const iconMapping = ["曲奇", "吐司"].reduce((prev, item) => {
-        prev[`Assets/Female3DCG/ItemHandheld/Preview/${item}.png`] = `Assets/Female3DCG/ItemMouth/Preview/${item}.png`;
+        prev[PathTools.assetPreview("ItemHandheld", item)] = PathTools.assetPreview("ItemMouth", item);
         return prev;
     }, {});
 

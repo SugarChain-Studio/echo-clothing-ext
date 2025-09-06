@@ -1,3 +1,4 @@
+import { PathTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 /** @type {CustomGroupedAssetDefinitions} */
@@ -140,8 +141,7 @@ const translations = {
 
 export default function () {
     AssetManager.addImageMapping({
-        "Assets/Female3DCG/ItemDevices/Preview/床右边_Luzi.png":
-            "Assets/Female3DCG/ItemDevices/Preview/床左边_Luzi.png",
+        [PathTools.assetPreview("ItemDevices", "床右边_Luzi")]: PathTools.assetPreview("ItemDevices", "床左边_Luzi"),
     });
 
     AssetManager.addGroupedAssets(assets, translations);

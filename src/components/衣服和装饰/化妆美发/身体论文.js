@@ -1,3 +1,4 @@
+import { PathTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type { {X:number,Y:number, textAlign: CanvasTextAlign}[]} */
@@ -204,7 +205,9 @@ export default function () {
         assetStrings,
     });
     AssetManager.addImageMapping({
-        "Assets/Female3DCG/BodyMarkings/Preview/身体论文_Luzi.png":
-            "Assets/Female3DCG/BodyMarkings/Preview/BodyWritings.png",
+        [PathTools.assetPreview("BodyMarkings", "身体论文_Luzi")]: PathTools.assetPreview(
+            "BodyMarkings",
+            "BodyWritings"
+        ),
     });
 }
