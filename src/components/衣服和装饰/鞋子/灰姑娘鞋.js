@@ -1,4 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {(layer:AssetLayerDefinition)=>AssetLayerDefinition} */
@@ -16,6 +16,7 @@ const hogLayer = (layer) => ({
     Priority: 10,
     Left: 210,
     Top: 505,
+    ParentGroup: {},
     PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
 });
 
@@ -32,14 +33,14 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: "Hide",
     },
-    ParentGroup: {},
+    ParentGroup: "BodyLower",
     Layer: [
         baseLayer({ Name: "tu", Priority: 7 }),
-        baseLayer({ Name: "gu", BlendingMode: "screen", AllowColorize: false, Priority: 7 }),
+        baseLayer({ Name: "gu", BlendingMode: "screen", Priority: 7 }),
         baseLayer({ Name: "tt", CopyLayerColor: "tu" }),
-        baseLayer({ Name: "gt", AllowColorize: false, BlendingMode: "screen" }),
+        baseLayer({ Name: "gt", BlendingMode: "screen" }),
         hogLayer({ Name: "th", CopyLayerColor: "tu" }),
-        hogLayer({ Name: "gh", AllowColorize: false, BlendingMode: "screen" }),
+        hogLayer({ Name: "gh", BlendingMode: "screen" }),
     ],
 };
 
@@ -54,5 +55,6 @@ const translation = {
 };
 
 export default function () {
+    AssetManager.addImageMapping(ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"]));
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation });
 }
