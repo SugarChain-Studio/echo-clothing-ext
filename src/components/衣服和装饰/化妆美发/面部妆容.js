@@ -72,6 +72,7 @@ const defs = [
             Left: 200,
             Top: 120,
             Priority: 9,
+            DynamicGroupName: "FaceMarkings",
             ParentGroup: {},
         },
         translation: {

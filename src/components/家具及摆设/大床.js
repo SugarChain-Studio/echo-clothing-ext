@@ -11,7 +11,6 @@ const assets = {
             Left: 0,
             Difficulty: 1,
             SelfBondage: 0,
-            Value: -1,
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
@@ -22,7 +21,6 @@ const assets = {
             Left: -210,
             Difficulty: 1,
             SelfBondage: 0,
-            Value: -1,
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
@@ -39,7 +37,6 @@ const assets = {
             Time: 5,
             RemoveTime: 5,
             RemoveAtLogin: true,
-            Value: -1,
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             DefaultColor: ["#523629", "#888990", "#808284"],
             RemoveItemOnRemove: [
@@ -72,7 +69,6 @@ const assets = {
             RemoveTime: 5,
             RemoveAtLogin: true,
             Visible: false,
-            Value: -1,
             DefaultColor: ["#523629", "#888990", "#808284"],
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             RemoveItemOnRemove: [
@@ -142,6 +138,7 @@ const translations = {
 export default function () {
     AssetManager.addImageMapping({
         [PathTools.assetPreview("ItemDevices", "床右边_Luzi")]: PathTools.assetPreview("ItemDevices", "床左边_Luzi"),
+        [PathTools.assetPreview("ItemAddon", "被子右边_Luzi")]: PathTools.assetPreview("ItemAddon", "被子左边_Luzi"),
     });
 
     AssetManager.addGroupedAssets(assets, translations);
