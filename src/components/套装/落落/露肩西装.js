@@ -11,6 +11,7 @@ const asset = {
     DynamicGroupName: "Cloth",
     PoseMapping: {
         ...AssetPoseMapping.Cloth,
+        TapedHands: "",
         AllFours: PoseType.HIDE,
         BackCuffs: PoseType.HIDE,
         Hogtied: PoseType.HIDE,

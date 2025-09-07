@@ -3,8 +3,10 @@ import { AssetManager } from "../../../assetForward";
 /** @type {<T>(arg0: number, arg1: (number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));
 
+/** @type {AssetPoseMapping} */
 const poseMapping = {
     ...AssetPoseMapping.Cloth,
+    TapedHands: "",
     AllFours: PoseType.HIDE,
     Hogtied: PoseType.HIDE,
 };
