@@ -15,12 +15,28 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: "Hide",
     },
-    ParentGroup: {},
+    ParentGroup: "BodyLower",
     DefaultColor: ["#6F8460", "#222", "Default"],
     Layer: [
         { Name: "u", Priority: 7, InheritPoseMappingFields: true, PoseMapping: { Hogtied: "Hide" } },
         {
-            Name: "a",
+            Name: "t2",
+            Priority: 7,
+            CopyLayerColor: "t",
+            AllowTypes: { typed: 0 },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
+        {
+            Name: "p2",
+            Priority: 7,
+            CopyLayerColor: "p",
+            AllowTypes: { typed: [1, 2, 3] },
+            CreateLayerTypes: ["typed"],
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
+        {
             AllowColorize: false,
             HasImage: false,
             Alpha: [
@@ -45,6 +61,7 @@ const asset = {
             Left: 200,
             Priority: 7,
             CopyLayerColor: "u",
+            ParentGroup: {},
             PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
         },
     ],
@@ -87,5 +104,8 @@ export default function () {
     AssetManager.addImageMapping({
         [ImageMapTools.assetPreview("Shoes", "洞洞鞋")]: ImageMapTools.assetOption("Shoes", "洞洞鞋", "0"),
     });
+    AssetManager.addImageMapping(
+        ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"], extended)
+    );
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation, extended, assetStrings });
 }
