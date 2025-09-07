@@ -1,4 +1,4 @@
-import { PathTools, PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -85,7 +85,7 @@ const assetStrings = {
 
 export default function () {
     AssetManager.addImageMapping({
-        [PathTools.assetPreview("Shoes", "洞洞鞋")]: PathTools.assetOption("Shoes", "洞洞鞋", "0"),
+        [ImageMapTools.assetPreview("Shoes", "洞洞鞋")]: ImageMapTools.assetOption("Shoes", "洞洞鞋", "0"),
     });
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation, extended, assetStrings });
 }

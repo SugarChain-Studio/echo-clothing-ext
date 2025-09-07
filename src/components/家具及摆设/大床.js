@@ -1,4 +1,4 @@
-import { PathTools } from "@mod-utils/Tools";
+import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../assetForward";
 
 /** @type {CustomGroupedAssetDefinitions} */
@@ -137,8 +137,14 @@ const translations = {
 
 export default function () {
     AssetManager.addImageMapping({
-        [PathTools.assetPreview("ItemDevices", "床右边_Luzi")]: PathTools.assetPreview("ItemDevices", "床左边_Luzi"),
-        [PathTools.assetPreview("ItemAddon", "被子右边_Luzi")]: PathTools.assetPreview("ItemAddon", "被子左边_Luzi"),
+        [ImageMapTools.assetPreview("ItemDevices", "床右边_Luzi")]: ImageMapTools.assetPreview(
+            "ItemDevices",
+            "床左边_Luzi"
+        ),
+        [ImageMapTools.assetPreview("ItemAddon", "被子右边_Luzi")]: ImageMapTools.assetPreview(
+            "ItemAddon",
+            "被子左边_Luzi"
+        ),
     });
 
     AssetManager.addGroupedAssets(assets, translations);
