@@ -59,6 +59,7 @@ const asset = {
             CopyLayerColor: "鞋底",
             Top: 500,
             Left: 200,
+            ParentGroup: {},
             PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
         },
     ],
@@ -141,15 +142,12 @@ const imageMapping = Object.entries({ Normal: ["Small", "Large", "XLarge"] })
     .reduce((pv, [from, to]) => {
         for (const pose of ["", "LegsClosed/", "Spread/"]) {
             for (const l of asset.Layer) {
-                if (to === "XLarge" && pose !== "LegsClosed/" || l.Name === "h") continue;
+                if ((to === "XLarge" && pose !== "LegsClosed/") || l.Name === "h") continue;
                 pv[
                     `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${to}_${l.Name}.png`
                 ] = `Assets/Female3DCG/Shoes/${pose}${asset.Name}_${from}_${l.Name}.png`;
             }
         }
-        pv[
-            `Assets/Female3DCG/Shoes/Hogtied/${asset.Name}_${to}_h.png`
-        ] = `Assets/Female3DCG/Shoes/Hogtied/${asset.Name}_${from}_h.png`;
         return pv;
     }, /**@type{Record<string,string>}*/ ({}));
 
