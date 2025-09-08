@@ -40,8 +40,6 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addImageMapping(
-        ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large", "FlatSmall", "FlatMedium"])
-    );
+    AssetManager.addImageMapping(ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"]));
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation });
 }

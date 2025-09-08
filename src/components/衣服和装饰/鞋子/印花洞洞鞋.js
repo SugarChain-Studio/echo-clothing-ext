@@ -104,8 +104,6 @@ export default function () {
     AssetManager.addImageMapping({
         [ImageMapTools.assetPreview("Shoes", "洞洞鞋")]: ImageMapTools.assetOption("Shoes", "洞洞鞋", "0"),
     });
-    AssetManager.addImageMapping(
-        ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"], extended)
-    );
+    AssetManager.addImageMapping(ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"]));
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation, extended, assetStrings });
 }
