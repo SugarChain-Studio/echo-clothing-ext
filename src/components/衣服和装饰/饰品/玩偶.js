@@ -105,6 +105,7 @@ const asset = {
         { Name: "艾尔", AllowTypes: { hz: 7 } },
         { Name: "小火火", AllowTypes: { hz: 8 } },
         { Name: "梦语诗", AllowTypes: { hz: 9 } },
+        { Name: "巧巧", AllowTypes: { hz: 10 } },
 
         // 吸血鬼城堡
         {
@@ -177,6 +178,9 @@ const asset = {
         { Name: "依", AllowTypes: { xppjb: 7 } },
         { Name: "珥九", AllowTypes: { xppjb: 8 } },
         { Name: "暴狸龙", AllowTypes: { xppjb: 9 } },
+        { Name: "Fu狸", AllowTypes: { xppjb: 10 } },
+        { Name: "依依", AllowTypes: { xppjb: 11 } },
+        { Name: "wallyilma2", AllowTypes: { xppjb: 12 } },
 
         // 失乐园 sly
         // { Name: "Reisigure", AllowTypes: { sly: 1 } },
@@ -246,6 +250,15 @@ const asset = {
         { Name: "忧咲", AllowTypes: { hb: 3 } },
         { Name: "红熙", AllowTypes: { hb: 4 } },
 
+        // 自恋柴的衣橱
+        { Name: "柴柴1", AllowTypes: { cai: 1 } },
+        { Name: "柴柴2", AllowTypes: { cai: 2 } },
+        { Name: "柴柴3", AllowTypes: { cai: 3 } },
+        // { Name: "柴柴4", AllowTypes: { cai: 4 } },
+        // { Name: "柴柴5", AllowTypes: { cai: 5 } },
+        // { Name: "柴柴6", AllowTypes: { cai: 6 } },
+        // { Name: "柴柴7", AllowTypes: { cai: 7 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -300,9 +313,10 @@ const asset = {
         { Name: "云喵", AllowTypes: { l: 43 } },
         { Name: "枳", AllowTypes: { l: 44 } },
         { Name: "Lana", AllowTypes: { l: 45 } },
-        { Name: "柴柴1", AllowTypes: { l: 46 } },
-        { Name: "柴柴2", AllowTypes: { l: 47 } },
-        { Name: "柴柴3", AllowTypes: { l: 48 } },
+        { Name: "Kitty", AllowTypes: { l: 46 } },
+        { Name: "lunara", AllowTypes: { l: 47 } },
+        { Name: "喵头嘤2", AllowTypes: { l: 48 } },
+        { Name: "诺瑞莉卡", AllowTypes: { l: 49 } },
     ],
 };
 
@@ -327,6 +341,7 @@ const typeNames = {
     ds: "Den of Sin",
     ll: "Latex Lab",
     hb: "月见里的海边",
+    cai: "自恋柴的衣橱",
     l: "(路过的玩偶)",
 };
 
@@ -361,13 +376,22 @@ const predefDialog = {
         Optionhz4: "Neko",
         Optionlihua2: "An'an",
 
+        Optioncai1: "柴",
+        Optioncai2: "柴²",
+        Optioncai3: "柴³",
+        Optioncai4: "柴⁴",
+        Optioncai5: "柴⁵",
+        Optioncai6: "柴⁶",
+        Optioncai7: "柴⁷",
+
         Setd2: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
         Sets4: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
         Setc3: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
         Setc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
         Setx1: "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
         Setxppjb1: "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
-        Setxppjb7: "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依！",
+        Setxppjb7: "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依!",
+        Setxppjb11: "天空一声巨响！依依玩偶闪亮登场！缓缓落在了DestinationCharacter怀里.",
         Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
     },
@@ -398,7 +422,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNames, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -406,7 +430,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -456,7 +480,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${typeNames[k]}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
