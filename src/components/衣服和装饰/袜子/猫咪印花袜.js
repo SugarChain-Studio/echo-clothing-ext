@@ -1,5 +1,5 @@
-import { AssetManager } from "../../assetForward";
-import { SockLRTool } from "../../lib/sockLR";
+import { AssetManager } from "../../../assetForward";
+import { SockLRTool } from "../../../lib/sockLR";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
