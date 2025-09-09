@@ -1,4 +1,6 @@
+import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
+import { cachePreloadGL } from "./cachePreload";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
@@ -6,13 +8,26 @@ const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMediu
  * @typedef { "" | "Arm1" | "Right" | "Hand" } ArmMaskMode
  */
 
-/** @type { Record<ArmMaskMode,Pick<AssetLayerDefinition, "Name"|"ParentGroup">> } */
+/** @type { Record<ArmMaskMode,Pick<AssetLayerDefinition, "Name"|"ParentGroup"|"PoseMapping">> } */
 const nameRecord = {
     "": { Name: "ArmMask", ParentGroup: "BodyUpper" },
     "Arm1": { Name: "ArmMask1", ParentGroup: "BodyUpper" },
-    "Right": { Name: "ArmMaskR", ParentGroup: "BodyUpper" },
+    "Right": { Name: "ArmMaskR", ParentGroup: "BodyUpper", PoseMapping: {} },
     "Hand": { Name: "ArmMaskH", ParentGroup: {} },
 };
+
+const argMaskGroup = /** @type {AssetGroupName}*/ ("LuziArmMask");
+
+/** @type {(name:string, size?: string, pose?:AssetPoseName)=>string} */
+const maskTexPath = (name, size, pose) => ImageMapTools.assetLayer(argMaskGroup, size ? `${name}_${size}` : name, pose);
+
+for (const size of bodySizes) {
+    for (const { Name, ParentGroup, PoseMapping } of Object.values(nameRecord)) {
+        const size_ = ParentGroup === "BodyUpper" ? size : undefined;
+        cachePreloadGL(maskTexPath(Name, size_));
+        if (!PoseMapping) cachePreloadGL(maskTexPath(Name, size_, "TapedHands"));
+    }
+}
 
 /**
  * @param { CustomGroupName | CustomGroupName [] } groupName
@@ -29,16 +44,12 @@ function createMappings(groupName, assetName, mode) {
     for (const group of groupNames) {
         if (ParentGroup === "BodyUpper") {
             for (const size of bodySizes) {
-                // Assets/Female3DCG/Cloth/绛云墨韵旗袍裙_Luzi_Normal_ArmMask.png
-                ret[
-                    `Assets/Female3DCG/${group}/${assetName}_${size}_${Name}.png`
-                ] = `Assets/Female3DCG/LuziArmMask/${Name}_${size}.png`;
-                ret[
-                    `Assets/Female3DCG/${group}/TapedHands/${assetName}_${size}_${Name}.png`
-                ] = `Assets/Female3DCG/LuziArmMask/TapedHands/${Name}_${size}.png`;
+                const to = `${assetName}_${size}_${Name}`;
+                ret[ImageMapTools.assetLayer(group, to)] = maskTexPath(Name, size);
+                ret[ImageMapTools.assetLayer(group, to, "TapedHands")] = maskTexPath(Name, size, "TapedHands");
             }
         } else {
-            ret[`Assets/Female3DCG/${group}/${assetName}_${Name}.png`] = `Assets/Female3DCG/LuziArmMask/${Name}.png`;
+            ret[ImageMapTools.assetLayer(group, `${assetName}_${Name}`)] = ImageMapTools.assetLayer(argMaskGroup, Name);
         }
     }
 

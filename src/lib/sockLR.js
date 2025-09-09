@@ -1,5 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
+import { cachePreloadGL } from "./cachePreload";
 
 const blackFill = (() => {
     const canvas = document.createElement("canvas");
@@ -10,6 +11,8 @@ const blackFill = (() => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     return canvas.toDataURL();
 })();
+
+cachePreloadGL(blackFill);
 
 const topLeft = {
     SocksLeft: { Top: 0, Left: { "": 0, "KneelingSpread": 30 } },
