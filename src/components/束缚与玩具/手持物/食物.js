@@ -1,5 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../../assetForward";
+import { ArmMaskTool } from "../../../lib";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const mouthFoodDef = {
@@ -63,6 +64,7 @@ const assets = {
         mouthFood("煎包_Luzi"),
         mouthFood("曲奇"),
         mouthFood("吐司"),
+        mouthFood("蛋挞"),
     ],
     ItemHandheld: [
         hambAsset,
@@ -85,6 +87,7 @@ const assets = {
         handFood("鸡腿_Luzi"),
         handFood("曲奇"),
         handFood("吐司"),
+        handFood("蛋挞"),
     ],
     ItemHood: [hambAsset],
 };
@@ -198,6 +201,8 @@ export default function () {
     }, {});
 
     AssetManager.addImageMapping(iconMapping);
-
+    assets.ItemHandheld?.filter((i) => ["蛋挞"].includes(i.Name))?.forEach((i) => {
+        ArmMaskTool.createArmMaskForCloth("ItemHandheld", i, "Right");
+    });
     AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
 }
