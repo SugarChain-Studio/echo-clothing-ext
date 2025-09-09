@@ -68,9 +68,9 @@ const translations = {
         Glasses: {
             单边眼镜左_Luzi: "Monocle Left",
             单边眼镜右_Luzi: "Monocle Right",
-            眼镜卡_Luzi: "Glasses Card",
-            爱心眼镜_Luzi: "Heart-shaped glasses",
-            下半框眼镜_Luzi: "Semi-rimless glasses",
+            眼镜卡_Luzi: "Nose Clip Glasses",
+            爱心眼镜_Luzi: "Heart-shaped Glasses",
+            下半框眼镜_Luzi: "Semi-rimless Glasses",
         },
     },
 };
