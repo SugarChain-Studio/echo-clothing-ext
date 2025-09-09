@@ -11,6 +11,7 @@ const asset = {
     ParentGroup: {},
     Priority: 55,
     InheritPoseMappingFields: true,
+    AllowActivity: ["PenetrateItem", "EatItem"],
     Layer: [{ Name: "B1" }, { Name: "A1", AllowTypes: { typed: 0 } }, { Name: "A2", AllowTypes: { typed: 1 } }],
 };
 
