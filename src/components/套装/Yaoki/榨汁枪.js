@@ -10,6 +10,7 @@ const asset = {
     ParentGroup: {},
     AllowActivity: ["MasturbateItem"],
     Fetish: ["Sadism"],
+    DefaultColor: ["Default", "#000000", "Default"],
     Layer: [
         { Name: "dc" },
         { Name: "gc", BlendingMode: "screen", AllowColorize: false },
@@ -42,7 +43,7 @@ const translation = {
 };
 
 export default function () {
-    // ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
+    ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
     AssetManager.addAssetWithConfig("ItemHandheld", asset, {
         layerNames,
         translation,
