@@ -8,7 +8,7 @@ const asset = {
     Left: 190,
     Top: 270,
     ParentGroup: {},
-    AllowActivity: ["MasturbateItem"],
+    AllowActivity: ["MasturbateItem", "PenetrateItem"],
     Fetish: ["Sadism"],
     DefaultColor: ["Default", "Default", "Default", "#000000"],
     Layer: [
