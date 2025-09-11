@@ -1,5 +1,6 @@
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -44,23 +45,27 @@ const translation = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
+    ChatTags: Tools.CommonChatTags(),
     Options: [{ Name: "1" }, { Name: "2" }, { Name: "3" }],
 };
 
-const assetStrings = {
-    CN: {
-        Select: "选择R18警棍样式",
-        1: "假阳具",
-        2: "振动棒",
-        3: "触手",
+const assetStrings = DialogTools.autoItemStrings(
+    {
+        CN: {
+            Select: "选择R18警棍样式",
+            1: "假阳具",
+            2: "振动棒",
+            3: "触手",
+        },
+        EN: {
+            Select: "Select R18 Baton Style",
+            1: "Dildo",
+            2: "Vibrator",
+            3: "Tentacle",
+        },
     },
-    EN: {
-        Select: "Select R18 Baton Style",
-        1: "Dildo",
-        2: "Vibrator",
-        3: "Tentacle",
-    },
-};
+    extended
+);
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
