@@ -10,7 +10,6 @@ const asset = {
     Random: false,
     Left: 60,
     Top: 180,
-    Priority: 34,
     Difficulty: -10,
     ParentGroup: {},
     IsRestraint: false,
