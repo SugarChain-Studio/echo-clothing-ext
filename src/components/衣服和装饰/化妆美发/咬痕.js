@@ -1,6 +1,6 @@
 import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createItemDialog } from "../../../lib";
+import { createItemDialogModular } from "../../../lib";
 
 /** @typedef {AssetLayerDefinition& { Text: Translation.Entry }} AssetLayerDefWithText */
 
@@ -90,7 +90,7 @@ const preset = [
     { FB: 0, Sa: 0, Sb: 0, Na: 0, Nb: 0, RN: 1, LN: 1, LBa: 1, LBb: 1, RB: 1, Ta: 0, Tb: 0, Tc: 0, Td: 0, Te: 0 },
 ];
 
-const itemDialog = createItemDialog("modular", [
+const itemDialog = createItemDialogModular([
     {
         location: { x: 1265, y: 450, w: 225, h: 55 },
         key: "预设1",

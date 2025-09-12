@@ -268,35 +268,46 @@ class DialogButtons {
 }
 
 /**
- * @overload
- * @param {"modular"} mode
- * @param {ItemDialog.ButtonConfig<ModularItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<ModularItemData>[]} [params]
- * @returns {DialogButtons<ModularItemData>}
- */
-/**
- * @overload
- * @param {"typed"} mode
- * @param {ItemDialog.ButtonConfig<TypedItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<TypedItemData>[]} [params]
- * @returns {DialogButtons<TypedItemData>}
- */
-/**
- * @overload
- * @param {"noarch"} mode
- * @param {ItemDialog.ButtonConfig<NoArchItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<NoArchItemData>[]} [params]
- * @returns {DialogButtons<NoArchItemData>}
- */
-/**
+ * Factory that creates a DialogButtons instance for a generic DataType.
  * @template {ExtendedItemData<any>} DataType
- * @param {"modular" | "typed" | "noarch"} _
  * @param {ItemDialog.ButtonConfig<DataType>[]} [buttons]
  * @param {ItemDialog.ParameterConfig<DataType>[]} [params]
+ * @returns {DialogButtons<DataType>}
  */
-export function createItemDialog(_, buttons, params) {
+function createItemDialog(buttons, params) {
     const ret = /** @type {DialogButtons<DataType>}*/ (new DialogButtons());
     if (buttons) ret.addButtons(buttons);
     if (params) ret.addParams(params);
     return ret;
+}
+
+/**
+ * Loose-typed wrapper for modular dialogs. Accepts any button/param shapes and
+ * returns a DialogButtons instance typed for ModularItemData.
+ * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @returns {DialogButtons<ModularItemData>}
+ */
+export function createItemDialogModular(buttons, params) {
+    return /** @type {DialogButtons<ModularItemData>} */ (createItemDialog(buttons, params));
+}
+
+/**
+ * Loose-typed wrapper for typed dialogs.
+ * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @returns {DialogButtons<TypedItemData>}
+ */
+export function createItemDialogTyped(buttons, params) {
+    return /** @type {DialogButtons<TypedItemData>} */ (createItemDialog(buttons, params));
+}
+
+/**
+ * Loose-typed wrapper for noarch dialogs.
+ * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @returns {DialogButtons<NoArchItemData>}
+ */
+export function createItemDialogNoArch(buttons, params) {
+    return /** @type {DialogButtons<NoArchItemData>} */ (createItemDialog(buttons, params));
 }

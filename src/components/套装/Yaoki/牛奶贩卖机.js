@@ -1,7 +1,7 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { createAfterDrawProcess, createItemDialog, Typing } from "../../../lib";
+import { createAfterDrawProcess, createItemDialogModular, Typing } from "../../../lib";
 
 // Milk Vending by Yaoki
 
@@ -465,8 +465,7 @@ const propTest = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.P
  */
 const propValue = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
 
-const itemDialog = createItemDialog(
-    "modular",
+const itemDialog = createItemDialogModular(
     [
         {
             location: buttons.左,

@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { createItemDialog } from "../../lib";
+import { createItemDialogNoArch } from "../../lib";
 import { runAutoCloseLegs } from "./自动闭腿";
 
 const groups = AssetFemale3DCG.filter((g) => g.Clothing).map((g) => /** @type {AssetGroupBodyName} */ (g.Group));
@@ -30,7 +30,7 @@ function toggleHide(item, groupName) {
         : [...old, groupName]; // 添加
 }
 
-const itemDialog = createItemDialog("noarch")
+const itemDialog = createItemDialogNoArch()
     .addTexts([{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("详细设置") }])
     .addCheckBoxes(
         groups.map((g, i) => ({

@@ -1,8 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
-import { createItemDialog, Typing } from "../../lib";
-import { monadic } from "@mod-utils/monadic";
+import { createItemDialogNoArch, Typing } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -175,7 +173,7 @@ function takeItem(item) {
     return null;
 }
 
-const itemDialog = createItemDialog("noarch", [
+const itemDialog = createItemDialogNoArch([
     {
         location: buttons.曲奇加一,
         key: "D曲奇加一",
@@ -215,7 +213,7 @@ const itemDialog = createItemDialog("noarch", [
     },
     .../** @type {["橙汁", "牛奶", "可乐"]}*/ (["橙汁", "牛奶", "可乐"]).flatMap(
         (drink) =>
-            /** @type {ItemDialog.ButtonConfig<ModularItemData>[]}*/ ([
+            /** @type {ItemDialog.ButtonConfig<NoArchItemData>[]}*/ ([
                 {
                     location: buttons[`加${drink}`],
                     key: `D加${drink}`,
@@ -264,11 +262,17 @@ const itemDialog = createItemDialog("noarch", [
         key: "D拿到手上",
         enable: ({ item }) =>
             !InventoryGet(Player, "ItemHandheld") && checks.IsExtend(item.Property) && checks.AnyCanDec(item.Property),
-        hover: () => (!InventoryGet(Player, "ItemHandheld") && Player.CanInteract() ? undefined : "手必须空"),
+        hover: ({ item }) => {
+            if (!!InventoryGet(Player, "ItemHandheld") || Player.CanInteract()) return "手必须空";
+            const property = /** @type {ExtendItemProperties}*/ (item.Property);
+            if (checks.IsExtend(property) && checks.AnyCanDec(property)) return "盘必须有";
+            return undefined;
+        },
         actionKey: "A拿到手上",
         actionProcess: (dict, item) => {
             const taken = takeItem(item);
             if (taken) dict.asset(taken.Asset, "TakedItemName", taken.Craft?.Name);
+            return dict;
         },
     },
 ]);
@@ -354,6 +358,7 @@ const assetStrings = {
 
         D拿到手上: "🖐拿到手上",
         手必须空: "你必须手中为空才能拿走",
+        盘必须有: "托盘中必须有内容物才能拿走",
         A拿到手上: "SourceCharacter从DestinationCharacterAssetName中拿走了TakedItemName",
     },
     EN: {
@@ -387,6 +392,11 @@ const assetStrings = {
 
         D清空: "Clear the tray",
         A清空: "SourceCharacter cleared the contents of DestinationCharacter AssetName.",
+
+        D拿到手上: "🖐Take to Hand",
+        手必须空: "Your hand must be free to take",
+        盘必须有: "The tray must have contents to take",
+        A拿到手上: "SourceCharacter took TakedItemName from DestinationCharacter AssetName",
     },
 };
 

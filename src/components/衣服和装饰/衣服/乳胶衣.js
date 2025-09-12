@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { createItemDialog } from "../../../lib";
+import { createItemDialogTyped } from "../../../lib";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const gloveLayerInfo = {
@@ -126,7 +126,7 @@ function findPairItem(item, chara) {
     );
 }
 
-const itemDialog = createItemDialog("typed", [
+const itemDialog = createItemDialogTyped([
     {
         location: { x: 1385, y: 650, w: 225, h: 55 },
         key: "复制颜色",
