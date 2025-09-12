@@ -58,29 +58,30 @@ const layerNames = {
     },
 };
 
-const drinkType = /** @type {["橙汁", "牛奶", "可乐"]}*/ (["橙汁", "牛奶", "可乐"]);
-const drinkTypeWEmpty = ["空杯", "橙汁", "可乐", "牛奶"];
-
 /**
  * @typedef { "曲奇" | "饮料" } ContentsType
  */
 
 /**
- * @typedef { Omit<Item,"Asset"> & { IAsset?: string} } ContentData
- */
-
-/**
- * @typedef { { Luzi_InventoryContent: ContentData[], Luzi_InventoryType?: ContentsType } } TrayData
+ * @typedef { { Luzi_InventoryContent: ContainerProperty.ContainerData[], Luzi_InventoryType?: ContentsType } } TrayData
  */
 
 /**
  * @typedef { globalThis.ItemProperties & TrayData } ExtendItemProperties
  */
 
-const maxv = Typing.record({
+const drinkType = ["空杯", "橙汁", "可乐", "牛奶"];
+
+/** @type {Record<string, ContentsType>} */
+const item2Content = { 曲奇: "曲奇", 杯饮: "饮料" };
+
+/** @type {Record<ContentsType,string >} */
+const content2Item = { 曲奇: "曲奇", 饮料: "杯饮" };
+
+const maxv = {
     曲奇: 12,
     饮料: 4,
-});
+};
 
 /** @typedef {(property:ExtendItemProperties)=>boolean} PropCheck */
 
@@ -108,9 +109,25 @@ const checks = Typing.transform(
         牛奶CanDec: /** @type {PropCheck} */ (property) =>
             prev.Is饮料(property) && property.Luzi_InventoryContent.some((item) => item.IAsset === "牛奶"),
 
+        Full: /** @type {PropCheck} */ (property) =>
+            (prev.Is曲奇(property) && property.Luzi_InventoryContent.length === maxv.曲奇) ||
+            (prev.Is饮料(property) && property.Luzi_InventoryContent.filter((it) => it.IAsset).length === maxv.饮料),
         AnyCanDec: /** @type {PropCheck} */ (property) =>
             (prev.Is曲奇(property) && property.Luzi_InventoryContent.length > 0) ||
             (prev.Is饮料(property) && property.Luzi_InventoryContent.filter((it) => it.IAsset).length > 0),
+
+        ItemCanInc: /** @type {(props:ExtendItemProperties, item:Item|null)=>boolean} */ (props, item) => {
+            if (!item) return false;
+            if (!item2Content[item.Asset.Name]) return false;
+
+            if (props.Luzi_InventoryType && item2Content[item.Asset.Name] !== props.Luzi_InventoryType) return false;
+
+            if (item.Asset.Name === "杯饮")
+                return props.Luzi_InventoryContent.filter((it) => it.IAsset).length < maxv.饮料;
+            if (item.Asset.Name === "曲奇") return props.Luzi_InventoryContent.length < maxv.曲奇;
+
+            return true;
+        },
     })
 );
 
@@ -138,13 +155,12 @@ const actionProcess = (dict, item) =>
     dict.text("TCounter", `${/** @type {ExtendItemProperties}*/ (item.Property).Luzi_InventoryContent.length}`);
 
 /**
- * @param {Item} item
- * @returns {Item | null}
+ * @param {Item} tray
  */
-function takeItem(item) {
-    const props = /**@type {ExtendItemProperties}*/ (item.Property);
+function takeItem(tray) {
+    const props = /**@type {ExtendItemProperties}*/ (tray.Property);
     const type = props?.Luzi_InventoryType;
-    if (!type) return null;
+    if (!type) return;
     if (type === "饮料") {
         const validTarget = props.Luzi_InventoryContent.filter((it) => it.IAsset);
         const target = Math.floor(Math.random() * validTarget.length);
@@ -156,11 +172,10 @@ function takeItem(item) {
         const item = InventoryWear(Player, "杯饮", "ItemHandheld");
         if (!item) return undefined;
         Object.assign(item, { ...value, IAsset: undefined, Asset: item.Asset });
-        const typed = drinkTypeWEmpty.indexOf(value.IAsset);
+        const typed = drinkType.indexOf(value.IAsset);
         if (typed < 0) return undefined;
         item.Property ??= {};
         ExtendedItemSetOptionByRecord(Player, item, { typed });
-        return item;
     } else if (type === "曲奇") {
         const target = Math.floor(Math.random() * props.Luzi_InventoryContent.length);
         const value = props.Luzi_InventoryContent.splice(target, 1)[0];
@@ -168,9 +183,38 @@ function takeItem(item) {
         const item = InventoryWear(Player, "曲奇", "ItemHandheld");
         if (!item) return undefined;
         Object.assign(item, { ...value, IAsset: undefined, Asset: item.Asset });
-        return item;
-    }
-    return null;
+    } else return;
+
+    CharacterRefresh(Player);
+    ChatRoomCharacterItemUpdate(Player, "ItemHandheld");
+}
+
+/**
+ * @param {Item} trayItem
+ * @param {Item} handItem
+ */
+function placeItem(trayItem, handItem) {
+    const props = /** @type {ExtendItemProperties} */ (trayItem.Property);
+    props.Luzi_InventoryType = item2Content[handItem.Asset.Name];
+    props.Luzi_InventoryContent ??= [];
+
+    const content = { ...handItem };
+    delete content.Asset;
+
+    if (handItem.Asset.Name === "杯饮") {
+        const drinkTypeNum = handItem.Property?.TypeRecord?.["typed"];
+        if (!drinkTypeNum) return;
+        const value = /** @type {ContainerProperty.ContainerData} */ ({ ...content, IAsset: drinkType[drinkTypeNum] });
+        const empty = props.Luzi_InventoryContent.findIndex((it) => !it.IAsset);
+        if (empty >= 0) props.Luzi_InventoryContent[empty] = value;
+        else props.Luzi_InventoryContent.push(value);
+    } else if (handItem.Asset.Name === "曲奇") {
+        const value = /** @type {ContainerProperty.ContainerData} */ ({ IAsset: "曲奇", ...content });
+        props.Luzi_InventoryContent.push(value);
+    } else return;
+
+    CharacterRefresh(Player);
+    ChatRoomCharacterItemUpdate(Player, "ItemHandheld");
 }
 
 const itemDialog = createItemDialogNoArch([
@@ -261,21 +305,66 @@ const itemDialog = createItemDialogNoArch([
         location: buttons.手上拿,
         key: "D拿到手上",
         enable: ({ item }) =>
-            !InventoryGet(Player, "ItemHandheld") && checks.IsExtend(item.Property) && checks.AnyCanDec(item.Property),
+            !InventoryGet(Player, "ItemHandheld") &&
+            Player.CanInteract() &&
+            checks.IsExtend(item.Property) &&
+            checks.AnyCanDec(item.Property),
+        onclick: ({ item }) => takeItem(item),
         hover: ({ item }) => {
-            if (!!InventoryGet(Player, "ItemHandheld") || Player.CanInteract()) return "手必须空";
+            if (!Player.CanInteract()) return "H互动";
+            if (!!InventoryGet(Player, "ItemHandheld")) return "H手空";
             const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            if (checks.IsExtend(property) && checks.AnyCanDec(property)) return "盘必须有";
+            if (!checks.IsExtend(property)) return "H数据";
+            if (!checks.AnyCanDec(property)) return "H盘有";
             return undefined;
         },
         actionKey: "A拿到手上",
-        actionProcess: (dict, item) => {
-            const taken = takeItem(item);
+        actionProcess: (dict) => {
+            const taken = InventoryGet(Player, "ItemHandheld");
             if (taken) dict.asset(taken.Asset, "TakedItemName", taken.Craft?.Name);
             return dict;
         },
+        leaveDialog: true,
     },
-]);
+    {
+        location: buttons.手上放,
+        key: "D放到托盘",
+        enable: ({ item }) =>
+            Player.CanInteract() &&
+            checks.IsExtend(item.Property) &&
+            checks.ItemCanInc(item.Property, InventoryGet(Player, "ItemHandheld")),
+        onclick: ({ item }) => {
+            const handItem = InventoryGet(Player, "ItemHandheld");
+            if (!handItem) return;
+            placeItem(item, handItem);
+            InventoryRemove(Player, "ItemHandheld");
+        },
+        hover: ({ item }) => {
+            if (!Player.CanInteract()) return "H互动";
+            const token = InventoryGet(Player, "ItemHandheld");
+            if (!token) return "H手有";
+            const property = /** @type {ExtendItemProperties}*/ (item.Property);
+            if (!checks.IsExtend(property)) return "H数据";
+            if (checks.Full(property)) return "H盘满";
+            if (!checks.ItemCanInc(property, token)) return "H类型";
+            return undefined;
+        },
+        actionKey: "A放到托盘",
+        actionProcess: (dict, item) => {
+            const assetType = /** @type {ExtendItemProperties}*/ (item.Property)?.Luzi_InventoryType;
+            if (!assetType) return dict;
+            const itemName = content2Item[assetType];
+            if (!itemName) return dict;
+
+            const asset = AssetGet("Female3DCG", "ItemHandheld", itemName);
+            if (!asset) return dict;
+            dict.asset(asset, "TakedItemName");
+
+            return dict;
+        },
+        leaveDialog: true,
+    },
+]).addTexts([{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("DBase") }]);
 
 const drinksImgs = { 橙汁: "橙汁", 牛奶: "牛奶", 可乐: "可乐", 空杯: "空杯" };
 
@@ -356,10 +445,19 @@ const assetStrings = {
         D清空: "清空托盘",
         A清空: "SourceCharacter清空了DestinationCharacterAssetName中的内容物。",
 
+        H互动: "你需要解开双手才能操作",
+        H手空: "你需要空手才能拿走",
+        H数据: "托盘数据错误，无法操作",
+        H盘有: "托盘中需要有内容物才能拿走",
+        H手有: "你需要手上有东西才能放入",
+        H盘满: "托盘已满，无法放入",
+        H类型: "托盘中内容物类型不符，无法放入",
+
         D拿到手上: "🖐拿到手上",
-        手必须空: "你必须手中为空才能拿走",
-        盘必须有: "托盘中必须有内容物才能拿走",
         A拿到手上: "SourceCharacter从DestinationCharacterAssetName中拿走了TakedItemName",
+
+        D放到托盘: "🖐放到托盘",
+        A放到托盘: "SourceCharacter把TakedItemName放到了DestinationCharacterAssetName中",
     },
     EN: {
         DBase: "Configure the contents of the Tray",
@@ -393,10 +491,19 @@ const assetStrings = {
         D清空: "Clear the tray",
         A清空: "SourceCharacter cleared the contents of DestinationCharacter AssetName.",
 
+        H互动: "You need to free your hands to operate",
+        H手空: "You need to have an empty hand to take out",
+        H数据: "Tray data error, unable to operate",
+        H盘有: "There needs something in the tray to take out",
+        H手有: "You need to have something in your hand to put in",
+        H盘满: "The tray is full and cannot be put in",
+        H类型: "The type of contents in the tray does not match and cannot be put in",
+
         D拿到手上: "🖐Take to Hand",
-        手必须空: "Your hand must be free to take",
-        盘必须有: "The tray must have contents to take",
         A拿到手上: "SourceCharacter took TakedItemName from DestinationCharacter AssetName",
+
+        D放到托盘: "🖐Put to Tray",
+        A放到托盘: "SourceCharacter put TakedItemName to DestinationCharacter AssetName",
     },
 };
 
