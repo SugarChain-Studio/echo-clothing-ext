@@ -1,7 +1,7 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { createAfterDrawProcess, createItemDialogModular, Typing } from "../../../lib";
+import { Container, createAfterDrawProcess, createItemDialogModular, Typing } from "../../../lib";
 
 // Milk Vending by Yaoki
 
@@ -126,6 +126,8 @@ const layerNames = {
  * @property {number} [Luzi_OutputStartRight]
  * @property {true} [Luzi_OutputDoneLeft]
  * @property {true} [Luzi_OutputDoneRight]
+ * @property {ContainerProperty.ContainerData} [Luzi_ContentLeft]
+ * @property {ContainerProperty.ContainerData} [Luzi_ContentRight]
  */
 
 /**
@@ -442,8 +444,10 @@ function afterDraw(_, originalFunction, drawData) {
 }
 
 const buttons = Typing.record({
-    左: { x: 1265, y: 600, w: 225, h: 55 },
-    右: { x: 1510, y: 600, w: 225, h: 55 },
+    左: /** @type {Rect} */ ({ x: 1265, y: 600, w: 225, h: 55 }),
+    右: /** @type {Rect} */ ({ x: 1510, y: 600, w: 225, h: 55 }),
+    左手: /** @type {Rect} */ ({ x: 1265, y: 890, w: 225, h: 55 }),
+    右手: /** @type {Rect} */ ({ x: 1510, y: 890, w: 225, h: 55 }),
 });
 
 /**
@@ -517,6 +521,78 @@ const itemDialog = createItemDialogModular(
                 }),
             actionKey: "A开始右杯",
         },
+        .../** @type {[["左","Left"],["右","Right"]]}*/ ([
+            ["左", "Left"],
+            ["右", "Right"],
+        ]).flatMap(([cn, en]) => [
+            {
+                location: buttons[`${cn}手`],
+                key: `D${cn}放`,
+                show: ({ data, item }) =>
+                    data.currentModule === "Base" &&
+                    propTest(
+                        item,
+                        (p) => p[`Luzi_OutputDone${en}`] !== true && typeof p[`Luzi_OutputStart${en}`] !== "number"
+                    ),
+                enable: ({ item }) => {
+                    if (!Player.CanInteract()) return false;
+                    const handItem = InventoryGet(Player, "ItemHandheld");
+                    if (!handItem) return false;
+                    if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0) return false;
+                    if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return false;
+                    return true;
+                },
+                onclick: ({ item }) => {
+                    const handItem = InventoryGet(Player, "ItemHandheld");
+                    if (!handItem) return;
+                    handItem.Property ??= {};
+                    propValue(item, (p) => {
+                        p[`Luzi_Content${en}`] = Container.item2content(handItem);
+                        p[`Luzi_OutputStart${en}`] = Date.now();
+                        p.Luzi_MilkTotal -= 200;
+                    });
+                    InventoryRemove(Player, "ItemHandheld", true);
+                },
+                hover: ({ item }) => {
+                    if (!Player.CanInteract()) return "H互动";
+                    const handItem = InventoryGet(Player, "ItemHandheld");
+                    if (!handItem) return "H空杯";
+                    if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0) return "H空杯";
+                    if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return "H存量";
+                    return undefined;
+                },
+                actionKey: `A${cn}放`,
+            },
+            {
+                location: buttons[`${cn}手`],
+                key: `D${cn}拿`,
+                show: ({ data, item }) =>
+                    data.currentModule === "Base" &&
+                    propTest(
+                        item,
+                        (p) => p[`Luzi_OutputDone${en}`] === true || typeof p[`Luzi_OutputStart${en}`] === "number"
+                    ),
+                enable: ({ item }) =>
+                    !InventoryGet(Player, "ItemHandheld") &&
+                    Player.CanInteract() &&
+                    propTest(item, (p) => p[`Luzi_OutputDone${en}`] === true),
+                onclick: ({ item }) => {
+                    propValue(item, (p) => {
+                        if (p[`Luzi_Content${en}`])
+                            Container.content2item(Player, p[`Luzi_Content${en}`], { typed: 3 });
+                        p[`Luzi_OutputDone${en}`] = null;
+                    });
+                },
+                hover: ({ item }) => {
+                    if (!Player.CanInteract()) return "H互动";
+                    if (InventoryGet(Player, "ItemHandheld")) return "H空手";
+                    if (propTest(item, (p) => p.Luzi_OutputDoneLeft !== true)) return "H未满";
+                    return undefined;
+                },
+                actionKey: `A${cn}拿`,
+                leaveDialog: true,
+            },
+        ]),
     ],
     [
         {
@@ -609,8 +685,18 @@ const assetStrings = {
                     `A开始${lr}杯`,
                     `SourceCharacter在DestinationCharacterAssetName${lr}边放了一个空玻璃杯，并开始注入牛奶`,
                 ],
+                [`D${lr}放`, `🖐️放在${lr}边`],
+                [`D${lr}拿`, `🖐️从${lr}边拿走`],
+                [`A${lr}放`, `SourceCharacter将手中的空杯放在DestinationCharacterAssetName${lr}边，并开始注入牛奶`],
+                [`A${lr}拿`, `SourceCharacter从DestinationCharacterAssetName${lr}边拿走一满杯牛奶`],
             ])
         ),
+
+        H互动: "你需要解开双手才能操作",
+        H空杯: "你需要手持一个空杯才能放入",
+        H空手: "你需要空手才能拿走",
+        H存量: "机器内至少需要200 mL牛奶才能放入空杯",
+        H未满: "杯子还没装满，不能拿走",
     },
     EN: {
         SelectBase: "Configure Milk Vending Machine",
@@ -649,8 +735,24 @@ const assetStrings = {
                     `A开始${zh}杯`,
                     `SourceCharacter places an empty glass on ${en} side of DestinationCharacter AssetName and starts filling it with milk`,
                 ],
+                [`D${zh}放`, `🖐️ Place on ${capitalizeFirst(en)}`],
+                [`D${zh}拿`, `🖐️ Take from ${capitalizeFirst(en)}`],
+                [
+                    `A${zh}放`,
+                    `SourceCharacter places an empty cup on ${en} side of DestinationCharacter AssetName and starts filling it with milk`,
+                ],
+                [
+                    `A${zh}拿`,
+                    `SourceCharacter takes a full cup of milk from ${en} side of DestinationCharacter AssetName`,
+                ],
             ])
         ),
+
+        H互动: "You need to free your hands to operate",
+        H空杯: "You need to hold an empty cup to place in",
+        H空手: "You need to have empty hands to take out",
+        H存量: "The machine needs at least 200 mL of milk to place an empty cup in",
+        H未满: "The cup is not full yet, you can't take it out",
     },
 };
 
