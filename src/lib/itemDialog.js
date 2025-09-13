@@ -284,8 +284,8 @@ function createItemDialog(buttons, params) {
 /**
  * Loose-typed wrapper for modular dialogs. Accepts any button/param shapes and
  * returns a DialogButtons instance typed for ModularItemData.
- * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @param {ItemDialog.ButtonConfig<ModularItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<ModularItemData>[]} [params]
  * @returns {DialogButtons<ModularItemData>}
  */
 export function createItemDialogModular(buttons, params) {
@@ -294,8 +294,8 @@ export function createItemDialogModular(buttons, params) {
 
 /**
  * Loose-typed wrapper for typed dialogs.
- * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @param {ItemDialog.ButtonConfig<TypedItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<TypedItemData>[]} [params]
  * @returns {DialogButtons<TypedItemData>}
  */
 export function createItemDialogTyped(buttons, params) {
@@ -304,8 +304,8 @@ export function createItemDialogTyped(buttons, params) {
 
 /**
  * Loose-typed wrapper for noarch dialogs.
- * @param {ItemDialog.ButtonConfig<any>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<any>[]} [params]
+ * @param {ItemDialog.ButtonConfig<NoArchItemData>[]} [buttons]
+ * @param {ItemDialog.ParameterConfig<NoArchItemData>[]} [params]
  * @returns {DialogButtons<NoArchItemData>}
  */
 export function createItemDialogNoArch(buttons, params) {

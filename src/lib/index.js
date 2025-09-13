@@ -7,3 +7,4 @@ export { takeLayerNames } from "./takeLayerName.js";
 export { createItemDialogModular, createItemDialogTyped, createItemDialogNoArch } from "./itemDialog.js";
 export { createAfterDrawProcess } from "./afterDraw.js";
 export { TypedOptionCombiner } from "./optionCombiner.js";
+export { Container } from "./container.js";

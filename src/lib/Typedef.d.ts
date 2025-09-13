@@ -88,3 +88,10 @@ declare namespace ItemDialog {
         onclick: (data: any, ctx: DialogDrawContext<DataType>) => void;
     }
 }
+
+declare namespace ContainerProperty {
+    interface ContainerData extends Omit<Item, 'Asset'> {
+        IAsset?: string;
+        IGroup?: AssetGroupItemName;
+    }
+}
