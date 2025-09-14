@@ -68,7 +68,7 @@ const asset = {
     Top: 0,
     Left: 0,
     AllowActivePose: [],
-    DynamicGroupName: "LuziCustom",
+    DynamicGroupName: "BodyMarkings",
     DefaultColor: "#752626",
     Layer: [
         { Name: "Base", HasImage: false, AllowTypes: {} },

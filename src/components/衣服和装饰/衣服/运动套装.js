@@ -79,7 +79,7 @@ const params = [
             Top: 220,
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            DynamicGroupName: "LuziCustom",
+            DynamicGroupName: "Bra",
             DefaultColor: ["#DDDDDD", "#1C1C1C", "#BBBBBB"],
             PoseMapping: PoseMapTools.HideFullBody(),
             Layer: [
@@ -141,7 +141,7 @@ const params = [
             Top: 370,
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            DynamicGroupName: "LuziCustom",
+            DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
             PoseMapping: PoseMapTools.HideFullBody(),
             Layer: [
@@ -173,7 +173,7 @@ const params = [
             Top: 370,
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            DynamicGroupName: "LuziCustom",
+            DynamicGroupName: "ClothLower",
             DefaultColor: ["#1C1C1C", "#DDDDDD"],
             Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
             PoseMapping: PoseMapTools.HideFullBody(),
@@ -203,12 +203,12 @@ const params = [
 ];
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth("LuziCustom", params[0][1]);
+    ArmMaskTool.createArmMaskForCloth(params[0][1].DynamicGroupName, params[0][1]);
 
     for (const [_, asset, option] of params.filter((p) => p[0].includes("ClothLower"))) {
         AssetManager.addImageMapping(
             ImageMapTools.mirrorBodyTypeLayer(
-                "LuziCustom",
+                asset.DynamicGroupName,
                 asset,
                 "Normal",
                 ["Large", "XLarge"],

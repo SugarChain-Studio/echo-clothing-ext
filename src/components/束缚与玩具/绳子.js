@@ -142,7 +142,8 @@ const assetBase = {
     Top: 210,
     Time: 15,
     Difficulty: 4,
-    DynamicGroupName: "LuziCustom",
+    CraftGroup: "绳子",
+    DynamicGroupName: "ItemTorso",
     Layer: [],
 };
 
@@ -199,7 +200,7 @@ const assetStrings = {
 
 export default function () {
     AssetManager.addImageMapping({
-        "Assets/Female3DCG/LuziCustom/Preview/绳子.png": "Screens/Inventory/LuziCustom/绳子/mode2.png",
+        "Assets/Female3DCG/ItemTorso/Preview/绳子.png": "Screens/Inventory/ItemTorso/绳子/mode2.png",
     });
 
     for (const groupName of /** @type {(keyof typeof groupModes)[]}*/ (Object.keys(groupModes))) {
