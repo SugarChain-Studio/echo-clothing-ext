@@ -1,4 +1,4 @@
-import { PoseMapTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { TypedOptionCombiner } from "../../lib";
 
