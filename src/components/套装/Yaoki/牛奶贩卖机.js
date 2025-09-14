@@ -438,11 +438,6 @@ const afterDrawProcess = createAfterDrawProcess(
     },
 });
 
-/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, MilkCupData>} */
-function afterDraw(_, originalFunction, drawData) {
-    afterDrawProcess.afterDraw(_, originalFunction, drawData);
-}
-
 const buttons = Typing.record({
     左: /** @type {Rect} */ ({ x: 1265, y: 600, w: 225, h: 55 }),
     右: /** @type {Rect} */ ({ x: 1510, y: 600, w: 225, h: 55 }),
@@ -617,7 +612,7 @@ const extended = {
     ScriptHooks: itemDialog.createHooks(["Draw", "Click"], {
         ScriptDraw: scriptDraw,
         BeforeDraw: beforeDraw,
-        AfterDraw: afterDraw,
+        ...afterDrawProcess.hooks(),
     }),
     ChatTags: Tools.CommonChatTags(),
     BaselineProperty: /** @type {MilkingVendorProperties} */ ({

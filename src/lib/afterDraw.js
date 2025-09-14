@@ -53,6 +53,13 @@ class AfterDrawProcess {
         }
         return this;
     }
+
+    /**
+     * @returns {{AfterDraw: ExtendedItemScriptHookCallbacks.AfterDraw<DataType, PersistentData>}}
+     */
+    hooks() {
+        return { AfterDraw: (...args) => this.afterDraw(...args) };
+    }
 }
 /**
  * @template {object} PreDataType

@@ -120,9 +120,7 @@ const params = [
                                     Archetype: ExtendedArchetype.TEXT,
                                     MaxLength: { Text: 20 },
                                     Font: "'Archivo Black', 'Impact', 'Arial Black', 'Franklin Gothic', 'Arial', sans-serif",
-                                    ScriptHooks: {
-                                        AfterDraw: (...args) => afterDraw.afterDraw(...args),
-                                    },
+                                    ScriptHooks: afterDraw.hooks(),
                                 },
                             },
                             {},
