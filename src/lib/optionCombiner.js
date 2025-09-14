@@ -18,9 +18,7 @@ export class TypedOptionCombiner {
      */
     combine(options, extraConfig) {
         for (const option of options) {
-            const nProperty = this._options[option]?.Property
-                ? { ...this._options[option].Property, ...extraConfig.Property }
-                : {};
+            const nProperty = { ...this._options[option]?.Property, ...extraConfig.Property };
             this._options[option] = { ...this._options[option], ...extraConfig, Property: nProperty };
         }
         return this;

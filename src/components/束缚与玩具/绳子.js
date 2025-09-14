@@ -1,4 +1,4 @@
-import { Tools } from "@mod-utils/Tools";
+import { PoseMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { TypedOptionCombiner } from "../../lib";
 
@@ -10,6 +10,12 @@ const modeText = {
 /** @type {AssetLayerDefinition} */
 const upperLC = {
     ParentGroup: "BodyUpper",
+};
+
+/** @type {AssetLayerDefinition} */
+const lowerFC = {
+    ParentGroup: "BodyLower",
+    PoseMapping: {},
 };
 
 /** @type {AssetLayerDefinition} */
@@ -27,8 +33,8 @@ const Layers = [
     { Name: "AAA_1_后", ParentGroup: "BodyLower", CopyLayerColor: "A_2", Priority: 4 },
 
     { Name: "A_1", ...upperLC },
-    { Name: "AA_1", ...upperLC, CopyLayerColor: "A_1" },
-    { Name: "AAA_1", ...upperLC, CopyLayerColor: "A_1" },
+    { Name: "AA_1", ...lowerFC, CopyLayerColor: "A_1" },
+    { Name: "AAA_1", ...lowerFC, CopyLayerColor: "A_1" },
     { Name: "AB_1_上", ...upperLC, CopyLayerColor: "A_1" },
     { Name: "AB_1_下", ...lowerLC, CopyLayerColor: "A_1" },
     { Name: "AC_1_上", ...upperLC, CopyLayerColor: "A_1" },
@@ -37,8 +43,8 @@ const Layers = [
     { Name: "B_1_下", ...lowerLC, CopyLayerColor: "A_1" },
 
     { Name: "A_2", ...upperLC },
-    { Name: "AA_2", ...upperLC, CopyLayerColor: "A_2" },
-    { Name: "AAA_2", ...upperLC, CopyLayerColor: "A_2" },
+    { Name: "AA_2", ...lowerFC, CopyLayerColor: "A_2" },
+    { Name: "AAA_2", ...lowerFC, CopyLayerColor: "A_2" },
     { Name: "AB_2_上", ...upperLC, CopyLayerColor: "A_2" },
     { Name: "AB_2_下", ...lowerLC, CopyLayerColor: "A_2" },
     { Name: "AC_2_上", ...upperLC, CopyLayerColor: "A_2" },
