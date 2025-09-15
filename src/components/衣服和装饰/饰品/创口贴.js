@@ -6,6 +6,7 @@ const baseAsset = {
     Random: false,
     ParentGroup: {},
     DynamicGroupName: /** @type {"Suit"}*/ ("Suit"),
+    Prerequisite: /** @type {AssetPrerequisite[]} */ (["HasVagina", "HasBreasts"]),
     Layer: [
         { Left: 180, Top: 300, Name: "上", ParentGroup: "BodyUpper" },
         { Left: 240, Top: 500, Name: "下" },
@@ -18,7 +19,8 @@ const lowerAsset = {
     Left: 240,
     Top: 500,
     ParentGroup: {},
-    DynamicGroupName: /** @type {"Suit"}*/ ("Suit"),
+    Prerequisite: /** @type {AssetPrerequisite[]} */ (["HasVagina"]),
+    DynamicGroupName: /** @type {const}*/ ("Suit"),
     PoseMapping: { AllFours: PoseType.HIDE, Hogtied: PoseType.HIDE },
 };
 
@@ -27,8 +29,9 @@ const upperAsset = {
     Random: false,
     Left: 180,
     Top: 300,
-    ParentGroup: /** @type {"BodyUpper"}*/ ("BodyUpper"),
-    DynamicGroupName: /** @type {"Suit"}*/ ("Suit"),
+    Prerequisite: /** @type {AssetPrerequisite[]} */ (["HasBreasts"]),
+    ParentGroup: /** @type {const}*/ ("BodyUpper"),
+    DynamicGroupName: /** @type {const}*/ ("Suit"),
     Layer: [{ Name: "上" }],
 };
 
