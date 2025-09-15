@@ -1,5 +1,6 @@
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
 /** @type {<T>(arg0: number, arg1: (number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));
 
@@ -38,10 +39,7 @@ const layerDefBase = /** @type {MyDefinition[]} */ ([
         Name: "D1B",
         Priority: 10,
         CopyLayerColor: "D1",
-        PoseMapping: {
-            BaseUpper: PoseType.HIDE,
-            ...Object.fromEntries(backPoses.map((pose) => [pose, pose])),
-        },
+        PoseMapping: PoseMapTools.FromTopHide(Object.fromEntries(backPoses.map((pose) => [pose, pose]))),
     },
     ...iota(4, (i) => ({ Name: `D${i + 2}`, ColorName: layerGroupBase.D[i + 1] })),
 ])
@@ -167,18 +165,22 @@ const assetStrings = {
     },
 };
 
+const poses = /** @type {AssetPoseName[]}*/ (["", "BackBoxTie", "BackCuffs", "BackElbowTouch", "OverTheHead", "Yoked"]);
+
 const imageMapping = Object.entries({ Normal: ["Large", "XLarge"], Small: ["FlatSmall", "FlatMedium"] })
     .flatMap(([key, values]) => values.map((size) => /** @type {[string,string]} */ ([key, size])))
     .reduce((pv, [from, to]) => {
-        for (const p of ["", "BackBoxTie/", "BackCuffs/", "BackElbowTouch/", "OverTheHead/", "Yoked/"]) {
+        for (const p of poses) {
             for (const l of asset.Layer) {
-                pv[
-                    `Assets/Female3DCG/Cloth/${p}${asset.Name}_${to}_${l.Name}.png`
-                ] = `Assets/Female3DCG/Cloth/${p}${asset.Name}_${from}_${l.Name}.png`;
+                pv[ImageMapTools.assetLayer("Cloth", `${asset.Name}_${to}_${l.Name}`, p)] = ImageMapTools.assetLayer(
+                    "Cloth",
+                    `${asset.Name}_${from}_${l.Name}`,
+                    p
+                );
             }
         }
         return pv;
-    }, /**@type{Record<string,string>}*/ ({}));
+    }, /**@type {Record<string,string>}*/ ({}));
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Hand");
