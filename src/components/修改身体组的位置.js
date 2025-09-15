@@ -7,6 +7,7 @@ const customOffset = [
     ...["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].map((Asset) =>
         Typing.drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
     ),
+    ...["BasicCockring", "LockingCockring"].map((Asset) => Typing.drawOffset({ Group: "ItemVulva", Asset, Y: -36 })),
     ...Typing.groups(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
         Typing.drawOffset({ Group, Y: -16 })
     ),
