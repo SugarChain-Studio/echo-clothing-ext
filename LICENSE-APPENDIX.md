@@ -65,6 +65,10 @@ supplement the main [LICENSE](LICENSE) file.
 
 ## Clarifications
 
-1. In principle, all code and assets in this project are licensed under the license above, unless otherwise specified.
-   
-2. Due to limited development resources and in order to facilitate community development without being hindered by copyright concerns, the main maintainers have chosen to immediately implement the CC4 license. However, at the time of this implementation, not all contributors had provided explicit consent. As responses from relevant contributors are gradually collected, any exceptions will be added to the "Special Circumstances" section above.
+1. In principle, all assets in this project are licensed under the license above, unless otherwise specified.
+
+2. Each asset is distributed as a specific combination of resources and related configurations. For example, the "Ruffled Dress" consists of multiple layers that together form the complete appearance of the clothing. Each such combination is considered a single *whole asset*, and the copyright and licensing terms apply to the whole asset as a unit, not to its individual components.
+
+3. The functional code and configuration files in this project (such as image modification scripts, etc.) are all licensed under the main LICENSE agreement. If you need to modify or repackage the asset units in this project, please confirm the authorization agreement for those *whole assets* respectively, or contact the relevant contributors for explicit authorization.
+
+4. Due to limited development resources and in order to facilitate community development without being hindered by copyright concerns, the main maintainers have chosen to immediately implement the CC4 license. However, at the time of this implementation, not all contributors had provided explicit consent. As responses from relevant contributors are gradually collected, any exceptions will be added to the "Special Circumstances" section above.
