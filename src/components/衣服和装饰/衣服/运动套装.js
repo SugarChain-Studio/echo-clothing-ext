@@ -200,6 +200,63 @@ const params = [
             assetStrings,
         },
     ],
+    [
+        ["ClothAccessory", "Mask"],
+        {
+            Name: "运动套装ha",
+            Random: false,
+            Gender: "F",
+            Left: 210,
+            Top: 170,
+            ParentGroup: {},
+            DynamicGroupName: "ClothAccessory",
+            PoseMapping: {},
+            Layer: [{ Name: "b" }, { Name: "s" }],
+        },
+        {
+            translation: {
+                CN: "运动套装纱布",
+                EN: "Sporty Set-up Gauze",
+            },
+            layerNames: {
+                CN: { b: "纱布", s: "胶带" },
+                EN: { b: "Gauze", s: "Tape" },
+            },
+        },
+    ],
+    [
+        ["ClothAccessory", "Necklace"],
+        {
+            Name: "运动套装nl",
+            Random: false,
+            Gender: "F",
+            Left: 210,
+            Top: 210,
+            ParentGroup: {},
+            DynamicGroupName: "ClothAccessory",
+            PoseMapping: {},
+            DefaultColor: ["#292929", "#00BBA6", "#FF4F4F", "#FF4F4F"],
+            Layer: [
+                { Name: "chd" },
+                { Name: "chg", AllowColorize: false, BlendingMode: "screen" },
+                { Name: "crd" },
+                { Name: "crg", AllowColorize: false, BlendingMode: "screen" },
+                { Name: "dud" },
+                { Name: "dld" },
+                { Name: "dg", AllowColorize: false, BlendingMode: "screen" },
+            ],
+        },
+        {
+            translation: {
+                CN: "运动套装项链",
+                EN: "Sporty Set-up Necklace",
+            },
+            layerNames: {
+                CN: { chd: "链条", crd: "缠绕水晶", dud: "上宝石", dld: "下宝石" },
+                EN: { chd: "Chain", crd: "Wrapped Crystal", dud: "Upper Gem", dld: "Lower Gem" },
+            },
+        },
+    ],
 ];
 
 export default function () {
