@@ -35,3 +35,8 @@ type ExtendType<T, From, To> = {
 type CustomLoginInventoryFixup = ExtendType<typeof LoginInventoryFixups[number], AssetGroupName, CustomGroupName>;
 
 type AddAssetWithConfigParams = Parameters<MyAssetManager['addAssetWithConfig']>;
+
+type AddAssetWithConfigParamsNoGroup = [
+    Parameters<MyAssetManager['addAssetWithConfig']>[1],
+    Parameters<MyAssetManager['addAssetWithConfig']>[2]
+];
