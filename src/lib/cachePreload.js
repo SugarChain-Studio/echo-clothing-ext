@@ -1,4 +1,5 @@
 import { resourceBaseURL } from "@mod-utils/rollupHelper";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { sleepUntil } from "@sugarch/bc-mod-utility";
 
 const loadQueue = [];
@@ -14,12 +15,6 @@ function _glPreload(gl, url) {
     GLDrawLoadImage(gl, url);
 }
 
-sleepUntil(() => !!GLDrawCanvas, 1000).then(() => {
-    loadQueue.forEach((url) => {
-        _glPreload(GLDrawCanvas.GL, url);
-    });
-});
-
 async function cachePreloadGL(url) {
     const url_ = purl(url);
     if (GLDrawCanvas) {
@@ -29,4 +24,13 @@ async function cachePreloadGL(url) {
     }
     DrawGetImage(url_);
 }
+
+HookManager.afterInit(() => {
+    sleepUntil(() => !!GLDrawCanvas, 100).then(() => {
+        loadQueue.forEach((url) => {
+            _glPreload(GLDrawCanvas.GL, url);
+        });
+    });
+});
+
 export { cachePreloadGL };

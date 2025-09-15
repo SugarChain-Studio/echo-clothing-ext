@@ -9,8 +9,6 @@ type CustomAssetDefinitionItem = import('@sugarch/bc-asset-manager').CustomAsset
 type CustomAssetDefinitionAppearance =
     import('@sugarch/bc-asset-manager').CustomAssetDefinitionAppearance<CustomGroupBodyName>;
 
-type CustomAssetDefinition = import('@sugarch/bc-asset-manager').CustomAssetDefinition<CustomGroupBodyName>;
-
 /** 按照身体组分类的物品定义 */
 type CustomGroupedAssetDefinitions =
     import('@sugarch/bc-asset-manager').CustomGroupedAssetDefinitions<CustomGroupBodyName>;
