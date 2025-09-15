@@ -10,8 +10,8 @@ import { AssetManager } from "../../../assetForward";
 /**
  * @typedef {object} EyeDefinition
  * @property {CustomAssetDefinitionAppearance} asset
- * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["translation"]} translation
- * @property {Parameters<typeof AssetManager.addAssetWithConfig>[2]["layerNames"]} layerNames
+ * @property {AddAssetWithConfigParams[2]["translation"]} translation
+ * @property {AddAssetWithConfigParams[2]["layerNames"]} layerNames
  * @property {SpecialExpressionDefinition} specials
  */
 

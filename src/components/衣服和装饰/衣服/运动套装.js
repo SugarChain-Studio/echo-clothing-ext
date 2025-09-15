@@ -68,7 +68,7 @@ const assetStrings = {
 };
 
 /** @type {AddAssetWithConfigParams[]} */
-const params = [
+const assets = [
     [
         ["Cloth", "Bra"],
         {
@@ -262,9 +262,9 @@ const params = [
 ];
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth(params[0][1].DynamicGroupName, params[0][1]);
+    ArmMaskTool.createArmMaskForCloth(assets[0][1].DynamicGroupName, assets[0][1]);
 
-    for (const [_, asset, option] of params.filter((p) => p[0].includes("ClothLower"))) {
+    for (const [_, asset, option] of assets.filter((p) => p[0].includes("ClothLower"))) {
         AssetManager.addImageMapping(
             ImageMapTools.mirrorBodyTypeLayer(
                 asset.DynamicGroupName,
@@ -276,7 +276,5 @@ export default function () {
         );
     }
 
-    for (const p of params) {
-        AssetManager.addAssetWithConfig(...p);
-    }
+    AssetManager.addAssetWithConfig(assets);
 }

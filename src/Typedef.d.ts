@@ -34,9 +34,7 @@ type ExtendType<T, From, To> = {
 
 type CustomLoginInventoryFixup = ExtendType<typeof LoginInventoryFixups[number], AssetGroupName, CustomGroupName>;
 
-type AddAssetWithConfigParams = Parameters<MyAssetManager['addAssetWithConfig']>;
+type AddAssetWithConfigParams = import('@sugarch/bc-asset-manager').AddAssetWithConfigParams<CustomGroupBodyName>;
 
-type AddAssetWithConfigParamsNoGroup = [
-    Parameters<MyAssetManager['addAssetWithConfig']>[1],
-    Parameters<MyAssetManager['addAssetWithConfig']>[2]
-];
+type AddAssetWithConfigParamsNoGroup =
+    import('@sugarch/bc-asset-manager').AddAssetWithConfigParamsNoGroup<CustomGroupBodyName>;

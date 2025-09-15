@@ -34,7 +34,7 @@ const makeFH = (name, defs, option) => [
 ];
 
 /** @type {AddAssetWithConfigParamsNoGroup[]}} */
-const assetsN = [
+const assets = [
     makeFH("前发1"),
     makeFH("前发2"),
     makeFH("前发3"),
@@ -95,8 +95,5 @@ const assetsN = [
 ];
 
 export default function () {
-    // AssetManager.addGroupedAssets(assets, translations);
-    for (const [asset, option] of assetsN) {
-        AssetManager.addAssetWithConfig("新前发_Luzi", asset, option);
-    }
+    AssetManager.addAssetWithConfig("新前发_Luzi", assets);
 }

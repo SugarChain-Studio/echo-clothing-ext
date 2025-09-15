@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 
 /** @type {TypedItemConfig} */
 const extended = {
@@ -453,7 +452,5 @@ const assetsN = [
 ];
 
 export default function () {
-    for (const [asset, option] of assetsN) {
-        AssetManager.addAssetWithConfig("新后发_Luzi", asset, option);
-    }
+    AssetManager.addAssetWithConfig("新后发_Luzi", assetsN);
 }

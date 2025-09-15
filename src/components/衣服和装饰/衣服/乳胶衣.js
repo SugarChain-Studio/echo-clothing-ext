@@ -146,7 +146,7 @@ const itemDialog = createItemDialogTyped([
     },
 ]);
 
-/** @type {[CustomAssetDefinition, Parameters<typeof AssetManager["addAssetWithConfig"]>[2]]} */
+/** @type {[CustomAssetDefinition, AddAssetWithConfigParams[2]]} */
 const upper = [
     assetUpper,
     {
@@ -203,7 +203,7 @@ const upper = [
     },
 ];
 
-/** @type {[CustomAssetDefinition, Parameters<typeof AssetManager["addAssetWithConfig"]>[2]]} */
+/** @type {[CustomAssetDefinition, AddAssetWithConfigParams[2]]} */
 const lower = [
     assetLower,
     {

@@ -13,62 +13,8 @@ const hairAttrShared = {
     InheritColor: hairFront,
 };
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    新前发_Luzi: [
-        {
-            Name: "蓬松卷发1",
-            ...hairAttrShared,
-            Layer: [{ Name: "A" }, { Name: "B" }],
-        },
-        {
-            Name: "蓬松卷发2",
-            ...hairAttrShared,
-            Layer: [{ Name: "A" }, { Name: "B" }],
-        },
-    ],
-    新后发_Luzi: [
-        {
-            Name: "蓬松卷发1",
-            ...hairAttrShared,
-            DynamicGroupName: "新前发_Luzi",
-            Layer: [{ Name: "A" }, { Name: "B" }],
-        },
-        {
-            Name: "蓬松卷发2",
-            ...hairAttrShared,
-            DynamicGroupName: "新前发_Luzi",
-            Layer: [{ Name: "A" }, { Name: "B" }],
-        },
-    ],
-};
-
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        新前发_Luzi: {
-            蓬松卷发1: "蓬松卷发1",
-            蓬松卷发2: "蓬松卷发2",
-        },
-        新后发_Luzi: {
-            蓬松卷发1: "蓬松卷发1",
-            蓬松卷发2: "蓬松卷发2",
-        },
-    },
-    EN: {
-        新前发_Luzi: {
-            蓬松卷发1: "Fluffy Curls 1",
-            蓬松卷发2: "Fluffy Curls 2",
-        },
-        新后发_Luzi: {
-            蓬松卷发1: "Fluffy Curls 1",
-            蓬松卷发2: "Fluffy Curls 2",
-        },
-    },
-};
-
 /** @type {Translation.String} */
-const layerNameBase = {
+const layerNames = {
     CN: {
         A: "两侧",
         B: "头顶",
@@ -79,29 +25,28 @@ const layerNameBase = {
     },
 };
 
-const layerNames = {
-    CN: {
-        新前发_Luzi: {
-            蓬松卷发1: layerNameBase.CN,
-            蓬松卷发2: layerNameBase.CN,
+/** @type {AddAssetWithConfigParams[]} */
+const assets = [
+    [
+        ["新前发_Luzi", "新后发_Luzi"],
+        {
+            Name: "蓬松卷发1",
+            ...hairAttrShared,
+            Layer: [{ Name: "A" }, { Name: "B" }],
         },
-        新后发_Luzi: {
-            蓬松卷发1: layerNameBase.CN,
-            蓬松卷发2: layerNameBase.CN,
+        { translation: { CN: "蓬松卷发1", EN: "Fluffy Curls 1" }, layerNames },
+    ],
+    [
+        ["新前发_Luzi", "新后发_Luzi"],
+        {
+            Name: "蓬松卷发2",
+            ...hairAttrShared,
+            Layer: [{ Name: "A" }, { Name: "B" }],
         },
-    },
-    EN: {
-        新前发_Luzi: {
-            蓬松卷发1: layerNameBase.EN,
-            蓬松卷发2: layerNameBase.EN,
-        },
-        新后发_Luzi: {
-            蓬松卷发1: layerNameBase.EN,
-            蓬松卷发2: layerNameBase.EN,
-        },
-    },
-};
+        { translation: { CN: "蓬松卷发2", EN: "Fluffy Curls 2" }, layerNames },
+    ],
+];
 
 export default function () {
-    AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
+    AssetManager.addAssetWithConfig(assets);
 }
