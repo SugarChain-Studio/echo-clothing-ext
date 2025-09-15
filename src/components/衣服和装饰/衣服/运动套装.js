@@ -237,8 +237,10 @@ const params = [
             PoseMapping: {},
             DefaultColor: ["#292929", "#00BBA6", "#FF4F4F", "#FF4F4F"],
             Layer: [
-                { Name: "chd" },
-                { Name: "chg", AllowColorize: false, BlendingMode: "screen" },
+                { Name: "cbd", Priority: 6 },
+                { Name: "cbg", Priority: 6, AllowColorize: false, BlendingMode: "screen" },
+                { Name: "cfd", CopyLayerColor: "cbd" },
+                { Name: "cfg", AllowColorize: false, BlendingMode: "screen" },
                 { Name: "crd" },
                 { Name: "crg", AllowColorize: false, BlendingMode: "screen" },
                 { Name: "dud" },
@@ -252,8 +254,8 @@ const params = [
                 EN: "Sporty Set-up Necklace",
             },
             layerNames: {
-                CN: { chd: "链条", crd: "缠绕水晶", dud: "上宝石", dld: "下宝石" },
-                EN: { chd: "Chain", crd: "Wrapped Crystal", dud: "Upper Gem", dld: "Lower Gem" },
+                CN: { cbd: "链条", crd: "缠绕水晶", dud: "上宝石", dld: "下宝石" },
+                EN: { cbd: "Chain", crd: "Wrapped Crystal", dud: "Upper Gem", dld: "Lower Gem" },
             },
         },
     ],
