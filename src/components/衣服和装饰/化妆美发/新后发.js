@@ -404,10 +404,10 @@ const assetsN = [
             Left: 0,
             Top: 0,
             ParentGroup: {},
-            DefaultColor: ["#2C2C2C", "#2C2C2C", "#AE7384", "#AE7384", "#B3B3B3", "#B3B3B3", "#D7D7D7", "#D7D7D7"],
+            DefaultColor: ["Default", "Default", "#AE7384", "#AE7384", "#B3B3B3", "#B3B3B3", "#D7D7D7", "#D7D7D7"],
             Layer: [
-                { Name: "A1", ColorGroup: "Base" },
-                { Name: "B1", ColorGroup: "Base" },
+                { Name: "A1", ColorGroup: "Base", InheritColor: "HairFront" },
+                { Name: "B1", ColorGroup: "Base", InheritColor: "HairFront" },
                 { Name: "A2", ColorGroup: "Stripe" },
                 { Name: "B2", ColorGroup: "Stripe" },
                 { Name: "A3", ColorGroup: "Ties" },
