@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "Luzi_CheekRetractor",
     Random: false,
-    Left: 0,
-    Top: 0,
+    Left: 220,
+    Top: 170,
     Difficulty: 6,
     Time: 15,
     AllowLock: false,
