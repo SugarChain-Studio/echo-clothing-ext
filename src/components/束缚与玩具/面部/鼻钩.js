@@ -15,9 +15,16 @@ const asset = {
     Fetish: ["Leather", "Metal"],
     Block: [],
     Layer: [
+        {
+            Name: "Skin",
+            CreateLayerTypes: ["typed"],
+            InheritColor: "BodyUpper",
+            HideColoring: true,
+            ColorSuffix: { HEX_COLOR: "White" },
+        },
+        { Name: "Nose", CreateLayerTypes: ["typed"] },
         { Name: "Band", CreateLayerTypes: ["typed"] },
         { Name: "Hook", CreateLayerTypes: ["typed"] },
-        { Name: "Nose", CreateLayerTypes: ["typed"] },
     ],
 };
 
@@ -27,8 +34,8 @@ const translation = {
 };
 
 const layerNames = {
-    CN: { Band: "绑带", Hook: "钩子", Nose: "鼻子" },
-    EN: { Band: "Band", Hook: "Hook", Nose: "Nose" },
+    CN: { Band: "绑带", Hook: "钩子", Nose: "鼻孔" },
+    EN: { Band: "Band", Hook: "Hook", Nose: "Nostril" },
 };
 
 /** @type {TypedItemConfig} */
