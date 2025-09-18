@@ -9,7 +9,6 @@ const asset = {
     Left: 190,
     Top: 270,
     ParentGroup: {},
-    AllowActivity: ["MasturbateItem", "PenetrateItem"],
     Fetish: ["Sadism"],
     DefaultColor: ["Default", "Default", "Default", "#000000"],
     Layer: [
@@ -46,7 +45,11 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     ChatTags: Tools.CommonChatTags(),
-    Options: [{ Name: "1" }, { Name: "2" }, { Name: "3" }],
+    Options: [
+        { Name: "1", Property: { AllowActivity: ["PenetrateItem"] } },
+        { Name: "2", Property: { AllowActivity: ["MasturbateItem", "PenetrateItem"] } },
+        { Name: "3", Property: { AllowActivity: ["RubItem", "PenetrateItem"] } },
+    ],
 };
 
 const assetStrings = DialogTools.autoItemStrings(
