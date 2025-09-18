@@ -152,6 +152,8 @@ const asset = {
         { Name: "希雅", AllowTypes: { EILRSW: 5 } },
         { Name: "酥酥", AllowTypes: { EILRSW: 6 } },
         { Name: "茗子", AllowTypes: { EILRSW: 7 } },
+        { Name: "Kemera", AllowTypes: { EILRSW: 8 } },
+        { Name: "viimi", AllowTypes: { EILRSW: 9 } },
 
         // 伊友玩偶
         { Name: "伊斯特", AllowTypes: { yytc: 1 } },
@@ -182,6 +184,7 @@ const asset = {
         { Name: "Fu狸", AllowTypes: { xppjb: 10 } },
         { Name: "依依", AllowTypes: { xppjb: 11 } },
         { Name: "wallyilma2", AllowTypes: { xppjb: 12 } },
+        { Name: "Shadow", AllowTypes: { xppjb: 13 } },
 
         // 失乐园 sly
         // { Name: "Reisigure", AllowTypes: { sly: 1 } },
@@ -388,6 +391,8 @@ const predefDialog = {
     CN: {
         Optionhz4: "Neko",
         Optionlihua2: "An'an",
+
+        Optionxppjb13: "Shadow γ",
 
         Optioncai1: "柴",
         Optioncai2: "柴²",
