@@ -17,6 +17,7 @@ const asset = {
     Left: 160,
     Top: 130,
     ParentGroup: {},
+    Priority: 55,
     DynamicGroupName: "ItemHead",
     Category: ["SciFi"],
     Fetish: ["Metal"],
