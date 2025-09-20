@@ -15,7 +15,7 @@ const hogLayer = (layer) => ({
     ...layer,
     Priority: 10,
     Left: 210,
-    Top: 505,
+    Top: 515,
     ParentGroup: {},
     PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
 });
@@ -35,18 +35,18 @@ const asset = {
     },
     ParentGroup: "BodyLower",
     Layer: [
-        baseLayer({ Name: "tu", Priority: 7 }),
+        baseLayer({ Name: "du", Priority: 7 }),
         baseLayer({ Name: "gu", BlendingMode: "screen", Priority: 7 }),
-        baseLayer({ Name: "tt", CopyLayerColor: "tu" }),
-        baseLayer({ Name: "gt", BlendingMode: "screen" }),
-        hogLayer({ Name: "th", CopyLayerColor: "tu" }),
-        hogLayer({ Name: "gh", BlendingMode: "screen" }),
+        baseLayer({ Name: "dt", CopyLayerColor: "du" }),
+        baseLayer({ Name: "gt", BlendingMode: "screen", CopyLayerColor: "gu" }),
+        hogLayer({ Name: "dh", CopyLayerColor: "du" }),
+        hogLayer({ Name: "gh", BlendingMode: "screen", CopyLayerColor: "gu" }),
     ],
 };
 
 const layerNames = {
-    CN: { tu: "透明色", gu: "光泽色" },
-    EN: { tu: "Trans Color", gu: "Gloss Color" },
+    CN: { du: "透明色", gu: "光泽色" },
+    EN: { du: "Trans Color", gu: "Gloss Color" },
 };
 
 const translation = {
