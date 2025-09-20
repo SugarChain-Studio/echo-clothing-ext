@@ -46,9 +46,9 @@ const extended = {
     DrawImages: false,
     ChatTags: Tools.CommonChatTags(),
     Options: [
-        { Name: "1", Property: { AllowActivity: ["PenetrateItem"] } },
-        { Name: "2", Property: { AllowActivity: ["MasturbateItem", "PenetrateItem"] } },
-        { Name: "3", Property: { AllowActivity: ["RubItem", "PenetrateItem"] } },
+        { Name: "1", Property: { AllowActivity: ["PenetrateItem", "SpankItem"] } },
+        { Name: "2", Property: { AllowActivity: ["MasturbateItem", "PenetrateItem", "SpankItem"] } },
+        { Name: "3", Property: { AllowActivity: ["RubItem", "PenetrateItem", "SpankItem"] } },
     ],
 };
 
