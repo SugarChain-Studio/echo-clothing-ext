@@ -1,4 +1,4 @@
-import { Tools } from "@mod-utils/Tools";
+import { PoseMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { Typing } from "../../lib";
 
@@ -21,7 +21,6 @@ const asset = {
     Effect: [E.Slow, E.Block],
     DynamicBeforeDraw: true,
     AllowActivePose: [...PoseAllStanding, ...PoseAllUpper],
-    Attribute: Typing.attributes(["LuziLimbTeleDevice"]),
     SetPose: ["BaseLower"],
     Hide: [
         "ItemHandheld",
@@ -58,27 +57,12 @@ const asset = {
     Layer: [
         {
             Name: "身体遮罩",
-            Top: 0,
-            Left: 0,
             BlendingMode: "destination-out",
-            TextureMask: {
-                Groups: ["BodyUpper"],
-            },
-            PoseMapping: {
-                BaseUpper: "Hide",
-                TapedHands: "Hide",
-                BackCuffs: "Hide",
-                BackElbowTouch: "Hide",
-                OverTheHead: "Hide",
-                Yoked: "Hide",
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            TextureMask: { Groups: ["BodyUpper"] },
+            PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
         },
         {
             Name: "手臂遮罩",
-            Top: 0,
-            Left: 0,
             BlendingMode: "destination-out",
             TextureMask: {
                 Groups: [
@@ -94,6 +78,7 @@ const asset = {
                     "ItemTorso",
                     "ItemTorso2",
                     "ItemArms",
+                    "动物身体_Luzi",
                 ],
             },
             ParentGroup: {
@@ -101,15 +86,7 @@ const asset = {
                 "OverTheHead": "",
                 "Yoked": "",
             },
-            PoseMapping: {
-                TapedHands: "",
-                BackCuffs: "",
-                BackElbowTouch: "",
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: PoseMapTools.HideFullBody({ OverTheHead: "OverTheHead", Yoked: "Yoked" }),
         },
         {
             Name: "下身遮罩",
@@ -129,32 +106,21 @@ const asset = {
                     "BodyMarkings",
                     "身体痕迹_Luzi",
                     "BodyMarkings2_Luzi",
+                    "动物身体_Luzi",
                 ],
             },
-            PoseMapping: {
-                Kneel: "",
-                KneelingSpread: "KneelingSpread",
-                LegsClosed: "",
-                Spread: "",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: PoseMapTools.HideFullBody({ KneelingSpread: "KneelingSpread" }),
         },
         {
             Name: "臂环",
             Priority: 6,
-            Top: 0,
-            Left: 0,
             ColorGroup: "固定环",
-            PoseMapping: {
-                BackBoxTie: "",
+            PoseMapping: PoseMapTools.HideFullBody({
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",
                 OverTheHead: "OverTheHead",
                 Yoked: "Yoked",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            }),
         },
         {
             Name: "腿环",
@@ -162,14 +128,12 @@ const asset = {
             Top: 460,
             Left: 0,
             ColorGroup: "固定环",
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
                 Spread: "Spread",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            }),
         },
         {
             Name: "腿杆",
@@ -189,8 +153,6 @@ const asset = {
         {
             Name: "Cross链",
             Priority: 26,
-            Top: 0,
-            Left: 0,
             ColorGroup: "锁链",
             ShowForAttribute: Typing.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
@@ -198,8 +160,6 @@ const asset = {
         {
             Name: "Cross锚",
             Priority: 26,
-            Top: 0,
-            Left: 0,
             ShowForAttribute: Typing.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
         },
@@ -210,31 +170,25 @@ const asset = {
             Left: 0,
             ParentGroup: "BodyLower",
             ColorGroup: "传送器",
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
                 Spread: "Spread",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            }),
         },
         {
             Name: "手链",
             Priority: 25,
-            Top: 0,
-            Left: 0,
             ParentGroup: "BodyUpper",
             ColorGroup: "传送器",
-            PoseMapping: {
+            PoseMapping: PoseMapTools.HideFullBody({
                 BackBoxTie: "BackBoxTie",
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",
                 OverTheHead: "OverTheHead",
                 Yoked: "Yoked",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            }),
         },
         {
             Name: "手链链子",
