@@ -26,17 +26,17 @@ const asset = {
     DrawLocks: false,
     DefaultColor: ["#4D305B", "#555555", "#000000", "#B57CC1", "#F4A9FF"],
     Layer: [
-        { Name: "visor_diff" },
-        { Name: "cover1", AllowTypes: { v: 1 }, CopyLayerColor: "visor_diff" },
-        { Name: "cover2", AllowTypes: { v: 2 }, CopyLayerColor: "visor_diff" },
-        { Name: "visor_gloss", BlendingMode: "screen", AllowColorize: false },
+        { Name: "visor_diff", Priority: 54 },
+        { Name: "cover1", Priority: 54, AllowTypes: { v: 1 }, CopyLayerColor: "visor_diff" },
+        { Name: "cover2", Priority: 54, AllowTypes: { v: 2 }, CopyLayerColor: "visor_diff" },
+        { Name: "visor_gloss", Priority: 54, BlendingMode: "screen", AllowColorize: false },
         { Name: "metal_diff" },
         { Name: "metal_gloss", BlendingMode: "screen", AllowColorize: false },
         { Name: "frame_diff" },
         { Name: "frame_gloss", BlendingMode: "screen", AllowColorize: false },
         { Name: "light1", HasImage: false },
-        { Name: "light2", HasImage: false },
-        { Name: "effect", HasImage: false, AllowTypes: { m: [1, 2] }, CopyLayerColor: "light2" },
+        { Name: "light2", Priority: 54, HasImage: false },
+        { Name: "effect", Priority: 54, HasImage: false, AllowTypes: { m: [1, 2] }, CopyLayerColor: "light2" },
     ],
 };
 
