@@ -340,50 +340,6 @@ const asset = {
     ],
 };
 
-/**
- * @typedef {Translation.Entry | string} TypeNameEntry
- */
-
-/**
- * @typedef {object} FullAndShort
- * @property {TypeNameEntry} Full
- * @property {TypeNameEntry} Short
- */
-
-/**
- * @param {TypeNameEntry | FullAndShort} obj
- * @returns {obj is TypeNameEntry}
- */
-function isTypeNameEntry(obj) {
-    return typeof obj === "string" || !("Full" in obj && "Short" in obj);
-}
-
-/**
- *
- * @param {TypeNameEntry} obj
- * @param {ServerChatRoomLanguage} lang
- */
-function resolveTypeName(obj, lang) {
-    if (typeof obj === "string") return obj;
-    return obj[lang] || obj.CN || obj.EN || "";
-}
-
-/**
- * @param { TypeNameEntry | FullAndShort} obj
- * @param {ServerChatRoomLanguage} lang
- */
-function takeFullName(obj, lang) {
-    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Full, lang);
-}
-
-/**
- * @param { TypeNameEntry | FullAndShort} obj
- * @param {ServerChatRoomLanguage} lang
- */
-function takeShortName(obj, lang) {
-    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Short, lang);
-}
-
 /** @type {Record<string, TypeNameEntry | FullAndShort>} */
 const typeNameNext = {
     d: { Short: { CN: "玩具店", EN: "Night at Saotome" }, Full: { CN: "早乙女的玩具店", EN: "Night at Saotome" } },
@@ -446,6 +402,50 @@ const predefDialog = {
 // 下面是根据上面的内容，生成描述的代码
 // 也就是说，不用手动写描述文字啦，只用写上面的内容就行
 
+/**
+ * @typedef {Translation.Entry | string} TypeNameEntry
+ */
+
+/**
+ * @typedef {object} FullAndShort
+ * @property {TypeNameEntry} Full
+ * @property {TypeNameEntry} Short
+ */
+
+/**
+ * @param {TypeNameEntry | FullAndShort} obj
+ * @returns {obj is TypeNameEntry}
+ */
+function isTypeNameEntry(obj) {
+    return typeof obj === "string" || !("Full" in obj && "Short" in obj);
+}
+
+/**
+ *
+ * @param {TypeNameEntry} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function resolveTypeName(obj, lang) {
+    if (typeof obj === "string") return obj;
+    return obj[lang] || obj.CN || obj.EN || "";
+}
+
+/**
+ * @param { TypeNameEntry | FullAndShort} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function takeFullName(obj, lang) {
+    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Full, lang);
+}
+
+/**
+ * @param { TypeNameEntry | FullAndShort} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function takeShortName(obj, lang) {
+    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Short, lang);
+}
+
 // 图层不允许调色
 asset.Layer.forEach((layer) => {
     layer.AllowColorize = false;
@@ -489,25 +489,12 @@ modules.forEach((m) => {
     };
 });
 
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, {lastType:string}>} */
-function scriptDraw(mdata, originalFunction, { C, Item, PersistentData }) {
-    const data = PersistentData();
-    const typeRecord = Item.Property?.TypeRecord || {};
-
-    let needUpdate = false;
-    const activeType = Object.entries(typeRecord).find(([k, v]) => !!v && k !== data.lastType);
-    if (activeType) {
-        data.lastType = activeType[0];
-        for (const k in typeRecord) {
-            if (k !== data.lastType) typeRecord[k] = 0;
-        }
-        needUpdate = true;
-    }
-
-    if (needUpdate) {
-        if (C.IsPlayer()) ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
-        CharacterRefresh(C, false);
-    }
+/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
+function click(data, originalFunction) {
+    const property = DialogFocusItem?.Property;
+    if (!property || data.currentModule === "Base") return originalFunction();
+    property.TypeRecord = {};
+    originalFunction();
 }
 
 /** @type {ModularItemConfig} */
@@ -518,7 +505,7 @@ const extended = {
     DrawImages: false,
     DrawData: Tools.makeButtonGroup(modules.length),
     ScriptHooks: {
-        ScriptDraw: scriptDraw,
+        Click: click,
     },
 };
 
