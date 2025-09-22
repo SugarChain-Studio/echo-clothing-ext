@@ -11,6 +11,7 @@ const asset = {
     Priority: 16,
     ParentGroup: {},
     SetPose: ["LegsClosed"],
+    DynamicGroupName: "动物身体_Luzi",
     Layer: [
         {
             Name: "身体",
