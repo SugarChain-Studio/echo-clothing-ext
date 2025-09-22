@@ -66,6 +66,36 @@ const assets = [
         },
         { translation: { CN: "下半框眼镜", EN: "Semi-rimless Glasses" } },
     ],
+    [
+        {
+            Name: "色散墨镜",
+            Random: false,
+            Left: 190,
+            Top: 80,
+            Layer: [
+                { Name: "r", CreateLayerTypes: ["typed"] },
+                { Name: "rg", BlendingMode: "screen", AllowColorize: false, CreateLayerTypes: ["typed"] },
+                { Name: "g", CreateLayerTypes: ["typed"] },
+            ],
+            DefaultColor: ["#050505", "Default"],
+        },
+        {
+            translation: { CN: "色散墨镜", EN: "Iridescent Sunglasses" },
+            layerNames: {
+                CN: { r: "眼镜框", g: "镜片" },
+                EN: { r: "Frame", g: "Lens" },
+            },
+            extended: {
+                Archetype: ExtendedArchetype.TYPED,
+                DrawImages: false,
+                Options: [{ Name: "Down" }, { Name: "Up", Property: { OverridePriority: 56 } }],
+            },
+            assetStrings: {
+                CN: { Select: "选择墨镜佩戴方式", Down: "戴好", Up: "挂头顶" },
+                EN: { Select: "Select Sunglasses Wearing Style", Down: "Worn", Up: "On Head" },
+            },
+        },
+    ],
 ];
 
 export default function () {
