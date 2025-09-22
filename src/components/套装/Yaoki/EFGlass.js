@@ -195,7 +195,7 @@ const itemAssetBase = /** @type {CustomAssetDefinition} */ ({ ...asset, ...itemA
 /** @type {AddAssetWithConfigParams[]} */
 const assetN = [
     [
-        "Mask",
+        ["Glasses", "Mask"],
         asset,
         {
             layerNames,
