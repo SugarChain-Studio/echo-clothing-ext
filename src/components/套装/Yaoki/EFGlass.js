@@ -124,6 +124,7 @@ const extended = {
         ScriptDraw: scriptDraw,
         ...afterDraw.hooks(),
     },
+    ChangeWhenLocked: false,
     Modules: [
         {
             Name: "透明度",
