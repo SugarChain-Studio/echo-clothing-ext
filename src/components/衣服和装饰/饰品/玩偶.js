@@ -283,6 +283,11 @@ const asset = {
         { Name: "Arco", AllowTypes: { nest: 17 } },
         { Name: "Rinko", AllowTypes: { nest: 18 } },
 
+        // Foxys Fun Experience
+        { Name: "Gab", AllowTypes: { ffe: 1 } },
+        { Name: "Seb", AllowTypes: { ffe: 2 } },
+        { Name: "Ryoko", AllowTypes: { ffe: 3 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -335,53 +340,32 @@ const asset = {
     ],
 };
 
-const typeNames = {
-    d: "玩具店",
+/** @type {Record<string, TypeNameEntry | FullAndShort>} */
+const typeNameNext = {
+    d: { Short: { CN: "玩具店", EN: "Night at Saotome" }, Full: { CN: "早乙女的玩具店", EN: "Night at Saotome" } },
     s: "狼窝",
-    z: "芷窝",
+    z: { CN: "芷窝", EN: "Mie" },
     c: "Catnest",
-    f: "猫州猫庭府",
-    y: "小夜家",
-    hz: "盒子的小黑屋",
-    x: "吸血鬼城堡",
-    lihua: "笠花和An'an的家",
+    f: { CN: "猫州猫庭府", EN: "Nekopara" },
+    y: { CN: "小夜家", EN: "Home of Saya" },
+    hz: { CN: "盒子的小黑屋", EN: "xiaoheiwu" },
+    x: { CN: "吸血鬼城堡", EN: "Vampire Castle" },
+    lihua: { CN: "笠花和An'an的家", EN: "Kasaki's room" },
     yb: "鸢堡",
     EILRSW: "EILRSW",
-    yytc: "伊友",
-    xppjb: "香喷喷酒吧",
-    // sly: "失乐园",
-    lilian: "Lilian的大杂烩",
-    lkls: "莉柯莉絲家與她的朋友",
+    yytc: { CN: "伊友", EN: "Friends of Yi" },
+    xppjb: { CN: "香喷喷酒吧", EN: "xiangpenpen" },
+    // sly: { CN: "失乐园", EN: "Paradise Lost" },
+    ffe: { Short: "FFE", Full: "Foxys Fun Experience" },
+    lilian: { CN: "Lilian的大杂烩", EN: "Lilian Home" },
+    lkls: { CN: "莉柯莉絲家與她的朋友", EN: "Licolis" },
     ce: "Celestial Enchants",
     ds: "Den of Sin",
     ll: "Latex Lab",
     hb: "月见里的海边",
     cai: "柴坊",
     nest: "Nest",
-    l: "(路过的玩偶)",
-};
-
-const typeNamesEN = {
-    d: "Night at Saotome",
-    // s: "Wolf's Den",
-    z: "Mie",
-    c: "Catnest",
-    f: "Nekopara",
-    y: "Home of Saya",
-    hz: "xiaoheiwu",
-    x: "Vampire Castle",
-    lihua: "Kasaki's room",
-    // yb: "Yuan Castle",
-    // EILRSW: "EILRSW",
-    yytc: "Friends of Yi",
-    xppjb: "xiangpenpen",
-    lilian: "Lilian Home",
-    lkls: "Licolis",
-    // ce: "Celestial Enchants",
-    // ds: "Den of Sin",
-    // ll: "Latex Lab",
-    // hb: "月见里的海边",
-    l: "(Wanderers)",
+    l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
 const translation = { CN: "玩偶", EN: "Plushies" };
@@ -418,6 +402,50 @@ const predefDialog = {
 // 下面是根据上面的内容，生成描述的代码
 // 也就是说，不用手动写描述文字啦，只用写上面的内容就行
 
+/**
+ * @typedef {Translation.Entry | string} TypeNameEntry
+ */
+
+/**
+ * @typedef {object} FullAndShort
+ * @property {TypeNameEntry} Full
+ * @property {TypeNameEntry} Short
+ */
+
+/**
+ * @param {TypeNameEntry | FullAndShort} obj
+ * @returns {obj is TypeNameEntry}
+ */
+function isTypeNameEntry(obj) {
+    return typeof obj === "string" || !("Full" in obj && "Short" in obj);
+}
+
+/**
+ *
+ * @param {TypeNameEntry} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function resolveTypeName(obj, lang) {
+    if (typeof obj === "string") return obj;
+    return obj[lang] || obj.CN || obj.EN || "";
+}
+
+/**
+ * @param { TypeNameEntry | FullAndShort} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function takeFullName(obj, lang) {
+    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Full, lang);
+}
+
+/**
+ * @param { TypeNameEntry | FullAndShort} obj
+ * @param {ServerChatRoomLanguage} lang
+ */
+function takeShortName(obj, lang) {
+    return isTypeNameEntry(obj) ? resolveTypeName(obj, lang) : resolveTypeName(obj.Short, lang);
+}
+
 // 图层不允许调色
 asset.Layer.forEach((layer) => {
     layer.AllowColorize = false;
@@ -427,7 +455,7 @@ asset.Layer.forEach((layer) => {
 /** @type {ModularItemModuleConfig []} */
 const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
-    const Name = typeNames[Key];
+    const Name = takeShortName(typeNameNext[Key], "CN");
     const module = pv.find((m) => m.Name === Name);
     if (!module) {
         pv.push({
@@ -440,15 +468,15 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
 
-/** @type { Record<keyof typeof typeNames, string[]> } */
+/** @type { Record<keyof typeof typeNameNext, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const [k] = Object.entries(cv.AllowTypes)[0];
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNames, string[]> } */({}));
+}, /** @type { Record<keyof typeof typeNameNext, string[]> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -461,25 +489,12 @@ modules.forEach((m) => {
     };
 });
 
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, {lastType:string}>} */
-function scriptDraw(mdata, originalFunction, { C, Item, PersistentData }) {
-    const data = PersistentData();
-    const typeRecord = Item.Property?.TypeRecord || {};
-
-    let needUpdate = false;
-    const activeType = Object.entries(typeRecord).find(([k, v]) => !!v && k !== data.lastType);
-    if (activeType) {
-        data.lastType = activeType[0];
-        for (const k in typeRecord) {
-            if (k !== data.lastType) typeRecord[k] = 0;
-        }
-        needUpdate = true;
-    }
-
-    if (needUpdate) {
-        if (C.IsPlayer()) ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
-        CharacterRefresh(C, false);
-    }
+/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
+function click(data, originalFunction) {
+    const property = DialogFocusItem?.Property;
+    if (!property || data.currentModule === "Base") return originalFunction();
+    property.TypeRecord = {};
+    originalFunction();
 }
 
 /** @type {ModularItemConfig} */
@@ -490,22 +505,25 @@ const extended = {
     DrawImages: false,
     DrawData: Tools.makeButtonGroup(modules.length),
     ScriptHooks: {
-        ScriptDraw: scriptDraw,
+        Click: click,
     },
 };
 
 const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const [k, v] = Object.entries(cv.AllowTypes)[0];
-    pv[`${typeNames[k]}${v}`] = cv.Name;
+    pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
     {
         selectBase: "选择玩偶房间",
-        module: ({ Name, Key }) => ({ Select: `选择${Name}`, Module: `${typeNames[Key]}` }),
-        option: (option, optionIndex, { Name }) => {
+        module: ({ Key }) => ({
+            Select: `选择${takeFullName(typeNameNext[Key], "CN")}`,
+            Module: `${takeShortName(typeNameNext[Key], "CN")}`,
+        }),
+        option: (_, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName) return { Option: "空", Set: "SourceCharacter移除了DestinationCharacter手上的玩偶." };
             return {
@@ -521,7 +539,10 @@ const enDialog = DialogTools.dialogGenerator(
     modules,
     {
         selectBase: "Select Plushies Room",
-        module: ({ Name, Key }) => ({ Select: `Select ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
+        module: ({ Key }) => ({
+            Select: `Select ${takeFullName(typeNameNext[Key], "EN")}`,
+            Module: `${takeShortName(typeNameNext[Key], "EN")}`,
+        }),
         option: (option, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName)
@@ -539,8 +560,11 @@ const ruDialog = DialogTools.dialogGenerator(
     modules,
     {
         selectBase: "Выбрать комнату с куклами",
-        module: ({ Name, Key }) => ({ Select: `Выбрать ${Name}`, Module: `${typeNamesEN[Key] || typeNames[Key]}` }),
-        option: (option, optionIndex, { Name }) => {
+        module: ({ Key }) => ({
+            Select: `Выбрать ${takeFullName(typeNameNext[Key], "EN")}`,
+            Module: `${takeShortName(typeNameNext[Key], "EN")}`,
+        }),
+        option: (_, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName)
                 return { Option: "Пусто", Set: "SourceCharacter удаляет куклу из руки DestinationCharacter." };

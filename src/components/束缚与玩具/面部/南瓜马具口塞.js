@@ -4,8 +4,8 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "南瓜马具口塞",
     Random: false,
-    Top: 0,
-    Left: 0,
+    Left: 210,
+    Top: 80,
     Priority: 36,
     ParentGroup: {},
     Fetish: ["Leather"],
@@ -18,20 +18,7 @@ const asset = {
     Effect: [E.BlockMouth, E.GagMedium],
     ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }],
     DefaultColor: ["#181818", "Default", "Default", "Default"],
-    Layer: [
-        {
-            Name: "带子",
-        },
-        {
-            Name: "金属",
-        },
-        {
-            Name: "南瓜",
-        },
-        {
-            Name: "眼睛",
-        },
-    ],
+    Layer: [{ Name: "带子" }, { Name: "金属" }, { Name: "南瓜" }, { Name: "眼睛" }],
     PoseMapping: {},
 };
 

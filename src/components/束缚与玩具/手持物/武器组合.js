@@ -8,8 +8,6 @@ const group = "ItemHandheld";
 const asset = {
     Name: "武器组合",
     Random: false,
-    Left: 30,
-    Top: 90,
     Difficulty: -10,
     ParentGroup: {},
     IsRestraint: false,
@@ -18,14 +16,13 @@ const asset = {
         ...AssetPoseMapping.ItemHandheld,
     },
     Layer: [
-        { Name: "法杖1", AllowTypes: { t: 0 } },
-        { Name: "法杖2", AllowTypes: { t: 0 } },
-        { Name: "剑1", AllowTypes: { t: 1, s: 0 }, Priority: 4 },
-        { Name: "剑2", CopyLayerColor: "剑1", AllowTypes: { t: 1, s: 1 } },
-        { Name: "弩1", AllowTypes: { t: 2, s: 0 }, Priority: 4 },
-        { Name: "弩2", CopyLayerColor: "弩1", AllowTypes: { t: 2, s: 1 } },
-        { Name: "斧1", AllowTypes: { t: 3, s: 0 }, Priority: 4 },
-        { Name: "斧2", CopyLayerColor: "斧1", AllowTypes: { t: 3, s: 1 } },
+        { Left: 0, Top: 90, Name: "法杖1", AllowTypes: { t: 0 } },
+        { Left: 0, Top: 90, Name: "法杖2", AllowTypes: { t: 0 } },
+        { Left: 40, Top: 60, Name: "剑", CreateLayerTypes: ["s"], AllowTypes: { t: 1 } },
+        { Left: 40, Top: 60, Name: "弩", CreateLayerTypes: ["s"], AllowTypes: { t: 2 } },
+        { Left: 40, Top: 60, Name: "斧", CreateLayerTypes: ["s"], AllowTypes: { t: 3 } },
+        { Left: 0, Top: -250, Name: "FF重剑", CreateLayerTypes: ["s"], AllowTypes: { t: 4 } },
+        { Left: 150, Top: 40, Name: "S大师剑", CreateLayerTypes: ["s"], AllowTypes: { t: 5 } },
     ],
 };
 
@@ -38,16 +35,20 @@ const layerNames = {
     CN: {
         法杖1: "水晶",
         法杖2: "法杖",
-        剑1: "剑",
-        弩1: "弩",
-        斧1: "斧",
+        剑: "剑",
+        弩: "弩",
+        斧: "斧",
+        FF重剑: "破坏之剑",
+        S大师剑: "大师剑",
     },
     EN: {
         法杖1: "Crystal",
         法杖2: "Staff",
-        剑1: "Sword",
-        弩1: "Crossbow",
-        斧1: "Axe",
+        剑: "Sword",
+        弩: "Crossbow",
+        斧: "Axe",
+        FF重剑: "Buster Sword",
+        S大师剑: "Master Sword",
     },
 };
 
@@ -60,13 +61,13 @@ const extended = {
             Name: "Type",
             Key: "t",
             DrawImages: false,
-            Options: [{}, {}, {}, {}],
+            Options: [{}, {}, {}, {}, {}, {}],
         },
         {
             Name: "Sheathe",
             Key: "s",
             DrawImages: false,
-            Options: [{}, { Property: { AllowActivity: ["RubItem", "SpankItem"] } }],
+            Options: [{ Property: { OverridePriority: 4 } }, { Property: { AllowActivity: ["RubItem", "SpankItem"] } }],
         },
     ],
 };
@@ -82,11 +83,15 @@ const assetStrings = {
         Optiont1: "剑",
         Optiont2: "弩",
         Optiont3: "斧",
+        Optiont4: "破坏之剑",
+        Optiont5: "大师剑",
 
         Sett0: "SourceCharacter给了TargetCharacter一个法杖道具。",
         Sett1: "SourceCharacter给了TargetCharacter一个剑道具。",
         Sett2: "SourceCharacter给了TargetCharacter一个弩道具。",
         Sett3: "SourceCharacter给了TargetCharacter一个斧道具。",
+        Sett4: "SourceCharacter给了TargetCharacter一个破坏之剑道具。",
+        Sett5: "SourceCharacter给了TargetCharacter一个大师剑道具。",
 
         SelectSheathe: "选择拔出",
         Options0: "收起",
@@ -105,11 +110,15 @@ const assetStrings = {
         Optiont1: "Sword",
         Optiont2: "Crossbow",
         Optiont3: "Axe",
+        Optiont4: "Buster Sword",
+        Optiont5: "Master Sword",
 
         Sett0: "SourceCharacter gives TargetCharacter a staff prop.",
         Sett1: "SourceCharacter gives TargetCharacter a sword prop.",
         Sett2: "SourceCharacter gives TargetCharacter a crossbow prop.",
         Sett3: "SourceCharacter gives TargetCharacter an axe prop.",
+        Sett4: "SourceCharacter gives TargetCharacter a buster sword prop.",
+        Sett5: "SourceCharacter gives TargetCharacter a master sword prop.",
 
         SelectSheathe: "Select Draw",
         Options0: "Sheathe",
@@ -121,9 +130,6 @@ const assetStrings = {
 };
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [
-        { t: [1, 3], s: 1 },
-        { t: 0, s: [0, 1] },
-    ]);
+    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3, 4, 5], s: 1 }]);
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings });
 }

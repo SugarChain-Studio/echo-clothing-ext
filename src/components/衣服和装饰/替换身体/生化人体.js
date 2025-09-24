@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { PoseMapTools, Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
 import { registerDrawHook } from "../../../lib/afterDraw";
@@ -29,7 +29,7 @@ const asset = {
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 7,
+    Priority: 8,
     Gender: "F",
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     DefaultColor: ["Default", "Default", "#696776", "#7E5F69", "#E3BFBF"],
@@ -78,16 +78,14 @@ const asset = {
         {
             Name: "上身遮罩",
             ParentGroup: "BodyUpper",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
+            PoseMapping: PoseMapTools.HideFullBody(),
             AllowColorize: false,
             HasImage: false,
         },
         {
             Name: "下身遮罩",
             ParentGroup: "BodyLower",
+            Priority: 9,
             PoseMapping: { ...AssetPoseMapping.BodyLower, Kneel: "LegsClosed" },
             AllowColorize: false,
             HasImage: false,
