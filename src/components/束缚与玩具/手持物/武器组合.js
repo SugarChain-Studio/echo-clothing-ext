@@ -21,8 +21,6 @@ const asset = {
         { Left: 40, Top: 60, Name: "剑", CreateLayerTypes: ["s"], AllowTypes: { t: 1 } },
         { Left: 40, Top: 60, Name: "弩", CreateLayerTypes: ["s"], AllowTypes: { t: 2 } },
         { Left: 40, Top: 60, Name: "斧", CreateLayerTypes: ["s"], AllowTypes: { t: 3 } },
-        { Left: 0, Top: -250, Name: "FF重剑", CreateLayerTypes: ["s"], AllowTypes: { t: 4 } },
-        { Left: 150, Top: 40, Name: "S大师剑", CreateLayerTypes: ["s"], AllowTypes: { t: 5 } },
     ],
 };
 
@@ -38,8 +36,6 @@ const layerNames = {
         剑: "剑",
         弩: "弩",
         斧: "斧",
-        FF重剑: "破坏之剑",
-        S大师剑: "大师剑",
     },
     EN: {
         法杖1: "Crystal",
@@ -47,8 +43,6 @@ const layerNames = {
         剑: "Sword",
         弩: "Crossbow",
         斧: "Axe",
-        FF重剑: "Buster Sword",
-        S大师剑: "Master Sword",
     },
 };
 
@@ -61,7 +55,7 @@ const extended = {
             Name: "Type",
             Key: "t",
             DrawImages: false,
-            Options: [{}, {}, {}, {}, {}, {}],
+            Options: [{}, {}, {}, {}],
         },
         {
             Name: "Sheathe",
@@ -90,8 +84,6 @@ const assetStrings = {
         Sett1: "SourceCharacter给了TargetCharacter一个剑道具。",
         Sett2: "SourceCharacter给了TargetCharacter一个弩道具。",
         Sett3: "SourceCharacter给了TargetCharacter一个斧道具。",
-        Sett4: "SourceCharacter给了TargetCharacter一个破坏之剑道具。",
-        Sett5: "SourceCharacter给了TargetCharacter一个大师剑道具。",
 
         SelectSheathe: "选择拔出",
         Options0: "收起",
@@ -117,8 +109,6 @@ const assetStrings = {
         Sett1: "SourceCharacter gives TargetCharacter a sword prop.",
         Sett2: "SourceCharacter gives TargetCharacter a crossbow prop.",
         Sett3: "SourceCharacter gives TargetCharacter an axe prop.",
-        Sett4: "SourceCharacter gives TargetCharacter a buster sword prop.",
-        Sett5: "SourceCharacter gives TargetCharacter a master sword prop.",
 
         SelectSheathe: "Select Draw",
         Options0: "Sheathe",
@@ -130,6 +120,6 @@ const assetStrings = {
 };
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3, 4, 5], s: 1 }]);
+    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3], s: 1 }]);
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings });
 }
