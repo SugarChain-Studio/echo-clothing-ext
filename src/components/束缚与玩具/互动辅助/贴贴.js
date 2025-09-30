@@ -9,6 +9,7 @@ const assets = [
         Visible: false,
         Value: -1,
         Effect: [E.Leash],
+        RemoveAtLogin: true,
     },
     {
         translation: { CN: "贴贴", EN: "Cuddle", RU: "Обнимашки" },
