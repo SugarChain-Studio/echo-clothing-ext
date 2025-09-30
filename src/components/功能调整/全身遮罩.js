@@ -35,15 +35,18 @@ function runFullMask({ group, asset, layers }) {
 
 export const FullMask = {
     /**
-     * @param {CustomGroupName} group
+     * @param {CustomGroupName | CustomGroupName[]} group
      * @param {string} asset
      * @property {string[]} [layers]
      */
     push: (group, asset, layers) => {
-        if (groups) {
-            runFullMask({ group, asset, layers });
-        } else {
-            wkList.push({ group, asset, layers });
+        const group_ = Array.isArray(group) ? group : [group];
+        for (const group of group_) {
+            if (groups) {
+                runFullMask({ group, asset, layers });
+            } else {
+                wkList.push({ group, asset, layers });
+            }
         }
     },
 };

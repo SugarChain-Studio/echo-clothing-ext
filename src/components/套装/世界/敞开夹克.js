@@ -114,6 +114,7 @@ const asset = {
     ],
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Cloth",
+    Expose: ["ItemNipples", "ItemNipples", "ItemBreast"],
     PoseMapping: poseMapping,
     Layer: layerDefBase.map((l) => ({ ...l, ColorName: undefined })),
 };
@@ -184,16 +185,12 @@ const imageMapping = Object.entries({ Normal: ["Large", "XLarge"], Small: ["Flat
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Hand");
-    /** @type {AssetGroupBodyName[]} */
-    const groups = ["Cloth", "ClothOuter"];
-    for (const group of groups) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            translation,
-            layerNames,
-            extended,
-            assetStrings,
-        });
-    }
+    AssetManager.addAssetWithConfig(["Cloth", "ClothOuter"], asset, {
+        translation,
+        layerNames,
+        extended,
+        assetStrings,
+    });
 
     AssetManager.addImageMapping(imageMapping);
 }

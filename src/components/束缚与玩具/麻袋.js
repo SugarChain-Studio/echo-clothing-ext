@@ -1,5 +1,4 @@
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../lib";
 import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
@@ -86,13 +85,11 @@ const assetStrings = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["ItemDevices", "ItemHood"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            layerNames,
-            extended,
-            translation,
-            assetStrings,
-        });
-        FullMask.push(group, asset.Name, ["麻袋遮罩"]);
-    }
+    AssetManager.addAssetWithConfig(["ItemDevices", "ItemHood"], asset, {
+        layerNames,
+        extended,
+        translation,
+        assetStrings,
+    });
+    FullMask.push(["ItemDevices", "ItemHood"], asset.Name, ["麻袋遮罩"]);
 }

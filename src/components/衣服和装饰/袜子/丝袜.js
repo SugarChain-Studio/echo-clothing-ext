@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -24,7 +23,5 @@ const translation = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["Socks", "SuitLower"])) {
-        AssetManager.addAssetWithConfig(group, asset, { translation, layerNames: {} });
-    }
+    AssetManager.addAssetWithConfig(["Socks", "SuitLower"], asset, { translation });
 }

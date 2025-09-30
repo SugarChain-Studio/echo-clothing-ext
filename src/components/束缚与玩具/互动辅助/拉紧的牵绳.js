@@ -1,3 +1,4 @@
+import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 const asset = {
@@ -6,28 +7,45 @@ const asset = {
     Value: -1, // 使用这个数据来让物品在列表不显示
 };
 
-const translations = {
-    CN: "拉紧的牵绳",
-    EN: "Pulled Leash",
-    RU: "Потянутый повод",
+const assetName = /** @type {const} */ (["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]);
+
+const translation = {
+    拉紧的牵绳_Luzi: {
+        CN: "拉紧的牵绳",
+        EN: "Pulled Leash",
+        RU: "Потянутый повод",
+    },
+    拉紧的链子_Luzi: {
+        CN: "拉紧的链子",
+        EN: "Pulled Chain",
+        RU: "Потянутая цепь",
+    },
+};
+
+const nAsset = {
+    拉紧的牵绳_Luzi: "CollarLeash",
+    拉紧的链子_Luzi: "ChainLeash",
 };
 
 /** @type {AssetGroupItemName[]} */
 const groups = ["ItemMisc", "ItemHandheld"];
 
-export default function () {
-    for (const group of groups) {
-        ["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]
-            .map((Name) => ({ ...asset, Name }))
-            .forEach((asset) => {
-                AssetManager.addAsset(group, asset, undefined, translations);
-            });
+const assets = assetName.map(
+    (name) =>
+        /** @type {AddAssetWithConfigParams} */ ([groups, { ...asset, Name: name }, { translation: translation[name] }])
+);
 
-        AssetManager.addImageMapping({
-            [`Assets/Female3DCG/${group}/Preview/拉紧的牵绳_Luzi.png`]:
-                "Assets/Female3DCG/ItemNeckRestraints/Preview/CollarLeash.png",
-            [`Assets/Female3DCG/${group}/Preview/拉紧的链子_Luzi.png`]:
-                "Assets/Female3DCG/ItemNeckRestraints/Preview/ChainLeash.png",
-        });
-    }
+export default function () {
+    AssetManager.addAssetWithConfig(assets);
+
+    AssetManager.addImageMapping(
+        Object.fromEntries(
+            assetName.flatMap((a) =>
+                groups.map((g) => [
+                    ImageMapTools.assetPreview(g, a),
+                    ImageMapTools.assetPreview("ItemNeckRestraints", nAsset[a]),
+                ])
+            )
+        )
+    );
 }
