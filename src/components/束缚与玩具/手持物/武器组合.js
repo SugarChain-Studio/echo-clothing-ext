@@ -26,6 +26,7 @@ const asset = {
         // Excalibur of Saber By KEAINAUX
         { Left: 50, Top: 80, Name: "胜利剑", CreateLayerTypes: ["s"], AllowTypes: { t: 5 } },
         { Left: 20, Top: 40, Name: "玛恩纳", CreateLayerTypes: ["s"], AllowTypes: { t: 6 } },
+        { Left: 130, Top: 0, Name: "斩龙剑", CreateLayerTypes: ["s"], AllowTypes: { t: 7 } },
     ],
 };
 
@@ -45,6 +46,7 @@ const layerNames = {
         羽毛笔: "羽毛笔-镰刀",
         胜利剑: "誓约胜利之剑",
         玛恩纳: "玛恩纳-剑",
+        斩龙剑: "斩龙剑",
     },
     EN: {
         法杖1: "Crystal",
@@ -56,6 +58,7 @@ const layerNames = {
         羽毛笔: "La Pluma - Scythe",
         胜利剑: "Excalibur",
         玛恩纳: "Młynar - Sword",
+        斩龙剑: "Dragon Slayer",
     },
 };
 
@@ -68,7 +71,7 @@ const extended = {
             Name: "Type",
             Key: "t",
             DrawImages: true,
-            Options: [{}, {}, {}, {}, {}, {}, {}],
+            Options: [{}, {}, {}, {}, {}, {}, {}, {}],
         },
         {
             Name: "Sheathe",
@@ -92,6 +95,7 @@ const assetStrings = {
         Optiont4: "羽毛笔-镰刀",
         Optiont5: "誓约胜利之剑",
         Optiont6: "玛恩纳-剑",
+        Optiont7: "斩龙剑",
 
         Sett0: "SourceCharacter给了TargetCharacter一个法杖道具。",
         Sett1: "SourceCharacter给了TargetCharacter一个剑道具。",
@@ -100,6 +104,7 @@ const assetStrings = {
         Sett4: "SourceCharacter给了TargetCharacter一把属于羽毛笔的镰刀道具。",
         Sett5: "SourceCharacter给了TargetCharacter一把属于阿尔托利亚的誓约胜利之剑道具。",
         Sett6: "SourceCharacter给了TargetCharacter一把属于玛恩纳的剑道具。",
+        Sett7: "SourceCharacter给了TargetCharacter一把属于格斯的斩龙剑道具。",
 
         SelectSheathe: "选择拔出",
         Options0: "收起",
@@ -121,6 +126,7 @@ const assetStrings = {
         Optiont4: "La Pluma - Scythe",
         Optiont5: "Excalibur",
         Optiont6: "Młynar - Sword",
+        Optiont7: "Dragon Slayer",
 
         Sett0: "SourceCharacter gives TargetCharacter a staff prop.",
         Sett1: "SourceCharacter gives TargetCharacter a sword prop.",
@@ -129,6 +135,7 @@ const assetStrings = {
         Sett4: "SourceCharacter gives TargetCharacter a scythe prop from La Pluma.",
         Sett5: "SourceCharacter gives TargetCharacter a Excalibur prop from Artoria.",
         Sett6: "SourceCharacter gives TargetCharacter a sword prop from Młynar.",
+        Sett7: "SourceCharacter gives TargetCharacter a Dragon Slayer prop from Guts.",
 
         SelectSheathe: "Select Draw",
         Options0: "Sheathe",
