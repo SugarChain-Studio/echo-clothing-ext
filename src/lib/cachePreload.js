@@ -3,8 +3,7 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { sleepUntil } from "@sugarch/bc-mod-utility";
 
 const loadQueue = [];
-
-const preloadPrereq = () => !!GLDrawCanvas && !String(GLDrawLoadImage).includes("Img.src = url;");
+let loaded = false;
 
 function purl(url) {
     if (url.startsWith("data:")) return url;
@@ -19,16 +18,17 @@ function _glPreload(gl, url) {
 
 async function cachePreloadGL(url) {
     const url_ = purl(url);
-    if (preloadPrereq()) {
+    if (loaded) {
         _glPreload(GLDrawCanvas.GL, url_);
     } else {
         loadQueue.push(url_);
     }
-    DrawGetImage(url_);
+    DrawGetImage(url); // DrawGetImage有crossOrigin处理，无需等待loaded
 }
 
 HookManager.afterInit(() => {
-    sleepUntil(() => preloadPrereq(), 100).then(() => {
+    sleepUntil(() => !!GLDrawCanvas, 100).then(() => {
+        loaded = true;
         loadQueue.forEach((q) => _glPreload(GLDrawCanvas.GL, q));
     });
 });
