@@ -26,7 +26,7 @@ const asset = {
         // Excalibur of Saber By KEAINAUX
         { Left: 50, Top: 80, Name: "胜利剑", CreateLayerTypes: ["s"], AllowTypes: { t: 5 } },
         { Left: 20, Top: 40, Name: "玛恩纳", CreateLayerTypes: ["s"], AllowTypes: { t: 6 } },
-        { Left: 130, Top: 0, Name: "斩龙剑", CreateLayerTypes: ["s"], AllowTypes: { t: 7 } },
+        { Left: 130, Top: -125, Name: "斩龙剑", CreateLayerTypes: ["s"], AllowTypes: { t: 7 } },
     ],
 };
 
