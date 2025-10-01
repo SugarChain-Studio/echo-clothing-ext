@@ -60,6 +60,7 @@
         "@sugarch/bc-mod-utility": "^0.2.11",
         "bc-stubs": "120.0.0",
         "bondage-club-mod-sdk": "^1.2.0",
+        "conventional-changelog-cli": "^5.0.0",
         "copyfiles": "^2.4.1",
         "eslint": "^9.36.0",
         "github-markdown-css": "^5.8.1",
