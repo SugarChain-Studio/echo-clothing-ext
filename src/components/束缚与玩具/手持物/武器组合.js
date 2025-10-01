@@ -16,15 +16,34 @@ const asset = {
         ...AssetPoseMapping.ItemHandheld,
     },
     Layer: [
-        { Left: 0, Top: 90, Name: "法杖1", AllowTypes: { t: 0 } },
-        { Left: 0, Top: 90, Name: "法杖2", AllowTypes: { t: 0 } },
+        { Left: 0, Top: 90, ColorGroup: "法杖", Name: "法杖1", AllowTypes: { t: 0 } },
+        { Left: 0, Top: 90, ColorGroup: "法杖", Name: "法杖2", AllowTypes: { t: 0 } },
         { Left: 40, Top: 60, Name: "剑", CreateLayerTypes: ["s"], AllowTypes: { t: 1 } },
         { Left: 40, Top: 60, Name: "弩", CreateLayerTypes: ["s"], AllowTypes: { t: 2 } },
         { Left: 40, Top: 60, Name: "斧", CreateLayerTypes: ["s"], AllowTypes: { t: 3 } },
+
         // Scythe of La Pluma By Pl.e
-        { Left: 0, Top: -125, Name: "羽毛笔", CreateLayerTypes: ["s"], AllowTypes: { t: 4 } },
+        {
+            Left: -250,
+            Top: -125,
+            ColorGroup: "羽毛笔",
+            Name: "羽毛笔_r",
+            Priority: 4,
+            CreateLayerTypes: ["s"],
+            AllowTypes: { t: 4 },
+        },
+        {
+            Left: -250,
+            Top: -125,
+            ColorGroup: "羽毛笔",
+            Name: "羽毛笔_s",
+            CreateLayerTypes: ["s"],
+            AllowTypes: { t: 4 },
+        },
+
         // Excalibur of Saber By KEAINAUX
         { Left: 50, Top: 80, Name: "胜利剑", CreateLayerTypes: ["s"], AllowTypes: { t: 5 } },
+
         { Left: 20, Top: 40, Name: "玛恩纳", CreateLayerTypes: ["s"], AllowTypes: { t: 6 } },
         { Left: 130, Top: -125, Name: "斩龙剑", CreateLayerTypes: ["s"], AllowTypes: { t: 7 } },
     ],
@@ -37,25 +56,33 @@ const translation = {
 
 const layerNames = {
     CN: {
-        法杖1: "水晶",
-        法杖2: "法杖",
+        法杖: "法杖",
+        法杖1: "木杖",
+        法杖2: "水晶",
+
         剑: "剑",
         弩: "弩",
         斧: "斧",
 
         羽毛笔: "羽毛笔-镰刀",
+        羽毛笔_s: "镰刀",
+        羽毛笔_r: "系绳",
+
         胜利剑: "誓约胜利之剑",
         玛恩纳: "玛恩纳-剑",
         斩龙剑: "斩龙剑",
     },
     EN: {
-        法杖1: "Crystal",
+        法杖1: "Staff (Crystal)",
         法杖2: "Staff",
         剑: "Sword",
         弩: "Crossbow",
         斧: "Axe",
 
         羽毛笔: "La Pluma - Scythe",
+        羽毛笔_s: "Scythe",
+        羽毛笔_r: "Rope",
+
         胜利剑: "Excalibur",
         玛恩纳: "Młynar - Sword",
         斩龙剑: "Dragon Slayer",
