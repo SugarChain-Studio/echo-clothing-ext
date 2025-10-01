@@ -174,6 +174,6 @@ const assetStrings = {
 };
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3, 4, 5, 6], s: 1 }]);
+    ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3, 4, 5, 6, 7], s: 1 }]);
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings });
 }
