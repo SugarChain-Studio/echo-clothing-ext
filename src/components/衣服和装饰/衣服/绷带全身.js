@@ -1,8 +1,20 @@
 import { AssetManager } from "../../../assetForward";
+import { SockLRTool } from "../../../lib";
 
-/** @type { CustomGroupedAssetDefinitions } */
-const assets = {
-    Gloves: [
+const translation = { CN: "绷带", EN: "Bandage", RU: "Повязка" };
+
+/** @type {CustomAssetDefinition} */
+const asset = {
+    Name: "绷带_Luzi",
+    Random: false,
+    Top: 0,
+    Left: { "": 0, "KneelingSpread": 30 },
+};
+
+/** @type { AddAssetWithConfigParams[] } */
+const assets = [
+    [
+        "Gloves",
         {
             Name: "绷带_Luzi",
             Random: false,
@@ -20,59 +32,18 @@ const assets = {
                 AllFours: "Hide",
             },
         },
+        { translation },
     ],
-    Socks: [
-        {
-            Name: "绷带_Luzi",
-            Random: false,
-            Top: 0,
-            Left: {
-                BaseLower: 0,
-                Kneel: 0,
-                KneelingSpread: 30,
-                LegsClosed: 0,
-                LegsOpen: 0,
-                Spread: 0,
-            },
-        },
-    ],
-    // SocksLeft: [
-    //     {
-    //         Name: "绷带_Luzi",
-    //         Random: false,
-    //         Top: 0,
-    //         Left: {
-    //             BaseLower: 0,
-    //             Kneel: 0,
-    //             KneelingSpread: 30,
-    //             LegsClosed: 0,
-    //             LegsOpen: 0,
-    //             Spread: 0,
-    //         },
-    //     }
-    // ],
-    // SocksRight: [
-    //     {
-    //         Name: "绷带_Luzi",
-    //         Random: false,
-    //         Top: 0,
-    //         Left: {
-    //             BaseLower: 0,
-    //             Kneel: 0,
-    //             KneelingSpread: 30,
-    //             LegsClosed: 0,
-    //             LegsOpen: 0,
-    //             Spread: 0,
-    //         },
-    //     }
-    // ],
-    Bra: [
+    ["Socks", asset, { translation }],
+    [
+        "Bra",
         {
             Name: "绷带全身_Luzi",
             Random: false,
             Gender: "F",
             Top: 0,
             Left: 0,
+            Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             Layer: [
                 {
                     Name: "上身",
@@ -102,54 +73,13 @@ const assets = {
                 },
             ],
         },
+        { translation, layerNames: { EN: { 上身: "Top", 下身: "Bottom" } } },
     ],
-};
-
-const translations = {
-    CN: {
-        Gloves: {
-            绷带_Luzi: "绷带",
-        },
-        Socks: {
-            绷带_Luzi: "绷带",
-        },
-        SocksRight: {
-            绷带_Luzi: "绷带",
-        },
-        Bra: {
-            绷带全身_Luzi: "绷带",
-        },
-    },
-    EN: {
-        Gloves: {
-            绷带_Luzi: "Bandage",
-        },
-        Socks: {
-            绷带_Luzi: "Bandage",
-        },
-        SocksRight: {
-            绷带_Luzi: "Bandage",
-        },
-        Bra: {
-            绷带全身_Luzi: "Bandage",
-        },
-    },
-    RU: {
-        Gloves: {
-            绷带_Luzi: "повязк",
-        },
-        Socks: {
-            绷带_Luzi: "повязк",
-        },
-        SocksRight: {
-            绷带_Luzi: "повязк",
-        },
-        Bra: {
-            绷带全身_Luzi: "повязк",
-        },
-    },
-};
+];
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig(assets);
+    SockLRTool.createSockLR(asset).forEach(([key, value]) => {
+        AssetManager.addAssetWithConfig(key, value, { translation });
+    });
 }
