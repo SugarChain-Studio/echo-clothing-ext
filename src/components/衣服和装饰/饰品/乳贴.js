@@ -1,4 +1,3 @@
-import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type { AddAssetWithConfigParamsNoGroup[] }} */
