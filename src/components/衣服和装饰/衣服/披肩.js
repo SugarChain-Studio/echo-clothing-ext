@@ -158,7 +158,5 @@ const assets = [
 ];
 
 export default function () {
-    for (const param of assets) {
-        AssetManager.addAssetWithConfig(...param);
-    }
+    AssetManager.addAssetWithConfig(assets);
 }

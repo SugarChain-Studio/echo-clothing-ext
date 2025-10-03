@@ -87,12 +87,10 @@ export default function () {
     }, /** @type {Record<string,string>} */ ({}));
     AssetManager.addImageMapping(mappings);
 
-    for (const group of /** @type {AssetGroupBodyName[]} */ (["Cloth", "ClothOuter"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            translation,
-            layerNames,
-            extended,
-            assetStrings,
-        });
-    }
+    AssetManager.addAssetWithConfig(["Cloth", "ClothOuter"], asset, {
+        translation,
+        layerNames,
+        extended,
+        assetStrings,
+    });
 }

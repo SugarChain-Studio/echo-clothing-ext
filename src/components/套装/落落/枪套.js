@@ -18,12 +18,8 @@ const translation = {
 };
 
 export default function () {
-    /** @type {CustomGroupName[]} */
-    const groups = ["Garters", "ClothAccessory"];
-    for (const group of groups) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            translation,
-            layerNames: {},
-        });
-    }
+    AssetManager.addAssetWithConfig(["Garters", "ClothAccessory"], asset, {
+        translation,
+        layerNames: {},
+    });
 }

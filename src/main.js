@@ -9,6 +9,7 @@ import { Logger } from "@mod-utils/log";
 import { CraftingCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
+import bcModSdk from "bondage-club-mod-sdk";
 
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",
@@ -42,7 +43,8 @@ once(ModInfo.name, () => {
             Logger.error(`Failed to fetch asset overrides: ${error.message}`);
         });
 
-    HookManager.init(ModInfo);
+    const mod = bcModSdk.registerMod(ModInfo);
+    HookManager.initWithMod(mod);
     AssetManager.init(setup);
 
     AssetManager.enableValidation((param) => {

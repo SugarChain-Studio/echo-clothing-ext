@@ -31,7 +31,7 @@ function createSockLR(asset, group = "Socks") {
     const maskName = `Mask${asset.Name}`;
 
     const imageMap = /** @type {AssetGroupName[]}*/ (
-        asset.DynamicGroupName ? [asset.DynamicGroupName] : ["SocksLeft", "SocksRight"]
+        asset.DynamicGroupName ? [asset.DynamicGroupName] : [group]
     ).reduce((pv, cv) => {
         pv[ImageMapTools.assetLayer(cv, `${asset.Name}_${maskName}`)] = blackFill;
         return pv;

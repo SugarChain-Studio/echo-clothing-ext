@@ -1,5 +1,5 @@
+import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -10,48 +10,12 @@ const asset = {
     Priority: 14,
     DynamicGroupName: "Suit",
     Layer: [
-        {
-            Name: "1",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
-        {
-            Name: "2",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "3",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "4",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "5",
-            PoseMapping: {
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "6",
-            PoseMapping: {
-                AllFours: PoseType.HIDE,
-                Hogtied: "Hogtied",
-            },
-        },
+        { Name: "1", PoseMapping: PoseMapTools.HideFullBody({ Hogtied: "Hogtied" }) },
+        { Name: "2", PoseMapping: PoseMapTools.HideFullBody() },
+        { Name: "3", PoseMapping: PoseMapTools.HideFullBody() },
+        { Name: "4", PoseMapping: PoseMapTools.HideFullBody() },
+        { Name: "5", PoseMapping: PoseMapTools.HideFullBody() },
+        { Name: "6", PoseMapping: PoseMapTools.HideFullBody({ Hogtied: "Hogtied" }) },
     ],
 };
 
@@ -82,7 +46,5 @@ const translation = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["Suit", "Cloth"])) {
-        AssetManager.addAssetWithConfig(group, asset, { translation, layerNames });
-    }
+    AssetManager.addAssetWithConfig(["Suit", "Cloth"], asset, { translation, layerNames });
 }

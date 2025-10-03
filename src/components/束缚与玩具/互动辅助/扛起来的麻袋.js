@@ -9,6 +9,7 @@ export default function () {
             Random: false,
             Visible: false,
             Value: -1, // 使用这个数据来让物品在列表不显示
+            RemoveAtLogin: true,
         },
         undefined,
         {

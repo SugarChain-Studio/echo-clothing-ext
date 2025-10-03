@@ -75,12 +75,10 @@ const layerNames = {
 };
 
 export default function () {
-    for (const group of /** @type {AssetGroupItemName[]} */ (["ItemNipples", "ItemNipplesPiercings"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            extended,
-            translation,
-            layerNames,
-            assetStrings,
-        });
-    }
+    AssetManager.addAssetWithConfig(["ItemNipples", "ItemNipplesPiercings"], asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }
