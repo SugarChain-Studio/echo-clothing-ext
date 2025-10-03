@@ -82,7 +82,6 @@ const assets = {
             Layer: [{ Name: "底色" }, { Name: "顶色" }, { Name: "盖子" }, { Name: "外观" }, { Name: "吸管" }],
         },
         handFood("棒棒糖_Luzi", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
-        handFood("烤鱼_Luzi"),
         handFood("烤鱼_Luzi", { Layer: [{ Name: "竹签" }, { Name: "鱼" }] }),
         handFood("鸡腿_Luzi"),
         handFood("曲奇"),
