@@ -1,4 +1,4 @@
-import { DialogTools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -31,6 +31,7 @@ function beforeDraw(data, originalFunction, { LayerType, L }) {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
+    ChatTags: Tools.CommonChatTags(),
     Options: [{ Name: "无" }, { Name: "笨蛋" }, { Name: "母狗" }, { Name: "骚货" }, { Name: "肉便器" }],
     ScriptHooks: { BeforeDraw: beforeDraw },
 };
@@ -57,14 +58,14 @@ const assetStrings = DialogTools.autoItemStrings(
     },
     extended,
     {
-        CN: (from) =>
+        CN: (from, strings) =>
             from === "无"
                 ? `SourceCharacter擦除了DestinationCharacterAssetName上的文字。`
-                : `SourceCharacter在DestinationCharacterAssetName上写下了"${from}"`,
-        EN: (from) =>
-            from === "None"
-                ? `SourceCharacter erased the text on DestinationCharacterAssetName.`
-                : `SourceCharacter wrote "${from}" on DestinationCharacterAssetName.`,
+                : `SourceCharacter在DestinationCharacterAssetName上写下了"${strings[from]}"`,
+        EN: (from, strings) =>
+            from === "无"
+                ? `SourceCharacter erased the text on DestinationCharacter AssetName.`
+                : `SourceCharacter wrote "${strings[from]}" on DestinationCharacter AssetName.`,
     }
 );
 
