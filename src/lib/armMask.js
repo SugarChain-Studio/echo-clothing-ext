@@ -93,7 +93,8 @@ function createLayerDef(mode, allowTypes) {
  */
 function createArmMaskForCloth(groupName, asset, mode = "", allowTypes) {
     const layerDef = createLayerDef(mode, allowTypes);
-    asset.Layer?.push(layerDef) ?? (asset.Layer = [layerDef]);
+    asset.Layer ??= [{}];
+    asset.Layer.push(layerDef) ?? (asset.Layer = [layerDef]);
     AssetManager.addImageMapping(createMappings(groupName, asset.Name, mode));
 }
 
