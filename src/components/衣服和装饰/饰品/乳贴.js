@@ -13,6 +13,7 @@ const asset = [
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
+            DynamicGroupName: "Bra",
             Layer: [{ Name: "左" }, { Name: "右" }],
         },
         {
@@ -31,6 +32,7 @@ const asset = [
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
+            DynamicGroupName: "Bra",
             Layer: [{ Name: "左" }, { Name: "右" }],
         },
         {
