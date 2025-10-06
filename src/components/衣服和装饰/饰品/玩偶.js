@@ -288,6 +288,11 @@ const asset = {
         { Name: "Seb", AllowTypes: { ffe: 2 } },
         { Name: "Ryoko", AllowTypes: { ffe: 3 } },
 
+        // 1563
+        { Name: "月月", AllowTypes: { pen: 1 } },
+        { Name: "晓雾", AllowTypes: { pen: 2 } },
+        { Name: "Penelope", AllowTypes: { pen: 3 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -365,6 +370,7 @@ const typeNameNext = {
     hb: "月见里的海边",
     cai: "柴坊",
     nest: "Nest",
+    pen: "1563",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
@@ -468,7 +474,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+}, /** @type {ModularItemModuleConfig[]} */([]));
 
 /** @type { Record<keyof typeof typeNameNext, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -476,7 +482,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, string[]> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -513,7 +519,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
