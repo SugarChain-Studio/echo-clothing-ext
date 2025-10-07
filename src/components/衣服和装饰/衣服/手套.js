@@ -1,84 +1,73 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    Gloves: [
+/** @type {(overrides?: AssetPoseMapping) => AssetPoseMapping} */
+const glovePoseM = (overrides) => ({
+    ...{
+        TapedHands: "TapedHands",
+        Yoked: "Yoked",
+        OverTheHead: "OverTheHead",
+        BackBoxTie: "BackBoxTie",
+        BackElbowTouch: "Hide",
+        BackCuffs: "BackCuffs",
+        Hogtied: "Hide",
+        AllFours: "Hide",
+    },
+    ...overrides,
+});
+
+/** @type { AddAssetWithConfigParamsNoGroup[] }} */
+const assets = [
+    [
         {
             Name: "袖手套_Luzi",
             Random: false,
-            Top: 0,
-            Left: 0,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "Hide",
-                BackCuffs: "BackCuffs",
-                Hogtied: "Hide",
-                AllFours: "Hide",
+            ...Tools.topLeftBuilder(
+                { Left: 150, Top: 310 },
+                ["BackCuffs", { Left: 290, Top: 300 }],
+                ["Yoked", { Left: 60, Top: 150 }],
+                ["OverTheHead", { Left: 90, Top: 10 }]
+            ),
+            PoseMapping: glovePoseM(),
+            DefaultColor: ["default", "#ADAA9A"],
+            Layer: [{ AllowTypes: { typed: 0 } }, { Name: "L", AllowTypes: { typed: 1 } }],
+        },
+        {
+            translation: { CN: "袖手套", EN: "Sleeve Gloves" },
+            layerNames: { CN: { L: "浅色" }, EN: { L: "Lighter" } },
+            extended: {
+                Archetype: ExtendedArchetype.TYPED,
+                DrawImages: false,
+                Options: [{ Name: "B" }, { Name: "L" }],
+            },
+            assetStrings: {
+                CN: { Select: "选择颜色样式", B: "深色", L: "浅色" },
+                EN: { Select: "Select Color Style", B: "Dark", L: "Light" },
             },
         },
+    ],
+    [
         {
             Name: "丝手套2_Luzi",
             Random: false,
             Top: 0,
             Left: 0,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: glovePoseM({ BackCuffs: "Hide" }),
         },
+        { translation: { CN: "丝手套 2", EN: "Silk Gloves 2" } },
+    ],
+    [
         {
             Name: "手套渐变_Luzi",
             Random: false,
             Top: 0,
             Left: 0,
-            PoseMapping: {
-                TapedHands: "TapedHands",
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                BackBoxTie: "BackBoxTie",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            PoseMapping: glovePoseM({ BackCuffs: "Hide" }),
         },
+        { translation: { CN: "渐变手套", EN: "Gradient Gloves" } },
     ],
-};
-
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        Gloves: {
-            袖手套_Luzi: "袖手套",
-            丝手套2_Luzi: "丝手套 2",
-            手套渐变_Luzi: "手套渐变",
-        },
-    },
-    EN: {
-        Gloves: {
-            袖手套_Luzi: "Sleeve Gloves",
-            丝手套2_Luzi: "Silk Gloves 2",
-            手套渐变_Luzi: "Gloves Gradient",
-        },
-    },
-    RU: {
-        Gloves: {
-            袖手套_Luzi: "Перчатки-рукава",
-            丝手套2_Luzi: "Перчатки из шелка 2",
-            手套渐变_Luzi: "Градиент перчаток",
-        },
-    },
-};
+];
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig("Gloves", assets);
 }
