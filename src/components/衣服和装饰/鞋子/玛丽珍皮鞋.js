@@ -5,7 +5,7 @@ import { AssetManager } from "../../../assetForward";
 const asset = {
     Name: "玛丽珍皮鞋",
     Random: false,
-    Height: 14,
+    Height: 8,
     Top: 870,
     Left: 120,
     PoseMapping: {
@@ -16,20 +16,12 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: "Hide",
     },
-    DefaultColor: ["#404040", "#404040", "#757575"],
+    DefaultColor: ["#202020", "#202020", "#757575", "#FFFFFF"],
     Layer: [
         {
             Name: "鞋面",
             Priority: 23,
             AllowTypes: { l: 0 },
-            InheritPoseMappingFields: true,
-            PoseMapping: { Hogtied: "Hide" },
-        },
-        {
-            Name: "鞋面_单",
-            Priority: 23,
-            CopyLayerColor: "鞋面",
-            AllowTypes: { l: 1 },
             InheritPoseMappingFields: true,
             PoseMapping: { Hogtied: "Hide" },
         },
@@ -47,10 +39,33 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
+            Name: "高光",
+            Priority: 23,
+            AllowTypes: { l: 0 },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
+        {
+            Name: "鞋面_单",
+            Priority: 23,
+            CopyLayerColor: "鞋面",
+            AllowTypes: { l: 1 },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
+        {
             Name: "搭扣_单",
             Priority: 23,
             CopyLayerColor: "搭扣",
             AllowTypes: { l: 1 },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
+        {
+            Name: "高光_单",
+            Priority: 23,
+            AllowTypes: { l: 1 },
+            CopyLayerColor: "高光",
             InheritPoseMappingFields: true,
             PoseMapping: { Hogtied: "Hide" },
         },
@@ -70,8 +85,9 @@ const layerNames = {
         鞋面: "Shoes",
         鞋底: "Sole",
         搭扣: "Lacing",
+        高光: "Highlight",
         鞋面_单: "Shoes (Single Lacing)",
-        鞋底_薄: "Thin Sole",
+        高光_单: "Highlight (Single Lacing)",
         搭扣_单: "Single Lacing",
     },
 };
@@ -84,7 +100,7 @@ const translation = {
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
 function beforeDraw(data, original, { L, Y, Property }) {
     if (L === "鞋底" && Property?.TypeRecord?.b === 1) {
-        return { Y: Y - 7 };
+        return { Y: Y - 4 };
     }
 }
 
