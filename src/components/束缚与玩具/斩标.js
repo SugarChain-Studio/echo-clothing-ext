@@ -1,62 +1,73 @@
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "斩标_Luzi",
     Random: false,
-    Top: -430,
-    Left: 0,
+    Top: -120,
+    Left: 200,
     Extended: true,
-    Fetish: ["Sadism"],
-    Layer: [
-        {
-            Name: "牌子",
-            Priority: 1,
-        },
-        {
-            Name: "笨蛋",
-            Priority: 2,
-            AllowTypes: { typed: [1] },
-        },
-    ],
+    Priority: 4,
+    DefaultColor: ["#ADADAD", "#000000"],
+    Layer: [{ Name: "牌子" }, { Name: "文字", AllowTypes: { typed: [1, 2, 3, 4] }, CreateLayerTypes: ["typed"] }],
 };
 
 const layerNames = {
-    CN: {
-        牌子: "斩标",
-        笨蛋: "文字",
-    },
     EN: {
         牌子: "Marking Panel",
-        笨蛋: "Text",
+        文字: "Text",
     },
 };
 
+const langMapping = { CN: "CN", TW: "CN" };
+
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, {}>} */
+function beforeDraw(data, originalFunction, { LayerType, L }) {
+    if (L === "文字") return { LayerType: `${LayerType}_${langMapping[TranslationLanguage] || "EN"}` };
+}
+
+/** @type {TypedItemConfig} */
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [{ Name: "无" }, { Name: "笨蛋" }],
+    ChatTags: Tools.CommonChatTags(),
+    Options: [{ Name: "无" }, { Name: "笨蛋" }, { Name: "母狗" }, { Name: "骚货" }, { Name: "肉便器" }],
+    ScriptHooks: { BeforeDraw: beforeDraw },
 };
 
 /** @type {Translation.Dialog} */
-const assetStrings = {
-    CN: {
-        Select: "选择斩标文字",
-        无: "无",
-        笨蛋: "笨蛋",
-
-        Set无: "SourceCharacter擦掉了DestinationCharacter斩标上的字.",
-        Set笨蛋: "SourceCharacter在DestinationCharacter斩标上写上了笨蛋.",
+const assetStrings = DialogTools.autoItemStrings(
+    {
+        CN: {
+            Select: "选择斩标文字",
+            无: "无",
+            笨蛋: "笨蛋",
+            母狗: "母狗",
+            骚货: "骚货",
+            肉便器: "肉便器",
+        },
+        EN: {
+            Select: "Select Behead Marking Text",
+            无: "None",
+            笨蛋: "Fool",
+            母狗: "Bitch",
+            骚货: "Slut",
+            肉便器: "Cum Dump",
+        },
     },
-    EN: {
-        Select: "Select Marking Text",
-        无: "None",
-        笨蛋: "Fool",
-
-        Set无: "SourceCharacter erased the words on DestinationCharacter Behead Marking.",
-        Set笨蛋: "SourceCharacter wrote '笨蛋' (Fool) on DestinationCharacter Behead Marking.",
-    },
-};
+    extended,
+    {
+        CN: (from, strings) =>
+            from === "无"
+                ? `SourceCharacter擦除了DestinationCharacterAssetName上的文字。`
+                : `SourceCharacter在DestinationCharacterAssetName上写下了"${strings[from]}"`,
+        EN: (from, strings) =>
+            from === "无"
+                ? `SourceCharacter erased the text on DestinationCharacter AssetName.`
+                : `SourceCharacter wrote "${strings[from]}" on DestinationCharacter AssetName.`,
+    }
+);
 
 const translation = { CN: "斩标", EN: "Behead Marking" };
 

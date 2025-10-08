@@ -1,3 +1,4 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 
 /** @type { AddAssetWithConfigParamsNoGroup[] }} */
@@ -6,13 +7,13 @@ const asset = [
         {
             Name: "乳贴1",
             Random: false,
-            Left: { "": 180, "AllFours": 190 },
-            Top: { "": 290, "AllFours": 330 },
+            ...Tools.topLeftBuilder({ Left: 180, Top: 290 }, ["AllFours", { Left: 190, Top: 330 }]),
             ParentGroup: "BodyUpper",
             DefaultColor: ["#B16565", "#B16565"],
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
+            DynamicGroupName: "Bra",
             Layer: [{ Name: "左" }, { Name: "右" }],
         },
         {
@@ -24,13 +25,13 @@ const asset = [
         {
             Name: "乳贴2",
             Random: false,
-            Left: { "": 180, "AllFours": 190 },
-            Top: { "": 290, "AllFours": 330 },
+            ...Tools.topLeftBuilder({ Left: 180, Top: 290 }, ["AllFours", { Left: 190, Top: 330 }]),
             ParentGroup: "BodyUpper",
             DefaultColor: ["#B16565", "#B16565"],
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
+            DynamicGroupName: "Bra",
             Layer: [{ Name: "左" }, { Name: "右" }],
         },
         {

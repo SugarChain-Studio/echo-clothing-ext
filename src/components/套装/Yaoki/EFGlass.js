@@ -8,7 +8,6 @@ const itemAttr = {
     Difficulty: 8,
     Time: 30,
     Audio: "FuturisticApply",
-    Effect: [E.BlockMouth],
     Prerequisite: ["GagFlat"],
 };
 

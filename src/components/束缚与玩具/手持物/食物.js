@@ -65,6 +65,7 @@ const assets = {
         mouthFood("曲奇"),
         mouthFood("吐司"),
         mouthFood("蛋挞"),
+        mouthFood("月饼"),
     ],
     ItemHandheld: [
         hambAsset,
@@ -82,12 +83,12 @@ const assets = {
             Layer: [{ Name: "底色" }, { Name: "顶色" }, { Name: "盖子" }, { Name: "外观" }, { Name: "吸管" }],
         },
         handFood("棒棒糖_Luzi", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
-        handFood("烤鱼_Luzi"),
         handFood("烤鱼_Luzi", { Layer: [{ Name: "竹签" }, { Name: "鱼" }] }),
         handFood("鸡腿_Luzi"),
         handFood("曲奇"),
         handFood("吐司"),
         handFood("蛋挞"),
+        handFood("月饼"),
     ],
     ItemHood: [hambAsset],
 };
@@ -102,6 +103,7 @@ const hmSharedTranslation = {
         曲奇: "曲奇",
         吐司: "吐司",
         蛋挞: "蛋挞",
+        月饼: "月饼",
     },
     EN: {
         棒棒糖_Luzi: "Lollipop",
@@ -111,6 +113,7 @@ const hmSharedTranslation = {
         曲奇: "Cookie",
         吐司: "Toast",
         蛋挞: "Egg Tart",
+        月饼: "Mooncake",
     },
 };
 
@@ -195,13 +198,13 @@ const layerNames = {
 };
 
 export default function () {
-    const iconMapping = ["曲奇", "吐司", "蛋挞"].reduce((prev, item) => {
+    const iconMapping = ["曲奇", "吐司", "蛋挞", "月饼"].reduce((prev, item) => {
         prev[ImageMapTools.assetPreview("ItemHandheld", item)] = ImageMapTools.assetPreview("ItemMouth", item);
         return prev;
     }, {});
 
     AssetManager.addImageMapping(iconMapping);
-    assets.ItemHandheld?.filter((i) => ["蛋挞"].includes(i.Name))?.forEach((i) => {
+    assets.ItemHandheld?.filter((i) => ["蛋挞", "月饼"].includes(i.Name))?.forEach((i) => {
         ArmMaskTool.createArmMaskForCloth("ItemHandheld", i, "Right");
     });
     AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
