@@ -34,12 +34,11 @@ const itemDialog = createItemDialogNoArch()
     .addTexts([{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("详细设置") }])
     .addCheckBoxes(
         groups.map((g, i) => ({
-            checkData: g,
-            text: (checkData) => AssetGroupGet("Female3DCG", checkData).Description,
+            text: () => AssetGroupGet("Female3DCG", g).Description,
             location: { x: 1100 + Math.floor(i / 8) * 200, y: 430 + (i % 8) * 70 },
             textWidth: 120,
-            onclick: (checkData, { item }) => toggleHide(item, checkData),
-            checked: (checkData, { item }) => item.Property?.Hide?.includes(checkData),
+            onclick: ({ item }) => toggleHide(item, g),
+            checked: ({ item }) => item.Property?.Hide?.includes(g),
         }))
     );
 

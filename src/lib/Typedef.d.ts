@@ -21,7 +21,7 @@ declare namespace ItemDialog {
         /** 点击触发后是否要更新物品，物品默认会更新物品所在栏，其他默认不更新 */
         update?: boolean | 'full' | AssetGroupItemName;
         /** 点击触发后要发送的动作文本键值，留空则不发送 */
-        actionKey?: string;
+        actionKey?: string | ((ctx: DialogDrawContext<DataType>) => string);
         /** 点击触发后，是否关闭Dialog，默认为false */
         leaveDialog?: boolean;
         /** 点击触发后要发送的动作文本的额外处理步骤 */
@@ -71,21 +71,19 @@ declare namespace ItemDialog {
     /** 物品互动对话的复选框 */
     interface CheckBoxConfig<DataType extends ExtendedItemData<any>> extends InteractableConfig<DataType> {
         /** 复选框是否显示，默认显示 */
-        show?: (data: any, ctx: DialogDrawContext<DataType>) => boolean;
+        show?: (ctx: DialogDrawContext<DataType>) => boolean;
         /** 复选框是否可用，默认可用 */
-        enable?: (data: any, ctx: DialogDrawContext<DataType>) => boolean;
+        enable?: (ctx: DialogDrawContext<DataType>) => boolean;
         /** 复选框的文本 */
-        text: (data: any, ctx: DialogDrawContextWithText<DataType>) => string;
+        text: (ctx: DialogDrawContextWithText<DataType>) => string;
         /** 复选框文本限宽，默认不限制 */
         textWidth?: number;
         /** 复选框的位置和大小，默认宽高 64x64 */
         location: { x: number; y: number } | Rect;
-        /** 复选框的状态数据，在状态改变时会传入回调中 */
-        checkData?: any;
         /** 复选框是否选中 */
-        checked: (data: any, ctx: DialogDrawContext<DataType>) => boolean;
+        checked: (ctx: DialogDrawContext<DataType>) => boolean;
         /** 复选框状态改变时的回调 */
-        onclick: (data: any, ctx: DialogDrawContext<DataType>) => void;
+        onclick: (ctx: DialogDrawContext<DataType>) => void;
     }
 }
 

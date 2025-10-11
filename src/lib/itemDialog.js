@@ -125,12 +125,12 @@ class DialogButtons {
         MainCanvas.textBaseline = "middle";
         MainCanvas.textAlign = "left";
         for (const box of this._checkboxes) {
-            if (box.show && !box.show(box.checkData, ctx)) continue;
-            const enable = !box.enable || box.enable(box.checkData, ctx);
+            if (box.show && !box.show(ctx)) continue;
+            const enable = !box.enable || box.enable(ctx);
             const { x, y } = box.location;
             const { w, h } = /**@type {Partial<Rect>} */ (box.location);
-            const checked = box.checked(box.checkData, ctx);
-            const textValue = box.text(box.checkData, ctxText);
+            const checked = box.checked(ctx);
+            const textValue = box.text(ctxText);
 
             const X = x + (w ?? 64) + 5;
             const Y = y + (h ?? 64) / 2;
@@ -180,11 +180,11 @@ class DialogButtons {
                 (box) =>
                     box.onclick &&
                     RMouseIn({ w: 64, h: 64, ...box.location }) &&
-                    (!box.show || box.show(box.checkData, ctx)) &&
-                    (!box.enable || box.enable(box.checkData, ctx))
+                    (!box.show || box.show(ctx)) &&
+                    (!box.enable || box.enable(ctx))
             );
             if (box) {
-                box.onclick(box.checkData, ctx);
+                box.onclick(ctx);
                 return box;
             }
         })();
@@ -196,6 +196,7 @@ class DialogButtons {
                 else CharacterRefresh(chara, false);
             }
             if (clicked.actionKey) {
+                const key = typeof clicked.actionKey === "function" ? clicked.actionKey(ctx) : clicked.actionKey;
                 const builder = new DictionaryBuilder()
                     .sourceCharacter(Player)
                     .targetCharacter(chara)
@@ -204,7 +205,7 @@ class DialogButtons {
                 const Dictionary = (
                     typeof clicked.actionProcess === "function" ? clicked.actionProcess(builder, item) : builder
                 ).build();
-                ChatRoomPublishCustomAction(dialogKey(clicked.actionKey), !!clicked.leaveDialog, Dictionary);
+                ChatRoomPublishCustomAction(dialogKey(key), !!clicked.leaveDialog, Dictionary);
             } else if (!!clicked.leaveDialog) {
                 DialogLeave();
             }
