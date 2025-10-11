@@ -2,7 +2,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
-    ["HairAccessory1", "HairAccessory2", "Hat"],
+    ["HairAccessory1", "HairAccessory3", "Hat"],
     {
         Name: "Luzi_MMelodia",
         Left: 230,
