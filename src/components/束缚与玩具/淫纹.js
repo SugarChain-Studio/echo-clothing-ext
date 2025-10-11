@@ -1,133 +1,83 @@
+import { monadic } from "@mod-utils/monadic";
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-
-import { ChatRoomEvents } from "@sugarch/bc-event-handler";
-import { 淫纹锁_Name } from "./魔法刻印";
+import { createItemDialogModular } from "../../lib";
 
 /**
- * @typedef { { Masturbate:boolean, Glow: boolean } } LewdCrestData
+ * @typedef { { Masturbate:boolean, Glow: boolean, InstantOrgasm: boolean } } LewdCrestProps
  */
 
 /**
- * @typedef { globalThis.ItemProperties & LewdCrestData } ExtendItemProperties
+ * @typedef { globalThis.ItemProperties & LewdCrestProps } ExtendItemProperties
  */
 
 /**
- * @typedef { Object } MyDataType
+ * @typedef { Object } LewdCrestData
  * @property { number } ArousalCheckTimer
  * @property { number } NextMasturbateTime
- * @property { number } BlinkCycle
- * @property { number } BlinkTimer
+ * @property { number } GlowOffset
+ * @property { HTMLCanvasElement } GlowCanvas
  */
 
-/**
- * @typedef { Object } Rect
- * @property {number} X
- * @property {number} Y
- * @property {number} W
- * @property {number} H
- */
+const ASSET_NAME = "淫纹_Luzi";
 
-// #region 拘束
-/** @type { CustomAssetDefinition} */
-const asset = {
-    Name: "淫纹_Luzi",
-    Random: false,
-    Top: 308,
-    Left: 54,
-    Priority: 10,
-    AllowLock: true,
-    AllowTighten: false,
-    DrawLocks: false,
-    Extended: true,
-    AlwaysExtend: true,
-    Difficulty: 20,
-    RemoveTime: 15,
-    Time: 10,
-    DynamicScriptDraw: true,
-    DynamicBeforeDraw: true,
-    ParentGroup: {},
-    Attribute: ["GenitaliaCover"],
-    DefaultColor: ["#EA3E74"],
-    DynamicGroupName: "ItemPelvis",
-    PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
-    Layer: [
-        {
-            Name: "淫纹",
-            AllowTypes: { t: 0 },
-        },
-        {
-            Name: "预设淫纹1",
-            AllowTypes: { t: 1 },
-        },
-        {
-            Name: "预设淫纹2",
-            AllowTypes: { t: 2 },
-        },
-        {
-            Name: "预设淫纹3",
-            AllowTypes: { t: 3 },
-        },
-        {
-            Name: "发光",
-        },
-    ],
-};
+/** @type { (item: Item) => ExtendItemProperties } */
+const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
 
-const translation = {
-    CN: "淫纹",
-    EN: "Lewd Crest",
-    RU: "Порнографический знак",
-    UA: "Хтивий візерунок",
-};
-
-const layerNames = {
-    EN: {
-        淫纹: "Lewd Crest",
-        预设淫纹1: "Preset Lewd Crest 1",
-        预设淫纹2: "Preset Lewd Crest 2",
-        预设淫纹3: "Preset Lewd Crest 3",
-        发光: "Glow",
+// #region 交互界面
+const dialog = createItemDialogModular([
+    {
+        location: { x: 1265, y: 600, w: 225, h: 55 },
+        show: ({ data }) => data.currentModule === "Base",
+        key: "淫纹魔法电流按钮",
+        actionKey: "淫纹魔法电流",
+        onclick: ({ item, chara }) => PropertyShockPublishAction(chara, item, true),
     },
-};
-
-/** @type {AssetArchetypeConfig} */
-const extended = {
-    Archetype: ExtendedArchetype.MODULAR,
-    ChangeWhenLocked: false,
-    DrawImages: false,
-    ChatTags: Tools.CommonChatTags(),
-    Modules: [
-        { Name: "样式", Key: "t", Options: [{}, {}, {}, {}], DrawImages: true },
-        {
-            Name: "性刺激",
-            Key: "a",
-            Options: [
-                {},
-                {},
-                { Property: { Effect: [E.DenialMode] } },
-                { Property: { Effect: [E.DenialMode, E.RuinOrgasms] } },
-            ],
+    {
+        location: { x: 1510, y: 600, w: 225, h: 55 },
+        show: ({ data }) => data.currentModule === "Base",
+        key: "淫纹强制高潮按钮",
+        actionKey: "淫纹强制高潮",
+        onclick: ({ item }) => {
+            const property = extProp(item);
+            property.InstantOrgasm = true;
         },
-    ],
-    ScriptHooks: {
-        Draw: dialogDrawHook,
-        Click: dialogClickHook,
-        BeforeDraw: beforeDraw,
-        ScriptDraw: scriptDraw,
     },
-    BaselineProperty: /** @type {ExtendItemProperties}*/ ({
-        Masturbate: false,
-        Glow: false,
-    }),
-};
+]).addCheckBoxes([
+    {
+        location: { x: 1185, y: 675 },
+        show: ({ data }) => data.currentModule === "Base",
+        text: ({ text }) => text("淫纹发光按钮"),
+        enable: ({ item }) => !InventoryItemHasEffect(item, "Lock", true),
+        checked: ({ item }) => extProp(item).Glow,
+        onclick: ({ item }) => {
+            const property = extProp(item);
+            property.Glow = !property.Glow;
+            property.OverridePriority = property.Glow ? 44 : undefined;
+        },
+    },
+    {
+        location: { x: 1185, y: 750 },
+        show: ({ data }) => data.currentModule === "Base",
+        text: ({ text }) => text("淫纹强制自慰按钮"),
+        enable: ({ item }) => !InventoryItemHasEffect(item, "Lock", true),
+        checked: ({ item }) => extProp(item).Masturbate,
+        onclick: ({ item }) => {
+            const property = extProp(item);
+            property.Masturbate = !property.Masturbate;
+        },
+        actionKey: ({ item }) => `${extProp(item).Masturbate ? "开始" : "停止"}淫纹强制自慰`,
+    },
+]);
+// #endregion
 
+// #region 文本
 const custom_dialogs = {
     CN: {
         淫纹发光按钮: "淫纹发光",
         淫纹强制自慰按钮: "淫纹强制自慰",
 
-        淫纹魔法电流按钮: "魔法点击",
+        淫纹魔法电流按钮: "魔法电流",
         淫纹强制高潮按钮: "强制高潮",
 
         开始淫纹强制自慰: "SourceCharacter通过AssetName上的魔法令TargetCharacter开始不停地自慰.",
@@ -135,16 +85,11 @@ const custom_dialogs = {
 
         淫纹强制高潮: "SourceCharacter通过AssetName上的魔法令TargetCharacter强制高潮.",
 
-        自慰BlockV0: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的私处.",
-        自慰BlockV1: "SourceCharacter急切的想要抚慰自己,扭动肩膀,尽可能让乳尖受到进一步刺激.",
-        自慰BlockV2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦私处,但仍难以得到刺激.",
-        自慰BlockV3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但她的手臂完全无法动弹.",
-        自慰BlockV4: "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着私处摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
-        自慰BlockP0: "SourceCharacter急切的想要抚慰自己,颤抖着夹紧双腿,尽可能刺激自己的阴茎.",
-        自慰BlockP1: "SourceCharacter急切的想要抚慰自己,扭动身体,尽可能磨蹭阴茎龟头.",
-        自慰BlockP2: "SourceCharacter急切的想要抚慰自己,夹紧双腿摩擦龟头,但仍难以得到刺激.",
-        自慰BlockP3: "SourceCharacter急切的想要抚慰自己,手臂挣扎着想要自慰,但他的手臂完全无法动弹.",
-        自慰BlockP4: "SourceCharacter急切的想要抚慰自己,手臂徒劳地向着阴茎摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
+        自慰Block0: "SourceCharacter急切的想要抚慰PronounSelf,颤抖着夹紧双腿,尽可能刺激自己的FocusAssetGroup.",
+        自慰Block1: "SourceCharacter急切的想要抚慰PronounSelf,扭动肩膀,尽可能让FocusAssetGroup受到进一步刺激.",
+        自慰Block2: "SourceCharacter急切的想要抚慰PronounSelf,夹紧双腿摩擦FocusAssetGroup,但仍难以得到刺激.",
+        自慰Block3:
+            "SourceCharacter急切的想要抚慰PronounSelf,徒劳地向着FocusAssetGroup摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
     },
     EN: {
         淫纹发光按钮: "Lewd Crest Glowing",
@@ -159,26 +104,14 @@ const custom_dialogs = {
 
         淫纹强制高潮: "SourceCharacter uses magic on AssetName to force TargetCharacter to orgasm.",
 
-        自慰BlockV0:
-            "SourceCharacter eagerly wants to pleasure themselves, trembling and squeezing their thighs together to stimulate their private areas as much as possible.",
-        自慰BlockV1:
-            "SourceCharacter eagerly wants to pleasure themselves, wriggling their shoulders to further stimulate their nipples.",
-        自慰BlockV2:
-            "SourceCharacter eagerly wants to pleasure themselves, squeezing their thighs together to rub their private areas but still finding it difficult to stimulate themselves.",
-        自慰BlockV3:
-            "SourceCharacter eagerly wants to pleasure themselves, struggling with their arms to masturbate, but their arms are completely immobilized.",
-        自慰BlockV4:
-            "SourceCharacter eagerly wants to pleasure themselves, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰BlockP0:
-            "SourceCharacter was eager to soothe himself, trembling and gripping his legs, trying to stimulate his penis as much as possible.",
-        自慰BlockP1:
-            "SourceCharacter is eager to soothe himself, twisting his body and rubbing against the glans penis as much as possible.",
-        自慰BlockP2:
-            "SourceCharacter urgently wanted to comfort himself, clamping his legs and rubbing his glans, but still struggled to get stimulation.",
-        自慰BlockP3:
-            "SourceCharacter desperately wanted to comfort himself, struggling with his arms to masturbate, but his arms were completely immobile.",
-        自慰BlockP4:
-            "SourceCharacter urgently wanted to comfort himself, and in vain, his arm groped towards his penis, but the joy that was so close at hand was so unattainable at this moment.",
+        自慰Block0:
+            "SourceCharacter eagerly wants to pleasure PronounSelf, trembling and squeezing PronounPossessive thighs together to stimulate PronounPossessive FocusAssetGroup as much as possible.",
+        自慰Block1:
+            "SourceCharacter eagerly wants to pleasure PronounSelf, wriggling PronounPossessive shoulders to further stimulate PronounPossessive FocusAssetGroup.",
+        自慰Block2:
+            "SourceCharacter eagerly wants to pleasure PronounSelf, squeezing PronounPossessive thighs together to rub PronounPossessive FocusAssetGroup but still finding it difficult to stimulate themselves.",
+        自慰Block3:
+            "SourceCharacter eagerly wants to pleasure PronounSelf, PronounPossessive futilely reaching towards PronounPossessive FocusAssetGroup, the close proximity of pleasure now seeming so unreachable.",
     },
     UA: {
         淫纹发光按钮: "Розпусний гребінь, що світиться",
@@ -190,26 +123,14 @@ const custom_dialogs = {
         停止淫纹强制自慰:
             "SourceCharacter використовує магію на AssetName, щоб зупинити примусову мастурбацію TargetCharacter.",
         淫纹强制高潮: "SourceCharacter використовує магію на AssetName, щоб змусити TargetCharacter досягти оргазму.",
-        自慰BlockV0:
+        自慰Block0:
             "SourceCharacter з нетерпінням хоче чіпати себе, стискає свої лахи як їхні ноги трусяться від жаги стимулювати себе якомога більше.",
-        自慰BlockV1:
+        自慰Block1:
             "SourceCharacter з нетерпінням хоче чіпати себе, трусячи своїми плечима з жагою стимулювати свої груди й соски.",
-        自慰BlockV2:
+        自慰Block2:
             "SourceCharacter з нетерпінням хоче чіпати себе, стискає свої лахи як їхні ноги трусяться від жаги стимулювати себе якомога більше але натомість не получається стимулювати себе так просто.",
-        自慰BlockV3:
+        自慰Block3:
             "SourceCharacter з нетерпінням хоче чіпати себе, пробуючи чинити опір проти щупальевого косьюму як їхні руки зв'язані позаду їх.",
-        自慰BlockV4:
-            "SourceCharacter з нетерпінням хоче чіпати себе, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰BlockP0:
-            "SourceCharacter з нетерпінням хоче охолодити свою жагу, як його тіло труситься і він стискає свої ляхи, пробуючи стимулювати себе якомога більше.",
-        自慰BlockP1:
-            "SourceCharacter з нетерпінням хоче охолодити свою жагу, як він повертає своє тіло всік і всяк якомога більше.",
-        自慰BlockP2:
-            "SourceCharacter терміново хоче знизити жагу, як він стискає свої ляхи і тре свою голівку пісюна, але з невдалою спробою пробує стимулювати себе.",
-        自慰BlockP3:
-            "SourceCharacter терміново хоче знизити жагу, намагаючись використати свої руки з користю і мастурбувати, але натомість його руки жалюгідно нерухомі.",
-        自慰BlockP4:
-            "SourceCharacter з гіганською жагою чіпати себе, цого рука слідує до його пісюна стискаючи з впевненістю, натомість не отримує доступне задоволення в руці.",
     },
     RU: {
         淫纹发光按钮: "Светящийся Lewd Crest",
@@ -222,26 +143,6 @@ const custom_dialogs = {
         停止淫纹强制自慰:
             "SourceCharacter использует магию на AssetName, чтобы остановить принудительную мастурбацию TargetCharacter.",
         淫纹强制高潮: "SourceCharacter использует магию на AssetName, чтобы заставить TargetCharacter кончить.",
-        自慰BlockV0:
-            "SourceCharacter eagerly wants to pleasure themselves, trembling and squeezing their thighs together to stimulate their private areas as much as possible.",
-        自慰BlockV1:
-            "SourceCharacter eagerly wants to pleasure themselves, wriggling their shoulders to further stimulate their nipples.",
-        自慰BlockV2:
-            "SourceCharacter eagerly wants to pleasure themselves, squeezing their thighs together to rub their private areas but still finding it difficult to stimulate themselves.",
-        自慰BlockV3:
-            "SourceCharacter eagerly wants to pleasure themselves, struggling with their arms to masturbate, but their arms are completely immobilized.",
-        自慰BlockV4:
-            "SourceCharacter eagerly wants to pleasure themselves, their arms futilely reaching towards their private areas, the close proximity of pleasure now seeming so unreachable.",
-        自慰BlockP0:
-            "SourceCharacter was eager to soothe himself, trembling and gripping his legs, trying to stimulate his penis as much as possible.",
-        自慰BlockP1:
-            "SourceCharacter is eager to soothe himself, twisting his body and rubbing against the glans penis as much as possible.",
-        自慰BlockP2:
-            "SourceCharacter urgently wanted to comfort himself, clamping his legs and rubbing his glans, but still struggled to get stimulation.",
-        自慰BlockP3:
-            "SourceCharacter desperately wanted to comfort himself, struggling with his arms to masturbate, but his arms were completely immobile.",
-        自慰BlockP4:
-            "SourceCharacter urgently wanted to comfort himself, and in vain, his arm groped towards his penis, but the joy that was so close at hand was so unattainable at this moment.",
     },
 };
 
@@ -356,6 +257,81 @@ const assetStrings = {
 };
 // #endregion
 
+// #region 拘束
+/** @type {AddAssetWithConfigParams} */
+const asset = [
+    ["ItemPelvis", "ItemTorso"],
+    {
+        Name: ASSET_NAME,
+        Random: false,
+        Left: 150,
+        Top: 380,
+        Priority: 10,
+        AllowLock: true,
+        AllowTighten: false,
+        DrawLocks: false,
+        Difficulty: 20,
+        RemoveTime: 15,
+        Time: 10,
+        ParentGroup: {},
+        DefaultColor: ["#EA3E74", "Default", "Default", "Default", "#D75CFF", "#72B5FF"],
+        DynamicGroupName: "ItemPelvis",
+        PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
+        Layer: [
+            { Name: "淫纹", AllowTypes: { t: 0 } },
+            { Name: "预设淫纹1", AllowTypes: { t: 1 } },
+            { Name: "预设淫纹2", AllowTypes: { t: 2 } },
+            { Name: "预设淫纹3", AllowTypes: { t: 3 } },
+            { Name: "渐变层", HasImage: false, AllowColorize: false },
+            { Name: "发光1", HasImage: false },
+            { Name: "发光2", HasImage: false },
+        ],
+    },
+    {
+        translation: { CN: "淫纹", EN: "Lewd Crest", RU: "Порнографический знак", UA: "Хтивий візерунок" },
+        layerNames: {
+            CN: { 发光1: "发光颜色1", 发光2: "发光颜色2" },
+            EN: {
+                淫纹: "Lewd Crest",
+                预设淫纹1: "Preset Lewd Crest 1",
+                预设淫纹2: "Preset Lewd Crest 2",
+                预设淫纹3: "Preset Lewd Crest 3",
+                发光1: "Glow Color1",
+                发光2: "Glow Color2",
+            },
+        },
+        extended: {
+            Archetype: ExtendedArchetype.MODULAR,
+            ChangeWhenLocked: false,
+            DrawImages: false,
+            ChatTags: Tools.CommonChatTags(),
+            Modules: [
+                { Name: "样式", Key: "t", DrawImages: true, Options: [{}, {}, {}, {}] },
+                {
+                    Name: "性刺激",
+                    Key: "a",
+                    Options: [
+                        {},
+                        {},
+                        { Property: { Effect: [E.DenialMode] } },
+                        { Property: { Effect: [E.DenialMode, E.RuinOrgasms] } },
+                    ],
+                },
+            ],
+            ScriptHooks: dialog.createHooks(["Click", "Draw"], {
+                AfterDraw: afterDraw,
+                ScriptDraw: scriptDraw,
+            }),
+            BaselineProperty: /** @type {ExtendItemProperties}*/ ({
+                Masturbate: false,
+                Glow: false,
+            }),
+        },
+        assetStrings,
+    },
+];
+// #endregion
+
 //#region 衣服
 const clothLCSetting = [
     { Name: "样式0", EN: "Style 0", Src: "淫纹", ConfigKey: "t0" },
@@ -364,134 +340,106 @@ const clothLCSetting = [
     { Name: "样式3", EN: "Style 3", Src: "预设淫纹3", ConfigKey: "t3" },
 ];
 
-/** @type { CustomAssetDefinition }} */
-const clothAsset = {
-    Name: "淫纹_Luzi",
-    Random: false,
-    Gender: "F",
-    Top: 308,
-    Left: 54,
-    Priority: 9,
-    DefaultColor: ["#E975A0", "Default", "Default", "Default"],
-    Extended: true,
-    PoseMapping: { ...AssetPoseMapping.Panties },
-    Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    ParentGroup: {},
-    DynamicGroupName: "ItemPelvis",
-    Layer: clothLCSetting.map((layer, index) => ({ Name: layer.Src, AllowTypes: { typed: index } })),
-};
-
-const clothTranslation = {
-    CN: "淫纹",
-    EN: "Lewd Crest",
-};
-
-const clothlayerName = {
-    EN: {
-        样式0: "Style 0",
-        样式1: "Style 1",
-        样式2: "Style 2",
-        样式3: "Style 3",
+/** @type {AddAssetWithConfigParams} */
+const clothAsset = [
+    ["Panties", "BodyMarkings", "Decals"],
+    {
+        Name: ASSET_NAME,
+        Random: false,
+        Gender: "F",
+        Left: 150,
+        Top: 380,
+        Priority: 9,
+        DefaultColor: ["#E975A0", "Default", "Default", "Default"],
+        Extended: true,
+        PoseMapping: { ...AssetPoseMapping.Panties },
+        Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+        ParentGroup: {},
+        DynamicGroupName: "ItemPelvis",
+        Layer: clothLCSetting.map((layer, index) => ({ Name: layer.Src, AllowTypes: { typed: index } })),
     },
-};
-
-/** @type {TypedItemConfig} */
-const clothExtended = {
-    Archetype: ExtendedArchetype.TYPED,
-    Options: clothLCSetting.map((layer, index) => ({
-        Name: layer.ConfigKey,
-        AllowTypes: { typed: index },
-    })),
-};
-
-const clothAssetsStrings = {
-    CN: clothLCSetting.reduce(
-        (acc, layer) => {
-            acc[layer.ConfigKey] = layer.Name;
-            return acc;
+    {
+        translation: { CN: "淫纹", EN: "Lewd Crest" },
+        layerNames: {
+            CN: { 样式0: "样式0", 样式1: "样式1", 样式2: "样式2", 样式3: "样式3" },
+            EN: { 样式0: "Style 0", 样式1: "Style 1", 样式2: "Style 2", 样式3: "Style 3" },
         },
-        { Select: "选择样式" }
-    ),
-    EN: clothLCSetting.reduce(
-        (acc, layer) => {
-            acc[layer.ConfigKey] = layer.EN;
-            return acc;
+        extended: {
+            Archetype: ExtendedArchetype.TYPED,
+            Options: clothLCSetting.map((layer, index) => ({
+                Name: layer.ConfigKey,
+                AllowTypes: { typed: index },
+            })),
         },
-        { Select: "Select Style" }
-    ),
-};
-
+        assetStrings: {
+            CN: {
+                Select: "选择样式",
+                ...Object.fromEntries(clothLCSetting.map((layer) => [layer.ConfigKey, layer.Name])),
+            },
+            EN: {
+                Select: "Select Style",
+                ...Object.fromEntries(clothLCSetting.map((layer) => [layer.ConfigKey, layer.EN])),
+            },
+        },
+    },
+];
 //#endregion
 
-//#region 界面
+//#region 功能
 /**
  * @param {Character} C 玩家自身
  * @param {Item} item 物品
  */
 function randomMastur(C, item) {
     if (!C.IsPlayer()) return;
-
     DrawFlashScreen("#F347B4", 1500, 500);
-
     const customDialog = DialogTools.dialogKey(item);
 
-    const whenBlocked = () => {
-        // 产生如同抚摸大腿的动作，仅自己可见
-        const dictionary = new DictionaryBuilder()
-            .sourceCharacter(Player)
-            .targetCharacter(Player)
-            .focusGroup("ItemLegs")
-            .build();
-        dictionary.push({ ActivityName: "Caress" });
+    monadic("Activity", AssetGetActivity("Female3DCG", "MasturbateHand"))
+        .filter(() => Player.CanInteract())
+        .then((activity) => activity.Target.filter((x) => ActivityCanBeDone(Player, "MasturbateHand", x)))
+        .filter((groups) => groups.length > 0)
+        .then((groups) => groups[Math.floor(Math.random() * groups.length)])
+        .then((g) => AssetGroupGet("Female3DCG", g))
+        .then((group, { Activity }) => (ActivityRun(Player, Player, group, { Activity, Group: group.Name }, true), {}))
+        .valueOr(() => {
+            const act = AssetGetActivity("Female3DCG", "MasturbateHand");
+            const g = act.Target[Math.floor(Math.random() * act.Target.length)];
 
-        ChatRoomMessage({
-            Sender: Player.MemberNumber,
-            Content: customDialog(`自慰Block${Player.HasPenis() ? "P" : "V"}${Math.floor(Math.random() * 5)}`),
-            Type: "Action",
-            Dictionary: new DictionaryBuilder().sourceCharacter(Player).targetCharacter(Player).build(),
+            // 产生如同抚摸对应区域的动作，仅自己可见
+            const dictionary = new DictionaryBuilder()
+                .sourceCharacter(Player)
+                .targetCharacter(Player)
+                .focusGroup(g)
+                .build();
+            dictionary.push({ ActivityName: "Caress" });
+
+            ChatRoomMessage({
+                Sender: Player.MemberNumber,
+                Content: customDialog(`自慰Block${Math.floor(Math.random() * 4)}`),
+                Type: "Action",
+                Dictionary: dictionary,
+            });
         });
-    };
-
-    if (!Player.CanInteract()) {
-        whenBlocked();
-        return;
-    }
-
-    const activity = AssetGetActivity("Female3DCG", "MasturbateHand");
-    if (!activity) {
-        whenBlocked();
-        return;
-    }
-
-    const groups = activity.Target.filter((x) => ActivityCanBeDone(Player, "MasturbateHand", x));
-    if (groups.length === 0) {
-        whenBlocked();
-        return;
-    }
-
-    const targetGroupName = groups[Math.floor(Math.random() * groups.length)];
-    const targetGroup = AssetGroupGet("Female3DCG", targetGroupName);
-    ActivityRun(
-        Player,
-        Player,
-        targetGroup,
-        {
-            Activity: AssetGetActivity("Female3DCG", "MasturbateHand"),
-            Group: targetGroupName,
-        },
-        true
-    );
 }
 
 /**
  * @param {Character} player
- * @param {MyDataType} data
+ * @param {LewdCrestData} data
  * @param {Item} item
  */
 function updateRuns(player, data, item) {
     if (!player.IsPlayer()) return;
 
-    const property = /**@type {ExtendItemProperties}*/ (item.Property);
+    const property = extProp(item);
+
+    // 立即高潮
+    if (property.InstantOrgasm) {
+        property.InstantOrgasm = false;
+        if (!!player.ArousalSettings) player.ArousalSettings.Progress = 100;
+        ActivityOrgasmPrepare(player);
+        ChatRoomCharacterItemUpdate(player, item.Asset.Group.Name);
+    }
 
     const now = CommonTime();
     if (!data.ArousalCheckTimer) data.ArousalCheckTimer = now;
@@ -524,168 +472,104 @@ function updateRuns(player, data, item) {
         data.NextMasturbateTime = nextTime();
     }
 }
-
-/**
- * @param {ServerChatRoomMessage} data
- */
-function onActionHandler(data) {
-    const { Type, Content, Dictionary } = data;
-    if (
-        Type === "Action" &&
-        Array.isArray(Dictionary) &&
-        Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber
-    ) {
-        if (Content.endsWith(`${asset.Name}淫纹强制高潮`)) {
-            if (!!Player.ArousalSettings) Player.ArousalSettings.Progress = 100;
-            ActivityOrgasmPrepare(Player);
-        } else if (Content.endsWith(`${asset.Name}Seta1`)) {
-            DrawFlashScreen("#F347B4", 1500, 500);
-        }
-    }
-}
-
-/** @type {Record<string, Rect>} */
-const buttons = {
-    电流按钮: { X: 1265, Y: 600, W: 225, H: 55 },
-    高潮按钮: { X: 1510, Y: 600, W: 225, H: 55 },
-
-    发光开关: { X: 1185, Y: 675, W: 64, H: 64 },
-    自慰开关: { X: 1185, Y: 750, W: 64, H: 64 },
-};
-
-/** @type { ExtendedItemScriptHookCallbacks.Draw<ModularItemData> } */
-function dialogDrawHook(Data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem) return;
-    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
-    } else {
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
-
-        const prevAlign = MainCanvas.textAlign;
-        MainCanvas.textAlign = "center";
-        ExtendedItemCustomDraw(dialogKey("淫纹魔法电流按钮"), buttons.电流按钮.X, buttons.电流按钮.Y);
-        ExtendedItemCustomDraw(dialogKey("淫纹强制高潮按钮"), buttons.高潮按钮.X, buttons.高潮按钮.Y);
-
-        MainCanvas.textAlign = "left";
-        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
-        const 强制自慰ON = property.Masturbate;
-        const 发光ON = property.Glow;
-        ExtendedItemDrawCheckbox("GlowSwitch", buttons.发光开关.X, buttons.发光开关.Y, 发光ON, {
-            text: AssetTextGet(dialogKey("淫纹发光按钮")),
-            textColor: "White",
-        });
-        ExtendedItemDrawCheckbox("MastSwitch", buttons.自慰开关.X, buttons.自慰开关.Y, 强制自慰ON, {
-            text: AssetTextGet(dialogKey("淫纹强制自慰按钮")),
-            textColor: "White",
-        });
-        MainCanvas.textAlign = prevAlign;
-    }
-}
-
-/**
- * @param {Rect} rect
- * @returns {boolean}
- */
-export function RMouseIn(rect) {
-    return MouseIn(rect.X, rect.Y, rect.W, rect.H);
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Click<ModularItemData>} */
-function dialogClickHook(Data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem) return;
-    if (Data.currentModule === "样式" || Data.currentModule === "性刺激") {
-    } else {
-        const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
-
-        const clickPush = (key, func) =>
-            ExtendedItemCustomClickAndPush(CharacterGetCurrent(), DialogFocusItem, key, () => func(), false, false);
-
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
-
-        if (RMouseIn(buttons.高潮按钮)) {
-            const Dictionary = new DictionaryBuilder()
-                .sourceCharacter(Player)
-                .targetCharacter(CharacterGetCurrent())
-                .destinationCharacterName(CharacterGetCurrent())
-                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
-                .build();
-            ChatRoomPublishCustomAction(dialogKey("淫纹强制高潮"), true, Dictionary);
-        } else if (RMouseIn(buttons.电流按钮)) {
-            ExtendedItemCustomClick("淫纹魔法电流", PropertyShockPublishAction, false, false);
-        } else if (RMouseIn(buttons.发光开关)) {
-            clickPush("Glow", () => {
-                property.Glow = !property.Glow;
-                property.OverridePriority = property.Glow ? 44 : undefined;
-            });
-        } else if (RMouseIn(buttons.自慰开关)) {
-            clickPush("Masturbate", () => (property.Masturbate = !property.Masturbate));
-            const Dictionary = new DictionaryBuilder()
-                .sourceCharacter(Player)
-                .destinationCharacterName(CharacterGetCurrent())
-                .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
-                .build();
-            ChatRoomPublishCustomAction(
-                dialogKey(`${property.Masturbate ? "开始" : "停止"}淫纹强制自慰`),
-                false,
-                Dictionary
-            );
-        }
-    }
-}
 //#endregion
 
 //#region 动画绘制
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, MyDataType>} */
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, LewdCrestData>} */
 function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     const Data = PersistentData();
-
     if (C.IsPlayer()) updateRuns(C, Data, Item);
-
-    if (/**@type {ExtendItemProperties}*/ (Item.Property)?.Glow) Tools.drawUpdate(C, Data);
+    if (extProp(Item)?.Glow) Tools.drawUpdate(C, Data);
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MyDataType>} */
-function beforeDraw(data, originalFunction, { PersistentData, L, Property, C }) {
-    if (L === "发光") {
-        const property = /** @type {ExtendItemProperties} */ (Property);
+const colorIdxes = /** @type {AssetLayerDefinition[]}*/ (asset[1].Layer)
+    .filter((l) => l.AllowColorize || l.AllowColorize === undefined)
+    .filter((l) => !l.CopyLayerColor || l.CopyLayerColor === undefined)
+    .map((l, i) => /** @type {const}*/ ([l.Name, i]))
+    .filter(([name]) => name.startsWith("发光"))
+    .map(([, i]) => i);
 
-        if (!property.Glow) return { Opacity: 0 };
+const type2Layer = Object.fromEntries(
+    /** @type {AssetLayerDefinition[]}*/ (asset[1].Layer)
+        .filter((l) => typeof l.AllowTypes?.["t"] === "number")
+        .map((l) => /** @type {[string, string]}*/ ([l.AllowTypes["t"], l.Name]))
+);
+
+/** @type {(c: string) => [number, number, number]} */
+const parse = (c) => {
+    if (c.length === 4) return [parseInt(c[1] + c[1], 16), parseInt(c[2] + c[2], 16), parseInt(c[3] + c[3], 16)];
+    if (c.length === 7) return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+    throw new Error(`Invalid color format: ${c}`);
+};
+
+/** @type {(a: number, b: number, f: number) => number} */
+const mix = (a, b, f) => Math.round(a * (1 - f) + b * f);
+
+/** @type {(c1:string, c2:string, factor:number) => string} */
+const colorMix = (c1, c2, factor) => {
+    const f = Math.max(0, Math.min(1, factor));
+    const [r1, g1, b1] = parse(c1);
+    const [r2, g2, b2] = parse(c2);
+    const r = mix(r1, r2, f).toString(16).padStart(2, "0");
+    const g = mix(g1, g2, f).toString(16).padStart(2, "0");
+    const b = mix(b1, b2, f).toString(16).padStart(2, "0");
+    return `#${r}${g}${b}`;
+};
+
+const center = {
+    0: 107,
+    1: 98,
+    2: 109,
+    3: 108,
+};
+
+/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, LewdCrestData>} */
+function afterDraw(data, originalFunction, drawData) {
+    const { A, CA, X, Y, PersistentData, L, C, drawCanvas, drawCanvasBlink } = drawData;
+    if (L === "渐变层") {
+        const property = extProp(CA);
+        const imgType = type2Layer[property?.TypeRecord?.t ?? 0];
+        const mc = center[property?.TypeRecord?.t ?? 0] || center[0];
+
+        if (!property.Glow) return;
 
         const Data = PersistentData();
+        Data.GlowOffset ??= Math.floor(Math.random() * 1000);
+        Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);
 
-        const now = Date.now();
+        const [c1, c2] = ((colors) => {
+            if (!Array.isArray(colors) && colors.length < 6) return ["#D75CFF", "#72B5FF"];
+            return colorIdxes.map((idx) => colors[idx] || "#FFFFFF").map((c) => (c === "Default" ? "#FFFFFF" : c));
+        })(CA.Color ?? CA.Asset.DefaultColor);
 
-        // 闪烁周期时间, 0.5 ~ 5 秒
-        const TwinkleCycleTime = (C.ArousalSettings ? Math.max(10, 110 - C.ArousalSettings.Progress) : 100) * 50;
+        const ctx = Data.GlowCanvas.getContext("2d");
+        ctx.clearRect(0, 0, 200, 200);
+        const gradient = ctx.createRadialGradient(100, mc, 0, 100, mc, 60);
+        const time = Date.now() / 1000 + Data.GlowOffset;
 
-        // 随机偏移一点时间，避免同步闪烁
-        if (!Data.BlinkCycle) Data.BlinkCycle = Math.floor(Math.random() * 1000);
-        if (!Data.BlinkTimer) Data.BlinkTimer = now;
+        const halfInterval = 2.5;
+        const offset = 1 - (time % (halfInterval * 2)) / (halfInterval * 2);
 
-        const delta = now - Data.BlinkTimer;
-        Data.BlinkTimer = now;
-        Data.BlinkCycle += (delta / TwinkleCycleTime) * Math.PI * 2;
+        const edgeColor = colorMix(c1, c2, offset < 0.5 ? offset * 2 : 2 - offset * 2);
+        gradient.addColorStop(0, edgeColor);
+        gradient.addColorStop(1, edgeColor);
 
-        return { Opacity: 0.7 + 0.3 * Math.cos(Data.BlinkCycle) };
+        gradient.addColorStop(1 - offset, c1);
+        gradient.addColorStop(offset < 0.5 ? 0.5 - offset : 1.5 - offset, c2);
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 200, 200);
+
+        const mask = Tools.getAssetURL(drawData, imgType);
+        DrawImageEx(mask, ctx, 0, 0, { BlendingMode: "destination-in" });
+
+        drawCanvas(Data.GlowCanvas, X, Y);
+        drawCanvasBlink(Data.GlowCanvas, X, Y);
     }
 }
 //#endregion
 
 export default function () {
-    ChatRoomEvents.on("Action", (data) => onActionHandler(data));
-
-    AssetManager.addAssetWithConfig(["ItemPelvis", "ItemTorso"], asset, {
-        extended,
-        translation,
-        layerNames,
-        assetStrings,
-    });
-
-    AssetManager.addAssetWithConfig(["Panties", "BodyMarkings"], clothAsset, {
-        extended: clothExtended,
-        translation: clothTranslation,
-        layerNames: clothlayerName,
-        assetStrings: clothAssetsStrings,
-    });
+    AssetManager.addAssetWithConfig(...asset);
+    AssetManager.addAssetWithConfig(...clothAsset);
 }
