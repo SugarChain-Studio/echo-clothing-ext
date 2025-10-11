@@ -535,18 +535,7 @@ function onActionHandler(data) {
         Array.isArray(Dictionary) &&
         Dictionary.find((x) => "TargetCharacter" in x)?.TargetCharacter === Player.MemberNumber
     ) {
-        if (Content.includes("ActionUse")) {
-            const assetName = Dictionary.find((x) => "AssetName" in x)?.AssetName;
-            const groupName = /** @type {any}*/ (Dictionary.find((x) => "FocusGroupName" in x))?.FocusGroupName;
-            if (assetName !== asset.Name || !groupName) return;
-
-            const sourceChara = Dictionary.find((x) => "SourceCharacter" in x)?.SourceCharacter;
-            const item = InventoryGet(Player, groupName);
-            const lock = { Asset: AssetGet(Player.AssetFamily, "ItemMisc", 淫纹锁_Name) };
-            InventoryLock(Player, item, lock, sourceChara);
-            item.Property.MemberNumberListKeys = CommonConvertArrayToString([sourceChara]);
-            ChatRoomCharacterItemUpdate(Player, groupName);
-        } else if (Content.endsWith(`${asset.Name}淫纹强制高潮`)) {
+        if (Content.endsWith(`${asset.Name}淫纹强制高潮`)) {
             if (!!Player.ArousalSettings) Player.ArousalSettings.Progress = 100;
             ActivityOrgasmPrepare(Player);
         } else if (Content.endsWith(`${asset.Name}Seta1`)) {
