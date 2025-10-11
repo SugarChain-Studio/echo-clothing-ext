@@ -29,4 +29,9 @@ export default function () {
         const alpha = asset.Alpha.find((x) => !x.Pose);
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
+
+    AssetManager.modifyAsset(["Shoes"], "PumpHighHeels", (group, asset) => {
+        const alpha = asset.Alpha.find((x) => !x.Pose);
+        /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
+    });
 }
