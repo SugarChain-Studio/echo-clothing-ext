@@ -2,6 +2,7 @@ import { monadic } from "@mod-utils/monadic";
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { createItemDialogModular } from "../../lib";
+import { LSCG } from "../../lib/lscg";
 
 /**
  * @typedef { { Masturbate:boolean, Glow: boolean, InstantOrgasm: boolean } } LewdCrestProps
@@ -15,6 +16,7 @@ import { createItemDialogModular } from "../../lib";
  * @typedef { Object } LewdCrestData
  * @property { number } ArousalCheckTimer
  * @property { number } NextMasturbateTime
+ * @property { number } LSCGTimer
  * @property { number } GlowOffset
  * @property { HTMLCanvasElement } GlowCanvas
  */
@@ -30,7 +32,6 @@ const dialog = createItemDialogModular([
         location: { x: 1265, y: 600, w: 225, h: 55 },
         show: ({ data }) => data.currentModule === "Base",
         key: "淫纹魔法电流按钮",
-        actionKey: "淫纹魔法电流",
         onclick: ({ item, chara }) => PropertyShockPublishAction(chara, item, true),
     },
     {
@@ -48,7 +49,7 @@ const dialog = createItemDialogModular([
         location: { x: 1185, y: 675 },
         show: ({ data }) => data.currentModule === "Base",
         text: ({ text }) => text("淫纹发光按钮"),
-        enable: ({ item }) => !InventoryItemHasEffect(item, "Lock", true),
+        enable: ({ item, chara }) => !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
         checked: ({ item }) => extProp(item).Glow,
         onclick: ({ item }) => {
             const property = extProp(item);
@@ -60,7 +61,7 @@ const dialog = createItemDialogModular([
         location: { x: 1185, y: 750 },
         show: ({ data }) => data.currentModule === "Base",
         text: ({ text }) => text("淫纹强制自慰按钮"),
-        enable: ({ item }) => !InventoryItemHasEffect(item, "Lock", true),
+        enable: ({ item, chara }) => !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
         checked: ({ item }) => extProp(item).Masturbate,
         onclick: ({ item }) => {
             const property = extProp(item);
@@ -449,14 +450,16 @@ function updateRuns(player, data, item) {
 
     // LSCG 联动
     if (property.TypeRecord.a === 1) {
-        const LSCG = /** @type {any} */ (player).LSCG;
-        if (LSCG && LSCG.InjectorModule && LSCG.InjectorModule.enabled && LSCG.InjectorModule.enableHorny) {
-            const { drugLevelMultiplier, hornyLevelMax, hornyLevel } = LSCG.InjectorModule;
-            LSCG.InjectorModule.hornyLevel = Math.min(
-                hornyLevel + 0.05 * drugLevelMultiplier * (delta / 1000),
-                hornyLevelMax * drugLevelMultiplier
-            );
+        data.LSCGTimer ??= now;
+        if (now - data.LSCGTimer > LSCG.breathInterval) {
+            data.LSCGTimer = now;
+            const randomLevelIncrease = Math.random() * 0.3 + 0.2; // 0.2 ~ 0.5
+            if (LSCG.random(45) === 0) {
+                LSCG.injectModule.AddHorny(randomLevelIncrease + 1, LSCG.random(3) === 0);
+            } else LSCG.injectModule.AddHorny(randomLevelIncrease / 4, false);
         }
+    } else {
+        data.LSCGTimer = now;
     }
 
     // 随机自慰

@@ -1,6 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { createAfterDrawProcess } from "../../../lib";
+import { LSCG } from "../../../lib/lscg";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const itemAttr = {
@@ -62,21 +63,38 @@ const translation = {
 };
 
 /**
- * @typedef {object} CanvasCacheData
+ * @typedef {object} EFClassesData
+ * @property {number} LSCGTimer
  * @property {HTMLCanvasElement} canvas
  */
 
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, CanvasCacheData>} */
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, EFClassesData>} */
 function scriptDraw(data, originalFunction, drawData) {
     const { C, Item, PersistentData } = drawData;
     const Data = PersistentData();
 
+    const now = Date.now();
+    // LSCG 联动
+    if (Item.Property?.TypeRecord?.m === 1) {
+        Data.LSCGTimer ??= now;
+        if (now - Data.LSCGTimer > LSCG.breathInterval) {
+            Data.LSCGTimer = now;
+            const randomLevelIncrease = Math.random() * 0.3 + 0.2; // 0.2 ~ 0.5
+            if (LSCG.random(45) === 0) {
+                LSCG.injectModule.AddMindControl(randomLevelIncrease + 1, LSCG.random(3) === 0);
+            } else LSCG.injectModule.AddMindControl(randomLevelIncrease / 4, false);
+        }
+    } else {
+        Data.LSCGTimer = now;
+    }
+
+    // 动画
     if (Item.Property?.TypeRecord?.f === 0) {
         Tools.drawUpdate(C, Data);
     }
 }
 
-const afterDraw = createAfterDrawProcess("modular", /** @type {CanvasCacheData} */ ({}), () => {}).onLayer(
+const afterDraw = createAfterDrawProcess("modular", /** @type {EFClassesData} */ ({}), () => {}).onLayer(
     ["effect", "light2", "light1"],
     (_, drawData) => {
         const resource = Tools.getAssetURL(drawData);
