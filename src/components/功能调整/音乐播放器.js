@@ -182,18 +182,20 @@ export default function () {
         while (true) {
             await sleepFor(1000);
             if (!ChatRoomCustomized) {
-                player.hide();
+                if (!player.isHided()) player.hide();
                 continue;
             }
 
-            if (player.isHided()) player.resume();
+            const url = ChatRoomData?.Custom?.MusicURL;
+            if (!url) {
+                if (!player.isHided()) player.hide();
+                continue;
+            }
 
+            player.setUrl(url);
+            if (player.isHided()) player.resume();
             const volume = Player?.AudioSettings?.MusicVolume;
             if (volume !== undefined) player.setVolume(volume);
-
-            const url = ChatRoomData?.Custom?.MusicURL;
-            if (url) player.setUrl(url);
-            else player.hide();
         }
     })();
 }
