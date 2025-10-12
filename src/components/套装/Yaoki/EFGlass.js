@@ -74,18 +74,21 @@ function scriptDraw(data, originalFunction, drawData) {
     const Data = PersistentData();
 
     const now = Date.now();
+
     // LSCG 联动
-    if (Item.Property?.TypeRecord?.m === 1) {
-        Data.LSCGTimer ??= now;
-        if (now - Data.LSCGTimer > LSCG.breathInterval) {
+    if (C.IsPlayer()) {
+        if (Item.Property?.TypeRecord?.m === 1) {
+            Data.LSCGTimer ??= now;
+            if (now - Data.LSCGTimer > LSCG.breathInterval) {
+                Data.LSCGTimer = now;
+                const randomLevelIncrease = Math.random() * 0.3 + 0.2; // 0.2 ~ 0.5
+                if (LSCG.random(45) === 0) {
+                    LSCG.injectModule.AddMindControl(randomLevelIncrease + 1, LSCG.random(3) === 0);
+                } else LSCG.injectModule.AddMindControl(randomLevelIncrease / 4, false);
+            }
+        } else {
             Data.LSCGTimer = now;
-            const randomLevelIncrease = Math.random() * 0.3 + 0.2; // 0.2 ~ 0.5
-            if (LSCG.random(45) === 0) {
-                LSCG.injectModule.AddMindControl(randomLevelIncrease + 1, LSCG.random(3) === 0);
-            } else LSCG.injectModule.AddMindControl(randomLevelIncrease / 4, false);
         }
-    } else {
-        Data.LSCGTimer = now;
     }
 
     // 动画
