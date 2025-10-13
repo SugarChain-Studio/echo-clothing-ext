@@ -11,7 +11,7 @@ const asset = [
             Left: 170,
             Top: 300,
             Priority: 18,
-            DefaultColor: ["#000000", "#000000", "#000000", "#DDDDDD", "#000000"],
+            DefaultColor: ["#000000", "#000000", "#000000", "#2B2931", "#000000"],
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
             PoseMapping: PoseMapTools.HideFullBody(),
