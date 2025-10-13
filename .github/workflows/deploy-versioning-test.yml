@@ -12,10 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout beta
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: beta
           submodules: "recursive"
           fetch-depth: 0
 
@@ -39,5 +38,5 @@ jobs:
           release_branches: "release"
           pre_release_branches: "beta"
           append_to_pre_release_tag: "beta"
-          custom_release_rules: "pre-feat:preminor"
+          custom_release_rules: "pre-feat:prepatch"
           github_token: ${{ secrets.GITHUB_TOKEN }}
