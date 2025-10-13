@@ -36,7 +36,7 @@ jobs:
         with:
           dry_run: "true"
           release_branches: "release"
-          pre_release_branches: "beta"
+          pre_release_branches: "beta,main"
           append_to_pre_release_tag: "beta"
           custom_release_rules: "pre-feat:prepatch"
           github_token: ${{ secrets.GITHUB_TOKEN }}
