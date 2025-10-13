@@ -9,68 +9,47 @@ const asset = {
     Left: 120,
     Expose: ["ItemNipples", "ItemNipplesPiercings", "ItemBreast"],
     DefaultColor: ["Default", "#000000", "Default", "#000000", "Default"],
+    PoseMapping: { Hogtied: "Hogtied", AllFours: "Hide" },
     Layer: [
         {
             Name: "衣服B2",
-            Priority: 15,
-            PoseMapping: {
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            Priority: 17,
             CopyLayerColor: "衣服A2",
             AllowTypes: { A: 1 },
         },
         {
             Name: "衣服B1",
-            Priority: 14,
-            PoseMapping: {
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            Priority: 16,
             CopyLayerColor: "衣服A1",
             AllowTypes: { A: 1 },
         },
         {
             Name: "衣服A2",
-            Priority: 15,
-            PoseMapping: {
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            Priority: 17,
             AllowTypes: { A: 0 },
         },
         {
             Name: "衣服A1",
-            Priority: 14,
-            PoseMapping: {
-                Hogtied: "Hogtied",
-                AllFours: "Hide",
-            },
+            Priority: 16,
             AllowTypes: { A: 0 },
         },
         {
             Name: "皮带A2",
-            Priority: 17,
-            PoseMapping: {
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            Priority: 18,
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
         },
         {
             Name: "皮带A1",
-            Priority: 16,
-            PoseMapping: {
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            Priority: 17,
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
         },
         {
             Name: "扣子",
             Priority: 18,
-            PoseMapping: {
-                Hogtied: "Hide",
-                AllFours: "Hide",
-            },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
         },
     ],
 };
