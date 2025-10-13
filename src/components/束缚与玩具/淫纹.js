@@ -5,7 +5,7 @@ import { createItemDialogModular } from "../../lib";
 import { LSCG } from "../../lib/lscg";
 
 /**
- * @typedef { { Masturbate:boolean, Glow: boolean, InstantOrgasm: boolean } } LewdCrestProps
+ * @typedef { { Masturbate:boolean, InstantOrgasm: boolean } } LewdCrestProps
  */
 
 /**
@@ -18,6 +18,8 @@ import { LSCG } from "../../lib/lscg";
  * @property { number } NextMasturbateTime
  * @property { number } LSCGTimer
  * @property { number } GlowOffset
+ * @property { number } V1GlowTimer
+ * @property { number } V1GlowCycle
  * @property { HTMLCanvasElement } GlowCanvas
  */
 
@@ -46,18 +48,6 @@ const dialog = createItemDialogModular([
     },
 ]).addCheckBoxes([
     {
-        location: { x: 1185, y: 675 },
-        show: ({ data }) => data.currentModule === "Base",
-        text: ({ text }) => text("淫纹发光按钮"),
-        enable: ({ item, chara }) => !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
-        checked: ({ item }) => extProp(item).Glow,
-        onclick: ({ item }) => {
-            const property = extProp(item);
-            property.Glow = !property.Glow;
-            property.OverridePriority = property.Glow ? 44 : undefined;
-        },
-    },
-    {
         location: { x: 1185, y: 750 },
         show: ({ data }) => data.currentModule === "Base",
         text: ({ text }) => text("淫纹强制自慰按钮"),
@@ -75,7 +65,6 @@ const dialog = createItemDialogModular([
 // #region 文本
 const custom_dialogs = {
     CN: {
-        淫纹发光按钮: "淫纹发光",
         淫纹强制自慰按钮: "淫纹强制自慰",
 
         淫纹魔法电流按钮: "魔法电流",
@@ -93,7 +82,6 @@ const custom_dialogs = {
             "SourceCharacter急切的想要抚慰PronounSelf,徒劳地向着FocusAssetGroup摸索尝试,近在咫尺的快乐此时却是如此遥不可及.",
     },
     EN: {
-        淫纹发光按钮: "Lewd Crest Glowing",
         淫纹强制自慰按钮: "Forced Masturbation",
 
         淫纹魔法电流按钮: "Magical Shock",
@@ -115,7 +103,6 @@ const custom_dialogs = {
             "SourceCharacter eagerly wants to pleasure PronounSelf, PronounPossessive futilely reaching towards PronounPossessive FocusAssetGroup, the close proximity of pleasure now seeming so unreachable.",
     },
     UA: {
-        淫纹发光按钮: "Розпусний гребінь, що світиться",
         淫纹强制自慰按钮: "Розпусний гребінь примусової мастурбації",
         淫纹魔法电流按钮: "Магічний шок Lewd Crest",
         淫纹强制高潮按钮: "Візерунок хтивості. Чарівний оргазм",
@@ -150,8 +137,9 @@ const custom_dialogs = {
 const assetStrings = {
     CN: {
         SelectBase: "淫纹设置",
-        Module样式: "淫纹样式",
-        Module性刺激: "淫纹性刺激",
+        Module样式: "样式",
+        Module性刺激: "性刺激",
+        Module发光: "发光",
 
         Select样式: "设置淫纹样式",
         Optiont0: "默认样式",
@@ -163,42 +151,59 @@ const assetStrings = {
         Sett2: "SourceCharacter将DestinationCharacter淫纹设置为样式2.",
         Sett3: "SourceCharacter将DestinationCharacter淫纹设置为样式3.",
 
-        Select性刺激: "淫纹性刺激设置",
+        Select性刺激: "设置淫纹性刺激",
         Optiona0: "无",
         Optiona1: "持续发情",
         Optiona2: "寸止",
         Optiona3: "拒绝",
-        Seta0: "SourceCharacter通过AssetName上的魔法令TargetCharacter的淫纹恢复自然状态.",
+        Seta0: "SourceCharacter关闭了AssetName上的催情魔法.",
         Seta1: "SourceCharacter通过AssetName上的魔法令TargetCharacter的小穴保持湿润,持续处于发情状态.",
         Seta2: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够处于高潮边缘.",
         Seta3: "SourceCharacter通过AssetName上的魔法令TargetCharacter仅能够拒绝高潮.",
+
+        Select发光: "设置淫纹发光",
+        Optiong0: "关闭",
+        Optiong1: "流动光",
+        Optiong2: "泛光",
+        Setg0: "SourceCharacter将DestinationCharacter淫纹发光关闭.",
+        Setg1: "SourceCharacter将DestinationCharacter淫纹发光设置为流动光.",
+        Setg2: "SourceCharacter将DestinationCharacter淫纹发光设置为泛光.",
 
         ...custom_dialogs.CN,
     },
     EN: {
         SelectBase: "Lewd Crest Settings",
-        Module样式: "Lewd Crest Style",
-        Module性刺激: "Sexual Stimulation",
+        Module样式: "Style",
+        Module性刺激: "Arousal",
+        Module发光: "Glow",
 
         Select样式: "Select Lewd Crest Style",
         Optiont0: "Default Style",
         Optiont1: "Style 1",
         Optiont2: "Style 2",
         Optiont3: "Style 3",
-        Sett0: "SourceCharacter sets DestinationCharacter Lust Pattern to the default style.",
-        Sett1: "SourceCharacter sets DestinationCharacter Lust Pattern to Style 1.",
-        Sett2: "SourceCharacter sets DestinationCharacter Lust Pattern to Style 2.",
-        Sett3: "SourceCharacter sets DestinationCharacter Lust Pattern to Style 3.",
+        Sett0: "SourceCharacter sets DestinationCharacter AssetName to the default style.",
+        Sett1: "SourceCharacter sets DestinationCharacter AssetName to Style 1.",
+        Sett2: "SourceCharacter sets DestinationCharacter AssetName to Style 2.",
+        Sett3: "SourceCharacter sets DestinationCharacter AssetName to Style 3.",
 
         Select性刺激: "Lewd Crest Sexual Stimulation Settings",
         Optiona0: "Idle",
         Optiona1: "Continuous Heat",
         Optiona2: "Edge",
         Optiona3: "Deny",
-        Seta0: "SourceCharacter uses magic on AssetName to restore DestinationCharacter Lust Pattern to its natural state.",
+        Seta0: "SourceCharacter uses magic on AssetName to disable the arousal effect.",
         Seta1: "SourceCharacter uses magic on AssetName to keep DestinationCharacter intimate area moist and in a continuous state of heat.",
         Seta2: "SourceCharacter uses magic on AssetName to keep TargetCharacter at the edge of orgasm.",
         Seta3: "SourceCharacter uses magic on AssetName to make TargetCharacter able to only reject orgasm.",
+
+        Select发光: "Set Lewd Crest Glow",
+        Optiong0: "Off",
+        Optiong1: "Flowing Light",
+        Optiong2: "Bloom Light",
+        Setg0: "SourceCharacter turns off DestinationCharacter Lewd Crest glow.",
+        Setg1: "SourceCharacter sets DestinationCharacter Lewd Crest glow to Flowing Light.",
+        Setg2: "SourceCharacter sets DestinationCharacter Lewd Crest glow to Bloom Light.",
 
         ...custom_dialogs.EN,
     },
@@ -275,7 +280,7 @@ const asset = [
         RemoveTime: 15,
         Time: 10,
         ParentGroup: {},
-        DefaultColor: ["#EA3E74", "Default", "Default", "Default", "#D75CFF", "#72B5FF"],
+        DefaultColor: ["#EA3E74", "Default", "Default", "Default", "#D75CFF", "#72B5FF", "#FFBFF1"],
         DynamicGroupName: "ItemPelvis",
         PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
         Layer: [
@@ -283,15 +288,16 @@ const asset = [
             { Name: "预设淫纹1", AllowTypes: { t: 1 } },
             { Name: "预设淫纹2", AllowTypes: { t: 2 } },
             { Name: "预设淫纹3", AllowTypes: { t: 3 } },
-            { Name: "渐变层", HasImage: false, AllowColorize: false },
+            { Name: "渐变层", HasImage: false, AllowColorize: false, AllowTypes: { g: 1 } },
             { Name: "发光1", HasImage: false },
             { Name: "发光2", HasImage: false },
+            { Name: "泛光", HasImage: false, AllowTypes: { g: 2 } },
         ],
     },
     {
         translation: { CN: "淫纹", EN: "Lewd Crest", RU: "Порнографический знак", UA: "Хтивий візерунок" },
         layerNames: {
-            CN: { 发光1: "发光颜色1", 发光2: "发光颜色2" },
+            CN: { 发光1: "发光颜色1", 发光2: "发光颜色2", 泛光: "泛光式发光" },
             EN: {
                 淫纹: "Lewd Crest",
                 预设淫纹1: "Preset Lewd Crest 1",
@@ -299,6 +305,7 @@ const asset = [
                 预设淫纹3: "Preset Lewd Crest 3",
                 发光1: "Glow Color1",
                 发光2: "Glow Color2",
+                泛光: "Bloom Style Glow",
             },
         },
         extended: {
@@ -318,6 +325,11 @@ const asset = [
                         { Property: { Effect: [E.DenialMode, E.RuinOrgasms] } },
                     ],
                 },
+                {
+                    Name: "发光",
+                    Key: "g",
+                    Options: [{}, { Property: { OverridePriority: 44 } }, { Property: { OverridePriority: 44 } }],
+                },
             ],
             ScriptHooks: dialog.createHooks(["Click", "Draw"], {
                 AfterDraw: afterDraw,
@@ -325,7 +337,6 @@ const asset = [
             }),
             BaselineProperty: /** @type {ExtendItemProperties}*/ ({
                 Masturbate: false,
-                Glow: false,
             }),
         },
         assetStrings,
@@ -477,21 +488,14 @@ function updateRuns(player, data, item) {
 }
 //#endregion
 
-//#region 动画绘制
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, LewdCrestData>} */
 function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     const Data = PersistentData();
     if (C.IsPlayer()) updateRuns(C, Data, Item);
-    if (extProp(Item)?.Glow) Tools.drawUpdate(C, Data);
+    if (Item.Property?.TypeRecord && [1, 2].includes(Item.Property.TypeRecord.g)) Tools.drawUpdate(C, Data);
 }
 
-const colorIdxes = /** @type {AssetLayerDefinition[]}*/ (asset[1].Layer)
-    .filter((l) => l.AllowColorize || l.AllowColorize === undefined)
-    .filter((l) => !l.CopyLayerColor || l.CopyLayerColor === undefined)
-    .map((l, i) => /** @type {const}*/ ([l.Name, i]))
-    .filter(([name]) => name.startsWith("发光"))
-    .map(([, i]) => i);
-
+//#region 动画绘制
 const type2Layer = Object.fromEntries(
     /** @type {AssetLayerDefinition[]}*/ (asset[1].Layer)
         .filter((l) => typeof l.AllowTypes?.["t"] === "number")
@@ -526,23 +530,25 @@ const center = {
     3: 108,
 };
 
+/** @type {(c:undefined | string, def: string)=> string} */
+const colorDefault = (c, def) => (!c || c === "Default" ? def : c);
+
 /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, LewdCrestData>} */
 function afterDraw(data, originalFunction, drawData) {
-    const { A, CA, X, Y, PersistentData, L, C, drawCanvas, drawCanvasBlink } = drawData;
-    if (L === "渐变层") {
+    const { A, CA, X, Property, Y, C, L, Color, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
+    const Data = PersistentData();
+
+    if (L === "渐变层" && Property.TypeRecord?.g === 1) {
         const property = extProp(CA);
         const imgType = type2Layer[property?.TypeRecord?.t ?? 0];
         const mc = center[property?.TypeRecord?.t ?? 0] || center[0];
 
-        if (!property.Glow) return;
-
-        const Data = PersistentData();
         Data.GlowOffset ??= Math.floor(Math.random() * 1000);
         Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);
 
         const [c1, c2] = ((colors) => {
             if (!Array.isArray(colors) && colors.length < 6) return ["#D75CFF", "#72B5FF"];
-            return colorIdxes.map((idx) => colors[idx] || "#FFFFFF").map((c) => (c === "Default" ? "#FFFFFF" : c));
+            return [4, 5].map((idx) => colorDefault(colors[idx], A.DefaultColor[idx]));
         })(CA.Color ?? CA.Asset.DefaultColor);
 
         const ctx = Data.GlowCanvas.getContext("2d");
@@ -565,6 +571,36 @@ function afterDraw(data, originalFunction, drawData) {
 
         const mask = Tools.getAssetURL(drawData, imgType);
         DrawImageEx(mask, ctx, 0, 0, { BlendingMode: "destination-in" });
+
+        drawCanvas(Data.GlowCanvas, X, Y);
+        drawCanvasBlink(Data.GlowCanvas, X, Y);
+    }
+    if (L === "泛光" && Property.TypeRecord?.g === 2) {
+        if (Property.TypeRecord?.g !== 2) return;
+
+        Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);
+        const ctx = Data.GlowCanvas.getContext("2d");
+        ctx.clearRect(0, 0, 200, 200);
+
+        const now = Date.now();
+
+        Data.V1GlowTimer ??= now;
+        const delta = now - Data.V1GlowTimer;
+        Data.V1GlowTimer = now;
+
+        Data.V1GlowCycle ??= Math.random() * Math.PI * 2;
+
+        // 闪烁周期时间, 1 ~ 5 秒
+        const TwinkleCycleTime = (C.ArousalSettings ? 100 - (C.ArousalSettings.Progress / 100) * 80 : 100) * 50;
+        Data.V1GlowCycle += (delta / TwinkleCycleTime) * Math.PI * 2;
+
+        ctx.globalAlpha = 0.2 + 0.3 * Math.cos(Data.V1GlowCycle);
+        const gradient = ctx.createRadialGradient(100, 108, 0, 100, 108, 100);
+        const c = colorDefault(Color, A.DefaultColor[6]);
+        gradient.addColorStop(0, c);
+        gradient.addColorStop(1, `${c}00`);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 200, 200);
 
         drawCanvas(Data.GlowCanvas, X, Y);
         drawCanvasBlink(Data.GlowCanvas, X, Y);
