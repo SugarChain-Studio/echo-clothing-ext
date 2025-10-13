@@ -293,6 +293,10 @@ const asset = {
         { Name: "晓雾", AllowTypes: { pen: 2 } },
         { Name: "Penelope", AllowTypes: { pen: 3 } },
 
+        // 鸭鸭窝
+        { Name: "Sunny2", AllowTypes: { yyw: 1 } },
+        { Name: "月诺诺", AllowTypes: { yyw: 2 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -342,6 +346,7 @@ const asset = {
         { Name: "希尔薇娅", AllowTypes: { l: 38 } },
         { Name: "云喵", AllowTypes: { l: 39 } },
         { Name: "诺瑞莉卡", AllowTypes: { l: 40 } },
+        { Name: "Kiki", AllowTypes: { l: 41 } },
     ],
 };
 
@@ -371,6 +376,7 @@ const typeNameNext = {
     cai: "柴坊",
     nest: "Nest",
     pen: "1563",
+    yyw: "鸭鸭窝",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
