@@ -6,7 +6,7 @@ from typing import List, TypedDict, Callable
 
 # 通配符数组
 wildcard_paths = [
-    "resources/Assets/Female3DCG/Cloth/**/西装露肩_Luzi_*base.png",
+    "resources/Assets/Female3DCG/Cloth/一块布_*_A6.png",
 ]
 
 # 定义亮度范围的类型
@@ -119,15 +119,20 @@ def main() -> None:
     # 第一遍：分析所有图片的亮度范围
     source_brightness_range = get_brightness_range(all_files)
     
-    if source_brightness_range['min'] >= source_brightness_range['max']:
-        print("警告: 检测到的亮度范围无效，跳过处理")
+    if source_brightness_range['min'] < source_brightness_range['max']:
+        print(f"原始亮度范围: {source_brightness_range['min']:.3f} ~ {source_brightness_range['max']:.3f}")
+        print(f"目标亮度范围: {TARGET_BRIGHTNESS_RANGE['min']:.3f} ~ {TARGET_BRIGHTNESS_RANGE['max']:.3f}")
+        
+        # 创建亮度归一化函数
+        brightness_normalizer = linear_normalize_brightness(source_brightness_range, TARGET_BRIGHTNESS_RANGE)
+    elif source_brightness_range['min'] == source_brightness_range['max']:
+        print(f"所有图片亮度相同: {source_brightness_range['min']:.3f}，将转换为目标范围的中间值")
+        target_brightness = (TARGET_BRIGHTNESS_RANGE['min'] + TARGET_BRIGHTNESS_RANGE['max']) / 2
+        print(f"目标亮度: {target_brightness:.3f}")
+        brightness_normalizer = lambda _: target_brightness
+    else:
+        print("无法确定亮度范围，跳过处理")
         return
-    
-    print(f"原始亮度范围: {source_brightness_range['min']:.3f} ~ {source_brightness_range['max']:.3f}")
-    print(f"目标亮度范围: {TARGET_BRIGHTNESS_RANGE['min']:.3f} ~ {TARGET_BRIGHTNESS_RANGE['max']:.3f}")
-    
-    # 创建亮度归一化函数
-    brightness_normalizer = linear_normalize_brightness(source_brightness_range, TARGET_BRIGHTNESS_RANGE)
     
     # 第二遍：应用归一化处理
     process_images(all_files, brightness_normalizer)
