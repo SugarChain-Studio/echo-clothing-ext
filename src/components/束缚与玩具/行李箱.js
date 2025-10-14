@@ -248,14 +248,10 @@ export default function () {
     AssetManager.addAssetWithConfig(...assets);
 
     SharedCenterModifier.addModifier(
-        DrawMods.asset([{ prev: "行李箱", next: "抓住行李箱" }], (_, { sharedC, initState, C }) => {
-            const { Zoom } = initState;
-            if (sharedC.prev.MemberNumber === C.MemberNumber) {
-                return { C, X: sharedC.center.X + 50 * Zoom, Y: sharedC.center.Y - 50 * Zoom, Zoom };
-            }
-            if (sharedC.next.MemberNumber === C.MemberNumber) {
-                return { C, X: sharedC.center.X - 50 * Zoom, Y: sharedC.center.Y, Zoom };
-            }
-        })
+        DrawMods.asset(
+            [{ prev: "行李箱", next: "抓住行李箱" }],
+            ["center", { X: 50, Y: -50 }],
+            ["center", { X: -50, Y: 0 }]
+        )
     );
 }
