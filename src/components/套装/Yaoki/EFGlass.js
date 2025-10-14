@@ -1,4 +1,4 @@
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { createAfterDrawProcess } from "../../../lib";
 import { LSCG } from "../../../lib/lscg";
@@ -36,7 +36,14 @@ const asset = {
         { Name: "frame_gloss", BlendingMode: "screen", AllowColorize: false },
         { Name: "light1", HasImage: false },
         { Name: "light2", Priority: 54, HasImage: false },
-        { Name: "effect", Priority: 54, HasImage: false, AllowTypes: { m: [1, 2] }, CopyLayerColor: "light2" },
+        {
+            Name: "effect",
+            Priority: 54,
+            HasImage: false,
+            AllowTypes: { m: [1, 2, 3, 4] },
+            CopyLayerColor: "light2",
+            CreateLayerTypes: ["m"],
+        },
     ],
 };
 
@@ -151,7 +158,7 @@ const extended = {
             Key: "v",
             Options: [{}, { Property: { Effect: [E.BlindNormal] } }, { Property: { Effect: [E.BlindHeavy] } }],
         },
-        { Name: "催眠", Key: "m", Options: [{}, {}] },
+        { Name: "催眠", Key: "m", Options: [{}, {}, {}, {}, {}] },
         { Name: "流光", Key: "f", Options: [{}, {}] },
     ],
 };
@@ -165,23 +172,34 @@ const assetStrings = {
         Optionv0: "默认",
         Optionv1: "半透明",
         Optionv2: "几乎不透明",
-        Setv0: "SourceCharacter配置DestinationCharacterAssetName为默认透明度",
-        Setv1: "SourceCharacter配置DestinationCharacterAssetName为半透明",
-        Setv2: "SourceCharacter配置DestinationCharacterAssetName为几乎不透明",
+        ...DialogTools.modularSetMessage(
+            "v",
+            ["默认透明度", "半透明", "几乎不透明"],
+            (field) => `SourceCharacter配置DestinationCharacterAssetName为${field}`
+        ),
 
         Module催眠: "催眠",
         Select催眠: "设置催眠效果",
         Optionm0: "无催眠",
-        Optionm1: "启动催眠",
-        Setm0: "SourceCharacter使DestinationCharacterAssetName无催眠效果",
-        Setm1: "SourceCharacter使DestinationCharacterAssetName启动催眠程序",
+        Optionm1: "催眠中",
+        Optionm2: "惩罚中",
+        Optionm3: "任务中",
+        Optionm4: "训练中",
+        ...DialogTools.modularSetMessage(
+            "m",
+            ["无催眠效果", "催眠", "惩罚", "任务", "训练"],
+            (field, idx) => `SourceCharacter使DestinationCharacterAssetName${idx === 0 ? field : `启动${field}程序`}`
+        ),
 
         Module流光: "灯光动画",
         Select流光: "设置灯光动画效果",
-        Optionf0: "有灯光动画",
-        Optionf1: "无灯光动画",
-        Setf0: "SourceCharacter使DestinationCharacterAssetName有灯光动画效果",
-        Setf1: "SourceCharacter使DestinationCharacterAssetName无灯光动画效果",
+        Optionf0: "有",
+        Optionf1: "无",
+        ...DialogTools.modularSetMessage(
+            "f",
+            ["有", "无"],
+            (field) => `SourceCharacter使DestinationCharacterAssetName${field}灯光动画`
+        ),
     },
     EN: {
         SelectBase: "Configure EvilFall Visor",
@@ -191,23 +209,37 @@ const assetStrings = {
         Optionv0: "Default",
         Optionv1: "Semi-Transparent",
         Optionv2: "Nearly Opaque",
-        Setv0: "SourceCharacter makes DestinationCharacter AssetName have default opacity",
-        Setv1: "SourceCharacter makes DestinationCharacter AssetName have semi-transparent opacity",
-        Setv2: "SourceCharacter makes DestinationCharacter AssetName have nearly opaque opacity",
+        ...DialogTools.modularSetMessage(
+            "v",
+            ["default", "semi-transparent", "nearly opaque"],
+            (field) => `SourceCharacter makes DestinationCharacter AssetName have ${field} opacity`
+        ),
 
         Module催眠: "Hypnosis",
         Select催眠: "Set Hypnosis Effect",
         Optionm0: "No Hypnosis",
-        Optionm1: "Hypnosis",
-        Setm0: "SourceCharacter makes DestinationCharacter AssetName have no hypnosis effect",
-        Setm1: "SourceCharacter makes DestinationCharacter AssetName initiate hypnosis protocol",
+        Optionm1: "Hypnotized",
+        Optionm2: "Punishment",
+        Optionm3: "Mission",
+        Optionm4: "Training",
+        ...DialogTools.modularSetMessage(
+            "m",
+            ["no hypnosis effect", "hypnosis", "punishment", "mission", "training"],
+            (field, idx) =>
+                `SourceCharacter makes DestinationCharacter AssetName ${
+                    idx === 0 ? field : `initiate ${field} protocol`
+                }.`
+        ),
 
         Module流光: "Light Animation",
         Select流光: "Set Light Animation Effect",
         Optionf0: "Animation",
         Optionf1: "No Animation",
-        Setf0: "SourceCharacter makes DestinationCharacter AssetName have light animation effect",
-        Setf1: "SourceCharacter makes DestinationCharacter AssetName have no light animation effect",
+        ...DialogTools.modularSetMessage(
+            "f",
+            ["animation", "no animation"],
+            (field) => `SourceCharacter makes DestinationCharacter AssetName have ${field} effect`
+        ),
     },
 };
 
