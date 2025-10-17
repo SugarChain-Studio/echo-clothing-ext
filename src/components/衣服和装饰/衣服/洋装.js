@@ -7,12 +7,18 @@ const asset = {
     Gender: "F",
     Top: 0,
     Left: 0,
-    ParentGroup: {},
     Prerequisite: ["HasBreasts"],
-    PoseMapping: {
-        Hogtied: "Hogtied",
-    },
     Priority: 30,
+    DefaultColor: ["#0E164D", "#020212", "#040820", "#020212", "#121113", "#000000", "#363330",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212",
+        "#0E164D", "#020212"
+    ],
     Layer: [
         { Name: "A1" },
         { Name: "A2" },
@@ -55,5 +61,5 @@ const translation = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
+    // AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
