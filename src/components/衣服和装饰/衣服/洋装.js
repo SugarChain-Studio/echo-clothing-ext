@@ -3,7 +3,6 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const bottomLayerShared = {
-    ParentGroup: "BodyUpper",
     PoseMapping: {
         AllFours: PoseType.HIDE,
         Hogtied: "Hogtied",
@@ -12,7 +11,6 @@ const bottomLayerShared = {
 
 /** @type {Partial<AssetLayerDefinition>} */
 const bottomLayerShared2 = {
-    ParentGroup: "BodyUpper",
     PoseMapping: {
         AllFours: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
