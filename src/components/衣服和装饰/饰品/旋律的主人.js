@@ -9,6 +9,7 @@ const asset = [
         Top: 50,
         ParentGroup: {},
         PoseMapping: {},
+        DynamicGroupName: "HairAccessory1",
         Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }],
     },
     {

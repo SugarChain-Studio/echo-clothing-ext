@@ -11,6 +11,7 @@ const asset = [
         ParentGroup: {},
         PoseMapping: {},
         DefaultColor: ["#966C2D", "#368DBF", "#368DBF", "Default"],
+        DynamicGroupName: "Mask",
         Layer: [
             { Name: "金属d" },
             { Name: "金属g", BlendingMode: "screen", AllowColorize: false },
