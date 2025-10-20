@@ -19,40 +19,40 @@ const topLeft = {
     SocksRight: { Top: 0, Left: { "": 250, "KneelingSpread": 220 } },
 };
 
-/**
- * 生成左右袜子
- * @param {CustomAssetDefinition} asset
- * @param {AssetGroupName} [group] 图片资源所在的身体组，默认是"Socks"
- * @returns {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]}
- */
-function createSockLR(asset, group = "Socks") {
-    if (!Array.isArray(asset.Layer)) asset.Layer = [{}];
+export class SockLRTool {
+    /**
+     * 生成左右袜子
+     * @param {CustomAssetDefinition} asset
+     * @param {AssetGroupName} [group] 图片资源所在的身体组，默认是"Socks"
+     * @returns {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]}
+     */
+    static createSockLR(asset, group = "Socks") {
+        if (!Array.isArray(asset.Layer)) asset.Layer = [{}];
 
-    const maskName = `Mask${asset.Name}`;
+        const maskName = `Mask${asset.Name}`;
 
-    const imageMap = /** @type {AssetGroupName[]}*/ (
-        asset.DynamicGroupName ? [asset.DynamicGroupName] : [group]
-    ).reduce((pv, cv) => {
-        pv[ImageMapTools.assetLayer(cv, `${asset.Name}_${maskName}`)] = blackFill;
-        return pv;
-    }, {});
+        const imageMap = /** @type {AssetGroupName[]}*/ (
+            asset.DynamicGroupName ? [asset.DynamicGroupName] : [group]
+        ).reduce((pv, cv) => {
+            pv[ImageMapTools.assetLayer(cv, `${asset.Name}_${maskName}`)] = blackFill;
+            return pv;
+        }, {});
 
-    AssetManager.addImageMapping(imageMap);
+        AssetManager.addImageMapping(imageMap);
 
-    return /** @type {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]} */ (
-        /** @type {["SocksLeft", "SocksRight"]}*/ (["SocksLeft", "SocksRight"]).map((grp) => {
-            const ret = { ...asset, Layer: [...asset.Layer], DynamicGroupName: group };
-            ret.Layer.push({
-                Name: maskName,
-                ...topLeft[grp],
-                ParentGroup: {},
-                PoseMapping: {},
-                TextureMask: {},
-                BlendingMode: "destination-out",
-            });
-            return [grp, ret];
-        })
-    );
+        return /** @type {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]} */ (
+            /** @type {["SocksLeft", "SocksRight"]}*/ (["SocksLeft", "SocksRight"]).map((grp) => {
+                const ret = { ...asset, Layer: [...asset.Layer], DynamicGroupName: group };
+                ret.Layer.push({
+                    Name: maskName,
+                    ...topLeft[grp],
+                    ParentGroup: {},
+                    PoseMapping: {},
+                    TextureMask: {},
+                    BlendingMode: "destination-out",
+                });
+                return [grp, ret];
+            })
+        );
+    }
 }
-
-export const SockLRTool = { createSockLR };
