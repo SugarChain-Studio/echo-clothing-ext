@@ -131,6 +131,57 @@ const assets = [
         },
         { translation: { CN: "蝙蝠翼发卡", EN: "Bat Wing Hair Clip" }, layerNames },
     ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "N四叶草",
+            ...hairAccShared,
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "天然四叶草发卡", EN: "Natural Clover Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "E四叶草",
+            ...hairAccShared,
+            Layer: [
+                { Name: "右_金属框", ColorGroup: "金属框" },
+                { Name: "右_宝石", ColorGroup: "宝石" },
+                { Name: "右_钻石", ColorGroup: "钻石" },
+                { Name: "左_金属框", ColorGroup: "金属框" },
+                { Name: "左_宝石", ColorGroup: "宝石" },
+                { Name: "左_钻石", ColorGroup: "钻石" },
+            ],
+        },
+        {
+            translation: { CN: "珠宝四叶草发卡", EN: "Jeweled Clover Hair Clip" },
+            layerNames: {
+                CN: {
+                    右_金属框: "右",
+                    右_宝石: "右",
+                    右_钻石: "右",
+                    左_金属框: "左",
+                    左_宝石: "左",
+                    左_钻石: "左",
+
+                    金属框: "金属框",
+                    宝石: "宝石",
+                    钻石: "钻石",
+                },
+                EN: {
+                    右_金属框: "Right",
+                    右_宝石: "Right",
+                    右_钻石: "Right",
+                    左_金属框: "Left",
+                    左_宝石: "Left",
+                    左_钻石: "Left",
+
+                    金属框: "Metal Frame",
+                    宝石: "Gem",
+                    钻石: "Diamond",
+                },
+            },
+        },
+    ]),
 ];
 
 export default function () {
