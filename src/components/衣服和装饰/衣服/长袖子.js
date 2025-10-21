@@ -1,55 +1,41 @@
 import { AssetManager } from "../../../assetForward";
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    长袖子_Luzi: [
-        {
-            Name: "广袖_Luzi",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            ParentGroup: {},
-            PoseMapping: {
-                BackBoxTie: "Hide",
-                BackCuffs: "Hide",
-                BackElbowTouch: "Hide",
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
-                Hogtied: "Hide",
-                AllFours: "Hide",
+/** @type { AddAssetWithConfigParams }} */
+const assets = [
+    "长袖子_Luzi",
+    {
+        Name: "广袖_Luzi",
+        Random: false,
+        Top: 0,
+        Left: 0,
+        ParentGroup: {},
+        PoseMapping: {
+            BackBoxTie: "Hide",
+            BackCuffs: "Hide",
+            BackElbowTouch: "Hide",
+            OverTheHead: "OverTheHead",
+            Yoked: "Yoked",
+            Hogtied: "Hide",
+            AllFours: "Hide",
+        },
+        Layer: [
+            { Name: "袖子", Priority: 36 },
+            {
+                Name: "臂环",
+                Priority: 36,
+                InheritPoseMappingFields: true,
+                PoseMapping: { OverTheHead: "Hide" },
+                CopyLayerColor: "袖子",
             },
-            Layer: [
-                {
-                    Name: "袖子",
-                    Priority: 36,
-                },
-                {
-                    Name: "渐变",
-                    Priority: 35,
-                },
-                {
-                    Name: "花纹",
-                    Priority: 37,
-                },
-            ],
-        },
-    ],
-};
-
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        长袖子_Luzi: {
-            广袖_Luzi: "广袖",
-        },
+            { Name: "渐变", Priority: 35 },
+            { Name: "花纹", Priority: 36 },
+        ],
     },
-    EN: {
-        长袖子_Luzi: {
-            广袖_Luzi: "Wide sleeve",
-        },
+    {
+        translation: { CN: "广袖", EN: "Wide Sleeve" },
     },
-};
+];
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig(...assets);
 }
