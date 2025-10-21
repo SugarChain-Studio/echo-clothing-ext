@@ -5,7 +5,7 @@ import { cachePreloadGL } from "./cachePreload";
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
 /**
- * @typedef { "" | "Arm1" | "Right" | "Hand" } ArmMaskMode
+ * @typedef { "" | "Arm1" | "Right" | "Hand" | "Short" } ArmMaskMode
  */
 
 /** @type { Record<ArmMaskMode,Pick<AssetLayerDefinition, "Name"|"ParentGroup"|"PoseMapping">> } */
@@ -14,6 +14,7 @@ const nameRecord = {
     "Arm1": { Name: "ArmMask1", ParentGroup: "BodyUpper" },
     "Right": { Name: "ArmMaskR", ParentGroup: "BodyUpper", PoseMapping: {} },
     "Hand": { Name: "ArmMaskH", ParentGroup: {} },
+    "Short": { Name: "ArmMaskShort", ParentGroup: {} },
 };
 
 const argMaskGroup = /** @type {AssetGroupName}*/ ("LuziArmMask");
