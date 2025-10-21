@@ -14,6 +14,14 @@ function recordEntries(record) {
  * @typedef {AssetDefinitionBase["DrawOffset"][0]} DrawOffsetItem
  */
 
+/**
+ * @param {AddAssetWithConfigParams | AddAssetWithConfigParamsNoGroup} arg0
+ * @returns {arg0 is AddAssetWithConfigParams}
+ */
+function addAssetParamHasGroup(arg0) {
+    return arg0.length === 3;
+}
+
 export const Typing = {
     attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
@@ -38,4 +46,5 @@ export const Typing = {
      */
     transform: (obj, func) => func(obj),
     entries: recordEntries,
+    addAssetParamHasGroup,
 };

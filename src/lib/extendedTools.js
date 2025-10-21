@@ -1,3 +1,5 @@
+import { Typing } from "./typing";
+
 /**
  * 为物品生成 左/右/两侧 的外观选项
  * @param {CustomAssetDefinition} assetDef
@@ -73,4 +75,37 @@ function createLeftRightBoth(assetDef, { preset = "left", mirror = false } = {})
     };
 }
 
-export const ExtendedTools = { createLeftRightBoth };
+export class ExtendedTools {
+    static createLeftRightBoth = createLeftRightBoth;
+
+    /**
+     * @overload
+     * @param {AddAssetWithConfigParamsNoGroup} arg0
+     * @param {Parameters<typeof createLeftRightBoth>[1]} [arg1]
+     * @returns {AddAssetWithConfigParamsNoGroup}
+     */
+    /**
+     * @overload
+     * @param {AddAssetWithConfigParams} arg0
+     * @param {Parameters<typeof createLeftRightBoth>[1]} [arg1]
+     * @returns {AddAssetWithConfigParams}
+     */
+    /**
+     * @param { AddAssetWithConfigParams | AddAssetWithConfigParamsNoGroup} arg0
+     * @param {Parameters<typeof createLeftRightBoth>[1]} [arg1]
+     */
+    static createLRBConfig(arg0, arg1 = { preset: "left", mirror: false }) {
+        if (Typing.addAssetParamHasGroup(arg0)) {
+            return /** @type {AddAssetWithConfigParams} */ ([
+                arg0[0],
+                arg0[1],
+                { ...arg0[2], ...createLeftRightBoth(arg0[1], arg1) },
+            ]);
+        } else {
+            return /** @type {AddAssetWithConfigParamsNoGroup} */ ([
+                arg0[0],
+                { ...arg0[1], ...createLeftRightBoth(arg0[0], arg1) },
+            ]);
+        }
+    }
+}

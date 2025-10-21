@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
 import { ExtendedTools } from "../../../lib";
 
 const hairAccShared = {
@@ -8,98 +7,6 @@ const hairAccShared = {
     Top: 0,
     Priority: 54,
     ParentGroup: {},
-};
-
-/** @type {Array<CustomAssetDefinition>}} */
-const assets = [
-    {
-        Name: "发卡1",
-        ...hairAccShared,
-        DefaultColor: ["#621616", "#621616"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "发卡2",
-        ...hairAccShared,
-        DefaultColor: ["#621616", "#621616"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "X发卡",
-        ...hairAccShared,
-        DefaultColor: ["#621616", "#621616"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "心型发卡",
-        ...hairAccShared,
-        DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
-        Layer: [{ Name: "右夹子" }, { Name: "右心" }, { Name: "左夹子" }, { Name: "左心" }],
-    },
-    {
-        Name: "星星发卡",
-        ...hairAccShared,
-        DefaultColor: ["#D0CF58", "#D0CF58"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "星星发卡2",
-        ...hairAccShared,
-        DefaultColor: ["#D0CF58", "#D0CF58"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "月亮发饰",
-        ...hairAccShared,
-        DefaultColor: ["#D0CF58", "#D0CF58"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "蝴蝶",
-        ...hairAccShared,
-        DefaultColor: ["#8B87FF", "#8B87FF"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-    {
-        Name: "蝴蝶2",
-        ...hairAccShared,
-        DefaultColor: ["#6382FF", "#6382FF", "#6382FF", "#6382FF"],
-        Layer: [{ Name: "右后" }, { Name: "右前" }, { Name: "左后" }, { Name: "左前" }],
-    },
-    {
-        Name: "蝙蝠翼发卡",
-        ...hairAccShared,
-        DefaultColor: ["#232323", "#232323"],
-        Layer: [{ Name: "右" }, { Name: "左" }],
-    },
-];
-
-/** @type { Translation.String } */
-const translations = {
-    CN: {
-        发卡1: "基础发卡 1",
-        发卡2: "基础发卡 2",
-        X发卡: "X发卡",
-        心型发卡: "心型发卡",
-        星星发卡: "星星发卡",
-        星星发卡2: "星星发卡 2",
-        月亮发饰: "月亮发饰",
-        蝙蝠翼发卡: "蝙蝠翼发卡",
-        蝴蝶: "蝴蝶头饰",
-        蝴蝶2: "蝴蝶头饰2",
-    },
-    EN: {
-        发卡1: "Basic Hair Clip 1",
-        发卡2: "Basic Hair Clip 2",
-        X发卡: "X Hair Clip",
-        心型发卡: "Heart Hair Clip",
-        星星发卡: "Star Hair Clip",
-        星星发卡2: "Star Hair Clip 2",
-        月亮发饰: "Moon Hair Clip",
-        蝙蝠翼发卡: "Bat Wing Hair Clip",
-        蝴蝶: "Butterfly Hair Clip",
-        蝴蝶2: "Butterfly Hair Clip 2",
-    },
 };
 
 /** @type { Translation.String } */
@@ -132,15 +39,100 @@ const layerNames = {
     },
 };
 
+/** @type {AddAssetWithConfigParamsNoGroup[]}} */
+const assets = [
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "发卡1",
+            ...hairAccShared,
+            DefaultColor: ["#621616", "#621616"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "发卡1", EN: "Basic Hair Clip 1" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "发卡2",
+            ...hairAccShared,
+            DefaultColor: ["#621616", "#621616"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "发卡2", EN: "Basic Hair Clip 2" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "X发卡",
+            ...hairAccShared,
+            DefaultColor: ["#621616", "#621616"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "X发卡", EN: "X Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "心型发卡",
+            ...hairAccShared,
+            DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
+            Layer: [{ Name: "右夹子" }, { Name: "右心" }, { Name: "左夹子" }, { Name: "左心" }],
+        },
+        { translation: { CN: "心型发卡", EN: "Heart Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "星星发卡",
+            ...hairAccShared,
+            DefaultColor: ["#D0CF58", "#D0CF58"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "星星发卡", EN: "Star Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "星星发卡2",
+            ...hairAccShared,
+            DefaultColor: ["#D0CF58", "#D0CF58"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "星星发卡2", EN: "Star Hair Clip 2" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "月亮发饰",
+            ...hairAccShared,
+            DefaultColor: ["#D0CF58", "#D0CF58"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "月亮发饰", EN: "Moon Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "蝴蝶",
+            ...hairAccShared,
+            DefaultColor: ["#8B87FF", "#8B87FF"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "蝴蝶", EN: "Butterfly Hair Clip" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "蝴蝶2",
+            ...hairAccShared,
+            DefaultColor: ["#6382FF", "#6382FF", "#6382FF", "#6382FF"],
+            Layer: [{ Name: "右后" }, { Name: "右前" }, { Name: "左后" }, { Name: "左前" }],
+        },
+        { translation: { CN: "蝴蝶2", EN: "Butterfly Hair Clip 2" }, layerNames },
+    ]),
+    ExtendedTools.createLRBConfig([
+        {
+            Name: "蝙蝠翼发卡",
+            ...hairAccShared,
+            DefaultColor: ["#232323", "#232323"],
+            Layer: [{ Name: "右" }, { Name: "左" }],
+        },
+        { translation: { CN: "蝙蝠翼发卡", EN: "Bat Wing Hair Clip" }, layerNames },
+    ]),
+];
+
 export default function () {
-    /** @type {CustomGroupName[]} */
-    const groups = ["HairAccessory1", "HairAccessory3"];
-    for (const asset of assets) {
-        const translation = DialogTools.pickEntry(translations, asset.Name);
-        AssetManager.addAssetWithConfig(groups, asset, {
-            translation,
-            layerNames,
-            ...ExtendedTools.createLeftRightBoth(asset),
-        });
-    }
+    AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory3"], assets);
 }

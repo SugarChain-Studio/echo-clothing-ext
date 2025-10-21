@@ -42,18 +42,8 @@ const assets = [
         {
             translation: { CN: "爱心眼镜", EN: "Heart-shaped Glasses" },
             layerNames: {
-                CN: {
-                    1: "镜片",
-                    2: "镜框",
-                    3: "高光",
-                    4: "暗色",
-                },
-                EN: {
-                    1: "Lens",
-                    2: "Frame",
-                    3: "Highlight",
-                    4: "Shadow",
-                },
+                CN: { 1: "镜片", 2: "镜框", 3: "高光", 4: "暗色" },
+                EN: { 1: "Lens", 2: "Frame", 3: "Highlight", 4: "Shadow" },
             },
         },
     ],
