@@ -1,13 +1,13 @@
-export const Container = {
+export class Container {
     /**
      * @param {Item} item
      * @returns {ContainerProperty.ContainerData}
      */
-    item2content(item) {
+    static item2content(item) {
         const ret = { ...item, IAsset: item.Asset.Name };
         delete ret.Asset;
         return ret;
-    },
+    }
 
     /**
      * @param {Character} chara
@@ -15,7 +15,7 @@ export const Container = {
      * @param {ItemProperties["TypeRecord"]} [record]
      * @returns {Item | null}
      */
-    content2item(chara, content, record) {
+    static content2item(chara, content, record) {
         const item = InventoryWear(chara, content.IAsset, "ItemHandheld");
         if (!item) return null;
 
@@ -28,5 +28,5 @@ export const Container = {
             ExtendedItemSetOptionByRecord(chara, item, record_, { push: false });
         }
         return item;
-    },
-};
+    }
+}

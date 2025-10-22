@@ -22,6 +22,26 @@ function addAssetParamHasGroup(arg0) {
     return arg0.length === 3;
 }
 
+/**
+ *
+ * @param  {...[string|string[], string]} args
+ * @returns {Record<string,string>}
+ */
+function stringEntries(...args) {
+    /** @type {Record<string,string>} */
+    const ret = {};
+    for (const [key, value] of args) {
+        if (Array.isArray(key)) {
+            for (const k of key) {
+                ret[k] = value;
+            }
+        } else {
+            ret[key] = value;
+        }
+    }
+    return ret;
+}
+
 export const Typing = {
     attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
@@ -47,4 +67,5 @@ export const Typing = {
     transform: (obj, func) => func(obj),
     entries: recordEntries,
     addAssetParamHasGroup,
+    stringEntries,
 };

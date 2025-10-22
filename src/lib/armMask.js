@@ -120,7 +120,7 @@ function createArmMaskForGroupedCloth(assets, mode = "") {
     }
 }
 
-export const ArmMaskTool = {
-    createArmMaskForCloth,
-    createArmMaskForGroupedCloth,
-};
+export class ArmMaskTool {
+    static createArmMaskForCloth = createArmMaskForCloth;
+    static createArmMaskForGroupedCloth = createArmMaskForGroupedCloth;
+}
