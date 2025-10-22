@@ -14,7 +14,7 @@ const nameRecord = {
     "Arm1": { Name: "ArmMask1", ParentGroup: "BodyUpper" },
     "Right": { Name: "ArmMaskR", ParentGroup: "BodyUpper", PoseMapping: {} },
     "Hand": { Name: "ArmMaskH", ParentGroup: {} },
-    "Short": { Name: "ArmMaskShort", ParentGroup: {} },
+    "Short": { Name: "ArmMaskShort", ParentGroup: "BodyUpper" },
 };
 
 const argMaskGroup = /** @type {AssetGroupName}*/ ("LuziArmMask");
@@ -85,7 +85,11 @@ function createLayerDef(mode, allowTypes) {
 /**
  * 为衣物创建手臂遮罩。
  *
- * 默认遮罩到Top=367；`mode = "Arm1"` 时，遮罩扩展到Top=353
+ * 默认遮罩到Top=367；
+ * * `mode = "Arm1"`，遮罩扩展到Top=353
+ * * `mode = "Right"`，仅遮罩右臂和右手
+ * * `mode = "Hand"`，仅遮罩手部
+ * * `mode = "Short"`，遮罩双手和到一点点手腕
  *
  * @param { CustomGroupName | CustomGroupName [] } groupName
  * @param { CustomAssetDefinition } asset

@@ -1,8 +1,10 @@
 import { AssetManager } from "../../../assetForward";
+import { ArmMaskTool } from "../../../lib";
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    ItemHands: [
+/** @type { AddAssetWithConfigParams[] }} */
+const assets = [
+    [
+        "ItemHands",
         {
             Name: "拳击手套_Luzi",
             Random: false,
@@ -20,8 +22,10 @@ const assets = {
             Effect: [E.Block, E.BlockWardrobe, E.MergedFingers],
             Hide: ["ItemHandheld"],
         },
+        { translation: { CN: "拳击手套", EN: "Boxing Gloves" } },
     ],
-    ItemHandheld: [
+    [
+        "ItemHandheld",
         {
             Name: "电蚊拍_Luzi",
             Random: false,
@@ -34,6 +38,10 @@ const assets = {
             ActivityAudio: ["Shocks"],
             PoseMapping: { ...AssetPoseMapping.ItemHandheld },
         },
+        { translation: { CN: "电蚊拍", EN: "Electric Fly Swatter" } },
+    ],
+    [
+        "ItemHandheld",
         {
             Name: "书",
             Random: false,
@@ -41,10 +49,13 @@ const assets = {
             Top: 340,
             Difficulty: -10,
             ParentGroup: {},
-            Priority: 26,
             PoseMapping: { ...AssetPoseMapping.ItemHandheld },
             Layer: [{ Name: "页" }, { Name: "壳" }],
         },
+        { translation: { CN: "书", EN: "Book" } },
+    ],
+    [
+        "ItemHandheld",
         {
             Name: "奶瓶",
             Random: false,
@@ -56,6 +67,10 @@ const assets = {
             PoseMapping: { ...AssetPoseMapping.ItemHandheld },
             Layer: [{ Name: "奶" }, { Name: "玻璃" }, { Name: "盖子" }],
         },
+        { translation: { CN: "奶瓶", EN: "Milk Bottle" } },
+    ],
+    [
+        "ItemHandheld",
         {
             Name: "红包",
             Random: false,
@@ -66,6 +81,10 @@ const assets = {
             Priority: 46,
             PoseMapping: { ...AssetPoseMapping.ItemHandheld },
         },
+        { translation: { CN: "红包", EN: "Red Packet" } },
+    ],
+    [
+        "ItemHandheld",
         {
             Name: "伊偶_Luzi",
             Random: false,
@@ -76,35 +95,12 @@ const assets = {
             Priority: 46,
             PoseMapping: { ...AssetPoseMapping.ItemHandheld, Yoked: "Yoked", OverTheHead: "OverTheHead" },
         },
+        { translation: { CN: "伊偶", EN: "Cyäegha Doll" } },
     ],
-};
-
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        ItemHandheld: {
-            电蚊拍_Luzi: "电蚊拍",
-            伊偶_Luzi: "伊偶",
-            书: "书",
-            奶瓶: "奶瓶",
-            红包: "红包",
-        },
-    },
-    EN: {
-        ItemHands: {
-            拳击手套_Luzi: "Boxing Gloves",
-        },
-        ItemHandheld: {
-            电蚊拍_Luzi: "Electric Fly Swatter",
-            书: "Book",
-            奶瓶: "Milk Bottle",
-            红包: "Red Packet",
-            拳击手套_Luzi: "Boxing Gloves",
-            伊偶_Luzi: "Cyäegha Doll",
-        },
-    },
-};
+];
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations);
+    const book = assets.find(([_, asset]) => asset.Name === "书");
+    ArmMaskTool.createArmMaskForCloth("ItemHandheld", book[1]);
+    AssetManager.addAssetWithConfig(assets);
 }
