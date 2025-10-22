@@ -1,9 +1,9 @@
-import { PoseMapTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {AssetLayerDefinition} */
 const base = {
-    PoseMapping: PoseMapTools.HideFullBody({
+    PoseMapping: PoseMapTool.HideFullBody({
         LegsClosed: PoseType.DEFAULT,
         Kneel: PoseType.DEFAULT,
     }),
@@ -11,7 +11,7 @@ const base = {
 
 /** @type {AssetLayerDefinition} */
 const baseLC = {
-    PoseMapping: PoseMapTools.HideFullBody({
+    PoseMapping: PoseMapTool.HideFullBody({
         LegsClosed: "LegsClosed",
         Kneel: "LegsClosed",
     }),

@@ -1,6 +1,5 @@
-import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createItemDialogModular } from "../../../lib";
+import { createItemDialogModular, PoseMapTool } from "../../../lib";
 
 /** @typedef {AssetLayerDefinition& { Text: Translation.Entry }} AssetLayerDefWithText */
 
@@ -37,7 +36,7 @@ const tummyLayer = (def) => ({
     ...def,
     Left: 180,
     Top: 370,
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
     Priority: 10,
 });
 

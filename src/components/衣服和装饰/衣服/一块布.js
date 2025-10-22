@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../../lib";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
@@ -14,7 +14,7 @@ const asset = [
             DefaultColor: ["#000000", "#000000", "#000000", "#625F6C", "#000000"],
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
             Layer: [
                 { Name: "A1", AllowTypes: { typed: 0 } },
                 { Name: "A2", AllowTypes: { typed: 1 }, CopyLayerColor: "A1" },

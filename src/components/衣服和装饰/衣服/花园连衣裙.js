@@ -1,6 +1,5 @@
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -8,7 +7,7 @@ const asset = {
     Random: false,
     Left: 90,
     Top: 210,
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
     DefaultColor: ["Default", "Default", "Default", "#303030", "Default"],
     Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
 };

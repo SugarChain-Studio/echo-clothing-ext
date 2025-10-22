@@ -1,4 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -11,7 +11,7 @@ const asset = {
         KneelingSpread: 90,
     },
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
     ParentGroup: {},
     Layer: [
         {

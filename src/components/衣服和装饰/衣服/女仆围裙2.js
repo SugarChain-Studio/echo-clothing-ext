@@ -1,5 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -11,7 +10,7 @@ const asset = {
     Priority: 32,
     DefaultColor: ["Default", "#000000"],
     ParentGroup: "BodyUpper",
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
     Layer: [
         {
             Name: "裙",

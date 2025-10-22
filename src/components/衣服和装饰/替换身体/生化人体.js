@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
 import { registerDrawHook } from "../../../lib/afterDraw";
+import { PoseMapTool } from "../../../lib";
 
 const drawConfig = {
     上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩", blend: "destination-out" },
@@ -78,7 +79,7 @@ const asset = {
         {
             Name: "上身遮罩",
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
             AllowColorize: false,
             HasImage: false,
         },

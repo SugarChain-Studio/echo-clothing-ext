@@ -1,4 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -10,12 +10,12 @@ const asset = {
     Priority: 14,
     DynamicGroupName: "Suit",
     Layer: [
-        { Name: "1", PoseMapping: PoseMapTools.HideFullBody({ Hogtied: "Hogtied" }) },
-        { Name: "2", PoseMapping: PoseMapTools.HideFullBody() },
-        { Name: "3", PoseMapping: PoseMapTools.HideFullBody() },
-        { Name: "4", PoseMapping: PoseMapTools.HideFullBody() },
-        { Name: "5", PoseMapping: PoseMapTools.HideFullBody() },
-        { Name: "6", PoseMapping: PoseMapTools.HideFullBody({ Hogtied: "Hogtied" }) },
+        { Name: "1", PoseMapping: PoseMapTool.HideFullBody({ Hogtied: "Hogtied" }) },
+        { Name: "2", PoseMapping: PoseMapTool.HideFullBody() },
+        { Name: "3", PoseMapping: PoseMapTool.HideFullBody() },
+        { Name: "4", PoseMapping: PoseMapTool.HideFullBody() },
+        { Name: "5", PoseMapping: PoseMapTool.HideFullBody() },
+        { Name: "6", PoseMapping: PoseMapTool.HideFullBody({ Hogtied: "Hogtied" }) },
     ],
 };
 

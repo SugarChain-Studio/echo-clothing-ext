@@ -1,7 +1,7 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Typing, PoseMapTool } from "../../../lib";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
-import { ImageMapTools, PoseMapTools, Tools } from "@mod-utils/Tools";
+import { ImageMapTools, Tools } from "@mod-utils/Tools";
 
 const mergingClothes = Typing.groups([
     "Bra",
@@ -234,7 +234,7 @@ const asset = {
             ParentGroup: "BodyUpper",
             TextureMask: {},
             BlendingMode: "destination-out",
-            PoseMapping: PoseMapTools.FromTopHide({
+            PoseMapping: PoseMapTool.FromTopHide({
                 BaseUpper: "",
                 TapedHands: "TapedHands",
             }),

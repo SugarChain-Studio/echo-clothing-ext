@@ -1,5 +1,6 @@
-import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
 
 /** @type {(layer:AssetLayerDefinition)=>AssetLayerDefinition} */
 const baseLayer = (layer) => ({
@@ -17,7 +18,7 @@ const hogLayer = (layer) => ({
     Left: 210,
     Top: 515,
     ParentGroup: {},
-    PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
+    PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
 });
 
 /** @type {CustomAssetDefinition} */

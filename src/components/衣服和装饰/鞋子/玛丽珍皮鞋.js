@@ -1,5 +1,5 @@
-import { PoseMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -75,7 +75,7 @@ const asset = {
             Top: 500,
             Left: 200,
             ParentGroup: {},
-            PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
         },
     ],
 };

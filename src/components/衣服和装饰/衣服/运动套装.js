@@ -1,6 +1,6 @@
-import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PoseMapTool } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -81,7 +81,7 @@ const assets = [
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Bra",
             DefaultColor: ["#DDDDDD", "#1C1C1C", "#BBBBBB"],
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
             Layer: [
                 { Name: "l", Priority: 15 },
                 { Name: "bd", CreateLayerTypes: ["m"] },
@@ -143,7 +143,7 @@ const assets = [
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "g", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
@@ -176,7 +176,7 @@ const assets = [
             DynamicGroupName: "ClothLower",
             DefaultColor: ["#1C1C1C", "#DDDDDD"],
             Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "l" },

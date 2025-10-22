@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
-import { PoseMapTools, Tools } from "@mod-utils/Tools";
-import { Typing } from "../../lib";
+import { Tools } from "@mod-utils/Tools";
+import { Typing, PoseMapTool } from "../../lib";
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<VibratingItemData, {}>} */
 function scriptDrawHook(data, originalFunction, drawData) {
@@ -61,7 +61,7 @@ const asset = {
             Left: 220,
             Top: 470,
             AllowTypes: { d: 2 },
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             Name: "P",
@@ -70,7 +70,7 @@ const asset = {
             Top: 500,
             AllowColorize: false,
             AllowTypes: { d: 2 },
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             Name: "触手",
@@ -78,20 +78,20 @@ const asset = {
             Left: 220,
             Top: 470,
             AllowTypes: { d: 2 },
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             AllowTypes: { d: 0 },
             Name: "触手服",
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             AllowTypes: { d: [1, 2] },
             Name: "触手服开",
             CopyLayerColor: "触手服",
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             AllowTypes: { f: 1 },
@@ -110,7 +110,7 @@ const asset = {
             AllowTypes: { s: 1 },
             Name: "上衣",
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             AllowTypes: { h: [1, 2] },

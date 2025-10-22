@@ -1,4 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -9,7 +9,7 @@ const asset = {
     Left: 100,
     Top: 180,
     ParentGroup: {},
-    PoseMapping: PoseMapTools.HideFullBody({
+    PoseMapping: PoseMapTool.HideFullBody({
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
     }),

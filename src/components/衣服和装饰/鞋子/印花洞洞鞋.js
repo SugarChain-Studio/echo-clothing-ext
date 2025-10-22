@@ -1,5 +1,6 @@
-import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -62,7 +63,7 @@ const asset = {
             Priority: 7,
             CopyLayerColor: "u",
             ParentGroup: {},
-            PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
         },
     ],
 };

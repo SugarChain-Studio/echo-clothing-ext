@@ -1,5 +1,4 @@
-import { PoseMapTools } from "@mod-utils/Tools";
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -11,7 +10,7 @@ const asset = {
     Priority: 32,
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
     ParentGroup: "BodyUpper",
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
     Layer: [
         {
             Name: "肩带内",
@@ -22,29 +21,29 @@ const asset = {
             Name: "肩带外",
             ColorGroup: "肩带",
             ParentGroup: {},
-            PoseMapping: PoseMapTools.HideFullBody({
+            PoseMapping: PoseMapTool.HideFullBody({
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
             }),
         },
         {
             Name: "裙",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             Name: "荷叶边",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             Name: "线上",
             ColorGroup: "描边线",
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
         {
             Name: "线下",
             ColorGroup: "描边线",
             ParentGroup: {},
-            PoseMapping: PoseMapTools.HideFullBody(),
+            PoseMapping: PoseMapTool.HideFullBody(),
         },
     ],
 };

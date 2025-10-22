@@ -1,6 +1,6 @@
-import { PoseMapTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../lib";
+import { Typing, PoseMapTool } from "../../lib";
 
 /** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];
@@ -59,7 +59,7 @@ const asset = {
             Name: "身体遮罩",
             BlendingMode: "destination-out",
             TextureMask: { Groups: ["BodyUpper"] },
-            PoseMapping: PoseMapTools.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
         },
         {
             Name: "手臂遮罩",
@@ -86,7 +86,7 @@ const asset = {
                 "OverTheHead": "",
                 "Yoked": "",
             },
-            PoseMapping: PoseMapTools.HideFullBody({ OverTheHead: "OverTheHead", Yoked: "Yoked" }),
+            PoseMapping: PoseMapTool.HideFullBody({ OverTheHead: "OverTheHead", Yoked: "Yoked" }),
         },
         {
             Name: "下身遮罩",
@@ -109,13 +109,13 @@ const asset = {
                     "动物身体_Luzi",
                 ],
             },
-            PoseMapping: PoseMapTools.HideFullBody({ KneelingSpread: "KneelingSpread" }),
+            PoseMapping: PoseMapTool.HideFullBody({ KneelingSpread: "KneelingSpread" }),
         },
         {
             Name: "臂环",
             Priority: 6,
             ColorGroup: "固定环",
-            PoseMapping: PoseMapTools.HideFullBody({
+            PoseMapping: PoseMapTool.HideFullBody({
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",
                 OverTheHead: "OverTheHead",
@@ -128,7 +128,7 @@ const asset = {
             Top: 460,
             Left: 0,
             ColorGroup: "固定环",
-            PoseMapping: PoseMapTools.HideFullBody({
+            PoseMapping: PoseMapTool.HideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
@@ -170,7 +170,7 @@ const asset = {
             Left: 0,
             ParentGroup: "BodyLower",
             ColorGroup: "传送器",
-            PoseMapping: PoseMapTools.HideFullBody({
+            PoseMapping: PoseMapTool.HideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
@@ -182,7 +182,7 @@ const asset = {
             Priority: 25,
             ParentGroup: "BodyUpper",
             ColorGroup: "传送器",
-            PoseMapping: PoseMapTools.HideFullBody({
+            PoseMapping: PoseMapTool.HideFullBody({
                 BackBoxTie: "BackBoxTie",
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",

@@ -1,6 +1,6 @@
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { ImageMapTools, PoseMapTools } from "@mod-utils/Tools";
+import { ImageMapTools } from "@mod-utils/Tools";
 /** @type {<T>(arg0: number, arg1: (number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));
 
@@ -39,7 +39,7 @@ const layerDefBase = /** @type {MyDefinition[]} */ ([
         Name: "D1B",
         Priority: 10,
         CopyLayerColor: "D1",
-        PoseMapping: PoseMapTools.FromTopHide(Object.fromEntries(backPoses.map((pose) => [pose, pose]))),
+        PoseMapping: PoseMapTool.FromTopHide(Object.fromEntries(backPoses.map((pose) => [pose, pose]))),
     },
     ...iota(4, (i) => ({ Name: `D${i + 2}`, ColorName: layerGroupBase.D[i + 1] })),
 ])

@@ -1,10 +1,9 @@
-import { PoseMapTools } from "@mod-utils/Tools";
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {AssetLayerDefinition} */
 const hideFB = {
-    PoseMapping: PoseMapTools.HideFullBody(),
+    PoseMapping: PoseMapTool.HideFullBody(),
 };
 
 /** @type {CustomAssetDefinition} */

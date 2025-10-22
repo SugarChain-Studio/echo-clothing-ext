@@ -1,6 +1,5 @@
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTools } from "@mod-utils/Tools";
 
 // Originally Designed by: 01musume
 
@@ -11,7 +10,7 @@ const main = { PoseMapping: { Hogtied: "Hogtied", AllFours: "AllFours", Kneel: "
 const upper = { PoseMapping: { Hogtied: "Hogtied", AllFours: "AllFours" } };
 
 /** @type {AssetLayerDefinition} */
-const lower = { PoseMapping: PoseMapTools.HideFullBody() };
+const lower = { PoseMapping: PoseMapTool.HideFullBody() };
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
 function beforeDraw(data, originalFunction, drawData) {
@@ -33,7 +32,7 @@ const asset = [
             Top: 0,
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Cloth",
-            PoseMapping: {},
+            PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
             DefaultColor: [
                 "Default",
                 "Default",

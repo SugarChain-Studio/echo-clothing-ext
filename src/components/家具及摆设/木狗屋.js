@@ -1,4 +1,5 @@
-import { PoseMapTools, Tools } from "@mod-utils/Tools";
+import { Tools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../lib";
 import { AssetManager } from "../../assetForward";
 
 /** @type {AssetPoseMapping} */
@@ -8,7 +9,7 @@ const baseMapping = {
 };
 
 /** @type {AssetPoseMapping} */
-const foursMapping = PoseMapTools.FromHide({ AllFours: "", Hogtied: "" });
+const foursMapping = PoseMapTool.FromHide({ AllFours: "", Hogtied: "" });
 
 /** @type { (string)=>Partial<AssetLayerDefinition> } */
 const bLConfig = (name) => ({
