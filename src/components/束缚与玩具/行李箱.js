@@ -65,6 +65,7 @@ const assets = [
         MinOpacity: 0,
         AllowLock: true,
         DrawLocks: false,
+        Time: 30,
         Prerequisite: ["NotSuspended", "NotLifted"],
         Effect: [E.Leash, E.BlockWardrobe, E.Enclose, E.Freeze, E.BlindTotal],
         Layer: [
@@ -76,8 +77,8 @@ const assets = [
                     {
                         Masks: [
                             [0, -CanvasUpperOverflow, 500, CanvasUpperOverflow - 36],
-                            [0, 0, 127, 1000],
-                            [373, 0, 127, 1000],
+                            [0, -200 + 36, 127, 1000 + 200],
+                            [373, -200 + 36, 127, 1000 + 200],
                             [0, 390, 500, CanvasLowerOverflow + 610],
                             // 四个角落遮罩，遮挡圆角
                             [127 - 15, -36 - 15, 30, 30],
