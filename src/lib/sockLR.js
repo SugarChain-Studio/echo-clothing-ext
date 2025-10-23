@@ -14,12 +14,16 @@ const blackFill = (() => {
 
 cachePreloadGL(blackFill);
 
-const topLeft = {
+const topLeft = /** @type {const} */ ({
     SocksLeft: { Top: 0, Left: { "": 0, "KneelingSpread": 30 } },
     SocksRight: { Top: 0, Left: { "": 250, "KneelingSpread": 220 } },
-};
+    Left: { Top: 0, Left: 250 },
+    Right: { Top: 0, Left: 0 },
+});
 
-export class SockLRTool {
+const flip = /** @type {const} */ ({ Left: "Right", Right: "Left" });
+
+export class LRTool {
     /**
      * 生成左右袜子
      * @param {CustomAssetDefinition} asset
@@ -54,5 +58,31 @@ export class SockLRTool {
                 return [grp, ret];
             })
         );
+    }
+
+    /**
+     * 创建左右配置
+     * @param {CustomGroupName} group 图片资源所在的身体组
+     * @param {CustomAssetDefinition} asset
+     * @param { {key:string, Left:number, Right:number} } type
+     */
+    static createLRConfig(group, asset, type) {
+        const imgMap = /** @type {Record<string, string>} */ ({});
+
+        for (const side of /** @type {const} */ (["Left", "Right"])) {
+            const layerName = `Mask${side}`;
+            imgMap[ImageMapTools.assetLayer(group, `${asset.Name}_${layerName}`)] = blackFill;
+            asset.Layer.push({
+                Name: layerName,
+                ...topLeft[side],
+                ParentGroup: {},
+                PoseMapping: {},
+                TextureMask: {},
+                AllowTypes: { [type.key]: type[flip[side]] },
+                BlendingMode: "destination-out",
+            });
+        }
+
+        AssetManager.addImageMapping(imgMap);
     }
 }
