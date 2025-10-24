@@ -3,7 +3,7 @@ import { GroupConfig } from "./身体组调整";
 
 /**
  * @typedef {Object} CopyGroupInfo
- * @property {CustomGroupBodyName} name
+ * @property {details.StrictCustomGroupBodyName} name
  * @property {CustomGroupBodyName} mirror
  * @property {Translation.Entry} description
  * @property {Partial<CustomGroupDefinition>} [overrides]
@@ -133,6 +133,14 @@ const copyGroups = [
             CN: "🍔项链 2",
             EN: "🍔Necklace 2",
             RU: "🍔Цепочка 2",
+        },
+    },
+    {
+        name: "Luzi_Jewelry_0",
+        mirror: "Jewelry",
+        description: {
+            CN: "🍔珠宝 1",
+            EN: "🍔Jewelry 1",
         },
     },
     {
