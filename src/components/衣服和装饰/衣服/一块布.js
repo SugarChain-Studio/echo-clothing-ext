@@ -10,7 +10,7 @@ const asset = [
             Gender: "F",
             Left: 170,
             Top: 300,
-            Priority: 18,
+            Priority: 25,
             DefaultColor: ["#000000", "#000000", "#000000", "#625F6C", "#000000"],
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
