@@ -27,7 +27,7 @@ const assets = [
                 Name: "臂环渐变",
                 InheritPoseMappingFields: true,
                 PoseMapping: { OverTheHead: "Hide" },
-                CopyLayerColor: "臂环",
+                CopyLayerColor: "渐变",
                 Priority: 35,
                 AllowTypes: { ar: 0 },
             },
