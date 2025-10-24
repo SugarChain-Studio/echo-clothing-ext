@@ -10,6 +10,7 @@ const asset = [
         Top: 100,
         ParentGroup: {},
         PoseMapping: {},
+        Priority: 53,
         DefaultColor: ["#966C2D", "#368DBF", "#368DBF", "Default"],
         DynamicGroupName: "Mask",
         Layer: [

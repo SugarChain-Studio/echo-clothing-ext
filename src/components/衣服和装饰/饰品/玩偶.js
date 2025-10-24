@@ -23,6 +23,7 @@ const asset = {
     ParentGroup: {},
     Priority: 50,
     PoseMapping: {},
+    DynamicGroupName: "ItemMisc",
     Layer: [
         // 玩具店
         { Name: "Saki", AllowTypes: { d: 1 } },
@@ -171,7 +172,6 @@ const asset = {
         { Name: "绛翎", AllowTypes: { yytc: 13 } },
         { Name: "玖儿", AllowTypes: { yytc: 14 } },
         { Name: "白澜諪", AllowTypes: { yytc: 15 } },
-
 
         // 香喷喷酒吧
         { Name: "依伊可", AllowTypes: { xppjb: 1 } },
@@ -483,7 +483,7 @@ const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, c
         module.Options.push({});
     }
     return pv;
-}, /** @type {ModularItemModuleConfig[]} */([]));
+}, /** @type {ModularItemModuleConfig[]} */ ([]));
 
 /** @type { Record<keyof typeof typeNameNext, string[]> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
@@ -491,7 +491,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     if (!pv[k]) pv[k] = [""];
     pv[k].push(cv.Name);
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, string[]> } */({}));
+}, /** @type { Record<keyof typeof typeNameNext, string[]> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -508,7 +508,9 @@ modules.forEach((m) => {
 function click(data, originalFunction) {
     const property = DialogFocusItem?.Property;
     if (!property || data.currentModule === "Base") return originalFunction();
-    property.TypeRecord = {};
+    for (const k in property.TypeRecord) {
+        property.TypeRecord[k] = 0;
+    }
     originalFunction();
 }
 
@@ -528,7 +530,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
@@ -600,5 +602,10 @@ const assetStrings = {
 };
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemMisc", asset, { extended, translation, layerNames, assetStrings });
+    AssetManager.addAssetWithConfig(["ItemMisc", "ItemHandheld"], asset, {
+        extended,
+        translation,
+        layerNames,
+        assetStrings,
+    });
 }
