@@ -42,6 +42,12 @@ function stringEntries(...args) {
     return ret;
 }
 
+/**
+ * @template T
+ * @template R
+ * @typedef {(arg:T[], func:(arg:T)=>R)=>R[]} ArrayTransformFunction
+ */
+
 export const Typing = /** @type {const} */ ({
     attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
@@ -68,4 +74,8 @@ export const Typing = /** @type {const} */ ({
     entries: recordEntries,
     addAssetParamHasGroup,
     stringEntries,
+
+    layerMap: /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */ (
+        (args, func) => args.map(func)
+    ),
 });

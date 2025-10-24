@@ -1,24 +1,40 @@
-import { DialogTools, ImageMapTools } from "@mod-utils/Tools";
+import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { PostPass, PoseMapTool } from "../../../lib";
+import { PostPass, PoseMapTool, Typing } from "../../../lib";
 import { LRTool } from "../../../lib/sockLR";
 
-const LRStrings = {
-    CN: {
-        Module左右: "左右",
-        Select左右: "选择佩戴哪一边",
-        Optionlr0: "都有",
-        Optionlr1: "左",
-        Optionlr2: "右",
+const LRStringGen = (base, key, blr = [0, 1, 2]) =>
+    DialogTools.combine(
+        {
+            CN: {
+                [`Option${key}${blr[0]}`]: "都有",
+                [`Option${key}${blr[1]}`]: "左",
+                [`Option${key}${blr[2]}`]: "右",
+                ...(blr.length > 3 ? { [`Option${key}${blr[3]}`]: "无" } : {}),
+            },
+            EN: {
+                [`Option${key}${blr[0]}`]: "Both",
+                [`Option${key}${blr[1]}`]: "Left",
+                [`Option${key}${blr[2]}`]: "Right",
+                ...(blr.length > 3 ? { [`Option${key}${blr[3]}`]: "None" } : {}),
+            },
+        },
+        base
+    );
+
+const LRStrings = LRStringGen(
+    {
+        CN: {
+            Module左右: "左右",
+            Select左右: "选择佩戴哪一边",
+        },
+        EN: {
+            Module左右: "Side",
+            Select左右: "Select which side to wear",
+        },
     },
-    EN: {
-        Module左右: "Side",
-        Select左右: "Select which side to wear",
-        Optionlr0: "Both",
-        Optionlr1: "Left",
-        Optionlr2: "Right",
-    },
-};
+    "lr"
+);
 
 /** @type { AddAssetWithConfigParams[] } */
 const asset = [
@@ -150,35 +166,83 @@ const asset = [
             {
                 Name: "踝链C",
                 Random: false,
-                Left: 140,
-                Top: 830,
                 Priority: 20,
                 DynamicGroupName: "Jewelry",
-                ParentGroup: "BodyLower",
-                PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
-                Layer: [{ Name: "环" }],
+                ParentGroup: {},
+                PoseMapping: {},
+                Layer: [
+                    ...Typing.layerMap(
+                        [
+                            { Name: "环_左", ColorGroup: "脚环", AllowTypes: { a: [0, 1] } },
+                            { Name: "环_右", ColorGroup: "脚环", AllowTypes: { a: [0, 2] } },
+                        ],
+                        (def) => ({
+                            ...def,
+                            Left: 140,
+                            Top: 830,
+                            ParentGroup: "BodyLower",
+                            PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
+                        })
+                    ),
+                    ...Typing.layerMap(
+                        [
+                            { Name: "手环_左", ColorGroup: "手环", AllowTypes: { w: [0, 1] } },
+                            { Name: "手环_右", ColorGroup: "手环", AllowTypes: { w: [0, 2] } },
+                        ],
+                        (def) => ({
+                            ...def,
+                            ...Tools.topLeftBuilder(
+                                { Left: 160, Top: 370 },
+                                ["OverTheHead", { Left: 110, Top: 80 }],
+                                ["Yoked", { Left: 60, Top: 230 }]
+                            ),
+                            ParentGroup: {},
+                            PoseMapping: PoseMapTool.Config(
+                                ["Yoked", "OverTheHead"],
+                                ["BackBoxTie", "BackCuffs", "BackElbowTouch"]
+                            ),
+                        })
+                    ),
+                ],
             },
             (asset) => {
                 AssetManager.addImageMapping(
                     ImageMapTools.mirrorBodyTypeLayer("Jewelry", asset, "Normal", ["Small", "Large"])
                 );
-                LRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
             }
         ),
         {
-            translation: { CN: "踝链C", EN: "Anklet C" },
+            translation: { CN: "手镯/踝链C", EN: "Wristlet/Anklet C" },
             layerNames: {
-                CN: { 环: "环" },
-                EN: { 环: "Ring" },
+                CN: { 环_左: "左", 环_右: "右", 手环_左: "左", 手环_右: "右", 手环: "手环", 脚环: "脚环" },
+                EN: { 环_左: "L", 环_右: "R", 手环_左: "L", 手环_右: "R", 手环: "Wristlet", 脚环: "Anklet" },
             },
             extended: {
                 Archetype: "modular",
                 DrawImages: false,
-                Modules: [{ Name: "左右", Key: "lr", Options: [{}, {}, {}] }],
+                Modules: [
+                    { Name: "手环", Key: "w", Options: [{}, {}, {}, {}] },
+                    { Name: "脚环", Key: "a", Options: [{}, {}, {}, {}] },
+                ],
             },
             assetStrings: DialogTools.combine(
                 { CN: { SelectBase: "配置踝链样式" }, EN: { SelectBase: "Select Anklet Style" } },
-                LRStrings
+                LRStringGen(
+                    {
+                        CN: { Module手环: "手环", Select手环: "配置手环" },
+                        EN: { Module手环: "Wristlet", Select手环: "Configure Wristlet" },
+                    },
+                    "w",
+                    [0, 1, 2, 3]
+                ),
+                LRStringGen(
+                    {
+                        CN: { Module脚环: "脚环", Select脚环: "配置脚环" },
+                        EN: { Module脚环: "Anklet", Select脚环: "Configure Anklet" },
+                    },
+                    "a",
+                    [0, 1, 2, 3]
+                )
             ),
         },
     ],
