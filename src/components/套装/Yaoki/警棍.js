@@ -1,4 +1,4 @@
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, Typing } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
@@ -16,7 +16,7 @@ const asset = {
         { Name: "h2" },
         { Name: "h1" },
         { Name: "dp", CreateLayerTypes: ["typed"] },
-        { Name: "gp", BlendingMode: "screen", AllowColorize: false, CreateLayerTypes: ["typed"] },
+        Typing.screenLayer({ Name: "gp", CreateLayerTypes: ["typed"] }),
     ],
 };
 

@@ -1,4 +1,4 @@
-import { ArmMaskTool, PostPass, PoseMapTool } from "../../../lib";
+import { ArmMaskTool, PostPass, PoseMapTool, Typing } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 // Originally Designed by: 01musume
@@ -50,19 +50,19 @@ const asset = [
                     { Left: 190, Top: 210, Name: "d_2", ...upper, ColorGroup: "strap" },
                     { Left: 170, Top: 280, Name: "d_3", ...main },
                     { Left: 180, Top: 320, Name: "d_8", ...upper },
-                    { Left: 190, Top: 210, Name: "g_1", ...upper, BlendingMode: "screen", AllowColorize: false },
-                    { Left: 190, Top: 210, Name: "g_2", ...upper, BlendingMode: "screen", AllowColorize: false },
-                    { Left: 170, Top: 280, Name: "g_3", ...main, BlendingMode: "screen", AllowColorize: false },
+                    Typing.screenLayer({ Left: 190, Top: 210, Name: "g_1", ...upper }),
+                    Typing.screenLayer({ Left: 190, Top: 210, Name: "g_2", ...upper }),
+                    Typing.screenLayer({ Left: 170, Top: 280, Name: "g_3", ...main }),
                     { Left: 190, Top: 210, Name: "d_5", ...upper, ColorGroup: "chain" },
                     { Left: 150, Top: 340, Name: "d_6", ...lower, ColorGroup: "chain" },
                     { Left: 150, Top: 340, Name: "d_7", ...lower, ColorGroup: "chain" },
-                    { Left: 190, Top: 210, Name: "g_5", ...upper, BlendingMode: "screen", AllowColorize: false },
-                    { Left: 150, Top: 340, Name: "g_6", ...lower, BlendingMode: "screen", AllowColorize: false },
-                    { Left: 150, Top: 340, Name: "g_7", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    Typing.screenLayer({ Left: 190, Top: 210, Name: "g_5", ...upper }),
+                    Typing.screenLayer({ Left: 150, Top: 340, Name: "g_6", ...lower }),
+                    Typing.screenLayer({ Left: 150, Top: 340, Name: "g_7", ...lower }),
                     { Left: 150, Top: 340, Name: "d_4", ...lower },
-                    { Left: 150, Top: 340, Name: "g_4", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    Typing.screenLayer({ Left: 150, Top: 340, Name: "g_4", ...lower }),
                     { Left: 240, Top: 340, Name: "d_f", ...lower },
-                    { Left: 240, Top: 340, Name: "g_f", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    Typing.screenLayer({ Left: 240, Top: 340, Name: "g_f", ...lower }),
                 ],
             },
             (asset) => {
@@ -153,22 +153,20 @@ const asset = [
                 Priority: 35,
                 Layer: [
                     { Name: "后d", Priority: 6 },
-                    { Name: "后g", BlendingMode: "screen", AllowColorize: false, Priority: 6 },
+                    Typing.screenLayer({ Name: "后g", Priority: 6 }),
                     {
                         Name: "后xd",
                         InheritPoseMappingFields: true,
                         PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
                         CopyLayerColor: "后d",
                     },
-                    {
+                    Typing.screenLayer({
                         Name: "后xg",
                         InheritPoseMappingFields: true,
                         PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
-                        BlendingMode: "screen",
-                        AllowColorize: false,
-                    },
+                    }),
                     { Name: "前d", CopyLayerColor: "后d" },
-                    { Name: "前g", BlendingMode: "screen", AllowColorize: false },
+                    Typing.screenLayer({ Name: "前g" }),
                 ],
             },
             (asset) => {

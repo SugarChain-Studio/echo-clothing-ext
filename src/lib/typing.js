@@ -78,4 +78,7 @@ export const Typing = /** @type {const} */ ({
     layerMap: /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */ (
         (args, func) => args.map(func)
     ),
+    screenLayer: /** @type {(layer: AssetLayerDefinition) => AssetLayerDefinition} */ (
+        (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false })
+    ),
 });

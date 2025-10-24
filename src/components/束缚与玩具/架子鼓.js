@@ -1,4 +1,5 @@
 import { AssetManager } from "../../assetForward";
+import { Typing } from "../../lib";
 
 /** @type {AddAssetWithConfigParams} */
 const assets = [
@@ -19,7 +20,7 @@ const assets = [
             { Name: "A5" },
             { Name: "A6" },
             { Name: "A7" },
-            { Name: "A7g", BlendingMode: "screen", AllowColorize: false },
+            Typing.screenLayer({ Name: "A7g" }),
         ],
     },
     {

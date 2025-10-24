@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Typing } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -87,7 +87,7 @@ const assets = [
                     { Name: "l", Priority: 15 },
                     { Name: "bd", CreateLayerTypes: ["m"] },
                     { Name: "text", HasImage: false, Left: 250, Top: 280 },
-                    { Name: "bg", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
+                    Typing.screenLayer({ Name: "bg", CreateLayerTypes: ["m"] }),
                 ],
             },
             (asset) => ArmMaskTool.createArmMaskForCloth(asset.DynamicGroupName, asset)
@@ -147,10 +147,7 @@ const assets = [
             DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
             PoseMapping: PoseMapTool.HideFullBody(),
-            Layer: [
-                { Name: "d", CreateLayerTypes: ["m"] },
-                { Name: "g", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
-            ],
+            Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Typing.screenLayer({ Name: "g", CreateLayerTypes: ["m"] })],
         },
         {
             translation: {
@@ -183,7 +180,7 @@ const assets = [
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "l" },
-                { Name: "g", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
+                Typing.screenLayer({ Name: "g", CreateLayerTypes: ["m"] }),
             ],
         },
         {
@@ -228,7 +225,7 @@ const assets = [
         },
     ],
     [
-        ["ClothAccessory", "Necklace"],
+        ["ClothAccessory", "Necklace", "Jewelry"],
         {
             Name: "运动套装nl",
             Random: false,
@@ -241,14 +238,14 @@ const assets = [
             DefaultColor: ["#292929", "#00BBA6", "#FF4F4F", "#FF4F4F"],
             Layer: [
                 { Name: "cbd", Priority: 6 },
-                { Name: "cbg", Priority: 6, AllowColorize: false, BlendingMode: "screen" },
+                Typing.screenLayer({ Name: "cbg", Priority: 6 }),
                 { Name: "cfd", CopyLayerColor: "cbd" },
-                { Name: "cfg", AllowColorize: false, BlendingMode: "screen" },
+                Typing.screenLayer({ Name: "cfg" }),
                 { Name: "crd" },
-                { Name: "crg", AllowColorize: false, BlendingMode: "screen" },
+                Typing.screenLayer({ Name: "crg" }),
                 { Name: "dud" },
                 { Name: "dld" },
-                { Name: "dg", AllowColorize: false, BlendingMode: "screen" },
+                Typing.screenLayer({ Name: "dg" }),
             ],
         },
         {

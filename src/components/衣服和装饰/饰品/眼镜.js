@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../lib";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
@@ -64,7 +65,7 @@ const assets = [
             Top: 80,
             Layer: [
                 { Name: "r", CreateLayerTypes: ["typed"] },
-                { Name: "rg", BlendingMode: "screen", AllowColorize: false, CreateLayerTypes: ["typed"] },
+                Typing.screenLayer({ Name: "rg", CreateLayerTypes: ["typed"] }),
                 { Name: "g", CreateLayerTypes: ["typed"] },
             ],
             DefaultColor: ["#050505", "Default"],

@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -12,11 +13,11 @@ const asset = {
     DefaultColor: ["#545454", "#000000", "Default"],
     Layer: [
         { Name: "rd" },
-        { Name: "rg", AllowColorize: false, BlendingMode: "screen" },
+        Typing.screenLayer({ Name: "rg" }),
         { Name: "sd" },
-        { Name: "sg", AllowColorize: false, BlendingMode: "screen" },
+        Typing.screenLayer({ Name: "sg" }),
         { Name: "pd" },
-        { Name: "pg", AllowColorize: false, BlendingMode: "screen" },
+        Typing.screenLayer({ Name: "pg" }),
     ],
 };
 
