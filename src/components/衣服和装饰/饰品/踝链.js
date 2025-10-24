@@ -1,29 +1,37 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTool } from "../../../lib";
+import { PostPass, PoseMapTool } from "../../../lib";
 import { LRTool } from "../../../lib/sockLR";
 
 /** @type { AddAssetWithConfigParams[] } */
 const asset = [
     [
         "Jewelry",
-        {
-            Name: "踝链A",
-            Random: false,
-            Left: 130,
-            Top: 850,
-            Priority: 20,
-            DynamicGroupName: "Jewelry",
-            ParentGroup: "BodyLower",
-            DefaultColor: ["Default", "#9FEEFF", "Default"],
-            PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
-            Layer: [
-                { Name: "链" },
-                { Name: "钻", AllowTypes: { s: 0 } },
-                { Name: "珠", AllowTypes: { s: 1 } },
-                { Name: "链2", Priority: 7, CopyLayerColor: "链" },
-            ],
-        },
+        PostPass.asset(
+            {
+                Name: "踝链A",
+                Random: false,
+                Left: 130,
+                Top: 850,
+                Priority: 20,
+                DynamicGroupName: "Jewelry",
+                ParentGroup: "BodyLower",
+                DefaultColor: ["Default", "#9FEEFF", "Default"],
+                PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
+                Layer: [
+                    { Name: "链" },
+                    { Name: "钻", AllowTypes: { s: 0 } },
+                    { Name: "珠", AllowTypes: { s: 1 } },
+                    { Name: "链2", Priority: 7, CopyLayerColor: "链" },
+                ],
+            },
+            (asset) => {
+                AssetManager.addImageMapping(
+                    ImageMapTools.mirrorBodyTypeLayer("Jewelry", asset, "Normal", ["Small", "Large"])
+                );
+                LRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
+            }
+        ),
         {
             translation: { CN: "踝链A", EN: "Anklet A" },
             layerNames: {
@@ -73,9 +81,5 @@ const asset = [
 ];
 
 export default function () {
-    AssetManager.addImageMapping(
-        ImageMapTools.mirrorBodyTypeLayer("Jewelry", asset[0][1], "Normal", ["Small", "Large"])
-    );
-    LRTool.createLRConfig("Jewelry", asset[0][1], { key: "lr", Left: 1, Right: 2 });
     AssetManager.addAssetWithConfig(asset);
 }

@@ -42,7 +42,7 @@ function stringEntries(...args) {
     return ret;
 }
 
-export const Typing = {
+export const Typing = /** @type {const} */ ({
     attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
     drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),
@@ -68,4 +68,4 @@ export const Typing = {
     entries: recordEntries,
     addAssetParamHasGroup,
     stringEntries,
-};
+});

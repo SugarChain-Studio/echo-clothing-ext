@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PoseMapTool } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -71,24 +71,27 @@ const assetStrings = {
 const assets = [
     [
         ["Cloth", "Bra"],
-        {
-            Name: "运动套装top",
-            Random: false,
-            Gender: "F",
-            Left: 170,
-            Top: 220,
-            Prerequisite: ["HasBreasts"],
-            ParentGroup: "BodyUpper",
-            DynamicGroupName: "Bra",
-            DefaultColor: ["#DDDDDD", "#1C1C1C", "#BBBBBB"],
-            PoseMapping: PoseMapTool.HideFullBody(),
-            Layer: [
-                { Name: "l", Priority: 15 },
-                { Name: "bd", CreateLayerTypes: ["m"] },
-                { Name: "text", HasImage: false, Left: 250, Top: 280 },
-                { Name: "bg", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
-            ],
-        },
+        PostPass.asset(
+            {
+                Name: "运动套装top",
+                Random: false,
+                Gender: "F",
+                Left: 170,
+                Top: 220,
+                Prerequisite: ["HasBreasts"],
+                ParentGroup: "BodyUpper",
+                DynamicGroupName: "Bra",
+                DefaultColor: ["#DDDDDD", "#1C1C1C", "#BBBBBB"],
+                PoseMapping: PoseMapTool.HideFullBody(),
+                Layer: [
+                    { Name: "l", Priority: 15 },
+                    { Name: "bd", CreateLayerTypes: ["m"] },
+                    { Name: "text", HasImage: false, Left: 250, Top: 280 },
+                    { Name: "bg", AllowColorize: false, BlendingMode: "screen", CreateLayerTypes: ["m"] },
+                ],
+            },
+            (asset) => ArmMaskTool.createArmMaskForCloth(asset.DynamicGroupName, asset)
+        ),
         {
             translation: {
                 CN: "运动套装上衣",
@@ -262,8 +265,6 @@ const assets = [
 ];
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth(assets[0][1].DynamicGroupName, assets[0][1]);
-
     for (const [_, asset, option] of assets.filter((p) => p[0].includes("ClothLower"))) {
         AssetManager.addImageMapping(
             ImageMapTools.mirrorBodyTypeLayer(

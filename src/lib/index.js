@@ -9,3 +9,4 @@ export { createAfterDrawProcess } from "./afterDraw.js";
 export { TypedOptionCombiner } from "./optionCombiner.js";
 export { Container } from "./container.js";
 export { PoseMapTool } from "./poseMapTool.js";
+export { PostPass } from "./postPass.js";

@@ -1,4 +1,4 @@
-import { ArmMaskTool, PoseMapTool } from "../../../lib";
+import { ArmMaskTool, PostPass, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 // Originally Designed by: 01musume
@@ -25,45 +25,50 @@ function beforeDraw(data, originalFunction, drawData) {
 const asset = [
     [
         "Cloth",
-        {
-            Name: "白色礼服",
-            Random: false,
-            Left: 0,
-            Top: 0,
-            ParentGroup: "BodyUpper",
-            DynamicGroupName: "Cloth",
-            PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
-            DefaultColor: [
-                "Default",
-                "Default",
-                "Default",
-                "#D3CAAE",
-                "Default",
-                "Default",
-                "Default",
-                "Default",
-                "#4E6F7A",
-            ],
-            Layer: [
-                { Left: 190, Top: 210, Name: "d_1", ...upper, ColorGroup: "strap" },
-                { Left: 190, Top: 210, Name: "d_2", ...upper, ColorGroup: "strap" },
-                { Left: 170, Top: 280, Name: "d_3", ...main },
-                { Left: 180, Top: 320, Name: "d_8", ...upper },
-                { Left: 190, Top: 210, Name: "g_1", ...upper, BlendingMode: "screen", AllowColorize: false },
-                { Left: 190, Top: 210, Name: "g_2", ...upper, BlendingMode: "screen", AllowColorize: false },
-                { Left: 170, Top: 280, Name: "g_3", ...main, BlendingMode: "screen", AllowColorize: false },
-                { Left: 190, Top: 210, Name: "d_5", ...upper, ColorGroup: "chain" },
-                { Left: 150, Top: 340, Name: "d_6", ...lower, ColorGroup: "chain" },
-                { Left: 150, Top: 340, Name: "d_7", ...lower, ColorGroup: "chain" },
-                { Left: 190, Top: 210, Name: "g_5", ...upper, BlendingMode: "screen", AllowColorize: false },
-                { Left: 150, Top: 340, Name: "g_6", ...lower, BlendingMode: "screen", AllowColorize: false },
-                { Left: 150, Top: 340, Name: "g_7", ...lower, BlendingMode: "screen", AllowColorize: false },
-                { Left: 150, Top: 340, Name: "d_4", ...lower },
-                { Left: 150, Top: 340, Name: "g_4", ...lower, BlendingMode: "screen", AllowColorize: false },
-                { Left: 240, Top: 340, Name: "d_f", ...lower },
-                { Left: 240, Top: 340, Name: "g_f", ...lower, BlendingMode: "screen", AllowColorize: false },
-            ],
-        },
+        PostPass.asset(
+            {
+                Name: "白色礼服",
+                Random: false,
+                Left: 0,
+                Top: 0,
+                ParentGroup: "BodyUpper",
+                DynamicGroupName: "Cloth",
+                PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
+                DefaultColor: [
+                    "Default",
+                    "Default",
+                    "Default",
+                    "#D3CAAE",
+                    "Default",
+                    "Default",
+                    "Default",
+                    "Default",
+                    "#4E6F7A",
+                ],
+                Layer: [
+                    { Left: 190, Top: 210, Name: "d_1", ...upper, ColorGroup: "strap" },
+                    { Left: 190, Top: 210, Name: "d_2", ...upper, ColorGroup: "strap" },
+                    { Left: 170, Top: 280, Name: "d_3", ...main },
+                    { Left: 180, Top: 320, Name: "d_8", ...upper },
+                    { Left: 190, Top: 210, Name: "g_1", ...upper, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 190, Top: 210, Name: "g_2", ...upper, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 170, Top: 280, Name: "g_3", ...main, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 190, Top: 210, Name: "d_5", ...upper, ColorGroup: "chain" },
+                    { Left: 150, Top: 340, Name: "d_6", ...lower, ColorGroup: "chain" },
+                    { Left: 150, Top: 340, Name: "d_7", ...lower, ColorGroup: "chain" },
+                    { Left: 190, Top: 210, Name: "g_5", ...upper, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 150, Top: 340, Name: "g_6", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 150, Top: 340, Name: "g_7", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 150, Top: 340, Name: "d_4", ...lower },
+                    { Left: 150, Top: 340, Name: "g_4", ...lower, BlendingMode: "screen", AllowColorize: false },
+                    { Left: 240, Top: 340, Name: "d_f", ...lower },
+                    { Left: 240, Top: 340, Name: "g_f", ...lower, BlendingMode: "screen", AllowColorize: false },
+                ],
+            },
+            (asset) => {
+                ArmMaskTool.createArmMaskForCloth("Cloth", asset);
+            }
+        ),
         {
             translation: { CN: "白色礼服", EN: "White Dress" },
             layerNames: {
@@ -130,41 +135,46 @@ const asset = [
     ],
     [
         ["ClothAccessory", "长袖子_Luzi"],
-        {
-            Name: "白色礼服丝巾",
-            Random: false,
-            Left: 60,
-            Top: 150,
-            ParentGroup: {},
-            DynamicGroupName: "ClothAccessory",
-            PoseMapping: {
-                BackBoxTie: "",
-                BackElbowTouch: "Hide",
-                BackCuffs: "Hide",
-                OverTheHead: "OverTheHead",
-                Yoked: "Yoked",
+        PostPass.asset(
+            {
+                Name: "白色礼服丝巾",
+                Random: false,
+                Left: 60,
+                Top: 150,
+                ParentGroup: {},
+                DynamicGroupName: "ClothAccessory",
+                PoseMapping: {
+                    BackBoxTie: "",
+                    BackElbowTouch: "Hide",
+                    BackCuffs: "Hide",
+                    OverTheHead: "OverTheHead",
+                    Yoked: "Yoked",
+                },
+                Priority: 35,
+                Layer: [
+                    { Name: "后d", Priority: 6 },
+                    { Name: "后g", BlendingMode: "screen", AllowColorize: false, Priority: 6 },
+                    {
+                        Name: "后xd",
+                        InheritPoseMappingFields: true,
+                        PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
+                        CopyLayerColor: "后d",
+                    },
+                    {
+                        Name: "后xg",
+                        InheritPoseMappingFields: true,
+                        PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
+                        BlendingMode: "screen",
+                        AllowColorize: false,
+                    },
+                    { Name: "前d", CopyLayerColor: "后d" },
+                    { Name: "前g", BlendingMode: "screen", AllowColorize: false },
+                ],
             },
-            Priority: 35,
-            Layer: [
-                { Name: "后d", Priority: 6 },
-                { Name: "后g", BlendingMode: "screen", AllowColorize: false, Priority: 6 },
-                {
-                    Name: "后xd",
-                    InheritPoseMappingFields: true,
-                    PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
-                    CopyLayerColor: "后d",
-                },
-                {
-                    Name: "后xg",
-                    InheritPoseMappingFields: true,
-                    PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
-                    BlendingMode: "screen",
-                    AllowColorize: false,
-                },
-                { Name: "前d", CopyLayerColor: "后d" },
-                { Name: "前g", BlendingMode: "screen", AllowColorize: false },
-            ],
-        },
+            (asset) => {
+                ArmMaskTool.createArmMaskForCloth("ClothAccessory", asset, "Short");
+            }
+        ),
         {
             translation: { CN: "白色礼服丝巾", EN: "White Dress Scarf" },
         },
@@ -172,7 +182,5 @@ const asset = [
 ];
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth("Cloth", asset[0][1]);
-    ArmMaskTool.createArmMaskForCloth("ClothAccessory", asset[1][1], "Short");
     AssetManager.addAssetWithConfig(asset);
 }

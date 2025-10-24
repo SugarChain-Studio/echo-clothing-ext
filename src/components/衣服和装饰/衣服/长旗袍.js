@@ -1,4 +1,4 @@
-import { PoseMapTool } from "../../../lib";
+import { PoseMapTool, PostPass } from "../../../lib";
 import { ArmMaskTool, Typing } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { Tools } from "@mod-utils/Tools";
@@ -6,49 +6,62 @@ import { Tools } from "@mod-utils/Tools";
 /** @type {AddAssetWithConfigParams} */
 const asset = [
     "Cloth",
-    {
-        Name: "长旗袍",
-        Random: false,
-        Gender: "F",
-        ...Tools.topLeftBuilder(
-            { Left: 170, Top: 210 },
-            ["AllFours", { Left: 180, Top: 190 }],
-            ["Hogtied", { Left: 180, Top: 210 }]
-        ),
-        Priority: 30,
-        Prerequisite: ["HasBreasts"],
-        PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
-        DefaultColor: [
-            "Default",
-            "Default",
-            "Default",
-            "Default",
-            "#000000",
-            "Default",
-            "Default",
-            "Default",
-            "Default",
-            "#000000",
-            "Default",
-            "Default",
-            "Default",
-        ],
-        Layer: [
-            { Name: "A1", ColorGroup: "Base" },
-            { Name: "A2", ColorGroup: "Shade" },
-            { Name: "A3", ColorGroup: "Highlight" },
-            { Name: "B1", ColorGroup: "Trim" },
-            { Name: "B2", ColorGroup: "Outline" },
-            { Name: "C1", ColorGroup: "Base" },
-            { Name: "C2", ColorGroup: "Shade" },
-            { Name: "C3", ColorGroup: "Highlight" },
-            { Name: "C5", ColorGroup: "Trim" },
-            { Name: "C4", ColorGroup: "Outline" },
-            { Name: "D1", ColorGroup: "Accessory", InheritPoseMappingFields: true, PoseMapping: { Hogtied: "Hide" } },
-            { Name: "D2", ColorGroup: "Accessory", InheritPoseMappingFields: true, PoseMapping: { Hogtied: "Hide" } },
-            { Name: "D3", ColorGroup: "Accessory" },
-        ],
-    },
+    PostPass.asset(
+        {
+            Name: "长旗袍",
+            Random: false,
+            Gender: "F",
+            ...Tools.topLeftBuilder(
+                { Left: 170, Top: 210 },
+                ["AllFours", { Left: 180, Top: 190 }],
+                ["Hogtied", { Left: 180, Top: 210 }]
+            ),
+            Priority: 30,
+            Prerequisite: ["HasBreasts"],
+            PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
+            DefaultColor: [
+                "Default",
+                "Default",
+                "Default",
+                "Default",
+                "#000000",
+                "Default",
+                "Default",
+                "Default",
+                "Default",
+                "#000000",
+                "Default",
+                "Default",
+                "Default",
+            ],
+            Layer: [
+                { Name: "A1", ColorGroup: "Base" },
+                { Name: "A2", ColorGroup: "Shade" },
+                { Name: "A3", ColorGroup: "Highlight" },
+                { Name: "B1", ColorGroup: "Trim" },
+                { Name: "B2", ColorGroup: "Outline" },
+                { Name: "C1", ColorGroup: "Base" },
+                { Name: "C2", ColorGroup: "Shade" },
+                { Name: "C3", ColorGroup: "Highlight" },
+                { Name: "C5", ColorGroup: "Trim" },
+                { Name: "C4", ColorGroup: "Outline" },
+                {
+                    Name: "D1",
+                    ColorGroup: "Accessory",
+                    InheritPoseMappingFields: true,
+                    PoseMapping: { Hogtied: "Hide" },
+                },
+                {
+                    Name: "D2",
+                    ColorGroup: "Accessory",
+                    InheritPoseMappingFields: true,
+                    PoseMapping: { Hogtied: "Hide" },
+                },
+                { Name: "D3", ColorGroup: "Accessory" },
+            ],
+        },
+        (asset) => ArmMaskTool.createArmMaskForCloth("Cloth", asset)
+    ),
     {
         translation: { CN: "长旗袍", EN: "Long Qipao Dress" },
         layerNames: {
@@ -88,6 +101,5 @@ const asset = [
 ];
 
 export default function () {
-    ArmMaskTool.createArmMaskForCloth("Cloth", asset[1]);
     AssetManager.addAssetWithConfig(...asset);
 }

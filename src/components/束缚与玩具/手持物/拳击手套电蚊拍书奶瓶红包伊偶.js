@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool } from "../../../lib";
+import { ArmMaskTool, PostPass } from "../../../lib";
 
 /** @type { AddAssetWithConfigParams[] }} */
 const assets = [
@@ -42,16 +42,21 @@ const assets = [
     ],
     [
         "ItemHandheld",
-        {
-            Name: "书",
-            Random: false,
-            Left: 180,
-            Top: 340,
-            Difficulty: -10,
-            ParentGroup: {},
-            PoseMapping: { ...AssetPoseMapping.ItemHandheld },
-            Layer: [{ Name: "页" }, { Name: "壳" }],
-        },
+        PostPass.asset(
+            {
+                Name: "书",
+                Random: false,
+                Left: 180,
+                Top: 340,
+                Difficulty: -10,
+                ParentGroup: {},
+                PoseMapping: { ...AssetPoseMapping.ItemHandheld },
+                Layer: [{ Name: "页" }, { Name: "壳" }],
+            },
+            (asset) => {
+                ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset);
+            }
+        ),
         { translation: { CN: "书", EN: "Book" } },
     ],
     [
@@ -100,7 +105,5 @@ const assets = [
 ];
 
 export default function () {
-    const book = assets.find(([_, asset]) => asset.Name === "书");
-    ArmMaskTool.createArmMaskForCloth("ItemHandheld", book[1]);
     AssetManager.addAssetWithConfig(assets);
 }
