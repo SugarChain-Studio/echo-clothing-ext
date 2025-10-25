@@ -81,4 +81,7 @@ export const Typing = /** @type {const} */ ({
     screenLayer: /** @type {(layer: AssetLayerDefinition) => AssetLayerDefinition} */ (
         (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false })
     ),
+    multiplyLayer: /** @type {(layer: AssetLayerDefinition) => AssetLayerDefinition} */ (
+        (layer) => ({ ...layer, BlendingMode: "multiply", AllowColorize: false })
+    ),
 });
