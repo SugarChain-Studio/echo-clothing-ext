@@ -38,5 +38,5 @@ jobs:
           release_branches: "release"
           pre_release_branches: "beta,main"
           append_to_pre_release_tag: "beta"
-          custom_release_rules: "pre-feat:prepatch"
+          default_prerelease_bump: "prerelease"
           github_token: ${{ secrets.GITHUB_TOKEN }}
