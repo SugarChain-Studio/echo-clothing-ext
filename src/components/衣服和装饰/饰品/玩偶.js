@@ -162,7 +162,7 @@ const asset = {
         { Name: "幽灵", AllowTypes: { yytc: 3 } },
         { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
         { Name: "小沫", AllowTypes: { yytc: 5 } },
-        { Name: "Sive", AllowTypes: { l: 6 } },
+        { Name: "Sive", AllowTypes: { l: 43 } },
         { Name: "40", AllowTypes: { yytc: 7 } },
         { Name: "焦糖", AllowTypes: { yytc: 8 } },
         { Name: "早紀", AllowTypes: { yytc: 9 } },
@@ -466,39 +466,43 @@ asset.Layer.forEach((layer) => {
     layer.AllowColorize = false;
 });
 
+const enabledModulesKey = new Set(asset.Layer.map((layer) => Object.keys(layer.AllowTypes)[0]));
+
+const optionCount = asset.Layer.reduce((pv, cv) => {
+    const Key = Object.keys(cv.AllowTypes)[0];
+    pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
+    return pv;
+}, /** @type { Record<string, Number> } */ ({}));
+
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
-const modules = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
-    const Key = Object.keys(cv.AllowTypes)[0];
-    const Name = takeShortName(typeNameNext[Key], "CN");
-    const module = pv.find((m) => m.Name === Name);
-    if (!module) {
-        pv.push({
+const modules = Object.entries(typeNameNext)
+    .filter(([key]) => enabledModulesKey.has(key))
+    .map(([Key, typeName]) => {
+        const Name = takeShortName(typeName, "CN");
+        return {
             Name,
             DrawImages: true,
             Key,
-            Options: [{}, {}],
-        });
-    } else {
-        module.Options.push({});
-    }
-    return pv;
-}, /** @type {ModularItemModuleConfig[]} */ ([]));
+            Options: Array.from({ length: optionCount[Key] + 1 }, () => ({})),
+        };
+    });
 
-/** @type { Record<keyof typeof typeNameNext, string[]> } */
+/** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const [k] = Object.entries(cv.AllowTypes)[0];
-    if (!pv[k]) pv[k] = [""];
-    pv[k].push(cv.Name);
+    pv[k] ??= {};
+    pv[k][cv.AllowTypes[k]] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, string[]> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
         elementData: m.Options.map((opt, idx) => {
-            if (idx === 0) return { imagePath: PathTools.emptyImage };
+            const src = typedLayerNames[m.Key][idx];
+            if (!src) return { imagePath: PathTools.emptyImage };
             return {
-                imagePath: `Assets/Female3DCG/ItemMisc/玩偶_Luzi_${typedLayerNames[m.Key][idx]}.png`,
+                imagePath: `Assets/Female3DCG/ItemMisc/玩偶_Luzi_${src}.png`,
             };
         }),
     };
