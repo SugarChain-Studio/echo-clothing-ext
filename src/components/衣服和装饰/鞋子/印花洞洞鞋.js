@@ -63,7 +63,7 @@ const asset = {
             Priority: 7,
             CopyLayerColor: "u",
             ParentGroup: {},
-            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.fromHide({ Hogtied: "Hogtied" }),
         },
     ],
 };

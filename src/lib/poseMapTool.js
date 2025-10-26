@@ -68,7 +68,7 @@ export class PoseMapTool {
      * @param {AssetPoseMapping} posem 用于合成的姿势映射
      * @returns {AssetPoseMapping}
      */
-    static FromHide(posem) {
+    static fromHide(posem) {
         return { ...Constants.PoseHideAll, ...posem };
     }
 
@@ -78,7 +78,7 @@ export class PoseMapTool {
      * @param {AssetPoseMapping} posem 用于合成的姿势映射
      * @returns {AssetPoseMapping}
      */
-    static FromTopHide(posem) {
+    static fromTopHide(posem) {
         return { ...Constants.PoseHideTop, ...posem };
     }
 
@@ -88,7 +88,7 @@ export class PoseMapTool {
      * @param {AssetPoseMapping} posem 用于合成的姿势映射
      * @returns {AssetPoseMapping}
      */
-    static FromBottomHide(posem) {
+    static fromBottomHide(posem) {
         return { ...Constants.PoseHideBottom, ...posem };
     }
 
@@ -105,7 +105,7 @@ export class PoseMapTool {
      * @param {AssetPoseMapping} [posem] 用于合成的姿势映射
      * @returns {AssetPoseMapping}
      */
-    static HideFullBody(posem) {
+    static hideFullBody(posem) {
         return { AllFours: "Hide", Hogtied: "Hide", ...posem };
     }
 
@@ -119,10 +119,11 @@ export class PoseMapTool {
      *
      * @param  {(keyof AssetPoseMapping)[]} poses 需要配置有独特路径的姿势
      * @param  {(keyof AssetPoseMapping)[]} [hides] 需要隐藏的姿势
+     * @param {AssetPoseMapping} [base] 用于扩展的基础姿势映射
      * @returns {AssetPoseMapping}
      */
-    static Config(poses, hides) {
-        const ret = {};
+    static config(poses, hides, base) {
+        const ret = { ...base };
         for (const p of poses) {
             ret[p] = p;
         }
@@ -144,12 +145,13 @@ export class PoseMapTool {
      * @param {boolean} inherit 是否继承父级的 PoseMapping 字段
      * @param  {(keyof AssetPoseMapping)[]} poses 需要配置有独特路径的姿势
      * @param  {(keyof AssetPoseMapping)[]} [hides] 需要隐藏的姿势
+     * @param {AssetPoseMapping} [base] 用于扩展的基础姿势映射
      * @returns {Pick<AssetLayerDefinition, "PoseMapping" | "InheritPoseMappingFields">}
      */
-    static LayerConfig(inherit, poses, hides) {
+    static LayerConfig(inherit, poses, hides, base) {
         return {
             InheritPoseMappingFields: inherit,
-            PoseMapping: PoseMapTool.Config(poses, hides),
+            PoseMapping: PoseMapTool.config(poses, hides, base),
         };
     }
 }

@@ -14,12 +14,12 @@ const asset = {
         {
             Name: "扣子",
             Priority: 27,
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
         },
         {
             Name: "裤子A1",
             Priority: 26,
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 Kneel: "Kneel",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
@@ -29,7 +29,7 @@ const asset = {
         {
             Name: "裤子A2",
             Priority: 1,
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 Kneel: PoseType.HIDE,
                 KneelingSpread: PoseType.HIDE,
                 LegsClosed: "LegsClosed",

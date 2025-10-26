@@ -36,7 +36,7 @@ const tummyLayer = (def) => ({
     ...def,
     Left: 180,
     Top: 370,
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     Priority: 10,
 });
 

@@ -20,7 +20,7 @@ const asset = [
                 SetPose: ["Yoked"],
                 DynamicGroupName: "ItemArms",
                 ParentGroup: {},
-                PoseMapping: PoseMapTool.Config(
+                PoseMapping: PoseMapTool.config(
                     ["OverTheHead", "Yoked", "BackBoxTie", "BackElbowTouch"],
                     ["BackCuffs", "BaseUpper"]
                 ),
@@ -90,7 +90,7 @@ const asset = [
                 SetPose: ["BaseLower"],
                 DynamicGroupName: "ItemArms",
                 ParentGroup: {},
-                PoseMapping: PoseMapTool.Config([], ["Kneel", "KneelingSpread", "LegsClosed", "Spread"]),
+                PoseMapping: PoseMapTool.config([], ["Kneel", "KneelingSpread", "LegsClosed", "Spread"]),
                 Layer: [
                     { Name: "B2", Priority: 6 },
                     { Name: "B1", CopyLayerColor: "B2" },

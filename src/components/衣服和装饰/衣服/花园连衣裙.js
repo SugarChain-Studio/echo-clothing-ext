@@ -7,7 +7,7 @@ const asset = {
     Random: false,
     Left: 90,
     Top: 210,
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     DefaultColor: ["Default", "Default", "Default", "#303030", "Default"],
     Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
 };

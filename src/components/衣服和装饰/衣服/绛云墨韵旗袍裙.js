@@ -3,7 +3,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {AssetLayerDefinition} */
 const hideFB = {
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
 };
 
 /** @type {CustomAssetDefinition} */

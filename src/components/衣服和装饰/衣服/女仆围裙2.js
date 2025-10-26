@@ -10,7 +10,7 @@ const asset = {
     Priority: 32,
     DefaultColor: ["Default", "#000000"],
     ParentGroup: "BodyUpper",
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
         {
             Name: "裙",

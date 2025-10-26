@@ -21,7 +21,7 @@ const asset = {
         "Default",
         "Default",
     ],
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
         { Name: "圆环", ParentGroup: {}, AllowTypes: { typed: [0, 1, 3] } },
         { Name: "连接", AllowTypes: { typed: 0 } },

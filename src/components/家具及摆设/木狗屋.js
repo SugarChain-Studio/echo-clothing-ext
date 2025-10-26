@@ -9,7 +9,7 @@ const baseMapping = {
 };
 
 /** @type {AssetPoseMapping} */
-const foursMapping = PoseMapTool.FromHide({ AllFours: "", Hogtied: "" });
+const foursMapping = PoseMapTool.fromHide({ AllFours: "", Hogtied: "" });
 
 /** @type { (string)=>Partial<AssetLayerDefinition> } */
 const bLConfig = (name) => ({

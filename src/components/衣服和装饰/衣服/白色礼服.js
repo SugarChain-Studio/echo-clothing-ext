@@ -10,7 +10,7 @@ const main = { PoseMapping: { Hogtied: "Hogtied", AllFours: "AllFours", Kneel: "
 const upper = { PoseMapping: { Hogtied: "Hogtied", AllFours: "AllFours" } };
 
 /** @type {AssetLayerDefinition} */
-const lower = { PoseMapping: PoseMapTool.HideFullBody() };
+const lower = { PoseMapping: PoseMapTool.hideFullBody() };
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
 function beforeDraw(data, originalFunction, drawData) {
@@ -33,7 +33,7 @@ const asset = [
                 Top: 0,
                 ParentGroup: "BodyUpper",
                 DynamicGroupName: "Cloth",
-                PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
+                PoseMapping: PoseMapTool.config(["Hogtied", "AllFours"]),
                 DefaultColor: [
                     "Default",
                     "Default",

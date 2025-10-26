@@ -39,7 +39,7 @@ const layerDefBase = /** @type {MyDefinition[]} */ ([
         Name: "D1B",
         Priority: 10,
         CopyLayerColor: "D1",
-        PoseMapping: PoseMapTool.FromTopHide(Object.fromEntries(backPoses.map((pose) => [pose, pose]))),
+        PoseMapping: PoseMapTool.fromTopHide(Object.fromEntries(backPoses.map((pose) => [pose, pose]))),
     },
     ...iota(4, (i) => ({ Name: `D${i + 2}`, ColorName: layerGroupBase.D[i + 1] })),
 ])

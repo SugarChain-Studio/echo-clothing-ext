@@ -10,7 +10,7 @@ const asset = {
     Priority: 32,
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
     ParentGroup: "BodyUpper",
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
         {
             Name: "肩带内",
@@ -21,29 +21,29 @@ const asset = {
             Name: "肩带外",
             ColorGroup: "肩带",
             ParentGroup: {},
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
             }),
         },
         {
             Name: "裙",
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
         },
         {
             Name: "荷叶边",
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
         },
         {
             Name: "线上",
             ColorGroup: "描边线",
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
         },
         {
             Name: "线下",
             ColorGroup: "描边线",
             ParentGroup: {},
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
         },
     ],
 };

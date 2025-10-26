@@ -79,7 +79,7 @@ const asset = {
         {
             Name: "上身遮罩",
             ParentGroup: "BodyUpper",
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
             AllowColorize: false,
             HasImage: false,
         },

@@ -75,7 +75,7 @@ const asset = {
             Top: 500,
             Left: 200,
             ParentGroup: {},
-            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.fromHide({ Hogtied: "Hogtied" }),
         },
     ],
 };

@@ -18,7 +18,7 @@ const hogLayer = (layer) => ({
     Left: 210,
     Top: 515,
     ParentGroup: {},
-    PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
+    PoseMapping: PoseMapTool.fromHide({ Hogtied: "Hogtied" }),
 });
 
 /** @type {CustomAssetDefinition} */

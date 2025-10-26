@@ -11,7 +11,7 @@ const asset = {
         KneelingSpread: 90,
     },
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    PoseMapping: PoseMapTool.HideFullBody(),
+    PoseMapping: PoseMapTool.hideFullBody(),
     ParentGroup: {},
     Layer: [
         {

@@ -18,7 +18,7 @@ const asset = [
             ),
             Priority: 30,
             Prerequisite: ["HasBreasts"],
-            PoseMapping: PoseMapTool.Config(["Hogtied", "AllFours"]),
+            PoseMapping: PoseMapTool.config(["Hogtied", "AllFours"]),
             DefaultColor: [
                 "Default",
                 "Default",

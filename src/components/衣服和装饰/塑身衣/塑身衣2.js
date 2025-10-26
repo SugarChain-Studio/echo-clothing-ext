@@ -3,7 +3,7 @@ import { AssetManager } from "../../../assetForward";
 
 /** @type {AssetLayerDefinition} */
 const base = {
-    PoseMapping: PoseMapTool.HideFullBody({
+    PoseMapping: PoseMapTool.hideFullBody({
         LegsClosed: PoseType.DEFAULT,
         Kneel: PoseType.DEFAULT,
     }),
@@ -11,7 +11,7 @@ const base = {
 
 /** @type {AssetLayerDefinition} */
 const baseLC = {
-    PoseMapping: PoseMapTool.HideFullBody({
+    PoseMapping: PoseMapTool.hideFullBody({
         LegsClosed: "LegsClosed",
         Kneel: "LegsClosed",
     }),

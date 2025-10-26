@@ -50,7 +50,7 @@ const asset = [
                 DynamicGroupName: "Jewelry",
                 ParentGroup: "BodyLower",
                 DefaultColor: ["Default", "#9FEEFF", "Default"],
-                PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
+                PoseMapping: PoseMapTool.config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
                 Layer: [
                     { Name: "链" },
                     { Name: "钻", AllowTypes: { s: 0 } },
@@ -113,7 +113,7 @@ const asset = [
                 Priority: 20,
                 DynamicGroupName: "Jewelry",
                 ParentGroup: "BodyLower",
-                PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
+                PoseMapping: PoseMapTool.config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
                 Layer: [{ Name: "环" }, { Name: "饰", AllowTypes: { o: 0 } }],
             },
             (asset) => {
@@ -181,7 +181,7 @@ const asset = [
                             Left: 140,
                             Top: 830,
                             ParentGroup: "BodyLower",
-                            PoseMapping: PoseMapTool.Config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
+                            PoseMapping: PoseMapTool.config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
                         })
                     ),
                     ...Typing.layerMap(
@@ -197,7 +197,7 @@ const asset = [
                                 ["Yoked", { Left: 60, Top: 230 }]
                             ),
                             ParentGroup: {},
-                            PoseMapping: PoseMapTool.Config(
+                            PoseMapping: PoseMapTool.config(
                                 ["Yoked", "OverTheHead"],
                                 ["BackBoxTie", "BackCuffs", "BackElbowTouch"]
                             ),

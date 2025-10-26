@@ -59,7 +59,7 @@ const asset = {
             Name: "身体遮罩",
             BlendingMode: "destination-out",
             TextureMask: { Groups: ["BodyUpper"] },
-            PoseMapping: PoseMapTool.FromHide({ Hogtied: "Hogtied" }),
+            PoseMapping: PoseMapTool.fromHide({ Hogtied: "Hogtied" }),
         },
         {
             Name: "手臂遮罩",
@@ -86,7 +86,7 @@ const asset = {
                 "OverTheHead": "",
                 "Yoked": "",
             },
-            PoseMapping: PoseMapTool.HideFullBody({ OverTheHead: "OverTheHead", Yoked: "Yoked" }),
+            PoseMapping: PoseMapTool.hideFullBody({ OverTheHead: "OverTheHead", Yoked: "Yoked" }),
         },
         {
             Name: "下身遮罩",
@@ -109,13 +109,13 @@ const asset = {
                     "动物身体_Luzi",
                 ],
             },
-            PoseMapping: PoseMapTool.HideFullBody({ KneelingSpread: "KneelingSpread" }),
+            PoseMapping: PoseMapTool.hideFullBody({ KneelingSpread: "KneelingSpread" }),
         },
         {
             Name: "臂环",
             Priority: 6,
             ColorGroup: "固定环",
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",
                 OverTheHead: "OverTheHead",
@@ -128,7 +128,7 @@ const asset = {
             Top: 460,
             Left: 0,
             ColorGroup: "固定环",
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
@@ -170,7 +170,7 @@ const asset = {
             Left: 0,
             ParentGroup: "BodyLower",
             ColorGroup: "传送器",
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 Kneel: "LegsClosed",
                 KneelingSpread: "KneelingSpread",
                 LegsClosed: "LegsClosed",
@@ -182,7 +182,7 @@ const asset = {
             Priority: 25,
             ParentGroup: "BodyUpper",
             ColorGroup: "传送器",
-            PoseMapping: PoseMapTool.HideFullBody({
+            PoseMapping: PoseMapTool.hideFullBody({
                 BackBoxTie: "BackBoxTie",
                 BackCuffs: "BackCuffs",
                 BackElbowTouch: "Hide",

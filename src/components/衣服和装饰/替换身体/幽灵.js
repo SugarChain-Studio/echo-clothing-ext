@@ -234,7 +234,7 @@ const asset = {
             ParentGroup: "BodyUpper",
             TextureMask: {},
             BlendingMode: "destination-out",
-            PoseMapping: PoseMapTool.FromTopHide({
+            PoseMapping: PoseMapTool.fromTopHide({
                 BaseUpper: "",
                 TapedHands: "TapedHands",
             }),

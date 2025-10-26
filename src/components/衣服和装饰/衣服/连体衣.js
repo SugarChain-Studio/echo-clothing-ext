@@ -10,12 +10,12 @@ const asset = {
     Priority: 14,
     DynamicGroupName: "Suit",
     Layer: [
-        { Name: "1", PoseMapping: PoseMapTool.HideFullBody({ Hogtied: "Hogtied" }) },
-        { Name: "2", PoseMapping: PoseMapTool.HideFullBody() },
-        { Name: "3", PoseMapping: PoseMapTool.HideFullBody() },
-        { Name: "4", PoseMapping: PoseMapTool.HideFullBody() },
-        { Name: "5", PoseMapping: PoseMapTool.HideFullBody() },
-        { Name: "6", PoseMapping: PoseMapTool.HideFullBody({ Hogtied: "Hogtied" }) },
+        { Name: "1", PoseMapping: PoseMapTool.hideFullBody({ Hogtied: "Hogtied" }) },
+        { Name: "2", PoseMapping: PoseMapTool.hideFullBody() },
+        { Name: "3", PoseMapping: PoseMapTool.hideFullBody() },
+        { Name: "4", PoseMapping: PoseMapTool.hideFullBody() },
+        { Name: "5", PoseMapping: PoseMapTool.hideFullBody() },
+        { Name: "6", PoseMapping: PoseMapTool.hideFullBody({ Hogtied: "Hogtied" }) },
     ],
 };
 

@@ -82,7 +82,7 @@ const assets = [
                 ParentGroup: "BodyUpper",
                 DynamicGroupName: "Bra",
                 DefaultColor: ["#DDDDDD", "#1C1C1C", "#BBBBBB"],
-                PoseMapping: PoseMapTool.HideFullBody(),
+                PoseMapping: PoseMapTool.hideFullBody(),
                 Layer: [
                     { Name: "l", Priority: 15 },
                     { Name: "bd", CreateLayerTypes: ["m"] },
@@ -146,7 +146,7 @@ const assets = [
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
             Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Typing.screenLayer({ Name: "g", CreateLayerTypes: ["m"] })],
         },
         {
@@ -176,7 +176,7 @@ const assets = [
             DynamicGroupName: "ClothLower",
             DefaultColor: ["#1C1C1C", "#DDDDDD"],
             Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-            PoseMapping: PoseMapTool.HideFullBody(),
+            PoseMapping: PoseMapTool.hideFullBody(),
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "l" },

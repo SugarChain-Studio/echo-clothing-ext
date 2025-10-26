@@ -9,7 +9,7 @@ const asset = {
     Left: 100,
     Top: 180,
     ParentGroup: {},
-    PoseMapping: PoseMapTool.HideFullBody({
+    PoseMapping: PoseMapTool.hideFullBody({
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
     }),
