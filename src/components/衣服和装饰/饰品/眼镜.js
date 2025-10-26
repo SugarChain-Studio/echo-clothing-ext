@@ -87,6 +87,35 @@ const assets = [
             },
         },
     ],
+    [
+        {
+            Name: "墨镜A",
+            Random: false,
+            Left: 190,
+            Top: 80,
+            Layer: [
+                { Name: "垫", CreateLayerTypes: ["typed"] },
+                { Name: "架", CreateLayerTypes: ["typed"] },
+                { Name: "镜", CreateLayerTypes: ["typed"] },
+            ],
+        },
+        {
+            translation: { CN: "飞行员墨镜", EN: "Aviator Sunglasses" },
+            layerNames: {
+                CN: { 垫: "鼻垫", 架: "镜架", 镜: "镜片" },
+                EN: { 垫: "Pad", 架: "Frame", 镜: "Lens" },
+            },
+            extended: {
+                Archetype: ExtendedArchetype.TYPED,
+                DrawImages: false,
+                Options: [{ Name: "Down" }, { Name: "Up", Property: { OverridePriority: 56 } }],
+            },
+            assetStrings: {
+                CN: { Select: "选择墨镜佩戴方式", Down: "戴好", Up: "挂头顶" },
+                EN: { Select: "Select Sunglasses Wearing Style", Down: "Worn", Up: "On Head" },
+            },
+        },
+    ],
 ];
 
 export default function () {
