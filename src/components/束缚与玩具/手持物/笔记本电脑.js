@@ -25,6 +25,7 @@ const asset = [
         Left: { "": 160, "Yoked": 10 },
         Top: { "": 300, "Yoked": 130 },
         Difficulty: -10,
+        IsRestraint: false,
         ParentGroup: {},
         PoseMapping: { ...AssetPoseMapping.ItemHandheld, Yoked: "Yoked" },
         Layer: [

@@ -11,6 +11,7 @@ const asset = [
         Top: 180,
         Difficulty: -10,
         Priority: 35,
+        IsRestraint: false,
         DynamicGroupName: "ItemHandheld",
         ParentGroup: {},
         DefaultColor: [

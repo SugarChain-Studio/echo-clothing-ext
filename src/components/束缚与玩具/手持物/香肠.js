@@ -8,6 +8,7 @@ const asset = {
     Left: 160,
     Top: 300,
     Difficulty: -10,
+    IsRestraint: false,
     ParentGroup: {},
     Priority: 55,
     InheritPoseMappingFields: true,
