@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../lib";
 
 /** @type {AssetLayerDefinition} */
 const propsS = {
@@ -41,20 +42,51 @@ const asset = [
         PoseMapping: {},
         Fetish: ["Latex", "Forniphilia"],
         Effect: [E.Leash],
-        DefaultColor: ["#111111", "#FFFFFF"],
+        DefaultColor: ["#111111", "#FFFFFF", "#111111", "#FFFFFF"],
         Layer: [
-            ...["base", "hlight"].flatMap((s) => [
-                { Name: `s_${s}`, ...propsS, AllowTypes: { typed: [0, 1] } },
-                { Name: `t_${s}`, ...propsT, CopyLayerColor: `s_${s}`, AllowTypes: { typed: [0, 2] } },
-                { Name: `af_${s}`, ...propsAf, CopyLayerColor: `s_${s}`, AllowTypes: { typed: [0, 2] } },
-            ]),
+            ...Typing.layerMap(
+                [
+                    { Name: "s_base", ColorGroup: "base" },
+                    { Name: "s_hlight", ColorGroup: "hlight" },
+                ],
+                (l) => ({
+                    ...propsS,
+                    ...l,
+                    AllowTypes: { typed: [0, 1] },
+                })
+            ),
+            ...Typing.layerMap(
+                [
+                    { Name: "t_base", ColorGroup: "base" },
+                    { Name: "t_hlight", ColorGroup: "hlight" },
+                ],
+                (l) => ({
+                    ...propsT,
+                    ...l,
+                    AllowTypes: { typed: [0, 2] },
+                })
+            ),
+            ...Typing.layerMap([{ Name: "af_base" }, { Name: "af_hlight" }], (l) => ({
+                ...propsAf,
+                CopyLayerColor: `t_${l.Name.substring(3)}`,
+                ...l,
+                AllowTypes: { typed: [0, 2] },
+            })),
         ],
     },
     {
         translation: { CN: "玩偶把手", EN: "Doll Handle" },
         layerNames: {
-            CN: { s_base: "色调", s_hlight: "高光" },
-            EN: { s_base: "Tone", s_hlight: "Highlight" },
+            CN: {
+                base: "色调",
+                hlight: "高光",
+                ...Typing.stringEntries([["s_base", "s_hlight"], "肩"], [["t_base", "t_hlight"], "髋"]),
+            },
+            EN: {
+                base: "Tone",
+                hlight: "Highlight",
+                ...Typing.stringEntries([["s_base", "s_hlight"], "Shoulder"], [["t_base", "t_hlight"], "Hip"]),
+            },
         },
         extended: {
             Archetype: ExtendedArchetype.TYPED,
