@@ -227,6 +227,7 @@ const asset = {
         { Name: "橙汁", AllowTypes: { lkls: 12 } },
         { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
         { Name: "MIZU", AllowTypes: { lkls: 14 } },
+        { Name: "暖海", AllowTypes: { lkls: 15 } },
 
         // Celestial Enchants
         { Name: "Celiko", AllowTypes: { ce: 1 } },
@@ -299,6 +300,11 @@ const asset = {
         { Name: "Sunny2", AllowTypes: { yyw: 1 } },
         { Name: "月诺诺", AllowTypes: { yyw: 2 } },
 
+        // Gugugaga
+        { Name: "白木", AllowTypes: { gggg: 1 } },
+        { Name: "KocO", AllowTypes: { gggg: 2 } },
+        { Name: "N", AllowTypes: { gggg: 3 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -350,6 +356,7 @@ const asset = {
         { Name: "Kiki", AllowTypes: { l: 40 } },
         { Name: "YL", AllowTypes: { l: 41 } },
         { Name: "殘楓", AllowTypes: { l: 42 } },
+        { Name: "幽玉", AllowTypes: { l: 43 } },
     ],
 };
 
@@ -380,6 +387,7 @@ const typeNameNext = {
     nest: "Nest",
     pen: "1563",
     yyw: "鸭鸭窝",
+    gggg: "Gugugaga",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
