@@ -162,7 +162,7 @@ const asset = {
         { Name: "幽灵", AllowTypes: { yytc: 3 } },
         { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
         { Name: "小沫", AllowTypes: { yytc: 5 } },
-        { Name: "Sive", AllowTypes: { l: 43 } },
+        { Name: "Sive", AllowTypes: { yytc: 6 } },
         { Name: "40", AllowTypes: { yytc: 7 } },
         { Name: "焦糖", AllowTypes: { yytc: 8 } },
         { Name: "早紀", AllowTypes: { yytc: 9 } },
