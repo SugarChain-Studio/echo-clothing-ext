@@ -185,16 +185,7 @@ const upper = [
             Archetype: ExtendedArchetype.TYPED,
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
-            ScriptHooks: {
-                Draw: (data, origin) => {
-                    origin();
-                    itemDialog.draw(data);
-                },
-                Click: (data, origin) => {
-                    origin();
-                    itemDialog.click(data);
-                },
-            },
+            ScriptHooks: itemDialog.createHooks(),
         },
         assetStrings: {
             CN: { Select: "选择是否有手套", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },
@@ -223,16 +214,7 @@ const lower = [
             Archetype: ExtendedArchetype.TYPED,
             DrawImages: false,
             Options: [{ Name: "无" }, { Name: "有" }],
-            ScriptHooks: {
-                Draw: (data, origin) => {
-                    origin();
-                    itemDialog.draw(data);
-                },
-                Click: (data, origin) => {
-                    origin();
-                    itemDialog.click(data);
-                },
-            },
+            ScriptHooks: itemDialog.createHooks(),
         },
         assetStrings: {
             CN: { Select: "选择是否有袜子", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },

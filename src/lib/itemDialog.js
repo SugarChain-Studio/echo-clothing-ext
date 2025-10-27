@@ -30,15 +30,29 @@ class DialogButtons {
      * @typedef {(data:DataType, item: Item, character: Character) => void} CallbackType
      */
 
+    /**
+     * @typedef {(original: ()=>void, data:DataType, item: Item, character: Character) => void} CallbackWithOriginalType
+     */
+
     constructor() {
+        /** @private */
         this._buttons = /** @type {ItemDialog.ButtonConfig<DataType>[]} */ ([]);
+        /** @private */
         this._params = /** @type {ItemDialog.ParameterConfig<DataType>[]} */ ([]);
+        /** @private */
         this._texts = /** @type {ItemDialog.TextConfig<DataType>[]} */ ([]);
+        /** @private */
         this._checkboxes = /** @type {ItemDialog.CheckBoxConfig<DataType>[]} */ ([]);
 
-        this._draw = /** @type {CallbackType | undefined} */ (undefined);
-        this._load = /** @type {CallbackType | undefined} */ (undefined);
-        this._exit = /** @type {CallbackType | undefined} */ (undefined);
+        /** @private */
+        this._ondraw = /** @type {CallbackType | undefined} */ (undefined);
+        /** @private */
+        this._onload = /** @type {CallbackType | undefined} */ (undefined);
+        /** @private */
+        this._onexit = /** @type {CallbackType | undefined} */ (undefined);
+
+        /** @private */
+        this._overrideClickExit = /** @type {CallbackWithOriginalType | undefined} */ (undefined);
     }
 
     /** @param {ItemDialog.ButtonConfig<DataType>[]} buttons */
@@ -69,11 +83,14 @@ class DialogButtons {
      * @param {CallbackType} draw
      */
     onDraw(draw) {
-        this._draw = draw;
+        this._ondraw = draw;
     }
 
-    /** @param {DataType} data*/
-    draw(data) {
+    /**
+     * @private
+     * @param {DataType} data
+     */
+    _draw(data) {
         const chara = CharacterGetCurrent();
         const item = DialogFocusItem;
         if (!item || !chara) return;
@@ -142,14 +159,24 @@ class DialogButtons {
         MainCanvas.textBaseline = oldBaseline;
         MainCanvas.textAlign = oldAlign;
 
-        this._draw?.(data, item, chara);
+        this._ondraw?.(data, item, chara);
     }
 
-    /** @param {DataType} data*/
-    click(data) {
+    /**
+     * @private
+     * @param {DataType} data
+     * @param {()=>void} original
+     */
+    _click(data, original) {
         const chara = CharacterGetCurrent();
         const item = DialogFocusItem;
         if (!item || !chara) return;
+
+        if (this._overrideClickExit && MouseIn(1885, 25, 90, 90)) {
+            this._overrideClickExit(original, data, item, chara);
+        } else {
+            original();
+        }
 
         const ctx = { data, item, chara };
 
@@ -213,30 +240,51 @@ class DialogButtons {
     }
 
     /**
-     * @param {Object} arg0
-     * @param {CallbackType} [arg0.load]
-     * @param {CallbackType} [arg0.exit]
+     * @private
+     * @param {DataType} data
      */
-    onLoadExit({ load, exit }) {
-        this._load = load;
-        this._exit = exit;
-    }
-
-    /** @param {DataType} data*/
-    load(data) {
+    _load(data) {
         const C = CharacterGetCurrent();
         const Item = DialogFocusItem;
         if (!Item || !C) return;
-        this._load?.(data, Item, C);
+        this._onload?.(data, Item, C);
     }
 
-    /** @param {DataType} data*/
-    exit(data) {
+    /**
+     * @private
+     * @param {DataType} data
+     */
+    _exit(data) {
         const C = CharacterGetCurrent();
         const Item = DialogFocusItem;
         if (!Item || !C) return;
-        this._exit?.(data, Item, C);
+        this._onexit?.(data, Item, C);
     }
+
+    /**
+     * @param {CallbackType} load
+     */
+    onLoad(load) {
+        this._onload = load;
+        return this;
+    }
+
+    /**
+     * @param {CallbackType} exit
+     */
+    onExit(exit) {
+        this._onexit = exit;
+        return this;
+    }
+
+    /**
+     * @param {CallbackWithOriginalType} clickExit
+     */
+    overrideClickExit(clickExit) {
+        this._overrideClickExit = clickExit;
+        return this;
+    }
+
     /**
      * @param {("Load" | "Exit" |"Draw"|"Click")[]} [keys] 要启用的hook名称，默认为["Click", "Draw"]
      * @param {ExtendedItemCapsScriptHooksStruct<DataType, any>} [base] 基础hook
@@ -252,13 +300,13 @@ class DialogButtons {
             hooks[key] = (() => {
                 switch (key) {
                     case "Load":
-                        return originThen((data) => this.load(data));
+                        return originThen((data) => this._load(data));
                     case "Exit":
-                        return originThen((data) => this.exit(data));
+                        return originThen((data) => this._exit(data));
                     case "Click":
-                        return originThen((data) => this.click(data));
+                        return (data, original) => this._click(data, original);
                     case "Draw":
-                        return originThen((data) => this.draw(data));
+                        return originThen((data) => this._draw(data));
                     default:
                         return () => {};
                 }
