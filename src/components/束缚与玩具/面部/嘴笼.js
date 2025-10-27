@@ -12,6 +12,7 @@ const asset = {
     Time: 20,
     AllowLock: true,
     AllowTighten: true,
+    DynamicGroupName: "ItemMouth",
     Effect: [E.BlockMouth, E.ProtrudingMouth],
     DefaultColor: ["Default", "Default", "#DADADA", "#191919", "Default", "Default"],
     Layer: [
