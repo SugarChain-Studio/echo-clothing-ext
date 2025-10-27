@@ -37,7 +37,7 @@ jobs:
           DRY_RUN: true
           WITH_V: true
           DEFAULT_BUMP: ${{ github.ref_name == 'release' && 'minor' || 'patch' }}
-          RELEASE_BRANCHES: "release,beta,main"
+          RELEASE_BRANCHES: "release"
           PRERELEASE_SUFFIX: "beta"
           PRERELEASE: ${{ github.ref_name != 'release' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
