@@ -7,6 +7,7 @@ const asset = [
         Name: "Luzi_MMelodia",
         Left: 230,
         Top: 50,
+        Random: false,
         ParentGroup: {},
         PoseMapping: {},
         DynamicGroupName: "HairAccessory1",
