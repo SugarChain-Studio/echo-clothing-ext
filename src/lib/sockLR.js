@@ -2,17 +2,23 @@ import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
 import { cachePreloadGL } from "./cachePreload";
 
-const blackFill = (() => {
+const blackFill = "luzi-canvas://half-black-fill";
+
+const vp = AssetManager.imageMapping.createVirtualPath("luzi-canvas://half-black-fill");
+
+new Promise((resolve) => {
     const canvas = document.createElement("canvas");
     canvas.width = 250;
     canvas.height = 1000;
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL();
-})();
-
-cachePreloadGL(blackFill);
+    canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        vp.resolve(url);
+        resolve();
+    });
+}).then(() => cachePreloadGL(blackFill));
 
 const topLeft = /** @type {const} */ ({
     SocksLeft: { Top: 0, Left: { "": 0, "KneelingSpread": 30 } },
@@ -35,14 +41,12 @@ export class LRTool {
 
         const maskName = `Mask${asset.Name}`;
 
-        const imageMap = /** @type {AssetGroupName[]}*/ (
-            asset.DynamicGroupName ? [asset.DynamicGroupName] : [group]
-        ).reduce((pv, cv) => {
-            pv[ImageMapTools.assetLayer(cv, `${asset.Name}_${maskName}`)] = blackFill;
-            return pv;
-        }, {});
-
-        AssetManager.addImageMapping(imageMap);
+        vp.map(
+            ImageMapTools.assetLayer(
+                asset.DynamicGroupName ? asset.DynamicGroupName : group,
+                `${asset.Name}_${maskName}`
+            )
+        );
 
         return /** @type {[["SocksLeft", CustomAssetDefinition], ["SocksRight", CustomAssetDefinition]]} */ (
             /** @type {["SocksLeft", "SocksRight"]}*/ (["SocksLeft", "SocksRight"]).map((grp) => {
@@ -67,11 +71,11 @@ export class LRTool {
      * @param { {key:string, Left:number, Right:number} } type
      */
     static createLRConfig(group, asset, type) {
-        const imgMap = /** @type {Record<string, string>} */ ({});
+        const imgMap = [];
 
         for (const side of /** @type {const} */ (["Left", "Right"])) {
             const layerName = `Mask${side}`;
-            imgMap[ImageMapTools.assetLayer(group, `${asset.Name}_${layerName}`)] = blackFill;
+            imgMap.push(ImageMapTools.assetLayer(group, `${asset.Name}_${layerName}`));
             asset.Layer.push({
                 Name: layerName,
                 ...topLeft[side],
@@ -83,6 +87,6 @@ export class LRTool {
             });
         }
 
-        AssetManager.addImageMapping(imgMap);
+        vp.map(imgMap);
     }
 }
