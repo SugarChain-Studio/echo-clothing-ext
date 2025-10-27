@@ -2,8 +2,6 @@ import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
 import { cachePreloadGL } from "./cachePreload";
 
-const blackFill = "luzi-canvas://half-black-fill";
-
 const vp = AssetManager.imageMapping.createVirtualPath("luzi-canvas://half-black-fill");
 
 new Promise((resolve) => {
@@ -16,9 +14,9 @@ new Promise((resolve) => {
     canvas.toBlob((blob) => {
         const url = URL.createObjectURL(blob);
         vp.resolve(url);
-        resolve();
+        resolve(url);
     });
-}).then(() => cachePreloadGL(blackFill));
+}).then((url) => cachePreloadGL(url));
 
 const topLeft = /** @type {const} */ ({
     SocksLeft: { Top: 0, Left: { "": 0, "KneelingSpread": 30 } },
