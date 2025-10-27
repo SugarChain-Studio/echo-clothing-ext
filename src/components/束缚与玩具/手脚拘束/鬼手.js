@@ -29,7 +29,7 @@ const asset = [
                     {
                         Name: "B1",
                         CopyLayerColor: "B2",
-                        ...PoseMapTool.LayerConfig(true, [], ["BackElbowTouch"]),
+                        ...PoseMapTool.layerConfig(true, [], ["BackElbowTouch"]),
                     },
                 ],
             },

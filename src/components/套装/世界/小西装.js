@@ -18,9 +18,9 @@ const asset = [
             PoseMapping: PoseMapTool.config(["Yoked", "OverTheHead"], ["AllFours"]),
             Layer: [
                 { Name: "A1", ColorGroup: "衬衫" },
-                { Name: "A2", ColorGroup: "衬衫", ...PoseMapTool.LayerConfig(true, [], ["Hogtied"]) },
+                { Name: "A2", ColorGroup: "衬衫", ...PoseMapTool.layerConfig(true, [], ["Hogtied"]) },
                 { Name: "B1", ColorGroup: "衬衫" },
-                { Name: "B2", ColorGroup: "衬衫", ...PoseMapTool.LayerConfig(true, [], ["Hogtied"]) },
+                { Name: "B2", ColorGroup: "衬衫", ...PoseMapTool.layerConfig(true, [], ["Hogtied"]) },
                 { Name: "扣子", ParentGroup: {}, PoseMapping: { Hogtied: "Hide" } },
                 { Name: "领带", PoseMapping: {}, AllowTypes: { t: 0 } },
             ],

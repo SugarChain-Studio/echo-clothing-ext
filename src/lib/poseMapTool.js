@@ -52,6 +52,25 @@ const Constants = {
 };
 
 /**
+ * @typedef { ((keyof AssetPoseMapping)[]) | "FullBody" | "All" } PoseConfig
+ */
+
+/**
+ *
+ * @param { PoseConfig } hides
+ * @returns {(keyof AssetPoseMapping)[]}
+ */
+function transformHides(hides) {
+    if (hides === "FullBody") {
+        return ["AllFours", "Hogtied"];
+    }
+    if (hides === "All") {
+        return /** @type {AssetPoseName[]}*/ (Object.keys(Constants.PoseHideAll));
+    }
+    return hides;
+}
+
+/**
  * 姿势映射工具类
  */
 export class PoseMapTool {
@@ -118,7 +137,7 @@ export class PoseMapTool {
      * const poseMapping = PoseMapTool.Config(["AllFours", "Hogtied"], ["BackBoxTie"]);
      *
      * @param  {(keyof AssetPoseMapping)[]} poses 需要配置有独特路径的姿势
-     * @param  {(keyof AssetPoseMapping)[]} [hides] 需要隐藏的姿势
+     * @param  {PoseConfig} [hides] 需要隐藏的姿势
      * @param {AssetPoseMapping} [base] 用于扩展的基础姿势映射
      * @returns {AssetPoseMapping}
      */
@@ -128,7 +147,7 @@ export class PoseMapTool {
             ret[p] = p;
         }
         if (hides) {
-            for (const h of hides) {
+            for (const h of transformHides(hides)) {
                 ret[h] = PoseType.HIDE;
             }
         }
@@ -144,11 +163,11 @@ export class PoseMapTool {
      * const poseMapping = PoseMapTool.Config(["AllFours", "Hogtied"], ["BackBoxTie"]);
      * @param {boolean} inherit 是否继承父级的 PoseMapping 字段
      * @param  {(keyof AssetPoseMapping)[]} poses 需要配置有独特路径的姿势
-     * @param  {(keyof AssetPoseMapping)[]} [hides] 需要隐藏的姿势
+     * @param  {PoseConfig} [hides] 需要隐藏的姿势
      * @param {AssetPoseMapping} [base] 用于扩展的基础姿势映射
      * @returns {Pick<AssetLayerDefinition, "PoseMapping" | "InheritPoseMappingFields">}
      */
-    static LayerConfig(inherit, poses, hides, base) {
+    static layerConfig(inherit, poses, hides, base) {
         return {
             InheritPoseMappingFields: inherit,
             PoseMapping: PoseMapTool.config(poses, hides, base),
