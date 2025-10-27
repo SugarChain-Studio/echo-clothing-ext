@@ -1,11 +1,6 @@
 name: Deploy Versioning Test
 
 on:
-  push:
-    branches:
-      - main
-      - beta
-      - release
   workflow_dispatch:
 
 permissions:
