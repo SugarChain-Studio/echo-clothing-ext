@@ -1,6 +1,11 @@
 name: Deploy Versioning Test
 
 on:
+  push:
+    branches:
+      - main
+      - beta
+      - release
   workflow_dispatch:
 
 permissions:
@@ -32,11 +37,11 @@ jobs:
 
       - name: Bump version and push tag
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          dry_run: "true"
-          release_branches: "release"
-          pre_release_branches: "beta,main"
-          append_to_pre_release_tag: "beta"
-          default_prerelease_bump: "prerelease"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        uses: anothrNick/github-tag-action@v1
+        env:
+          DRY_RUN: true
+          DEFAULT_BUMP: ${{ github.ref_name == 'release' && 'minor' || 'patch' }}
+          RELEASE_BRANCHES: "release,beta,main"
+          PRERELEASE_SUFFIX: "beta"
+          PRERELEASE: ${{ github.ref_name != 'release' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
