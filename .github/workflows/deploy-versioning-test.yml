@@ -32,13 +32,16 @@ jobs:
 
       - name: Bump version and push tag
         id: tag_version
-        uses: anothrNick/github-tag-action@v1
-        env:
-          DRY_RUN: true
-          WITH_V: true
-          DEFAULT_BUMP: "minor"
-          RELEASE_BRANCHES: "release"
-          PRERELEASE_SUFFIX: "beta"
-          TAG_CONTEXT: "branch"
-          PRERELEASE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          release_branches: "release"
+          pre_release_branches: "beta"
+          append_to_pre_release_tag: "beta"
+          custom_release_rules: "adjust:minor:Adjustments"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output the changelog
+        run: |
+          echo "New version: ${{ steps.tag_version.outputs.new_tag }}"
+          echo "Previous version: ${{ steps.tag_version.outputs.previous_tag }}"
+          echo "Changelog generated: ${{ steps.tag_version.outputs.changelog }}"
