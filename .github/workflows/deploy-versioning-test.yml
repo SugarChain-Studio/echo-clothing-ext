@@ -34,10 +34,28 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
+          dry_run: true
           release_branches: "release"
           pre_release_branches: "beta,main"
           append_to_pre_release_tag: "beta"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Change Log and Page
+        run: |
+          git tag | grep 'beta' | xargs -r git tag -d
+          pnpm changelog 
+          pnpm changelog:page
+          git fetch --tags
+
+      - name: Display CHANGELOG.md
+        run: cat CHANGELOG.md
+
+      - name: Checkout release
+        uses: actions/checkout@v4
+        with:
+          ref: release
+          submodules: "recursive"
+          fetch-depth: 0
 
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
@@ -53,4 +71,5 @@ jobs:
           echo "Version: $version" >> temp.txt
           echo "$changelog" >> temp.txt
 
-          cat temp.txt
+      - name: Display changelog info
+        run: cat temp.txt
