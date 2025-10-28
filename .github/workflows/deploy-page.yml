@@ -129,7 +129,7 @@ jobs:
       - name: Generate changelog info and set to output
         id: changelog
         run: |
-          changelog=$(conventional-changelog -p angular -r 2 | sed '1,6d')
+          changelog=$(conventional-changelog -n ./scripts/.changelog-config.mjs -r 2 | sed '1,6d')
           version=$(git describe --tags --abbrev=0)
           name=$(node ./scripts/.package-props.js displayName)
 
