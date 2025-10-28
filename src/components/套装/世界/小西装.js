@@ -13,7 +13,6 @@ const asset = [
             Top: 210,
             Priority: 27,
             DynamicGroupName: "Cloth",
-            DefaultColor: ["Default", "Default", "Default", "Default", "#333333"],
             Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
             PoseMapping: PoseMapTool.config(["Yoked", "OverTheHead"], ["AllFours"]),
             Layer: [
@@ -74,7 +73,6 @@ const asset = [
             ),
             Priority: 27,
             DynamicGroupName: "Cloth",
-            DefaultColor: ["Default", "Default", "Default", "Default", "#333333"],
             Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
             PoseMapping: PoseMapTool.config(
                 ["Yoked", "OverTheHead", "Hogtied", "BackBoxTie", "BackElbowTouch", "BackCuffs"],
@@ -98,7 +96,7 @@ const asset = [
                     B1: "R. Sleeve",
                     B2: "R. Lapel",
                     C1: "Inner Liner",
-                    Suit: "Suit",
+                    西装: "Suit",
                 },
             },
         },
