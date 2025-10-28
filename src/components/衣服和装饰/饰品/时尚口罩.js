@@ -13,7 +13,6 @@ const asset = {
     DynamicGroupName: "Mask",
     IsRestraint: false,
     DefaultColor: ["Default", "Default", "Default", "#000000"],
-    Hide: ["Mouth"],
     Layer: [
         { Name: "1", AllowTypes: { c: 0, w: 0 } },
         { Name: "2", CopyLayerColor: "1", AllowTypes: { c: 0, w: 1 } },
@@ -90,7 +89,7 @@ export default function () {
                     Archetype: "modular",
                     ChatTags: Tools.CommonChatTags(),
                     Modules: [
-                        { Name: "戴好", Key: "w", Options: [{}, {}] },
+                        { Name: "戴好", Key: "w", Options: [{ Property: { Hide: ["Mouth"] } }, {}] },
                         { Name: "颜色", Key: "c", Options: [{}, {}, {}] },
                     ],
                 },
@@ -105,7 +104,11 @@ export default function () {
                     Archetype: "modular",
                     ChatTags: Tools.CommonChatTags(),
                     Modules: [
-                        { Name: "戴好", Key: "w", Options: [{ Property: { Effect: [E.BlockMouth] } }, {}] },
+                        {
+                            Name: "戴好",
+                            Key: "w",
+                            Options: [{ Property: { Effect: [E.BlockMouth], Hide: ["Mouth"] } }, {}],
+                        },
                         { Name: "颜色", Key: "c", Options: [{}, {}, {}] },
                     ],
                 },
