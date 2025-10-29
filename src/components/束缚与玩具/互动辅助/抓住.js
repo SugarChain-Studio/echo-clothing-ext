@@ -20,6 +20,11 @@ const assets = [
         translation: { CN: "抓住行李箱", EN: "Grabbed Luggage" },
         previewSrc: ImageMapTools.assetPreview("ItemDevices", "行李箱"),
     },
+    {
+        name: "抓住硬壳行李箱",
+        translation: { CN: "抓住硬壳行李箱", EN: "Grabbed Hard-Shell Luggage" },
+        previewSrc: ImageMapTools.assetPreview("ItemDevices", "硬壳行李箱"),
+    },
 ];
 
 const asset = {
