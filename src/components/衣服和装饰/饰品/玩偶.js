@@ -419,6 +419,7 @@ const predefDialog = {
         Setxppjb11: "天空一声巨响！依依玩偶闪亮登场！缓缓落在了DestinationCharacter怀里.",
         Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
+        Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶",
     },
 };
 
@@ -480,7 +481,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
     return pv;
-}, /** @type { Record<string, Number> } */ ({}));
+}, /** @type { Record<string, Number> } */({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -502,7 +503,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     pv[k] ??= {};
     pv[k][cv.AllowTypes[k]] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -542,7 +543,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
