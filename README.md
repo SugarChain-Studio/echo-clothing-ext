@@ -23,7 +23,7 @@ This mod introduces various enhancements to the game, including additional cloth
 })();
 ```
 
-wiki: https://github.com/emdsa2/-mod/wiki
+wiki: <https://github.com/emdsa2/-mod/wiki>
 
 
 ## Add-on Menu Overview
@@ -64,4 +64,8 @@ All the new clothing, binding, and wardrobe slots are invisible to those who don
 
 ## 额外的服装槽位 和 一些bug😶
 
-Discord：https://discord.gg/K9YnNqsNKx
+Discord：<https://discord.gg/K9YnNqsNKx>
+
+## 开发者指南
+
+- 开发环境与本地调试、物品定义示例、提交信息与 Tag 规范：参见 `docs/dev_guide.md`
