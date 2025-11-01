@@ -11,7 +11,7 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
  */
 
 /** @type {ChatRoomRemoteEventEmitter<LuggageEvent>} */
-const handler = new ChatRoomRemoteEventEmitter("EchoClothingExt@LuggageHandler");
+export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@LuggageHandler");
 
 const dialog = createItemDialogModular([
     {
@@ -24,24 +24,31 @@ const dialog = createItemDialogModular([
                 Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
             ),
         onclick: ({ chara }) => {
-            handler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+            luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
         },
         leaveDialog: true,
         actionKey: "抓住箱子动作",
     },
 ]);
 
-handler.on("grabLuggage", ({ senderCharacter }, { Sender, Target }) => {
+const luggagePairItemMap = {
+    行李箱: "抓住行李箱",
+    硬壳行李箱: "抓住硬壳行李箱",
+};
+
+luggageHandler.on("grabLuggage", ({ senderCharacter }, { Sender, Target }) => {
     if (Target === Player.MemberNumber) {
         if (!ServerChatRoomGetAllowItem(senderCharacter, Player)) return;
         Tools.findCharacter("SourceC", Sender)
-            .then(() => AssetGet("Female3DCG", "ItemDevices", "行李箱"))
+            .then(() => InventoryGet(Player, "ItemDevices")?.Asset)
             .then((asset, { SourceC }) => {
                 ChatRoomOrderTools.wearAndPair(Player, asset, { nextCharacter: SourceC.MemberNumber }, "follow");
             });
     } else if (Sender === Player.MemberNumber) {
         Tools.findCharacter("TargetC", Target)
-            .then(() => AssetGet("Female3DCG", "ItemMisc", "抓住行李箱"))
+            .then((target) => InventoryGet(target, "ItemDevices")?.Asset)
+            .then((asset) => luggagePairItemMap[asset.Name])
+            .then((name) => AssetGet("Female3DCG", "ItemMisc", name))
             .then((asset, { TargetC }) => {
                 ChatRoomOrderTools.wearAndPair(Player, asset, { prevCharacter: TargetC.MemberNumber }, "lead");
             });

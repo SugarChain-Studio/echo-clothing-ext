@@ -1,49 +1,26 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 import { createItemDialogModular } from "../../lib";
-import { ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
-
-/**
- * @typedef {Object} LuggageEvent
- * @property {[{Sender:number,Target:number}]} grabLuggage2
- */
-
-/** @type {ChatRoomRemoteEventEmitter<LuggageEvent>} */
-const handler = new ChatRoomRemoteEventEmitter("EchoClothingExt@LuggageHandler");
+import { DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
+import { luggageHandler } from "./行李箱";
 
 const dialog = createItemDialogModular([
     {
         location: { x: 1385, y: 650, w: 225, h: 55 },
         key: "抓住箱子",
-        show: ({ data, chara }) => data.currentModule === "Base" && (chara.MemberNumber !== Player.MemberNumber),
+        show: ({ data, chara }) => data.currentModule === "Base" && chara.MemberNumber !== Player.MemberNumber,
         enable: ({ chara }) =>
-            (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) && 
-            ((item) => !item || item.Asset.Name === "抓住硬壳行李箱" )(Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")),
+            (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
+            ((item) => !item || item.Asset.Name === "抓住硬壳行李箱")(
+                Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
+            ),
         onclick: ({ chara }) => {
-            handler.emitAll("grabLuggage2", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+            luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
         },
         leaveDialog: true,
         actionKey: "抓住箱子动作",
     },
 ]);
-
-handler.on("grabLuggage2", ({ senderCharacter }, { Sender, Target }) => {
-    if (Target === Player.MemberNumber) {
-        if (!ServerChatRoomGetAllowItem(senderCharacter, Player)) return;
-        Tools.findCharacter("SourceC", Sender)
-            .then(() => AssetGet("Female3DCG", "ItemDevices", "硬壳行李箱"))
-            .then((asset, { SourceC }) => {
-                ChatRoomOrderTools.wearAndPair(Player, asset, { nextCharacter: SourceC.MemberNumber }, "follow");
-            });
-    } else if (Sender === Player.MemberNumber) {
-        Tools.findCharacter("TargetC", Target)
-            .then(() => AssetGet("Female3DCG", "ItemMisc", "抓住硬壳行李箱"))
-            .then((asset, { TargetC }) => {
-                ChatRoomOrderTools.wearAndPair(Player, asset, { prevCharacter: TargetC.MemberNumber }, "lead");
-            });
-    }
-});
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
 function beforeDraw(data, original, { L, Property }) {
@@ -115,18 +92,18 @@ const assets = [
         translation: { CN: "硬壳行李箱", EN: "Hard-shell Luggage" },
         layerNames: {
             CN: {
-                "内衬": "内衬",
-                "箱体": "箱体",
-                "箱盖": "箱盖",
-                "滑轮": "滑轮",
-                "衣物堆": "衣物堆",
+                内衬: "内衬",
+                箱体: "箱体",
+                箱盖: "箱盖",
+                滑轮: "滑轮",
+                衣物堆: "衣物堆",
             },
             EN: {
-                "内衬": "Luggage Lining",
-                "箱体": "Luggage Body",
-                "箱盖": "Luggage Lid",
-                "滑轮": "Wheel",
-                "衣物堆": "Clothing Pile",
+                内衬: "Luggage Lining",
+                箱体: "Luggage Body",
+                箱盖: "Luggage Lid",
+                滑轮: "Wheel",
+                衣物堆: "Clothing Pile",
             },
         },
         extended: {
@@ -134,10 +111,7 @@ const assets = [
             ChatTags: Tools.CommonChatTags(),
             DrawImages: false,
             ChangeWhenLocked: false,
-            ScriptHooks: {
-                ...dialog.createHooks(["Draw", "Click"]),
-                BeforeDraw: beforeDraw,
-            },
+            ScriptHooks: dialog.createHooks(["Draw", "Click"], { BeforeDraw: beforeDraw }),
             Modules: [
                 {
                     Name: "填充衣物",
@@ -148,15 +122,9 @@ const assets = [
                     Name: "行李箱状态",
                     Key: "s",
                     Options: [
-                        {
-                            Property: { Difficulty: 10, Effect: [E.Enclose, E.BlindHeavy, E.Block]},
-                        }, 
-                        {
-                            Property: { Difficulty: 6, Effect: [E.BlindNormal]},
-                        }, 
-                        {
-                            Property: { Difficulty: 6, Effect: [E.BlindLight]},
-                        },
+                        { Property: { Difficulty: 10, Effect: [E.Enclose, E.BlindHeavy, E.Block] } },
+                        { Property: { Difficulty: 6, Effect: [E.BlindNormal] } },
+                        { Property: { Difficulty: 6, Effect: [E.BlindLight] } },
                     ],
                 },
             ],
