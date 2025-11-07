@@ -50,10 +50,10 @@ const asset = {
     Layer: [
         { Name: "base" },
         { Name: "outline" },
-        Typing.screenLayer({ Name: "shade" }),
+        Typing.multiplyLayer({ Name: "shade" }),
         { Name: "line" },
         { Name: "text", Left: 250, Top: 100, HasImage: false },
-        Typing.screenLayer({ Name: "highlight" }),
+        { Name: "highlight" },
     ],
     Alpha: [
         {
@@ -182,12 +182,14 @@ const layerNames = {
         outline: "轮廓",
         line: "线条",
         text: "文字",
+        highlight: "高光",
     },
     EN: {
         base: "Base",
         outline: "Outline",
         line: "Line",
         text: "Text",
+        highlight: "Highlight",
     },
 };
 
