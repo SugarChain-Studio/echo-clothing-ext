@@ -1,4 +1,4 @@
-function Find-BondageCollegeFolder {
+﻿function Find-BondageCollegeFolder {
     param (
         [string]$CurrentPath
     )
