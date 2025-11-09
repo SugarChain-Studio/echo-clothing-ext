@@ -77,4 +77,4 @@ jobs:
 
       - name: Display changelog info
         run: |
-          echo ${{ steps.changelog.outputs.message }}
+          echo "${{ steps.changelog.outputs.message }}"
