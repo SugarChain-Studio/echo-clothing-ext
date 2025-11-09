@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: "recursive"
+          submodules: 'recursive'
           fetch-depth: 0
 
       - name: Install pnpm
@@ -24,8 +24,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: "pnpm"
+          node-version: '22'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -34,10 +34,9 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
-          dry_run: true
-          release_branches: "release"
-          pre_release_branches: "beta,main"
-          append_to_pre_release_tag: "beta"
+          release_branches: 'release'
+          pre_release_branches: 'beta'
+          append_to_pre_release_tag: 'beta'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Change Log and Page
@@ -54,7 +53,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: release
-          submodules: "recursive"
+          submodules: 'recursive'
           fetch-depth: 0
 
       - name: Remove local beta tags
@@ -63,7 +62,7 @@ jobs:
       - name: Generate changelog info and set to output
         id: changelog
         run: |
-          changelog=$(conventional-changelog -n ./scripts/.changelog-config.mjs -r 2 | sed '1,6d')
+          changelog=$(npx conventional-changelog -n ./scripts/.changelog-config.mjs --stdout -r 2 | sed '1,3d')
           version=$(git describe --tags --abbrev=0)
           name=$(node ./scripts/.package-props.js displayName)
 
@@ -72,4 +71,5 @@ jobs:
           echo "$changelog" >> temp.txt
 
       - name: Display changelog info
-        run: cat temp.txt
+        run: |
+          echo {{ steps.changelog.outputs.message }}
