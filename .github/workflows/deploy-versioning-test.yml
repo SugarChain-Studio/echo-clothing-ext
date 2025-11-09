@@ -63,6 +63,8 @@ jobs:
       - name: Generate changelog info and set to output
         id: changelog
         run: |
+          [ -f  CHANGELOG.md ] && rm CHANGELOG.md
+
           changelog=$(pnpm -s changelog:latest-stdout 2>/dev/null | sed '1,3d')
           version=$(git describe --tags --abbrev=0)
           name=$(node ./scripts/.package-props.js displayName)
