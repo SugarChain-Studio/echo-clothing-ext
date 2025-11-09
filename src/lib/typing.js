@@ -2,6 +2,14 @@
 const identity = (arg) => arg;
 
 /**
+ * @template T
+ * @template U
+ * @typedef { (arg0:T, arg1?:Partial<U>) => U } MergeFunction
+ */
+
+const merge = (arg0, arg1) => ({ ...arg0, ...arg1 });
+
+/**
  * @template {string} K
  * @template V
  * @param {Record<K,V>} record
@@ -53,6 +61,10 @@ export const Typing = /** @type {const} */ ({
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
     drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),
     asset: /** @type {(arg:CustomAssetDefinition) => CustomAssetDefinition}*/ (identity),
+
+    assetItem: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/ (merge),
+    assetApp: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/ (merge),
+
     assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
     modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),
     typedItem: /** @type {(arg:TypedItemConfig) => TypedItemConfig}*/ (identity),
