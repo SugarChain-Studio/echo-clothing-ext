@@ -1,5 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { CustomValidate } from "../../../lib";
 
 /**
  * @typedef {Object} HelperAssetDefinition
@@ -31,7 +32,6 @@ const asset = {
     Random: false,
     Visible: false,
     Value: -1, // 使用这个数据来让物品在列表不显示
-    RemoveAtLogin: true,
 };
 
 export default function () {
@@ -47,6 +47,10 @@ export default function () {
     );
 
     AssetManager.addAssetWithConfig("ItemMisc", assetsN);
+
+    for (const a of assets) {
+        CustomValidate.remove("ItemMisc", a.name);
+    }
 
     AssetManager.addImageMapping(
         Object.fromEntries(assets.map((a) => [ImageMapTools.assetPreview("ItemMisc", a.name), a.previewSrc]))

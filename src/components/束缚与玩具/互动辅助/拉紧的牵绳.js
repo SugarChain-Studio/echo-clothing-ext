@@ -1,11 +1,11 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { CustomValidate } from "../../../lib";
 
 const asset = {
     Random: false,
     Visible: false,
     Value: -1, // 使用这个数据来让物品在列表不显示
-    RemoveAtLogin: true,
 };
 
 const assetName = /** @type {const} */ (["拉紧的牵绳_Luzi", "拉紧的链子_Luzi"]);
@@ -38,6 +38,12 @@ const assets = assetName.map(
 
 export default function () {
     AssetManager.addAssetWithConfig(assets);
+
+    for (const g of groups) {
+        for (const a of assetName) {
+            CustomValidate.remove(g, a);
+        }
+    }
 
     AssetManager.addImageMapping(
         Object.fromEntries(

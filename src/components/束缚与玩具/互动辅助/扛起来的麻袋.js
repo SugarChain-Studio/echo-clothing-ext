@@ -1,5 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { CustomValidate } from "../../../lib";
 
 export default function () {
     AssetManager.addAsset(
@@ -9,7 +10,6 @@ export default function () {
             Random: false,
             Visible: false,
             Value: -1, // 使用这个数据来让物品在列表不显示
-            RemoveAtLogin: true,
         },
         undefined,
         {
@@ -18,6 +18,8 @@ export default function () {
             RU: "Несущий мешок",
         }
     );
+
+    CustomValidate.remove("ItemMisc", "扛起来的麻袋_Luzi");
 
     AssetManager.addImageMapping({
         "Assets/Female3DCG/ItemMisc/Preview/扛起来的麻袋_Luzi.png":

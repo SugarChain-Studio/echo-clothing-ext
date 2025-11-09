@@ -36,7 +36,6 @@ const assets = {
             SelfBondage: 0,
             Time: 5,
             RemoveTime: 5,
-            RemoveAtLogin: true,
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             DefaultColor: ["#523629", "#888990", "#808284"],
             RemoveItemOnRemove: [
@@ -67,7 +66,6 @@ const assets = {
             SelfBondage: 0,
             Time: 5,
             RemoveTime: 5,
-            RemoveAtLogin: true,
             Visible: false,
             DefaultColor: ["#523629", "#888990", "#808284"],
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
