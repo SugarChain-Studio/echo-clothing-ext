@@ -57,16 +57,13 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
 
-      - name: Install conventional-changelog
-        run: pnpm add -g conventional-changelog-cli
-
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
 
       - name: Generate changelog info and set to output
         id: changelog
         run: |
-          changelog=$(conventional-changelog -n ./scripts/.changelog-config.mjs --stdout -r 2 | sed '1,3d')
+          changelog=$(pnpm -s changelog:latest-stdout 2>/dev/null | sed '1,6d')
           version=$(git describe --tags --abbrev=0)
           name=$(node ./scripts/.package-props.js displayName)
 
@@ -76,4 +73,4 @@ jobs:
 
       - name: Display changelog info
         run: |
-          echo {{ steps.changelog.outputs.message }}
+          echo ${{ steps.changelog.outputs.message }}
