@@ -50,13 +50,6 @@ jobs:
       - name: Display first 100 lines of CHANGELOG.md
         run: cat CHANGELOG.md | sed -n '1,100p'
 
-      - name: Checkout release
-        uses: actions/checkout@v4
-        with:
-          ref: release
-          submodules: 'recursive'
-          fetch-depth: 0
-
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
 
