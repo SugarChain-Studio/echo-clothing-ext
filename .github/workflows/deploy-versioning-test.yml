@@ -57,6 +57,9 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
 
+      - name: Install conventional-changelog
+        run: pnpm add -g conventional-changelog-cli
+
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
 
