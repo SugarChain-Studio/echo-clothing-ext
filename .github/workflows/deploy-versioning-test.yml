@@ -34,6 +34,7 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
+          dry_run: 'true'
           release_branches: 'release'
           pre_release_branches: 'beta'
           append_to_pre_release_tag: 'beta'
@@ -46,8 +47,8 @@ jobs:
           pnpm changelog:page
           git fetch --tags
 
-      - name: Display CHANGELOG.md
-        run: cat CHANGELOG.md
+      - name: Display first 100 lines of CHANGELOG.md
+        run: cat CHANGELOG.md | sed -n '1,100p'
 
       - name: Checkout release
         uses: actions/checkout@v4
