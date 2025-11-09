@@ -71,6 +71,10 @@ jobs:
           echo "Version: $version" >> temp.txt
           echo "$changelog" >> temp.txt
 
+          echo 'message<<EOF' >> $GITHUB_OUTPUT
+          cat temp.txt >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
       - name: Display changelog info
         run: |
           echo ${{ steps.changelog.outputs.message }}
