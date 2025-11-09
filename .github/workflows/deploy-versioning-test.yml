@@ -63,7 +63,9 @@ jobs:
           name=$(node ./scripts/.package-props.js displayName)
 
           echo "# [$name] New version released!" >> temp.txt
+          echo "" >> temp.txt
           echo "Version: $version" >> temp.txt
+          echo "" >> temp.txt
           echo "$changelog" >> temp.txt
 
           echo 'message<<EOF' >> $GITHUB_OUTPUT

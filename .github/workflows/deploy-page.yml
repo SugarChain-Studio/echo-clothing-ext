@@ -129,12 +129,16 @@ jobs:
       - name: Generate changelog info and set to output
         id: changelog
         run: |
-          changelog=$(conventional-changelog -n ./scripts/.changelog-config.mjs -r 2 | sed '1,3d')
+          [ -f  CHANGELOG.md ] && rm CHANGELOG.md
+
+          changelog=$(pnpm -s changelog:latest-stdout 2>/dev/null | sed '1,3d')
           version=$(git describe --tags --abbrev=0)
           name=$(node ./scripts/.package-props.js displayName)
 
           echo "# [$name] New version released!" >> temp.txt
+          echo "" >> temp.txt
           echo "Version: $version" >> temp.txt
+          echo "" >> temp.txt
           echo "$changelog" >> temp.txt
 
           echo 'message<<EOF' >> $GITHUB_OUTPUT
