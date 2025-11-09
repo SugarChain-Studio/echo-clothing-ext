@@ -13,6 +13,8 @@ type CustomAssetDefinitionAppearance =
 type CustomGroupedAssetDefinitions =
     import('@sugarch/bc-asset-manager').CustomGroupedAssetDefinitions<CustomGroupBodyName>;
 
+type CustomAssetDefinitionBase = import('@sugarch/bc-asset-manager').CustomAssetDefinitionBase<CustomGroupBodyName>;
+
 // src/types/sweetalert2.d.ts
 declare module 'https://cdn.jsdelivr.net/npm/sweetalert2@11.23.0/+esm' {
     import Swal from 'sweetalert2';
