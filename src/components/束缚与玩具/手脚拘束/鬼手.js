@@ -2,6 +2,8 @@ import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { ImmPass, PoseMapTool, PostPass } from "../../../lib";
 
+const CraftGroup = "鬼手";
+
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [
     [
@@ -10,6 +12,7 @@ const asset = [
             {
                 Name: "鬼手A",
                 Random: false,
+                CraftGroup,
                 Left: 50,
                 Top: 40,
                 Time: 5,
@@ -80,6 +83,7 @@ const asset = [
             {
                 Name: "鬼手L",
                 Random: false,
+                CraftGroup,
                 Left: 90,
                 Top: 740,
                 Time: 5,
@@ -113,6 +117,7 @@ const asset = [
             {
                 Name: "鬼手M",
                 Random: false,
+                CraftGroup,
                 Left: 170,
                 Top: 170,
                 Time: 5,
@@ -146,6 +151,7 @@ const asset = [
             {
                 Name: "鬼手E",
                 Random: false,
+                CraftGroup,
                 Left: 160,
                 Top: 130,
                 Time: 5,
@@ -179,6 +185,7 @@ const asset = [
             {
                 Name: "鬼手G",
                 Random: false,
+                CraftGroup,
                 Left: 210,
                 Top: 420,
                 Time: 5,

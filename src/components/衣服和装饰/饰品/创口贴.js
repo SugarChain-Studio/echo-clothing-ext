@@ -1,6 +1,7 @@
 import { AssetManager } from "../../../assetForward";
+import { Typing } from "../../../lib";
 
-/** @type {CustomAssetDefinitionAppearance} */
+/** @type {CustomAssetDefinitionBase} */
 const baseAsset = {
     Name: "创口贴",
     Random: false,
@@ -13,7 +14,7 @@ const baseAsset = {
     ],
 };
 
-/** @type {CustomAssetDefinitionAppearance} */
+/** @type {CustomAssetDefinitionBase} */
 const lowerAsset = {
     Name: "创口贴_下",
     Random: false,
@@ -25,7 +26,7 @@ const lowerAsset = {
     PoseMapping: { AllFours: PoseType.HIDE, Hogtied: PoseType.HIDE },
 };
 
-/** @type {CustomAssetDefinitionAppearance} */
+/** @type {CustomAssetDefinitionBase} */
 const upperAsset = {
     Name: "创口贴",
     Random: false,
@@ -41,14 +42,24 @@ const upperAsset = {
 const translation = { CN: "创口贴", EN: "BandAid" };
 const layerNames = { EN: { 上: "Top", 下: "Bottom" } };
 
+const CraftGroup = "创口贴";
+
 /** @type {AddAssetWithConfigParams[]} */
 const assetN = [
-    ["Suit", baseAsset, { translation, layerNames }],
-    ["Bra", upperAsset, { translation, layerNames }],
-    ["Panties", { ...lowerAsset, Expose: ["ItemVulvaPiercings", "ItemButt"] }, { translation, layerNames }],
-    ["ItemNipples", upperAsset, { translation, layerNames }],
-    ["ItemVulva", lowerAsset, { translation, layerNames }],
-    ["ItemVulvaPiercings", { ...lowerAsset, Block: ["ItemVulva"] }, { translation, layerNames }],
+    ["Suit", Typing.assetApp(baseAsset), { translation, layerNames }],
+    ["Bra", Typing.assetApp(upperAsset), { translation, layerNames }],
+    [
+        "Panties",
+        Typing.assetApp(lowerAsset, { Expose: ["ItemVulvaPiercings", "ItemButt"] }),
+        { translation, layerNames },
+    ],
+    ["ItemNipples", Typing.assetItem(upperAsset, { CraftGroup }), { translation, layerNames }],
+    ["ItemVulva", Typing.assetItem(lowerAsset, { CraftGroup }), { translation, layerNames }],
+    [
+        "ItemVulvaPiercings",
+        Typing.assetItem(lowerAsset, { CraftGroup, Block: ["ItemVulva"] }),
+        { translation, layerNames },
+    ],
 ];
 
 export default function () {
