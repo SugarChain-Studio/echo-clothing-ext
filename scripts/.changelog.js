@@ -5,12 +5,8 @@ const packageJson = require(path.join(process.cwd(), "package.json"));
 
 const fullname = packageJson.modFullName || packageJson.name;
 
-const sourcePath = path.join(
-  process.argv[2] || path.join(process.cwd(), "CHANGELOG.md")
-);
-const targetPath = path.join(
-  process.argv[3] || path.join(process.cwd(), "CHANGELOG.html")
-);
+const sourcePath = path.join(process.argv[2] || path.join(process.cwd(), "CHANGELOG.md"));
+const targetPath = path.join(process.argv[3] || path.join(process.cwd(), "CHANGELOG.html"));
 const cssPath = require.resolve("github-markdown-css");
 
 const changelogFile = fs.readFileSync(sourcePath, "utf8");
@@ -45,6 +41,10 @@ const htmlTemplate = `
 ${htmlContent}
 </body>
 </html>`;
+
+if (!fs.existsSync(path.dirname(targetPath))) {
+    fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+}
 
 fs.writeFileSync(targetPath, htmlTemplate);
 
