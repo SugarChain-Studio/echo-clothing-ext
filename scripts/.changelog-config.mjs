@@ -10,7 +10,8 @@ export default {
             const result = preset.writer.transform(commit, context);
             if (result?.title === "BREAKING CHANGES") return result;
             if (commit.type === "adjust") {
-                return { ...result, type: "Adjustments" };
+                const shortHash = typeof commit.hash === "string" ? commit.hash.substring(0, 7) : commit.shortHash;
+                return { ...result, type: "Adjustments", shortHash };
             }
             return result;
         },
