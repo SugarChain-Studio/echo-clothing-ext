@@ -481,7 +481,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
     return pv;
-}, /** @type { Record<string, Number> } */({}));
+}, /** @type { Record<string, Number> } */ ({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -503,7 +503,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     pv[k] ??= {};
     pv[k][cv.AllowTypes[k]] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -543,7 +543,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
@@ -576,10 +576,10 @@ const enDialog = DialogTools.dialogGenerator(
         option: (option, optionIndex, { Name }) => {
             const layerName = layerNames[`${Name}${optionIndex}`];
             if (!layerName)
-                return { Option: "Empty", Set: "SourceCharacter removes the doll from DestinationCharacter hand." };
+                return { Option: "Empty", Set: "SourceCharacter removes the plushie from DestinationCharacter hand." };
             return {
                 Option: `${layerName}`,
-                Set: `SourceCharacter gives DestinationCharacter a cute ${layerName} doll.`,
+                Set: `SourceCharacter gives DestinationCharacter a cute ${layerName} plushie.`,
             };
         },
     },
