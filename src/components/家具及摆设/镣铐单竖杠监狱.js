@@ -20,6 +20,7 @@ const asset = {
     Effect: [E.Freeze, E.BlockWardrobe, E.Mounted, E.MapImmobile],
     Hide: [],
     ArousalZone: "ItemVulva",
+    Prerequisite: ["CanBaseLower"],
     Layer: [
         {
             Top: 560,
@@ -187,8 +188,8 @@ const extended = {
             Key: "o",
             Options: [
                 { Property: { SetPose: ["BaseLower"] } },
-                { Property: { SetPose: ["LegsClosed"] } },
-                { Property: { SetPose: ["Spread"] } },
+                { Prerequisite: ["CanLegsClosed"], Property: { SetPose: ["LegsClosed"] } },
+                { Prerequisite: ["CanSpread"], Property: { SetPose: ["Spread"] } },
             ],
         },
         {
