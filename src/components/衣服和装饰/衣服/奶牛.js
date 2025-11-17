@@ -1,32 +1,19 @@
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "奶牛_Luzi",
+    Name: "奶牛-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
     Left: 0,
     Prerequisite: ["HasBreasts"],
-    PoseMapping: {
-        TapedHands: PoseType.DEFAULT,
-        Yoked: PoseType.DEFAULT,
-        OverTheHead: PoseType.DEFAULT,
-        BackBoxTie: PoseType.DEFAULT,
-        BackElbowTouch: PoseType.DEFAULT,
-        BackCuffs: PoseType.DEFAULT,
-        AllFours: "Hide",
-        Hogtied: "Hide",
-    },
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
-        {
-            Name: "衣服",
-            Priority: 26,
-        },
-        {
-            Name: "边缘",
-            Priority: 26,
-        },
+        { Name: "衣服", Priority: 26 },
+        { Name: "边缘", Priority: 26 },
     ],
 };
 
@@ -45,4 +32,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
+    luziFixups("Cloth", asset.Name);
 }

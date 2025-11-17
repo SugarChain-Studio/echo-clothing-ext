@@ -1,8 +1,10 @@
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "裙_Luzi",
+    Name: "裙-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
@@ -11,90 +13,17 @@ const asset = {
     SetPose: ["LegsClosed"],
     AllowActivePose: ["Kneel", "LegsClosed"],
     DefaultColor: ["#7F1739", "Default", "Default"],
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
-        {
-            Name: "底面",
-            Priority: 1,
-            ParentGroup: {},
-            PoseMapping: {
-                Kneel: "Kneel",
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上裙子",
-            PoseMapping: {
-                Kneel: PoseType.DEFAULT,
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下裙子",
-            PoseMapping: {
-                Kneel: "Kneel",
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上拉链",
-            PoseMapping: {
-                Kneel: PoseType.DEFAULT,
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下拉链",
-            PoseMapping: {
-                Kneel: "Kneel",
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上亮面",
-            PoseMapping: {
-                Kneel: PoseType.DEFAULT,
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下亮面",
-            PoseMapping: {
-                Kneel: "Kneel",
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "上高光",
-            PoseMapping: {
-                Kneel: PoseType.DEFAULT,
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
-        {
-            Name: "下高光",
-            PoseMapping: {
-                Kneel: "Kneel",
-                LegsClosed: PoseType.DEFAULT,
-                Hogtied: PoseType.HIDE,
-                AllFours: PoseType.HIDE,
-            },
-        },
+        { Name: "底面", Priority: 1, ParentGroup: {}, ...PoseMapTool.layerConfig(true, ["Kneel"]) },
+        { Name: "上裙子" },
+        { Name: "下裙子", ...PoseMapTool.layerConfig(true, ["Kneel"]) },
+        { Name: "上拉链" },
+        { Name: "下拉链", ...PoseMapTool.layerConfig(true, ["Kneel"]) },
+        { Name: "上亮面" },
+        { Name: "下亮面", ...PoseMapTool.layerConfig(true, ["Kneel"]) },
+        { Name: "上高光" },
+        { Name: "下高光", ...PoseMapTool.layerConfig(true, ["Kneel"]) },
     ],
 };
 
@@ -120,4 +49,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
+    luziFixups("ClothLower", asset.Name);
 }

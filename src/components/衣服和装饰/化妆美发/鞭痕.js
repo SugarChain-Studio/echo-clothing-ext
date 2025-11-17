@@ -1,24 +1,17 @@
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "鞭痕_Luzi",
+    Name: "鞭痕-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
     Priority: 10,
     Extended: true,
     ParentGroup: "BodyUpper",
-    PoseMapping: {
-        TapedHands: PoseType.DEFAULT,
-        Yoked: PoseType.DEFAULT,
-        OverTheHead: PoseType.DEFAULT,
-        BackBoxTie: PoseType.DEFAULT,
-        BackElbowTouch: PoseType.DEFAULT,
-        BackCuffs: PoseType.DEFAULT,
-        Hogtied: "Hide",
-        AllFours: "Hide",
-    },
+    PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
         { Name: "1", AllowTypes: { typed: [0, 1, 2, 3, 4, 5, 6, 7] } },
         { Name: "2", AllowTypes: { typed: [1, 2, 3, 4, 5, 6, 7] } },
@@ -97,4 +90,5 @@ export default function () {
         extended,
         assetStrings,
     });
+    luziFixups("身体痕迹_Luzi", asset.Name);
 }

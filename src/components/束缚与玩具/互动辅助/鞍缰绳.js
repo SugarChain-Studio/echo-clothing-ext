@@ -1,78 +1,60 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
-/** @type { CustomGroupedAssetDefinitions }} */
-const assets = {
-    ItemTorso: [
+/** @type { AddAssetWithConfigParams[] }} */
+const assets = [
+    [
+        "ItemTorso",
         {
-            Name: "鞍_Luzi",
+            Name: "鞍-Luzi",
             Random: false,
             ParentGroup: {},
             Effect: ["Leash"],
         },
+        { translation: { CN: "鞍", EN: "Saddle", RU: "Седло" } },
     ],
-};
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        ItemTorso: {
-            鞍_Luzi: "鞍",
+    [
+        "ItemTorso",
+        {
+            Name: "缰绳-Luzi",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Priority: 50,
+            Extended: true,
+            ParentGroup: {},
+            Layer: [{ Name: "绳子", AllowTypes: { typed: [1] } }],
         },
-    },
-    EN: {
-        ItemTorso: {
-            鞍_Luzi: "Saddle",
+        {
+            translation: { CN: "缰绳", EN: "Reins", RU: "Уздечка" },
+            extended: {
+                Archetype: ExtendedArchetype.TYPED,
+                DrawImages: false,
+                Options: [{ Name: "1" }, { Name: "2" }],
+            },
+            assetStrings: {
+                CN: {
+                    Select: "设置",
+                    1: "无",
+                    2: "有绳子",
+                    Set1: "SourceCharacter把绳子收起来了",
+                    Set2: "SourceCharacter拿出了绳子",
+                },
+                EN: {
+                    Select: "Select",
+                    1: "None",
+                    2: "With Rope",
+                    Set1: "SourceCharacter put away the rope",
+                    Set2: "SourceCharacter took out the rope",
+                },
+            },
         },
-    },
-    RU: {
-        ItemTorso: {
-            鞍_Luzi: "Седло",
-        },
-    },
-};
-
-/** @type {CustomAssetDefinition} */
-const asset = {
-    Name: "缰绳_Luzi",
-    Random: false,
-    Top: 0,
-    Left: 0,
-    Priority: 50,
-    Extended: true,
-    ParentGroup: {},
-    Layer: [{ Name: "绳子", AllowTypes: { typed: [1] } }],
-};
-
-const extended = {
-    Archetype: ExtendedArchetype.TYPED,
-    DrawImages: false,
-    Options: [{ Name: "1" }, { Name: "2" }],
-};
-
-const translation = {
-    CN: "缰绳",
-    EN: "Reins",
-    RU: "Уздечка",
-};
-
-/** @type {Translation.Dialog} */
-const assetStrings = {
-    CN: {
-        Select: "设置",
-        1: "无",
-        2: "有绳子",
-        Set1: "SourceCharacter把绳子收起来了",
-        Set2: "SourceCharacter拿出了绳子",
-    },
-    EN: {
-        Select: "Select",
-        1: "None",
-        2: "With Rope",
-        Set1: "SourceCharacter put away the rope",
-        Set2: "SourceCharacter took out the rope",
-    },
-};
+    ],
+];
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames: {}, assetStrings });
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig(assets);
+    for (const a of assets) {
+        luziFixups(a[0], a[1].Name);
+    }
 }

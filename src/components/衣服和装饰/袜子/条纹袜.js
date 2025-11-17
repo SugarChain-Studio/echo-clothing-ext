@@ -1,50 +1,55 @@
+import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
-/** @type {CustomAssetDefinition} */
-const asset = {
-    Name: "条纹袜_Luzi",
-    Random: false,
-    Top: 0,
-    Left: {
-        BaseLower: 0,
-        Kneel: 0,
-        KneelingSpread: 30,
-        LegsClosed: 0,
-        LegsOpen: 0,
-        Spread: 0,
-    },
-    Layer: [
+/** @type {AddAssetWithConfigParams[]} */
+const asset = [
+    [
+        ["Socks", "SocksLeft", "SocksRight"],
         {
-            Name: "袜子",
-            Priority: 20,
+            Name: "条纹袜-Luzi",
+            Random: false,
+            ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 30 }]),
+            Layer: [
+                { Name: "袜子", Priority: 20 },
+                { Name: "条纹", Priority: 20 },
+            ],
         },
         {
-            Name: "条纹",
-            Priority: 20,
+            translation: {
+                CN: "条纹袜",
+                EN: "Striped Socks",
+                RU: "Полосатые носки",
+            },
         },
     ],
-};
-
-const layerNames = {
-    EN: {
-        袜子: "Socks",
-        条纹: "Stripes",
-    },
-};
-
-/** @type {Translation.Entry} */
-const translation = {
-    CN: "条纹袜",
-    EN: "Striped Socks",
-    RU: "Полосатые носки",
-};
+    [
+        ["Socks", "SocksLeft", "SocksRight"],
+        {
+            Name: "条纹袜2-Luzi",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Priority: 20,
+            DefaultColor: ["#272020", "#221717", "#221717"],
+            Layer: [{ Name: "袜子" }, { Name: "条纹" }, { Name: "袜边" }],
+        },
+        {
+            translation: {
+                CN: "条纹袜 2",
+                EN: "Striped Socks 2",
+                RU: "Полосатые носки 2",
+            },
+            layerNames: {
+                EN: { 袜子: "Socks", 条纹: "Stripes", 袜边: "SockEdge" },
+            },
+        },
+    ],
+];
 
 export default function () {
-    for (const group of Typing.groups(["Socks", "SocksLeft", "SocksRight"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            layerNames,
-            translation,
-        });
+    AssetManager.addAssetWithConfig(asset);
+    for (const a of asset) {
+        luziFixups(a[0], a[1].Name);
     }
 }

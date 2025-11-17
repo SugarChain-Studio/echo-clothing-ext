@@ -1,9 +1,10 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
+import { luziFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "斩标_Luzi",
+    Name: "斩标-Luzi",
     Random: false,
     Top: -120,
     Left: 200,
@@ -73,4 +74,5 @@ const translation = { CN: "斩标", EN: "Behead Marking" };
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemMisc", asset, { extended, translation, layerNames, assetStrings });
+    luziFixups("ItemMisc", asset.Name);
 }

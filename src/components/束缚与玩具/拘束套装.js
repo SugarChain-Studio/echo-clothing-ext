@@ -1,5 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
+import { luziFixups } from "../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const upperMapping = {
@@ -24,7 +25,7 @@ const suitMapping = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "拘束套装_Luzi",
+    Name: "拘束套装-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -183,4 +184,5 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
     AssetManager.addImageMapping(icons);
+    luziFixups(["ItemTorso", "ItemTorso2"], asset.Name);
 }

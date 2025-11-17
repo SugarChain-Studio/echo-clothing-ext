@@ -2,7 +2,7 @@ import { AssetManager } from "../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "后背_Luzi",
+    Name: "后背-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,

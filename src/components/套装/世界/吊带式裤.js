@@ -1,11 +1,12 @@
 import { AssetManager } from "../../../assetForward";
 import { Typing } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
     "ClothLower",
     {
-        Name: "裤子1_Luzi",
+        Name: "裤子1-Luzi",
         Random: false,
         Top: 0,
         Left: {
@@ -80,4 +81,5 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
+    luziFixups(asset[0], asset[1].Name);
 }

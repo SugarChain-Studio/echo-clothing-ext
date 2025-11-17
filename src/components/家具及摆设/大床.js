@@ -1,11 +1,13 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../assetForward";
+import { luziFixups } from "../../lib/fixups";
 
-/** @type {CustomGroupedAssetDefinitions} */
-const assets = {
-    ItemAddon: [
+/** @type {AddAssetWithConfigParams[]} */
+const assets = [
+    [
+        "ItemAddon",
         {
-            Name: "被子左边_Luzi",
+            Name: "被子左边-Luzi",
             Random: false,
             Top: -260,
             Left: 0,
@@ -14,8 +16,12 @@ const assets = {
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
+        { translation: { CN: "被子左边", EN: "Quilt Left" } },
+    ],
+    [
+        "ItemAddon",
         {
-            Name: "被子右边_Luzi",
+            Name: "被子右边-Luzi",
             Random: false,
             Top: -260,
             Left: -210,
@@ -24,10 +30,12 @@ const assets = {
             DefaultColor: ["#99A2AB", "Default"],
             Layer: [{ Name: "外" }, { Name: "内" }],
         },
+        { translation: { CN: "被子右边", EN: "Quilt Right" } },
     ],
-    ItemDevices: [
+    [
+        "ItemDevices",
         {
-            Name: "床左边_Luzi",
+            Name: "床左边-Luzi",
             Random: false,
             Top: -260,
             Left: 0,
@@ -56,8 +64,13 @@ const assets = {
             Effect: [E.Mounted, E.OnBed],
             Layer: [{ Name: "骨架" }, { Name: "床垫" }, { Name: "枕头" }],
         },
+        { translation: { CN: "床左边", EN: "Bed Left" } },
+    ],
+    [
+        "ItemDevices",
+
         {
-            Name: "床右边_Luzi",
+            Name: "床右边-Luzi",
             Random: false,
             Top: -260,
             Left: -110,
@@ -86,64 +99,24 @@ const assets = {
             ],
             Effect: [E.Mounted, E.OnBed],
         },
+        { translation: { CN: "床右边", EN: "Bed Right" } },
     ],
-};
-
-/** @type {Translation.GroupedEntries} */
-const translations = {
-    CN: {
-        ItemAddon: {
-            被子左边_Luzi: "被子左边",
-            被子右边_Luzi: "被子右边",
-        },
-        ItemDevices: {
-            床左边_Luzi: "床左边",
-            床右边_Luzi: "床右边",
-        },
-    },
-    EN: {
-        ItemAddon: {
-            被子左边_Luzi: "Left Side of Quilt",
-            被子右边_Luzi: "Right Side of Quilt",
-        },
-        ItemDevices: {
-            床左边_Luzi: "Left Side of Bed",
-            床右边_Luzi: "Right Side of Bed",
-        },
-    },
-    RU: {
-        ItemAddon: {
-            被子左边_Luzi: "Левая сторона одеяла",
-            被子右边_Luzi: "Правая сторона одеяла",
-        },
-        ItemDevices: {
-            床左边_Luzi: "Левая сторона кровати",
-            床右边_Luzi: "Правая сторона кровати",
-        },
-    },
-    UA: {
-        ItemAddon: {
-            被子左边_Luzi: "Ліва сторона ковдри",
-            被子右边_Luzi: "Права сторона ковдри",
-        },
-        ItemDevices: {
-            床左边_Luzi: "Ліва сторона ліжка",
-            床右边_Luzi: "Права сторона ліжка",
-        },
-    },
-};
+];
 
 export default function () {
     AssetManager.addImageMapping({
-        [ImageMapTools.assetPreview("ItemDevices", "床右边_Luzi")]: ImageMapTools.assetPreview(
+        [ImageMapTools.assetPreview("ItemDevices", "床右边-Luzi")]: ImageMapTools.assetPreview(
             "ItemDevices",
-            "床左边_Luzi"
+            "床左边-Luzi"
         ),
-        [ImageMapTools.assetPreview("ItemAddon", "被子右边_Luzi")]: ImageMapTools.assetPreview(
+        [ImageMapTools.assetPreview("ItemAddon", "被子右边-Luzi")]: ImageMapTools.assetPreview(
             "ItemAddon",
-            "被子左边_Luzi"
+            "被子左边-Luzi"
         ),
     });
 
-    AssetManager.addGroupedAssets(assets, translations);
+    AssetManager.addAssetWithConfig(assets);
+    for (const a of assets) {
+        luziFixups(a[0], a[1].Name);
+    }
 }

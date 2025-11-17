@@ -1,9 +1,10 @@
 import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "女仆围裙_Luzi",
+    Name: "女仆围裙-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
@@ -11,6 +12,7 @@ const asset = {
     DefaultColor: ["Default", "Default", "Default", "Default", "#000000"],
     ParentGroup: "BodyUpper",
     PoseMapping: PoseMapTool.hideFullBody(),
+    DynamicGroupName: "Cloth",
     Layer: [
         {
             Name: "肩带内",
@@ -81,10 +83,6 @@ const layerNames = {
 
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Arm1");
-    AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
-    AssetManager.addAssetWithConfig(
-        "ClothAccessory",
-        { ...asset, DynamicGroupName: "Cloth" },
-        { translation, layerNames }
-    );
+    AssetManager.addAssetWithConfig(["Cloth", "ClothAccessory"], asset, { translation, layerNames });
+    luziFixups(["Cloth", "ClothAccessory"], asset.Name);
 }

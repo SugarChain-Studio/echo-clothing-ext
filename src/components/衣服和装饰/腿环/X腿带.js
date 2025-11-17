@@ -1,50 +1,33 @@
 import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "X腿带_Luzi",
+    Name: "X腿带-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
     Left: 0,
     Priority: 22,
     Extended: true,
-    PoseMapping: {
-        Kneel: "Kneel",
-        LegsClosed: "LegsClosed",
-        Spread: "Spread",
-        KneelingSpread: "KneelingSpread",
-        Hogtied: PoseType.HIDE,
-        AllFours: PoseType.HIDE,
-    },
+    PoseMapping: PoseMapTool.config(["Kneel", "LegsClosed", "Spread", "KneelingSpread"], ["Hogtied", "AllFours"]),
     DefaultColor: ["#141414"],
     Layer: [
-        {
-            Name: "带子",
-        },
+        { Name: "带子" },
         {
             Name: "左腿",
             HasImage: false,
-            HideColoring: true,
+            AllowColorize: false,
             AllowTypes: { typed: [1] },
-            Alpha: [
-                {
-                    Group: ["Garters"],
-                    Masks: [[251, 0, 250, 1000]],
-                },
-            ],
+            Alpha: [{ Group: ["Garters"], Masks: [[251, 0, 250, 1000]] }],
         },
         {
             Name: "右腿",
             HasImage: false,
-            HideColoring: true,
+            AllowColorize: false,
             AllowTypes: { typed: [2] },
-            Alpha: [
-                {
-                    Group: ["Garters"],
-                    Masks: [[0, 0, 250, 1000]],
-                },
-            ],
+            Alpha: [{ Group: ["Garters"], Masks: [[0, 0, 250, 1000]] }],
         },
     ],
 };
@@ -92,4 +75,5 @@ export default function () {
         layerNames,
         assetStrings,
     });
+    luziFixups("Garters", asset.Name);
 }

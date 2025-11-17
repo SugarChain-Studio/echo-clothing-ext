@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "露胸胶衣_Luzi",
+    Name: "露胸胶衣-Luzi",
     Random: false,
     Gender: "F",
     Top: 180,
@@ -10,6 +11,7 @@ const asset = {
     Expose: ["ItemNipples", "ItemNipplesPiercings", "ItemBreast"],
     DefaultColor: ["Default", "#000000", "Default", "#000000", "Default"],
     PoseMapping: { Hogtied: "Hogtied", AllFours: "Hide" },
+    DynamicGroupName: "Cloth",
     Layer: [
         {
             Name: "衣服B2",
@@ -132,7 +134,6 @@ export default function () {
     targetGroups.forEach((name) => {
         const nAsset = /** @type {CustomAssetDefinition} */ ({
             ...asset,
-            DynamicGroupName: "Cloth",
             ...(name === "ItemTorso" ? { Difficulty: 6, AllowLock: true, Time: 10 } : {}),
         });
 
@@ -143,4 +144,6 @@ export default function () {
             assetStrings,
         });
     });
+
+    luziFixups(targetGroups, asset.Name);
 }

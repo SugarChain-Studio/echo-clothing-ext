@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const assetdef = {
-    Name: "迷你裤_Luzi",
+    Name: "迷你裤-Luzi",
     Top: 400,
     Random: false,
     DefaultColor: ["#727B91", "#FFD1A3", "#88665A"],
@@ -34,8 +35,9 @@ const translation = {
     EN: "Mini Hotpants",
 };
 
-export default function () {
-    AssetManager.addAssetWithConfig(
+/** @type {AddAssetWithConfigParams[]} */
+const asset = [
+    [
         "ClothLower",
         {
             ...assetdef,
@@ -44,7 +46,14 @@ export default function () {
                 KneelingSpread: 190,
             },
         },
-        { layerNames, translation }
-    );
-    AssetManager.addAssetWithConfig("Panties", { ...assetdef, Left: 100, Priority: 19 }, { layerNames, translation });
+        { layerNames, translation },
+    ],
+    ["Panties", { ...assetdef, Left: 100, Priority: 19 }, { layerNames, translation }],
+];
+
+export default function () {
+    AssetManager.addAssetWithConfig(asset);
+    for (const a of asset) {
+        luziFixups("ClothLower", a[1].Name);
+    }
 }

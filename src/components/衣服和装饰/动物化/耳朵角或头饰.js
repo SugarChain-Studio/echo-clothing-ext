@@ -1,10 +1,11 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParamsNoGroup[] } */
 const accessories = [
     [
         {
-            Name: "耳朵1_Luzi",
+            Name: "耳朵1-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: -40,
@@ -20,7 +21,7 @@ const accessories = [
     ],
     [
         {
-            Name: "耳朵2_Luzi",
+            Name: "耳朵2-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -36,20 +37,18 @@ const accessories = [
     ],
     [
         {
-            Name: "角7_Luzi",
+            Name: "角7-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
             Left: 0,
             Priority: 52,
         },
-        {
-            translation: { CN: "角 7", EN: "Horn 7", RU: "Рог 7" },
-        },
+        { translation: { CN: "卷羊角", EN: "Curled Horn" } },
     ],
     [
         {
-            Name: "精灵耳2_Luzi",
+            Name: "精灵耳2-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -62,7 +61,7 @@ const accessories = [
     ],
     [
         {
-            Name: "小马耳2_Luzi",
+            Name: "小马耳2-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -72,7 +71,7 @@ const accessories = [
     ],
     [
         {
-            Name: "鱼鳍耳朵_Luzi",
+            Name: "鱼鳍耳朵-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Left: 160,
@@ -91,7 +90,7 @@ const accessories = [
     ],
     [
         {
-            Name: "耷拉下来的耳朵_Luzi",
+            Name: "耷拉下来的耳朵-Luzi",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Left: 140,
@@ -106,4 +105,7 @@ const accessories = [
 
 export default function () {
     AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory2"], accessories);
+    for (const a of accessories) {
+        luziFixups(["HairAccessory1", "HairAccessory2"], a[0].Name);
+    }
 }

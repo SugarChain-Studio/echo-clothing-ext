@@ -1,11 +1,12 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
     [
         "Cloth",
         {
-            Name: "披肩_Luzi",
+            Name: "披肩-Luzi",
             Random: false,
             Gender: "F",
             Top: -110,
@@ -45,7 +46,7 @@ const assets = [
     [
         "ClothAccessory",
         {
-            Name: "披肩短_Luzi",
+            Name: "披肩短-Luzi",
             Random: false,
             Gender: "F",
             Left: 110,
@@ -81,7 +82,7 @@ const assets = [
     [
         "ClothAccessory",
         {
-            Name: "披肩长_Luzi",
+            Name: "披肩长-Luzi",
             Random: false,
             Gender: "F",
             Left: 80,
@@ -117,7 +118,7 @@ const assets = [
     [
         "ClothAccessory",
         {
-            Name: "立领披肩_Luzi",
+            Name: "立领披肩-Luzi",
             Random: false,
             Gender: "F",
             Top: 0,
@@ -159,4 +160,7 @@ const assets = [
 
 export default function () {
     AssetManager.addAssetWithConfig(assets);
+    for (const asset of assets) {
+        luziFixups(asset[0], asset[1].Name);
+    }
 }

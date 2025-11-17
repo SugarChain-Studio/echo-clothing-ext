@@ -1,12 +1,12 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "连衣裙_Luzi",
+    Name: "连衣裙-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
-    Priority: 26,
     DefaultColor: ["#1F1F1F", "#1F1F1F", "#1F1F1F", "#1F1F1F", "#FFFFFF"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
@@ -67,4 +67,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
+    luziFixups("Cloth", asset.Name);
 }
