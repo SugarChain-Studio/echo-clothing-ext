@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { customFixup } from "../../../lib/fixups";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
-    Name: "折扇_Luzi",
+    Name: "折扇-Luzi",
     Random: false,
     Top: 240,
     Left: 150,
@@ -182,5 +183,10 @@ export default function () {
         translation,
         layerNames,
         assetStrings,
+    });
+
+    customFixup({
+        New: { Group: "ItemHandheld", Name: "折扇-Luzi" },
+        Old: { Group: "ItemHandheld", Name: "折扇_Luzi" },
     });
 }

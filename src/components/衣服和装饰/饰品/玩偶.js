@@ -1,6 +1,8 @@
 import { AssetManager } from "../../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
+import { customFixup } from "../../../lib/fixups";
+import { Typing } from "../../../lib";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
@@ -16,7 +18,7 @@ const specialMapping = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "玩偶_Luzi",
+    Name: "玩偶-Luzi",
     Random: false,
     Left: 125,
     Top: 225,
@@ -511,7 +513,7 @@ modules.forEach((m) => {
             const src = typedLayerNames[m.Key][idx];
             if (!src) return { imagePath: PathTools.emptyImage };
             return {
-                imagePath: `Assets/Female3DCG/ItemMisc/玩偶_Luzi_${src}.png`,
+                imagePath: `Assets/Female3DCG/ItemMisc/${asset.Name}_${src}.png`,
             };
         }),
     };
@@ -621,4 +623,8 @@ export default function () {
         layerNames,
         assetStrings,
     });
+
+    for (const Group of Typing.groups(["ItemMisc", "ItemHandheld"])) {
+        customFixup({ New: { Group, Name: "玩偶-Luzi" }, Old: { Group, Name: "玩偶_Luzi" } });
+    }
 }
