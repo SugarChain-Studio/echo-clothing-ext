@@ -3,17 +3,33 @@ import { GroupConfig } from "./身体组调整";
 
 /**
  * @typedef {Object} CopyGroupInfo
- * @property {details.StrictCustomGroupBodyName} name
- * @property {CustomGroupBodyName} mirror
+ * @property {details.StrictCustomGroupBodyName} mirror
+ * @property {CustomGroupBodyName} source
  * @property {Translation.Entry} description
  * @property {Partial<CustomGroupDefinition>} [overrides]
  */
 
+/** @type {Map<AssetGroupName, Set<CustomGroupName>>} */
+const mirrorMap = new Map();
+
+function addMirror(groupName, mirrorName) {
+    if (!mirrorMap.has(groupName)) {
+        mirrorMap.set(groupName, new Set([groupName]));
+    }
+    mirrorMap.get(groupName).add(mirrorName);
+}
+
+/** @param {AssetGroupName} groupName */
+export function getMirrors(groupName) {
+    if (!mirrorMap.has(groupName)) return new Set([groupName]);
+    return mirrorMap.get(groupName);
+}
+
 /** @type {CopyGroupInfo[]} */
 const copyGroups = [
     {
-        name: "新前发_Luzi_stack",
-        mirror: "新前发_Luzi",
+        mirror: "新前发_Luzi_stack",
+        source: "新前发_Luzi",
         description: {
             CN: "🍔前发(叠加)",
             EN: "🍔Front Hair (Stack)",
@@ -21,8 +37,8 @@ const copyGroups = [
         overrides: { Hide: undefined },
     },
     {
-        name: "新后发_Luzi_stack",
-        mirror: "新后发_Luzi",
+        mirror: "新后发_Luzi_stack",
+        source: "新后发_Luzi",
         description: {
             CN: "🍔后发(叠加)",
             EN: "🍔Back Hair (Stack)",
@@ -30,8 +46,8 @@ const copyGroups = [
         overrides: { Hide: undefined },
     },
     {
-        name: "BodyMarkings2_Luzi",
-        mirror: "BodyMarkings",
+        mirror: "BodyMarkings2_Luzi",
+        source: "BodyMarkings",
         description: {
             CN: "🍔身体涂画 2",
             EN: "🍔Body Markings 2",
@@ -39,8 +55,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Cloth_笨笨蛋Luzi",
-        mirror: "Cloth",
+        mirror: "Cloth_笨笨蛋Luzi",
+        source: "Cloth",
         description: {
             CN: "🍔衣服 2",
             EN: "🍔Cloth 2",
@@ -48,8 +64,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Cloth_笨笨笨蛋Luzi2",
-        mirror: "Cloth",
+        mirror: "Cloth_笨笨笨蛋Luzi2",
+        source: "Cloth",
         description: {
             CN: "🍔衣服 3",
             EN: "🍔Cloth 3",
@@ -57,8 +73,8 @@ const copyGroups = [
         },
     },
     {
-        name: "ClothLower_笨笨蛋Luzi",
-        mirror: "ClothLower",
+        mirror: "ClothLower_笨笨蛋Luzi",
+        source: "ClothLower",
         description: {
             CN: "🍔下装 2",
             EN: "🍔Bottom 2",
@@ -66,8 +82,8 @@ const copyGroups = [
         },
     },
     {
-        name: "ClothLower_笨笨笨蛋Luzi2",
-        mirror: "ClothLower",
+        mirror: "ClothLower_笨笨笨蛋Luzi2",
+        source: "ClothLower",
         description: {
             CN: "🍔下装 3",
             EN: "🍔Bottom 3",
@@ -75,8 +91,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Bra_笨笨蛋Luzi",
-        mirror: "Bra",
+        mirror: "Bra_笨笨蛋Luzi",
+        source: "Bra",
         description: {
             CN: "🍔胸罩 2",
             EN: "🍔Bra 2",
@@ -84,8 +100,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Panties_笨笨蛋Luzi",
-        mirror: "Panties",
+        mirror: "Panties_笨笨蛋Luzi",
+        source: "Panties",
         description: {
             CN: "🍔内裤 2",
             EN: "🍔Panties 2",
@@ -93,24 +109,24 @@ const copyGroups = [
         },
     },
     {
-        name: "Suit_笨笨蛋Luzi",
-        mirror: "Suit",
+        mirror: "Suit_笨笨蛋Luzi",
+        source: "Suit",
         description: {
             CN: "🍔套装(上身) 2",
             EN: "🍔Suit Upper 2",
         },
     },
     {
-        name: "SuitLower_笨笨蛋Luzi",
-        mirror: "SuitLower",
+        mirror: "SuitLower_笨笨蛋Luzi",
+        source: "SuitLower",
         description: {
             CN: "🍔套装(下身) 2",
             EN: "🍔Suit Lower 2",
         },
     },
     {
-        name: "ClothAccessory_笨笨蛋Luzi",
-        mirror: "ClothAccessory",
+        mirror: "ClothAccessory_笨笨蛋Luzi",
+        source: "ClothAccessory",
         description: {
             CN: "🍔服装配饰 2",
             EN: "🍔Cloth Accessory 2",
@@ -118,8 +134,8 @@ const copyGroups = [
         },
     },
     {
-        name: "ClothAccessory_笨笨笨蛋Luzi2",
-        mirror: "ClothAccessory",
+        mirror: "ClothAccessory_笨笨笨蛋Luzi2",
+        source: "ClothAccessory",
         description: {
             CN: "🍔服装配饰 3",
             EN: "🍔Cloth Accessory 3",
@@ -127,8 +143,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Necklace_笨笨蛋Luzi",
-        mirror: "Necklace",
+        mirror: "Necklace_笨笨蛋Luzi",
+        source: "Necklace",
         description: {
             CN: "🍔项链 2",
             EN: "🍔Necklace 2",
@@ -136,16 +152,16 @@ const copyGroups = [
         },
     },
     {
-        name: "Luzi_Jewelry_0",
-        mirror: "Jewelry",
+        mirror: "Luzi_Jewelry_0",
+        source: "Jewelry",
         description: {
             CN: "🍔珠宝 1",
             EN: "🍔Jewelry 1",
         },
     },
     {
-        name: "Shoes_笨笨蛋Luzi",
-        mirror: "Shoes",
+        mirror: "Shoes_笨笨蛋Luzi",
+        source: "Shoes",
         description: {
             CN: "🍔鞋子 2",
             EN: "🍔Shoes 2",
@@ -153,8 +169,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Hat_笨笨蛋Luzi",
-        mirror: "Hat",
+        mirror: "Hat_笨笨蛋Luzi",
+        source: "Hat",
         description: {
             CN: "🍔帽子 2",
             EN: "🍔Hat 2",
@@ -162,8 +178,8 @@ const copyGroups = [
         },
     },
     {
-        name: "HairAccessory3_笨笨蛋Luzi",
-        mirror: "HairAccessory3",
+        mirror: "HairAccessory3_笨笨蛋Luzi",
+        source: "HairAccessory3",
         description: {
             CN: "🍔发饰 +1",
             EN: "🍔Hair Accessory +1",
@@ -171,8 +187,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Luzi_HairAccessory3_1",
-        mirror: "HairAccessory3",
+        mirror: "Luzi_HairAccessory3_1",
+        source: "HairAccessory3",
         description: {
             CN: "🍔发饰 +2",
             EN: "🍔Hair Accessory +2",
@@ -180,8 +196,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Luzi_HairAccessory3_2",
-        mirror: "HairAccessory3",
+        mirror: "Luzi_HairAccessory3_2",
+        source: "HairAccessory3",
         description: {
             CN: "🍔发饰 +3",
             EN: "🍔Hair Accessory +3",
@@ -189,8 +205,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Gloves_笨笨蛋Luzi",
-        mirror: "Gloves",
+        mirror: "Gloves_笨笨蛋Luzi",
+        source: "Gloves",
         description: {
             CN: "🍔手套 2",
             EN: "🍔Gloves 2",
@@ -198,8 +214,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Mask_笨笨蛋Luzi",
-        mirror: "Mask",
+        mirror: "Mask_笨笨蛋Luzi",
+        source: "Mask",
         description: {
             CN: "🍔面具 2",
             EN: "🍔Mask 2",
@@ -207,8 +223,8 @@ const copyGroups = [
         },
     },
     {
-        name: "Wings_笨笨蛋Luzi",
-        mirror: "Wings",
+        mirror: "Wings_笨笨蛋Luzi",
+        source: "Wings",
         description: {
             CN: "🍔翅膀 2",
             EN: "🍔Wings 2",
@@ -228,6 +244,8 @@ export default function () {
     });
 
     copyGroups.forEach((definition) => {
-        AssetManager.addCopyGroup(definition.name, definition.mirror, definition.description, definition.overrides);
+        addMirror(definition.source, definition.mirror);
+
+        AssetManager.addCopyGroup(definition.mirror, definition.source, definition.description, definition.overrides);
     });
 }
