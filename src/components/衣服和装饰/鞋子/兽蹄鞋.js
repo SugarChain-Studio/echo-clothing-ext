@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "兽蹄鞋_Luzi",
+    Name: "兽蹄鞋-Luzi",
     Random: false,
     Height: 14,
     Top: 490,
@@ -40,4 +41,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation });
+    luziFixups("Shoes", asset.Name);
 }

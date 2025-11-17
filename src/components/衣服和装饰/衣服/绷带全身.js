@@ -1,22 +1,15 @@
 import { AssetManager } from "../../../assetForward";
-import { SockLRTool } from "../../../lib";
+import { PostPass, SockLRTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 const translation = { CN: "绷带", EN: "Bandage", RU: "Повязка" };
-
-/** @type {CustomAssetDefinition} */
-const asset = {
-    Name: "绷带_Luzi",
-    Random: false,
-    Top: 0,
-    Left: { "": 0, "KneelingSpread": 30 },
-};
 
 /** @type { AddAssetWithConfigParams[] } */
 const assets = [
     [
         "Gloves",
         {
-            Name: "绷带_Luzi",
+            Name: "绷带-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -34,11 +27,27 @@ const assets = [
         },
         { translation },
     ],
-    ["Socks", asset, { translation }],
+    [
+        "Socks",
+        PostPass.asset(
+            {
+                Name: "绷带-Luzi",
+                Random: false,
+                Top: 0,
+                Left: { "": 0, "KneelingSpread": 30 },
+            },
+            (asset) => {
+                SockLRTool.createSockLR(asset).forEach(([key, value]) => {
+                    AssetManager.addAssetWithConfig(key, value, { translation });
+                });
+            }
+        ),
+        { translation },
+    ],
     [
         "Bra",
         {
-            Name: "绷带全身_Luzi",
+            Name: "绷带全身-Luzi",
             Random: false,
             Gender: "F",
             Top: 0,
@@ -79,7 +88,8 @@ const assets = [
 
 export default function () {
     AssetManager.addAssetWithConfig(assets);
-    SockLRTool.createSockLR(asset).forEach(([key, value]) => {
-        AssetManager.addAssetWithConfig(key, value, { translation });
-    });
+    for (const [g, asset] of assets) {
+        luziFixups(g, asset.Name);
+    }
+    luziFixups(["SocksLeft", "SocksRight"], "绷带-Luzi");
 }

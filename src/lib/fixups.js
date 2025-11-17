@@ -19,9 +19,10 @@ export function customFixup(fixup) {
  * @param {string} name
  */
 export function luziFixups(groups, name) {
+    if (!name.includes("-")) return;
     for (const group of getManyMirrors(groups)) {
         myFixups.push({
-            Old: { Group: group, Name: name.replace("-Luzi", "_Luzi") },
+            Old: { Group: group, Name: name.replace("-", "_") },
             New: { Group: /** @type {AssetGroupName} */ (group), Name: name },
         });
     }
