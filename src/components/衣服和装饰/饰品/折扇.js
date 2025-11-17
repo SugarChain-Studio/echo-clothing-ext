@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { customFixup } from "../../../lib/fixups";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
@@ -185,8 +185,5 @@ export default function () {
         assetStrings,
     });
 
-    customFixup({
-        New: { Group: "ItemHandheld", Name: "折扇-Luzi" },
-        Old: { Group: "ItemHandheld", Name: "折扇_Luzi" },
-    });
+    luziFixups("ItemHandheld", asset.Name);
 }

@@ -9,7 +9,7 @@ import { GroupConfig } from "./身体组调整";
  * @property {Partial<CustomGroupDefinition>} [overrides]
  */
 
-/** @type {Map<AssetGroupName, Set<CustomGroupName>>} */
+/** @type {Map<CustomGroupName, Set<CustomGroupName>>} */
 const mirrorMap = new Map();
 
 function addMirror(groupName, mirrorName) {
@@ -19,10 +19,24 @@ function addMirror(groupName, mirrorName) {
     mirrorMap.get(groupName).add(mirrorName);
 }
 
-/** @param {AssetGroupName} groupName */
+/** @param {CustomGroupName} groupName */
 export function getMirrors(groupName) {
-    if (!mirrorMap.has(groupName)) return new Set([groupName]);
-    return mirrorMap.get(groupName);
+    if (!mirrorMap.has(groupName)) return [groupName];
+    return Array.from(mirrorMap.get(groupName));
+}
+
+/** @param {CustomGroupName[] | CustomGroupName} groupNames */
+export function getManyMirrors(groupNames) {
+    const grps = Array.isArray(groupNames) ? groupNames : [groupNames];
+    /** @type {Set<CustomGroupName>} */
+    const result = new Set();
+    for (const groupName of grps) {
+        const mirrors = getMirrors(groupName);
+        for (const mirror of mirrors) {
+            result.add(mirror);
+        }
+    }
+    return Array.from(result);
 }
 
 /** @type {CopyGroupInfo[]} */
@@ -233,6 +247,8 @@ const copyGroups = [
     },
 ];
 
+copyGroups.forEach((definition) => addMirror(definition.source, definition.mirror));
+
 export default function () {
     GroupConfig.forceCharaPreview(["新前发_Luzi_stack", "新后发_Luzi_stack"]);
 
@@ -244,8 +260,6 @@ export default function () {
     });
 
     copyGroups.forEach((definition) => {
-        addMirror(definition.source, definition.mirror);
-
         AssetManager.addCopyGroup(definition.mirror, definition.source, definition.description, definition.overrides);
     });
 }

@@ -1,5 +1,6 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
+import { getManyMirrors } from "../components/功能调整/复制身体区域";
 
 /**
  * @type {(typeof LoginInventoryFixups)}
@@ -11,6 +12,19 @@ const myFixups = [];
  */
 export function customFixup(fixup) {
     myFixups.push(/** @type {typeof myFixups[number]} */ (fixup));
+}
+
+/**
+ * @param {CustomGroupName | CustomGroupName[]} groups
+ * @param {string} name
+ */
+export function luziFixups(groups, name) {
+    for (const group of getManyMirrors(groups)) {
+        myFixups.push({
+            Old: { Group: group, Name: name.replace("-Luzi", "_Luzi") },
+            New: { Group: /** @type {AssetGroupName} */ (group), Name: name },
+        });
+    }
 }
 
 /** @param {PlayerCharacter} player */

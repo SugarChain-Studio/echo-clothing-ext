@@ -1,8 +1,7 @@
 import { AssetManager } from "../../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { customFixup } from "../../../lib/fixups";
-import { Typing } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
@@ -624,7 +623,5 @@ export default function () {
         assetStrings,
     });
 
-    for (const Group of Typing.groups(["ItemMisc", "ItemHandheld"])) {
-        customFixup({ New: { Group, Name: "玩偶-Luzi" }, Old: { Group, Name: "玩偶_Luzi" } });
-    }
+    luziFixups(["ItemMisc", "ItemHandheld"], asset.Name);
 }

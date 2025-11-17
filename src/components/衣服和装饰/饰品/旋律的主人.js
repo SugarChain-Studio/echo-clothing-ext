@@ -1,10 +1,11 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
     ["HairAccessory1", "HairAccessory3", "Hat"],
     {
-        Name: "Luzi_MMelodia",
+        Name: "Luzi-MMelodia",
         Left: 230,
         Top: 50,
         Random: false,
@@ -27,4 +28,5 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
+    luziFixups(asset[0], asset[1].Name);
 }

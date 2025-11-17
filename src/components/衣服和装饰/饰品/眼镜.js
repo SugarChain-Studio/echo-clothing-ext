@@ -1,11 +1,12 @@
 import { AssetManager } from "../../../assetForward";
 import { Typing } from "../../../lib";
+import { customFixup } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
     [
         {
-            Name: "单边眼镜左_Luzi",
+            Name: "单边眼镜左-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -14,7 +15,7 @@ const assets = [
     ],
     [
         {
-            Name: "单边眼镜右_Luzi",
+            Name: "单边眼镜右-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -23,7 +24,7 @@ const assets = [
     ],
     [
         {
-            Name: "眼镜卡_Luzi",
+            Name: "眼镜卡-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -33,7 +34,7 @@ const assets = [
     ],
     [
         {
-            Name: "爱心眼镜_Luzi",
+            Name: "爱心眼镜-Luzi",
             Random: false,
             Left: 200,
             Top: 80,
@@ -50,7 +51,7 @@ const assets = [
     ],
     [
         {
-            Name: "下半框眼镜_Luzi",
+            Name: "下半框眼镜-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -120,4 +121,11 @@ const assets = [
 
 export default function () {
     AssetManager.addAssetWithConfig("Glasses", assets);
+
+    for (const [asset] of assets) {
+        customFixup({
+            New: { Group: "Glasses", Name: asset.Name },
+            Old: { Group: "Glasses", Name: asset.Name.replace("-Luzi", "_Luzi") },
+        });
+    }
 }
