@@ -49,6 +49,7 @@
     "description": "BC视觉表现的美学修正与拓展",
     "devDependencies": {
         "@eslint/js": "^9.36.0",
+        "@typescript-eslint/parser": "^8.12.2",
         "@rollup/plugin-alias": "^5.1.1",
         "@rollup/plugin-commonjs": "^28.0.6",
         "@rollup/plugin-node-resolve": "^16.0.1",
