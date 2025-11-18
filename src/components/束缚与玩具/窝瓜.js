@@ -1,10 +1,11 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { PathTools } from "@sugarch/bc-mod-utility";
+import { luziFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "窝瓜_Luzi",
+    Name: "窝瓜-Luzi",
     Random: false,
     Top: 140,
     Left: 0,
@@ -131,4 +132,5 @@ export default function () {
     });
 
     AssetManager.addImageMapping(icons);
+    luziFixups("ItemDevices", asset.Name);
 }

@@ -84,6 +84,53 @@ const assets = [
         },
         { translation, layerNames: { EN: { 上身: "Top", 下身: "Bottom" } } },
     ],
+    [
+        "ItemHood",
+        {
+            Name: "绷带头部-Luzi",
+            Random: false,
+            Block: [],
+            Priority: 51,
+            Top: 0,
+            Left: 0,
+        },
+        { translation: { CN: "绷带头部", EN: "Head Bandage", RU: "Бинтование головы", UA: "Обв'язка голови бинтами" } },
+    ],
+    [
+        "ItemTorso",
+        {
+            Name: "绷带全身-Luzi",
+            Gender: "F",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            Difficulty: 10,
+            SelfBondage: 6,
+            Time: 30,
+            RemoveTime: 40,
+            AllowTighten: true,
+            SetPose: ["BackElbowTouch", "LegsClosed"],
+            Effect: [E.Block, E.BlockWardrobe, E.Slow],
+            Prerequisite: ["HasBreasts"],
+            Layer: [
+                {
+                    Name: "上",
+                    Priority: 24,
+                    ParentGroup: "BodyUpper",
+                    PoseMapping: { BackElbowTouch: PoseType.DEFAULT },
+                },
+                { Name: "下", Priority: 24, ParentGroup: "BodyLower", PoseMapping: { LegsClosed: PoseType.DEFAULT } },
+            ],
+        },
+        {
+            translation: {
+                CN: "绷带全身",
+                EN: "Full Body Bandage",
+                RU: "Бинты на всё тело",
+                UA: "Обв'язка бинтами на все тіло",
+            },
+        },
+    ],
 ];
 
 export default function () {

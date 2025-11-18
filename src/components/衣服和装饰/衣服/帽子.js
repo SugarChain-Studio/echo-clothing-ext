@@ -41,7 +41,7 @@ const assets = [
     ],
     [
         {
-            Name: "帽子2_Luzi",
+            Name: "帽子2-Luzi",
             Random: false,
             Left: 160,
             Top: 20,

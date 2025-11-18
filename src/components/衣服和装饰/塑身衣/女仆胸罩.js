@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "女仆胸罩_Luzi",
+    Name: "女仆胸罩-Luzi",
     Random: false,
     Left: 170,
     Top: 270,
@@ -27,19 +28,12 @@ const asset = {
     ],
 };
 
-const layerNames = {
-    EN: {
-        花边: "Lace",
-        胸罩: "Bra",
-    },
-};
+const layerNames = { EN: { 花边: "Lace", 胸罩: "Bra" } };
 
 /** @type {Translation.Entry} */
-const translation = {
-    CN: "女仆胸罩",
-    EN: "Maid Bra",
-};
+const translation = { CN: "女仆胸罩", EN: "Maid Bra" };
 
 export default function () {
     AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation });
+    luziFixups("Bra", asset.Name);
 }

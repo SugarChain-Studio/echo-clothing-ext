@@ -21,6 +21,7 @@ function addMirror(groupName, mirrorName) {
 
 /** @param {CustomGroupName} groupName */
 export function getMirrors(groupName) {
+    if (groupName === "ItemTorso") return /** @type {CustomGroupName[]}*/ (["ItemTorso", "ItemTorso2"]);
     if (!mirrorMap.has(groupName)) return [groupName];
     return Array.from(mirrorMap.get(groupName));
 }

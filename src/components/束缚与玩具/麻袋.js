@@ -1,9 +1,10 @@
 import { AssetManager } from "../../assetForward";
+import { luziFixups } from "../../lib/fixups";
 import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "麻袋_Luzi",
+    Name: "麻袋-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -92,4 +93,5 @@ export default function () {
         assetStrings,
     });
     FullMask.push(["ItemDevices", "ItemHood"], asset.Name, ["麻袋遮罩"]);
+    luziFixups(["ItemDevices", "ItemHood"], asset.Name);
 }

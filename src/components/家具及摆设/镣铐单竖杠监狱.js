@@ -1,12 +1,13 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
+import { luziFixups } from "../../lib/fixups";
 
 /** @type {RectTuple} */
 const mask = [200, 423, 100, 100];
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "单监_Luzi",
+    Name: "单监-Luzi",
     Random: false,
     Left: 120,
     Top: 550,
@@ -273,4 +274,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, { extended, translation, layerNames, assetStrings });
+    luziFixups("ItemDevices", asset.Name);
 }

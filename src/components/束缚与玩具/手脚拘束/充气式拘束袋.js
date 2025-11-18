@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "充气式拘束袋_Luzi",
+    Name: "充气式拘束袋-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
@@ -358,4 +359,5 @@ export default function () {
         extended,
         assetStrings,
     });
+    luziFixups(["ItemDevices", "ItemArms"], asset.Name);
 }

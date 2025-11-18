@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳夹_Luzi",
+    Name: "乳夹-Luzi",
     Fetish: ["Metal"],
     Difficulty: 10,
     Time: 15,
@@ -15,18 +16,8 @@ const asset = {
         { Name: "Closed", Group: "Eyes", Timer: 5 },
         { Name: "Angry", Group: "Eyebrows", Timer: 5 },
     ],
-    PoseMapping: {
-        AllFours: "Hide",
-    },
-    Layer: [
-        {
-            Name: "乳夹",
-        },
-        {
-            Name: "链子",
-            ParentGroup: {},
-        },
-    ],
+    PoseMapping: { AllFours: "Hide" },
+    Layer: [{ Name: "乳夹" }, { Name: "链子", ParentGroup: {} }],
 };
 
 const layerNames = {
@@ -53,4 +44,5 @@ export default function () {
         translation,
         layerNames,
     });
+    luziFixups("ItemNipples", asset.Name);
 }

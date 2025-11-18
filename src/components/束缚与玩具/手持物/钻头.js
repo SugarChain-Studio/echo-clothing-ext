@@ -9,7 +9,7 @@ const group = "ItemHandheld";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "钻头_Luzi",
+    Name: "钻头-Luzi",
     Random: false,
     Top: 110,
     Left: 10,

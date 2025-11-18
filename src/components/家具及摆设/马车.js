@@ -6,7 +6,7 @@ import { AssetManager } from "../../assetForward";
 const asset = {
     ItemDevices: [
         {
-            Name: "马车前_Luzi",
+            Name: "马车前-Luzi",
             Random: false,
             Top: 0,
             Left: -50,
@@ -16,7 +16,7 @@ const asset = {
             Layer: [],
         },
         {
-            Name: "马车_Luzi",
+            Name: "马车-Luzi",
             Random: false,
             Top: 0,
             Left: -70,

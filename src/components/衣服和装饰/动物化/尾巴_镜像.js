@@ -1,10 +1,11 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
     [
         {
-            Name: "穿戴式狗尾镜像_Luzi",
+            Name: "穿戴式狗尾镜像-Luzi",
             Random: false,
             Top: -100,
             Left: 0,
@@ -15,7 +16,7 @@ const assets = [
     ],
     [
         {
-            Name: "白色穿戴式狼尾镜像_Luzi",
+            Name: "白色穿戴式狼尾镜像-Luzi",
             Random: false,
             Top: -100,
             Left: 0,
@@ -30,7 +31,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式浅色猫尾镜像_Luzi",
+            Name: "穿戴式浅色猫尾镜像-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -45,7 +46,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式软小狗尾镜像_Luzi",
+            Name: "穿戴式软小狗尾镜像-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -60,7 +61,7 @@ const assets = [
     ],
     [
         {
-            Name: "大型穿戴式狼尾镜像_Luzi",
+            Name: "大型穿戴式狼尾镜像-Luzi",
             Random: false,
             Top: -100,
             Left: 0,
@@ -75,7 +76,7 @@ const assets = [
     ],
     [
         {
-            Name: "小型穿戴式狼尾镜像_Luzi",
+            Name: "小型穿戴式狼尾镜像-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -90,7 +91,7 @@ const assets = [
     ],
     [
         {
-            Name: "小型穿戴式软猫尾镜像_Luzi",
+            Name: "小型穿戴式软猫尾镜像-Luzi",
             Random: false,
             Top: 0,
             Left: 0,
@@ -105,16 +106,16 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式浣熊尾镜像_Luzi",
+            Name: "穿戴式浣熊尾镜像-Luzi",
             Random: false,
         },
         {
-            translation: { CN: "穿戴式猫尾(镜像)", EN: "Raccoon2 Tail Strap (Mirror)", RU: "Носимый кошачий хвост" },
+            translation: { CN: "穿戴式浣熊尾(镜像)", EN: "Raccoon2 Tail Strap (Mirror)", RU: "Носимый кошачий хвост" },
         },
     ],
     [
         {
-            Name: "穿戴式猫尾镜像_Luzi",
+            Name: "穿戴式猫尾镜像-Luzi",
             Random: false,
             Top: -100,
             Left: 0,
@@ -149,4 +150,7 @@ const icons = {
 export default function () {
     AssetManager.addAssetWithConfig("TailStraps", assets);
     AssetManager.addImageMapping(icons);
+    for (const a of assets) {
+        luziFixups("TailStraps", a[0].Name);
+    }
 }

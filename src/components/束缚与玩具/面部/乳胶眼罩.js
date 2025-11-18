@@ -1,9 +1,10 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳胶眼罩_Luzi",
+    Name: "乳胶眼罩-Luzi",
     Random: false,
     Gender: "F",
     Left: 190,
@@ -85,4 +86,5 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetStrings });
     AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset, { translation, layerNames });
+    luziFixups(["ItemHead", "Glasses", "Mask"], asset.Name);
 }

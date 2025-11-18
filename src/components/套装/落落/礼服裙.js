@@ -1,9 +1,10 @@
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "长裙_Luzi",
+    Name: "长裙-Luzi",
     Random: false,
     Left: 20,
     Top: 200,
@@ -45,4 +46,5 @@ export default function () {
         translation,
         layerNames,
     });
+    luziFixups("Cloth", asset.Name);
 }

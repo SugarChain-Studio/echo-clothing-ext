@@ -1,9 +1,10 @@
 import { AssetManager } from "../../assetForward";
+import { luziFixups } from "../../lib/fixups";
 import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "巨型玩偶_Luzi",
+    Name: "巨型玩偶-Luzi",
     Random: false,
     Priority: 58,
     Difficulty: -2,
@@ -93,4 +94,5 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
     FullMask.push("ItemDevices", asset.Name, ["遮罩"]);
+    luziFixups("ItemDevices", asset.Name);
 }

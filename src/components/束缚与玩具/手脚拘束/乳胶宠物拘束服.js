@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const upper = { Kneel: "Kneel", KneelingSpread: "KneelingSpread", AllFours: "AllFours" };
@@ -8,7 +9,7 @@ const lower = { Kneel: "Kneel", KneelingSpread: "KneelingSpread", AllFours: "Hid
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳胶宠物拘束服_Luzi",
+    Name: "乳胶宠物拘束服-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -50,4 +51,5 @@ const translations = {
 
 export default function () {
     AssetManager.addAsset("ItemArms", asset, undefined, translations);
+    luziFixups(["ItemArms"], asset.Name);
 }

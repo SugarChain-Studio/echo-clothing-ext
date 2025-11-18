@@ -1,6 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { Typing, PoseMapTool } from "../../lib";
+import { luziFixups } from "../../lib/fixups";
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<VibratingItemData, {}>} */
 function scriptDrawHook(data, originalFunction, drawData) {
@@ -38,7 +39,7 @@ function beforeDraw(data, originalFunction, { L, Y, Property }) {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "触手服_Luzi",
+    Name: "触手服-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -395,4 +396,5 @@ const translation = { CN: "触手服", EN: "Tentacle Suit", UA: "Щупальц�
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
+    luziFixups(["ItemTorso", "ItemTorso2"], asset.Name);
 }

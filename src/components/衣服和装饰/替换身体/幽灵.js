@@ -1,5 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { Typing, PoseMapTool } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { ImageMapTools, Tools } from "@mod-utils/Tools";
 
@@ -197,7 +198,7 @@ function afterDraw(data, originalFunction, drawData) {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "幽灵人形_Luzi",
+    Name: "幽灵人形-Luzi",
     Random: false,
     Top: 0,
     Left: 0,
@@ -357,4 +358,6 @@ export default function () {
         extended,
         assetStrings,
     });
+
+    luziFixups("动物身体_Luzi", asset.Name);
 }

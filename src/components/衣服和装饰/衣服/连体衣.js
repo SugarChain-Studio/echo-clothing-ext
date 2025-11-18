@@ -1,9 +1,10 @@
 import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "连体衣_Luzi",
+    Name: "连体衣-Luzi",
     Random: false,
     Top: 200,
     Left: 170,
@@ -47,4 +48,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig(["Suit", "Cloth"], asset, { translation, layerNames });
+    luziFixups(["Suit", "Cloth"], asset.Name);
 }

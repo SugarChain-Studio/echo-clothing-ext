@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "西装露肩_Luzi",
+    Name: "西装露肩-Luzi",
     Random: false,
     Left: 30,
     Top: 50,
@@ -61,14 +62,11 @@ const assetStrings = {
 };
 
 export default function () {
-    /** @type {AssetGroupBodyName[]} */
-    const groups = ["Cloth", "ClothOuter"];
-    for (const group of groups) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            translation,
-            layerNames,
-            extended,
-            assetStrings,
-        });
-    }
+    AssetManager.addAssetWithConfig(["Cloth", "ClothOuter"], asset, {
+        translation,
+        layerNames,
+        extended,
+        assetStrings,
+    });
+    luziFixups(["Cloth", "ClothOuter"], asset.Name);
 }

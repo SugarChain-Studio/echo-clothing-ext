@@ -1,5 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
+import { luziFixups } from "../../lib/fixups";
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
@@ -163,7 +164,7 @@ function dialogClick(Data, originalFunction) {
 
 /** @type { CustomAssetDefinition } */
 const asset = {
-    Name: "电击器_Luzi",
+    Name: "电击器-Luzi",
     Random: false,
     Gender: "F",
     Left: {
@@ -360,4 +361,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemLegs", asset, { extended, translation, layerNames, assetStrings });
+    luziFixups("ItemLegs", asset.Name);
 }

@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "蕾丝边_Luzi",
+    Name: "蕾丝边-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -22,26 +23,16 @@ const asset = {
         {
             Name: "左腿",
             HasImage: false,
-            HideColoring: true,
+            AllowColorize: false,
             AllowTypes: { typed: [1] },
-            Alpha: [
-                {
-                    Group: ["Garters"],
-                    Masks: [[251, 0, 250, 1000]],
-                },
-            ],
+            Alpha: [{ Group: ["Garters"], Masks: [[251, 0, 250, 1000]] }],
         },
         {
             Name: "右腿",
             HasImage: false,
-            HideColoring: true,
+            AllowColorize: false,
             AllowTypes: { typed: [2] },
-            Alpha: [
-                {
-                    Group: ["Garters"],
-                    Masks: [[0, 0, 250, 1000]],
-                },
-            ],
+            Alpha: [{ Group: ["Garters"], Masks: [[0, 0, 250, 1000]] }],
         },
     ],
 };
@@ -84,4 +75,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Garters", asset, { extended, translation, layerNames, assetStrings });
+    luziFixups("Garters", asset.Name);
 }

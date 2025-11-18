@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "半开百褶裙_Luzi",
+    Name: "半开百褶裙-Luzi",
     Random: false,
     Top: 0,
     Left: {
@@ -16,20 +17,8 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
-    Layer: [
-        {
-            Name: "裙子",
-            Priority: 26,
-        },
-        {
-            Name: "白线",
-            Priority: 26,
-        },
-        {
-            Name: "链子",
-            Priority: 26,
-        },
-    ],
+    Priority: 26,
+    Layer: [{ Name: "裙子" }, { Name: "白线" }, { Name: "链子" }],
 };
 
 /** @type {Translation.Entry} */
@@ -49,4 +38,5 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
+    luziFixups("ClothLower", asset.Name);
 }

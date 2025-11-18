@@ -1,10 +1,11 @@
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { takeLayerNames } from "../../../lib";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "斜肩上衣_Luzi",
+    Name: "斜肩上衣-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -56,4 +57,5 @@ const translation = {
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { extended, translation, assetStrings, layerNames });
+    luziFixups("Cloth", asset.Name);
 }

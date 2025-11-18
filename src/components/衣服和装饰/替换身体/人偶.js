@@ -1,9 +1,10 @@
 import { AssetManager } from "../../../assetForward";
 import { registerDrawHook } from "../../../lib/afterDraw";
+import { luziFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "人偶_Luzi",
+    Name: "人偶-Luzi",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -91,4 +92,5 @@ function beforeDraw({ C, L }) {
 export default function () {
     registerDrawHook(asset, "动物身体_Luzi", { beforeDraw });
     AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
+    luziFixups("动物身体_Luzi", asset.Name);
 }

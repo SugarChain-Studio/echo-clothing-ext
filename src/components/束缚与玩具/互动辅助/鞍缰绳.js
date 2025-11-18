@@ -55,6 +55,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
     for (const a of assets) {
-        luziFixups(a[0], a[1].Name);
+        luziFixups(["ItemTorso", "ItemTorso2"], a[1].Name);
     }
 }
