@@ -1,11 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParamsNoGroup[] } */
 const accessories = [
     [
         {
-            Name: "耳朵1-Luzi",
+            Name: "耳朵1",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: -40,
@@ -21,7 +21,7 @@ const accessories = [
     ],
     [
         {
-            Name: "耳朵2-Luzi",
+            Name: "耳朵2",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -37,7 +37,7 @@ const accessories = [
     ],
     [
         {
-            Name: "角7-Luzi",
+            Name: "角7",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -48,7 +48,7 @@ const accessories = [
     ],
     [
         {
-            Name: "精灵耳2-Luzi",
+            Name: "精灵耳2",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -61,7 +61,7 @@ const accessories = [
     ],
     [
         {
-            Name: "小马耳2-Luzi",
+            Name: "小马耳2",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Top: 0,
@@ -71,7 +71,7 @@ const accessories = [
     ],
     [
         {
-            Name: "鱼鳍耳朵-Luzi",
+            Name: "鱼鳍耳朵",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Left: 160,
@@ -90,7 +90,7 @@ const accessories = [
     ],
     [
         {
-            Name: "耷拉下来的耳朵-Luzi",
+            Name: "耷拉下来的耳朵",
             Random: false,
             DynamicGroupName: "HairAccessory1",
             Left: 140,
@@ -106,6 +106,6 @@ const accessories = [
 export default function () {
     AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory2"], accessories);
     for (const a of accessories) {
-        luziFixups(["HairAccessory1", "HairAccessory2"], a[0].Name);
+        luziSuffixFixups(["HairAccessory1", "HairAccessory2"], a[0].Name);
     }
 }

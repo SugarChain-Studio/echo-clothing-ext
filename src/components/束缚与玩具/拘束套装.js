@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const upperMapping = {
@@ -25,7 +25,7 @@ const suitMapping = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "拘束套装-Luzi",
+    Name: "拘束套装",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -143,10 +143,10 @@ const extended = {
 
 /** @type {Record<string, string>} */
 const icons = {
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/无.png": PathTools.emptyImage,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/乳胶衣.png": PathTools.emptyImage,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/透视紧身衣.png": PathTools.emptyImage,
-    "Screens/Inventory/ItemTorso/拘束套装_Luzi/紧身衣.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装/无.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装/乳胶衣.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装/透视紧身衣.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemTorso/拘束套装/紧身衣.png": PathTools.emptyImage,
 };
 
 const assetStrings = {
@@ -184,5 +184,5 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
     AssetManager.addImageMapping(icons);
-    luziFixups(["ItemTorso", "ItemTorso2"], asset.Name);
+    luziSuffixFixups(["ItemTorso", "ItemTorso2"], asset.Name);
 }

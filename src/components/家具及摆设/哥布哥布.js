@@ -1,11 +1,11 @@
 import { AssetManager } from "../../assetForward";
 import { registerDrawHook } from "../../lib/afterDraw";
 import { ChainCanvasCache } from "../../lib/chain";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
-    Name: "哥布哥布-Luzi",
+    Name: "哥布哥布",
     Random: false,
     Top: 580,
     Left: 250,
@@ -67,5 +67,5 @@ function afterDraw(drawData) {
 export default function () {
     registerDrawHook(asset, "ItemNeckRestraints", { afterDraw });
     AssetManager.addAssetWithConfig("ItemNeckRestraints", asset, { translation, layerNames });
-    luziFixups("ItemNeckRestraints", asset.Name);
+    luziSuffixFixups("ItemNeckRestraints", asset.Name);
 }

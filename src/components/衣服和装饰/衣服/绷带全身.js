@@ -1,6 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { PostPass, SockLRTool } from "../../../lib";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 const translation = { CN: "绷带", EN: "Bandage", RU: "Повязка" };
 
@@ -9,7 +9,7 @@ const assets = [
     [
         "Gloves",
         {
-            Name: "绷带-Luzi",
+            Name: "绷带",
             Random: false,
             Top: 0,
             Left: 0,
@@ -31,7 +31,7 @@ const assets = [
         "Socks",
         PostPass.asset(
             {
-                Name: "绷带-Luzi",
+                Name: "绷带",
                 Random: false,
                 Top: 0,
                 Left: { "": 0, "KneelingSpread": 30 },
@@ -47,7 +47,7 @@ const assets = [
     [
         "Bra",
         {
-            Name: "绷带全身-Luzi",
+            Name: "绷带全身",
             Random: false,
             Gender: "F",
             Top: 0,
@@ -87,7 +87,7 @@ const assets = [
     [
         "ItemHood",
         {
-            Name: "绷带头部-Luzi",
+            Name: "绷带头部",
             Random: false,
             Block: [],
             Priority: 51,
@@ -99,7 +99,7 @@ const assets = [
     [
         "ItemTorso",
         {
-            Name: "绷带全身-Luzi",
+            Name: "绷带全身",
             Gender: "F",
             Random: false,
             Top: 0,
@@ -136,7 +136,7 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
     for (const [g, asset] of assets) {
-        luziFixups(g, asset.Name);
+        luziSuffixFixups(g, asset.Name);
     }
-    luziFixups(["SocksLeft", "SocksRight"], "绷带-Luzi");
+    luziSuffixFixups(["SocksLeft", "SocksRight"], "绷带");
 }

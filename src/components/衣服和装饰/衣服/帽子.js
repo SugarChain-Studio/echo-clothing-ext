@@ -1,11 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
     [
         {
-            Name: "冕旒-Luzi",
+            Name: "冕旒",
             Random: false,
             Left: 0,
             Top: -18,
@@ -41,7 +41,7 @@ const assets = [
     ],
     [
         {
-            Name: "帽子2-Luzi",
+            Name: "帽子2",
             Random: false,
             Left: 160,
             Top: 20,
@@ -62,6 +62,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig("Hat", assets);
     for (const a of assets) {
-        luziFixups("Hat", a[0].Name);
+        luziSuffixFixups("Hat", a[0].Name);
     }
 }

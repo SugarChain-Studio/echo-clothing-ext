@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "短穿环_Luzi",
+    Name: "短穿环",
     Fetish: ["Metal"],
     Difficulty: 10,
     Time: 15,
@@ -21,4 +22,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemNipplesPiercings", asset, { translation, layerNames: {} });
+    luziSuffixFixups(["ItemNipplesPiercings"], asset.Name);
 }

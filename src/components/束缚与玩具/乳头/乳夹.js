@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳夹-Luzi",
+    Name: "乳夹",
     Fetish: ["Metal"],
     Difficulty: 10,
     Time: 15,
@@ -44,5 +44,5 @@ export default function () {
         translation,
         layerNames,
     });
-    luziFixups("ItemNipples", asset.Name);
+    luziSuffixFixups("ItemNipples", asset.Name);
 }

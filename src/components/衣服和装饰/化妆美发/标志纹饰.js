@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {(AssetLayerDefinition & {Localized: Translation.Entry})[]} */
 const layers = [
@@ -266,7 +267,7 @@ const posModules = [
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "标志纹饰_Luzi",
+    Name: "标志纹饰",
     Random: false,
     Top: 240,
     Left: 190,
@@ -457,4 +458,5 @@ export default function () {
         extended,
         assetStrings,
     });
+    luziSuffixFixups(["BodyMarkings"], asset.Name);
 }

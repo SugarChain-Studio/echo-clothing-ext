@@ -1,13 +1,13 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../assetForward";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
     [
         "ItemAddon",
         {
-            Name: "被子左边-Luzi",
+            Name: "被子左边",
             Random: false,
             Top: -260,
             Left: 0,
@@ -21,7 +21,7 @@ const assets = [
     [
         "ItemAddon",
         {
-            Name: "被子右边-Luzi",
+            Name: "被子右边",
             Random: false,
             Top: -260,
             Left: -210,
@@ -35,7 +35,7 @@ const assets = [
     [
         "ItemDevices",
         {
-            Name: "床左边-Luzi",
+            Name: "床左边",
             Random: false,
             Top: -260,
             Left: 0,
@@ -48,8 +48,8 @@ const assets = [
             DefaultColor: ["#523629", "#888990", "#808284"],
             RemoveItemOnRemove: [
                 { Group: "ItemAddon", Name: "Covers" },
-                { Group: "ItemAddon", Name: "被子左边_Luzi" },
-                { Group: "ItemAddon", Name: "被子右边_Luzi" },
+                { Group: "ItemAddon", Name: "被子左边" },
+                { Group: "ItemAddon", Name: "被子右边" },
                 { Group: "ItemAddon", Name: "BedRopes" },
                 { Group: "ItemAddon", Name: "BedStraps" },
                 { Group: "ItemAddon", Name: "BedTape" },
@@ -70,7 +70,7 @@ const assets = [
         "ItemDevices",
 
         {
-            Name: "床右边-Luzi",
+            Name: "床右边",
             Random: false,
             Top: -260,
             Left: -110,
@@ -84,8 +84,8 @@ const assets = [
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             RemoveItemOnRemove: [
                 { Group: "ItemAddon", Name: "Covers" },
-                { Group: "ItemAddon", Name: "被子左边_Luzi" },
-                { Group: "ItemAddon", Name: "被子右边_Luzi" },
+                { Group: "ItemAddon", Name: "被子左边" },
+                { Group: "ItemAddon", Name: "被子右边" },
                 { Group: "ItemAddon", Name: "BedRopes" },
                 { Group: "ItemAddon", Name: "BedStraps" },
                 { Group: "ItemAddon", Name: "BedTape" },
@@ -105,18 +105,12 @@ const assets = [
 
 export default function () {
     AssetManager.addImageMapping({
-        [ImageMapTools.assetPreview("ItemDevices", "床右边-Luzi")]: ImageMapTools.assetPreview(
-            "ItemDevices",
-            "床左边-Luzi"
-        ),
-        [ImageMapTools.assetPreview("ItemAddon", "被子右边-Luzi")]: ImageMapTools.assetPreview(
-            "ItemAddon",
-            "被子左边-Luzi"
-        ),
+        [ImageMapTools.assetPreview("ItemDevices", "床右边")]: ImageMapTools.assetPreview("ItemDevices", "床左边"),
+        [ImageMapTools.assetPreview("ItemAddon", "被子右边")]: ImageMapTools.assetPreview("ItemAddon", "被子左边"),
     });
 
     AssetManager.addAssetWithConfig(assets);
     for (const a of assets) {
-        luziFixups(a[0], a[1].Name);
+        luziSuffixFixups(a[0], a[1].Name);
     }
 }

@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "踩脚袜_Luzi",
+    Name: "踩脚袜",
     Random: false,
     Top: 0,
     Left: {
@@ -27,4 +28,5 @@ export default function () {
         layerNames: {},
         translation,
     });
+    luziSuffixFixups(["Socks", "SocksLeft", "SocksRight"], asset.Name);
 }

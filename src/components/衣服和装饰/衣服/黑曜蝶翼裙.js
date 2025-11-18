@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "黑曜蝶翼裙-Luzi",
+    Name: "黑曜蝶翼裙",
     Random: false,
     Left: { "": 60, "KneelingSpread": 150 },
     Top: 380,
@@ -67,5 +67,5 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
-    luziFixups("ClothLower", asset.Name);
+    luziSuffixFixups("ClothLower", asset.Name);
 }

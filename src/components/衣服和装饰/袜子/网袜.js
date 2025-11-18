@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "网袜-Luzi",
+    Name: "网袜",
     Random: false,
     Top: 0,
     Left: {
@@ -121,5 +121,5 @@ export default function () {
         layerNames,
         translation,
     });
-    luziFixups("Socks", asset.Name);
+    luziSuffixFixups("Socks", asset.Name);
 }

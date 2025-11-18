@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "半开百褶裙-Luzi",
+    Name: "半开百褶裙",
     Random: false,
     Top: 0,
     Left: {
@@ -38,5 +38,5 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
-    luziFixups("ClothLower", asset.Name);
+    luziSuffixFixups("ClothLower", asset.Name);
 }

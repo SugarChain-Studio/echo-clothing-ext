@@ -1,6 +1,7 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../../assetForward";
 import { ArmMaskTool } from "../../../lib";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const mouthFoodDef = {
@@ -45,7 +46,7 @@ const handFood = (name, args) => ({ Name: name, ...handFoodDef, ...args });
 
 /** @type {CustomAssetDefinitionItem} */
 const hambAsset = {
-    Name: "汉堡_Luzi",
+    Name: "汉堡",
     Random: false,
     Top: -50,
     Left: 150,
@@ -59,11 +60,11 @@ const hambAsset = {
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
     ItemMouth: [
-        mouthFood("蛋糕卷_Luzi"),
-        mouthFood("棒棒糖_Luzi", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
-        mouthFood("烤鱼_Luzi"),
-        mouthFood("鸡腿_Luzi"),
-        mouthFood("煎包_Luzi"),
+        mouthFood("蛋糕卷"),
+        mouthFood("棒棒糖", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
+        mouthFood("烤鱼"),
+        mouthFood("鸡腿"),
+        mouthFood("煎包"),
         mouthFood("曲奇"),
         mouthFood("吐司"),
         mouthFood("蛋挞"),
@@ -84,9 +85,9 @@ const assets = {
             PoseMapping: {},
             Layer: [{ Name: "底色" }, { Name: "顶色" }, { Name: "盖子" }, { Name: "外观" }, { Name: "吸管" }],
         },
-        handFood("棒棒糖_Luzi", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
-        handFood("烤鱼_Luzi", { Layer: [{ Name: "竹签" }, { Name: "鱼" }] }),
-        handFood("鸡腿_Luzi"),
+        handFood("棒棒糖", { Layer: [{ Name: "棒子" }, { Name: "糖" }, { Name: "条纹" }] }),
+        handFood("烤鱼", { Layer: [{ Name: "竹签" }, { Name: "鱼" }] }),
+        handFood("鸡腿"),
         handFood("曲奇"),
         handFood("吐司"),
         handFood("蛋挞"),
@@ -98,20 +99,20 @@ const assets = {
 /** @type {Translation.String} */
 const hmSharedTranslation = {
     CN: {
-        棒棒糖_Luzi: "棒棒糖",
-        烤鱼_Luzi: "烤鱼",
-        鸡腿_Luzi: "烤鸡腿",
-        蛋糕卷_Luzi: "蛋糕卷",
+        棒棒糖: "棒棒糖",
+        烤鱼: "烤鱼",
+        鸡腿: "烤鸡腿",
+        蛋糕卷: "蛋糕卷",
         曲奇: "曲奇",
         吐司: "吐司",
         蛋挞: "蛋挞",
         月饼: "月饼",
     },
     EN: {
-        棒棒糖_Luzi: "Lollipop",
-        烤鱼_Luzi: "Grilled Fish",
-        鸡腿_Luzi: "Roasted Chicken Leg",
-        蛋糕卷_Luzi: "Cake Roll",
+        棒棒糖: "Lollipop",
+        烤鱼: "Grilled Fish",
+        鸡腿: "Roasted Chicken Leg",
+        蛋糕卷: "Cake Roll",
         曲奇: "Cookie",
         吐司: "Toast",
         蛋挞: "Egg Tart",
@@ -123,48 +124,48 @@ const hmSharedTranslation = {
 const translations = {
     CN: {
         ItemHandheld: {
-            汉堡_Luzi: "汉堡",
+            汉堡: "汉堡",
             奶茶: "奶茶",
             ...hmSharedTranslation.CN,
         },
         ItemMouth: {
-            煎包_Luzi: "煎包",
+            煎包: "煎包",
             ...hmSharedTranslation.CN,
         },
         ItemHood: {
-            汉堡_Luzi: "汉堡",
+            汉堡: "汉堡",
         },
     },
     EN: {
         ItemHandheld: {
-            汉堡_Luzi: "Hamburger",
+            汉堡: "Hamburger",
             奶茶: "Milk Tea",
             ...hmSharedTranslation.EN,
         },
         ItemMouth: {
-            煎包_Luzi: "Fried Bun",
+            煎包: "Fried Bun",
             ...hmSharedTranslation.EN,
         },
         ItemHood: {
-            汉堡_Luzi: "Hamburger",
+            汉堡: "Hamburger",
         },
     },
     RU: {
         ItemHandheld: {
-            汉堡_Luzi: "Гамбургер",
-            棒棒糖_Luzi: "Леденец",
-            烤鱼_Luzi: "Запечённая рыба",
-            鸡腿_Luzi: "Запечённая куриная нога",
+            汉堡: "Гамбургер",
+            棒棒糖: "Леденец",
+            烤鱼: "Запечённая рыба",
+            鸡腿: "Запечённая куриная нога",
             奶茶: "чай с молоком",
         },
         ItemMouth: {
-            棒棒糖_Luzi: "Леденец",
-            烤鱼_Luzi: "Запечённая рыба",
-            鸡腿_Luzi: "Запечённая куриная нога",
-            蛋糕卷_Luzi: "Рулет",
+            棒棒糖: "Леденец",
+            烤鱼: "Запечённая рыба",
+            鸡腿: "Запечённая куриная нога",
+            蛋糕卷: "Рулет",
         },
         ItemHood: {
-            汉堡_Luzi: "Гамбургер",
+            汉堡: "Гамбургер",
         },
     },
 };
@@ -172,19 +173,19 @@ const translations = {
 const layerNames = {
     EN: {
         ItemMouth: {
-            棒棒糖_Luzi: {
+            棒棒糖: {
                 棒子: "Stick",
                 糖: "Candy",
                 条纹: "Stripes",
             },
         },
         ItemHandheld: {
-            棒棒糖_Luzi: {
+            棒棒糖: {
                 棒子: "Stick",
                 糖: "Candy",
                 条纹: "Stripes",
             },
-            烤鱼_Luzi: {
+            烤鱼: {
                 竹签: "Bamboo Skewer",
                 鱼: "Fish",
             },
@@ -210,4 +211,8 @@ export default function () {
         ArmMaskTool.createArmMaskForCloth("ItemHandheld", i, "Right");
     });
     AssetManager.addGroupedAssetsWithConfig(assets, translations, layerNames);
+
+    Object.entries(assets).forEach(([group, items]) =>
+        items.forEach((item) => luziSuffixFixups(/** @type {AssetGroupName} */ (group), item.Name))
+    );
 }

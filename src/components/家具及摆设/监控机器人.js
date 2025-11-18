@@ -1,11 +1,11 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { takeLayerNames } from "../../lib";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
-    Name: "监控机器人-Luzi",
+    Name: "监控机器人",
     Random: false,
     Top: 100,
     Left: 350,
@@ -268,5 +268,5 @@ export default function () {
         assetStrings,
         extended,
     });
-    luziFixups("ItemNeckRestraints", asset.Name);
+    luziSuffixFixups("ItemNeckRestraints", asset.Name);
 }

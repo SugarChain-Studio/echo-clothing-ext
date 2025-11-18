@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const assetdef = {
-    Name: "迷你裤-Luzi",
+    Name: "迷你裤",
     Top: 400,
     Random: false,
     DefaultColor: ["#727B91", "#FFD1A3", "#88665A"],
@@ -54,6 +54,6 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
     for (const a of asset) {
-        luziFixups("ClothLower", a[1].Name);
+        luziSuffixFixups("ClothLower", a[1].Name);
     }
 }

@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "丝袜2_Luzi",
+    Name: "丝袜2",
     Random: false,
     Top: 0,
     Left: {
@@ -24,10 +24,6 @@ const translation = {
 };
 
 export default function () {
-    for (const group of Typing.groups(["Socks", "SocksLeft", "SocksRight"])) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            layerNames: {},
-            translation,
-        });
-    }
+    AssetManager.addAssetWithConfig(["Socks", "SocksLeft", "SocksRight"], asset, { translation });
+    luziSuffixFixups(["Socks", "SocksLeft", "SocksRight"], asset.Name);
 }

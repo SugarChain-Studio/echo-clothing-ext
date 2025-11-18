@@ -1,9 +1,9 @@
 import { AssetManager } from "../../assetForward";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "玻璃罐子-Luzi",
+    Name: "玻璃罐子",
     Random: false,
     /** @type {AssetGender} */
     Gender: "F",
@@ -429,5 +429,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, { extended, translation, layerNames, assetStrings });
-    luziFixups("ItemDevices", asset.Name);
+    luziSuffixFixups("ItemDevices", asset.Name);
 }

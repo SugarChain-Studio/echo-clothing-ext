@@ -1,8 +1,9 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "SND项链_Luzi",
+    Name: "SND项链",
     Random: false,
     Left: 190,
     Top: 210,
@@ -21,10 +22,9 @@ const translation = {
 export default function () {
     /** @type {AssetGroupBodyName[]} */
     const groups = ["Necklace", "ClothAccessory"];
-    for (const group of groups) {
-        AssetManager.addAssetWithConfig(group, asset, {
-            translation,
-            layerNames: {},
-        });
-    }
+    AssetManager.addAssetWithConfig(groups, asset, {
+        translation,
+        layerNames: {},
+    });
+    luziSuffixFixups(groups, asset.Name);
 }

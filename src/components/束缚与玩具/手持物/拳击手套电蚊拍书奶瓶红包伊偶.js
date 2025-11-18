@@ -1,13 +1,13 @@
 import { AssetManager } from "../../../assetForward";
 import { ArmMaskTool, PostPass } from "../../../lib";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParams[] }} */
 const assets = [
     [
         "ItemHands",
         {
-            Name: "拳击手套-Luzi",
+            Name: "拳击手套",
             Random: false,
             Gender: "F",
             ParentGroup: {},
@@ -28,7 +28,7 @@ const assets = [
     [
         "ItemHandheld",
         {
-            Name: "电蚊拍-Luzi",
+            Name: "电蚊拍",
             Random: false,
             Top: -110,
             Left: 0,
@@ -96,7 +96,7 @@ const assets = [
     [
         "ItemHandheld",
         {
-            Name: "伊偶-Luzi",
+            Name: "伊偶",
             Random: false,
             Gender: "F",
             Top: { OverTheHead: -100 },
@@ -113,6 +113,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
     for (const a of assets) {
-        luziFixups(a[0], a[1].Name);
+        luziSuffixFixups(a[0], a[1].Name);
     }
 }

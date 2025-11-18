@@ -1,10 +1,11 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {AssetPoseName[]} */
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "调整高度_Luzi",
+    Name: "调整高度",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -75,4 +76,5 @@ export default function () {
         extended,
         assetStrings: dialog,
     });
+    luziSuffixFixups("ItemAddon", asset.Name);
 }

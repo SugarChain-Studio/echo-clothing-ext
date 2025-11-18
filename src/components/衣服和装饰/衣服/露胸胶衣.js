@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "露胸胶衣-Luzi",
+    Name: "露胸胶衣",
     Random: false,
     Gender: "F",
     Top: 180,
@@ -145,5 +145,5 @@ export default function () {
         });
     });
 
-    luziFixups(targetGroups, asset.Name);
+    luziSuffixFixups(targetGroups, asset.Name);
 }

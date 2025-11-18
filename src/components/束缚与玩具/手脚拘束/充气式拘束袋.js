@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "充气式拘束袋-Luzi",
+    Name: "充气式拘束袋",
     Random: false,
     Top: 0,
     Left: 0,
@@ -359,5 +359,5 @@ export default function () {
         extended,
         assetStrings,
     });
-    luziFixups(["ItemDevices", "ItemArms"], asset.Name);
+    luziSuffixFixups(["ItemDevices", "ItemArms"], asset.Name);
 }

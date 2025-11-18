@@ -1,5 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { {X:number,Y:number, textAlign: CanvasTextAlign}[]} */
 const Positions = [
@@ -65,7 +66,7 @@ function afterDrawHook(data, originalFunction, { C, A, CA, X, Y, drawCanvas, dra
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "身体论文_Luzi",
+    Name: "身体论文",
     Priority: 13,
     DynamicGroupName: "BodyMarkings",
     PoseMapping: {
@@ -210,4 +211,5 @@ export default function () {
             "BodyWritings"
         ),
     });
+    luziSuffixFixups(["BodyMarkings2_Luzi"], asset.Name);
 }

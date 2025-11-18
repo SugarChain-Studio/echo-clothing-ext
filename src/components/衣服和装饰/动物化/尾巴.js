@@ -1,11 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
     [
         {
-            Name: "尾巴1-Luzi",
+            Name: "尾巴1",
             Random: false,
             Top: 0,
             Left: 0,
@@ -21,7 +21,7 @@ const assets = [
     ],
     [
         {
-            Name: "尾巴2-Luzi",
+            Name: "尾巴2",
             Random: false,
             Top: 0,
             Left: 0,
@@ -35,7 +35,7 @@ const assets = [
     ],
     [
         {
-            Name: "尾巴3-Luzi",
+            Name: "尾巴3",
             Random: false,
             Top: 0,
             Left: 0,
@@ -49,7 +49,7 @@ const assets = [
     ],
     [
         {
-            Name: "雪豹尾巴-Luzi",
+            Name: "雪豹尾巴",
             Random: false,
             Top: 0,
             Left: 0,
@@ -59,7 +59,7 @@ const assets = [
     ],
     [
         {
-            Name: "雪豹尾巴镜像-Luzi",
+            Name: "雪豹尾巴镜像",
             Random: false,
             Top: 0,
             Left: 0,
@@ -69,7 +69,7 @@ const assets = [
     ],
     [
         {
-            Name: "鱼尾1-Luzi",
+            Name: "鱼尾1",
             Random: false,
             Top: 0,
             Left: 0,
@@ -79,7 +79,7 @@ const assets = [
     ],
     [
         {
-            Name: "鱼尾2-Luzi",
+            Name: "鱼尾2",
             Random: false,
             Top: 0,
             Left: 0,
@@ -116,6 +116,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig("TailStraps", assets);
     for (const a of assets) {
-        luziFixups("TailStraps", a[0].Name);
+        luziSuffixFixups("TailStraps", a[0].Name);
     }
 }

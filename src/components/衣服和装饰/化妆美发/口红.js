@@ -1,10 +1,10 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup} */
 const asset = [
     {
-        Name: "口红-Luzi",
+        Name: "口红",
         Random: false,
         Top: 0,
         Left: 0,
@@ -46,5 +46,5 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig("身体痕迹_Luzi", ...asset);
-    luziFixups("身体痕迹_Luzi", asset[0].Name);
+    luziSuffixFixups("身体痕迹_Luzi", asset[0].Name);
 }

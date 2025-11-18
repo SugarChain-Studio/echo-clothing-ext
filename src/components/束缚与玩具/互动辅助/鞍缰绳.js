@@ -1,12 +1,12 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParams[] }} */
 const assets = [
     [
         "ItemTorso",
         {
-            Name: "鞍-Luzi",
+            Name: "鞍",
             Random: false,
             ParentGroup: {},
             Effect: ["Leash"],
@@ -16,7 +16,7 @@ const assets = [
     [
         "ItemTorso",
         {
-            Name: "缰绳-Luzi",
+            Name: "缰绳",
             Random: false,
             Top: 0,
             Left: 0,
@@ -55,6 +55,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
     for (const a of assets) {
-        luziFixups(["ItemTorso", "ItemTorso2"], a[1].Name);
+        luziSuffixFixups(["ItemTorso", "ItemTorso2"], a[1].Name);
     }
 }

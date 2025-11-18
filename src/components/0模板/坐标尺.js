@@ -3,7 +3,7 @@ import { AssetManager } from "../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "坐标尺_Luzi",
+    Name: "坐标尺",
     Random: false,
     Top: 0,
     Left: 0,

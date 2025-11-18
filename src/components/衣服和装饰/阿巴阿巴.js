@@ -1,9 +1,9 @@
 import { AssetManager } from "../../assetForward";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "阿巴阿巴-Luzi",
+    Name: "阿巴阿巴",
     Random: false,
     Top: 0,
     Left: 0,
@@ -81,5 +81,5 @@ const translation = { CN: "阿巴阿巴", EN: "Aba Aba" };
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemHandheld", asset, { extended, translation, layerNames, assetStrings });
-    luziFixups("ItemHandheld", asset.Name);
+    luziSuffixFixups("ItemHandheld", asset.Name);
 }

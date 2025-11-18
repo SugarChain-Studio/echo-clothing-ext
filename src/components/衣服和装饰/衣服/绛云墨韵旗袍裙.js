@@ -1,6 +1,6 @@
 import { ArmMaskTool, PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AssetLayerDefinition} */
 const hideFB = {
@@ -9,7 +9,7 @@ const hideFB = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "绛云墨韵旗袍裙-Luzi",
+    Name: "绛云墨韵旗袍裙",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -147,5 +147,5 @@ const translation = {
 export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
-    luziFixups("Cloth", asset.Name);
+    luziSuffixFixups("Cloth", asset.Name);
 }

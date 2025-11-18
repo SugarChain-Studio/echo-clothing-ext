@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {(overrides?: AssetPoseMapping) => AssetPoseMapping} */
 const glovePoseM = (overrides) => ({
@@ -21,7 +21,7 @@ const glovePoseM = (overrides) => ({
 const assets = [
     [
         {
-            Name: "袖手套-Luzi",
+            Name: "袖手套",
             Random: false,
             ...Tools.topLeftBuilder(
                 { Left: 150, Top: 310 },
@@ -49,7 +49,7 @@ const assets = [
     ],
     [
         {
-            Name: "丝手套2-Luzi",
+            Name: "丝手套2",
             Random: false,
             Top: 0,
             Left: 0,
@@ -59,7 +59,7 @@ const assets = [
     ],
     [
         {
-            Name: "手套渐变-Luzi",
+            Name: "手套渐变",
             Random: false,
             Top: 0,
             Left: 0,
@@ -72,6 +72,6 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig("Gloves", assets);
     for (const a of assets) {
-        luziFixups("Gloves", a[0].Name);
+        luziSuffixFixups("Gloves", a[0].Name);
     }
 }

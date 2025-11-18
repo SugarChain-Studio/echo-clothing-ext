@@ -1,9 +1,10 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳胶头套_Luzi",
+    Name: "乳胶头套",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -125,4 +126,5 @@ export default function () {
         extended,
         assetStrings,
     });
+    luziSuffixFixups(["ItemHood"], asset.Name);
 }

@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
-    Name: "折扇-Luzi",
+    Name: "折扇",
     Random: false,
     Top: 240,
     Left: 150,
@@ -185,5 +185,5 @@ export default function () {
         assetStrings,
     });
 
-    luziFixups("ItemHandheld", asset.Name);
+    luziSuffixFixups("ItemHandheld", asset.Name);
 }

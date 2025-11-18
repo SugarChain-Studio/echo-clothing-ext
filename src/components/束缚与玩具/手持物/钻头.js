@@ -9,7 +9,7 @@ const group = "ItemHandheld";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "钻头-Luzi",
+    Name: "钻头",
     Random: false,
     Top: 110,
     Left: 10,
@@ -73,7 +73,7 @@ function scriptDraw({ C, Item, PersistentData }) {
     Tools.drawUpdate(C, Data);
 }
 
-const dialogs = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头_Luzi"], {
+const dialogs = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头"], {
     CN: {
         Select: "转不转",
         不转: "不转",

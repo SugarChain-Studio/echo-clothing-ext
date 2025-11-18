@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 /** @type {Partial<AssetLayerDefinition>} */
 const bottomLayerShared = {
     ParentGroup: "BodyLower",
@@ -23,7 +23,7 @@ const topLayerShared = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "锦云绣雪旗袍-Luzi",
+    Name: "锦云绣雪旗袍",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -93,5 +93,5 @@ const assetStrings = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames, extended, assetStrings });
-    luziFixups("Cloth", asset.Name);
+    luziSuffixFixups("Cloth", asset.Name);
 }

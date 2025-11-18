@@ -1,13 +1,13 @@
 import { ArmMaskTool, PostPass } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
     [
         PostPass.asset(
             {
-                Name: "女仆装-Luzi",
+                Name: "女仆装",
                 Random: false,
                 Gender: "F",
                 Top: 0,
@@ -30,7 +30,7 @@ const asset = [
     [
         PostPass.asset(
             {
-                Name: "女仆装2-Luzi",
+                Name: "女仆装2",
                 Random: false,
                 Gender: "F",
                 Top: 0,
@@ -74,6 +74,6 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset);
     for (const [assetDef] of asset) {
-        luziFixups("Cloth", assetDef.Name);
+        luziSuffixFixups("Cloth", assetDef.Name);
     }
 }

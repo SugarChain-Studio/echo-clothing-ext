@@ -1,10 +1,10 @@
 import { PoseMapTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "女巫小披肩-Luzi",
+    Name: "女巫小披肩",
     Random: false,
     Gender: "F",
     Left: 100,
@@ -18,7 +18,7 @@ const asset = {
     MinOpacity: 0,
     MaxOpacity: 1,
     Layer: [
-        { Name: "后背", Priority: 4 },
+        { Name: "后背", Priority: 4, ...PoseMapTool.layerConfig(true, [], ["BaseLower"]) },
         { Name: "下半基础", ColorGroup: "基础" },
         { Name: "下半纹路" },
         { Name: "下半阴影", ColorGroup: "阴影", BlendingMode: "multiply" },
@@ -55,5 +55,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothAccessory", asset, { translation, layerNames });
-    luziFixups("ClothAccessory", asset.Name);
+    luziSuffixFixups("ClothAccessory", asset.Name);
 }

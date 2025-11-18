@@ -1,10 +1,10 @@
 import { AssetManager } from "../../../assetForward";
 import { PoseMapTool } from "../../../lib";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "X腿带-Luzi",
+    Name: "X腿带",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -75,5 +75,5 @@ export default function () {
         layerNames,
         assetStrings,
     });
-    luziFixups("Garters", asset.Name);
+    luziSuffixFixups("Garters", asset.Name);
 }

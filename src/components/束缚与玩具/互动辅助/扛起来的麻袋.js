@@ -6,7 +6,7 @@ export default function () {
     AssetManager.addAsset(
         "ItemMisc",
         {
-            Name: "扛起来的麻袋_Luzi",
+            Name: "扛起来的麻袋",
             Random: false,
             Visible: false,
             Value: -1, // 使用这个数据来让物品在列表不显示
@@ -19,11 +19,10 @@ export default function () {
         }
     );
 
-    CustomValidate.remove("ItemMisc", "扛起来的麻袋_Luzi");
+    CustomValidate.remove("ItemMisc", "扛起来的麻袋");
 
     AssetManager.addImageMapping({
-        "Assets/Female3DCG/ItemMisc/Preview/扛起来的麻袋_Luzi.png":
-            "Assets/Female3DCG/ItemDevices/Preview/BurlapSack.png",
+        "Assets/Female3DCG/ItemMisc/Preview/扛起来的麻袋.png": "Assets/Female3DCG/ItemDevices/Preview/BurlapSack.png",
     });
 
     HookManager.progressiveHook("InventoryItemHasEffect")

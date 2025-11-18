@@ -1,10 +1,10 @@
 import { AssetManager } from "../../../assetForward";
 import { PoseMapTool } from "../../../lib";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "鞭痕-Luzi",
+    Name: "鞭痕",
     Random: false,
     Top: 0,
     Left: 0,
@@ -90,5 +90,5 @@ export default function () {
         extended,
         assetStrings,
     });
-    luziFixups("身体痕迹_Luzi", asset.Name);
+    luziSuffixFixups("身体痕迹_Luzi", asset.Name);
 }

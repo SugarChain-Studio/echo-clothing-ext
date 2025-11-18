@@ -1,29 +1,30 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 const assetAdjustments = {
-    缩小地上_Luzi: { OverrideZoom: 0.3 },
-    缩小浮空_Luzi: { OverrideZoom: 0.3 },
-    身高加40cm_Luzi: { ZoomModifier: +0.08 },
-    身高加30cm_Luzi: { ZoomModifier: +0.06 },
-    身高加20cm_Luzi: { ZoomModifier: +0.04 },
-    身高加10cm_Luzi: { ZoomModifier: +0.02 },
-    身高减10cm_Luzi: { ZoomModifier: -0.02 },
-    身高减20cm_Luzi: { ZoomModifier: -0.04 },
-    身高减30cm_Luzi: { ZoomModifier: -0.06 },
-    身高减40cm_Luzi: { ZoomModifier: -0.08 },
+    缩小地上: { OverrideZoom: 0.3 },
+    缩小浮空: { OverrideZoom: 0.3 },
+    身高加40cm: { ZoomModifier: +0.08 },
+    身高加30cm: { ZoomModifier: +0.06 },
+    身高加20cm: { ZoomModifier: +0.04 },
+    身高加10cm: { ZoomModifier: +0.02 },
+    身高减10cm: { ZoomModifier: -0.02 },
+    身高减20cm: { ZoomModifier: -0.04 },
+    身高减30cm: { ZoomModifier: -0.06 },
+    身高减40cm: { ZoomModifier: -0.08 },
 };
 
 /** @type { CustomAssetDefinitionAppearance[]} */
 const assets = [
     {
-        Name: "缩小地上_Luzi",
+        Name: "缩小地上",
         Visible: false,
         Random: false,
         Effect: [E.Slow],
     },
     {
-        Name: "缩小浮空_Luzi",
+        Name: "缩小浮空",
         Visible: false,
         Random: false,
         OverrideHeight: {
@@ -33,42 +34,42 @@ const assets = [
         },
     },
     {
-        Name: "身高加40cm_Luzi",
+        Name: "身高加40cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高加30cm_Luzi",
+        Name: "身高加30cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高加20cm_Luzi",
+        Name: "身高加20cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高加10cm_Luzi",
+        Name: "身高加10cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高减10cm_Luzi",
+        Name: "身高减10cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高减20cm_Luzi",
+        Name: "身高减20cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高减30cm_Luzi",
+        Name: "身高减30cm",
         Visible: false,
         Random: false,
     },
     {
-        Name: "身高减40cm_Luzi",
+        Name: "身高减40cm",
         Visible: false,
         Random: false,
     },
@@ -77,40 +78,40 @@ const assets = [
 /** @type {Translation.CustomRecord<string,string>} */
 const translations = {
     CN: {
-        缩小地上_Luzi: "缩小地上",
-        缩小浮空_Luzi: "缩小浮空",
-        身高加10cm_Luzi: "+10cm",
-        身高加20cm_Luzi: "+20cm",
-        身高加30cm_Luzi: "+30cm",
-        身高加40cm_Luzi: "+40cm",
-        身高减10cm_Luzi: "-10cm",
-        身高减20cm_Luzi: "-20cm",
-        身高减30cm_Luzi: "-30cm",
-        身高减40cm_Luzi: "-40cm",
+        缩小地上: "缩小地上",
+        缩小浮空: "缩小浮空",
+        身高加10cm: "+10cm",
+        身高加20cm: "+20cm",
+        身高加30cm: "+30cm",
+        身高加40cm: "+40cm",
+        身高减10cm: "-10cm",
+        身高减20cm: "-20cm",
+        身高减30cm: "-30cm",
+        身高减40cm: "-40cm",
     },
     EN: {
-        缩小地上_Luzi: "Shrink on Ground",
-        缩小浮空_Luzi: "Shrink in Air",
-        身高加10cm_Luzi: "+10cm",
-        身高加20cm_Luzi: "+20cm",
-        身高加30cm_Luzi: "+30cm",
-        身高加40cm_Luzi: "+40cm",
-        身高减10cm_Luzi: "-10cm",
-        身高减20cm_Luzi: "-20cm",
-        身高减30cm_Luzi: "-30cm",
-        身高减40cm_Luzi: "-40cm",
+        缩小地上: "Shrink on Ground",
+        缩小浮空: "Shrink in Air",
+        身高加10cm: "+10cm",
+        身高加20cm: "+20cm",
+        身高加30cm: "+30cm",
+        身高加40cm: "+40cm",
+        身高减10cm: "-10cm",
+        身高减20cm: "-20cm",
+        身高减30cm: "-30cm",
+        身高减40cm: "-40cm",
     },
     RU: {
-        缩小地上_Luzi: "Уменьшить на земле",
-        缩小浮空_Luzi: "Уменьшить в воздухе",
-        身高加10cm_Luzi: "+10cm",
-        身高加20cm_Luzi: "+20cm",
-        身高加30cm_Luzi: "+30cm",
-        身高加40cm_Luzi: "+40cm",
-        身高减10cm_Luzi: "-10cm",
-        身高减20cm_Luzi: "-20cm",
-        身高减30cm_Luzi: "-30cm",
-        身高减40cm_Luzi: "-40cm",
+        缩小地上: "Уменьшить на земле",
+        缩小浮空: "Уменьшить в воздухе",
+        身高加10cm: "+10cm",
+        身高加20cm: "+20cm",
+        身高加30cm: "+30cm",
+        身高加40cm: "+40cm",
+        身高减10cm: "-10cm",
+        身高减20cm: "-20cm",
+        身高减30cm: "-30cm",
+        身高减40cm: "-40cm",
     },
 };
 
@@ -140,4 +141,7 @@ export default function () {
     });
 
     AssetManager.addGroupedAssets({ [groupName]: assets }, regroupedTranslations);
+    for (const a of assets) {
+        luziSuffixFixups(groupName, a.Name);
+    }
 }

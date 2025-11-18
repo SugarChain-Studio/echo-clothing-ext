@@ -1,9 +1,9 @@
 import { AssetManager } from "../../assetForward";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "开腿展示架-Luzi",
+    Name: "开腿展示架",
     Random: false,
     Top: 0,
     Left: 0,
@@ -270,5 +270,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, { extended, translation, layerNames, assetStrings });
-    luziFixups("ItemDevices", asset.Name);
+    luziSuffixFixups("ItemDevices", asset.Name);
 }

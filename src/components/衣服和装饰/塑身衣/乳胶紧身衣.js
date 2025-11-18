@@ -3,7 +3,7 @@ import { PoseMapTool } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "乳胶紧身衣-Luzi",
+    Name: "乳胶紧身衣",
     Random: false,
     Top: 0,
     Left: 0,

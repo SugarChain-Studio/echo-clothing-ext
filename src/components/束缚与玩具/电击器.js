@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
@@ -114,10 +114,10 @@ function dialogDraw(Data, originalFunction) {
 
     const prevAlign = MainCanvas.textAlign;
     MainCanvas.textAlign = "center";
-    ExtendedItemCustomDraw("ItemLegs电击器_Luzi触发电击", 触发电击按钮.X, 触发电击按钮.Y);
+    ExtendedItemCustomDraw("ItemLegs电击器触发电击", 触发电击按钮.X, 触发电击按钮.Y);
     MainCanvas.textAlign = "left";
     ExtendedItemDrawCheckbox("GlowSwitch", 持续电击开关.X, 持续电击开关.Y, shockL > 0, {
-        text: AssetTextGet("ItemLegs电击器_Luzi持续电击开关"),
+        text: AssetTextGet("ItemLegs电击器持续电击开关"),
         textColor: "White",
     });
     MainCanvas.textAlign = prevAlign;
@@ -164,7 +164,7 @@ function dialogClick(Data, originalFunction) {
 
 /** @type { CustomAssetDefinition } */
 const asset = {
-    Name: "电击器-Luzi",
+    Name: "电击器",
     Random: false,
     Gender: "F",
     Left: {
@@ -361,5 +361,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemLegs", asset, { extended, translation, layerNames, assetStrings });
-    luziFixups("ItemLegs", asset.Name);
+    luziSuffixFixups("ItemLegs", asset.Name);
 }

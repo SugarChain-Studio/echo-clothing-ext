@@ -1,10 +1,10 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziPrefixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "Luzi-NoseHook",
+    Name: "LuziNoseHook",
     Random: false,
     Left: 200,
     Top: 70,
@@ -73,5 +73,5 @@ const assetStrings = DialogTools.autoItemStrings(
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemNose", asset, { translation, layerNames, extended, assetStrings });
-    luziFixups("ItemNose", asset.Name);
+    luziPrefixFixups("ItemNose", asset.Name, "Luzi_NoseHook");
 }

@@ -1,11 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
     [
         {
-            Name: "穿戴式狗尾镜像-Luzi",
+            Name: "穿戴式狗尾镜像",
             Random: false,
             Top: -100,
             Left: 0,
@@ -16,7 +16,7 @@ const assets = [
     ],
     [
         {
-            Name: "白色穿戴式狼尾镜像-Luzi",
+            Name: "白色穿戴式狼尾镜像",
             Random: false,
             Top: -100,
             Left: 0,
@@ -31,7 +31,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式浅色猫尾镜像-Luzi",
+            Name: "穿戴式浅色猫尾镜像",
             Random: false,
             Top: 0,
             Left: 0,
@@ -46,7 +46,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式软小狗尾镜像-Luzi",
+            Name: "穿戴式软小狗尾镜像",
             Random: false,
             Top: 0,
             Left: 0,
@@ -61,7 +61,7 @@ const assets = [
     ],
     [
         {
-            Name: "大型穿戴式狼尾镜像-Luzi",
+            Name: "大型穿戴式狼尾镜像",
             Random: false,
             Top: -100,
             Left: 0,
@@ -76,7 +76,7 @@ const assets = [
     ],
     [
         {
-            Name: "小型穿戴式狼尾镜像-Luzi",
+            Name: "小型穿戴式狼尾镜像",
             Random: false,
             Top: 0,
             Left: 0,
@@ -91,7 +91,7 @@ const assets = [
     ],
     [
         {
-            Name: "小型穿戴式软猫尾镜像-Luzi",
+            Name: "小型穿戴式软猫尾镜像",
             Random: false,
             Top: 0,
             Left: 0,
@@ -106,7 +106,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式浣熊尾镜像-Luzi",
+            Name: "穿戴式浣熊尾镜像",
             Random: false,
         },
         {
@@ -115,7 +115,7 @@ const assets = [
     ],
     [
         {
-            Name: "穿戴式猫尾镜像-Luzi",
+            Name: "穿戴式猫尾镜像",
             Random: false,
             Top: -100,
             Left: 0,
@@ -151,6 +151,6 @@ export default function () {
     AssetManager.addAssetWithConfig("TailStraps", assets);
     AssetManager.addImageMapping(icons);
     for (const a of assets) {
-        luziFixups("TailStraps", a[0].Name);
+        luziSuffixFixups("TailStraps", a[0].Name);
     }
 }

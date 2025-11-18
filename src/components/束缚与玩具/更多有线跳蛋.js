@@ -1,10 +1,10 @@
 import { AssetManager } from "../../assetForward";
 import { takeLayerNames } from "../../lib";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type { CustomAssetDefinition } */
 const asset = {
-    Name: "更多有线跳蛋-Luzi",
+    Name: "更多有线跳蛋",
     Random: false,
     Gender: "F",
     Top: 530,
@@ -232,5 +232,5 @@ export default function () {
         layerNames,
         assetStrings,
     });
-    luziFixups("ItemVulva", asset.Name);
+    luziSuffixFixups("ItemVulva", asset.Name);
 }

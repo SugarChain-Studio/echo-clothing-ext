@@ -1,10 +1,10 @@
 import { AssetManager } from "../../assetForward";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 import { FullMask } from "../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "拳击袋-Luzi",
+    Name: "拳击袋",
     Random: false,
     Top: 0,
     Left: 0,
@@ -150,5 +150,5 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
     FullMask.push("ItemDevices", asset.Name, ["前遮罩", "前框遮罩"]);
-    luziFixups("ItemDevices", asset.Name);
+    luziSuffixFixups("ItemDevices", asset.Name);
 }

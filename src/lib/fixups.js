@@ -16,16 +16,35 @@ export function customFixup(fixup) {
 
 /**
  * @param {CustomGroupName | CustomGroupName[]} groups
- * @param {string} name
+ * @param {string} oldName
+ * @param {string} newName
  */
-export function luziFixups(groups, name) {
-    if (!name.includes("-")) return;
+export function groupFixup(groups, oldName, newName) {
     for (const group of getManyMirrors(groups)) {
         myFixups.push({
-            Old: { Group: group, Name: name.replace("-", "_") },
-            New: { Group: /** @type {AssetGroupName} */ (group), Name: name },
+            Old: { Group: group, Name: oldName },
+            New: { Group: /** @type {AssetGroupName} */ (group), Name: newName },
         });
     }
+}
+
+/**
+ * @param {CustomGroupName | CustomGroupName[]} groups
+ * @param {string} name
+ */
+export function luziSuffixFixups(groups, name) {
+    const oldName = `${name}_Luzi`;
+    groupFixup(groups, oldName, name);
+}
+
+/**
+ * @param {CustomGroupName | CustomGroupName[]} groups
+ * @param {string} name
+ * @param {string} [oldName]
+ */
+export function luziPrefixFixups(groups, name, oldName) {
+    const oldName_ = oldName || `Luzi_${name}`;
+    groupFixup(groups, oldName_, name);
 }
 
 /** @param {PlayerCharacter} player */

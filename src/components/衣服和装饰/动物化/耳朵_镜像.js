@@ -1,9 +1,11 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
-/** @type {CustomAssetDefinitionAppearance[]} */
-const assets = [
+/** @type {AddAssetWithConfigParams} */
+const asset = [
+    "HairAccessory2",
     {
-        Name: "黑猫耳镜像_Luzi",
+        Name: "黑猫耳镜像",
         Random: false,
         Fetish: ["Pet"],
         BodyCosplay: true,
@@ -26,27 +28,12 @@ const assets = [
             },
         ],
     },
+    {
+        translation: { CN: "黑猫耳镜像", EN: "Black Cat Ears Mirror", RU: "Зеркальные чёрные кошачьи уши" },
+    },
 ];
 
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        HairAccessory2: {
-            黑猫耳镜像_Luzi: "黑猫耳镜像",
-        },
-    },
-    EN: {
-        HairAccessory2: {
-            黑猫耳镜像_Luzi: "Black Cat Ears Mirror",
-        },
-    },
-    RU: {
-        HairAccessory2: {
-            黑猫耳镜像_Luzi: "Зеркальные чёрные кошачьи уши",
-        },
-    },
-};
-
 export default function () {
-    AssetManager.addGroupedAssets({ HairAccessory2: assets }, translations);
+    AssetManager.addAssetWithConfig(...asset);
+    luziSuffixFixups(asset[0], asset[1].Name);
 }

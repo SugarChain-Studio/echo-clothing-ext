@@ -1,6 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { createItemDialogTyped } from "../../../lib";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const gloveLayerInfo = {
@@ -48,7 +48,7 @@ const lowerLayerInfo = {
 
 /** @type {CustomAssetDefinition} */
 const assetUpper = {
-    Name: "乳胶衣-Luzi",
+    Name: "乳胶衣",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -68,7 +68,7 @@ const assetUpper = {
 
 /** @type {CustomAssetDefinition} */
 const assetLower = {
-    Name: "乳胶衣-Luzi",
+    Name: "乳胶衣",
     Random: false,
     Gender: "F",
     Top: {
@@ -227,5 +227,5 @@ const lower = [
 export default function () {
     AssetManager.addAssetWithConfig("Suit", ...upper);
     AssetManager.addAssetWithConfig("SuitLower", ...lower);
-    luziFixups(["Suit", "SuitLower"], assetUpper.Name);
+    luziSuffixFixups(["Suit", "SuitLower"], assetUpper.Name);
 }

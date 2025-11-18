@@ -1,11 +1,11 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParams } */
 const asset = [
     "Hat",
     {
-        Name: "NPC气泡-Luzi",
+        Name: "NPC气泡",
         Random: false,
         Top: -50,
         Left: 150,
@@ -62,5 +62,5 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
-    luziFixups(asset[0], asset[1].Name);
+    luziSuffixFixups(asset[0], asset[1].Name);
 }

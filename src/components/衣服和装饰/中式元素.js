@@ -1,8 +1,9 @@
 import { AssetManager } from "../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
+import { PoseMapTool } from "../../lib";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {(Name:string, config: Pick<CustomAssetDefinitionAppearance, 'Priority' | 'Top' | 'Left'> ) => CustomAssetDefinitionAppearance} */
-const 茉莉花钿SharedAssetDefinition = (Name, config) => ({
+const hairpinSharedDef = (Name, config) => ({
     Name,
     Random: false,
     ...config,
@@ -21,128 +22,62 @@ const 茉莉花钿SharedAssetDefinition = (Name, config) => ({
     ],
 });
 
-const 茉莉花钿1 = 茉莉花钿SharedAssetDefinition("茉莉花钿1", { Left: 160, Top: 80, Priority: 55 });
-const 茉莉花钿2 = 茉莉花钿SharedAssetDefinition("茉莉花钿2", { Left: 150, Top: 70, Priority: 40 });
-
-/** @type {(DynamicGroup?:CustomGroupName)=>CustomAssetDefinitionAppearance} */
-const 假领子 = (DynamicGroupName) => ({
-    Name: "假领子_Luzi",
-    Random: false,
-    Top: 0,
-    Left: 0,
-    MinOpacity: 0,
-    EditOpacity: true,
-    Priority: 18,
-    ParentGroup: {},
-    DynamicGroupName,
-    Layer: [
-        {
-            Name: "衣服",
-            PoseMapping: {
-                Yoked: "Yoked",
-                OverTheHead: "OverTheHead",
-                AllFours: "Hide",
-            },
-        },
-        {
-            Name: "扣子",
-            PoseMapping: {
-                AllFours: "Hide",
-            },
-        },
-    ],
-});
-
-/** @type {CustomGroupedAssetDefinitions} */
-const assets = {
-    Cloth: [假领子()],
-    ClothAccessory: [假领子("Cloth")],
-    HairAccessory1: [茉莉花钿1, 茉莉花钿2],
-    HairAccessory3: [茉莉花钿1, 茉莉花钿2],
-};
-
 /** @type {TypedItemConfig} */
-const 茉莉花钿SharedConfig = {
+const hairpinExtended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "左" }, { Name: "右" }, { Name: "两侧" }],
 };
 
-/** @type {ExtendedItemMainConfig} */
-const extended = {
-    HairAccessory1: {
-        茉莉花钿1: 茉莉花钿SharedConfig,
-        茉莉花钿2: 茉莉花钿SharedConfig,
-    },
-    HairAccessory3: {
-        茉莉花钿1: 茉莉花钿SharedConfig,
-        茉莉花钿2: 茉莉花钿SharedConfig,
-    },
+/** @type {Translation.String} */
+const hairpinStrings = {
+    CN: { Select: "选择花的位置", 左: "左", 右: "右", 两侧: "两侧" },
+    EN: { Select: "Select flower position", 左: "Left", 右: "Right", 两侧: "Both" },
+    RU: { Select: "Выберите положение цветка", 左: "Лево", 右: "Право", 两侧: "Оба" },
 };
 
-/** @type { Translation.GroupedEntries } */
-const translations = {
-    CN: {
-        Cloth: {
-            假领子_Luzi: "假领子",
+/** @type {AddAssetWithConfigParams[]} */
+const assets = [
+    [
+        ["Cloth", "ClothAccessory"],
+        {
+            Name: "假领子",
+            Random: false,
+            Top: 0,
+            Left: 0,
+            MinOpacity: 0,
+            EditOpacity: true,
+            Priority: 18,
+            ParentGroup: {},
+            DynamicGroupName: "Cloth",
+            PoseMapping: PoseMapTool.config(["Yoked", "OverTheHead"], ["AllFours"]),
+            Layer: [{ Name: "衣服" }, { Name: "扣子", PoseMapping: PoseMapTool.config([], ["AllFours"]) }],
         },
-        ClothAccessory: {
-            假领子_Luzi: "假领子",
+        { translation: { CN: "假领子", EN: "Fake Collar" } },
+    ],
+    [
+        ["HairAccessory1", "HairAccessory3"],
+        hairpinSharedDef("茉莉花钿1", { Left: 160, Top: 80, Priority: 55 }),
+        {
+            translation: { CN: "茉莉花钿 1", EN: "Jasmine Hairpin 1" },
+            extended: hairpinExtended,
+            assetStrings: hairpinStrings,
         },
-        HairAccessory1: {
-            茉莉花钿1: "茉莉花钿 1",
-            茉莉花钿2: "茉莉花钿 2",
+    ],
+    [
+        ["HairAccessory1", "HairAccessory3"],
+        hairpinSharedDef("茉莉花钿2", { Left: 150, Top: 70, Priority: 40 }),
+        {
+            translation: { CN: "茉莉花钿 2", EN: "Jasmine Hairpin 2" },
+            extended: hairpinExtended,
+            assetStrings: hairpinStrings,
         },
-        HairAccessory3: {
-            茉莉花钿1: "茉莉花钿 1",
-            茉莉花钿2: "茉莉花钿 2",
-        },
-    },
-    EN: {
-        Cloth: {
-            假领子_Luzi: "Fake Collar",
-        },
-        ClothAccessory: {
-            假领子_Luzi: "Fake Collar",
-        },
-        HairAccessory1: {
-            茉莉花钿1: "Jasmine Hairpin 1",
-            茉莉花钿2: "Jasmine Hairpin 2",
-        },
-        HairAccessory3: {
-            茉莉花钿1: "Jasmine Hairpin 1",
-            茉莉花钿2: "Jasmine Hairpin 2",
-        },
-    },
-    RU: {
-        Cloth: {
-            假领子_Luzi: "Поддельный воротник",
-        },
-        ClothAccessory: {
-            假领子_Luzi: "Поддельный воротник",
-        },
-        HairAccessory1: {
-            茉莉花钿1: "Жасминовая шпилька 1",
-            茉莉花钿2: "Жасминовая шпилька 2",
-        },
-        HairAccessory3: {
-            茉莉花钿1: "Жасминовая шпилька 1",
-            茉莉花钿2: "Жасминовая шпилька 2",
-        },
-    },
-};
-
-const customDialog = DialogTools.replicateGroupedItemDialog(
-    ["HairAccessory1", "HairAccessory3"],
-    ["茉莉花钿1", "茉莉花钿2"],
-    {
-        CN: { Select: "选择花的位置", 左: "左", 右: "右", 两侧: "两侧" },
-        EN: { Select: "Select flower position", 左: "Left", 右: "Right", 两侧: "Both" },
-        RU: { Select: "Выберите положение цветка", 左: "Лево", 右: "Право", 两侧: "Оба" },
-    }
-);
+    ],
+];
 
 export default function () {
-    AssetManager.addGroupedAssets(assets, translations, extended);
-    AssetManager.addCustomAssetString(customDialog);
+    AssetManager.addAssetWithConfig(assets);
+    for (const a of assets) {
+        luziSuffixFixups(a[0], a[1].Name);
+    }
 }

@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /**
  * @typedef {Object} AssetDefinitionParam
@@ -8,12 +9,12 @@ import { AssetManager } from "../../../assetForward";
  * @property {Translation.String} layerNames 图层名翻译
  */
 
-/** @type {AssetDefinitionParam[]} */
+/** @type {AddAssetWithConfigParams[]} */
 const defs = [
-    {
-        groups: ["EyeShadow", "FaceMarkings"],
-        asset: {
-            Name: "面部妆容_Luzi",
+    [
+        ["EyeShadow", "FaceMarkings"],
+        {
+            Name: "面部妆容",
             Random: false,
             Left: 200,
             Top: 120,
@@ -21,17 +22,18 @@ const defs = [
             ParentGroup: {},
             DynamicGroupName: "FaceMarkings",
         },
-        translation: {
-            CN: "泪痕仪轨",
-            EN: "Tear Track Ritual",
-            RU: "Ритуал слезной дорожки",
+        {
+            translation: {
+                CN: "泪痕仪轨",
+                EN: "Tear Track Ritual",
+                RU: "Ритуал слезной дорожки",
+            },
         },
-        layerNames: {},
-    },
-    {
-        groups: ["EyeShadow", "FaceMarkings"],
-        asset: {
-            Name: "面部妆容1_Luzi",
+    ],
+    [
+        ["EyeShadow", "FaceMarkings"],
+        {
+            Name: "面部妆容1",
             Random: false,
             Left: 200,
             Top: 120,
@@ -39,16 +41,17 @@ const defs = [
             ParentGroup: {},
             DynamicGroupName: "FaceMarkings",
         },
-        translation: {
-            CN: "五星显相",
-            EN: "Five-Star Manifestation",
-            RU: "Пятизвездочное проявление",
+        {
+            translation: {
+                CN: "五星显相",
+                EN: "Five-Star Manifestation",
+                RU: "Пятизвездочное проявление",
+            },
         },
-        layerNames: {},
-    },
-    {
-        groups: ["EyeShadow", "FaceMarkings"],
-        asset: {
+    ],
+    [
+        ["EyeShadow", "FaceMarkings"],
+        {
             Name: "小丑面妆",
             Random: false,
             Left: 200,
@@ -57,17 +60,12 @@ const defs = [
             DynamicGroupName: "FaceMarkings",
             Layer: [{ Name: "←" }, { Name: "→" }],
         },
-        translation: {
-            CN: "小丑",
-            EN: "The Clown",
-            RU: "Клоун",
-        },
-        layerNames: {},
-    },
-    {
-        groups: ["BodyMarkings", "FaceMarkings"],
-        asset: {
-            Name: "番茄酱_Luzi",
+        { translation: { CN: "小丑", EN: "The Clown", RU: "Клоун" } },
+    ],
+    [
+        ["BodyMarkings", "FaceMarkings"],
+        {
+            Name: "番茄酱",
             Random: false,
             Left: 200,
             Top: 120,
@@ -75,17 +73,19 @@ const defs = [
             DynamicGroupName: "FaceMarkings",
             ParentGroup: {},
         },
-        translation: {
-            CN: "病娇的证据",
-            EN: "Evidence of Yandere",
-            RU: "Доказательства яндера",
+        {
+            translation: {
+                CN: "病娇的证据",
+                EN: "Evidence of Yandere",
+                RU: "Доказательства яндера",
+            },
         },
-        layerNames: {},
-    },
+    ],
 ];
 
 export default function () {
-    for (const { groups, asset, translation, layerNames } of defs) {
-        AssetManager.addAssetWithConfig(groups, asset, { translation, layerNames });
+    AssetManager.addAssetWithConfig(defs);
+    for (const a of defs) {
+        luziSuffixFixups(a[0], a[1].Name);
     }
 }

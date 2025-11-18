@@ -46,7 +46,7 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
-            Name: "鞋面_单",
+            Name: "鞋面单",
             Priority: 23,
             CopyLayerColor: "鞋面",
             AllowTypes: { l: 1 },
@@ -54,7 +54,7 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
-            Name: "搭扣_单",
+            Name: "搭扣单",
             Priority: 23,
             CopyLayerColor: "搭扣",
             AllowTypes: { l: 1 },
@@ -62,7 +62,7 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
-            Name: "高光_单",
+            Name: "高光单",
             Priority: 23,
             AllowTypes: { l: 1 },
             CopyLayerColor: "高光",

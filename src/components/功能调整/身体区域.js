@@ -131,13 +131,13 @@ const groups = [
             BodyCosplay: true,
             Asset: [
                 {
-                    Name: "少_Luzi",
+                    Name: "少",
                     Random: false,
                     Priority: 9,
                     DefaultColor: ["#D9DCFF"],
                 },
                 {
-                    Name: "中_Luzi",
+                    Name: "中",
                     Random: false,
                     Priority: 9,
                     DefaultColor: ["#D9DCFF"],

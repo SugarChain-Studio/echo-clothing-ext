@@ -1,7 +1,7 @@
 import { AssetManager } from "../../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
@@ -17,7 +17,7 @@ const specialMapping = {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "玩偶-Luzi",
+    Name: "玩偶",
     Random: false,
     Left: 125,
     Top: 225,
@@ -623,5 +623,5 @@ export default function () {
         assetStrings,
     });
 
-    luziFixups(["ItemMisc", "ItemHandheld"], asset.Name);
+    luziSuffixFixups(["ItemMisc", "ItemHandheld"], asset.Name);
 }

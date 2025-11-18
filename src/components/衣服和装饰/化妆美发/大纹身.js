@@ -1,4 +1,5 @@
 import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /**
  * @typedef {Object} TattooLayerDefinitionExtension
@@ -340,7 +341,7 @@ function layerMapping(layer) {
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "大纹身_Luzi",
+    Name: "大纹身",
     Time: 5,
     RemoveTime: 5,
     IsRestraint: false,
@@ -432,4 +433,5 @@ export default function () {
         extended,
         assetStrings,
     });
+    luziSuffixFixups(["BodyMarkings"], asset.Name);
 }

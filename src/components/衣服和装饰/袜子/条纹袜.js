@@ -1,13 +1,13 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [
     [
         ["Socks", "SocksLeft", "SocksRight"],
         {
-            Name: "条纹袜-Luzi",
+            Name: "条纹袜",
             Random: false,
             ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 30 }]),
             Layer: [
@@ -26,7 +26,7 @@ const asset = [
     [
         ["Socks", "SocksLeft", "SocksRight"],
         {
-            Name: "条纹袜2-Luzi",
+            Name: "条纹袜2",
             Random: false,
             Top: 0,
             Left: 0,
@@ -50,6 +50,6 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
     for (const a of asset) {
-        luziFixups(a[0], a[1].Name);
+        luziSuffixFixups(a[0], a[1].Name);
     }
 }

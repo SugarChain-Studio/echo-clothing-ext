@@ -1,14 +1,14 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { Typing, PoseMapTool } from "../../lib";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "隐形药水-Luzi",
+    Name: "隐形药水",
     Random: false,
     Gender: "F",
     Top: 0,
@@ -460,5 +460,5 @@ export default function () {
     AssetManager.modifyAsset("ItemDevices", "X-Cross", (group, asset) => {
         asset.Attribute = Typing.attributes([...asset.Attribute, "LuziXCross"]);
     });
-    luziFixups("ItemAddon", asset.Name);
+    luziSuffixFixups("ItemAddon", asset.Name);
 }

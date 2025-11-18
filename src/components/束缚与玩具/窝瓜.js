@@ -1,11 +1,11 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { luziFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "窝瓜-Luzi",
+    Name: "窝瓜",
     Random: false,
     Top: 140,
     Left: 0,
@@ -88,8 +88,8 @@ const extended = {
 
 /** @type {Record<string, string>} */
 const icons = {
-    "Screens/Inventory/ItemDevices/窝瓜_Luzi/没盖子.png": PathTools.emptyImage,
-    "Screens/Inventory/ItemDevices/窝瓜_Luzi/有盖子.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemDevices/窝瓜/没盖子.png": PathTools.emptyImage,
+    "Screens/Inventory/ItemDevices/窝瓜/有盖子.png": PathTools.emptyImage,
 };
 
 /** @type {Translation.Dialog} */
@@ -132,5 +132,5 @@ export default function () {
     });
 
     AssetManager.addImageMapping(icons);
-    luziFixups("ItemDevices", asset.Name);
+    luziSuffixFixups("ItemDevices", asset.Name);
 }

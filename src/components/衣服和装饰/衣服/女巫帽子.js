@@ -1,9 +1,9 @@
 import { AssetManager } from "../../../assetForward";
-import { luziFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "女巫帽子-Luzi",
+    Name: "女巫帽子",
     Random: false,
     Gender: "F",
     Top: -60,
@@ -127,5 +127,5 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("Hat", asset, { extended, translation, layerNames, assetStrings });
-    luziFixups("Hat", asset.Name);
+    luziSuffixFixups("Hat", asset.Name);
 }

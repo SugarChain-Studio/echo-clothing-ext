@@ -1,5 +1,6 @@
 import { AssetManager } from "../../../assetForward";
 import { Typing } from "../../../lib";
+import { groupFixup } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinitionBase} */
 const baseAsset = {
@@ -16,13 +17,14 @@ const baseAsset = {
 
 /** @type {CustomAssetDefinitionBase} */
 const lowerAsset = {
-    Name: "创口贴_下",
+    Name: "创口贴",
     Random: false,
     Left: 240,
     Top: 500,
     ParentGroup: {},
     Prerequisite: ["HasVagina"],
     DynamicGroupName: "Suit",
+    Layer: [{ Name: "下" }],
     PoseMapping: { AllFours: PoseType.HIDE, Hogtied: PoseType.HIDE },
 };
 
@@ -63,8 +65,6 @@ const assetN = [
 ];
 
 export default function () {
-    AssetManager.addImageMapping({
-        "Assets/Female3DCG/Suit/Preview/创口贴_下.png": "Assets/Female3DCG/Suit/Preview/创口贴.png",
-    });
     AssetManager.addAssetWithConfig(assetN);
+    groupFixup(["Panties", "ItemVulvaPiercings"], "创口贴_下", "创口贴");
 }
