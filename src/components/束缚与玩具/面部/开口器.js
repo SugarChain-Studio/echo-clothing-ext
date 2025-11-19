@@ -3,7 +3,7 @@ import { luziPrefixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "CheekRetractor",
+    Name: "LuziCheekRetractor",
     Random: false,
     Left: 220,
     Top: 170,
@@ -37,5 +37,5 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemMouth", asset, { translation, layerNames });
-    luziPrefixFixups("ItemMouth", asset.Name, "LuziCheekRetractor");
+    luziPrefixFixups("ItemMouth", asset.Name, "Luzi_CheekRetractor");
 }

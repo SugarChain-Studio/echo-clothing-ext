@@ -46,12 +46,11 @@ export function luziPrefixFixups(groups, name, oldName) {
     const oldName_ = oldName || `Luzi_${name}`;
     groupFixup(groups, oldName_, name);
 }
+/** @type {Map<string, CustomLoginInventoryFixup["New"]>} */
+const oldNewMap = new Map();
 
 /** @param {PlayerCharacter} player */
 function performWardrobeFixup(player) {
-    /** @type {Map<string, CustomLoginInventoryFixup["New"]>} */
-    const oldNewMap = new Map(myFixups.map((fixup) => [`${fixup.Old.Group}::${fixup.Old.Name}`, fixup.New]));
-
     for (const dressup of player.Wardrobe) {
         for (const dress of dressup) {
             const key = `${dress.Group}::${dress.Name}`;
@@ -65,11 +64,28 @@ function performWardrobeFixup(player) {
 }
 
 AssetManager.afterLoad(() => {
+    myFixups
+        .map((fixup) => /** @type {const}*/ ([`${fixup.Old.Group}::${fixup.Old.Name}`, fixup.New]))
+        .forEach(([key, newInfo]) => {
+            oldNewMap.set(key, newInfo);
+        });
+
     LoginInventoryFixups.push(...myFixups);
 });
 
 HookManager.hookFunction("LoginPerformCraftingFixups", 0, (args, next) => {
     performWardrobeFixup(Player);
+
+    return next(args);
+});
+
+HookManager.hookFunction("AssetGet", 0, (args, next) => {
+    const itemKey = `${args[1]}::${args[2]}`;
+    if (oldNewMap.has(itemKey)) {
+        const newInfo = oldNewMap.get(itemKey);
+        args[1] = /** @type {AssetGroupName}*/ (newInfo.Group);
+        args[2] = newInfo.Name;
+    }
 
     return next(args);
 });
