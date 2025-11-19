@@ -7,7 +7,6 @@ const gloveLayerInfo = {
     Priority: 27,
     AllowTypes: { typed: 1 },
     PoseMapping: {
-        TapedHands: "TapedHands",
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
         BackBoxTie: "Hide",
@@ -15,14 +14,15 @@ const gloveLayerInfo = {
         BackCuffs: "BackCuffs",
         Hogtied: "Hide",
         AllFours: "Hide",
+        TapedHands: "TapedHands",
     },
+    HideAs: { Group: "Gloves" },
 };
 
 /** @type {Partial<AssetLayerDefinition>} */
 const upperLayerInfo = {
     Priority: 14,
     PoseMapping: {
-        TapedHands: "TapedHands",
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
         BackBoxTie: "BackBoxTie",
@@ -30,6 +30,7 @@ const upperLayerInfo = {
         BackCuffs: "BackCuffs",
         Hogtied: "Hogtied",
         AllFours: "Hide",
+        TapedHands: "TapedHands",
     },
 };
 

@@ -5,7 +5,6 @@ import { luziSuffixFixups } from "../../../lib/fixups";
 /** @type {(overrides?: AssetPoseMapping) => AssetPoseMapping} */
 const glovePoseM = (overrides) => ({
     ...{
-        TapedHands: "TapedHands",
         Yoked: "Yoked",
         OverTheHead: "OverTheHead",
         BackBoxTie: "BackBoxTie",
@@ -13,6 +12,7 @@ const glovePoseM = (overrides) => ({
         BackCuffs: "BackCuffs",
         Hogtied: "Hide",
         AllFours: "Hide",
+        TapedHands: "TapedHands",
     },
     ...overrides,
 });

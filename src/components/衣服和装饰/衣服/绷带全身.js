@@ -15,7 +15,6 @@ const assets = [
             Left: 0,
             ParentGroup: "BodyUpper",
             PoseMapping: {
-                TapedHands: "TapedHands",
                 Yoked: "Yoked",
                 OverTheHead: "OverTheHead",
                 BackBoxTie: "BackElbowTouch",
@@ -23,6 +22,7 @@ const assets = [
                 BackCuffs: "BackElbowTouch",
                 Hogtied: "Hide",
                 AllFours: "Hide",
+                TapedHands: "TapedHands",
             },
         },
         { translation },
@@ -58,7 +58,6 @@ const assets = [
                     Name: "上身",
                     ParentGroup: "BodyUpper",
                     PoseMapping: {
-                        TapedHands: "TapedHands",
                         Yoked: "Yoked",
                         OverTheHead: "OverTheHead",
                         BackBoxTie: "BackElbowTouch",
@@ -66,6 +65,7 @@ const assets = [
                         BackCuffs: "BackElbowTouch",
                         Hogtied: "Hide",
                         AllFours: "Hide",
+                        TapedHands: "TapedHands",
                     },
                 },
                 {

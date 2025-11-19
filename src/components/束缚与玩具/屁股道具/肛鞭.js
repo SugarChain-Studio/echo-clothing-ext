@@ -23,7 +23,6 @@ const assets = {
             Difficulty: -10,
             ParentGroup: {},
             PoseMapping: {
-                TapedHands: PoseType.DEFAULT,
                 Yoked: "Hide",
                 OverTheHead: "Hide",
                 BackBoxTie: "Hide",

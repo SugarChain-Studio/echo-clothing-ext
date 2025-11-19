@@ -14,7 +14,6 @@ const asset = [
                 Name: "上半身",
                 ParentGroup: "BodyUpper",
                 PoseMapping: {
-                    TapedHands: "TapedHands",
                     Yoked: "Yoked",
                     OverTheHead: "OverTheHead",
                     BackBoxTie: "BackBoxTie",
@@ -22,6 +21,7 @@ const asset = [
                     BackCuffs: "BackCuffs",
                     Hogtied: "Hogtied",
                     AllFours: "Hide",
+                    TapedHands: "TapedHands",
                 },
             },
             {

@@ -9,7 +9,6 @@ const asset = {
     Difficulty: -10,
     ParentGroup: {},
     PoseMapping: {
-        TapedHands: PoseType.HIDE,
         Yoked: PoseType.HIDE,
         OverTheHead: PoseType.HIDE,
         BackBoxTie: PoseType.HIDE,
@@ -17,6 +16,7 @@ const asset = {
         BackCuffs: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
+        TapedHands: PoseType.HIDE,
     },
     DefaultColor: ["#776451", "Default", "#776451", "#C3C0BA"],
     Layer: [

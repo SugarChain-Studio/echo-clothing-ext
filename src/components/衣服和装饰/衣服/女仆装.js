@@ -53,9 +53,9 @@ const asset = [
                     {
                         Name: "围裙",
                         PoseMapping: {
-                            TapedHands: "TapedHands",
                             AllFours: "Hide",
                             Hogtied: "Hogtied",
+                            TapedHands: "TapedHands",
                         },
                     },
                 ],

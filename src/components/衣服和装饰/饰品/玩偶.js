@@ -5,7 +5,6 @@ import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
-    TapedHands: "TapedHands",
     Yoked: "TapedHands",
     OverTheHead: "TapedHands",
     BackBoxTie: "TapedHands",
@@ -13,6 +12,7 @@ const specialMapping = {
     BackCuffs: "TapedHands",
     Hogtied: "TapedHands",
     AllFours: "TapedHands",
+    TapedHands: "TapedHands",
 };
 
 /** @type {CustomAssetDefinition} */
