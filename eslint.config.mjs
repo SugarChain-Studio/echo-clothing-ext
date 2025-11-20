@@ -86,23 +86,13 @@ export default [
             "no-param-reassign": "warn",
             "prefer-spread": "warn",
 
-            // 检查字符串中的"TargetCharacter's"
-            "no-restricted-syntax": [
-                "error",
-                {
-                    // 匹配普通字符串字面量
-                    selector: "Literal[value=/TargetCharacter's/]",
-                    message: msgRestrictedLiteral,
-                },
-                {
-                    // 匹配模板字符串中的内容
-                    selector: "TemplateElement[value.raw=/TargetCharacter's/]",
-                    message: msgRestrictedTemplate,
-                },
-            ],
+            // 使用插件规则替代字符串中 "TargetCharacter's" 检查
+            "local/no-targetcharacters-possessive": "error",
 
             // 自定义本地规则：禁止 CustomAssetDefinition 顶层 Name 含下划线（中英提示）
-            "local/no-underscore-in-custom-asset-name": "warn",
+            "local/no-underscore-in-custom-asset-name": "error",
+            // 自定义本地规则：AssetPoseMapping 中 TapedHands 必须最后（中英提示）
+            "local/tapedhands-last-in-assetposemapping": "error",
         },
     },
 ];

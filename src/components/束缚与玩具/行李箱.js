@@ -3,7 +3,6 @@ import { AssetManager } from "../../assetForward";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 import { createItemDialogModular } from "../../lib";
 import { ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /**
  * @typedef {Object} LuggageEvent

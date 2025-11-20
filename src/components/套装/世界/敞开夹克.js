@@ -7,9 +7,9 @@ const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));
 /** @type {AssetPoseMapping} */
 const poseMapping = {
     ...AssetPoseMapping.Cloth,
-    TapedHands: "",
     AllFours: PoseType.HIDE,
     Hogtied: PoseType.HIDE,
+    TapedHands: "",
 };
 
 const backPoses = ["BackBoxTie", "BackCuffs", "BackElbowTouch"];
