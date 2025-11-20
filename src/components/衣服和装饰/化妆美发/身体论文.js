@@ -206,7 +206,7 @@ export default function () {
         assetStrings,
     });
     AssetManager.addImageMapping({
-        [ImageMapTools.assetPreview("BodyMarkings", "身体论文_Luzi")]: ImageMapTools.assetPreview(
+        [ImageMapTools.assetPreview("BodyMarkings", "身体论文")]: ImageMapTools.assetPreview(
             "BodyMarkings",
             "BodyWritings"
         ),
