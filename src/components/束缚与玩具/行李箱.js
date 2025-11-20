@@ -231,12 +231,6 @@ const assets = [
 ];
 
 export default function () {
-    // fix vanilla bc bug
-    HookManager.patchFunction("CharacterCheckHooks", {
-        '(Layer.Visibility == "OthersExceptDialog" && !(inDialog && !C.IsPlayer()))':
-            '(Layer.Visibility == "OthersExceptDialog" && !inDialog && !C.IsPlayer())',
-    });
-
     AssetManager.addImageMapping({
         ...Object.fromEntries([
             [

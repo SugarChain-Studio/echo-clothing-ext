@@ -58,14 +58,8 @@ export default function () {
     HookManager.patchFunction("DrawCharacterSegment", {
         "DrawCanvasSegment(C.Canvas, Left": "DrawCanvasSegment(C.Canvas, Left + 250",
     });
-
-    HookManager.patchFunction("DrawRefreshCharacterForImage", {
-        "const path = url.pathname;": "const path = decodeURI(url.pathname);",
-    });
-
     HookManager.afterInit(async () => {
         await sleepUntil(() => globalThis["GLDrawCanvas"] !== undefined);
         GLDrawResetCanvas();
-        // CommonDrawCanvasPrepare(Player);
     });
 }

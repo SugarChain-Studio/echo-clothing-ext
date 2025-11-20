@@ -10,6 +10,9 @@ import { CraftingCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
+import runBCPatch from "./bcPatch";
+import runDrawMod from "./drawMod";
+
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",
     zh: "在玩家外观加载后初始化自定义资产注册，部分资产可能丢失。",
@@ -33,6 +36,9 @@ once(ModInfo.name, async () => {
     AssetManager.setLogger(Logger);
 
     CraftingCache.setup(Logger);
+
+    runBCPatch();
+    runDrawMod();
 
     fetchAssetOverrides()
         .then((override) => resolveAssetOverrides(resourceBaseURL, override))
