@@ -15,7 +15,7 @@ const asset = {
     Extended: true,
     EditOpacity: true,
     MinOpacity: 0,
-    Opacity: 0,
+    Opacity: 0.7,
     AllowActivePose: ["Kneel"],
     SetPose: ["Kneel"],
     Effect: [E.BlockWardrobe, E.Freeze],
@@ -24,6 +24,7 @@ const asset = {
             Name: "遮罩",
             HasImage: false,
             AllowColorize: false,
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
@@ -55,7 +56,7 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "熊熊" }],
-    BaselineProperty: { Opacity: 0.7 },
+    BaselineProperty: { Opacity: asset.Opacity },
     ScriptHooks: {
         Init: PropertyOpacityInit,
         Load: PropertyOpacityLoad,

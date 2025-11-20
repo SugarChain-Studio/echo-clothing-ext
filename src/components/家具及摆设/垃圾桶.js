@@ -12,7 +12,7 @@ const asset = {
     Extended: true,
     EditOpacity: true,
     MinOpacity: 0,
-    Opacity: 0,
+    Opacity: 1,
     Priority: 58,
     AllowActivePose: ["Kneel"],
     SetPose: ["Kneel"],
@@ -21,12 +21,13 @@ const asset = {
             Name: "垃圾桶遮罩",
             HasImage: false,
             AllowColorize: false,
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
-                        [0, 695, 500, 120], //下
-                        [0, 175, 160, 1000], //左
-                        [340, 175, 160, 1000], //右
+                        [-250, 695, 1000, 120], //下
+                        [-250, 175, 160 + 250, 1000], //左
+                        [340, 175, 160 + 250, 1000], //右
                     ],
                 },
             ],
@@ -36,12 +37,13 @@ const asset = {
             HasImage: false,
             AllowColorize: false,
             AllowTypes: { typed: [1, 2] },
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
-                        [0, -100, 500, 150], //上
-                        [0, 0, 160, 1000], //左
-                        [340, 0, 160, 1000], //右
+                        [-250, -100, 1000, 150], //上
+                        [-250, 0, 160 + 250, 1000], //左
+                        [340, 0, 160 + 250, 1000], //右
                     ],
                 },
             ],
@@ -73,7 +75,7 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "打开盖子" }, { Name: "合上盖子" }, { Name: "打开挡板" }],
-    BaselineProperty: { Opacity: 1 },
+    BaselineProperty: { Opacity: asset.Opacity },
     ScriptHooks: {
         Init: PropertyOpacityInit,
         Load: PropertyOpacityLoad,

@@ -12,7 +12,7 @@ const asset = {
     Extended: true,
     EditOpacity: true,
     MinOpacity: 0,
-    Opacity: 0,
+    Opacity: 1,
     SetPose: ["BackElbowTouch", "Kneel"],
     Layer: [
         {
@@ -20,13 +20,14 @@ const asset = {
             AllowColorize: false,
             HasImage: false,
             AllowTypes: { typed: 0 },
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
-                        [0, -100, 500, 135], //上
-                        [0, 717, 500, 120], //下
-                        [0, 0, 130, 1000], //左
-                        [370, 200, 135, 1000], //右
+                        [-250, -100, 1000, 180], //上
+                        [-250, 700, 1000, 300], //下
+                        [-250, 0, 130 + 250, 1000], //左
+                        [370, 0, 130 + 250, 1000], //右
                     ],
                 },
             ],
@@ -36,13 +37,14 @@ const asset = {
             AllowColorize: false,
             HasImage: false,
             AllowTypes: { typed: 1 },
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
-                        [0, -100, 500, 135],
-                        [0, 717, 500, 120],
-                        [0, 0, 130, 1000],
-                        [370, 200, 135, 1000],
+                        [-250, -100, 1000, 135],
+                        [-250, 717, 1000, 120],
+                        [-250, 0, 130 + 250, 1000],
+                        [370, 0, 130 + 250, 1000],
                     ],
                 },
             ],
@@ -99,7 +101,7 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "无照片" }, { Name: "有照片" }],
-    BaselineProperty: { Opacity: 1 },
+    BaselineProperty: { Opacity: asset.Opacity },
     ScriptHooks: {
         Init: PropertyOpacityInit,
         Load: PropertyOpacityLoad,

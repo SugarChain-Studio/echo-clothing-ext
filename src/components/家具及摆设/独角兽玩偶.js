@@ -15,7 +15,7 @@ const asset = {
     Extended: true,
     EditOpacity: true,
     MinOpacity: 0,
-    Opacity: 0,
+    Opacity: 0.7,
     AllowActivePose: ["AllFours"],
     SetPose: ["AllFours"],
     Effect: [E.BlockWardrobe, E.Freeze],
@@ -24,19 +24,21 @@ const asset = {
             Name: "身体遮罩",
             AllowColorize: false,
             HasImage: false,
-            Alpha: [{ Masks: [[0, 388, 500, 200]] }],
+            MinOpacity: 1,
+            Alpha: [{ Masks: [[-250, 388, 1000, 1000]] }],
         },
         {
             Name: "头部遮罩",
             AllowColorize: false,
             HasImage: false,
             AllowTypes: { typed: 0 },
+            MinOpacity: 1,
             Alpha: [
                 {
                     Masks: [
-                        [0, -200, 500, 270], //上
-                        [0, 0, 154, 400], //左
-                        [350, 0, 200, 400], //右
+                        [0, -700, 500, 770], //上
+                        [-250, 0, 150 + 250, 400], //左
+                        [350, 0, 150 + 250, 400], //右
                         [0, 160, 172, 75], //左中
                         [336, 170, 100, 65], //右中
                     ],
@@ -98,7 +100,7 @@ const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
     Options: [{ Name: "戴上头套" }, { Name: "摘掉头套" }],
-    BaselineProperty: { Opacity: 0.7 },
+    BaselineProperty: { Opacity: asset.Opacity },
     ScriptHooks: {
         Init: PropertyOpacityInit,
         Load: PropertyOpacityLoad,
