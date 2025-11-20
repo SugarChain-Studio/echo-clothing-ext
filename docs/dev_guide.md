@@ -149,26 +149,23 @@ fix: 修正“xxx”物品两个选项的英文拼写
 
 ### `local/no-underscore-in-custom-asset-name`
 
-限制：`CustomAssetDefinition` 顶层字段 `Name` 不允许出现下划线 `_`。
+`CustomAssetDefinition` 顶层字段 `Name` 不允许出现下划线 `_`。
 
-原因：基础系统的图片资源名到物品资产的“反向查找”是以“第一个下划线出现的位置”为分界，将文件名前缀视为物品的 `Name`。如果 `Name` 本身含有下划线，就会让系统误判边界（例如 `Cool_Top_Layer1.png`，系统会把 `Cool` 解析为 Name 而不是期望的 `Cool_Top`），导致资源匹配失败或错位。为避免二义性，`Name` 禁止出现 `_`。除此之外没有强制的大小写 / 单词分隔要求；保持你在项目里其它资产的已有风格即可。
+原因：实现里的图片资源名到物品资产的“反向查找”是以“第一个下划线出现的位置”为分界，将文件名前缀视为物品的 `Name`。如果 `Name` 本身含有下划线，就会让系统误判边界（例如 `Cool_Top_Layer1.png`，系统会把 `Cool` 解析为 Name 而不是期望的 `Cool_Top`），导致资源匹配失败或错位。为避免二义性，`Name` 禁止出现 `_`。除此之外没有强制的大小写 / 单词分隔要求；保持你在项目里其它资产的已有风格即可。
 
 如果确实需要兼容历史带下划线的名称（极少数情况），建议：
 1. 使用新规范名称作为主定义；
 2. 在扩展或兼容映射里加入旧名称的处理（不直接将旧名称继续作为 `Name`）。
 
----
-
 ### `local/tapedhands-last-in-assetposemapping`
 
-在定义 `AssetPoseMapping` 对象时，必须把 `TapedHands` 属性写在最后。
+在定义 `AssetPoseMapping` 对象时，必须把 `TapedHands` 属性写在最后。如果顺序不正确会报错，并且可以使用自动修复 (`pnpm lint --fix`) 将 `TapedHands` 移动到末尾。
 
-如果顺序不正确会报错，并且可以使用自动修复 (`pnpm lint --fix`) 将 `TapedHands` 移动到末尾。其原因是：实现里会按定义顺序遍历姿势映射，`TapedHands` 是一个特殊姿势；如果它没有放在最后，会被过早匹配，使其优先级高于正常上半身姿势（例如普通站立/背后捆绑等），导致这些普通姿势被错误隐藏或覆盖。
+原因：实现里会按定义顺序遍历姿势映射，`TapedHands` 是一个特殊姿势；如果它没有放在最后，会被过早匹配，使其优先级高于正常上半身姿势（例如普通站立/背后捆绑等），导致这些普通姿势被错误隐藏或覆盖。
 
 ### `local/no-targetcharacters-possessive`
 
-禁止在字符串（普通字面量与模板字符串）中出现 `TargetCharacter's`，改用 `DestinationCharacter`。
+禁止在字符串（普通字面量与模板字符串）中出现 `TargetCharacter's`，改用 `DestinationCharacter`。该规则支持自动修复（`pnpm lint --fix`），会把出现的 `TargetCharacter's` 替换为 `DestinationCharacter`。
 
 原因：`DestinationCharacter` 在目标为自身时会自动进行人称与所有格的正确替换（her / his / their 等），而直接拼接 `TargetCharacter's` 会生成错误输出（例如 `her's`、`he's`）。
 
-该规则支持自动修复（`pnpm lint --fix`），会把出现的 `TargetCharacter's` 替换为 `DestinationCharacter`。如果确实需要原样引用（极少数情况），请添加解释性注释并避免直接使用该模式。
