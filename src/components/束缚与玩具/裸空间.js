@@ -194,18 +194,18 @@ const orgasmState = new StateTools.OrgasmState();
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<NoArchItemData, {Initialized:boolean}>} */
 function scriptDraw(itemData, originalFunction, { C, Item, PersistentData }) {
-    if (C.IsPlayer()) return;
+    if (C.IsPlayer()) {
+        const data = PersistentData();
 
-    const data = PersistentData();
+        if (!data.Initialized) {
+            data.Initialized = true;
+            orgasmState.reset();
+        }
 
-    if (!data.Initialized) {
-        data.Initialized = true;
-        orgasmState.reset();
-    }
-
-    if (orgasmState.take("Orgasmed")) {
-        operations.randomize(Item);
-        ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
+        if (orgasmState.take("Orgasmed")) {
+            operations.randomize(Item);
+            ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
+        }
     }
 }
 
