@@ -72,6 +72,11 @@ jobs:
           cat temp.txt >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
 
-      - name: Display changelog info
-        run: |
-          echo "${{ steps.changelog.outputs.message }}"
+      - name: Display changelog message
+        run: echo "${{ steps.changelog.outputs.message }}"
+
+      - name: Discord notification
+        uses: appleboy/discord-action@v1.2.0
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: "Debug Message: ${{ steps.changelog.outputs.message }}"

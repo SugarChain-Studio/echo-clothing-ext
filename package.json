@@ -9,7 +9,7 @@
         "dev:beta": "pnpm type-check && pnpm resources:dev --type beta && pnpm build --configDebug --configBeta --configBaseURL \"http://localhost:8080/\"",
         "changelog": "conventional-changelog -n ./scripts/.changelog-config.mjs -o CHANGELOG.md -r 0",
         "changelog:stdout": "conventional-changelog -n ./scripts/.changelog-config.mjs",
-        "changelog:latest-stdout": "conventional-changelog -n ./scripts/.changelog-config.mjs --stdout -r 3",
+        "changelog:latest-stdout": "conventional-changelog -n ./scripts/.changelog-config.mjs --stdout -r 2",
         "changelog:page": "node ./scripts/.changelog.js CHANGELOG.md public/changelog.html",
         "resources:rel": "node ./scripts/.resource.js --rel",
         "resources:dev": "node ./scripts/.resource.js --dev",
