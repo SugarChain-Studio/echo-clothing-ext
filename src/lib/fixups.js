@@ -51,13 +51,10 @@ const oldNewMap = new Map();
 
 /** @param {PlayerCharacter} player */
 function performWardrobeFixup(player) {
-    if (!Array.isArray(player.Wardrobe)) {
-        // 空衣柜会是 null 而不是 []，与类型定义不符
-        console.error("player.Wardrobe is not an array", player.Wardrobe);
-        return;
-    }
-
+    // 在此时，Wardrobe或者Wardrobe的元素可能是null，与类型定义不符
+    if (!Array.isArray(player.Wardrobe)) return;
     for (const dressup of player.Wardrobe) {
+        if (!Array.isArray(dressup)) continue;
         for (const dress of dressup) {
             const key = `${dress.Group}::${dress.Name}`;
             if (oldNewMap.has(key)) {
