@@ -10,6 +10,7 @@ const asset = {
     Left: 0,
     ParentGroup: {},
     Hide: ["HairFront"],
+    DynamicGroupName: "Cloth",
     AllowActivePose: ["BaseUpper", "BackBoxTie", "BackCuffs", "BackElbowTouch", "Yoked", "Hogtied", "AllFours"],
     PoseMapping: {
         Yoked: "Yoked",
