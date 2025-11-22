@@ -48,8 +48,8 @@ const asset = [
             ScriptHooks: { BeforeDraw: beforeDraw },
         },
         assetStrings: {
-            CN: { Select: "选择白大褂伪装模式", A: "自动", P: "姿势", F: "束缚" },
-            EN: { Select: "Select Lab Coat Disguise Mode", A: "Auto", P: "Pose", F: "Restraint" },
+            CN: { Select: "选择白大褂伪装拘束模式", A: "自动", P: "不伪装", F: "保持伪装" },
+            EN: { Select: "Select Lab Coat Disguise Restraint Mode", A: "Auto", P: "No Disguise", F: "Keep Disguise" },
         },
     },
 ];
