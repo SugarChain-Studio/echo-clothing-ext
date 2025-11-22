@@ -14,71 +14,20 @@ const asset = {
     AllowActivity: ["SpankItem", "RubItem"],
     ActivityAudio: ["SmackCrop"],
     Layer: [
-        {
-            Name: "折叠扇面",
-            AllowTypes: { n: [0] },
-        },
-        {
-            Name: "折叠扇面边缘",
-            AllowTypes: { n: [0] },
-        },
-        {
-            Name: "折叠扇骨",
-            AllowTypes: { n: [0] },
-        },
-        {
-            Name: "展开扇骨后",
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "展开扇面",
-            CopyLayerColor: "折叠扇面",
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "展开扇面边缘",
-            CopyLayerColor: "折叠扇面边缘",
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "展开扇骨",
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "展开扇面阴影",
-            Priority: 56,
-            AllowTypes: { n: [1] },
-        },
-        {
-            Name: "梅",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [1] },
-        },
-        {
-            Name: "兰",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [2] },
-        },
-        {
-            Name: "竹",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [3] },
-        },
-        {
-            Name: "菊",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [4] },
-        },
-        {
-            Name: "山水",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [5] },
-        },
-        {
-            Name: "溪上扁舟隔月来",
-            AllowColorize: false,
-            AllowTypes: { n: [1], p: [6] },
-        },
+        { Name: "折叠扇面", AllowTypes: { n: [0] } },
+        { Name: "折叠扇面边缘", AllowTypes: { n: [0] } },
+        { Name: "折叠扇骨", AllowTypes: { n: [0] } },
+        { Name: "展开扇骨后", AllowTypes: { n: [1] } },
+        { Name: "展开扇面", CopyLayerColor: "折叠扇面", AllowTypes: { n: [1] } },
+        { Name: "展开扇面边缘", CopyLayerColor: "折叠扇面边缘", AllowTypes: { n: [1] } },
+        { Name: "展开扇骨", AllowTypes: { n: [1] } },
+        { Name: "展开扇面阴影", Priority: 56, AllowTypes: { n: [1] } },
+        { Name: "梅", AllowColorize: false, AllowTypes: { n: [1], p: [1] } },
+        { Name: "兰", AllowColorize: false, AllowTypes: { n: [1], p: [2] } },
+        { Name: "竹", AllowColorize: false, AllowTypes: { n: [1], p: [3] } },
+        { Name: "菊", AllowColorize: false, AllowTypes: { n: [1], p: [4] } },
+        { Name: "山水", AllowColorize: false, AllowTypes: { n: [1], p: [5] } },
+        { Name: "溪上扁舟隔月来", AllowColorize: false, AllowTypes: { n: [1], p: [6] } },
     ],
 };
 

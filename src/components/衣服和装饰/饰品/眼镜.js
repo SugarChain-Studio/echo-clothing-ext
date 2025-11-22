@@ -4,32 +4,13 @@ import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [
+    [{ Name: "单边眼镜左", Random: false, Top: 0, Left: 0 }, { translation: { CN: "单边眼镜左", EN: "Monocle Left" } }],
     [
-        {
-            Name: "单边眼镜左",
-            Random: false,
-            Top: 0,
-            Left: 0,
-        },
-        { translation: { CN: "单边眼镜左", EN: "Monocle Left" } },
-    ],
-    [
-        {
-            Name: "单边眼镜右",
-            Random: false,
-            Top: 0,
-            Left: 0,
-        },
+        { Name: "单边眼镜右", Random: false, Top: 0, Left: 0 },
         { translation: { CN: "单边眼镜右", EN: "Monocle Right" } },
     ],
     [
-        {
-            Name: "眼镜卡",
-            Random: false,
-            Top: 0,
-            Left: 0,
-            Layer: [{ Name: "眼镜", Priority: 56 }],
-        },
+        { Name: "眼镜卡", Random: false, Top: 0, Left: 0, Layer: [{ Name: "眼镜", Priority: 56 }] },
         { translation: { CN: "眼镜卡", EN: "Nose Clip Glasses" } },
     ],
     [
@@ -50,12 +31,7 @@ const assets = [
         },
     ],
     [
-        {
-            Name: "下半框眼镜",
-            Random: false,
-            Top: 0,
-            Left: 0,
-        },
+        { Name: "下半框眼镜", Random: false, Top: 0, Left: 0 },
         { translation: { CN: "下半框眼镜", EN: "Semi-rimless Glasses" } },
     ],
     [
