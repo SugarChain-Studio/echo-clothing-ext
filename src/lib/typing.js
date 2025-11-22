@@ -31,12 +31,12 @@ function addAssetParamHasGroup(arg0) {
 }
 
 /**
- *
- * @param  {...[string|string[], string]} args
- * @returns {Record<string,string>}
+ * @template K
+ * @param  {...[ string| string[], K]} args
+ * @returns {Record<string,K>}
  */
-function stringEntries(...args) {
-    /** @type {Record<string,string>} */
+function repeatEntries(...args) {
+    /** @type {Record<string,K>} */
     const ret = {};
     for (const [key, value] of args) {
         if (Array.isArray(key)) {
@@ -85,7 +85,9 @@ export const Typing = /** @type {const} */ ({
     transform: (obj, func) => func(obj),
     entries: recordEntries,
     addAssetParamHasGroup,
-    stringEntries,
+
+    stringEntries: /** @type {typeof repeatEntries<string>} */ (repeatEntries),
+    repeatEntries,
 
     layerMap: /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */ (
         (args, func) => args.map(func)
