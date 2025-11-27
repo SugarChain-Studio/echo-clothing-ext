@@ -19,7 +19,14 @@ const asset = [
                 Kneel: "LegsClosed",
                 KneelingSpread: PoseType.DEFAULT,
             },
-            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }],
+            Layer: [
+                { Name: "1" },
+                { Name: "2" },
+                { Name: "3" },
+                { Name: "4" },
+                { Name: "I0", Priority: 29, ColorGroup: "内衬", ParentGroup: {} },
+                { Name: "I1", Priority: 6, ColorGroup: "内衬", ParentGroup: {} },
+            ],
         },
         (asset) => {
             ArmMaskTool.createArmMaskForCloth("Cloth", asset);
@@ -36,12 +43,18 @@ const asset = [
                 2: "腰带",
                 3: "身体珠宝",
                 4: "裙珠宝",
+                I0: "后",
+                I1: "前",
+                内衬: "内衬",
             },
             EN: {
                 1: "Dress",
                 2: "Belt",
                 3: "Body Jewelry",
                 4: "Dress Jewelry",
+                I0: "Back",
+                I1: "Front",
+                内衬: "Lining",
             },
         },
         extended: {
