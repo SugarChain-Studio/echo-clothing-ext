@@ -260,7 +260,7 @@ const asset = [
                         ArchetypeConfig: {
                             Archetype: ExtendedArchetype.VARIABLEHEIGHT,
                             MaxHeight: 0,
-                            MinHeight: -250,
+                            MinHeight: -450,
                             DrawData: { elementData: [{ position: [1140, 650, 100, 500], icon: "rope" }] },
                             DialogPrefix: { Chat: "SuspensionChange" },
                         },
