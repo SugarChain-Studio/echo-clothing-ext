@@ -12,6 +12,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  NODE_VERSION: "22"
+
 jobs:
   build:
     environment:
@@ -32,7 +35,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
 
       - name: Install dependencies
@@ -114,14 +117,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Install conventional-changelog
-        run: pnpm add -g conventional-changelog-cli
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Remove local beta tags
         run: git tag | grep 'beta' | xargs -r git tag -d
