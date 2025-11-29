@@ -80,6 +80,7 @@ const asset = {
         { Name: "小果", AllowTypes: { f: 5 } },
         { Name: "埃菲尔徳", AllowTypes: { f: 6 } },
         { Name: "小寒", AllowTypes: { f: 7 } },
+        { Name: "沐猫", AllowTypes: { f: 8 } },
 
         // 小夜家玩偶
         { Name: "向归夜", AllowTypes: { y: 1 } },
@@ -145,6 +146,7 @@ const asset = {
         { Name: "小a", AllowTypes: { yb: 12 } },
         { Name: "透透子", AllowTypes: { yb: 13 } },
         { Name: "luobo", AllowTypes: { yb: 14 } },
+        { Name: "岚宝", AllowTypes: { yb: 15 } },
 
         // EILRSW
         { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
@@ -275,17 +277,16 @@ const asset = {
         { Name: "lunara", AllowTypes: { nest: 5 } },
         { Name: "Kitty", AllowTypes: { nest: 6 } },
         { Name: "柴柴", AllowTypes: { nest: 7 } },
-        { Name: "UMI", AllowTypes: { nest: 8 } },
-        { Name: "姜海琳", AllowTypes: { nest: 9 } },
-        { Name: "姜海琳1", AllowTypes: { nest: 10 } },
-        { Name: "姜海琳2", AllowTypes: { nest: 11 } },
-        { Name: "辛西婭1", AllowTypes: { nest: 12 } },
-        { Name: "辛西婭2", AllowTypes: { nest: 13 } },
-        { Name: "優米", AllowTypes: { nest: 14 } },
-        { Name: "Lana", AllowTypes: { nest: 15 } },
-        { Name: "枳", AllowTypes: { nest: 16 } },
-        { Name: "Arco", AllowTypes: { nest: 17 } },
-        { Name: "Rinko", AllowTypes: { nest: 18 } },
+        { Name: "辛西婭2", AllowTypes: { nest: 8 } },
+        { Name: "優米", AllowTypes: { nest: 9 } },
+        { Name: "Lana", AllowTypes: { nest: 10 } },
+        { Name: "枳", AllowTypes: { nest: 11 } },
+        { Name: "Arco", AllowTypes: { nest: 12 } },
+        { Name: "Rinko", AllowTypes: { nest: 13 } },
+        { Name: "乳胶犬鹤子", AllowTypes: { nest: 14 } },
+        { Name: "姜海琳3", AllowTypes: { nest: 15 } },
+        { Name: "鹤子", AllowTypes: { nest: 16 } },
+        { Name: "狄亚", AllowTypes: { nest: 17 } },
 
         // Foxys Fun Experience
         { Name: "Gab", AllowTypes: { ffe: 1 } },
@@ -305,6 +306,54 @@ const asset = {
         { Name: "白木", AllowTypes: { gggg: 1 } },
         { Name: "KocO", AllowTypes: { gggg: 2 } },
         { Name: "N", AllowTypes: { gggg: 3 } },
+
+        // 羊羊星
+        { Name: "UMI", AllowTypes: { yyx: 1 } },
+        { Name: "姜海琳", AllowTypes: { yyx: 2 } },
+        { Name: "姜海琳1", AllowTypes: { yyx: 3 } },
+        { Name: "姜海琳2", AllowTypes: { yyx: 4 } },
+        { Name: "辛西婭1", AllowTypes: { yyx: 5 } },
+        { Name: "辛西婭3", AllowTypes: { yyx: 6 } },
+        { Name: "UM", AllowTypes: { yyx: 7 } },
+
+        // 胡话的梦境
+        { Name: "腐化1", AllowTypes: { hhdmj: 1 } },
+        { Name: "腐化2", AllowTypes: { hhdmj: 2 } },
+        { Name: "北玄", AllowTypes: { hhdmj: 3 } },
+        { Name: "梓筠", AllowTypes: { hhdmj: 4 } },
+        { Name: "可可", AllowTypes: { hhdmj: 5 } },
+        { Name: "梦梦", AllowTypes: { hhdmj: 6 } },
+        { Name: "羽娅", AllowTypes: { hhdmj: 7 } },
+        { Name: "玖玖", AllowTypes: { hhdmj: 8 } },
+        { Name: "惟忆", AllowTypes: { hhdmj: 9 } },
+        { Name: "晴雪", AllowTypes: { hhdmj: 10 } },
+
+        // 青青草原
+        { Name: "太上皇小灰灰", AllowTypes: { qqcy: 1 } },
+        { Name: "乖巧小灰灰", AllowTypes: { qqcy: 2 } },
+        { Name: "月~", AllowTypes: { qqcy: 3 } },
+        { Name: "梦~", AllowTypes: { qqcy: 4 } },
+        { Name: "狼~", AllowTypes: { qqcy: 5 } },
+        { Name: "鱼~", AllowTypes: { qqcy: 6 } },
+        { Name: "火龙果", AllowTypes: { qqcy: 7 } },
+        { Name: "狐狸~", AllowTypes: { qqcy: 8 } },
+        { Name: "莉柯姐姐~", AllowTypes: { qqcy: 9 } },
+        { Name: "小羽姐姐~", AllowTypes: { qqcy: 10 } },
+        { Name: "老大姐姐~", AllowTypes: { qqcy: 11 } },
+        { Name: "梦梦~", AllowTypes: { qqcy: 12 } },
+        { Name: "狼崽", AllowTypes: { qqcy: 13 } },
+        { Name: "乔", AllowTypes: { qqcy: 14 } },
+
+        // 玩偶店
+        { Name: "希尔薇娅", AllowTypes: { wd: 1 } },
+        { Name: "希尔薇娅2", AllowTypes: { wd: 2 } },
+        { Name: "爱丽丝梦游仙境", AllowTypes: { wd: 3 } },
+        { Name: "安", AllowTypes: { wd: 4 } },
+        { Name: "麟", AllowTypes: { wd: 5 } },
+        { Name: "羽猫", AllowTypes: { wd: 6 } },
+        { Name: "小乔", AllowTypes: { wd: 7 } },
+        { Name: "凛", AllowTypes: { wd: 8 } },
+        { Name: "幽灵2", AllowTypes: { wd: 9 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -350,14 +399,13 @@ const asset = {
         { Name: "Soph", AllowTypes: { l: 33 } },
         { Name: "羽", AllowTypes: { l: 34 } },
         { Name: "Milim", AllowTypes: { l: 35 } },
-        { Name: "爱丽丝梦游仙境", AllowTypes: { l: 36 } },
-        { Name: "希尔薇娅", AllowTypes: { l: 37 } },
-        { Name: "云喵", AllowTypes: { l: 38 } },
-        { Name: "诺瑞莉卡", AllowTypes: { l: 39 } },
-        { Name: "Kiki", AllowTypes: { l: 40 } },
-        { Name: "YL", AllowTypes: { l: 41 } },
-        { Name: "殘楓", AllowTypes: { l: 42 } },
-        { Name: "幽玉", AllowTypes: { l: 43 } },
+        { Name: "云喵", AllowTypes: { l: 36 } },
+        { Name: "诺瑞莉卡", AllowTypes: { l: 37 } },
+        { Name: "Kiki", AllowTypes: { l: 38 } },
+        { Name: "YL", AllowTypes: { l: 39 } },
+        { Name: "殘楓", AllowTypes: { l: 40 } },
+        { Name: "幽玉", AllowTypes: { l: 41 } },
+        { Name: "小煜", AllowTypes: { l: 42 } },
     ],
 };
 
@@ -389,6 +437,10 @@ const typeNameNext = {
     pen: "1563",
     yyw: "鸭鸭窝",
     gggg: "Gugugaga",
+    yyx: "羊羊星",
+    hhdmj: "胡话的梦境",
+    qqcy: "青青草原~",
+    wd: "玩偶店",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
@@ -417,10 +469,12 @@ const predefDialog = {
         Setx1: "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
         Setxppjb1: "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
         Setxppjb7: "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依!",
-        Setxppjb11: "天空一声巨响！依依玩偶闪亮登场！缓缓落在了DestinationCharacter怀里.",
+        Setxppjb11: "天空一声巨响! 依依玩偶闪亮登场! 缓缓落在了DestinationCharacter怀里.",
         Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
-        Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶",
+        Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶.",
+        Setnest14: "SourceCharacter给了DestinationCharacter给了她一个可怜巴巴的乳胶犬鹤子.",
+        Setnest15: "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
     },
 };
 
@@ -482,7 +536,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
     return pv;
-}, /** @type { Record<string, Number> } */ ({}));
+}, /** @type { Record<string, Number> } */({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -504,7 +558,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     pv[k] ??= {};
     pv[k][cv.AllowTypes[k]] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -544,7 +598,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
