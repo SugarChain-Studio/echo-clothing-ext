@@ -473,7 +473,7 @@ const predefDialog = {
         Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
         Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶.",
-        Setnest14: "SourceCharacter给了DestinationCharacter给了她一个可怜巴巴的乳胶犬鹤子.",
+        Setnest14: "SourceCharacter给了DestinationCharacter一个可怜巴巴的乳胶犬鹤子.",
         Setnest15: "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
     },
 };
