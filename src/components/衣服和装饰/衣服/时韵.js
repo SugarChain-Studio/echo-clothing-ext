@@ -1,4 +1,4 @@
-import { ImmPass, PoseMapTool, PostPass, Typing } from "../../../lib";
+import { ImmPass, PoseMapTool, Typing } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { ImageMapTools } from "@mod-utils/Tools";
 
