@@ -2,6 +2,15 @@ import { ArmMaskTool, PostPass } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
+function beforeDraw(data, originalFunction, drawData) {
+    const { C, Pose } = drawData;
+    if (C.HasEffect(E.Suspended)) {
+        if (Pose === "Kneel" || Pose === "KneelingSpread") return { Pose: /** @type {AssetPoseName} */ ("") };
+        else return { Pose };
+    }
+}
+
 /** @type {AddAssetWithConfigParams} */
 const asset = [
     "Cloth",
@@ -14,11 +23,7 @@ const asset = [
             Priority: 30,
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Cloth",
-            PoseMapping: {
-                ...AssetPoseMapping.ClothLower,
-                Kneel: "LegsClosed",
-                KneelingSpread: PoseType.DEFAULT,
-            },
+            PoseMapping: { ...AssetPoseMapping.ClothLower },
             Layer: [
                 { Name: "1" },
                 { Name: "2" },
@@ -61,6 +66,7 @@ const asset = [
             Archetype: "modular",
             DrawImages: false,
             Modules: [{ Name: "镜像", Key: "M", Options: [{}, { DrawOptions: { Mirror: true } }] }],
+            ScriptHooks: { BeforeDraw: beforeDraw },
         },
         assetStrings: {
             CN: {
