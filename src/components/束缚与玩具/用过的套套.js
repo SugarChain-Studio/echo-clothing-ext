@@ -1,7 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { PoseMapTool, takeLayerNames } from "../../lib";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { PoseMapTool } from "../../lib";
 
 /** @type { AddAssetWithConfigParams } */
 const asset = [
