@@ -12,12 +12,11 @@ const asset = [
             Left: 30,
             Top: 50,
             Priority: 31,
-            ParentGroup: {},
+            ParentGroup: { BackCuffs: "BodyUpper" },
             DynamicGroupName: "Cloth",
             PoseMapping: {
                 ...AssetPoseMapping.Cloth,
                 AllFours: PoseType.HIDE,
-                BackCuffs: PoseType.HIDE,
                 Hogtied: PoseType.HIDE,
                 TapedHands: "",
             },
