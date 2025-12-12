@@ -441,9 +441,9 @@ const asset = {
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
         { Name: "olga", AllowTypes: { l: 43 } },
-        { Name: "乳胶犬鹤子", AllowTypes: { nest: 44 } },
-        { Name: "鹤子", AllowTypes: { nest: 45 } },
-        { Name: "狄亚", AllowTypes: { nest: 46 } },
+        { Name: "乳胶犬鹤子", AllowTypes: { l: 44 } },
+        { Name: "鹤子", AllowTypes: { l: 45 } },
+        { Name: "狄亚", AllowTypes: { l: 46 } },
     ],
 };
 
