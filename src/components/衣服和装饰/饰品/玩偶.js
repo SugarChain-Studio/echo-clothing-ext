@@ -231,6 +231,22 @@ const asset = {
         { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
         { Name: "MIZU", AllowTypes: { lkls: 14 } },
         { Name: "暖海", AllowTypes: { lkls: 15 } },
+        // { Name: "Lucy", AllowTypes: { lkls: 16 } },
+        // { Name: "小竹", AllowTypes: { lkls: 17 } },
+        // { Name: "小羽", AllowTypes: { lkls: 18 } },
+        // { Name: "紉唯", AllowTypes: { lkls: 19 } },
+        // { Name: "Hime", AllowTypes: { lkls: 20 } },
+        // { Name: "PENGPENG", AllowTypes: { lkls: 21 } },
+        // { Name: "櫻奈", AllowTypes: { lkls: 22 } },
+        // { Name: "贝斯蒂", AllowTypes: { lkls: 23 } },
+        // { Name: "euna", AllowTypes: { lkls: 24 } },
+        // { Name: "艾梅莉", AllowTypes: { lkls: 25 } },
+        // { Name: "TINA", AllowTypes: { lkls: 26 } },
+        // { Name: "Haruka", AllowTypes: { lkls: 27 } },
+        // { Name: "歪歪", AllowTypes: { lkls: 28 } },
+        // { Name: "凌雨", AllowTypes: { lkls: 29 } },
+        // { Name: "小风", AllowTypes: { lkls: 30 } },
+        // { Name: "Ayman", AllowTypes: { lkls: 31 } },
 
         // Celestial Enchants
         { Name: "Celiko", AllowTypes: { ce: 1 } },
@@ -283,10 +299,7 @@ const asset = {
         { Name: "枳", AllowTypes: { nest: 11 } },
         { Name: "Arco", AllowTypes: { nest: 12 } },
         { Name: "Rinko", AllowTypes: { nest: 13 } },
-        { Name: "乳胶犬鹤子", AllowTypes: { nest: 14 } },
-        { Name: "姜海琳3", AllowTypes: { nest: 15 } },
-        { Name: "鹤子", AllowTypes: { nest: 16 } },
-        { Name: "狄亚", AllowTypes: { nest: 17 } },
+        { Name: "姜海琳3", AllowTypes: { nest: 14 } },
 
         // Foxys Fun Experience
         { Name: "Gab", AllowTypes: { ffe: 1 } },
@@ -355,6 +368,27 @@ const asset = {
         { Name: "凛", AllowTypes: { wd: 8 } },
         { Name: "幽灵2", AllowTypes: { wd: 9 } },
 
+        // // 岚の家
+        // { Name: "岚1", AllowTypes: { fdj: 1 } },
+        // { Name: "岚3", AllowTypes: { fdj: 2 } },
+        // { Name: "莉柯莉絲", AllowTypes: { fdj: 3 } },
+        // { Name: "小羽", AllowTypes: { fdj: 4 } },
+        // { Name: "小依", AllowTypes: { fdj: 5 } },
+        // { Name: "UU", AllowTypes: { fdj: 6 } },
+        // { Name: "小毛衣", AllowTypes: { fdj: 7 } },
+        // { Name: "妍白", AllowTypes: { fdj: 8 } },
+        // { Name: "兔兔", AllowTypes: { fdj: 9 } },
+        // { Name: "布莱克", AllowTypes: { fdj: 10 } },
+        // { Name: "茶茶", AllowTypes: { fdj: 11 } },
+        // { Name: "小词", AllowTypes: { fdj: 12 } },
+        // { Name: "桦娜", AllowTypes: { fdj: 13 } },
+        // { Name: "小樱", AllowTypes: { fdj: 14 } },
+        // { Name: "小尤菲", AllowTypes: { fdj: 15 } },
+        // { Name: "云岫", AllowTypes: { fdj: 16 } },
+        // { Name: "Kimi", AllowTypes: { fdj: 17 } },
+        // { Name: "蛇蛇", AllowTypes: { fdj: 18 } },
+        // { Name: "小away", AllowTypes: { fdj: 19 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -406,6 +440,10 @@ const asset = {
         { Name: "殘楓", AllowTypes: { l: 40 } },
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
+        { Name: "olga", AllowTypes: { l: 43 } },
+        { Name: "乳胶犬鹤子", AllowTypes: { nest: 44 } },
+        { Name: "鹤子", AllowTypes: { nest: 45 } },
+        { Name: "狄亚", AllowTypes: { nest: 46 } },
     ],
 };
 
@@ -441,6 +479,7 @@ const typeNameNext = {
     hhdmj: "胡话的梦境",
     qqcy: "青青草原~",
     wd: "玩偶店",
+    // fdj: "岚の家",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
