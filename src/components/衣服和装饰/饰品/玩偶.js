@@ -328,6 +328,9 @@ const asset = {
         { Name: "辛西婭1", AllowTypes: { yyx: 5 } },
         { Name: "辛西婭3", AllowTypes: { yyx: 6 } },
         { Name: "UM", AllowTypes: { yyx: 7 } },
+        { Name: "乳胶犬鹤子", AllowTypes: { yyx: 8 } },
+        { Name: "鹤子", AllowTypes: { yyx: 9 } },
+        { Name: "狄亚", AllowTypes: { yyx: 10 } },
 
         // 胡话的梦境
         { Name: "腐化1", AllowTypes: { hhdmj: 1 } },
@@ -441,9 +444,6 @@ const asset = {
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
         { Name: "olga", AllowTypes: { l: 43 } },
-        { Name: "乳胶犬鹤子", AllowTypes: { l: 44 } },
-        { Name: "鹤子", AllowTypes: { l: 45 } },
-        { Name: "狄亚", AllowTypes: { l: 46 } },
     ],
 };
 
