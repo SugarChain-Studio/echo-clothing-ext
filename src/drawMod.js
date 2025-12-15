@@ -42,6 +42,13 @@ export default function () {
         "clearRect(0, 0, 500, CanvasDrawHeight)": "clearRect(0, 0, 1000, CanvasDrawHeight)",
     });
 
+    HookManager.hookFunction("CommonDrawCanvasPrepare", 10, (args, next) => {
+        const [C] = args;
+        if (C?.Canvas?.width === 500) C.Canvas.width = 1000;
+        if (C?.CanvasBlink?.width === 500) C.CanvasBlink.width = 1000;
+        return next(args);
+    });
+
     HookManager.patchFunction("DrawCharacter", {
         "500 * HeightRatio * Zoom": "1000 * HeightRatio * Zoom",
         "TempCanvas.canvas.width = CanvasDrawWidth;": "TempCanvas.canvas.width = CanvasDrawWidth * 2;",
@@ -51,15 +58,12 @@ export default function () {
 
         "DrawImageEx(Canvas, DrawCanvas, X + XOffset * Zoom":
             "DrawImageEx(Canvas, DrawCanvas, X + (XOffset - 500 * HeightRatio) * Zoom",
-
-        // 再次确保画布宽度被修改
-        "if (!DrawCanvas) DrawCanvas = MainCanvas;":
-            "if (!DrawCanvas) DrawCanvas = MainCanvas; \n if (C.Canvas?.width === 500) C.Canvas.width = 1000; \n if (C.CanvasBlink?.width === 500) C.CanvasBlink.width = 1000;",
     });
 
     HookManager.patchFunction("DrawCharacterSegment", {
         "DrawCanvasSegment(C.Canvas, Left": "DrawCanvasSegment(C.Canvas, Left + 250",
     });
+
     HookManager.afterInit(async () => {
         await sleepUntil(() => globalThis["GLDrawCanvas"] !== undefined);
         GLDrawResetCanvas();
