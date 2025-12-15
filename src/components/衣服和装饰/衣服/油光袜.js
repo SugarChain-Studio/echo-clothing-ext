@@ -76,7 +76,7 @@ const asset = [
                         { Name: "F2", CopyLayerColor: "B2" },
                         { Name: "G1", ColorGroup: "HL" },
                         { Name: "G2", ColorGroup: "HL" },
-                        { Name: "L", CopyLayerColor: "B1", AllowTypes: { h: [2, 3], m: [0, 2, 3] } },
+                        { Name: "L", CopyLayerColor: "B1", AllowTypes: { h: [1, 2, 3], m: [0, 2, 3] } },
                     ],
                     (l) => ({
                         Priority: 29,
