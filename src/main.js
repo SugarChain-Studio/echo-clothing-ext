@@ -6,7 +6,7 @@ import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
-import { CraftingCache } from "./lib";
+import { AfterAssetOverrides, CraftingCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
@@ -44,6 +44,7 @@ once(ModInfo.name, async () => {
         .then((override) => resolveAssetOverrides(resourceBaseURL, override))
         .then((mappings) => AssetManager.imageMapping.setBasicImgMapping(mappings))
         .then(() => AssetManager.afterLoad(() => wearHamburgerOnThankYou()))
+        .then(() => AfterAssetOverrides.run())
         .catch((error) => {
             Logger.error(`Failed to fetch asset overrides: ${error.message}`);
         });
