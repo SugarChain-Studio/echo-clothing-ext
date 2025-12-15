@@ -19,7 +19,7 @@ declare namespace ItemDialog {
     /** 可交互元素的配置 */
     interface InteractableConfig<DataType extends ExtendedItemData<any>> {
         /** 点击触发后是否要更新物品，物品默认会更新物品所在栏，其他默认不更新 */
-        update?: boolean | 'full' | AssetGroupItemName;
+        update?: boolean | "full" | AssetGroupItemName;
         /** 点击触发后要发送的动作文本键值，留空则不发送 */
         actionKey?: string | ((ctx: DialogDrawContext<DataType>) => string);
         /** 点击触发后，是否关闭Dialog，默认为false */
@@ -42,6 +42,8 @@ declare namespace ItemDialog {
         hover?: (ctx: DialogDrawContext<DataType>) => string | undefined;
         /** 按钮点击时的回调，必须显示的可用按钮才会触发，留空则不触发 */
         onclick?: (ctx: DialogDrawContext<DataType>) => void;
+        /** 按钮是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
+        requireLockPermission?: boolean;
     }
 
     /** 物品互动对话的属性文本 */
@@ -61,7 +63,7 @@ declare namespace ItemDialog {
         /** 文本的位置和最大宽度 */
         location: { x: number; y: number; w: number };
         /** 文本的对齐方式，默认为center */
-        align?: 'left' | 'center' | 'right';
+        align?: "left" | "center" | "right";
         /** 文本的背景颜色 */
         backColor?: string;
         /** 普通文本的值，返回undefined则不显示 */
@@ -84,11 +86,15 @@ declare namespace ItemDialog {
         checked: (ctx: DialogDrawContext<DataType>) => boolean;
         /** 复选框状态改变时的回调 */
         onclick: (ctx: DialogDrawContext<DataType>) => void;
+        /** 复选框悬停时显示的文本，如果未定义则不显示 */
+        hover?: (ctx: DialogDrawContext<DataType>) => string | undefined;
+        /** 复选框是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
+        requireLockPermission?: boolean;
     }
 }
 
 declare namespace ContainerProperty {
-    interface ContainerData extends Omit<Item, 'Asset'> {
+    interface ContainerData extends Omit<Item, "Asset"> {
         IAsset?: string;
         IGroup?: AssetGroupItemName;
     }

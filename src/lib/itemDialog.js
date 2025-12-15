@@ -11,7 +11,7 @@ const drawButton = (text, id, location, hover) => {
 /** @type {ItemDialog.DrawButtonFunction} */
 const drawButtonDisable = (text, id, location, hover) => {
     const rect = /** @type {RectTuple} */ (Object.values(location));
-    DrawButton(...rect, text(id), "Gray", null, hover && text(hover), true);
+    DrawButton(...rect, text(id), "Pink", null, hover && text(hover), true);
 };
 
 /**
@@ -102,12 +102,15 @@ class DialogButtons {
 
         const oldAlign = MainCanvas.textAlign;
         MainCanvas.textAlign = "center";
+
+        const lockRejected = InventoryGetItemProperty(item, "LockedBy") && !DialogCanUnlock(chara, item);
+
         for (const button of this._buttons) {
             if (button.show && !button.show(ctx)) continue;
 
             const hover = button.hover?.(ctx);
 
-            if (!button.enable || button.enable(ctx)) {
+            if ((!button.requireLockPermission || !lockRejected) && (!button.enable || button.enable(ctx))) {
                 drawButton(text, button.key, button.location, hover);
             } else {
                 drawButtonDisable(text, button.key, button.location, hover);
@@ -143,7 +146,7 @@ class DialogButtons {
         MainCanvas.textAlign = "left";
         for (const box of this._checkboxes) {
             if (box.show && !box.show(ctx)) continue;
-            const enable = !box.enable || box.enable(ctx);
+            const enable = (!box.requireLockPermission || !lockRejected) && (!box.enable || box.enable(ctx));
             const { x, y } = box.location;
             const { w, h } = /**@type {Partial<Rect>} */ (box.location);
             const checked = box.checked(ctx);
@@ -152,7 +155,13 @@ class DialogButtons {
             const X = x + (w ?? 64) + 5;
             const Y = y + (h ?? 64) / 2;
 
-            DrawCheckbox(x, y, w ?? 64, h ?? 64, "", checked, !enable);
+            const hover = box.hover?.(ctx);
+            // DrawCheckbox(x, y, w ?? 64, h ?? 64, "", checked, !enable);
+            // DrawButton(x, Y, w ?? 64, h ?? 64, "", "White", null, hover, !enable);
+
+            const color = enable ? "White" : "Pink";
+            const icon = checked ? "Icons/Checked.png" : "";
+            DrawButton(x, y, w ?? 64, h ?? 64, "", color, icon, hover, !enable);
             if (box.textWidth) DrawTextFit(textValue, X, Y, box.textWidth, "White", "Gray");
             else DrawText(textValue, X, Y, "White", "Gray");
         }
@@ -189,6 +198,8 @@ class DialogButtons {
         };
         const dialogKey = DialogTools.dialogKey(item);
 
+        const lockRejected = InventoryGetItemProperty(item, "LockedBy") && !DialogCanUnlock(chara, item);
+
         /** @type {ItemDialog.InteractableConfig<DataType>} */
         const clicked = (() => {
             const btn = this._buttons.find(
@@ -196,6 +207,7 @@ class DialogButtons {
                     btn.onclick &&
                     RMouseIn(btn.location) &&
                     (!btn.show || btn.show(ctx)) &&
+                    (!btn.requireLockPermission || !lockRejected) &&
                     (!btn.enable || btn.enable(ctx))
             );
             if (btn) {
@@ -208,6 +220,7 @@ class DialogButtons {
                     box.onclick &&
                     RMouseIn({ w: 64, h: 64, ...box.location }) &&
                     (!box.show || box.show(ctx)) &&
+                    (!box.requireLockPermission || !lockRejected) &&
                     (!box.enable || box.enable(ctx))
             );
             if (box) {
