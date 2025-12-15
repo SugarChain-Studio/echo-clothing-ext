@@ -13,6 +13,7 @@ const customOffset = [
     ),
     ...["CockSock", "Jockstrap"].map((Asset) => Typing.drawOffset({ Asset, Y: -20 })),
     { Asset: "Splatters", Layer: ["Internal2", "Internal3"], Y: -20 },
+    { Asset: "ExtendablePostureCollar", Y: -11, X: -10 },
 ];
 
 /** @type {["Original", "EchoV2"]} */
