@@ -6,6 +6,7 @@ const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer(
     const { C, A, Color, Property, X, Y, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
 
     if (Property.TypeRecord.t !== 0) return;
+    if (!Property.Text) return;
 
     const thisConfig = { w: 80, y: 8, r: 200 };
 
