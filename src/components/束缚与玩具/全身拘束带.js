@@ -13,6 +13,7 @@ const asset = [
             Gender: "F",
             Left: 160,
             Top: 210,
+            Time: 15,
             Difficulty: 25,
             AllowLock: true,
             DrawLocks: false,
