@@ -1,36 +1,5 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
-
-/** @type {CustomAssetDefinition} */
-const asset = {
-    Name: "乳胶眼罩",
-    Random: false,
-    Gender: "F",
-    Left: 190,
-    Top: 140,
-    Difficulty: 3,
-    Time: 10,
-    AllowLock: true,
-    AllowTighten: true,
-    Fetish: ["Leather"],
-    Priority: 44,
-    DynamicGroupName: "ItemHead",
-    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
-};
-
-const layerNames = {
-    CN: {
-        A1: "眼罩",
-        A2: "带子",
-        A3: "扣具",
-    },
-    EN: {
-        A1: "Blindfold",
-        A2: "Belt",
-        A3: "Buckles",
-    },
-};
 
 /**@type {AssetArchetypeConfig} */
 const extended = {
@@ -78,13 +47,63 @@ const assetStrings = {
     },
 };
 
-const translation = {
-    CN: "乳胶眼罩",
-    EN: "Latex Blindfold",
-};
+/** @type {AddAssetWithConfigParamsNoGroup[]} */
+const asset = [
+    [
+        {
+            Name: "乳胶眼罩",
+            Random: false,
+            Gender: "F",
+            Left: 190,
+            Top: 140,
+            Difficulty: 3,
+            Time: 10,
+            AllowLock: true,
+            AllowTighten: true,
+            Fetish: ["Leather"],
+            Priority: 44,
+            DynamicGroupName: "ItemHead",
+            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
+        },
+        {
+            translation: { CN: "乳胶眼罩", EN: "Latex Blindfold" },
+            layerNames: {
+                CN: { A1: "眼罩", A2: "带子", A3: "扣具" },
+                EN: { A1: "Blindfold", A2: "Belt", A3: "Buckles" },
+            },
+        },
+    ],
+    [
+        {
+            Name: "乳胶眼罩2",
+            Random: false,
+            Gender: "F",
+            Left: 200,
+            Top: 140,
+            Difficulty: 3,
+            Time: 10,
+            AllowLock: true,
+            AllowTighten: true,
+            Fetish: ["Leather"],
+            Priority: 44,
+            DynamicGroupName: "ItemHead",
+            DefaultColor: ["#0A0A0A", "Default", "Default", "Default", "Default"],
+            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
+        },
+        {
+            translation: { CN: "乳胶眼罩2", EN: "Latex Blindfold 2" },
+            layerNames: {
+                CN: { A1: "基础", A2: "光泽", A3: "绑带", A4: "固定环左", A5: "固定环右" },
+                EN: { A1: "Base", A2: "Shine", A3: "Strap", A4: "Left Buckle", A5: "Right Buckle" },
+            },
+        },
+    ],
+];
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemHead", asset, { extended, translation, layerNames, assetStrings });
-    AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset, { translation, layerNames });
-    luziSuffixFixups(["ItemHead", "Glasses", "Mask"], asset.Name);
+    AssetManager.addAssetWithConfig(
+        "ItemHead",
+        asset.map((a) => ((a[1] = { ...a[1], extended, assetStrings }), a))
+    );
+    AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset);
 }
