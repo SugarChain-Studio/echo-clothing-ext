@@ -136,7 +136,7 @@ const asset = [
                 DrawImages: false,
                 Modules: [
                     { Name: "手指", Key: "h", Options: [{}, {}, {}, {}] },
-                    { Name: "袖子", Key: "m", Options: [{}, {}, {}, {}] },
+                    { Name: "剪裁", Key: "m", Options: [{}, {}, {}, {}, {}] },
                     { Name: "胸口", Key: "b", Options: [{}, {}] },
                 ],
             },
@@ -171,12 +171,13 @@ const asset = [
                     Optionh2: "露指手套",
                     Optionh3: "挂中指手套",
 
-                    Module袖子: "袖子样式",
-                    Select袖子: "选择袖子样式",
+                    Module剪裁: "剪裁样式",
+                    Select剪裁: "选择剪裁样式",
                     Optionm0: "完整袖",
                     Optionm1: "无袖",
                     Optionm2: "分离袖",
                     Optionm3: "仅袖",
+                    Optionm4: "时韵适配",
 
                     Module胸口: "胸口样式",
                     Select胸口: "选择胸口样式",
@@ -193,12 +194,13 @@ const asset = [
                     Optionh2: "Fingerless Gloves",
                     Optionh3: "Cutout Gloves",
 
-                    Module袖子: "Sleeve Style",
-                    Select袖子: "Select Sleeve Style",
+                    Module剪裁: "Tailor Style",
+                    Select剪裁: "Select Tailor Style",
                     Optionm0: "Full Sleeves",
                     Optionm1: "Sleeveless",
                     Optionm2: "Detached Sleeves",
                     Optionm3: "Sleeves Only",
+                    Optionm4: "Chrono Pattern",
 
                     Module胸口: "Chest Style",
                     Select胸口: "Select Chest Style",
@@ -330,7 +332,7 @@ const preload = () => {
                     `${asset[0][1].Name}_${parent}_${layer}`,
                     /** @type {AssetPoseName}*/ (P)
                 );
-            for (const type of [0, 1, 2, 3]) {
+            for (const type of [0, 1, 2, 3, 4]) {
                 const source = layerSource(`m${type}_gmask`);
 
                 const vp = AssetManager.imageMapping.createVirtualPath(maskURL(source));
@@ -347,6 +349,10 @@ const preload = () => {
                     if (type === 2 || type === 3) {
                         if (armPMap[pose] !== "Hide") masks.push(layerSource(`a1_mmask`, pose));
                         if (handPMap[pose] !== "Hide") masks.push(layerSource(`a2_mmask`, pose));
+                    }
+
+                    if (type === 4) {
+                        masks.push(layerSource(`c_mmask`, ""));
                     }
 
                     const canvas = document.createElement("canvas");
