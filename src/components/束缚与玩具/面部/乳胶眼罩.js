@@ -87,7 +87,7 @@ const asset = [
             Fetish: ["Leather"],
             Priority: 44,
             DynamicGroupName: "ItemHead",
-            DefaultColor: ["#0A0A0A", "Default", "Default", "Default", "Default"],
+            DefaultColor: ["#0A0A0A", "Default", "#E2C443", "#E2C443", "#E2C443"],
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
         },
         {

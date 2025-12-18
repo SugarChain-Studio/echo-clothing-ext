@@ -11,7 +11,7 @@ const asset = {
     Priority: 53,
     DynamicGroupName: "Mask",
     IsRestraint: false,
-    DefaultColor: ["#0A0A0A", "Default", "Default"],
+    DefaultColor: ["#0A0A0A", "Default", "#E2C443"],
     Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
 };
 
