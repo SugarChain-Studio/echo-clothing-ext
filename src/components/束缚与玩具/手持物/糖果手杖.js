@@ -20,7 +20,12 @@ const translation = {
     EN: "Candy Cane",
 };
 
+const layerNames = {
+    CN: { Base: "基础", Pattern: "图案" },
+    EN: { Base: "Base", Pattern: "Pattern" },
+};
+
 export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
-    AssetManager.addAssetWithConfig("ItemHandheld", asset, { translation });
+    AssetManager.addAssetWithConfig("ItemHandheld", asset, { translation, layerNames });
 }
