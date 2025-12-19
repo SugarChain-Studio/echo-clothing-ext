@@ -5,7 +5,7 @@ from PIL import Image
 # 带有通配符的目录路径（支持多个）
 wildcard_paths = [
     # "resources/Assets/Female3DCG/Suit/**/马油袜_*.png",
-    "resources/Assets/Female3DCG/SuitLower/**/马油袜下_*.png",
+    "resources/Assets/Female3DCG/SuitLower/Kneel/马油袜下_XLarge_*.png",
 ]
 
 # 排除的通配符路径（可选，多项）
