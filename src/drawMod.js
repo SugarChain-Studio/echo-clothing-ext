@@ -42,13 +42,6 @@ export default function () {
         "clearRect(0, 0, 500, CanvasDrawHeight)": "clearRect(0, 0, 1000, CanvasDrawHeight)",
     });
 
-    HookManager.hookFunction("CommonDrawCanvasPrepare", 10, (args, next) => {
-        const [C] = args;
-        if (C?.Canvas?.width === 500) C.Canvas.width = 1000;
-        if (C?.CanvasBlink?.width === 500) C.CanvasBlink.width = 1000;
-        return next(args);
-    });
-
     HookManager.patchFunction("DrawCharacter", {
         "500 * HeightRatio * Zoom": "1000 * HeightRatio * Zoom",
         "TempCanvas.canvas.width = CanvasDrawWidth;": "TempCanvas.canvas.width = CanvasDrawWidth * 2;",
@@ -58,6 +51,13 @@ export default function () {
 
         "DrawImageEx(Canvas, DrawCanvas, X + XOffset * Zoom":
             "DrawImageEx(Canvas, DrawCanvas, X + (XOffset - 500 * HeightRatio) * Zoom",
+    });
+
+    HookManager.hookFunction("DrawCharacter", 10, (args, next) => {
+        const [C] = args;
+        if (C?.Canvas && C.Canvas.width === 500) C.Canvas.width = 1000;
+        if (C?.CanvasBlink && C.CanvasBlink.width === 500) C.CanvasBlink.width = 1000;
+        return next(args);
     });
 
     HookManager.patchFunction("DrawCharacterSegment", {
