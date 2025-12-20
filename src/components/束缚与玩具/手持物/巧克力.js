@@ -156,5 +156,5 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
-    // ArmMaskTool.createArmMaskForCloth(asset[0], asset[1], "Right");
+    ArmMaskTool.createArmMaskForCloth(asset[0], asset[1], "Right");
 }

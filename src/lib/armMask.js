@@ -1,6 +1,7 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../assetForward";
 import { cachePreloadGL } from "./cachePreload";
+import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
@@ -30,6 +31,9 @@ for (const size of bodySizes) {
     }
 }
 
+/** @type {Set<string>} */
+const itemSet = new Set();
+
 /**
  * @param { CustomGroupName | CustomGroupName [] } groupName
  * @param { string } assetName
@@ -43,6 +47,8 @@ function createMappings(groupName, assetName, mode) {
     const { Name, ParentGroup } = nameRecord[mode];
 
     for (const group of groupNames) {
+        itemSet.add(`${group}::${assetName}`);
+
         if (ParentGroup === "BodyUpper") {
             for (const size of bodySizes) {
                 const to = `${assetName}_${size}_${Name}`;
@@ -123,6 +129,16 @@ function createArmMaskForGroupedCloth(assets, mode = "") {
         }
     }
 }
+
+HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
+    const [URL] = args;
+    if (URL.src.includes(argMaskGroup)) {
+        Character.filter((c) =>
+            c.Appearance.some((item) => itemSet.has(`${item.Asset.Group.Name}::${item.Asset.Name}`))
+        ).forEach((c) => (c.MustDraw = true));
+    }
+    return next(args);
+});
 
 export class ArmMaskTool {
     static createArmMaskForCloth = createArmMaskForCloth;
