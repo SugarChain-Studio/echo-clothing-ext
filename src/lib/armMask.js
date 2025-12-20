@@ -132,7 +132,7 @@ function createArmMaskForGroupedCloth(assets, mode = "") {
 
 HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
     const [URL] = args;
-    if (URL.src.includes(argMaskGroup)) {
+    if (URL?.src?.includes(argMaskGroup)) {
         Character.filter((c) =>
             c.Appearance.some((item) => itemSet.has(`${item.Asset.Group.Name}::${item.Asset.Name}`))
         ).forEach((c) => (c.MustDraw = true));
