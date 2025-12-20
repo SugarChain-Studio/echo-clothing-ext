@@ -1,42 +1,60 @@
 import { AssetManager } from "../../assetForward";
 import { PoseMapTool } from "../../lib";
 
-const upperPose = PoseMapTool.config(["Hogtied"]);
-const lowerPose = PoseMapTool.config(["Kneel"]);
-
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
     [
         {
-            Name: "LuziFBT",
+            Name: "全身条带拘束",
             Random: false,
             Gender: "F",
-            Left: 160,
-            Top: 210,
+            Left: 0,
+            Top: 0,
             Time: 15,
             Difficulty: 25,
             AllowLock: true,
             DrawLocks: false,
             Effect: [E.Block, E.BlockWardrobe, E.Slow],
+            DynamicGroupName: "ItemTorso",
             Prerequisite: ["HasBreasts"],
             SetPose: ["BackElbowTouch", "LegsClosed"],
             AllowActivePose: ["BackElbowTouch", "Kneel", "LegsClosed"],
+            ParentGroup: {},
+            DefaultColor: ["Default", "#4A4A4A", "Default", "#E2C443", "Default", "#4A4A4A", "Default", "#E2C443"],
             Layer: [
-                { Name: "↑_A1", PoseMapping: upperPose, ColorGroup: "环", ParentGroup: "BodyUpper" },
-                { Name: "↓_A1", PoseMapping: lowerPose, ColorGroup: "环", ParentGroup: "BodyLower" },
-                { Name: "↑_B1", PoseMapping: upperPose, ColorGroup: "束带", ParentGroup: "BodyUpper" },
-                { Name: "↑_B3", PoseMapping: upperPose, ColorGroup: "边线", ParentGroup: "BodyUpper" },
-                { Name: "↓_B1", PoseMapping: lowerPose, ColorGroup: "束带", ParentGroup: "BodyLower" },
-                { Name: "↓_B3", PoseMapping: lowerPose, ColorGroup: "边线", ParentGroup: "BodyLower" },
-                { Name: "↑_B2", PoseMapping: upperPose, ColorGroup: "阴影", ParentGroup: "BodyUpper" },
-                { Name: "↓_B2", PoseMapping: lowerPose, ColorGroup: "阴影", ParentGroup: "BodyLower" },
+                { Name: "A1_U", ColorGroup: "环", ParentGroup: "BodyUpper" },
+                { Name: "A1_L", CopyLayerColor: "A1_U", ParentGroup: "BodyLower" },
+                { Name: "B1", ColorGroup: "条带" },
+                { Name: "B2", ColorGroup: "阴影" },
+                { Name: "B3", ColorGroup: "轮廓线" },
+                { Name: "C1", ColorGroup: "环" },
+                { Name: "D1_U", ColorGroup: "条带", ParentGroup: "BodyUpper" },
+                { Name: "D1_L", CopyLayerColor: "D1_U", ParentGroup: "BodyLower" },
+                { Name: "D2_U", ColorGroup: "阴影", ParentGroup: "BodyUpper" },
+                { Name: "D2_L", CopyLayerColor: "D2_U", ParentGroup: "BodyLower" },
+                { Name: "D3_U", ColorGroup: "轮廓线", ParentGroup: "BodyUpper" },
+                { Name: "D3_L", CopyLayerColor: "D3_U", ParentGroup: "BodyLower" },
+                {
+                    Name: "↑_遮罩",
+                    BlendingMode: "destination-out",
+                    TextureMask: {},
+                    ParentGroup: "BodyUpper",
+                    PoseMapping: PoseMapTool.config(["Kneel", "Hogtied"]),
+                },
+                {
+                    Name: "↓_遮罩",
+                    BlendingMode: "destination-out",
+                    TextureMask: {},
+                    ParentGroup: "BodyLower",
+                    PoseMapping: PoseMapTool.config(["Kneel"]),
+                },
             ],
         },
         {
-            translation: { CN: "全身捆绑带", EN: "Full Body Straps" },
+            translation: { CN: "全身条带", EN: "Full Body Straps" },
             layerNames: {
-                CN: { 环: "环", 束带: "束带", 环阴影: "阴影", 边线: "边线" },
-                EN: { 环: "Ring", 束带: "Strap", 环阴影: "Shadow", 边线: "Edge" },
+                CN: { 环: "环", 条带: "条带", 阴影: "阴影", 轮廓线: "轮廓线" },
+                EN: { 环: "Ring", 条带: "Strap", 阴影: "Shadow", 轮廓线: "Edge" },
             },
         },
     ],
