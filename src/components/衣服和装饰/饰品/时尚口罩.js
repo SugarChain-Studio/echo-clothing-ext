@@ -97,7 +97,7 @@ export default function () {
         ],
         [
             ["ItemMouth", "ItemMouth2", "ItemMouth3"],
-            { ...asset, Prerequisite: ["GagFlat"] },
+            { ...asset, Prerequisite: ["GagFlat"], Effect: [] },
             {
                 ...config,
                 extended: {
@@ -107,7 +107,7 @@ export default function () {
                         {
                             Name: "戴好",
                             Key: "w",
-                            Options: [{ Property: { Effect: [E.BlockMouth], Hide: ["Mouth"] } }, {}],
+                            Options: [{ Property: { Effect: [E.BlockMouth, E.GagLight], Hide: ["Mouth"] } }, {}],
                         },
                         { Name: "颜色", Key: "c", Options: [{}, {}, {}] },
                     ],
