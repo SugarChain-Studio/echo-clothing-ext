@@ -31,6 +31,40 @@ function addAssetParamHasGroup(arg0) {
 }
 
 /**
+ *
+ * @param {AddAssetWithConfigParams[0] | undefined} g0
+ * @param {AddAssetWithConfigParams[0] | undefined} g1
+ * @return {AddAssetWithConfigParams[0]}
+ */
+function mergeGroup(g0, g1) {
+    const ret = [];
+    const push = (group) => {
+        if (Array.isArray(group)) {
+            ret.push(...group);
+        } else {
+            ret.push(group);
+        }
+    };
+
+    if (g0) push(g0);
+    if (g1) push(g1);
+    return ret;
+}
+
+/**
+ * @param {AddAssetWithConfigParams} arg0
+ * @param {[AddAssetWithConfigParams[0],Partial<AddAssetWithConfigParams[1]>,Partial<AddAssetWithConfigParams[2]>][]} arg1
+ * @returns {AddAssetWithConfigParams[]}
+ */
+function mergeAddAssetParams(arg0, arg1) {
+    return arg1.map((arg) => [
+        mergeGroup(arg0[0], arg[0]),
+        /** @type {CustomAssetDefinition}*/ ({ ...arg0[1], ...arg[1] }),
+        { ...arg0[2], ...arg[2] },
+    ]);
+}
+
+/**
  * @template K
  * @param  {...[ string| string[], K]} args
  * @returns {Record<string,K>}
@@ -64,6 +98,9 @@ export const Typing = /** @type {const} */ ({
 
     mergeItem: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/ (merge),
     mergeApp: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/ (merge),
+
+    mergeAssets: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinition[]>}*/ (merge),
+    mergeAddAssetParams,
 
     assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
     modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),
