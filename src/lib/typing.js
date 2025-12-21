@@ -62,8 +62,8 @@ export const Typing = /** @type {const} */ ({
     drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),
     asset: /** @type {(arg:CustomAssetDefinition) => CustomAssetDefinition}*/ (identity),
 
-    assetItem: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/ (merge),
-    assetApp: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/ (merge),
+    mergeItem: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/ (merge),
+    mergeApp: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/ (merge),
 
     assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
     modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),

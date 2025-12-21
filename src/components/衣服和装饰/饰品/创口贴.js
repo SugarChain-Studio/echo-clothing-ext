@@ -48,18 +48,18 @@ const CraftGroup = "创口贴";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assetN = [
-    ["Suit", Typing.assetApp(baseAsset), { translation, layerNames }],
-    ["Bra", Typing.assetApp(upperAsset), { translation, layerNames }],
+    ["Suit", Typing.mergeApp(baseAsset), { translation, layerNames }],
+    ["Bra", Typing.mergeApp(upperAsset), { translation, layerNames }],
     [
         "Panties",
-        Typing.assetApp(lowerAsset, { Expose: ["ItemVulvaPiercings", "ItemButt"] }),
+        Typing.mergeApp(lowerAsset, { Expose: ["ItemVulvaPiercings", "ItemButt"] }),
         { translation, layerNames },
     ],
-    ["ItemNipples", Typing.assetItem(upperAsset, { CraftGroup }), { translation, layerNames }],
-    ["ItemVulva", Typing.assetItem(lowerAsset, { CraftGroup }), { translation, layerNames }],
+    ["ItemNipples", Typing.mergeItem(upperAsset, { CraftGroup }), { translation, layerNames }],
+    ["ItemVulva", Typing.mergeItem(lowerAsset, { CraftGroup }), { translation, layerNames }],
     [
         "ItemVulvaPiercings",
-        Typing.assetItem(lowerAsset, { CraftGroup, Block: ["ItemVulva"] }),
+        Typing.mergeItem(lowerAsset, { CraftGroup, Block: ["ItemVulva"] }),
         { translation, layerNames },
     ],
 ];

@@ -1,6 +1,5 @@
 import { Tools } from "@mod-utils/index";
 import { AssetManager } from "../../assetForward";
-import { PoseMapTool } from "../../lib";
 import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<TextItemData>} */
