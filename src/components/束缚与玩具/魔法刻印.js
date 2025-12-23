@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 
-export const ASSET_NAME = "淫纹锁_Luzi_Padlock";
+export const ASSET_NAME = "淫纹锁LuziPadlock";
 
 /** @type { AddAssetWithConfigParams} */
 const asset = [

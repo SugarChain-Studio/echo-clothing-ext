@@ -3,6 +3,7 @@ import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { createItemDialogModular } from "../../lib";
 import { LSCG } from "../../lib/lscg";
+import { luziSuffixFixups } from "../../lib/fixups";
 
 /**
  * @typedef { { Masturbate:boolean, InstantOrgasm: boolean, OpenPerm?: boolean } } LewdCrestProps
@@ -23,7 +24,7 @@ import { LSCG } from "../../lib/lscg";
  * @property { HTMLCanvasElement } GlowCanvas
  */
 
-const ASSET_NAME = "淫纹_Luzi";
+const ASSET_NAME = "淫纹";
 
 /** @type { (item: Item) => ExtendItemProperties } */
 const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
@@ -638,4 +639,6 @@ function afterDraw(data, originalFunction, drawData) {
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
     AssetManager.addAssetWithConfig(...clothAsset);
+    luziSuffixFixups(asset[0], asset[1].Name);
+    luziSuffixFixups(clothAsset[0], clothAsset[1].Name);
 }
