@@ -13,7 +13,7 @@ const asset = [
             Top: 210,
             Priority: 27,
             DynamicGroupName: "Cloth",
-            Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+            Expose: ["ItemBreast", "ItemNipples", "ItemNipplePiercings"],
             PoseMapping: PoseMapTool.config(["Yoked", "OverTheHead"], ["AllFours"]),
             Layer: [
                 { Name: "A1", ColorGroup: "衬衫" },
@@ -73,7 +73,7 @@ const asset = [
             ),
             Priority: 27,
             DynamicGroupName: "Cloth",
-            Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+            Expose: ["ItemBreast", "ItemNipples", "ItemNipplePiercings"],
             PoseMapping: PoseMapTool.config(
                 ["Yoked", "OverTheHead", "Hogtied", "BackBoxTie", "BackElbowTouch", "BackCuffs"],
                 ["AllFours"]
