@@ -81,6 +81,47 @@ const defs = [
             },
         },
     ],
+    [
+        ["BodyMarkings", "FaceMarkings"],
+        {
+            Name: "花钿",
+            Random: false,
+            Left: 190,
+            Top: 70,
+            Priority: 9,
+            DynamicGroupName: "FaceMarkings",
+            ParentGroup: {},
+            CreateLayerTypes: ["m"],
+            DefaultColor: "#C6091C",
+        },
+        {
+            translation: { CN: "花钿", EN: "Huadian" },
+            extended: {
+                Archetype: "modular",
+                Modules: [
+                    {
+                        Name: "图案",
+                        Key: "m",
+                        Options: Array.from({ length: 12 }, () => ({})),
+                    },
+                ],
+            },
+            assetStrings: {
+                CN: {
+                    SelectBase: "选择花钿样式",
+                    Module图案: "图案",
+                    Select图案: "选择图案",
+                    ...Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`Optionm${i}`, `样式 ${i + 1}`])),
+                },
+                EN: {
+                    SelectBase: "Select Huadian Style",
+                    Module图案: "Pattern",
+                    Select图案: "Select Pattern",
+                    ...Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`Optionm${i}`, `Style ${i + 1}`])),
+                },
+            },
+        },
+    ],
 ];
 
 export default function () {
