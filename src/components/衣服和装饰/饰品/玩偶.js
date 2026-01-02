@@ -233,22 +233,22 @@ const asset = {
         { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
         { Name: "MIZU", AllowTypes: { lkls: 14 } },
         { Name: "暖海", AllowTypes: { lkls: 15 } },
-        // { Name: "Lucy", AllowTypes: { lkls: 16 } },
-        // { Name: "小竹", AllowTypes: { lkls: 17 } },
-        // { Name: "小羽", AllowTypes: { lkls: 18 } },
-        // { Name: "紉唯", AllowTypes: { lkls: 19 } },
-        // { Name: "Hime", AllowTypes: { lkls: 20 } },
-        // { Name: "PENGPENG", AllowTypes: { lkls: 21 } },
-        // { Name: "櫻奈", AllowTypes: { lkls: 22 } },
-        // { Name: "贝斯蒂", AllowTypes: { lkls: 23 } },
-        // { Name: "euna", AllowTypes: { lkls: 24 } },
-        // { Name: "艾梅莉", AllowTypes: { lkls: 25 } },
-        // { Name: "TINA", AllowTypes: { lkls: 26 } },
-        // { Name: "Haruka", AllowTypes: { lkls: 27 } },
-        // { Name: "歪歪", AllowTypes: { lkls: 28 } },
-        // { Name: "凌雨", AllowTypes: { lkls: 29 } },
-        // { Name: "小风", AllowTypes: { lkls: 30 } },
-        // { Name: "Ayman", AllowTypes: { lkls: 31 } },
+        { Name: "Lucy", AllowTypes: { lkls: 16 } },
+        { Name: "小竹", AllowTypes: { lkls: 17 } },
+        { Name: "小羽", AllowTypes: { lkls: 18 } },
+        { Name: "紉唯", AllowTypes: { lkls: 19 } },
+        { Name: "Hime", AllowTypes: { lkls: 20 } },
+        { Name: "PENGPENG", AllowTypes: { lkls: 21 } },
+        { Name: "櫻奈", AllowTypes: { lkls: 22 } },
+        { Name: "贝斯蒂", AllowTypes: { lkls: 23 } },
+        { Name: "euna", AllowTypes: { lkls: 24 } },
+        { Name: "艾梅莉", AllowTypes: { lkls: 25 } },
+        { Name: "TINA", AllowTypes: { lkls: 26 } },
+        { Name: "Haruka", AllowTypes: { lkls: 27 } },
+        { Name: "Ayman", AllowTypes: { lkls: 28 } },
+        { Name: "歪歪", AllowTypes: { lkls: 29 } },
+        { Name: "凌雨", AllowTypes: { lkls: 30 } },
+        { Name: "小风", AllowTypes: { lkls: 31 } },
 
         // Celestial Enchants
         { Name: "Celiko", AllowTypes: { ce: 1 } },
@@ -302,6 +302,9 @@ const asset = {
         { Name: "Arco", AllowTypes: { nest: 12 } },
         { Name: "Rinko", AllowTypes: { nest: 13 } },
         { Name: "姜海琳3", AllowTypes: { nest: 14 } },
+        { Name: "碧洛蒂丝", AllowTypes: { nest: 15 } },
+        { Name: "喵头嘤3！", AllowTypes: { nest: 16 } },
+        { Name: "Elara", AllowTypes: { nest: 17 } },
 
         // Foxys Fun Experience
         { Name: "Gab", AllowTypes: { ffe: 1 } },
@@ -312,6 +315,8 @@ const asset = {
         { Name: "月月", AllowTypes: { pen: 1 } },
         { Name: "晓雾", AllowTypes: { pen: 2 } },
         { Name: "Penelope", AllowTypes: { pen: 3 } },
+        { Name: "Noel", AllowTypes: { pen: 4 } },
+        { Name: "叶子", AllowTypes: { pen: 5 } },
 
         // 鸭鸭窝
         { Name: "Sunny2", AllowTypes: { yyw: 1 } },
@@ -374,25 +379,30 @@ const asset = {
         { Name: "幽灵2", AllowTypes: { wd: 9 } },
 
         // // 岚の家
-        // { Name: "岚1", AllowTypes: { fdj: 1 } },
-        // { Name: "岚3", AllowTypes: { fdj: 2 } },
-        // { Name: "莉柯莉絲", AllowTypes: { fdj: 3 } },
-        // { Name: "小羽", AllowTypes: { fdj: 4 } },
-        // { Name: "小依", AllowTypes: { fdj: 5 } },
-        // { Name: "UU", AllowTypes: { fdj: 6 } },
-        // { Name: "小毛衣", AllowTypes: { fdj: 7 } },
-        // { Name: "妍白", AllowTypes: { fdj: 8 } },
-        // { Name: "兔兔", AllowTypes: { fdj: 9 } },
-        // { Name: "布莱克", AllowTypes: { fdj: 10 } },
-        // { Name: "茶茶", AllowTypes: { fdj: 11 } },
-        // { Name: "小词", AllowTypes: { fdj: 12 } },
-        // { Name: "桦娜", AllowTypes: { fdj: 13 } },
-        // { Name: "小樱", AllowTypes: { fdj: 14 } },
-        // { Name: "小尤菲", AllowTypes: { fdj: 15 } },
-        // { Name: "云岫", AllowTypes: { fdj: 16 } },
-        // { Name: "Kimi", AllowTypes: { fdj: 17 } },
-        // { Name: "蛇蛇", AllowTypes: { fdj: 18 } },
-        // { Name: "小away", AllowTypes: { fdj: 19 } },
+        { Name: "岚1", AllowTypes: { fdj: 1 } },
+        { Name: "岚3", AllowTypes: { fdj: 2 } },
+        { Name: "莉柯莉絲3", AllowTypes: { fdj: 3 } },
+        { Name: "小羽2", AllowTypes: { fdj: 4 } },
+        { Name: "小依", AllowTypes: { fdj: 5 } },
+        { Name: "UU", AllowTypes: { fdj: 6 } },
+        { Name: "小毛衣", AllowTypes: { fdj: 7 } },
+        { Name: "妍白", AllowTypes: { fdj: 8 } },
+        { Name: "兔兔", AllowTypes: { fdj: 9 } },
+        { Name: "布莱克", AllowTypes: { fdj: 10 } },
+        { Name: "茶茶", AllowTypes: { fdj: 11 } },
+        { Name: "小尤菲", AllowTypes: { fdj: 12 } },
+        { Name: "蛇蛇", AllowTypes: { fdj: 13 } },
+        { Name: "小away", AllowTypes: { fdj: 14 } },
+        // { Name: "小词", AllowTypes: { fdj:  } },
+        // { Name: "桦娜", AllowTypes: { fdj:  } },
+        // { Name: "小樱", AllowTypes: { fdj:  } },
+        // { Name: "云岫", AllowTypes: { fdj:  } },
+        // { Name: "Kimi", AllowTypes: { fdj:  } },
+
+        // 小角落好了！
+        { Name: "瑞饼", AllowTypes: { xjl: 1 } },
+        { Name: "诺瑞莉卡", AllowTypes: { xjl: 2 } },
+        { Name: "瑞饼饼好了！", AllowTypes: { xjl: 3 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -408,7 +418,7 @@ const asset = {
         { Name: "Clara", AllowTypes: { l: 7 } },
         { Name: "WallyIlma", AllowTypes: { l: 8 } },
         { Name: "奈芙塔莉", AllowTypes: { l: 9 } },
-        { Name: "瑞饼", AllowTypes: { l: 10 } },
+        { Name: "永翼", AllowTypes: { l: 10 } },
         { Name: "Annie", AllowTypes: { l: 11 } },
         { Name: "accoo", AllowTypes: { l: 12 } },
         { Name: "疾风", AllowTypes: { l: 13 } },
@@ -439,13 +449,19 @@ const asset = {
         { Name: "羽", AllowTypes: { l: 34 } },
         { Name: "Milim", AllowTypes: { l: 35 } },
         { Name: "云喵", AllowTypes: { l: 36 } },
-        { Name: "诺瑞莉卡", AllowTypes: { l: 37 } },
+        { Name: "miaomiao", AllowTypes: { l: 37 } },
         { Name: "Kiki", AllowTypes: { l: 38 } },
         { Name: "YL", AllowTypes: { l: 39 } },
         { Name: "殘楓", AllowTypes: { l: 40 } },
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
         { Name: "olga", AllowTypes: { l: 43 } },
+        { Name: "tiancai", AllowTypes: { l: 44 } },
+        { Name: "haikou", AllowTypes: { l: 45 } },
+        { Name: "银河", AllowTypes: { l: 46 } },
+        { Name: "微微", AllowTypes: { l: 47 } },
+        { Name: "CC1", AllowTypes: { l: 48 } },
+        { Name: "CC2", AllowTypes: { l: 49 } },
     ],
 };
 
@@ -481,7 +497,8 @@ const typeNameNext = {
     hhdmj: "胡话的梦境",
     qqcy: "青青草原~",
     wd: "玩偶店",
-    // fdj: "岚の家",
+    fdj: "岚の家",
+    xjl: "小角落好了！",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
@@ -514,8 +531,8 @@ const predefDialog = {
         Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
         Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
         Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶.",
-        Setnest14: "SourceCharacter给了DestinationCharacter一个可怜巴巴的乳胶犬鹤子.",
-        Setnest15: "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
+        Setyyx8: "SourceCharacter给了DestinationCharacter一个可怜巴巴的乳胶犬鹤子.",
+        Setnest14: "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
     },
 };
 
@@ -577,7 +594,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
     return pv;
-}, /** @type { Record<string, Number> } */ ({}));
+}, /** @type { Record<string, Number> } */({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -599,7 +616,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     pv[k] ??= {};
     pv[k][cv.AllowTypes[k]] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -639,7 +656,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
