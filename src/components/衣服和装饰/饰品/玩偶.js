@@ -303,7 +303,7 @@ const asset = {
         { Name: "Rinko", AllowTypes: { nest: 13 } },
         { Name: "姜海琳3", AllowTypes: { nest: 14 } },
         { Name: "碧洛蒂丝", AllowTypes: { nest: 15 } },
-        { Name: "喵头嘤3！", AllowTypes: { nest: 16 } },
+        { Name: "喵头嘤3", AllowTypes: { nest: 16 } },
         { Name: "Elara", AllowTypes: { nest: 17 } },
 
         // Foxys Fun Experience
@@ -402,7 +402,7 @@ const asset = {
         // 小角落好了！
         { Name: "瑞饼", AllowTypes: { xjl: 1 } },
         { Name: "诺瑞莉卡", AllowTypes: { xjl: 2 } },
-        { Name: "瑞饼饼好了！", AllowTypes: { xjl: 3 } },
+        { Name: "瑞饼饼", AllowTypes: { xjl: 3 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -498,7 +498,7 @@ const typeNameNext = {
     qqcy: "青青草原~",
     wd: "玩偶店",
     fdj: "岚の家",
-    xjl: "小角落好了！",
+    xjl: "小角落",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
