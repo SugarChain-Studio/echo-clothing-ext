@@ -376,7 +376,7 @@ const asset = {
         { Name: "羽猫", AllowTypes: { wd: 6 } },
         { Name: "小乔", AllowTypes: { wd: 7 } },
         { Name: "凛", AllowTypes: { wd: 8 } },
-        { Name: "幽灵2", AllowTypes: { wd: 9 } },
+        // { Name: "幽灵2", AllowTypes: { wd: 9 } },
 
         // // 岚の家
         { Name: "岚1", AllowTypes: { fdj: 1 } },
