@@ -216,6 +216,7 @@ const asset = {
         { Name: "Linnn", AllowTypes: { lilian: 4 } },
         { Name: "天使Linnn", AllowTypes: { lilian: 5 } },
         { Name: "兔战Linnn", AllowTypes: { lilian: 6 } },
+        { Name: "Nagi", AllowTypes: { lilian: 7 } },
 
         // 莉柯莉絲家與她的朋友
         { Name: "莉柯莉絲1", AllowTypes: { lkls: 1 } },
@@ -403,6 +404,16 @@ const asset = {
         { Name: "瑞饼", AllowTypes: { xjl: 1 } },
         { Name: "诺瑞莉卡", AllowTypes: { xjl: 2 } },
         { Name: "瑞饼饼", AllowTypes: { xjl: 3 } },
+        { Name: "魂饨儿", AllowTypes: { xjl: 4 } },
+
+        // Ayako的Qt大家族
+        { Name: "Melody Qt", AllowTypes: { qt: 1 } },
+
+        // Yes
+        { Name: "Yes", AllowTypes: { yes: 1 } },
+        { Name: "tiancai", AllowTypes: { yes: 2 } },
+        { Name: "haikou", AllowTypes: { yes: 3 } },
+        { Name: "银河", AllowTypes: { yes: 4 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -456,12 +467,9 @@ const asset = {
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
         { Name: "olga", AllowTypes: { l: 43 } },
-        { Name: "tiancai", AllowTypes: { l: 44 } },
-        { Name: "haikou", AllowTypes: { l: 45 } },
-        { Name: "银河", AllowTypes: { l: 46 } },
-        { Name: "微微", AllowTypes: { l: 47 } },
-        { Name: "CC1", AllowTypes: { l: 48 } },
-        { Name: "CC2", AllowTypes: { l: 49 } },
+        { Name: "微微", AllowTypes: { l: 44 } },
+        { Name: "CC1", AllowTypes: { l: 45 } },
+        { Name: "CC2", AllowTypes: { l: 46 } },
     ],
 };
 
@@ -498,6 +506,8 @@ const typeNameNext = {
     qqcy: "青青草原~",
     wd: "玩偶店",
     fdj: "岚の家",
+    qt: "Ayako的Qt大家族",
+    yes: "Yes",
     xjl: "小角落",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
