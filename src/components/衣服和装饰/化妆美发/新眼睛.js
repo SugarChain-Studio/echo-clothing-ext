@@ -297,7 +297,7 @@ const assets = [
         layerNames: commonLayerNames,
         specials: commonSpecials,
     },
-        {
+    {
         asset: {
             Name: "眼睛12",
             Left: 180,
