@@ -53,7 +53,7 @@ const assets = [
     makeFH("前发16", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发17", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发18", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    makeFH("前发19", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 10 }] }),
+    makeFH("前发19", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发20", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发21", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发22", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
@@ -95,8 +95,12 @@ const assets = [
     makeFH("前发52", { Layer: [{ Name: "底" }, { Name: "渐变" }, { Name: "高光" }] }),
     makeFH("前发53", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发54", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    // makeFH("前发55", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    // makeFH("前发56", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+    makeFH("前发55", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+    makeFH("前发56", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+    makeFH("前发57", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 56  }] }),
+    makeFH("前发58", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 45 }] }),
+    makeFH("前发59", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 39 }, { Name: "底3", Priority: 52 }] }),
+
 ];
 
 export default function () {
