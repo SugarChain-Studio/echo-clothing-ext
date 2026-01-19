@@ -12,6 +12,7 @@ wildcard_paths = [
     "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛8_*.png",
     "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛9_*.png",
     "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛10_*.png",
+    "resources\Assets\Female3DCG\*眼_Luzi\**\眼睛12_*.png",
 ]
 
 # 定义裁剪参数

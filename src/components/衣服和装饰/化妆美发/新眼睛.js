@@ -297,6 +297,27 @@ const assets = [
         layerNames: commonLayerNames,
         specials: commonSpecials,
     },
+        {
+        asset: {
+            Name: "眼睛12",
+            Left: 180,
+            Top: 119,
+            DefaultColor: ["Default", "Default", "#ffcb5a", "Default", "#111"],
+            Layer: [
+                { Name: "1", AllowColorize: true },
+                { Name: "2", AllowColorize: true },
+                { Name: "3", AllowColorize: true },
+                { Name: "4", AllowColorize: true },
+                { Name: "5", AllowColorize: true },
+            ],
+        },
+        translation: {
+            CN: "未命名",
+            EN: "未命名",
+        },
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
+    },
 ];
 
 export default function () {
