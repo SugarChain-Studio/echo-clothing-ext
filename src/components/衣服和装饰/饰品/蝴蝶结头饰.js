@@ -27,7 +27,7 @@ const assets2 = [
             Left: 165,
             DynamicGroupName: "Mask",
         },
-        { translation: { CN: "蝴蝶结头饰大", EN: "Large Bow Hair Accessory" } }
+        { translation: { CN: "蝴蝶结头饰大", EN: "Large Bow Hair Accessory" } },
     ],
 ];
 
