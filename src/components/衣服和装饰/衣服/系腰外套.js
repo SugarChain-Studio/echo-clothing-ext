@@ -30,7 +30,7 @@ const assets2 = [
             Name: "系腰外套大",
             Random: false,
             Top: 400,
-            Left: 140,
+            Left: 115,
             DynamicGroupName: "ClothOuter",
             ParentGroup: {},
             PoseMapping: {},
