@@ -15,7 +15,7 @@ const assets = [
             PoseMapping: {},
             Layer: [
                 { Name: "A1", Priority: 5 },
-                { Name: "A2" },
+                { Name: "A2", Priority: 27 },
             ],
         },
         { translation: { CN: "系腰外套小", EN: "Small Waist-Tied Outerwear" } },
@@ -36,7 +36,7 @@ const assets2 = [
             PoseMapping: {},
             Layer: [
                 { Name: "A1", Priority: 5 },
-                { Name: "A2" },
+                { Name: "A2", Priority: 27 },
             ],
         },
         { translation: { CN: "系腰外套大", EN: "Large Waist-Tied Outerwear" } },
