@@ -33,6 +33,7 @@ const dialog = createItemDialogModular([
 const luggagePairItemMap = {
     行李箱: "抓住行李箱",
     硬壳行李箱: "抓住硬壳行李箱",
+    宠物箱: "抓住宠物箱",
 };
 
 luggageHandler.on("grabLuggage", ({ senderCharacter }, { Sender, Target }) => {
