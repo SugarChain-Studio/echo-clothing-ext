@@ -246,6 +246,15 @@ const copyGroups = [
             RU: "🍔Крылья 2",
         },
     },
+    {
+        mirror: "Luzi_TailStraps_0",
+        source: "TailStraps",
+        description: {
+            CN: "🍔尾巴 2",
+            EN: "🍔Tail 2",
+            RU: "🍔Хвост 2",
+        },
+    },
 ];
 
 copyGroups.forEach((definition) => addMirror(definition.source, definition.mirror));
