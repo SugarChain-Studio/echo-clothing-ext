@@ -4,7 +4,7 @@ from common import regulateXYWH
 
 # 带有通配符的目录路径
 wildcard_paths = [
-    "resources/Assets/Female3DCG/TailStraps/蝎子尾巴_*.png"
+    "resources/Assets/Female3DCG/ClothOuter/**/大衣_*.png"
 ]
 
 # 新前发参数
