@@ -152,7 +152,7 @@ class DialogButtons {
             const checked = box.checked(ctx);
             const textValue = box.text(ctxText);
 
-            const X = x + (w ?? 64) + 5;
+            const X = x + (w ?? 64) + 15;
             const Y = y + (h ?? 64) / 2;
 
             const hover = box.hover?.(ctx);
