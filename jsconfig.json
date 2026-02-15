@@ -3,6 +3,8 @@
         "checkJs": true,
         "allowJs": true,
         "lib": ["es2021", "dom"],
+        "strictFunctionTypes": false,
+        "noImplicitAny": false,
         "paths": {
             "@mod-utils/*": ["./utils/src/*"]
         }
