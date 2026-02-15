@@ -24,7 +24,7 @@ const asset = {
     Fetish: ["Metal"],
     Prerequisite: "GagFlat",
     DrawLocks: false,
-    Effect: [E.BlockMouth],
+    Effect: [E.UseRemote, E.BlockMouth],
     DefaultColor: ["#131313", "#7F7F7F", "#4D305B", "#B57CC1", "#F4A9FF"],
     Layer: [
         { Name: "frame_diff" },

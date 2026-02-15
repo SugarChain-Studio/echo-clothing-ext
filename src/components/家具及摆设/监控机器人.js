@@ -12,6 +12,7 @@ const asset = {
     Time: 15,
     Fetish: ["Metal"],
     Category: ["SciFi"],
+    Effect: [E.UseRemote],
     Audio: "FuturisticApply",
     Priority: 55,
     Difficulty: 60,

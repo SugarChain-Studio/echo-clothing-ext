@@ -22,6 +22,7 @@ const asset = {
     Priority: 55,
     DynamicGroupName: "ItemHead",
     Category: ["SciFi"],
+    Effect: [E.UseRemote],
     Fetish: ["Metal"],
     DrawLocks: false,
     DefaultColor: ["#4D305B", "#555555", "#000000", "#B57CC1", "#F4A9FF"],
