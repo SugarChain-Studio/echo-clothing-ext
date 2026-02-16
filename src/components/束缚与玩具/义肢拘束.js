@@ -634,7 +634,7 @@ const assets = [
                     Optionr4: "限制姿势4",
                     Optionr5: "限制姿势5",
 
-                    Setr0: "SourceCharacter配置DestinationCharacterAssetName，使得TargetCharcter可以通过脑机接口控制姿势。",
+                    Setr0: "SourceCharacter配置DestinationCharacterAssetName，使得TargetCharacter可以通过脑机接口控制姿势。",
                     Setr1: "SourceCharacter将DestinationCharacterAssetName的姿势限制为BaseLower。",
                     Setr2: "SourceCharacter将DestinationCharacterAssetName的姿势限制为Kneel。",
                     Setr3: "SourceCharacter将DestinationCharacterAssetName的姿势限制为KneelingSpread。",
@@ -647,7 +647,7 @@ const assets = [
                     Optionm1: "禁止移动",
                     Optionm2: "跟随模式",
 
-                    Setm0: "SourceCharacter配置DestinationCharacterAssetName，使得TargetCharcter可以自由控制AssetName移动。",
+                    Setm0: "SourceCharacter配置DestinationCharacterAssetName，使得TargetCharacter可以自由控制AssetName移动。",
                     Setm1: "SourceCharacter使DestinationCharacterAssetName保持停留在原地。",
                     Setm2: "SourceCharacter启动了DestinationCharacterAssetName的跟随模式。",
                 },
@@ -663,7 +663,7 @@ const assets = [
                     Optionr4: "Restrict Pose 4",
                     Optionr5: "Restrict Pose 5",
 
-                    Setr0: "SourceCharacter configures DestinationCharacter AssetName, allowing TargetCharcter to control poses through the brain-machine interface.",
+                    Setr0: "SourceCharacter configures DestinationCharacter AssetName, allowing TargetCharacter to control poses through the brain-machine interface.",
                     Setr1: "SourceCharacter restricts the pose of DestinationCharacter AssetName to BaseLower.",
                     Setr2: "SourceCharacter restricts the pose of DestinationCharacter AssetName to Kneel.",
                     Setr3: "SourceCharacter restricts the pose of DestinationCharacter AssetName to KneelingSpread.",
@@ -676,7 +676,7 @@ const assets = [
                     Optionm1: "Freeze",
                     Optionm2: "Follow",
 
-                    Setm0: "SourceCharacter configures DestinationCharacter AssetName, allowing TargetCharcter to freely control movement.",
+                    Setm0: "SourceCharacter configures DestinationCharacter AssetName, allowing TargetCharacter to freely control movement.",
                     Setm1: "SourceCharacter configures DestinationCharacter AssetName to stay in place.",
                     Setm2: "SourceCharacter activates follow mode on DestinationCharacter AssetName.",
                 },
