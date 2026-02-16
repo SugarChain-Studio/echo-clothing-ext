@@ -228,8 +228,8 @@ const assets = [
                         { Name: "B3", ColorGroup: "Lining" }, // 内衬-肩部
                         { Name: "B4", ColorGroup: "Struct" }, // 结构-胸口
 
-                        { Name: "C1", ColorGroup: "Struct", ParentGroup: {} }, // 结构-肩部
-                        { Name: "C2", ColorGroup: "Shell", ParentGroup: {} }, // 外壳-肩部
+                        { Name: "C1", ColorGroup: "Struct", Priority: 38, ParentGroup: {} }, // 结构-肩部
+                        { Name: "C2", ColorGroup: "Shell", Priority: 38, ParentGroup: {} }, // 外壳-肩部
                         { Name: "C3", ColorGroup: "Struct", ParentGroup: {}, Priority: 6 }, // 结构-肩部轴承
                     ],
                     (l) => ({ PoseMapping: {}, Priority: 17, ...l })
@@ -714,9 +714,9 @@ const assets = [
                 { Name: "牙齿", Priority: 12, AllowTypes: { g: 1 }, AllowColorize: false },
 
                 // 1线 2头部结构 3外壳
-                { Name: "G1" },
-                { Name: "G2" },
-                { Name: "G3", ColorGroup: "Shell" },
+                { Name: "G1", Priority: 51 },
+                { Name: "G2", Priority: 51 },
+                { Name: "G3", Priority: 51, ColorGroup: "Shell" },
 
                 { Name: "H1", ColorGroup: "Shell" },
                 { Name: "H2" },
