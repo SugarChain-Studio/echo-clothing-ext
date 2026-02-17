@@ -415,6 +415,19 @@ const asset = {
         { Name: "haikou", AllowTypes: { yes: 3 } },
         { Name: "银河", AllowTypes: { yes: 4 } },
 
+        // 妖精小屋
+        { Name: "菲露亚", AllowTypes: { yjxw: 1 } },
+        { Name: "鹤舞", AllowTypes: { yjxw: 2 } },
+        { Name: "绿野幻梦", AllowTypes: { yjxw: 3 } },
+        { Name: "kelar", AllowTypes: { yjxw: 4 } },
+        { Name: "芝麻汤圆", AllowTypes: { yjxw: 5 } },
+        { Name: "暖雪", AllowTypes: { yjxw: 6 } },
+
+        // 血天使的住所
+        { Name: "小粽子", AllowTypes: { xts: 1 } },
+        { Name: "血落音", AllowTypes: { xts: 2 } },
+        { Name: "墨羽", AllowTypes: { xts: 3 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -467,9 +480,12 @@ const asset = {
         { Name: "幽玉", AllowTypes: { l: 41 } },
         { Name: "小煜", AllowTypes: { l: 42 } },
         { Name: "olga", AllowTypes: { l: 43 } },
-        { Name: "微微", AllowTypes: { l: 44 } },
+        { Name: "薇薇", AllowTypes: { l: 44 } },
         { Name: "CC1", AllowTypes: { l: 45 } },
         { Name: "CC2", AllowTypes: { l: 46 } },
+        { Name: "Hanna", AllowTypes: { l: 47 } },
+        { Name: "七分白衣", AllowTypes: { l: 48 } },
+        { Name: "花怜", AllowTypes: { l: 49 } },
     ],
 };
 
@@ -509,6 +525,8 @@ const typeNameNext = {
     qt: "Ayako的Qt大家族",
     yes: "Yes",
     xjl: "小角落",
+    yjxw: "妖精小屋",
+    xts: "血天使的住所",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
