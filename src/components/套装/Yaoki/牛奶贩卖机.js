@@ -150,18 +150,21 @@ const layerNames = {
  * @property {HTMLCanvasElement} [OutputCupCanvas]
  */
 
-const maxProdFlow = 10;
+export const maxProdFlow = 10;
 
 const orgasmState = new StateTools.OrgasmState();
+
+const vIsWorking = (item) => item.Property?.TypeRecord?.m === 1;
 
 /**
  * 产量计算
  * @param {Character} C
  * @param {Item} Item
+ * @param {(item: Item) => boolean} isWorking
  */
-function flowAlgorithm(C, Item) {
+export function flowAlgorithm(C, Item, isWorking) {
     if (C.ArousalSettings.Active === "Inactive") return 0;
-    if (Item.Property?.TypeRecord?.m !== 1) return 0;
+    if (!isWorking(Item)) return 0;
 
     const arousalFactorF = (group) => {
         const factor = PreferenceGetArousalZone(C, group).Factor;
@@ -186,7 +189,7 @@ function flowAlgorithm(C, Item) {
     return (((arousalFactorV * mSpeed) / 100 + orgasmFactor) / 8) * maxProdFlow;
 }
 
-function flowText(value) {
+export function flowText(value) {
     // maxProdFlow = 40 mL/min
     return `${(value * 4).toFixed(2)} mL/min`;
 }
@@ -229,7 +232,7 @@ function milkerStateUpdate(delta, data, { Item }) {
 function scriptDraw(data, originalFunction, drawData) {
     const { C, Item, PersistentData } = drawData;
     const Data = PersistentData();
-    if (Item.Property?.TypeRecord?.m !== 1) {
+    if (!vIsWorking(Item)) {
         delete Data.RandomOffsetLeft;
         delete Data.RandomOffsetRight;
         Data.MilkProdFlow = 0;
@@ -240,7 +243,7 @@ function scriptDraw(data, originalFunction, drawData) {
     const property = /** @type {MilkingVendorProperties} */ (Item.Property);
 
     if (
-        property?.TypeRecord?.m === 1 ||
+        vIsWorking(Item) ||
         typeof property.Luzi_OutputStartLeft === "number" ||
         typeof property.Luzi_OutputStartRight === "number"
     ) {
@@ -251,7 +254,7 @@ function scriptDraw(data, originalFunction, drawData) {
 
     let need_push = false;
 
-    if (property?.TypeRecord?.m === 1) {
+    if (vIsWorking(Item)) {
         Data.MilkTimer ??= now;
         Data.MilkCupAmount ??= 0;
         Data.RandomOffsetLeft ??= Math.floor(Math.random() * 100);
@@ -259,7 +262,7 @@ function scriptDraw(data, originalFunction, drawData) {
 
         const delta = (now - Data.MilkTimer) / 1000;
         Data.MilkTimer = now;
-        Data.MilkProdFlow = flowAlgorithm(C, Item);
+        Data.MilkProdFlow = flowAlgorithm(C, Item, vIsWorking);
 
         // 每秒钟杯内值都会变成上一秒的 0.8
         const reductioned = Data.MilkCupAmount * Math.pow(0.8, delta);
@@ -594,7 +597,7 @@ const itemDialog = createItemDialogModular(
             Y: 700,
             key: "产率",
             show: ({ data }) => data.currentModule === "Base",
-            value: ({ item, chara }) => flowText(flowAlgorithm(chara, item)),
+            value: ({ item, chara }) => flowText(flowAlgorithm(chara, item, vIsWorking)),
         },
         {
             Y: 775,
