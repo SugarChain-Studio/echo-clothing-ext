@@ -25,13 +25,17 @@ export function RMouseIn(rect) {
 /**
  * @template {ExtendedItemData<any>} DataType
  */
-class DialogButtons {
+class CustomItemDialog {
     /**
      * @typedef {(data:DataType, item: Item, character: Character) => void} CallbackType
      */
 
     /**
      * @typedef {(original: ()=>void, data:DataType, item: Item, character: Character) => void} CallbackWithOriginalType
+     */
+
+    /**
+     * @typedef {(before:ItemProperties, after:ItemProperties, ctx: ItemDialog.DialogDrawContext<DataType>) => void} OnChangeType
      */
 
     constructor() {
@@ -53,6 +57,7 @@ class DialogButtons {
 
         /** @private */
         this._overrideClickExit = /** @type {CallbackWithOriginalType | undefined} */ (undefined);
+        this._onchanges = /** @type {OnChangeType[]} */ ([]);
     }
 
     /** @param {ItemDialog.ButtonConfig<DataType>[]} buttons */
@@ -84,6 +89,15 @@ class DialogButtons {
      */
     onDraw(draw) {
         this._ondraw = draw;
+        return this;
+    }
+
+    /**
+     * @param {OnChangeType} callback
+     */
+    onChange(callback) {
+        this._onchanges.push(callback);
+        return this;
     }
 
     /**
@@ -181,6 +195,8 @@ class DialogButtons {
         const item = DialogFocusItem;
         if (!item || !chara) return;
 
+        const propertiesBefore = { ...item.Property };
+
         if (this._overrideClickExit && MouseIn(1885, 25, 90, 90)) {
             this._overrideClickExit(original, data, item, chara);
         } else {
@@ -250,6 +266,9 @@ class DialogButtons {
                 DialogLeave();
             }
         }
+
+        const propertiesAfter = { ...item.Property };
+        this._onchanges.forEach((callback) => callback(propertiesBefore, propertiesAfter, ctx));
     }
 
     /**
@@ -334,10 +353,10 @@ class DialogButtons {
  * @template {ExtendedItemData<any>} DataType
  * @param {ItemDialog.ButtonConfig<DataType>[]} [buttons]
  * @param {ItemDialog.ParameterConfig<DataType>[]} [params]
- * @returns {DialogButtons<DataType>}
+ * @returns {CustomItemDialog<DataType>}
  */
 function createItemDialog(buttons, params) {
-    const ret = /** @type {DialogButtons<DataType>}*/ (new DialogButtons());
+    const ret = /** @type {CustomItemDialog<DataType>}*/ (new CustomItemDialog());
     if (buttons) ret.addButtons(buttons);
     if (params) ret.addParams(params);
     return ret;
@@ -348,28 +367,28 @@ function createItemDialog(buttons, params) {
  * returns a DialogButtons instance typed for ModularItemData.
  * @param {ItemDialog.ButtonConfig<ModularItemData>[]} [buttons]
  * @param {ItemDialog.ParameterConfig<ModularItemData>[]} [params]
- * @returns {DialogButtons<ModularItemData>}
+ * @returns {CustomItemDialog<ModularItemData>}
  */
 export function createItemDialogModular(buttons, params) {
-    return /** @type {DialogButtons<ModularItemData>} */ (createItemDialog(buttons, params));
+    return /** @type {CustomItemDialog<ModularItemData>} */ (createItemDialog(buttons, params));
 }
 
 /**
  * Loose-typed wrapper for typed dialogs.
  * @param {ItemDialog.ButtonConfig<TypedItemData>[]} [buttons]
  * @param {ItemDialog.ParameterConfig<TypedItemData>[]} [params]
- * @returns {DialogButtons<TypedItemData>}
+ * @returns {CustomItemDialog<TypedItemData>}
  */
 export function createItemDialogTyped(buttons, params) {
-    return /** @type {DialogButtons<TypedItemData>} */ (createItemDialog(buttons, params));
+    return /** @type {CustomItemDialog<TypedItemData>} */ (createItemDialog(buttons, params));
 }
 
 /**
  * Loose-typed wrapper for noarch dialogs.
  * @param {ItemDialog.ButtonConfig<NoArchItemData>[]} [buttons]
  * @param {ItemDialog.ParameterConfig<NoArchItemData>[]} [params]
- * @returns {DialogButtons<NoArchItemData>}
+ * @returns {CustomItemDialog<NoArchItemData>}
  */
 export function createItemDialogNoArch(buttons, params) {
-    return /** @type {DialogButtons<NoArchItemData>} */ (createItemDialog(buttons, params));
+    return /** @type {CustomItemDialog<NoArchItemData>} */ (createItemDialog(buttons, params));
 }

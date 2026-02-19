@@ -13,17 +13,17 @@ import { resourceBaseURL } from "@mod-utils/rollupHelper";
  */
 
 /**
- * @typedef { globalThis.ItemProperties & ProtheticRestraintArmProps } ExtendItemProperties
+ * @typedef { globalThis.ItemProperties & ProtheticRestraintArmProps } ArmItemProperties
  */
 
 /** @type {ItemProperties} */
-const defaultProps = /** @type {ExtendItemProperties} */ ({
+const defaultProps = /** @type {ArmItemProperties} */ ({
     LuziAutoMasturbate: false,
     LuziForbidStruggle: true,
 });
 
-/** @type { (item: Item) => ExtendItemProperties } */
-const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
+/** @type { (item: Item) => ArmItemProperties } */
+const armProp = (item) => /** @type {ArmItemProperties}*/ (item.Property);
 
 const armItemDialog = createItemDialogModular([])
     .addCheckBoxes([
@@ -50,12 +50,12 @@ const armItemDialog = createItemDialogModular([])
             text: ({ chara, text }) => text("D_ForbidStruggle").replace("CNAME", CharacterNickname(chara)),
             requireLockPermission: true,
             enable: ({ item }) => !item.Property?.Effect?.includes(E.Block),
-            checked: ({ item }) => Boolean(extProp(item).LuziForbidStruggle),
+            checked: ({ item }) => Boolean(armProp(item).LuziForbidStruggle),
             onclick: ({ item }) => {
-                const property = extProp(item);
+                const property = armProp(item);
                 property.LuziForbidStruggle = !property.LuziForbidStruggle;
             },
-            actionKey: ({ item }) => `A_ForbidStruggleSet${extProp(item).LuziForbidStruggle ? "T" : "F"}`,
+            actionKey: ({ item }) => `A_ForbidStruggleSet${armProp(item).LuziForbidStruggle ? "T" : "F"}`,
         },
         {
             location: { x: 1200, y: 780 },
@@ -63,12 +63,12 @@ const armItemDialog = createItemDialogModular([])
             text: ({ text }) => text("D_AutoMasturbate"),
             requireLockPermission: true,
             enable: ({ item }) => !item.Property?.Effect?.includes(E.Block),
-            checked: ({ item }) => Boolean(extProp(item).LuziAutoMasturbate),
+            checked: ({ item }) => Boolean(armProp(item).LuziAutoMasturbate),
             onclick: ({ item }) => {
-                const property = extProp(item);
+                const property = armProp(item);
                 property.LuziAutoMasturbate = !property.LuziAutoMasturbate;
             },
-            actionKey: ({ item }) => `A_AutoMasturbateSet${extProp(item).LuziAutoMasturbate ? "T" : "F"}`,
+            actionKey: ({ item }) => `A_AutoMasturbateSet${armProp(item).LuziAutoMasturbate ? "T" : "F"}`,
         },
     ])
     .addTexts([
@@ -82,6 +82,76 @@ const armItemDialog = createItemDialogModular([])
             align: "center",
         },
     ]);
+
+const legItemDialog = createItemDialogModular().addCheckBoxes([
+    {
+        location: { x: 1200, y: 620 },
+        show: ({ data }) => data.currentModule === "Base",
+        text: ({ text }) => text("D_EnableLeash"),
+        requireLockPermission: true,
+        checked: ({ item }) => Boolean(item.Property?.Effect?.includes(E.Leash)),
+        onclick: ({ item }) => {
+            item.Property ??= {};
+            item.Property.Effect ??= [];
+            if (item.Property.Effect.includes(E.Leash)) {
+                item.Property.Effect = item.Property.Effect.filter((e) => e !== E.Leash);
+            } else {
+                item.Property.Effect.push(E.Leash);
+            }
+        },
+        actionKey: ({ item }) => `A_EnableLeash${item.Property?.Effect?.includes(E.Leash) ? "T" : "F"}`,
+    },
+]);
+
+const headItemDialog = createItemDialogModular([
+    ...["", "SynthWave", "PaddedCell", "LatexRoom"].map(
+        (src, idx) =>
+            /** @type {Parameters<typeof createItemDialogModular>[0][0]} */ ({
+                location: { x: 1135 + (idx % 3) * 250, y: 700 + Math.floor(idx / 3) * 80, w: 225, h: 50 },
+                show: ({ data, item }) => data.currentModule === "Visor" && item.Property?.TypeRecord?.v > 1,
+                enable: ({ item }) => item.Property?.CustomBlindBackground !== src,
+                requireLockPermission: true,
+                checked: ({ item }) => item.Property?.CustomBlindBackground === src,
+                onclick: ({ item }) => {
+                    item.Property ??= {};
+                    item.Property.CustomBlindBackground = src;
+                },
+                key: `BG_${src || "None"}`,
+            })
+    ),
+])
+    .addTexts([
+        {
+            location: { x: 1500, y: 650, w: 500 },
+            align: "center",
+            text: ({ data, item, text }) => {
+                if (data.currentModule !== "Visor") return undefined;
+                if (!(item.Property?.TypeRecord?.v > 1)) return undefined;
+                return text("D_ConfigBackGround");
+            },
+        },
+    ])
+    .onChange((before, after, { item, chara }) => {
+        let should_update = false;
+        if (before.TypeRecord?.v !== after.TypeRecord?.v && !(after.TypeRecord?.v > 1)) {
+            item.Property.CustomBlindBackground = "";
+            should_update = true;
+        }
+
+        if (before.TypeRecord?.v !== after.TypeRecord?.v || before.TypeRecord?.b !== after.TypeRecord?.b) {
+            /** @type {EffectName[]} */
+            const blurList = [E.BlurLight, E.BlurNormal, E.BlurHeavy];
+            item.Property.Effect ??= [];
+            item.Property.Effect = item.Property.Effect.filter((e) => !blurList.includes(e));
+            if (after.TypeRecord?.v > 0 && after.TypeRecord?.b > 0) {
+                const effect = blurList[after.TypeRecord.b - 1];
+                item.Property.Effect.push(effect);
+            }
+            should_update = true;
+        }
+
+        if (should_update) ChatRoomCharacterItemUpdate(chara, item.Asset.Group.Name);
+    });
 
 /**
  * @typedef { Object } ProtheticRestraintArmData
@@ -115,7 +185,7 @@ function randomMastur(C) {
 function armUpdateRuns(player, data, item) {
     if (!player.IsPlayer()) return;
 
-    const property = extProp(item);
+    const property = armProp(item);
 
     const now = CommonTime();
     if (!data.ArousalCheckTimer) data.ArousalCheckTimer = now;
@@ -361,6 +431,7 @@ const assets = [
                 DrawImages: false,
                 ScriptHooks: { ...armItemDialog.createHooks(), ScriptDraw: armScriptDraw },
                 ChangeWhenLocked: false,
+                AllowEffect: [E.Block],
                 Modules: [
                     {
                         Name: "RMode",
@@ -592,9 +663,10 @@ const assets = [
                 Archetype: "modular",
                 ChatTags: Tools.CommonChatTags(),
                 DrawImages: false,
-                ScriptHooks: {},
+                ScriptHooks: legItemDialog.createHooks(),
                 BaselineProperty: defaultProps,
-                AllowEffect: [E.Block],
+                ChangeWhenLocked: false,
+                AllowEffect: [E.Leash],
                 Modules: [
                     {
                         Name: "RMode",
@@ -616,13 +688,17 @@ const assets = [
                         Options: [
                             { Property: { Effect: [E.Slow] } },
                             { Property: { Effect: [E.Freeze, E.MapImmobile] } },
-                            { Property: { Effect: [E.Slow, E.Leash] } },
                         ],
                     },
                 ],
             },
             assetStrings: {
                 CN: {
+                    D_EnableLeash: "启用跟随模式（同牵绳）",
+
+                    A_EnableLeashT: "SourceCharacter启用了DestinationCharacterAssetName的跟随移动功能。",
+                    A_EnableLeashF: "SourceCharacter关闭了DestinationCharacterAssetName的跟随移动功能。",
+
                     SelectBase: "配置义肢拘束(腿部)",
 
                     ModuleRMode: "拘束模式",
@@ -645,13 +721,18 @@ const assets = [
                     SelectMove: "选择移动限制",
                     Optionm0: "自由移动",
                     Optionm1: "禁止移动",
-                    Optionm2: "跟随模式",
 
                     Setm0: "SourceCharacter配置DestinationCharacterAssetName，使得TargetCharacter可以自由控制AssetName移动。",
                     Setm1: "SourceCharacter使DestinationCharacterAssetName保持停留在原地。",
-                    Setm2: "SourceCharacter启动了DestinationCharacterAssetName的跟随模式。",
                 },
                 EN: {
+                    D_EnableLeash: "Enable Leash Mode (Same as Leash)",
+
+                    A_EnableLeashT:
+                        "SourceCharacter enables the follow movement feature on DestinationCharacter AssetName.",
+                    A_EnableLeashF:
+                        "SourceCharacter disables the follow movement feature on DestinationCharacter AssetName.",
+
                     SelectBase: "Configure Prosthetic Restraint (Legs)",
 
                     ModuleRMode: "Restraint Mode",
@@ -674,11 +755,9 @@ const assets = [
                     SelectMove: "Select Movement Restriction",
                     Optionm0: "Free Movement",
                     Optionm1: "Freeze",
-                    Optionm2: "Follow",
 
                     Setm0: "SourceCharacter configures DestinationCharacter AssetName, allowing TargetCharacter to freely control movement.",
                     Setm1: "SourceCharacter configures DestinationCharacter AssetName to stay in place.",
-                    Setm2: "SourceCharacter activates follow mode on DestinationCharacter AssetName.",
                 },
             },
         },
@@ -728,20 +807,21 @@ const assets = [
             extended: {
                 Archetype: "modular",
                 DrawImages: false,
+                ChangeWhenLocked: false,
                 ChatTags: Tools.CommonChatTags(),
+                AllowEffect: [E.BlurLight, E.BlurNormal, E.BlurHeavy],
+                BaselineProperty: {
+                    CustomBlindBackground: "",
+                },
                 Modules: [
                     {
                         Name: "Visor",
                         Key: "v",
                         Options: [
                             {},
-                            { Property: { Effect: [E.BlindHeavy, E.BlockWardrobe] } },
-                            {
-                                Property: {
-                                    Effect: [E.BlindTotal, E.BlockWardrobe, E.VRAvatars],
-                                    CustomBlindBackground: "SynthWave",
-                                },
-                            },
+                            {},
+                            { Property: { Effect: [E.BlindTotal, E.BlockWardrobe] } },
+                            { Property: { Effect: [E.BlindTotal, E.BlockWardrobe, E.VRAvatars] } },
                         ],
                     },
                     {
@@ -750,16 +830,21 @@ const assets = [
                         Options: [
                             {},
                             {
-                                Prerequisite: ["AccessMouth"],
+                                Prerequisite: ["GagUnique"],
                                 Property: {
-                                    Block: ["ItemMouth", "ItemMouth2", "ItemMouth3"],
-                                    Effect: [E.GagHeavy, E.BlockMouth],
+                                    Fetish: ["Gagged"],
+                                    Effect: [E.GagHeavy, E.OpenMouth],
                                 },
                             },
                         ],
                     },
+                    { Name: "InfoBlock", Key: "ib", Options: [{}, {}, {}] },
+                    { Name: "Blur", Key: "b", Options: [{}, {}, {}, {}] },
                 ],
-                ScriptHooks: { ScriptDraw: headScriptDraw, BeforeDraw: headBeforeDraw },
+                ScriptHooks: headItemDialog.createHooks(["Click", "Draw"], {
+                    ScriptDraw: headScriptDraw,
+                    BeforeDraw: headBeforeDraw,
+                }),
             },
             layerNames: {
                 CN: {
@@ -795,17 +880,25 @@ const assets = [
             },
             assetStrings: {
                 CN: {
+                    BG_None: "无",
+                    BG_SynthWave: "合成器浪潮",
+                    BG_PaddedCell: "软垫监狱",
+                    BG_LatexRoom: "乳胶房间",
+                    D_ConfigBackGround: "配置背景:",
+
                     SelectBase: "配置义肢拘束(头部)",
 
                     ModuleVisor: "显示器",
                     SelectVisor: "配置头戴显示器",
                     Optionv0: "抬起",
-                    Optionv1: "放下",
-                    Optionv2: "VR模式",
+                    Optionv1: "放下(透视)",
+                    Optionv2: "放下(遮蔽)",
+                    Optionv3: "放下(VR模式)",
 
                     Setv0: "SourceCharacter配置DestinationCharacterAssetName抬起头戴显示器。",
-                    Setv1: "SourceCharacter配置DestinationCharacterAssetName放下头戴显示器。",
-                    Setv2: "SourceCharacter配置DestinationCharacterAssetName进入VR模式。",
+                    Setv1: "SourceCharacter配置DestinationCharacterAssetName放下头戴显示器，并配置为透视模式。",
+                    Setv2: "SourceCharacter配置DestinationCharacterAssetName放下头戴显示器，并配置为遮蔽模式。",
+                    Setv3: "SourceCharacter配置DestinationCharacterAssetName进入VR模式。",
 
                     ModuleGag: "口塞",
                     SelectGag: "配置口塞",
@@ -814,17 +907,49 @@ const assets = [
 
                     Setg0: "SourceCharacter配置DestinationCharacterAssetName移除束舌口塞。",
                     Setg1: "SourceCharacter配置DestinationCharacterAssetName添加束舌口塞。",
+
+                    ModuleInfoBlock: "信息屏蔽",
+                    SelectInfoBlock: "配置信息屏蔽",
+                    Optionib0: "无",
+                    Optionib1: "+隐藏兴奋条",
+                    Optionib2: "+隐藏名字",
+
+                    Setib0: "SourceCharacter配置DestinationCharacterAssetName不屏蔽任何界面信息。",
+                    Setib1: "SourceCharacter配置DestinationCharacterAssetName屏蔽兴奋条。",
+                    Setib2: "SourceCharacter配置DestinationCharacterAssetName屏蔽兴奋条和名字。",
+
+                    ModuleBlur: "模糊",
+                    SelectBlur: "配置模糊",
+                    Optionb0: "无",
+                    Optionb1: "轻度模糊",
+                    Optionb2: "中度模糊",
+                    Optionb3: "重度模糊",
+
+                    Setb0: "SourceCharacter配置DestinationCharacterAssetName移除模糊效果。",
+                    Setb1: "SourceCharacter配置DestinationCharacterAssetName造成轻度模糊效果。",
+                    Setb2: "SourceCharacter配置DestinationCharacterAssetName造成中度模糊效果。",
+                    Setb3: "SourceCharacter配置DestinationCharacterAssetName造成重度模糊效果。",
                 },
                 EN: {
+                    BG_None: "None",
+                    BG_SynthWave: "SynthWave",
+                    BG_PaddedCell: "Padded Cell",
+                    BG_LatexRoom: "Latex Room",
+                    D_ConfigBackGround: "Configure Background:",
+
                     SelectBase: "Configure Prosthetic Restraint (Head)",
 
                     ModuleVisor: "Visor",
                     SelectVisor: "Configure Visor",
                     Optionv0: "Up",
-                    Optionv1: "Down",
+                    Optionv1: "Down (See-through)",
+                    Optionv2: "Down (Opaque)",
+                    Optionv3: "Down (VR Mode)",
 
                     Setv0: "SourceCharacter configures DestinationCharacter AssetName to raise the visor.",
-                    Setv1: "SourceCharacter configures DestinationCharacter AssetName to lower the visor.",
+                    Setv1: "SourceCharacter configures DestinationCharacter AssetName to lower the visor, and sets it to see-through mode.",
+                    Setv2: "SourceCharacter configures DestinationCharacter AssetName to lower the visor, and sets it to opaque mode.",
+                    Setv3: "SourceCharacter configures DestinationCharacter AssetName to enter VR mode.",
 
                     ModuleGag: "Gag",
                     SelectGag: "Configure Gag",
@@ -833,6 +958,28 @@ const assets = [
 
                     Setg0: "SourceCharacter configures DestinationCharacter AssetName to remove the tongue restriction gag.",
                     Setg1: "SourceCharacter configures DestinationCharacter AssetName to add the tongue restriction gag.",
+
+                    ModuleInfoBlock: "Info Block",
+                    SelectInfoBlock: "Configure Info Block",
+                    Optionib0: "None",
+                    Optionib1: "+Hide Arousal",
+                    Optionib2: "+Hide Name",
+
+                    Setib0: "SourceCharacter configures DestinationCharacter AssetName to not block any interface information.",
+                    Setib1: "SourceCharacter configures DestinationCharacter AssetName to hide arousal bar.",
+                    Setib2: "SourceCharacter configures DestinationCharacter AssetName to hide arousal bar and name.",
+
+                    ModuleBlur: "Blur",
+                    SelectBlur: "Configure Blur",
+                    Optionb0: "None",
+                    Optionb1: "Light Blur",
+                    Optionb2: "Medium Blur",
+                    Optionb3: "Heavy Blur",
+
+                    Setb0: "SourceCharacter configures DestinationCharacter AssetName to remove blur effect.",
+                    Setb1: "SourceCharacter configures DestinationCharacter AssetName to apply light blur effect.",
+                    Setb2: "SourceCharacter configures DestinationCharacter AssetName to apply medium blur effect.",
+                    Setb3: "SourceCharacter configures DestinationCharacter AssetName to apply heavy blur effect.",
                 },
             },
         },
@@ -877,7 +1024,7 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
             "Struggle",
             "Unlock",
             "Remote",
-            "RemoteDisable",
+            "RemoteDisabledForCannotInteract",
             "TightenLoosen",
             "Lock",
             "LockMenu",
@@ -905,7 +1052,7 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
             .then((item, { armItem }) => {
                 if (item.Asset.Name.includes("义肢拘束")) {
                     runFilter(basicBlockButtons, "Luzi_ProResBlock");
-                } else if (extProp(armItem).LuziForbidStruggle) {
+                } else if (armProp(armItem).LuziForbidStruggle) {
                     runFilter(rulesBlockButtons, "Luzi_ProResStruggle");
                 }
             });
@@ -932,6 +1079,20 @@ HookManager.hookFunction("InterfaceTextGet", 0, (args, next) => {
     return next(args);
 });
 
+HookManager.hookFunction("DrawCharacter", 0, (args, next) => {
+    const oldChatRoomHideIconState = ChatRoomHideIconState;
+    const headItem = Player.Appearance.find(
+        (app) => app.Asset.Group.Name === "ItemHood" && app.Asset.Name === "义肢拘束H"
+    );
+    if (headItem && headItem.Property?.TypeRecord?.v > 0) {
+        const blockValue = headItem.Property?.TypeRecord?.ib ?? 0;
+        ChatRoomHideIconState = Math.max(ChatRoomHideIconState, blockValue > 0 ? blockValue + 1 : 0);
+    }
+    const ret = next(args);
+    ChatRoomHideIconState = oldChatRoomHideIconState;
+    return ret;
+});
+
 function injectItemClickStatus() {
     const target = /** @type {Object<string, DialogMenu<string, DialogInventoryItem>["GetClickStatus"]>} */ (
         DialogMenuMapping.items.clickStatusCallbacks
@@ -939,7 +1100,7 @@ function injectItemClickStatus() {
     /** @type {DialogMenu<string, DialogInventoryItem>["GetClickStatus"]} */
     const callback = (C, _, cur) => {
         const tItem = C.Appearance.find((app) => app.Asset.Group.Name === "ItemArms" && app.Asset.Name === "义肢拘束A");
-        const forbidStruggle = tItem && extProp(tItem).LuziForbidStruggle;
+        const forbidStruggle = tItem && armProp(tItem).LuziForbidStruggle;
         if (C.IsPlayer() && tItem) {
             const langEntry = interfaceStrings[TranslationLanguage] || interfaceStrings["EN"] || interfaceStrings["CN"];
             if (cur && cur.Asset.Name.includes("义肢拘束")) {
