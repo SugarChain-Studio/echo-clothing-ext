@@ -2,7 +2,7 @@ import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { flowAlgorithm, flowText, maxProdFlow } from "../套装/Yaoki/牛奶贩卖机";
-import { createItemDialogModular } from "../../lib";
+import { createItemDialogModular, Typing } from "../../lib";
 
 const orgasmState = new StateTools.OrgasmState();
 
@@ -202,13 +202,16 @@ const asset = [
             DynamicGroupName: "ItemTorso",
             Prerequisite: ["HasBreasts", "AccessBreast", "AccessBreastSuitZip"],
             ParentGroup: "BodyUpper",
+            ArousalZone: "ItemBreast",
             Priority: 16,
             PoseMapping: { AllFours: "Hide" },
             Layer: [
-                { Name: "瓶子", ParentGroup: {}, Priority: 5, ColorGroup: "背包" },
-                { Name: "固定", ParentGroup: {}, Priority: 5, ColorGroup: "背包" },
-                { Name: "泵体", ParentGroup: {}, Priority: 5, ColorGroup: "背包" },
-                { Name: "泵瓶", ParentGroup: {}, Priority: 5, ColorGroup: "背包" },
+                ...Typing.layerMap([{ Name: "瓶子" }, { Name: "固定" }, { Name: "泵体" }, { Name: "泵瓶" }], (l) => ({
+                    ParentGroup: {},
+                    Priority: 5,
+                    ColorGroup: "背包",
+                    ...l,
+                })),
                 { Name: "2_不透明", Priority: 5, AllowTypes: { s: 0 }, AllowColorize: false },
                 { Name: "2_管子", Priority: 5, AllowTypes: { s: 0 } },
                 { Name: "外橡胶", AllowTypes: { s: 0 }, ColorGroup: "橡胶" },
