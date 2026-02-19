@@ -414,6 +414,7 @@ const asset = {
         { Name: "tiancai", AllowTypes: { yes: 2 } },
         { Name: "haikou", AllowTypes: { yes: 3 } },
         { Name: "银河", AllowTypes: { yes: 4 } },
+        { Name: "薇薇安", AllowTypes: { yes: 5 } },
 
         // 妖精小屋
         { Name: "菲露亚", AllowTypes: { yjxw: 1 } },
