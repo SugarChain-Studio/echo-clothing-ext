@@ -134,14 +134,16 @@ const assetStrings = {
     },
 };
 
-ActivityEvents.on("SelfOnSelf", "SipItem", (sender, player) => {
-    const item = player.Appearance.find((a) => a.Asset.Group.Name === group && a.Asset.Name === asset.Name);
-    if (!item) return;
-    if (item.Property?.TypeRecord?.v !== 2) {
-        if (item.Property?.TypeRecord?.v === 1) {
-            item.Craft = undefined;
+ActivityEvents.on("SelfInvolved", "SipItem", (sender, player, { SourceCharacterC }) => {
+    if (SourceCharacterC.IsPlayer()) {
+        const item = player.Appearance.find((a) => a.Asset.Group.Name === group && a.Asset.Name === asset.Name);
+        if (!item) return;
+        if (item.Property?.TypeRecord?.v !== 2) {
+            if (item.Property?.TypeRecord?.v === 1) {
+                item.Craft = undefined;
+            }
+            ExtendedItemSetOptionByRecord(player, item, { typed: 0 }, { refresh: true, push: true });
         }
-        ExtendedItemSetOptionByRecord(player, item, { typed: 0 }, { refresh: true, push: true });
     }
 });
 
