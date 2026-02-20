@@ -203,7 +203,7 @@ function placeItem(trayItem, handItem) {
 
     if (handItem.Asset.Name === "杯饮") {
         const drinkTypeNum = handItem.Property?.TypeRecord?.["typed"];
-        if (!drinkTypeNum) return;
+        if (drinkTypeNum === undefined) return;
         const value = /** @type {ContainerProperty.ContainerData} */ ({ ...content, IAsset: drinkType[drinkTypeNum] });
         const empty = props.Luzi_InventoryContent.findIndex((it) => !it.IAsset);
         if (empty >= 0) props.Luzi_InventoryContent[empty] = value;
