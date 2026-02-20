@@ -100,10 +100,12 @@ const assetStrings = {
         ModuleVolume: "饮用次数",
         SelectVolume: "选择可饮用次数",
         Optionv0: "一次",
-        Optionv1: "无限",
+        Optionv1: "一次(移除制作)",
+        Optionv2: "无限",
 
         Setv0: "SourceCharacter使DestinationCharacterAssetName只能饮用一次。",
-        Setv1: "SourceCharacter使DestinationCharacterAssetName可以无限次饮用。",
+        Setv1: "SourceCharacter使DestinationCharacterAssetName只能饮用一次，且饮用后移除制作。",
+        Setv2: "SourceCharacter使DestinationCharacterAssetName可以无限次饮用。",
     },
     EN: {
         Select: "Select Drink Type",
@@ -123,17 +125,22 @@ const assetStrings = {
         ModuleVolume: "Drink Volume",
         SelectVolume: "Select how many times the drink can be consumed",
         Optionv0: "One Time",
-        Optionv1: "Infinite",
+        Optionv1: "One Time (Remove Crafting)",
+        Optionv2: "Infinite",
 
         Setv0: "SourceCharacter made DestinationCharacter AssetName can only be consumed once.",
-        Setv1: "SourceCharacter made DestinationCharacter AssetName drinkable infinitely.",
+        Setv1: "SourceCharacter made DestinationCharacter AssetName can only be consumed once and remove crafting when consumed.",
+        Setv2: "SourceCharacter made DestinationCharacter AssetName drinkable infinitely.",
     },
 };
 
 ActivityEvents.on("SelfOnSelf", "SipItem", (sender, player) => {
     const item = player.Appearance.find((a) => a.Asset.Group.Name === group && a.Asset.Name === asset.Name);
     if (!item) return;
-    if (item.Property?.TypeRecord?.v === 0) {
+    if (item.Property?.TypeRecord?.v !== 2) {
+        if (item.Property?.TypeRecord?.v === 1) {
+            item.Craft = undefined;
+        }
         ExtendedItemSetOptionByRecord(player, item, { typed: 0 }, { refresh: true, push: true });
     }
 });
