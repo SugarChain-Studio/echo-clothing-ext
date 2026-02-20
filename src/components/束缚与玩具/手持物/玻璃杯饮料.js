@@ -1,6 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
+import { ActivityEvents } from "@sugarch/bc-event-handler";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";
@@ -24,17 +25,56 @@ const asset = {
     ],
 };
 
-/** @type {TypedItemConfig} */
+/** @type {ModularItemConfig} */
 const extended = {
-    Archetype: ExtendedArchetype.TYPED,
+    Archetype: ExtendedArchetype.MODULAR,
     ChatTags: Tools.CommonChatTags(),
-    Options: [
-        { Name: "空杯" },
-        { Name: "橙汁", Property: { AllowActivity: ["SipItem"] } },
-        { Name: "可乐", Property: { AllowActivity: ["SipItem"] } },
-        { Name: "牛奶", Property: { AllowActivity: ["SipItem"] } },
+    Modules: [
+        {
+            Name: "Content",
+            Key: "typed",
+            Options: [
+                {},
+                { Property: { AllowActivity: ["SipItem"] } },
+                { Property: { AllowActivity: ["SipItem"] } },
+                { Property: { AllowActivity: ["SipItem"] } },
+            ],
+        },
+        {
+            Name: "Volume",
+            Key: "v",
+            Options: [{}, {}],
+        },
     ],
 };
+
+/** @type {(character:Character)=>(Item|undefined)} */
+export function holdsEmptyGlass(character) {
+    const item = character.Appearance.find((a) => a.Asset.Group.Name === group && a.Asset.Name === asset.Name);
+    return item?.Property?.TypeRecord?.typed === 0 ? item : undefined;
+}
+
+/** @typedef {""|"橙汁"|"可乐"|"牛奶"} GlassContent */
+
+/** @type {Record<GlassContent, number>} */
+const typeMap = {
+    "": 0,
+    "橙汁": 1,
+    "可乐": 2,
+    "牛奶": 3,
+};
+
+/**
+ * @param {Character} chara
+ * @param {Item} item
+ * @param {""|"橙汁"|"可乐"|"牛奶"} content
+ */
+export function setGlassContent(chara, item, content) {
+    const nt = typeMap[content];
+    if (nt !== undefined) {
+        ExtendedItemSetOptionByRecord(chara, item, { typed: nt }, { refresh: true, push: true });
+    }
+}
 
 const translation = {
     CN: "玻璃杯饮料",
@@ -43,30 +83,60 @@ const translation = {
 
 const assetStrings = {
     CN: {
-        Select: "选择饮料类型",
-        空杯: "没有饮料",
-        橙汁: "橙汁",
-        可乐: "可乐",
-        牛奶: "牛奶",
+        SelectBase: "配置玻璃杯饮料。",
 
-        Set牛奶: "SourceCharacter将牛奶倒入DestinationCharacterAssetName中。",
-        Set可乐: "SourceCharacter将可乐倒入DestinationCharacterAssetName中。",
-        Set橙汁: "SourceCharacter将橙汁倒入DestinationCharacterAssetName中。",
-        Set空杯: "SourceCharacter将DestinationCharacterAssetName倒空了。",
+        ModuleContent: "饮料类型",
+        SelectContent: "选择饮料类型",
+        Optiontyped0: "没有饮料",
+        Optiontyped1: "橙汁",
+        Optiontyped2: "可乐",
+        Optiontyped3: "牛奶",
+
+        Settyped0: "SourceCharacter将DestinationCharacterAssetName倒空了。",
+        Settyped1: "SourceCharacter将橙汁倒入DestinationCharacterAssetName中。",
+        Settyped2: "SourceCharacter将可乐倒入DestinationCharacterAssetName中。",
+        Settyped3: "SourceCharacter将牛奶倒入DestinationCharacterAssetName中。",
+
+        ModuleVolume: "饮用次数",
+        SelectVolume: "选择可饮用次数",
+        Optionv0: "一次",
+        Optionv1: "无限",
+
+        Setv0: "SourceCharacter使DestinationCharacterAssetName只能饮用一次。",
+        Setv1: "SourceCharacter使DestinationCharacterAssetName可以无限次饮用。",
     },
     EN: {
         Select: "Select Drink Type",
-        空杯: "No Drink",
-        橙汁: "Orange Juice",
-        可乐: "Cola",
-        牛奶: "Milk",
 
-        Set牛奶: "SourceCharacter filled DestinationCharacter AssetName with milk.",
-        Set可乐: "SourceCharacter filled DestinationCharacter AssetName with cola.",
-        Set橙汁: "SourceCharacter filled DestinationCharacter AssetName with orange juice.",
-        Set空杯: "SourceCharacter emptied DestinationCharacter AssetName.",
+        ModuleContent: "Drink Type",
+        SelectContent: "Select the type of drink",
+        Optiontyped0: "Empty",
+        Optiontyped1: "Orange Juice",
+        Optiontyped2: "Cola",
+        Optiontyped3: "Milk",
+
+        Settyped0: "SourceCharacter emptied DestinationCharacter AssetName.",
+        Settyped1: "SourceCharacter poured orange juice into DestinationCharacter AssetName.",
+        Settyped2: "SourceCharacter poured cola into DestinationCharacter AssetName.",
+        Settyped3: "SourceCharacter poured milk into DestinationCharacter AssetName.",
+
+        ModuleVolume: "Drink Volume",
+        SelectVolume: "Select how many times the drink can be consumed",
+        Optionv0: "One Time",
+        Optionv1: "Infinite",
+
+        Setv0: "SourceCharacter made DestinationCharacter AssetName can only be consumed once.",
+        Setv1: "SourceCharacter made DestinationCharacter AssetName drinkable infinitely.",
     },
 };
+
+ActivityEvents.on("SelfOnSelf", "SipItem", (sender, player) => {
+    const item = player.Appearance.find((a) => a.Asset.Group.Name === group && a.Asset.Name === asset.Name);
+    if (!item) return;
+    if (item.Property?.TypeRecord?.v === 0) {
+        ExtendedItemSetOptionByRecord(player, item, { typed: 0 }, { refresh: true, push: true });
+    }
+});
 
 export default function () {
     AssetManager.addAssetWithConfig(group, asset, { extended, translation, layerNames: {}, assetStrings });
