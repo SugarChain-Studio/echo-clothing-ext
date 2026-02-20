@@ -174,7 +174,7 @@ export function flowAlgorithm(C, Item, isWorking) {
     // range 0 ~ 6
     const arousalFactorV = arousalFactorF("ItemBreast") + arousalFactorF("ItemNipples");
 
-    const mSpeed = C.ArousalSettings.Progress;
+    const mSpeed = Math.max((C.ArousalSettings.Progress * 2 - 100) / 100, 0);
 
     const orgasmFactor = (() => {
         if (Item.Property?.TimeSinceLastOrgasm) {
@@ -184,9 +184,9 @@ export function flowAlgorithm(C, Item, isWorking) {
         return 0;
     })();
 
-    // 产量流速 = (胸部快感因子 + 乳头快感因子) * 性奋值 / 100 + 高潮因子
+    // 产量流速 = (胸部快感因子 + 乳头快感因子) * (max(性奋值 * 2 - 100,0) / 100) + 高潮因子
     // 然后标准化到 maxProdFlow
-    return (((arousalFactorV * mSpeed) / 100 + orgasmFactor) / 8) * maxProdFlow;
+    return ((arousalFactorV * mSpeed + orgasmFactor) / 8) * maxProdFlow;
 }
 
 export function flowText(value) {
