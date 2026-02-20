@@ -3,6 +3,7 @@ import { AssetManager } from "../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { flowAlgorithm, flowText, maxProdFlow } from "../套装/Yaoki/牛奶贩卖机";
 import { createItemDialogModular, Typing } from "../../lib";
+import { holdsEmptyGlass, setGlassContent } from "./手持物/玻璃杯饮料";
 
 const orgasmState = new StateTools.OrgasmState();
 
@@ -29,6 +30,8 @@ const orgasmState = new StateTools.OrgasmState();
 
 const vIsWorking = (item) => item.Property?.TypeRecord?.s === 0;
 
+const MilkMax = 3000;
+
 /**
  * @param {number} delta
  * @param {MilkCupData} data
@@ -52,6 +55,7 @@ function milkerStateUpdate(delta, data, { Item }) {
     }
 
     property.Luzi_MilkTotal = (property.Luzi_MilkTotal ?? 0) + (data.MilkProdFlow * delta * 4) / 60;
+    if (property.Luzi_MilkTotal > MilkMax) property.Luzi_MilkTotal = MilkMax;
 
     const now = Date.now();
     if (!data.MilkUpdateTimer) data.MilkUpdateTimer = now;
@@ -115,7 +119,26 @@ function scriptDraw(data, originalFunction, drawData) {
 }
 
 const itemDialog = createItemDialogModular(
-    [],
+    [
+        {
+            location: { x: 1385, y: 850, w: 225, h: 55 },
+            show: ({ data }) => data.currentModule === "Base",
+            enable: ({ item, chara }) => !!holdsEmptyGlass(chara) && propValue(item, (p) => p.Luzi_MilkTotal > 200),
+            hover: ({ item, chara }) => {
+                if (!holdsEmptyGlass(chara)) return "D_NeedEmptyGlass";
+                if (propValue(item, (p) => p.Luzi_MilkTotal <= 200)) return "D_NeedMoreMilk";
+            },
+            onclick: ({ item }) => {
+                propValue(item, (p) => (p.Luzi_MilkTotal = Math.max((p.Luzi_MilkTotal ?? 0) - 200, 0)));
+                const glass = holdsEmptyGlass(Player);
+                setGlassContent(Player, glass, "牛奶");
+                ChatRoomCharacterItemUpdate(Player, glass.Asset.Group.Name);
+            },
+            key: "D_TakeDrink",
+            actionKey: "A_TakeDrink",
+            leaveDialog: true,
+        },
+    ],
     [
         {
             Y: 700,
@@ -124,10 +147,14 @@ const itemDialog = createItemDialogModular(
             value: ({ item, chara }) => flowText(flowAlgorithm(chara, item, vIsWorking)),
         },
         {
-            Y: 775,
+            Y: 765,
             key: "存量",
             show: ({ data }) => data.currentModule === "Base",
-            value: ({ item }) => propValue(item, (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL`),
+            value: ({ item }) =>
+                propValue(
+                    item,
+                    (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL ${p.Luzi_MilkTotal >= MilkMax ? "(满)" : ""}`
+                ),
         },
     ]
 );
@@ -307,6 +334,11 @@ const asset = [
 
                     产率: "产率",
                     存量: "机器存量",
+
+                    D_TakeDrink: "🖐装一杯饮料",
+                    A_TakeDrink: "SourceCharacter从DestinationCharacterAssetName中装了一杯饮料。",
+                    D_NeedEmptyGlass: "需要手持一个空的玻璃杯",
+                    D_NeedMoreMilk: "需要机器内有200mL牛奶",
                 },
                 EN: {
                     SelectBase: "Configure Portable Breast Pump",
@@ -321,6 +353,11 @@ const asset = [
 
                     产率: "Flow Rate",
                     存量: "Total Volume",
+
+                    D_TakeDrink: "🖐Take a Drink",
+                    A_TakeDrink: "SourceCharacter took a drink from DestinationCharacter AssetName.",
+                    D_NeedEmptyGlass: "Need to hold an empty glass",
+                    D_NeedMoreMilk: "Need at least 200mL of milk in the machine",
                 },
             },
         },
