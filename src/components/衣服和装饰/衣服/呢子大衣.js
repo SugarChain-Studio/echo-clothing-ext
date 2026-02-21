@@ -28,7 +28,7 @@ const asset = [
         Priority: 55,
         PoseMapping: PoseMapTool.hideFullBody(),
         Layer: [
-            { Name: "A1" },
+            { Name: "A1", Priority: 6 },
             {
                 Name: "A2",
                 ParentGroup: "BodyUpper",
