@@ -6,7 +6,7 @@ import { CustomValidate } from "../../../lib";
  * @typedef {Object} HelperAssetDefinition
  * @property {string} name
  * @property {Translation.Entry} translation
- * @property {string} previewSrc
+ * @property {string} [previewSrc]
  */
 
 /** @type {HelperAssetDefinition[]} */
@@ -19,17 +19,14 @@ const assets = [
     {
         name: "抓住行李箱",
         translation: { CN: "抓住行李箱", EN: "Grabbed Luggage" },
-        previewSrc: ImageMapTools.assetPreview("ItemDevices", "行李箱"),
     },
     {
         name: "抓住硬壳行李箱",
         translation: { CN: "抓住硬壳行李箱", EN: "Grabbed Hard-Shell Luggage" },
-        previewSrc: ImageMapTools.assetPreview("ItemDevices", "硬壳行李箱"),
     },
     {
         name: "抓住宠物箱",
-        translation: { CN: "抓住宠物箱", EN: "Grabbed Hard-Shell Luggage" },
-        previewSrc: ImageMapTools.assetPreview("ItemDevices", "宠物箱"),
+        translation: { CN: "抓住宠物箱", EN: "Grabbed Pet Carrier" },
     },
 ];
 
@@ -58,6 +55,10 @@ export default function () {
     }
 
     AssetManager.addImageMapping(
-        Object.fromEntries(assets.map((a) => [ImageMapTools.assetPreview("ItemMisc", a.name), a.previewSrc]))
+        Object.fromEntries(
+            assets
+                .filter((a) => a.previewSrc)
+                .map((a) => [ImageMapTools.assetPreview("ItemMisc", a.name), a.previewSrc])
+        )
     );
 }
