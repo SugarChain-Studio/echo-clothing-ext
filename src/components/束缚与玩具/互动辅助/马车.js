@@ -23,9 +23,13 @@ const dialog = createItemDialogNoArch([
         location: { x: 1265, y: 550, w: 225, h: 55 },
         key: "D_连接马车_牵引",
         requireLockPermission: true,
-        enable: () => Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
+        enable: ({ chara, item }) =>
+            Player.CanInteract() &&
+            (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
+            Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
         hover: ({ chara, item }) => {
-            if (!DialogCanUnlock(chara, item)) return "D_锁权限";
+            if (!Player.CanInteract()) return "D_无法驾驶_交互";
+            if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
             if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
             return "D_hint_连接马车_牵引";
         },
@@ -44,10 +48,13 @@ const dialog = createItemDialogNoArch([
         location: { x: 1510, y: 550, w: 225, h: 55 },
         key: "D_连接马车_驾驶",
         requireLockPermission: true,
-        enable: () => Player.CanInteract() && Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
+        enable: ({ chara, item }) =>
+            Player.CanInteract() &&
+            (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
+            Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
         hover: ({ chara, item }) => {
-            if (!DialogCanUnlock(chara, item)) return "D_锁权限";
             if (!Player.CanInteract()) return "D_无法驾驶_交互";
+            if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
             if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
             return "D_hint_连接马车_驾驶";
         },
