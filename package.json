@@ -13,7 +13,7 @@
         "changelog:page": "node ./scripts/.changelog.js CHANGELOG.md public/changelog.html",
         "resources:rel": "node ./scripts/.resource.js --rel",
         "resources:dev": "node ./scripts/.resource.js --dev",
-        "serve": "http-server -p 8080 --cors public",
+        "serve": "http-server -p 8080 --cors public -c31536000",
         "package-props": "node ./scripts/.package-props.js",
         "update-sugarch": "node ./scripts/update-sugarch-deps.js",
         "update-sugarch:check": "node ./scripts/update-sugarch-deps.js --dry-run",

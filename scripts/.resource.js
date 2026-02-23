@@ -67,23 +67,6 @@ function createSymlink(src, dest) {
     }
 }
 
-function copyFiles(src, dest) {
-    try {
-        if (fs.existsSync(dest)) {
-            const stat = fs.lstatSync(dest);
-            if (stat.isSymbolicLink()) {
-                fs.unlinkSync(dest);
-                console.info(`Remove symbolic link: ${dest}`);
-            }
-        }
-
-        execSync(`cp -r ${src} ${dest}`);
-        console.info(`Copy files: ${src} -> ${dest}`);
-    } catch (err) {
-        console.error(`Failed to copy files: ${src} -> ${dest}`, err);
-    }
-}
-
 function processDirectories() {
     const { dirs, files } = fs.readdirSync(resourcesDir).reduce(
         (acc, item) => {
@@ -118,8 +101,6 @@ function processDirectories() {
 
         if (isDev) {
             createSymlink(srcDir, destDir);
-        } else if (isRel) {
-            copyFiles(srcDir, destDir);
         }
     });
 }

@@ -1,6 +1,6 @@
 import { AssetManager } from "./assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { ModInfo, resourceBaseURL } from "@mod-utils/rollupHelper";
+import { debugFlag, ModInfo, resourceBaseURL } from "@mod-utils/rollupHelper";
 
 import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
@@ -8,7 +8,6 @@ import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
 import { AfterAssetOverrides, CraftingCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
-import { resolveAssetOverrides } from "@sugarch/bc-asset-manager";
 
 import runBCPatch from "./bcPatch";
 import runDrawMod from "./drawMod";
@@ -31,6 +30,14 @@ function wearHamburgerOnThankYou() {
         });
 }
 
+const assetPath = (path, version) => {
+    if (debugFlag) {
+        return `${resourceBaseURL}/${path}?v=${version}`;
+    } else {
+        return `https://cdn.jsdelivr.net/gh/SugarChain-Studio/echo-clothing-ext@${version}/resources/${path}`;
+    }
+};
+
 once(ModInfo.name, async () => {
     HookManager.setLogger(Logger);
     AssetManager.setLogger(Logger);
@@ -41,7 +48,16 @@ once(ModInfo.name, async () => {
     runDrawMod();
 
     fetchAssetOverrides()
-        .then((override) => resolveAssetOverrides(resourceBaseURL, override))
+        .then((override) => {
+            /** @type {Record<string, string>} */
+            const ret = {};
+            for (const [version, paths] of Object.entries(override)) {
+                for (const path of paths) {
+                    ret[path] = assetPath(path, version);
+                }
+            }
+            return ret;
+        })
         .then((mappings) => AssetManager.imageMapping.setBasicImgMapping(mappings))
         .then(() => AssetManager.afterLoad(() => wearHamburgerOnThankYou()))
         .then(() => AfterAssetOverrides.run())
