@@ -3,7 +3,6 @@ import { AssetManager } from "../../assetForward";
 import { createItemDialogModular, PoseMapTool, Typing } from "../../lib";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";
-import { resourceBaseURL } from "@mod-utils/rollupHelper";
 
 /**
  * @typedef {Object} ProtheticRestraintArmProps
@@ -1117,8 +1116,8 @@ function injectItemClickStatus() {
 
 export default function () {
     AssetManager.addImageMapping({
-        "Icons/Luzi_ProResBlock.png": `${resourceBaseURL}/Icons/Luzi_ProRes.png`,
-        "Icons/Luzi_ProResStruggle.png": `${resourceBaseURL}/Icons/Luzi_ProRes.png`,
+        "Icons/Luzi_ProResBlock.png": "Icons/Luzi_ProRes.png",
+        "Icons/Luzi_ProResStruggle.png": "Icons/Luzi_ProRes.png",
     });
     injectItemClickStatus();
     AssetManager.addAssetWithConfig(assets);

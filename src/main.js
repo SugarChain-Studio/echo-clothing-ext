@@ -30,11 +30,13 @@ function wearHamburgerOnThankYou() {
         });
 }
 
+const jsDelivrBase = `https://cdn.jsdelivr.net/${ModInfo.repository?.replace("https://github.com/", "gh/")}`;
+
 const assetPath = (path, version) => {
     if (debugFlag) {
         return `${resourceBaseURL}/${path}?v=${version}`;
     } else {
-        return `https://cdn.jsdelivr.net/gh/SugarChain-Studio/echo-clothing-ext@${version}/resources/${path}`;
+        return `${jsDelivrBase}@${version}/resources/${path}`;
     }
 };
 
