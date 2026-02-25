@@ -1,6 +1,6 @@
-import { ArmMaskTool, PostPass } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { ArmMaskTool, PostPass } from "../../../../lib";
+import { AssetManager } from "../../../../assetForward";
+import { luziSuffixFixups } from "../../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
@@ -20,6 +20,7 @@ const asset = [
             },
             (asset) => {
                 ArmMaskTool.createArmMaskForCloth("Cloth", asset, "Arm1");
+                luziSuffixFixups("Cloth", asset.Name);
             }
         ),
         {
@@ -62,6 +63,7 @@ const asset = [
             },
             (asset) => {
                 ArmMaskTool.createArmMaskForCloth("Cloth", asset);
+                luziSuffixFixups("Cloth", asset.Name);
             }
         ),
         {
@@ -73,7 +75,4 @@ const asset = [
 
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset);
-    for (const [assetDef] of asset) {
-        luziSuffixFixups("Cloth", assetDef.Name);
-    }
 }
