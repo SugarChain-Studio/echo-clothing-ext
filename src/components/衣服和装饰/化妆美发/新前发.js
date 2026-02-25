@@ -70,14 +70,38 @@ const assets = [
     makeFH("前发30", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发31", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发32", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    makeFH("前发33_L", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 33A", EN: "Front Hair 33A" } }),
-    makeFH("前发33_R", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 33B", EN: "Front Hair 33B" } }),
-    makeFH("前发34A", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 34A", EN: "Front Hair 34A" } }),
-    makeFH("前发34B", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 34B", EN: "Front Hair 34B" } }),
+    makeFH(
+        "前发33_L",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 33A", EN: "Front Hair 33A" } }
+    ),
+    makeFH(
+        "前发33_R",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 33B", EN: "Front Hair 33B" } }
+    ),
+    makeFH(
+        "前发34A",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 34A", EN: "Front Hair 34A" } }
+    ),
+    makeFH(
+        "前发34B",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 34B", EN: "Front Hair 34B" } }
+    ),
     makeFH("前发35", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发36", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    makeFH("前发37A", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 37A", EN: "Front Hair 37A" } }),
-    makeFH("前发37B", { Layer: [{ Name: "底" }, { Name: "高光" }] }, { translation: { CN: "前发 37B", EN: "Front Hair 37B" } }),
+    makeFH(
+        "前发37A",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 37A", EN: "Front Hair 37A" } }
+    ),
+    makeFH(
+        "前发37B",
+        { Layer: [{ Name: "底" }, { Name: "高光" }] },
+        { translation: { CN: "前发 37B", EN: "Front Hair 37B" } }
+    ),
     makeFH("前发38", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发39", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发40", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
@@ -97,10 +121,29 @@ const assets = [
     makeFH("前发54", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发55", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
     makeFH("前发56", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
-    makeFH("前发57", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 56  }] }),
+    makeFH("前发57", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 56 }] }),
     makeFH("前发58", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 45 }] }),
-    makeFH("前发59", { Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 39 }, { Name: "底3", Priority: 52 }] }),
-
+    makeFH("前发59", {
+        Layer: [{ Name: "底" }, { Name: "高光" }, { Name: "底2", Priority: 39 }, { Name: "底3", Priority: 52 }],
+    }),
+    makeFH(
+        "前发60",
+        {
+            Layer: [
+                { Name: "A1", ColorGroup: "G1" },
+                { Name: "A2" },
+                { Name: "A3", ColorGroup: "G1" },
+                { Name: "A4" },
+                { Name: "B1" },
+            ],
+        },
+        {
+            layerNames: {
+                CN: { G1: "发缕1", A1: "外侧", A2: "发缕2", A3: "内侧", A4: "中间发缕", B1: "光泽" },
+                EN: { G1: "Strand 1", A1: "Outer", A2: "Strand 2", A3: "Inner", A4: "Middle Strand", B1: "Shine" },
+            },
+        }
+    ),
 ];
 
 export default function () {
