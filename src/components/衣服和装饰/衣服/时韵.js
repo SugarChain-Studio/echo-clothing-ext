@@ -21,8 +21,8 @@ const asset = [
                 PoseMapping: PoseMapTool.config(["BackCuffs", "BackElbowTouch", "Yoked", "OverTheHead"], ["AllFours"]),
                 Layer: [
                     { Name: "A1", ColorGroup: "Base" },
-                    { Name: "B1", ColorGroup: "Base" },
-                    { Name: "A2", ColorGroup: "Sequin" },
+                    { Name: "A2", ColorGroup: "Base" },
+                    { Name: "B1", ColorGroup: "Sequin" },
                     { Name: "B2", ColorGroup: "Sequin" },
                 ],
             },
@@ -36,14 +36,14 @@ const asset = [
             translation: { CN: "时韵（肩部）", EN: "Chrono Pattern (Shoulder)" },
             layerNames: {
                 CN: {
-                    ...Typing.stringEntries([["A1", "A2"], "左"]),
-                    ...Typing.stringEntries([["B1", "B2"], "右"]),
+                    ...Typing.stringEntries([["A1", "B1"], "左"]),
+                    ...Typing.stringEntries([["A2", "B2"], "右"]),
                     Base: "基础",
                     Sequin: "亮片",
                 },
                 EN: {
-                    ...Typing.stringEntries([["A1", "A2"], "Left"]),
-                    ...Typing.stringEntries([["B1", "B2"], "Right"]),
+                    ...Typing.stringEntries([["A1", "B1"], "Left"]),
+                    ...Typing.stringEntries([["A2", "B2"], "Right"]),
                     Base: "Base",
                     Sequin: "Sequin",
                 },
