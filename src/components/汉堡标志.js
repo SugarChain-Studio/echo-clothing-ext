@@ -42,7 +42,7 @@ export default function () {
         const ret = /** @type {HTMLButtonElement} */ (next(args));
 
         if (AssetManager.assetIsCustomed(asset)) {
-            ret.appendChild(cloneWithTooltip(iconDiv));
+            ret.appendChild(cloneWithTooltip(iconDiv, "dialog-inventory"));
         }
         return ret;
     });
