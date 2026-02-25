@@ -124,7 +124,7 @@ const itemDialog = createItemDialogModular(
             location: { x: 1385, y: 850, w: 225, h: 55 },
             show: ({ data }) => data.currentModule === "Base",
             enable: ({ item, chara }) => !!holdsEmptyGlass(chara) && propValue(item, (p) => p.Luzi_MilkTotal > 200),
-            hover: ({ item, chara }) => {
+            hover: ({ item }) => {
                 if (!holdsEmptyGlass(Player)) return "D_NeedEmptyGlass";
                 if (propValue(item, (p) => p.Luzi_MilkTotal <= 200)) return "D_NeedMoreMilk";
             },
