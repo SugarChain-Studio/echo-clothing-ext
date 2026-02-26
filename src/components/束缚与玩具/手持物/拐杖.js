@@ -14,6 +14,7 @@ const asset = [
             Priority: 35,
             IsRestraint: false,
             DynamicGroupName: "ItemHandheld",
+            AllowActivity: ["RubItem", "SpankItem"],
             ParentGroup: {},
             PoseMapping: {},
         },
