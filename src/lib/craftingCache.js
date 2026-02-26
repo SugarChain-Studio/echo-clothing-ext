@@ -148,7 +148,10 @@ function restoreMissingItems(missingItems) {
     missingItems.forEach((item) => {
         // 限制索引范围
         if (item.index < MAX_CRAFTING_LENGTH) {
-            Player.Crafting[item.index] = item.craft;
+            const status = CraftingValidate(item.craft);
+            if (status !== CraftingStatusType.CRITICAL_ERROR) {
+                Player.Crafting[item.index] = item.craft;
+            }
         }
     });
 
