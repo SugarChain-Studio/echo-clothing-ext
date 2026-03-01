@@ -47,25 +47,16 @@ const assets = [
         },
         { translation: { CN: "蓬松卷发2", EN: "Fluffy Curls 2" }, layerNames },
     ],
-];
-
-const hairAttrShared2 = {
-    Random: false,
-    Left: 0,
-    Top: 0,
-    // Priority: 52,
-    ParentGroup: {},
-    Extended: false,
-    InheritColor: hairFront,
-};
-
-/** @type {AddAssetWithConfigParams[]} */
-const assets2 = [
     [
         ["新前发_Luzi"],
         {
             Name: "姬发公主切前",
-            ...hairAttrShared2,
+            Random: false,
+            Left: 0,
+            Top: 0,
+            ParentGroup: {},
+            Extended: false,
+            InheritColor: hairFront,
             DynamicGroupName: "新前发_Luzi",
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "B" }, { Name: "C" }],
         },
@@ -75,7 +66,12 @@ const assets2 = [
         ["新后发_Luzi"],
         {
             Name: "姬发公主切后",
-            ...hairAttrShared2,
+            Random: false,
+            Left: 0,
+            Top: 0,
+            ParentGroup: {},
+            Extended: false,
+            InheritColor: hairFront,
             DynamicGroupName: "新后发_Luzi",
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "C" }],
         },
@@ -85,5 +81,4 @@ const assets2 = [
 
 export default function () {
     AssetManager.addAssetWithConfig(assets);
-    AssetManager.addAssetWithConfig(assets2);
 }
