@@ -31,7 +31,7 @@ const plugin = {
                 messages: {},
             },
             create(context) {
-                const sourceCode = context.getSourceCode();
+                const sourceCode = context.sourceCode;
                 const services = /** @type {any} */ (context.parserServices ?? {});
                 const program = services.program;
                 const checker = program && program.getTypeChecker ? program.getTypeChecker() : null;
@@ -271,7 +271,7 @@ const plugin = {
                 },
             },
             create(context) {
-                const sourceCode = context.getSourceCode();
+                const sourceCode = context.sourceCode;
                 const locale = resolveLocale(context);
                 const isZh = locale === "zh";
                 const isAssetPoseMappingObject = (obj) => {
@@ -369,7 +369,7 @@ const plugin = {
                 const locale = resolveLocale(context);
                 const messageId = locale === "zh" ? "zh" : "en";
                 const pattern = /TargetCharacter's/g;
-                const sourceCode = context.getSourceCode();
+                const sourceCode = context.sourceCode;
                 return {
                     Literal(node) {
                         if (typeof node.value !== "string") return;
@@ -386,8 +386,8 @@ const plugin = {
                                     quote === '"'
                                         ? replacedInner.replace(/"/g, '\\"')
                                         : quote === "'"
-                                        ? replacedInner.replace(/'/g, "\\'")
-                                        : replacedInner;
+                                          ? replacedInner.replace(/'/g, "\\'")
+                                          : replacedInner;
                                 return fixer.replaceText(node, quote + safeInner + quote);
                             },
                         });
