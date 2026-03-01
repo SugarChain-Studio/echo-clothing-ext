@@ -75,7 +75,7 @@ once(ModInfo.name, async () => {
 
     AssetManager.enableCustomAssetUseValidation((target) => !!CharacterTag.get(target, ModInfo.name));
 
-    AssetManager.enableValidation((param) => {
+    AssetManager.enableFromModUserValidation((param) => {
         const from = ChatRoomCharacter.find((c) => c.MemberNumber === param.sourceMemberNumber);
         return from && !!CharacterTag.get(from, ModInfo.name);
     });

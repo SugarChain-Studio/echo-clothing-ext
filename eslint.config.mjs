@@ -14,11 +14,6 @@ const intlLocale = (() => {
 const envLocale = (process.env.ESLINT_LOCALE || process.env.LANG || "").toLowerCase();
 const rawLocale = String(intlLocale || envLocale).toLowerCase();
 const locale = rawLocale.includes("zh") || rawLocale.includes("cn") ? "zh" : "en";
-const msgRestrictedLiteral =
-    locale === "zh"
-        ? "请使用 'DestinationCharacter' 代替 'TargetCharacter's'，保持正确所有格形式。"
-        : "Please use 'DestinationCharacter' instead of 'TargetCharacter's' to keep correct possessive form.";
-const msgRestrictedTemplate = msgRestrictedLiteral;
 
 export default [
     {
