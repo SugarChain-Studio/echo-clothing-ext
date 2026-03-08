@@ -30,6 +30,7 @@ const v1CompatibleGroups = new Set(
         "ItemMouth",
         "ItemMouth2",
         "ItemMouth3",
+        "ItemNipples",
         "ItemNipplesPiercings",
         "ClothOuter",
     ])
