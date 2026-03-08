@@ -9,6 +9,7 @@ import { monadic } from "@mod-utils/monadic";
  * @property {boolean} [LuziAutoMasturbate] 是否启用自动自慰功能
  * @property {boolean} [LuziForbidStruggle] 是否禁止挣扎行为
  * @property {boolean} [LuziSelfInteract] 互动限制-私密区域t
+ * @property {boolean} [LuziPRRoleplay] 角色扮演模式
  */
 
 /**
@@ -24,7 +25,18 @@ const defaultProps = /** @type {ArmItemProperties} */ ({
 /** @type { (item: Item) => ArmItemProperties } */
 const armProp = (item) => /** @type {ArmItemProperties}*/ (item.Property);
 
-const armItemDialog = createItemDialogModular([])
+const armItemDialog = createItemDialogModular([
+    {
+        location: { x: 1385, y: 900, w: 225, h: 55 },
+        key: "D_DisablePRRoleplay",
+        show: ({ item, chara, data }) =>
+            data.currentModule === "Base" && armProp(item).LuziPRRoleplay && chara.IsPlayer(),
+        onclick: ({ item }) => (armProp(item).LuziPRRoleplay = false),
+        hover: () => "H_DisablePRRoleplay",
+        leaveDialog: true,
+        actionKey: "A_DisablePRRoleplay",
+    },
+])
     .addCheckBoxes([
         {
             location: { x: 1200, y: 620 },
@@ -78,6 +90,13 @@ const armItemDialog = createItemDialogModular([])
                 return text(`D_CurRMode`).replace("RMODE", text(`Optionr${configR}`));
             },
             location: { x: 1500, y: 550, w: 500 },
+            align: "center",
+        },
+        {
+            location: { x: 1500, y: 920, w: 500 },
+            text: ({ item, chara, text }) => {
+                if (armProp(item).LuziPRRoleplay && !chara.IsPlayer()) return text("D_InPRRoleplay");
+            },
             align: "center",
         },
     ]);
@@ -463,6 +482,12 @@ const assets = [
                     A_BlockInteractionSetF:
                         "SourceCharacter将DestinationCharacterAssetName的手臂拘束效果移除，允许互动。",
 
+                    D_DisablePRRoleplay: "关闭角色扮演模式",
+                    D_InPRRoleplay: "角色扮演模式已启动",
+                    H_DisablePRRoleplay: "启动义肢拘束的操作屏蔽器",
+                    A_DisablePRRoleplay:
+                        "SourceCharacter关闭了DestinationCharacterAssetName的角色扮演模式，现在AssetName会阻碍DestinationCharacter互动。",
+
                     D_ForbidStruggle: "禁止 CNAME 的挣扎行为",
                     A_ForbidStruggleSetT:
                         "SourceCharacter配置DestinationCharacterAssetName，使TargetCharacter无法进行挣扎。",
@@ -506,6 +531,12 @@ const assets = [
                         "SourceCharacter sets DestinationCharacter AssetName as Arm Restraint, blocking all interaction.",
                     A_BlockInteractionSetF:
                         "SourceCharacter removes Arm Restraint effect from DestinationCharacter AssetName, allowing interaction.",
+
+                    D_DisablePRRoleplay: "Disable Roleplay Mode",
+                    D_InPRRoleplay: "Roleplay Mode Activated",
+                    H_DisablePRRoleplay: "Enable the operation blocker of Prosthetic Restraint",
+                    A_DisablePRRoleplay:
+                        "SourceCharacter disables Roleplay Mode on DestinationCharacter AssetName, now AssetName will hinder DestinationCharacter interaction.",
 
                     D_ForbidStruggle: "Prevent CNAME from struggling",
                     A_ForbidStruggleSetT:
@@ -1047,6 +1078,7 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
             .then("armItem", () =>
                 C.Appearance.find((i) => i.Asset.Name === "义肢拘束A" && i.Asset.Group.Name === "ItemArms")
             )
+            .filter((armItem) => !armProp(armItem).LuziPRRoleplay)
             .then((_, { group }) => InventoryGet(C, group.Name))
             .then((item, { armItem }) => {
                 if (item.Asset.Name.includes("义肢拘束")) {
@@ -1113,6 +1145,19 @@ function injectItemClickStatus() {
     const key = "Luzi_ProResBlockClickCheck";
     if (!target[key]) target[key] = callback;
 }
+
+HookManager.hookFunction("InventoryWear", 0, (args, next) => {
+    const [C, assetName, _1, _2, _3, _4, Craft] = args;
+
+    const ret = next(args);
+
+    if (C.IsPlayer() && assetName === "义肢拘束A" && Craft?.Lock === undefined) {
+        ret.Property ??= {};
+        armProp(ret).LuziPRRoleplay = true;
+    }
+
+    return ret;
+});
 
 export default function () {
     AssetManager.addImageMapping({
