@@ -99,6 +99,7 @@ const asset = {
         { Name: "雪瑗", AllowTypes: { y: 12 } },
         { Name: "xiu狸子", AllowTypes: { y: 13 } },
         { Name: "布菈", AllowTypes: { y: 14 } },
+        { Name: "菲露娅", AllowTypes: { y: 15 } },
 
         // 盒子的小黑屋
         { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
@@ -423,11 +424,18 @@ const asset = {
         { Name: "kelar", AllowTypes: { yjxw: 4 } },
         { Name: "芝麻汤圆", AllowTypes: { yjxw: 5 } },
         { Name: "暖雪", AllowTypes: { yjxw: 6 } },
+        { Name: "赛琳", AllowTypes: { yjxw: 7 } },
 
         // 血天使的住所
         { Name: "小粽子", AllowTypes: { xts: 1 } },
         { Name: "血落音", AllowTypes: { xts: 2 } },
         { Name: "墨羽", AllowTypes: { xts: 3 } },
+
+        // beacon
+        { Name: "鈴音", AllowTypes: { beacon: 1 } },
+        { Name: "璐鹭", AllowTypes: { beacon: 2 } },
+        { Name: "望", AllowTypes: { beacon: 3 } },
+        { Name: "白月", AllowTypes: { beacon: 4 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -528,6 +536,7 @@ const typeNameNext = {
     xjl: "小角落",
     yjxw: "妖精小屋",
     xts: "血天使的住所",
+    beacon: "Beacon",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
