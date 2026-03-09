@@ -484,7 +484,7 @@ const assets = [
 
                     D_DisablePRRoleplay: "关闭角色扮演模式",
                     D_InPRRoleplay: "角色扮演模式已启动",
-                    H_DisablePRRoleplay: "启动义肢拘束的操作屏蔽器",
+                    H_DisablePRRoleplay: "自缚的义肢拘束会进入角色扮演模式，点击以解除",
                     A_DisablePRRoleplay:
                         "SourceCharacter关闭了DestinationCharacterAssetName的角色扮演模式，现在AssetName会阻碍DestinationCharacter互动。",
 
@@ -534,7 +534,8 @@ const assets = [
 
                     D_DisablePRRoleplay: "Disable Roleplay Mode",
                     D_InPRRoleplay: "Roleplay Mode Activated",
-                    H_DisablePRRoleplay: "Enable the operation blocker of Prosthetic Restraint",
+                    H_DisablePRRoleplay:
+                        "Prosthetic Restraint from self-binding will enter Roleplay Mode, click to disable",
                     A_DisablePRRoleplay:
                         "SourceCharacter disables Roleplay Mode on DestinationCharacter AssetName, now AssetName will hinder DestinationCharacter interaction.",
 
