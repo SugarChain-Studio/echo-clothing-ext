@@ -133,6 +133,7 @@ const itemDialog = createItemDialogTyped({
         {
             location: { x: 1385, y: 650, w: 225, h: 55 },
             key: "复制颜色",
+            hover: () => "H_复制颜色",
             enable: ({ item, chara }) => !!findPairItem(item, chara),
             onclick: ({ item, chara }) => {
                 const other = findPairItem(item, chara);
@@ -221,8 +222,20 @@ const lower = [
             ScriptHooks: itemDialog.createHooks(),
         },
         assetStrings: {
-            CN: { Select: "选择是否有袜子", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },
-            EN: { Select: "Select whether to have socks", 无: "No", 有: "Yes", 复制颜色: "Apply matching item color" },
+            CN: {
+                Select: "选择是否有袜子",
+                无: "无",
+                有: "有",
+                复制颜色: "应用配套物品颜色",
+                H_复制颜色: "将此物品的颜色应用到配套的其他的物品上",
+            },
+            EN: {
+                Select: "Select whether to have socks",
+                无: "No",
+                有: "Yes",
+                复制颜色: "Apply matching item color",
+                H_复制颜色: "Apply this item's color to the matching other item",
+            },
         },
     },
 ];
