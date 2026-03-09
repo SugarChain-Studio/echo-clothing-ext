@@ -91,6 +91,34 @@ declare namespace ItemDialog {
         /** 复选框是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
         requireLockPermission?: boolean;
     }
+
+    /** 回调类型 */
+    type Callback<DataType extends ExtendedItemData<any>> = (data: DataType, item: Item, character: Character) => void;
+    /** 带原始函数的回调类型 */
+    type CallbackWithOriginal<DataType extends ExtendedItemData<any>> = (
+        original: () => void,
+        data: DataType,
+        item: Item,
+        character: Character
+    ) => void;
+    /** 变化事件回调类型 */
+    type OnChange<DataType extends ExtendedItemData<any>> = (
+        before: ItemProperties,
+        after: ItemProperties,
+        ctx: DialogDrawContext<DataType>
+    ) => void;
+
+    interface Options<DataType extends ExtendedItemData<any>> {
+        buttons?: ButtonConfig<DataType>[];
+        params?: ParameterConfig<DataType>[];
+        texts?: TextConfig<DataType>[];
+        checkboxes?: CheckBoxConfig<DataType>[];
+        ondraw?: Callback<DataType>;
+        onload?: Callback<DataType>;
+        onexit?: Callback<DataType>;
+        overrideClickExit?: CallbackWithOriginal<DataType>;
+        onchanges?: OnChange<DataType>;
+    }
 }
 
 declare namespace ContainerProperty {

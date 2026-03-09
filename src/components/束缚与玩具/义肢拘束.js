@@ -25,19 +25,20 @@ const defaultProps = /** @type {ArmItemProperties} */ ({
 /** @type { (item: Item) => ArmItemProperties } */
 const armProp = (item) => /** @type {ArmItemProperties}*/ (item.Property);
 
-const armItemDialog = createItemDialogModular([
-    {
-        location: { x: 1385, y: 900, w: 225, h: 55 },
-        key: "D_DisablePRRoleplay",
-        show: ({ item, chara, data }) =>
-            data.currentModule === "Base" && armProp(item).LuziPRRoleplay && chara.IsPlayer(),
-        onclick: ({ item }) => (armProp(item).LuziPRRoleplay = false),
-        hover: () => "H_DisablePRRoleplay",
-        leaveDialog: true,
-        actionKey: "A_DisablePRRoleplay",
-    },
-])
-    .addCheckBoxes([
+const armItemDialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1385, y: 900, w: 225, h: 55 },
+            key: "D_DisablePRRoleplay",
+            show: ({ item, chara, data }) =>
+                data.currentModule === "Base" && armProp(item).LuziPRRoleplay && chara.IsPlayer(),
+            onclick: ({ item }) => (armProp(item).LuziPRRoleplay = false),
+            hover: () => "H_DisablePRRoleplay",
+            leaveDialog: true,
+            actionKey: "A_DisablePRRoleplay",
+        },
+    ],
+    checkboxes: [
         {
             location: { x: 1200, y: 620 },
             show: ({ data }) => data.currentModule === "Base",
@@ -81,8 +82,8 @@ const armItemDialog = createItemDialogModular([
             },
             actionKey: ({ item }) => `A_AutoMasturbateSet${armProp(item).LuziAutoMasturbate ? "T" : "F"}`,
         },
-    ])
-    .addTexts([
+    ],
+    texts: [
         {
             text: ({ data, item, text }) => {
                 if (data.currentModule !== "Base") return undefined;
@@ -99,46 +100,50 @@ const armItemDialog = createItemDialogModular([
             },
             align: "center",
         },
-    ]);
+    ],
+});
 
-const legItemDialog = createItemDialogModular().addCheckBoxes([
-    {
-        location: { x: 1200, y: 620 },
-        show: ({ data }) => data.currentModule === "Base",
-        text: ({ text }) => text("D_EnableLeash"),
-        requireLockPermission: true,
-        checked: ({ item }) => Boolean(item.Property?.Effect?.includes(E.Leash)),
-        onclick: ({ item }) => {
-            item.Property ??= {};
-            item.Property.Effect ??= [];
-            if (item.Property.Effect.includes(E.Leash)) {
-                item.Property.Effect = item.Property.Effect.filter((e) => e !== E.Leash);
-            } else {
-                item.Property.Effect.push(E.Leash);
-            }
+const legItemDialog = createItemDialogModular({
+    checkboxes: [
+        {
+            location: { x: 1200, y: 620 },
+            show: ({ data }) => data.currentModule === "Base",
+            text: ({ text }) => text("D_EnableLeash"),
+            requireLockPermission: true,
+            checked: ({ item }) => Boolean(item.Property?.Effect?.includes(E.Leash)),
+            onclick: ({ item }) => {
+                item.Property ??= {};
+                item.Property.Effect ??= [];
+                if (item.Property.Effect.includes(E.Leash)) {
+                    item.Property.Effect = item.Property.Effect.filter((e) => e !== E.Leash);
+                } else {
+                    item.Property.Effect.push(E.Leash);
+                }
+            },
+            actionKey: ({ item }) => `A_EnableLeash${item.Property?.Effect?.includes(E.Leash) ? "T" : "F"}`,
         },
-        actionKey: ({ item }) => `A_EnableLeash${item.Property?.Effect?.includes(E.Leash) ? "T" : "F"}`,
-    },
-]);
+    ],
+});
 
-const headItemDialog = createItemDialogModular([
-    ...["", "SynthWave", "PaddedCell", "LatexRoom"].map(
-        (src, idx) =>
-            /** @type {Parameters<typeof createItemDialogModular>[0][0]} */ ({
-                location: { x: 1135 + (idx % 3) * 250, y: 700 + Math.floor(idx / 3) * 80, w: 225, h: 50 },
-                show: ({ data, item }) => data.currentModule === "Visor" && item.Property?.TypeRecord?.v > 1,
-                enable: ({ item }) => item.Property?.CustomBlindBackground !== src,
-                requireLockPermission: true,
-                checked: ({ item }) => item.Property?.CustomBlindBackground === src,
-                onclick: ({ item }) => {
-                    item.Property ??= {};
-                    item.Property.CustomBlindBackground = src;
-                },
-                key: `BG_${src || "None"}`,
-            })
-    ),
-])
-    .addTexts([
+const headItemDialog = createItemDialogModular({
+    buttons: [
+        .../** @type {const}*/ (["", "SynthWave", "PaddedCell", "LatexRoom"]).map(
+            (src, idx) =>
+                /** @type {ItemDialog.ButtonConfig<ModularItemData>} */ ({
+                    location: { x: 1135 + (idx % 3) * 250, y: 700 + Math.floor(idx / 3) * 80, w: 225, h: 50 },
+                    show: ({ data, item }) => data.currentModule === "Visor" && item.Property?.TypeRecord?.v > 1,
+                    enable: ({ item }) => item.Property?.CustomBlindBackground !== src,
+                    requireLockPermission: true,
+                    checked: ({ item }) => item.Property?.CustomBlindBackground === src,
+                    onclick: ({ item }) => {
+                        item.Property ??= {};
+                        item.Property.CustomBlindBackground = src;
+                    },
+                    key: `BG_${src || "None"}`,
+                })
+        ),
+    ],
+    texts: [
         {
             location: { x: 1500, y: 650, w: 500 },
             align: "center",
@@ -148,8 +153,8 @@ const headItemDialog = createItemDialogModular([
                 return text("D_ConfigBackGround");
             },
         },
-    ])
-    .onChange((before, after, { item, chara }) => {
+    ],
+    onchanges: (before, after, { item, chara }) => {
         let should_update = false;
         if (before.TypeRecord?.v !== after.TypeRecord?.v && !(after.TypeRecord?.v > 1)) {
             item.Property.CustomBlindBackground = "";
@@ -169,7 +174,8 @@ const headItemDialog = createItemDialogModular([
         }
 
         if (should_update) ChatRoomCharacterItemUpdate(chara, item.Asset.Group.Name);
-    });
+    },
+});
 
 /**
  * @typedef { Object } ProtheticRestraintArmData

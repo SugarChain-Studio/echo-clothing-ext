@@ -12,23 +12,25 @@ import { ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/C
 /** @type {ChatRoomRemoteEventEmitter<LuggageEvent>} */
 export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@LuggageHandler");
 
-const dialog = createItemDialogModular([
-    {
-        location: { x: 1385, y: 650, w: 225, h: 55 },
-        key: "抓住箱子",
-        show: ({ data }) => data.currentModule === "Base",
-        enable: ({ chara }) =>
-            (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
-            ((item) => !item || item.Asset.Name === "抓住行李箱")(
-                Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
-            ),
-        onclick: ({ chara }) => {
-            luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+const dialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1385, y: 650, w: 225, h: 55 },
+            key: "抓住箱子",
+            show: ({ data }) => data.currentModule === "Base",
+            enable: ({ chara }) =>
+                (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
+                ((item) => !item || item.Asset.Name === "抓住行李箱")(
+                    Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
+                ),
+            onclick: ({ chara }) => {
+                luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+            },
+            leaveDialog: true,
+            actionKey: "抓住箱子动作",
         },
-        leaveDialog: true,
-        actionKey: "抓住箱子动作",
-    },
-]);
+    ],
+});
 
 const luggagePairItemMap = {
     行李箱: "抓住行李箱",

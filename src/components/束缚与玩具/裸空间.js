@@ -136,26 +136,27 @@ const operations = Typing.transform(
     })
 );
 
-const dialog = createItemDialogNoArch([
-    {
-        location: { x: 1385, y: 430, w: 225, h: 55 },
-        show: ({ data }) => tconfig(data).currentDialog === "Base",
-        key: "B_Details",
-        onclick: ({ data }) => {
-            tconfig(data).currentDialog = "Details";
+const dialog = createItemDialogNoArch({
+    buttons: [
+        {
+            location: { x: 1385, y: 430, w: 225, h: 55 },
+            show: ({ data }) => tconfig(data).currentDialog === "Base",
+            key: "B_Details",
+            onclick: ({ data }) => {
+                tconfig(data).currentDialog = "Details";
+            },
+            leaveDialog: false,
         },
-        leaveDialog: false,
-    },
-    {
-        location: { x: 1385, y: 580, w: 225, h: 55 },
-        show: ({ data }) => tconfig(data).currentDialog === "Base",
-        key: "B_Random",
-        onclick: ({ item }) => operations.randomize(item),
-        actionKey: "A_Random",
-        leaveDialog: true,
-    },
-])
-    .addCheckBoxes([
+        {
+            location: { x: 1385, y: 580, w: 225, h: 55 },
+            show: ({ data }) => tconfig(data).currentDialog === "Base",
+            key: "B_Random",
+            onclick: ({ item }) => operations.randomize(item),
+            actionKey: "A_Random",
+            leaveDialog: true,
+        },
+    ],
+    checkboxes: [
         {
             location: { x: 1300, y: 650 },
             text: ({ text }) => text("CB_Orgasm"),
@@ -164,31 +165,30 @@ const dialog = createItemDialogNoArch([
             checked: ({ item }) => item.Property?.TypeRecord?.["o"] === 1,
             actionKey: "A_Orgasm",
         },
-    ])
-    .addTexts([
-        {
-            location: { x: 1500, y: 375, w: 750 },
-            text: ({ data, text }) => text(`T_${tconfig(data).currentDialog}`),
-        },
-    ])
-    .addCheckBoxes(
-        rakuukanConfigs.map((g, i) => ({
+        ...rakuukanConfigs.map((g, i) => ({
             text: ({ text }) => `${text("CB_Hole").replace("$Num", `${i + 1}`)}`,
             show: ({ data }) => tconfig(data).currentDialog === "Details",
             location: { x: 1200 + Math.floor(i / 5) * 200, y: 430 + (i % 5) * 75 },
             textWidth: 120,
             onclick: ({ item }) => operations.toggleH(item, i),
             checked: ({ item }) => item.Property?.TypeRecord?.[`m${num2alphabet(i)}`] === 1,
-        }))
-    )
-    .onLoad((data) => (tconfig(data).currentDialog = "Base"))
-    .overrideClickExit((original, data) => {
+        })),
+    ],
+    texts: [
+        {
+            location: { x: 1500, y: 375, w: 750 },
+            text: ({ data, text }) => text(`T_${tconfig(data).currentDialog}`),
+        },
+    ],
+    onload: (data) => (tconfig(data).currentDialog = "Base"),
+    overrideClickExit: (original, data) => {
         if (tconfig(data).currentDialog !== "Base") {
             tconfig(data).currentDialog = "Base";
         } else {
             original();
         }
-    });
+    },
+});
 
 const orgasmState = new StateTools.OrgasmState();
 

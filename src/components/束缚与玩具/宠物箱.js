@@ -4,23 +4,25 @@ import { createItemDialogModular } from "../../lib";
 import { DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
 import { luggageHandler } from "./行李箱";
 
-const dialog = createItemDialogModular([
-    {
-        location: { x: 1385, y: 650, w: 225, h: 55 },
-        key: "抓住箱子",
-        show: ({ data, chara }) => data.currentModule === "Base" && chara.MemberNumber !== Player.MemberNumber,
-        enable: ({ chara }) =>
-            (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
-            ((item) => !item || item.Asset.Name === "抓住宠物箱")(
-                Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
-            ),
-        onclick: ({ chara }) => {
-            luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+const dialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1385, y: 650, w: 225, h: 55 },
+            key: "抓住箱子",
+            show: ({ data, chara }) => data.currentModule === "Base" && chara.MemberNumber !== Player.MemberNumber,
+            enable: ({ chara }) =>
+                (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
+                ((item) => !item || item.Asset.Name === "抓住宠物箱")(
+                    Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
+                ),
+            onclick: ({ chara }) => {
+                luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+            },
+            leaveDialog: true,
+            actionKey: "抓住箱子动作",
         },
-        leaveDialog: true,
-        actionKey: "抓住箱子动作",
-    },
-]);
+    ],
+});
 
 /** @type {AddAssetWithConfigParams} */
 const assets = [
@@ -73,7 +75,7 @@ const assets = [
                 CreateLayerTypes: ["s"],
                 AllowTypes: { s: [1, 2, 3] },
             },
-            { 
+            {
                 Name: "锁",
                 Priority: 60,
                 AllowTypes: { s: [1, 2, 3] },
@@ -158,8 +160,14 @@ const assets = [
                     Key: "c",
                     Options: [
                         {},
-                        { Prerequisite: ["Collared"], Property: { Difficulty: 18, Effect: [E.Tethered, E.IsChained, E.MapImmobile] } },
-                        { Prerequisite: ["Collared"], Property: { Difficulty: 26, Effect: [E.Tethered, E.IsChained, E.MapImmobile] } },
+                        {
+                            Prerequisite: ["Collared"],
+                            Property: { Difficulty: 18, Effect: [E.Tethered, E.IsChained, E.MapImmobile] },
+                        },
+                        {
+                            Prerequisite: ["Collared"],
+                            Property: { Difficulty: 26, Effect: [E.Tethered, E.IsChained, E.MapImmobile] },
+                        },
                     ],
                 },
                 {
@@ -170,10 +178,7 @@ const assets = [
                 {
                     Name: "遮光布",
                     Key: "b",
-                    Options: [
-                        { Property: { Effect: [] } },
-                        { Property: { Effect: [E.BlindHeavy] } },
-                    ],
+                    Options: [{ Property: { Effect: [] } }, { Property: { Effect: [E.BlindHeavy] } }],
                 },
             ],
         },

@@ -27,61 +27,41 @@ export function RMouseIn(rect) {
  */
 class CustomItemDialog {
     /**
-     * @typedef {(data:DataType, item: Item, character: Character) => void} CallbackType
+     * @typedef {ItemDialog.Callback<DataType>} CallbackType
      */
 
     /**
-     * @typedef {(original: ()=>void, data:DataType, item: Item, character: Character) => void} CallbackWithOriginalType
+     * @typedef {ItemDialog.CallbackWithOriginal<DataType>} CallbackWithOriginalType
      */
 
     /**
-     * @typedef {(before:ItemProperties, after:ItemProperties, ctx: ItemDialog.DialogDrawContext<DataType>) => void} OnChangeType
+     * @typedef {ItemDialog.OnChange<DataType>} OnChangeType
      */
 
-    constructor() {
+    /**
+     * @param {ItemDialog.Options<DataType>} [options]
+     */
+    constructor(options = {}) {
         /** @private */
-        this._buttons = /** @type {ItemDialog.ButtonConfig<DataType>[]} */ ([]);
+        this._buttons = /** @type {ItemDialog.ButtonConfig<DataType>[]} */ ([...(options.buttons ?? [])]);
         /** @private */
-        this._params = /** @type {ItemDialog.ParameterConfig<DataType>[]} */ ([]);
+        this._params = /** @type {ItemDialog.ParameterConfig<DataType>[]} */ ([...(options.params ?? [])]);
         /** @private */
-        this._texts = /** @type {ItemDialog.TextConfig<DataType>[]} */ ([]);
+        this._texts = /** @type {ItemDialog.TextConfig<DataType>[]} */ ([...(options.texts ?? [])]);
         /** @private */
-        this._checkboxes = /** @type {ItemDialog.CheckBoxConfig<DataType>[]} */ ([]);
+        this._checkboxes = /** @type {ItemDialog.CheckBoxConfig<DataType>[]} */ ([...(options.checkboxes ?? [])]);
 
         /** @private */
-        this._ondraw = /** @type {CallbackType | undefined} */ (undefined);
+        this._ondraw = /** @type {CallbackType | undefined} */ (options.ondraw);
         /** @private */
-        this._onload = /** @type {CallbackType | undefined} */ (undefined);
+        this._onload = /** @type {CallbackType | undefined} */ (options.onload);
         /** @private */
-        this._onexit = /** @type {CallbackType | undefined} */ (undefined);
+        this._onexit = /** @type {CallbackType | undefined} */ (options.onexit);
 
         /** @private */
-        this._overrideClickExit = /** @type {CallbackWithOriginalType | undefined} */ (undefined);
-        this._onchanges = /** @type {OnChangeType[]} */ ([]);
-    }
-
-    /** @param {ItemDialog.ButtonConfig<DataType>[]} buttons */
-    addButtons(buttons) {
-        this._buttons.push(...buttons);
-        return this;
-    }
-
-    /** @param {ItemDialog.ParameterConfig<DataType>[]} params */
-    addParams(params) {
-        this._params.push(...params);
-        return this;
-    }
-
-    /** @param {ItemDialog.TextConfig<DataType>[]} texts */
-    addTexts(texts) {
-        this._texts.push(...texts);
-        return this;
-    }
-
-    /** @param {ItemDialog.CheckBoxConfig<DataType>[]} checkboxes */
-    addCheckBoxes(checkboxes) {
-        this._checkboxes.push(...checkboxes);
-        return this;
+        this._overrideClickExit = /** @type {CallbackWithOriginalType | undefined} */ (options.overrideClickExit);
+        /** @private */
+        this._onchanges = /** @type {OnChangeType[]} */ (options.onchanges ? [options.onchanges] : []);
     }
 
     /**
@@ -351,44 +331,38 @@ class CustomItemDialog {
 /**
  * Factory that creates a DialogButtons instance for a generic DataType.
  * @template {ExtendedItemData<any>} DataType
- * @param {ItemDialog.ButtonConfig<DataType>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<DataType>[]} [params]
+ * @param {ItemDialog.Options<DataType>} [options]
  * @returns {CustomItemDialog<DataType>}
  */
-function createItemDialog(buttons, params) {
-    const ret = /** @type {CustomItemDialog<DataType>}*/ (new CustomItemDialog());
-    if (buttons) ret.addButtons(buttons);
-    if (params) ret.addParams(params);
+function createItemDialog(options) {
+    const ret = /** @type {CustomItemDialog<DataType>}*/ (new CustomItemDialog(options));
     return ret;
 }
 
 /**
  * Loose-typed wrapper for modular dialogs. Accepts any button/param shapes and
  * returns a DialogButtons instance typed for ModularItemData.
- * @param {ItemDialog.ButtonConfig<ModularItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<ModularItemData>[]} [params]
+ * @param {ItemDialog.Options<ModularItemData>} [options]
  * @returns {CustomItemDialog<ModularItemData>}
  */
-export function createItemDialogModular(buttons, params) {
-    return /** @type {CustomItemDialog<ModularItemData>} */ (createItemDialog(buttons, params));
+export function createItemDialogModular(options) {
+    return /** @type {CustomItemDialog<ModularItemData>} */ (createItemDialog(options));
 }
 
 /**
  * Loose-typed wrapper for typed dialogs.
- * @param {ItemDialog.ButtonConfig<TypedItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<TypedItemData>[]} [params]
+ * @param {ItemDialog.Options<TypedItemData>} [options]
  * @returns {CustomItemDialog<TypedItemData>}
  */
-export function createItemDialogTyped(buttons, params) {
-    return /** @type {CustomItemDialog<TypedItemData>} */ (createItemDialog(buttons, params));
+export function createItemDialogTyped(options) {
+    return /** @type {CustomItemDialog<TypedItemData>} */ (createItemDialog(options));
 }
 
 /**
  * Loose-typed wrapper for noarch dialogs.
- * @param {ItemDialog.ButtonConfig<NoArchItemData>[]} [buttons]
- * @param {ItemDialog.ParameterConfig<NoArchItemData>[]} [params]
+ * @param {ItemDialog.Options<NoArchItemData>} [options]
  * @returns {CustomItemDialog<NoArchItemData>}
  */
-export function createItemDialogNoArch(buttons, params) {
-    return /** @type {CustomItemDialog<NoArchItemData>} */ (createItemDialog(buttons, params));
+export function createItemDialogNoArch(options) {
+    return /** @type {CustomItemDialog<NoArchItemData>} */ (createItemDialog(options));
 }

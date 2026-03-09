@@ -61,22 +61,24 @@ function beforeDraw(data, originalFunction, drawData) {
     }
 }
 
-const itemDialog = createItemDialogModular().addTexts([
-    {
-        location: { x: 1500, y: 675, w: 750 },
-        text: ({ data, text, item }) =>
-            data.currentModule === "Base" && item.Property?.TypeRecord?.p === 2 && prized(item.Property)
-                ? text("T_Prized")
-                : undefined,
-    },
-    {
-        location: { x: 1500, y: 745, w: 750 },
-        text: ({ data, text, item }) =>
-            data.currentModule === "Base" && extProp(item.Property).LuziCid
-                ? text("T_OpenID").replace("$ID", `${extProp(item.Property).LuziCid}`)
-                : undefined,
-    },
-]);
+const itemDialog = createItemDialogModular({
+    texts: [
+        {
+            location: { x: 1500, y: 675, w: 750 },
+            text: ({ data, text, item }) =>
+                data.currentModule === "Base" && item.Property?.TypeRecord?.p === 2 && prized(item.Property)
+                    ? text("T_Prized")
+                    : undefined,
+        },
+        {
+            location: { x: 1500, y: 745, w: 750 },
+            text: ({ data, text, item }) =>
+                data.currentModule === "Base" && extProp(item.Property).LuziCid
+                    ? text("T_OpenID").replace("$ID", `${extProp(item.Property).LuziCid}`)
+                    : undefined,
+        },
+    ],
+});
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [

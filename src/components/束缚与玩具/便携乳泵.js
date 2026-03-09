@@ -118,8 +118,8 @@ function scriptDraw(data, originalFunction, drawData) {
     }
 }
 
-const itemDialog = createItemDialogModular(
-    [
+const itemDialog = createItemDialogModular({
+    buttons: [
         {
             location: { x: 1385, y: 850, w: 225, h: 55 },
             show: ({ data }) => data.currentModule === "Base",
@@ -139,7 +139,7 @@ const itemDialog = createItemDialogModular(
             leaveDialog: true,
         },
     ],
-    [
+    params: [
         {
             Y: 700,
             key: "产率",
@@ -156,8 +156,8 @@ const itemDialog = createItemDialogModular(
                     (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL ${p.Luzi_MilkTotal >= MilkMax ? "(满)" : ""}`
                 ),
         },
-    ]
-);
+    ],
+});
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, MilkCupData>} */
 function beforeDraw(mdata, originalFunction, { L, CA, PersistentData }) {

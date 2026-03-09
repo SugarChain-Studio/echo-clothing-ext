@@ -89,20 +89,22 @@ const preset = [
     { FB: 0, Sa: 0, Sb: 0, Na: 0, Nb: 0, RN: 1, LN: 1, LBa: 1, LBb: 1, RB: 1, Ta: 0, Tb: 0, Tc: 0, Td: 0, Te: 0 },
 ];
 
-const itemDialog = createItemDialogModular([
-    {
-        location: { x: 1265, y: 450, w: 225, h: 55 },
-        key: "预设1",
-        show: ({ data }) => data.currentModule === "Base",
-        onclick: ({ chara, item }) => ExtendedItemSetOptionByRecord(chara, item, preset[0], { push: false }),
-    },
-    {
-        location: { x: 1510, y: 450, w: 225, h: 55 },
-        key: "预设2",
-        show: ({ data }) => data.currentModule === "Base",
-        onclick: ({ chara, item }) => ExtendedItemSetOptionByRecord(chara, item, preset[1], { push: false }),
-    },
-]);
+const itemDialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1265, y: 450, w: 225, h: 55 },
+            key: "预设1",
+            show: ({ data }) => data.currentModule === "Base",
+            onclick: ({ chara, item }) => ExtendedItemSetOptionByRecord(chara, item, preset[0], { push: false }),
+        },
+        {
+            location: { x: 1510, y: 450, w: 225, h: 55 },
+            key: "预设2",
+            show: ({ data }) => data.currentModule === "Base",
+            onclick: ({ chara, item }) => ExtendedItemSetOptionByRecord(chara, item, preset[1], { push: false }),
+        },
+    ],
+});
 
 /** @type {ModularItemConfig}*/
 const extended = {

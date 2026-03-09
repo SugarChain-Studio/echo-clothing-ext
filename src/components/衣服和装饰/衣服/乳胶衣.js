@@ -128,25 +128,27 @@ function findPairItem(item, chara) {
     );
 }
 
-const itemDialog = createItemDialogTyped([
-    {
-        location: { x: 1385, y: 650, w: 225, h: 55 },
-        key: "复制颜色",
-        enable: ({ item, chara }) => !!findPairItem(item, chara),
-        onclick: ({ item, chara }) => {
-            const other = findPairItem(item, chara);
-            if (!other) return;
-            if (!Array.isArray(item.Color)) return;
+const itemDialog = createItemDialogTyped({
+    buttons: [
+        {
+            location: { x: 1385, y: 650, w: 225, h: 55 },
+            key: "复制颜色",
+            enable: ({ item, chara }) => !!findPairItem(item, chara),
+            onclick: ({ item, chara }) => {
+                const other = findPairItem(item, chara);
+                if (!other) return;
+                if (!Array.isArray(item.Color)) return;
 
-            const otherLayerLen = other.Asset.Layer.filter((l) => l.AllowColorize).length;
-            if (otherLayerLen === 3) {
-                other.Color = item.Color.slice(0, 3);
-            } else if (otherLayerLen === 6) {
-                other.Color = [...item.Color, ...item.Color];
-            }
+                const otherLayerLen = other.Asset.Layer.filter((l) => l.AllowColorize).length;
+                if (otherLayerLen === 3) {
+                    other.Color = item.Color.slice(0, 3);
+                } else if (otherLayerLen === 6) {
+                    other.Color = [...item.Color, ...item.Color];
+                }
+            },
         },
-    },
-]);
+    ],
+});
 
 /** @type {[CustomAssetDefinition, AddAssetWithConfigParams[2]]} */
 const upper = [

@@ -30,53 +30,56 @@ const ASSET_NAME = "淫纹";
 const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
 
 // #region 交互界面
-const dialog = createItemDialogModular([
-    {
-        location: { x: 1265, y: 600, w: 225, h: 55 },
-        show: ({ data }) => data.currentModule === "Base",
-        key: "淫纹魔法电流按钮",
-        enable: ({ item, chara }) =>
-            extProp(item).OpenPerm || !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
-        onclick: ({ item, chara }) => PropertyShockPublishAction(chara, item, true),
-    },
-    {
-        location: { x: 1510, y: 600, w: 225, h: 55 },
-        show: ({ data }) => data.currentModule === "Base",
-        key: "淫纹强制高潮按钮",
-        actionKey: "淫纹强制高潮",
-        enable: ({ item, chara }) =>
-            extProp(item).OpenPerm || !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
-        onclick: ({ item }) => {
-            const property = extProp(item);
-            property.InstantOrgasm = true;
+const dialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1265, y: 600, w: 225, h: 55 },
+            show: ({ data }) => data.currentModule === "Base",
+            key: "淫纹魔法电流按钮",
+            enable: ({ item, chara }) =>
+                extProp(item).OpenPerm || !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
+            onclick: ({ item, chara }) => PropertyShockPublishAction(chara, item, true),
         },
-    },
-]).addCheckBoxes([
-    {
-        location: { x: 1185, y: 750 },
-        show: ({ data }) => data.currentModule === "Base",
-        text: ({ text }) => text("淫纹强制自慰按钮"),
-        requireLockPermission: true,
-        checked: ({ item }) => extProp(item).Masturbate,
-        onclick: ({ item }) => {
-            const property = extProp(item);
-            property.Masturbate = !property.Masturbate;
+        {
+            location: { x: 1510, y: 600, w: 225, h: 55 },
+            show: ({ data }) => data.currentModule === "Base",
+            key: "淫纹强制高潮按钮",
+            actionKey: "淫纹强制高潮",
+            enable: ({ item, chara }) =>
+                extProp(item).OpenPerm || !InventoryGetItemProperty(item, "LockedBy") || DialogCanUnlock(chara, item),
+            onclick: ({ item }) => {
+                const property = extProp(item);
+                property.InstantOrgasm = true;
+            },
         },
-        actionKey: ({ item }) => `${extProp(item).Masturbate ? "开始" : "停止"}淫纹强制自慰`,
-    },
-    {
-        location: { x: 1185, y: 830 },
-        show: ({ data }) => data.currentModule === "Base",
-        text: ({ text }) => text("淫纹权限"),
-        requireLockPermission: true,
-        checked: ({ item }) => extProp(item).OpenPerm,
-        onclick: ({ item }) => {
-            const property = extProp(item);
-            property.OpenPerm = !property.OpenPerm;
+    ],
+    checkboxes: [
+        {
+            location: { x: 1185, y: 750 },
+            show: ({ data }) => data.currentModule === "Base",
+            text: ({ text }) => text("淫纹强制自慰按钮"),
+            requireLockPermission: true,
+            checked: ({ item }) => extProp(item).Masturbate,
+            onclick: ({ item }) => {
+                const property = extProp(item);
+                property.Masturbate = !property.Masturbate;
+            },
+            actionKey: ({ item }) => `${extProp(item).Masturbate ? "开始" : "停止"}淫纹强制自慰`,
         },
-        actionKey: ({ item }) => `${extProp(item).OpenPerm ? "开启" : "关闭"}淫纹权限`,
-    },
-]);
+        {
+            location: { x: 1185, y: 830 },
+            show: ({ data }) => data.currentModule === "Base",
+            text: ({ text }) => text("淫纹权限"),
+            requireLockPermission: true,
+            checked: ({ item }) => extProp(item).OpenPerm,
+            onclick: ({ item }) => {
+                const property = extProp(item);
+                property.OpenPerm = !property.OpenPerm;
+            },
+            actionKey: ({ item }) => `${extProp(item).OpenPerm ? "开启" : "关闭"}淫纹权限`,
+        },
+    ],
+});
 // #endregion
 
 // #region 文本

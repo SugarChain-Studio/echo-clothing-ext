@@ -4,23 +4,25 @@ import { createItemDialogModular } from "../../lib";
 import { DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
 import { luggageHandler } from "./行李箱";
 
-const dialog = createItemDialogModular([
-    {
-        location: { x: 1385, y: 650, w: 225, h: 55 },
-        key: "抓住箱子",
-        show: ({ data, chara }) => data.currentModule === "Base" && chara.MemberNumber !== Player.MemberNumber,
-        enable: ({ chara }) =>
-            (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
-            ((item) => !item || item.Asset.Name === "抓住硬壳行李箱")(
-                Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
-            ),
-        onclick: ({ chara }) => {
-            luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+const dialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1385, y: 650, w: 225, h: 55 },
+            key: "抓住箱子",
+            show: ({ data, chara }) => data.currentModule === "Base" && chara.MemberNumber !== Player.MemberNumber,
+            enable: ({ chara }) =>
+                (ChatRoomLeashList.includes(chara.MemberNumber) || ChatRoomCanBeLeashed(chara)) &&
+                ((item) => !item || item.Asset.Name === "抓住硬壳行李箱")(
+                    Player.Appearance.find((i) => i.Asset.Group.Name === "ItemMisc")
+                ),
+            onclick: ({ chara }) => {
+                luggageHandler.emitAll("grabLuggage", { Sender: Player.MemberNumber, Target: chara.MemberNumber });
+            },
+            leaveDialog: true,
+            actionKey: "抓住箱子动作",
         },
-        leaveDialog: true,
-        actionKey: "抓住箱子动作",
-    },
-]);
+    ],
+});
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, {}>} */
 function beforeDraw(data, original, { L, Property }) {

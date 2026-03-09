@@ -30,17 +30,16 @@ function toggleHide(item, groupName) {
         : [...old, groupName]; // 添加
 }
 
-const itemDialog = createItemDialogNoArch()
-    .addTexts([{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("详细设置") }])
-    .addCheckBoxes(
-        groups.map((g, i) => ({
-            text: () => AssetGroupGet("Female3DCG", g).Description,
-            location: { x: 1100 + Math.floor(i / 8) * 200, y: 430 + (i % 8) * 70 },
-            textWidth: 120,
-            onclick: ({ item }) => toggleHide(item, g),
-            checked: ({ item }) => item.Property?.Hide?.includes(g),
-        }))
-    );
+const itemDialog = createItemDialogNoArch({
+    checkboxes: groups.map((g, i) => ({
+        text: () => AssetGroupGet("Female3DCG", g).Description,
+        location: { x: 1100 + Math.floor(i / 8) * 200, y: 430 + (i % 8) * 70 },
+        textWidth: 120,
+        onclick: ({ item }) => toggleHide(item, g),
+        checked: ({ item }) => item.Property?.Hide?.includes(g),
+    })),
+    texts: [{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("详细设置") }],
+});
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, {}>} */
 function scriptDraw(data, originalFunction, { C, Item }) {

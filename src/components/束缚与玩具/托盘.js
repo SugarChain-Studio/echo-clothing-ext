@@ -217,154 +217,157 @@ function placeItem(trayItem, handItem) {
     ChatRoomCharacterItemUpdate(Player, "ItemHandheld");
 }
 
-const itemDialog = createItemDialogNoArch([
-    {
-        location: buttons.曲奇加一,
-        key: "D曲奇加一",
-        enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanInc(item.Property),
-        onclick: ({ item }) => {
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            property.Luzi_InventoryType = "曲奇";
-            if (!Array.isArray(property.Luzi_InventoryContent)) property.Luzi_InventoryContent = [];
-            property.Luzi_InventoryContent.push({});
+const itemDialog = createItemDialogNoArch({
+    buttons: [
+        {
+            location: buttons.曲奇加一,
+            key: "D曲奇加一",
+            enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanInc(item.Property),
+            onclick: ({ item }) => {
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                property.Luzi_InventoryType = "曲奇";
+                if (!Array.isArray(property.Luzi_InventoryContent)) property.Luzi_InventoryContent = [];
+                property.Luzi_InventoryContent.push({});
+            },
+            actionKey: "A曲奇加一",
+            actionProcess,
         },
-        actionKey: "A曲奇加一",
-        actionProcess,
-    },
-    {
-        location: buttons.曲奇减一,
-        key: "D曲奇减一",
-        enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanDec(item.Property),
-        onclick: ({ item }) => {
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            property.Luzi_InventoryType = "曲奇";
-            property.Luzi_InventoryContent.shift();
+        {
+            location: buttons.曲奇减一,
+            key: "D曲奇减一",
+            enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanDec(item.Property),
+            onclick: ({ item }) => {
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                property.Luzi_InventoryType = "曲奇";
+                property.Luzi_InventoryContent.shift();
+            },
+            actionKey: "A曲奇减一",
+            actionProcess,
         },
-        actionKey: "A曲奇减一",
-        actionProcess,
-    },
-    {
-        location: buttons.曲奇加满,
-        key: "D曲奇加满",
-        enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanInc(item.Property),
-        onclick: ({ item }) => {
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            property.Luzi_InventoryType = "曲奇";
-            property.Luzi_InventoryContent = Array.from({ length: maxv.曲奇 }, () => ({}));
+        {
+            location: buttons.曲奇加满,
+            key: "D曲奇加满",
+            enable: ({ item }) => checks.IsExtend(item.Property) && checks.曲奇CanInc(item.Property),
+            onclick: ({ item }) => {
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                property.Luzi_InventoryType = "曲奇";
+                property.Luzi_InventoryContent = Array.from({ length: maxv.曲奇 }, () => ({}));
+            },
+            actionKey: "A曲奇加满",
+            actionProcess,
         },
-        actionKey: "A曲奇加满",
-        actionProcess,
-    },
-    .../** @type {["橙汁", "牛奶", "可乐"]}*/ (["橙汁", "牛奶", "可乐"]).flatMap(
-        (drink) =>
-            /** @type {ItemDialog.ButtonConfig<NoArchItemData>[]}*/ ([
-                {
-                    location: buttons[`加${drink}`],
-                    key: `D加${drink}`,
-                    enable: ({ item }) => checks.IsExtend(item.Property) && checks.饮料CanInc(item.Property),
-                    onclick: ({ item }) => {
-                        const property = /** @type {ExtendItemProperties}*/ (item.Property);
-                        property.Luzi_InventoryType = "饮料";
-                        if (property.Luzi_InventoryContent.length < maxv.饮料)
-                            property.Luzi_InventoryContent.push({ IAsset: drink });
-                        else property.Luzi_InventoryContent.find((it) => !it.IAsset).IAsset = drink;
+        .../** @type {["橙汁", "牛奶", "可乐"]}*/ (["橙汁", "牛奶", "可乐"]).flatMap(
+            (drink) =>
+                /** @type {ItemDialog.ButtonConfig<NoArchItemData>[]}*/ ([
+                    {
+                        location: buttons[`加${drink}`],
+                        key: `D加${drink}`,
+                        enable: ({ item }) => checks.IsExtend(item.Property) && checks.饮料CanInc(item.Property),
+                        onclick: ({ item }) => {
+                            const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                            property.Luzi_InventoryType = "饮料";
+                            if (property.Luzi_InventoryContent.length < maxv.饮料)
+                                property.Luzi_InventoryContent.push({ IAsset: drink });
+                            else property.Luzi_InventoryContent.find((it) => !it.IAsset).IAsset = drink;
+                        },
+                        actionKey: `A加${drink}`,
+                        actionProcess,
                     },
-                    actionKey: `A加${drink}`,
-                    actionProcess,
-                },
-                {
-                    location: buttons[`拿${drink}`],
-                    key: `D拿${drink}`,
-                    enable: ({ item }) => checks.IsExtend(item.Property) && checks[`${drink}CanDec`](item.Property),
-                    onclick: ({ item }) => {
-                        const property = /** @type {ExtendItemProperties}*/ (item.Property);
-                        property.Luzi_InventoryType = "饮料";
-                        const targets = property.Luzi_InventoryContent.filter((it) => it.IAsset === drink);
-                        if (targets.length > 0) {
-                            targets[Math.floor(Math.random() * targets.length)].IAsset = undefined;
-                        }
+                    {
+                        location: buttons[`拿${drink}`],
+                        key: `D拿${drink}`,
+                        enable: ({ item }) => checks.IsExtend(item.Property) && checks[`${drink}CanDec`](item.Property),
+                        onclick: ({ item }) => {
+                            const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                            property.Luzi_InventoryType = "饮料";
+                            const targets = property.Luzi_InventoryContent.filter((it) => it.IAsset === drink);
+                            if (targets.length > 0) {
+                                targets[Math.floor(Math.random() * targets.length)].IAsset = undefined;
+                            }
+                        },
+                        actionKey: `A拿${drink}`,
+                        actionProcess,
                     },
-                    actionKey: `A拿${drink}`,
-                    actionProcess,
-                },
-            ])
-    ),
-    {
-        location: buttons.清空,
-        key: "D清空",
-        enable: ({ item }) => checks.IsExtend(item.Property) && !checks.Empty(item.Property),
-        onclick: ({ item }) => {
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            property.Luzi_InventoryType = null;
-            property.Luzi_InventoryContent = [];
+                ])
+        ),
+        {
+            location: buttons.清空,
+            key: "D清空",
+            enable: ({ item }) => checks.IsExtend(item.Property) && !checks.Empty(item.Property),
+            onclick: ({ item }) => {
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                property.Luzi_InventoryType = null;
+                property.Luzi_InventoryContent = [];
+            },
+            actionKey: `A清空`,
+            actionProcess,
         },
-        actionKey: `A清空`,
-        actionProcess,
-    },
-    {
-        location: buttons.手上拿,
-        key: "D拿到手上",
-        enable: ({ item }) =>
-            !InventoryGet(Player, "ItemHandheld") &&
-            Player.CanInteract() &&
-            checks.IsExtend(item.Property) &&
-            checks.AnyCanDec(item.Property),
-        onclick: ({ item }) => takeItem(item),
-        hover: ({ item }) => {
-            if (!Player.CanInteract()) return "H互动";
-            if (!!InventoryGet(Player, "ItemHandheld")) return "H手空";
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            if (!checks.IsExtend(property)) return "H数据";
-            if (!checks.AnyCanDec(property)) return "H盘有";
-            return undefined;
+        {
+            location: buttons.手上拿,
+            key: "D拿到手上",
+            enable: ({ item }) =>
+                !InventoryGet(Player, "ItemHandheld") &&
+                Player.CanInteract() &&
+                checks.IsExtend(item.Property) &&
+                checks.AnyCanDec(item.Property),
+            onclick: ({ item }) => takeItem(item),
+            hover: ({ item }) => {
+                if (!Player.CanInteract()) return "H互动";
+                if (!!InventoryGet(Player, "ItemHandheld")) return "H手空";
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                if (!checks.IsExtend(property)) return "H数据";
+                if (!checks.AnyCanDec(property)) return "H盘有";
+                return undefined;
+            },
+            actionKey: "A拿到手上",
+            actionProcess: (dict) => {
+                const taken = InventoryGet(Player, "ItemHandheld");
+                if (taken) dict.asset(taken.Asset, "TakedItemName", taken.Craft?.Name);
+                return dict;
+            },
+            leaveDialog: true,
         },
-        actionKey: "A拿到手上",
-        actionProcess: (dict) => {
-            const taken = InventoryGet(Player, "ItemHandheld");
-            if (taken) dict.asset(taken.Asset, "TakedItemName", taken.Craft?.Name);
-            return dict;
-        },
-        leaveDialog: true,
-    },
-    {
-        location: buttons.手上放,
-        key: "D放到托盘",
-        enable: ({ item }) =>
-            Player.CanInteract() &&
-            checks.IsExtend(item.Property) &&
-            checks.ItemCanInc(item.Property, InventoryGet(Player, "ItemHandheld")),
-        onclick: ({ item }) => {
-            const handItem = InventoryGet(Player, "ItemHandheld");
-            if (!handItem) return;
-            placeItem(item, handItem);
-            InventoryRemove(Player, "ItemHandheld");
-        },
-        hover: ({ item }) => {
-            if (!Player.CanInteract()) return "H互动";
-            const token = InventoryGet(Player, "ItemHandheld");
-            if (!token) return "H手有";
-            const property = /** @type {ExtendItemProperties}*/ (item.Property);
-            if (!checks.IsExtend(property)) return "H数据";
-            if (checks.Full(property)) return "H盘满";
-            if (!checks.ItemCanInc(property, token)) return "H类型";
-            return undefined;
-        },
-        actionKey: "A放到托盘",
-        actionProcess: (dict, item) => {
-            const assetType = /** @type {ExtendItemProperties}*/ (item.Property)?.Luzi_InventoryType;
-            if (!assetType) return dict;
-            const itemName = content2Item[assetType];
-            if (!itemName) return dict;
+        {
+            location: buttons.手上放,
+            key: "D放到托盘",
+            enable: ({ item }) =>
+                Player.CanInteract() &&
+                checks.IsExtend(item.Property) &&
+                checks.ItemCanInc(item.Property, InventoryGet(Player, "ItemHandheld")),
+            onclick: ({ item }) => {
+                const handItem = InventoryGet(Player, "ItemHandheld");
+                if (!handItem) return;
+                placeItem(item, handItem);
+                InventoryRemove(Player, "ItemHandheld");
+            },
+            hover: ({ item }) => {
+                if (!Player.CanInteract()) return "H互动";
+                const token = InventoryGet(Player, "ItemHandheld");
+                if (!token) return "H手有";
+                const property = /** @type {ExtendItemProperties}*/ (item.Property);
+                if (!checks.IsExtend(property)) return "H数据";
+                if (checks.Full(property)) return "H盘满";
+                if (!checks.ItemCanInc(property, token)) return "H类型";
+                return undefined;
+            },
+            actionKey: "A放到托盘",
+            actionProcess: (dict, item) => {
+                const assetType = /** @type {ExtendItemProperties}*/ (item.Property)?.Luzi_InventoryType;
+                if (!assetType) return dict;
+                const itemName = content2Item[assetType];
+                if (!itemName) return dict;
 
-            const asset = AssetGet("Female3DCG", "ItemHandheld", itemName);
-            if (!asset) return dict;
-            dict.asset(asset, "TakedItemName");
+                const asset = AssetGet("Female3DCG", "ItemHandheld", itemName);
+                if (!asset) return dict;
+                dict.asset(asset, "TakedItemName");
 
-            return dict;
+                return dict;
+            },
+            leaveDialog: true,
         },
-        leaveDialog: true,
-    },
-]).addTexts([{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("DBase") }]);
+    ],
+    texts: [{ location: { x: 1500, y: 375, w: 750 }, text: ({ text }) => text("DBase") }],
+});
 
 const drinksImgs = { 橙汁: "橙汁", 牛奶: "牛奶", 可乐: "可乐", 空杯: "空杯" };
 

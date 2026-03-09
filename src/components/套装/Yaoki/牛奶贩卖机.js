@@ -467,8 +467,8 @@ const propTest = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.P
  */
 const propValue = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
 
-const itemDialog = createItemDialogModular(
-    [
+const itemDialog = createItemDialogModular({
+    buttons: [
         {
             location: buttons.左,
             key: "拿左杯",
@@ -519,7 +519,7 @@ const itemDialog = createItemDialogModular(
                 }),
             actionKey: "A开始右杯",
         },
-        .../** @type {[["左","Left"],["右","Right"]]}*/ ([
+        .../** @type {const}*/ ([
             ["左", "Left"],
             ["右", "Right"],
         ]).flatMap(([cn, en]) => [
@@ -592,7 +592,7 @@ const itemDialog = createItemDialogModular(
             },
         ]),
     ],
-    [
+    params: [
         {
             Y: 700,
             key: "产率",
@@ -605,8 +605,8 @@ const itemDialog = createItemDialogModular(
             show: ({ data }) => data.currentModule === "Base",
             value: ({ item }) => propValue(item, (p) => `${(p.Luzi_MilkTotal ?? 0).toFixed(2)} mL`),
         },
-    ]
-);
+    ],
+});
 
 /** @type {ModularItemConfig} */
 const extended = {

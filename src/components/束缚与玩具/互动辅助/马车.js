@@ -18,71 +18,84 @@ export const carriageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@C
 const harnessItemName = "马车固定";
 const carriageItemName = "马车";
 
-const dialog = createItemDialogNoArch([
-    {
-        location: { x: 1265, y: 550, w: 225, h: 55 },
-        key: "D_连接马车_牵引",
-        requireLockPermission: true,
-        enable: ({ chara, item }) =>
-            Player.CanInteract() &&
-            (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
-            Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
-        hover: ({ chara, item }) => {
-            if (!Player.CanInteract()) return "D_无法驾驶_交互";
-            if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
-            if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
-            return "D_hint_连接马车_牵引";
+const dialog = createItemDialogNoArch({
+    buttons: [
+        {
+            location: { x: 1265, y: 550, w: 225, h: 55 },
+            key: "D_连接马车_牵引",
+            requireLockPermission: true,
+            enable: ({ chara, item }) =>
+                Player.CanInteract() &&
+                (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
+                Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
+            hover: ({ chara, item }) => {
+                if (!Player.CanInteract()) return "D_无法驾驶_交互";
+                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
+                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
+                return "D_hint_连接马车_牵引";
+            },
+            onclick: ({ chara }) =>
+                monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {
+                    ChatRoomOrderTools.wearAndPair(
+                        Player,
+                        carriage.Asset,
+                        { nextCharacter: chara.MemberNumber },
+                        "follow"
+                    );
+                    carriageHandler.emit(chara, "leashPonyLead", {
+                        Sender: Player.MemberNumber,
+                        Target: chara.MemberNumber,
+                    });
+                }),
+            leaveDialog: true,
+            actionKey: "A_连接马车_牵引",
         },
-        onclick: ({ chara }) =>
-            monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {
-                ChatRoomOrderTools.wearAndPair(Player, carriage.Asset, { nextCharacter: chara.MemberNumber }, "follow");
-                carriageHandler.emit(chara, "leashPonyLead", {
-                    Sender: Player.MemberNumber,
-                    Target: chara.MemberNumber,
-                });
-            }),
-        leaveDialog: true,
-        actionKey: "A_连接马车_牵引",
-    },
-    {
-        location: { x: 1510, y: 550, w: 225, h: 55 },
-        key: "D_连接马车_驾驶",
-        requireLockPermission: true,
-        enable: ({ chara, item }) =>
-            Player.CanInteract() &&
-            (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
-            Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
-        hover: ({ chara, item }) => {
-            if (!Player.CanInteract()) return "D_无法驾驶_交互";
-            if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
-            if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
-            return "D_hint_连接马车_驾驶";
+        {
+            location: { x: 1510, y: 550, w: 225, h: 55 },
+            key: "D_连接马车_驾驶",
+            requireLockPermission: true,
+            enable: ({ chara, item }) =>
+                Player.CanInteract() &&
+                (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
+                Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
+            hover: ({ chara, item }) => {
+                if (!Player.CanInteract()) return "D_无法驾驶_交互";
+                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
+                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
+                return "D_hint_连接马车_驾驶";
+            },
+            onclick: ({ chara }) =>
+                monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {
+                    ChatRoomOrderTools.wearAndPair(
+                        Player,
+                        carriage.Asset,
+                        { nextCharacter: chara.MemberNumber },
+                        "lead"
+                    );
+                    carriageHandler.emit(chara, "leashPonyRide", {
+                        Sender: Player.MemberNumber,
+                        Target: chara.MemberNumber,
+                    });
+                }),
+            leaveDialog: true,
+            actionKey: "A_连接马车_驾驶",
         },
-        onclick: ({ chara }) =>
-            monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {
-                ChatRoomOrderTools.wearAndPair(Player, carriage.Asset, { nextCharacter: chara.MemberNumber }, "lead");
-                carriageHandler.emit(chara, "leashPonyRide", {
-                    Sender: Player.MemberNumber,
-                    Target: chara.MemberNumber,
-                });
-            }),
-        leaveDialog: true,
-        actionKey: "A_连接马车_驾驶",
-    },
-]).addTexts([
-    {
-        location: { x: 1500, y: 650, w: 500 },
-        align: "center",
-        text: ({ chara, text }) => {
-            const xstate = ChatRoomOrderTools.assetState(chara);
-            if (xstate && xstate.associatedAsset.asset === harnessItemName) {
-                const prev = ChatRoomOrderTools.pick.prev(chara);
-                const c = ChatRoomCharacter.find((c) => c.MemberNumber === prev);
-                return text("D_连接到马车").replace("CARRIAGE_PLAYER", c ? CharacterNickname(c) : `${prev}`);
-            }
+    ],
+    texts: [
+        {
+            location: { x: 1500, y: 650, w: 500 },
+            align: "center",
+            text: ({ chara, text }) => {
+                const xstate = ChatRoomOrderTools.assetState(chara);
+                if (xstate && xstate.associatedAsset.asset === harnessItemName) {
+                    const prev = ChatRoomOrderTools.pick.prev(chara);
+                    const c = ChatRoomCharacter.find((c) => c.MemberNumber === prev);
+                    return text("D_连接到马车").replace("CARRIAGE_PLAYER", c ? CharacterNickname(c) : `${prev}`);
+                }
+            },
         },
-    },
-]);
+    ],
+});
 
 /** @type {(arg:{Sender:number,Target:number}, mode: "follow" | "lead")=>void} */
 const setCarriagePony = ({ Sender }, mode) => {
