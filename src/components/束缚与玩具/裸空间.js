@@ -226,7 +226,7 @@ const asset = [
         extended: {
             Archetype: "noarch",
             DrawImages: false,
-            ScriptHooks: dialog.createHooks(["Click", "Draw", "Load"], { ScriptDraw: scriptDraw }),
+            ScriptHooks: dialog.createHooks({ ScriptDraw: scriptDraw }),
         },
         assetStrings: {
             CN: {

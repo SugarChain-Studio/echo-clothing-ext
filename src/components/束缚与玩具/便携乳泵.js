@@ -298,7 +298,7 @@ const asset = [
             extended: {
                 Archetype: "modular",
                 ChatTags: Tools.CommonChatTags(),
-                ScriptHooks: itemDialog.createHooks(["Draw", "Click"], {
+                ScriptHooks: itemDialog.createHooks({
                     ScriptDraw: scriptDraw,
                     BeforeDraw: beforeDraw,
                     AfterDraw: afterDraw,

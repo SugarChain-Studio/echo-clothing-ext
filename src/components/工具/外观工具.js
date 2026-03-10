@@ -64,7 +64,7 @@ const extended = {
                     HasSubscreen: true,
                     ArchetypeConfig: {
                         Archetype: ExtendedArchetype.NOARCH,
-                        ScriptHooks: itemDialog.createHooks(["Click", "Draw"]),
+                        ScriptHooks: itemDialog.createHooks(),
                     },
                 },
             ],

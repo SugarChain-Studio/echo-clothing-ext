@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { DialogTools } from "@mod-utils/Tools";
+import { createItemDialogModular } from "../../../lib";
 
 /**
  * @typedef {Object} GradientCustomProperty
@@ -140,89 +140,42 @@ function afterDraw(mdata, originalFunction, drawData) {
     drawCanvasBlink(layerData.canvas, 0, CanvasUpperOverflow, AlphaMasks);
 }
 
-/** @type {(value:number | undefined | null, min:number, max:number) => number} */
-function clamp(value, min, max) {
-    if (value == null) return min;
-    return Math.min(max, Math.max(min, value));
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Load<ModularItemData>} */
-function load(data, originalFunction) {
-    originalFunction();
-    const idupper = PropertyGetID("UpperBound");
-    const idsize = PropertyGetID("GradientSize");
-
-    const item = DialogFocusItem;
-    const C = CharacterGetCurrent();
-    item.Property ??= {};
-    const property = /** @type {GradientItemProperties}*/ (item.Property);
-
-    const upperValue = clamp(property?.upperBound, 0, 500);
-    const sizeValue = clamp(property?.gradientSize, 0, 500);
-
-    const upperSlider = ElementCreateRangeInput(idupper, upperValue, 0, 500, 1);
-    const sizeSlider = ElementCreateRangeInput(idsize, sizeValue, 1, 500, 1);
-
-    if (upperSlider) {
-        upperSlider.addEventListener("input", () => {
-            property.upperBound = clamp(parseInt(upperSlider.value), 0, 500);
-            CharacterRefresh(C, false, false);
-        });
-    }
-    if (sizeSlider) {
-        sizeSlider.addEventListener("input", () => {
-            property.gradientSize = clamp(parseInt(sizeSlider.value), 0, 500);
-            CharacterRefresh(C, false, false);
-        });
-    }
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Draw<ModularItemData>} */
-function draw(data, originalFunction) {
-    originalFunction();
-
-    const item = DialogFocusItem;
-
-    const idupper = PropertyGetID("UpperBound");
-    const idsize = PropertyGetID("GradientSize");
-    if (data.currentModule === "Base") {
-        const show = (ele) => {
-            if (ele) ele.style.display = "";
-        };
-        show(document.getElementById(idupper));
-        show(document.getElementById(idsize));
-
-        ElementPosition(idupper, 1550, 650, 400);
-        ElementPosition(idsize, 1550, 730, 400);
-
-        const dialogKey = DialogTools.dialogKey(item);
-        const text = (key) => AssetTextGet(dialogKey(key));
-
-        const oldTextAlign = MainCanvas.textAlign;
-        const oldTextBaseline = MainCanvas.textBaseline;
-        MainCanvas.textAlign = "left";
-        MainCanvas.textBaseline = "middle";
-        DrawTextFit(text("GradientPos"), 1250, 630, 300, "White", "Gray");
-        DrawTextFit(text("GradientSize"), 1250, 710, 300, "White", "Gray");
-        MainCanvas.textAlign = oldTextAlign;
-        MainCanvas.textBaseline = oldTextBaseline;
-    } else {
-        const hide = (ele) => {
-            if (ele) ele.style.display = "none";
-        };
-        hide(document.getElementById(idupper));
-        hide(document.getElementById(idsize));
-    }
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Exit<ModularItemData>} */
-function exit(data, originalFunction) {
-    if (data.currentModule === "Base") {
-        ElementRemove(PropertyGetID("UpperBound"));
-        ElementRemove(PropertyGetID("GradientSize"));
-    }
-    originalFunction?.();
-}
+const dialog = createItemDialogModular({
+    sliders: [
+        {
+            location: { x: 1250, y: 650, w: 500 },
+            config: { min: 0, max: 500 },
+            show: ({ data }) => data.currentModule === "Base",
+            value: ({ item }) => {
+                const property = /** @type {GradientItemProperties}*/ (item.Property);
+                return property?.upperBound ?? 0;
+            },
+            onChange: ({ item, chara }, value) => {
+                item.Property ??= {};
+                const property = /** @type {GradientItemProperties}*/ (item.Property);
+                property.upperBound = value;
+                CharacterRefresh(chara, false, false);
+            },
+            leftLabel: ({ text }) => text("GradientPos"),
+        },
+        {
+            location: { x: 1250, y: 730, w: 500 },
+            config: { min: 1, max: 500 },
+            show: ({ data }) => data.currentModule === "Base",
+            value: ({ item }) => {
+                const property = /** @type {GradientItemProperties}*/ (item.Property);
+                return property?.gradientSize ?? 1;
+            },
+            onChange: ({ item, chara }, value) => {
+                item.Property ??= {};
+                const property = /** @type {GradientItemProperties}*/ (item.Property);
+                property.gradientSize = value;
+                CharacterRefresh(chara, false, false);
+            },
+            leftLabel: ({ text }) => text("GradientSize"),
+        },
+    ],
+});
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
@@ -255,7 +208,7 @@ const asset = [
                 { Name: "Front", Key: "f", Options: [{}, {}] },
                 { Name: "Back", Key: "b", Options: [{}, {}] },
             ],
-            ScriptHooks: { AfterDraw: afterDraw, Load: load, Draw: draw, Exit: exit },
+            ScriptHooks: dialog.createHooks({ AfterDraw: afterDraw }),
         },
         assetStrings: {
             CN: {

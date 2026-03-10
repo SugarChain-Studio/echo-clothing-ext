@@ -113,7 +113,7 @@ const assets = [
             ChatTags: Tools.CommonChatTags(),
             DrawImages: false,
             ChangeWhenLocked: false,
-            ScriptHooks: dialog.createHooks(["Draw", "Click"], { BeforeDraw: beforeDraw }),
+            ScriptHooks: dialog.createHooks({ BeforeDraw: beforeDraw }),
             Modules: [
                 {
                     Name: "填充衣物",

@@ -406,9 +406,7 @@ function afterDraw(data, originalFunction, drawData) {
 const extended = {
     Archetype: ExtendedArchetype.NOARCH,
     ChatTags: Tools.CommonChatTags(),
-    ScriptHooks: itemDialog.createHooks(["Draw", "Click"], {
-        AfterDraw: afterDraw,
-    }),
+    ScriptHooks: itemDialog.createHooks({ AfterDraw: afterDraw }),
     BaselineProperty: /** @type {ExtendItemProperties}*/ ({ Luzi_InventoryContent: [] }),
 };
 

@@ -361,10 +361,7 @@ const asset = [
                     Options: [{}, { Property: { OverridePriority: 44 } }, { Property: { OverridePriority: 44 } }],
                 },
             ],
-            ScriptHooks: dialog.createHooks(["Click", "Draw"], {
-                AfterDraw: afterDraw,
-                ScriptDraw: scriptDraw,
-            }),
+            ScriptHooks: dialog.createHooks({ AfterDraw: afterDraw, ScriptDraw: scriptDraw }),
             BaselineProperty: /** @type {ExtendItemProperties}*/ ({
                 Masturbate: false,
                 OpenPerm: false,

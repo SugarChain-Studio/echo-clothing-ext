@@ -180,7 +180,7 @@ const assets = [
             ChatTags: Tools.CommonChatTags(),
             DrawImages: false,
             ChangeWhenLocked: false,
-            ScriptHooks: dialog.createHooks(["Draw", "Click"]),
+            ScriptHooks: dialog.createHooks(),
             Modules: [
                 {
                     Name: "填充衣物",

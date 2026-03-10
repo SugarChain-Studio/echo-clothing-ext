@@ -114,7 +114,7 @@ const asset = [
             ChatTags: Tools.CommonChatTags(),
             DrawImages: false,
             Modules: [{ Name: "包装", Key: "p", Options: [{}, {}, {}] }],
-            ScriptHooks: itemDialog.createHooks(["Draw"], {
+            ScriptHooks: itemDialog.createHooks({
                 BeforeDraw: beforeDraw,
                 ScriptDraw: scriptDraw,
             }),

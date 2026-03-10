@@ -23,6 +23,15 @@ export function RMouseIn(rect) {
 }
 
 /**
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ */
+function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+/**
  * @template {ExtendedItemData<any>} DataType
  */
 class CustomItemDialog {
@@ -50,6 +59,8 @@ class CustomItemDialog {
         this._texts = /** @type {ItemDialog.TextConfig<DataType>[]} */ ([...(options.texts ?? [])]);
         /** @private */
         this._checkboxes = /** @type {ItemDialog.CheckBoxConfig<DataType>[]} */ ([...(options.checkboxes ?? [])]);
+        /** @private */
+        this._sliders = /** @type {ItemDialog.SliderConfig<DataType>[]} */ ([...(options.sliders ?? [])]);
 
         /** @private */
         this._ondraw = /** @type {CallbackType | undefined} */ (options.ondraw);
@@ -62,6 +73,9 @@ class CustomItemDialog {
         this._overrideClickExit = /** @type {CallbackWithOriginalType | undefined} */ (options.overrideClickExit);
         /** @private */
         this._onchanges = /** @type {OnChangeType[]} */ (options.onchanges ? [options.onchanges] : []);
+
+        /** @private */
+        this._key = Math.random().toString(36).slice(2);
     }
 
     /**
@@ -159,9 +173,50 @@ class CustomItemDialog {
             if (box.textWidth) DrawTextFit(textValue, X, Y, box.textWidth, "White", "Gray");
             else DrawText(textValue, X, Y, "White", "Gray");
         }
+
+        this._sliders.forEach((slider, idx) => {
+            const id = `slider_${this._key}_${idx}`;
+            const ele = /** @type {HTMLInputElement} */ (document.getElementById(id));
+            if (!ele) return;
+            const curValue = parseInt(ele.value);
+            const X = slider.location.x;
+            const Y = slider.location.y;
+            const W = slider.location.w;
+            const H = 32;
+            const labelWidth = 60;
+            const spacing = 10;
+
+            let SliderX = X;
+            let SliderW = W;
+
+            if (slider.show && !slider.show(ctx)) {
+                ele.style.display = "none";
+                return;
+            }
+
+            ele.style.display = "";
+
+            MainCanvas.textBaseline = "middle";
+            if (slider.leftLabel) {
+                MainCanvas.textAlign = "left";
+                const labelText = slider.leftLabel(ctxText, curValue);
+                DrawTextFit(labelText, X, Y + H / 2, labelWidth, "White", "Gray");
+                SliderX += labelWidth + spacing;
+                SliderW -= labelWidth + spacing;
+            }
+
+            if (slider.rightLabel) {
+                MainCanvas.textAlign = "right";
+                const labelText = slider.rightLabel(ctxText, curValue);
+                DrawTextFit(labelText, X + W, Y + H / 2, labelWidth, "White", "Gray");
+                SliderW -= labelWidth + spacing;
+            }
+
+            ElementPosition(id, SliderX + SliderW / 2, Y + H, SliderW, H);
+        });
+
         MainCanvas.textBaseline = oldBaseline;
         MainCanvas.textAlign = oldAlign;
-
         this._ondraw?.(data, item, chara);
     }
 
@@ -260,17 +315,40 @@ class CustomItemDialog {
         const Item = DialogFocusItem;
         if (!Item || !C) return;
         this._onload?.(data, Item, C);
+
+        this._sliders.forEach((slider, idx) => {
+            const id = `slider_${this._key}_${idx}`;
+            const max = slider.config?.max ?? 100;
+            const min = slider.config?.min ?? 0;
+            const step = slider.config?.step ?? 1;
+            const init = clamp(slider.value({ data, item: Item, chara: C }), min, max);
+
+            const ele = ElementCreateRangeInput(id, init, min, max, step);
+
+            ele.addEventListener("input", () => {
+                slider.onChange?.({ data, item: Item, chara: C }, parseInt(ele.value));
+            });
+            ele.style.display = "none";
+        });
     }
 
     /**
      * @private
      * @param {DataType} data
+     * @param {(()=>void)|null} original
      */
-    _exit(data) {
+    _exit(data, original) {
         const C = CharacterGetCurrent();
         const Item = DialogFocusItem;
         if (!Item || !C) return;
         this._onexit?.(data, Item, C);
+
+        if (!original) {
+            this._sliders.forEach((_, idx) => {
+                const id = `slider_${this._key}_${idx}`;
+                ElementRemove(id);
+            });
+        }
     }
 
     /**
@@ -298,23 +376,30 @@ class CustomItemDialog {
     }
 
     /**
-     * @param {("Load" | "Exit" |"Draw"|"Click")[]} [keys] 要启用的hook名称，默认为["Click", "Draw"]
      * @param {ExtendedItemCapsScriptHooksStruct<DataType, any>} [base] 基础hook
      * @return {ExtendedItemCapsScriptHooksStruct<DataType, any>}
      */
-    createHooks(keys = ["Click", "Draw"], base = {}) {
+    createHooks(base = {}) {
         const hooks = { ...base };
         const originThen = (func) => (data, originalFunction) => {
             originalFunction?.();
             func(data);
         };
+
+        const keys = /** @type {("Load" | "Exit" |"Draw"|"Click")[]} */ (["Click", "Draw"]);
+        if (this._onload || this._sliders.length > 0) keys.push("Load");
+        if (this._onexit || this._sliders.length > 0) keys.push("Exit");
+
         for (const key of keys) {
             hooks[key] = (() => {
                 switch (key) {
                     case "Load":
                         return originThen((data) => this._load(data));
                     case "Exit":
-                        return originThen((data) => this._exit(data));
+                        return (data, originalFunction) => {
+                            this._exit(data, originalFunction);
+                            originalFunction?.();
+                        };
                     case "Click":
                         return (data, original) => this._click(data, original);
                     case "Draw":

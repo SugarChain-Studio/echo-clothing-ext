@@ -612,7 +612,7 @@ const itemDialog = createItemDialogModular({
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     DrawImages: false,
-    ScriptHooks: itemDialog.createHooks(["Draw", "Click"], {
+    ScriptHooks: itemDialog.createHooks({
         ScriptDraw: scriptDraw,
         BeforeDraw: beforeDraw,
         ...afterDrawProcess.hooks(),

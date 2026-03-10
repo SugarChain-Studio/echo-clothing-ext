@@ -1,6 +1,7 @@
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { luziSuffixFixups } from "../../lib/fixups";
+import { createItemDialogModular, PoseMapTool, PostPass } from "../../lib";
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
@@ -91,110 +92,57 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
     }
 }
 
-const 持续电击开关 = {
-    X: 1185,
-    Y: 675,
-    W: 64,
-    H: 64,
-};
-
-const 触发电击按钮 = {
-    X: 1510,
-    Y: 675,
-    W: 225,
-    H: 55,
-};
-
-/** @type {ExtendedItemScriptHookCallbacks.Draw<ExtendedItemData>} */
-function dialogDraw(Data, originalFunction) {
-    originalFunction();
-    if (!DialogFocusItem) return;
-
-    const shockL = DialogFocusItem.Property?.ShockLevel || 0;
-
-    const prevAlign = MainCanvas.textAlign;
-    MainCanvas.textAlign = "center";
-    ExtendedItemCustomDraw("ItemLegs电击器触发电击", 触发电击按钮.X, 触发电击按钮.Y);
-    MainCanvas.textAlign = "left";
-    ExtendedItemDrawCheckbox("GlowSwitch", 持续电击开关.X, 持续电击开关.Y, shockL > 0, {
-        text: AssetTextGet("ItemLegs电击器持续电击开关"),
-        textColor: "White",
-    });
-    MainCanvas.textAlign = prevAlign;
-}
-
-/** @type {ExtendedItemScriptHookCallbacks.Click<ExtendedItemData>} */
-function dialogClick(Data, originalFunction) {
-    originalFunction();
-
-    if (MouseIn(触发电击按钮.X, 触发电击按钮.Y, 触发电击按钮.W, 触发电击按钮.H)) {
-        const targetItem = DialogFocusItem;
-        targetItem.Property.ShowText = false;
-        PropertyShockPublishAction(CharacterGetCurrent(), targetItem, false);
-        targetItem.Property.ShowText = true;
-    } else if (MouseIn(持续电击开关.X, 持续电击开关.Y, 持续电击开关.W, 持续电击开关.H)) {
-        const property = DialogFocusItem.Property || {};
-
-        const dialogKey = DialogTools.dialogKey(DialogFocusItem);
-
-        ExtendedItemCustomClickAndPush(
-            CharacterGetCurrent(),
-            DialogFocusItem,
-            "持续电击",
-            () => {
-                const shockL = property.ShockLevel || 0;
-                property.ShockLevel = shockL > 0 ? 0 : 1;
+const dialog = createItemDialogModular({
+    buttons: [
+        {
+            location: { x: 1510, y: 675, w: 225, h: 55 },
+            key: "触发电击",
+            show: ({ data }) => data.currentModule === "Base",
+            onclick: ({ item, chara }) => {
+                PropertyShockPublishAction(chara, item, false);
             },
-            false,
-            false
-        );
-
-        const Dictionary = new DictionaryBuilder()
-            .sourceCharacter(Player)
-            .destinationCharacterName(CharacterGetCurrent())
-            .asset(DialogFocusItem.Asset, "AssetName", DialogFocusItem.Craft && DialogFocusItem.Craft.Name)
-            .build();
-        ChatRoomPublishCustomAction(
-            dialogKey(`设置${property.ShockLevel ? "开始" : "停止"}间歇持续电击`),
-            false,
-            Dictionary
-        );
-    }
-}
+        },
+    ],
+    checkboxes: [
+        {
+            location: { x: 1185, y: 675 },
+            text: ({ text }) => text("持续电击开关"),
+            checked: ({ item }) => item.Property?.ShockLevel > 0,
+            onclick: ({ item }) => {
+                const shockL = item.Property?.ShockLevel || 0;
+                item.Property ??= {};
+                item.Property.ShockLevel = shockL > 0 ? 0 : 1;
+            },
+            actionKey: ({ item }) => `设置${item.Property?.ShockLevel ? "开始" : "停止"}间歇持续电击`,
+        },
+    ],
+});
 
 /** @type { CustomAssetDefinition } */
-const asset = {
-    Name: "电击器",
-    Random: false,
-    Gender: "F",
-    Left: {
-        [PoseType.DEFAULT]: 0,
-        KneelingSpread: 60,
+const asset = PostPass.asset(
+    {
+        Name: "电击器",
+        Random: false,
+        Gender: "F",
+        ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 60 }]),
+        Difficulty: 3,
+        Priority: 14,
+        Fetish: ["Masochism"],
+        PoseMapping: PoseMapTool.config(["Kneel", "KneelingSpread", "Spread", "LegsClosed"], ["AllFours", "Hogtied"]),
+        Layer: [
+            { Name: "绑带" },
+            { Name: "本体" },
+            { Name: "电击肛塞", AllowTypes: [{ a: 1 }] },
+            { Name: "阴部", AllowTypes: [{ p: 1 }] },
+            { Name: "大腿内侧", AllowTypes: [{ u: 1 }] },
+            { Name: "小腹", AllowTypes: [{ d: 1 }] },
+            { Name: "闪光" },
+        ],
     },
-    Top: 0,
-    Difficulty: 3,
-    Priority: 14,
-    Fetish: ["Masochism"],
-    Extended: true,
-    Effect: [],
-    PoseMapping: {
-        AllFours: "Hide",
-        Hogtied: "Hide",
-        Kneel: "Kneel",
-        KneelingSpread: "KneelingSpread",
-        Spread: "Spread",
-        LegsClosed: "LegsClosed",
-    },
-    Layer: [
-        { Name: "绑带" },
-        { Name: "本体" },
-        { Name: "电击肛塞", AllowTypes: [{ a: 1 }] },
-        { Name: "阴部", AllowTypes: [{ p: 1 }] },
-        { Name: "大腿内侧", AllowTypes: [{ u: 1 }] },
-        { Name: "小腹", AllowTypes: [{ d: 1 }] },
-        { Name: "闪光" },
-    ],
-};
+    (asset) => {
+        luziSuffixFixups("ItemLegs", asset.Name);
+    }
+);
 
 const layerNames = {
     EN: {
@@ -211,12 +159,7 @@ const layerNames = {
 /** @type {AssetArchetypeConfig} */
 const extended = {
     Archetype: ExtendedArchetype.MODULAR,
-    ScriptHooks: {
-        BeforeDraw: beforeDraw,
-        ScriptDraw: scriptDraw,
-        Draw: dialogDraw,
-        Click: dialogClick,
-    },
+    ScriptHooks: dialog.createHooks({ BeforeDraw: beforeDraw, ScriptDraw: scriptDraw }),
     ChatTags: Tools.CommonChatTags(),
     Modules: [
         {
@@ -359,5 +302,4 @@ const translation = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemLegs", asset, { extended, translation, layerNames, assetStrings });
-    luziSuffixFixups("ItemLegs", asset.Name);
 }

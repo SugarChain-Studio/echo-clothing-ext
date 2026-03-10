@@ -92,6 +92,39 @@ declare namespace ItemDialog {
         requireLockPermission?: boolean;
     }
 
+    /** 滑动条配置 */
+    interface SliderConfig<DataType extends ExtendedItemData<any>> extends InteractableConfig<DataType> {
+        /** 滑动条是否显示，默认显示 */
+        show?: (ctx: DialogDrawContext<DataType>) => boolean;
+        /** 滑动条是否可用，默认可用 */
+        enable?: (ctx: DialogDrawContext<DataType>) => boolean;
+        /** 滑动条的位置和长度，默认宽度 400 高度 40 */
+        location?: { x: number; y: number; w: number };
+        /** 滑动条的配置 */
+        readonly config?: {
+            /** 滑动条的最大值，默认为100 */
+            max?: number;
+            /** 滑动条的最小值，默认为0 */
+            min?: number;
+            /** 滑动条的步长，默认为1 */
+            step?: number;
+        };
+        /** 滑动条当前的值，默认为0 */
+        value: (ctx: DialogDrawContext<DataType>) => number;
+        /** 滑动条数值改变时的回调 */
+        onChange: (ctx: DialogDrawContext<DataType>, value: number) => void;
+        /** 滑动条悬停时显示的文本，如果未定义则不显示 */
+        hover?: (ctx: DialogDrawContext<DataType>) => string | undefined;
+
+        /** 滑动条左侧标签，如果未定义则不显示 */
+        leftLabel?: (ctx: DialogDrawContextWithText<DataType>, curValue: number) => string | undefined;
+        /** 滑动条右侧标签，如果未定义则不显示 */
+        rightLabel?: (ctx: DialogDrawContextWithText<DataType>, curValue: number) => string | undefined;
+
+        /** 滑动条是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
+        requireLockPermission?: boolean;
+    }
+
     /** 回调类型 */
     type Callback<DataType extends ExtendedItemData<any>> = (data: DataType, item: Item, character: Character) => void;
     /** 带原始函数的回调类型 */
@@ -113,6 +146,7 @@ declare namespace ItemDialog {
         params?: ParameterConfig<DataType>[];
         texts?: TextConfig<DataType>[];
         checkboxes?: CheckBoxConfig<DataType>[];
+        sliders?: SliderConfig<DataType>[];
         ondraw?: Callback<DataType>;
         onload?: Callback<DataType>;
         onexit?: Callback<DataType>;

@@ -878,7 +878,7 @@ const assets = [
                     { Name: "InfoBlock", Key: "ib", Options: [{}, {}, {}] },
                     { Name: "Blur", Key: "b", Options: [{}, {}, {}, {}] },
                 ],
-                ScriptHooks: headItemDialog.createHooks(["Click", "Draw"], {
+                ScriptHooks: headItemDialog.createHooks({
                     ScriptDraw: headScriptDraw,
                     BeforeDraw: headBeforeDraw,
                 }),
