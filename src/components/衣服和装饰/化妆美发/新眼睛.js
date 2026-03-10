@@ -312,8 +312,8 @@ const assets = [
             ],
         },
         translation: {
-            CN: "未命名",
-            EN: "未命名",
+            CN: "異國短毛猫",
+            EN: "Exotic Shorthair",
         },
         layerNames: commonLayerNames,
         specials: commonSpecials,
@@ -333,8 +333,8 @@ const assets = [
             ],
         },
         translation: {
-            CN: "未命名",
-            EN: "未命名",
+            CN: "缅甸猫",
+            EN: "Burmese",
         },
         layerNames: commonLayerNames,
         specials: commonSpecials,

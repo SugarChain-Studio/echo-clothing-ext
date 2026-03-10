@@ -49,7 +49,7 @@ const copyGroups = [
             CN: "🍔前发(叠加)",
             EN: "🍔Front Hair (Stack)",
         },
-        overrides: { Hide: undefined },
+        overrides: { Hide: undefined, Priority: 52 },
     },
     {
         mirror: "新后发_Luzi_stack",
@@ -58,7 +58,7 @@ const copyGroups = [
             CN: "🍔后发(叠加)",
             EN: "🍔Back Hair (Stack)",
         },
-        overrides: { Hide: undefined },
+        overrides: { Hide: undefined, Priority: 5 },
     },
     {
         mirror: "BodyMarkings2_Luzi",

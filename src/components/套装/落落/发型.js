@@ -60,7 +60,7 @@ const assets = [
             DynamicGroupName: "新前发_Luzi",
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "B" }, { Name: "C" }],
         },
-        { translation: { CN: "姬发公主切", EN: "Fluffy Curls 1" }, layerNames },
+        { translation: { CN: "姬发公主切(前)", EN: "Hime Cut (Front)" }, layerNames },
     ],
     [
         ["新后发_Luzi"],
@@ -75,7 +75,7 @@ const assets = [
             DynamicGroupName: "新后发_Luzi",
             Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "C" }],
         },
-        { translation: { CN: "姬发公主切", EN: "Fluffy Curls 2" }, layerNames },
+        { translation: { CN: "姬发公主切(后)", EN: "Hime Cut (Back)" }, layerNames },
     ],
 ];
 
