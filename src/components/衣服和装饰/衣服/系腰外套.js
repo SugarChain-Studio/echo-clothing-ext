@@ -20,10 +20,6 @@ const assets = [
         },
         { translation: { CN: "系腰外套小", EN: "Small Waist-Tied Outerwear" } },
     ],
-];
-
-/** @type { AddAssetWithConfigParams[] }} */
-const assets2 = [
     [
         ["ClothOuter", "ClothLower", "Cloth"],
         {
@@ -45,11 +41,4 @@ const assets2 = [
 
 export default function () {
     AssetManager.addAssetWithConfig(assets);
-    for (const asset of assets) {
-        luziSuffixFixups(asset[0], asset[1].Name);
-    }
-    AssetManager.addAssetWithConfig(assets2);
-    for (const asset of assets2) {
-        luziSuffixFixups(asset[0], asset[1].Name);
-    }
 }

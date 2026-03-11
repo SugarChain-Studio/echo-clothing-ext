@@ -1,0 +1,30 @@
+import { AssetManager } from "../../../../assetForward";
+import { luziSuffixFixups } from "../../../../lib/fixups";
+
+/** @type {CustomAssetDefinition} */
+const asset = {
+    Name: "绑带鞋",
+    Random: false,
+    Top: 0,
+    Left: 0,
+    PoseMapping: {
+        Kneel: PoseType.HIDE,
+        KneelingSpread: PoseType.HIDE,
+        LegsClosed: "LegsClosed",
+        Spread: "Spread",
+        Hogtied: PoseType.HIDE,
+        AllFours: PoseType.HIDE,
+    },
+    Priority: 23,
+};
+
+/** @type {Translation.Entry} */
+const translation = {
+    CN: "绑带鞋",
+    EN: "Lace-up shoes",
+};
+
+export default function () {
+    AssetManager.addAssetWithConfig("Shoes", asset, { translation, layerNames: {} });
+    luziSuffixFixups("Shoes", asset.Name);
+}
