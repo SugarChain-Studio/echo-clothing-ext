@@ -1,3 +1,4 @@
+import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { createItemDialogTyped } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
@@ -151,6 +152,18 @@ const itemDialog = createItemDialogTyped({
     ],
 });
 
+/** @type {Translation.String} */
+const copyColorStrings = {
+    CN: {
+        复制颜色: "应用配套物品颜色",
+        H_复制颜色: "将此物品的颜色应用到配套的其他的物品上",
+    },
+    EN: {
+        复制颜色: "Apply matching item color",
+        H_复制颜色: "Apply this item's color to the matching other item",
+    },
+};
+
 /** @type {[CustomAssetDefinition, AddAssetWithConfigParams[2]]} */
 const upper = [
     assetUpper,
@@ -192,10 +205,13 @@ const upper = [
             Options: [{ Name: "无" }, { Name: "有" }],
             ScriptHooks: itemDialog.createHooks(),
         },
-        assetStrings: {
-            CN: { Select: "选择是否有手套", 无: "无", 有: "有", 复制颜色: "应用配套物品颜色" },
-            EN: { Select: "Select whether to have gloves", 无: "No", 有: "Yes", 复制颜色: "Apply matching item color" },
-        },
+        assetStrings: DialogTools.combine(
+            {
+                CN: { Select: "选择是否有手套", 无: "无", 有: "有" },
+                EN: { Select: "Select whether to have gloves", 无: "No", 有: "Yes" },
+            },
+            copyColorStrings
+        ),
     },
 ];
 
@@ -221,22 +237,13 @@ const lower = [
             Options: [{ Name: "无" }, { Name: "有" }],
             ScriptHooks: itemDialog.createHooks(),
         },
-        assetStrings: {
-            CN: {
-                Select: "选择是否有袜子",
-                无: "无",
-                有: "有",
-                复制颜色: "应用配套物品颜色",
-                H_复制颜色: "将此物品的颜色应用到配套的其他的物品上",
+        assetStrings: DialogTools.combine(
+            {
+                CN: { Select: "选择是否有袜子", 无: "无", 有: "有" },
+                EN: { Select: "Select whether to have socks", 无: "No", 有: "Yes" },
             },
-            EN: {
-                Select: "Select whether to have socks",
-                无: "No",
-                有: "Yes",
-                复制颜色: "Apply matching item color",
-                H_复制颜色: "Apply this item's color to the matching other item",
-            },
-        },
+            copyColorStrings
+        ),
     },
 ];
 
