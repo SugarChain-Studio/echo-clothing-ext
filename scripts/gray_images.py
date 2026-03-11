@@ -6,7 +6,7 @@ from typing import List, TypedDict, Callable
 
 # 通配符数组
 wildcard_paths = [
-    "resources/Assets/Female3DCG/Cloth/小西装S_*_领带.png",
+    "resources/Assets/Female3DCG/长袖子_Luzi/**/袖子_*_A3.png",
 ]
 
 # 定义亮度范围的类型
@@ -15,7 +15,7 @@ class BrightnessRange(TypedDict):
     max: float
 
 # 目标亮度范围配置
-TARGET_BRIGHTNESS_RANGE = None
+TARGET_BRIGHTNESS_RANGE = {'min': 0.5, 'max': 1} 
 
 
 def get_brightness_range(file_paths: List[str]) -> BrightnessRange:
