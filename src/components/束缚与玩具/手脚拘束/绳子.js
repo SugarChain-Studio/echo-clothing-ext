@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { TypedOptionCombiner } from "../../lib";
+import { AssetManager } from "../../../assetForward";
+import { TypedOptionCombiner } from "../../../lib";
 
 const modeText = {
     CN: (idx) => `模式${idx}`,

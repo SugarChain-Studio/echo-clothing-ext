@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { PoseMapTool } from "../../lib";
+import { AssetManager } from "../../../assetForward";
+import { PoseMapTool } from "../../../lib";
 
 /** @type { AddAssetWithConfigParams } */
 const asset = [

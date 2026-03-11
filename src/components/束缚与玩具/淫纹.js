@@ -312,6 +312,7 @@ const asset = [
         ParentGroup: {},
         DefaultColor: ["#EA3E74", "Default", "Default", "Default", "#D75CFF", "#72B5FF", "#FFBFF1"],
         DynamicGroupName: "ItemPelvis",
+        Category: ["Fantasy"],
         PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
         Layer: [
             { Name: "淫纹", AllowTypes: { t: 0 } },
@@ -394,6 +395,7 @@ const clothAsset = [
         Extended: true,
         PoseMapping: { ...AssetPoseMapping.Panties },
         Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+        Category: ["Fantasy"],
         ParentGroup: {},
         DynamicGroupName: "ItemPelvis",
         Layer: clothLCSetting.map((layer, index) => ({ Name: layer.Src, AllowTypes: { typed: index } })),

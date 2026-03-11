@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/index";
-import { AssetManager } from "../../assetForward";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { AssetManager } from "../../../assetForward";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<TextItemData>} */
 function afterDraw(

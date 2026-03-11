@@ -1,9 +1,9 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { flowAlgorithm, flowText, maxProdFlow } from "../套装/Yaoki/牛奶贩卖机";
-import { createItemDialogModular, Typing } from "../../lib";
-import { holdsEmptyGlass, setGlassContent } from "./手持物/玻璃杯饮料";
+import { flowAlgorithm, flowText, maxProdFlow } from "../../套装/Yaoki/牛奶贩卖机";
+import { createItemDialogModular, Typing } from "../../../lib";
+import { holdsEmptyGlass, setGlassContent } from "../手持物/玻璃杯饮料";
 
 const orgasmState = new StateTools.OrgasmState();
 

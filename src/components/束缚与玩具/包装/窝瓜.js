@@ -1,7 +1,7 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 import { Tools } from "@mod-utils/Tools";
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

@@ -1,5 +1,5 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

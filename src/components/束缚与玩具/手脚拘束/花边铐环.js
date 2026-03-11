@@ -1,5 +1,5 @@
-import { AssetManager } from "../../assetForward";
-import { PoseMapTool, Typing } from "../../lib";
+import { AssetManager } from "../../../assetForward";
+import { PoseMapTool, Typing } from "../../../lib";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [

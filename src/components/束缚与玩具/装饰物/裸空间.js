@@ -1,6 +1,6 @@
 import { ImageMapTools, StateTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { createItemDialogNoArch, Typing } from "../../lib";
+import { AssetManager } from "../../../assetForward";
+import { createItemDialogNoArch, Typing } from "../../../lib";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 
 const typeURL = (type) => `luzi-canvas://rakuukan-type-${type}`;

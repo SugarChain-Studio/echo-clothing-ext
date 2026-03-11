@@ -49,6 +49,7 @@ const asset = {
     AllowTighten: true,
     DrawLocks: false,
     Prerequisite: ["HasBreasts"],
+    Category: ["Fantasy"],
     RemoveTime: 5,
     Extended: true,
     Time: 10,

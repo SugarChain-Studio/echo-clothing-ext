@@ -1,7 +1,7 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { luziSuffixFixups } from "../../lib/fixups";
-import { createItemDialogModular, PoseMapTool, PostPass } from "../../lib";
+import { luziSuffixFixups } from "../../../lib/fixups";
+import { createItemDialogModular, PoseMapTool, PostPass } from "../../../lib";
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
