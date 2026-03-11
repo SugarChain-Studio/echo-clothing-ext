@@ -221,7 +221,7 @@ const groups = [
             Group: "外观工具",
             Priority: 0,
             AllowNone: true,
-            AllowColorize: false,
+            Random: false,
             Asset: [],
             Color: ["Default"],
         },

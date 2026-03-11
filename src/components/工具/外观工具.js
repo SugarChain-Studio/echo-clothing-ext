@@ -9,6 +9,7 @@ const asset = {
     Name: "兼容工具",
     Visible: false,
     Random: false,
+    AllowColorize: false,
     Gender: "F",
 };
 

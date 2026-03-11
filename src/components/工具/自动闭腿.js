@@ -7,6 +7,7 @@ const asset = {
     Name: "自动闭腿",
     Visible: false,
     Random: false,
+    AllowColorize: false,
     Gender: "F",
     DynamicScriptDraw: true,
 };
