@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { AssetManager } from "../../../../assetForward";
+import { Typing } from "../../../../lib";
 
 /** @type { AddAssetWithConfigParams }} */
 const asset = [

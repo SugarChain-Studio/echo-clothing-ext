@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { ExtendedTools } from "../../../lib";
+import { AssetManager } from "../../../../assetForward";
+import { ExtendedTools } from "../../../../lib";
 
 const hairAccShared = {
     Random: false,

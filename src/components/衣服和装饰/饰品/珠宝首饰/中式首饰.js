@@ -1,6 +1,6 @@
-import { AssetManager } from "../../assetForward";
-import { PoseMapTool } from "../../lib";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { AssetManager } from "../../../../assetForward";
+import { PoseMapTool } from "../../../../lib";
+import { luziSuffixFixups } from "../../../../lib/fixups";
 
 /** @type {(Name:string, config: Pick<CustomAssetDefinitionAppearance, 'Priority' | 'Top' | 'Left'> ) => CustomAssetDefinitionAppearance} */
 const hairpinSharedDef = (Name, config) => ({
