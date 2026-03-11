@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { AddAssetWithConfigParams[] }} */
 const assets = [

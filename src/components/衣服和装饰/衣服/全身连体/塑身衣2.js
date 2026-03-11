@@ -1,6 +1,6 @@
-import { PoseMapTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { PoseMapTool } from "../../../../lib";
+import { AssetManager } from "../../../../assetForward";
+import { luziSuffixFixups } from "../../../../lib/fixups";
 
 /** @type {AssetLayerDefinition} */
 const base = {

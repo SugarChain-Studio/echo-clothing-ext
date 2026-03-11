@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { AssetManager } from "../../../../assetForward";
+import { luziSuffixFixups } from "../../../../lib/fixups";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const upperLayer = {
