@@ -11,6 +11,7 @@ import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 
 import runBCPatch from "./bcPatch";
 import runDrawMod from "./drawMod";
+import { ItemPermissionCache } from "./lib/itemPermissionCache";
 
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",
@@ -45,6 +46,7 @@ once(ModInfo.name, async () => {
     AssetManager.setLogger(Logger);
 
     CraftingCache.setup(Logger);
+    ItemPermissionCache.setup(Logger);
 
     runBCPatch();
     runDrawMod();
