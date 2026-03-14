@@ -10,7 +10,6 @@ const asset = {
     Top: 0,
     Left: 0,
     Difficulty: 12,
-    SelfBondage: 8,
     Time: 40,
     RemoveTime: 30,
     Extended: true,

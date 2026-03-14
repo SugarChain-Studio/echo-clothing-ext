@@ -105,7 +105,6 @@ const assets = [
             Top: 0,
             Left: 0,
             Difficulty: 10,
-            SelfBondage: 6,
             Time: 30,
             RemoveTime: 40,
             AllowTighten: true,
