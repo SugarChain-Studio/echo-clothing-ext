@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type {AssetLayerDefinition} */
 const propsS = {
@@ -44,7 +44,7 @@ const asset = [
         Effect: [E.Leash],
         DefaultColor: ["#111111", "#FFFFFF", "#111111", "#FFFFFF"],
         Layer: [
-            ...Typing.layerMap(
+            ...Type.layerMap(
                 [
                     { Name: "s_base", ColorGroup: "base" },
                     { Name: "s_hlight", ColorGroup: "hlight" },
@@ -55,7 +55,7 @@ const asset = [
                     AllowTypes: { typed: [0, 1] },
                 })
             ),
-            ...Typing.layerMap(
+            ...Type.layerMap(
                 [
                     { Name: "t_base", ColorGroup: "base" },
                     { Name: "t_hlight", ColorGroup: "hlight" },
@@ -66,7 +66,7 @@ const asset = [
                     AllowTypes: { typed: [0, 2] },
                 })
             ),
-            ...Typing.layerMap([{ Name: "af_base" }, { Name: "af_hlight" }], (l) => ({
+            ...Type.layerMap([{ Name: "af_base" }, { Name: "af_hlight" }], (l) => ({
                 ...propsAf,
                 CopyLayerColor: `t_${l.Name.substring(3)}`,
                 ...l,
@@ -80,12 +80,12 @@ const asset = [
             CN: {
                 base: "色调",
                 hlight: "高光",
-                ...Typing.stringEntries([["s_base", "s_hlight"], "肩"], [["t_base", "t_hlight"], "髋"]),
+                ...Type.stringEntries([["s_base", "s_hlight"], "肩"], [["t_base", "t_hlight"], "髋"]),
             },
             EN: {
                 base: "Tone",
                 hlight: "Highlight",
-                ...Typing.stringEntries([["s_base", "s_hlight"], "Shoulder"], [["t_base", "t_hlight"], "Hip"]),
+                ...Type.stringEntries([["s_base", "s_hlight"], "Shoulder"], [["t_base", "t_hlight"], "Hip"]),
             },
         },
         extended: {

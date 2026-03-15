@@ -1,4 +1,4 @@
-import { PoseMapTool, Typing } from "../../../lib";
+import { PoseMapTool, Type } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinitionBase} */
@@ -25,7 +25,7 @@ const assetBase = {
 const asset = [
     [
         "ClothAccessory",
-        Typing.mergeApp(assetBase),
+        Type.mergeApp(assetBase),
         {
             translation: { CN: "书包", EN: "School Bag" },
             layerNames: {
@@ -36,7 +36,7 @@ const asset = [
     ],
     [
         "ItemArms",
-        Typing.mergeItem(assetBase, {
+        Type.mergeItem(assetBase, {
             SetPose: ["BackElbowTouch"],
             AllowActivePose: ["BackElbowTouch"],
             Time: 30,

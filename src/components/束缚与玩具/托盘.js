@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { createItemDialogNoArch, Typing } from "../../lib";
+import { createItemDialogNoArch, Type } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -85,7 +85,7 @@ const maxv = {
 
 /** @typedef {(property:ExtendItemProperties)=>boolean} PropCheck */
 
-const checks = Typing.transform(
+const checks = Type.transform(
     {
         IsExtend: /** @type {(property:ItemProperties)=> property is ExtendItemProperties} */ (property) =>
             property && Array.isArray(/** @type {any}*/ (property).Luzi_InventoryContent),
@@ -131,7 +131,7 @@ const checks = Typing.transform(
     })
 );
 
-const buttons = Typing.record({
+const buttons = Type.record({
     曲奇加一: { x: 1265, y: 500, w: 225, h: 55 },
     曲奇减一: { x: 1510, y: 500, w: 225, h: 55 },
     曲奇加满: { x: 1385, y: 560, w: 225, h: 55 },

@@ -90,7 +90,7 @@ function repeatEntries(...args) {
  * @typedef {(arg:T[], func:(arg:T)=>R)=>R[]} ArrayTransformFunction
  */
 
-export const Typing = /** @type {const} */ ({
+export const Type = /** @type {const} */ ({
     attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
     groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
     drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),

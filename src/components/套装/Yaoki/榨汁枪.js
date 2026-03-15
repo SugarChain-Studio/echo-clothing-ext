@@ -1,4 +1,4 @@
-import { ArmMaskTool, Typing } from "../../../lib";
+import { ArmMaskTool, Type } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -13,9 +13,9 @@ const asset = {
     DefaultColor: ["Default", "#000000", "Default"],
     Layer: [
         { Name: "dc" },
-        Typing.screenLayer({ Name: "gc" }),
+        Type.screenLayer({ Name: "gc" }),
         { Name: "dg" },
-        Typing.screenLayer({ Name: "gg" }),
+        Type.screenLayer({ Name: "gg" }),
         { Name: "l" },
     ],
 };

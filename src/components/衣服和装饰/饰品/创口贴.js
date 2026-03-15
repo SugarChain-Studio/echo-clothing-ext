@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 import { groupFixup } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinitionBase} */
@@ -48,18 +48,14 @@ const CraftGroup = "创口贴";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assetN = [
-    ["Suit", Typing.mergeApp(baseAsset), { translation, layerNames }],
-    ["Bra", Typing.mergeApp(upperAsset), { translation, layerNames }],
-    [
-        "Panties",
-        Typing.mergeApp(lowerAsset, { Expose: ["ItemVulvaPiercings", "ItemButt"] }),
-        { translation, layerNames },
-    ],
-    ["ItemNipples", Typing.mergeItem(upperAsset, { CraftGroup }), { translation, layerNames }],
-    ["ItemVulva", Typing.mergeItem(lowerAsset, { CraftGroup }), { translation, layerNames }],
+    ["Suit", Type.mergeApp(baseAsset), { translation, layerNames }],
+    ["Bra", Type.mergeApp(upperAsset), { translation, layerNames }],
+    ["Panties", Type.mergeApp(lowerAsset, { Expose: ["ItemVulvaPiercings", "ItemButt"] }), { translation, layerNames }],
+    ["ItemNipples", Type.mergeItem(upperAsset, { CraftGroup }), { translation, layerNames }],
+    ["ItemVulva", Type.mergeItem(lowerAsset, { CraftGroup }), { translation, layerNames }],
     [
         "ItemVulvaPiercings",
-        Typing.mergeItem(lowerAsset, { CraftGroup, Block: ["ItemVulva"] }),
+        Type.mergeItem(lowerAsset, { CraftGroup, Block: ["ItemVulva"] }),
         { translation, layerNames },
     ],
 ];

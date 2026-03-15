@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
@@ -37,8 +37,8 @@ const asset = [
             Layer: [
                 { Name: "BL" },
                 { Name: "BR" },
-                Typing.multiplyLayer({ Name: "SL" }),
-                Typing.multiplyLayer({ Name: "SR" }),
+                Type.multiplyLayer({ Name: "SL" }),
+                Type.multiplyLayer({ Name: "SR" }),
             ],
         },
         {
@@ -61,8 +61,8 @@ const asset = [
             Layer: [
                 { Name: "BL" },
                 { Name: "BR" },
-                Typing.multiplyLayer({ Name: "SL" }),
-                Typing.multiplyLayer({ Name: "SR" }),
+                Type.multiplyLayer({ Name: "SL" }),
+                Type.multiplyLayer({ Name: "SR" }),
             ],
         },
         {

@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { Typing, PoseMapTool } from "../../lib";
+import { Type, PoseMapTool } from "../../lib";
 import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {AssetPoseName[]} */
@@ -155,13 +155,13 @@ const asset = {
             Name: "Cross链",
             Priority: 26,
             ColorGroup: "锁链",
-            ShowForAttribute: Typing.attributes(["LuziXCross"]),
+            ShowForAttribute: Type.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
         },
         {
             Name: "Cross锚",
             Priority: 26,
-            ShowForAttribute: Typing.attributes(["LuziXCross"]),
+            ShowForAttribute: Type.attributes(["LuziXCross"]),
             AllowTypes: { a: 0, l: 0 },
         },
         {
@@ -458,7 +458,7 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemAddon", asset, { translation, layerNames, extended, assetStrings: dialog });
     AssetManager.modifyAsset("ItemDevices", "X-Cross", (group, asset) => {
-        asset.Attribute = Typing.attributes([...asset.Attribute, "LuziXCross"]);
+        asset.Attribute = Type.attributes([...asset.Attribute, "LuziXCross"]);
     });
     luziSuffixFixups("ItemAddon", asset.Name);
 }

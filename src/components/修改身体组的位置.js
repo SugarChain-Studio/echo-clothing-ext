@@ -1,17 +1,17 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
-import { Typing } from "../lib";
+import { Type } from "../lib";
 
 /** @type {AssetDefinitionBase["DrawOffset"]} */
 const customOffset = [
     ...["FlatChastityCage", "PlasticChastityCage", "FuturisticTrainingBelt"].map((Asset) =>
-        Typing.drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
+        Type.drawOffset({ Group: "ItemVulva", Asset, Y: -20 })
     ),
-    ...["BasicCockring", "LockingCockring"].map((Asset) => Typing.drawOffset({ Group: "ItemVulva", Asset, Y: -36 })),
-    ...Typing.groups(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
-        Typing.drawOffset({ Group, Y: -16 })
+    ...["BasicCockring", "LockingCockring"].map((Asset) => Type.drawOffset({ Group: "ItemVulva", Asset, Y: -36 })),
+    ...Type.groups(["Pussy", "ItemVulva", "ItemVulvaPiercings", "ItemButt"]).map((Group) =>
+        Type.drawOffset({ Group, Y: -16 })
     ),
-    ...["CockSock", "Jockstrap"].map((Asset) => Typing.drawOffset({ Asset, Y: -20 })),
+    ...["CockSock", "Jockstrap"].map((Asset) => Type.drawOffset({ Asset, Y: -20 })),
     { Asset: "Splatters", Layer: ["Internal2", "Internal3"], Y: -20 },
     { Asset: "ExtendablePostureCollar", Y: -11, X: -10 },
 ];

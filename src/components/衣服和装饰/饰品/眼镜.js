@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
@@ -42,7 +42,7 @@ const assets = [
             Top: 80,
             Layer: [
                 { Name: "r", CreateLayerTypes: ["typed"] },
-                Typing.screenLayer({ Name: "rg", CreateLayerTypes: ["typed"] }),
+                Type.screenLayer({ Name: "rg", CreateLayerTypes: ["typed"] }),
                 { Name: "g", CreateLayerTypes: ["typed"] },
             ],
             DefaultColor: ["#050505", "Default"],

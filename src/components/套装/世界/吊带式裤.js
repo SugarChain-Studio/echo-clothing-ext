@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {AddAssetWithConfigParams} */
@@ -48,11 +48,11 @@ const asset = [
                 "束带(上)": "束带(上)",
                 "搭扣(下)": "搭扣(下)",
                 "搭扣(上)": "搭扣(上)",
-                ...Typing.stringEntries(
+                ...Type.stringEntries(
                     [["右_A0", "右_A1", "右_B1", "右_C1", "右_C2", "右_C3", "右_C4"], "右"],
                     [["右_B2"], "右(附加)"]
                 ),
-                ...Typing.stringEntries(
+                ...Type.stringEntries(
                     [["左_A0", "左_A1", "左_B1", "左_C1", "左_C2", "左_C3", "左_C4"], "左"],
                     [["左_B2"], "左(附加)"]
                 ),
@@ -66,11 +66,11 @@ const asset = [
                 "束带(上)": "Belt (Upper)",
                 "搭扣(下)": "Buckle (Lower)",
                 "搭扣(上)": "Buckle (Upper)",
-                ...Typing.stringEntries(
+                ...Type.stringEntries(
                     [["右_A0", "右_A1", "右_B1", "右_C1", "右_C2", "右_C3", "右_C4"], "Right"],
                     [["右_B2"], "Right (Attached)"]
                 ),
-                ...Typing.stringEntries(
+                ...Type.stringEntries(
                     [["左_A0", "左_A1", "左_B1", "左_C1", "左_C2", "左_C3", "左_C4"], "Left"],
                     [["左_B2"], "Left (Attached)"]
                 ),

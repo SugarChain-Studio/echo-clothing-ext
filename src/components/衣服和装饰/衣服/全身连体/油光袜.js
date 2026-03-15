@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
-import { AfterAssetOverrides, PoseMapTool, Typing } from "../../../../lib";
+import { AfterAssetOverrides, PoseMapTool, Type } from "../../../../lib";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {AddAssetWithConfigParams[]} */
@@ -69,7 +69,7 @@ const asset = [
                 { Name: "D5", ColorGroup: "HL" },
                 { Name: "D6", ColorGroup: "HL" },
                 { Name: "D7", ColorGroup: "HL" },
-                ...Typing.layerMap(
+                ...Type.layerMap(
                     [
                         { Name: "E1", CopyLayerColor: "A1" },
                         { Name: "F1", CopyLayerColor: "B1" },

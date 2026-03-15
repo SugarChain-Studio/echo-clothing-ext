@@ -1,4 +1,4 @@
-import { ImmPass, PoseMapTool, Typing } from "../../../../lib";
+import { ImmPass, PoseMapTool, Type } from "../../../../lib";
 import { AssetManager } from "../../../../assetForward";
 import { ImageMapTools } from "@mod-utils/Tools";
 
@@ -36,14 +36,14 @@ const asset = [
             translation: { CN: "时韵（肩部）", EN: "Chrono Pattern (Shoulder)" },
             layerNames: {
                 CN: {
-                    ...Typing.stringEntries([["A1", "B1"], "左"]),
-                    ...Typing.stringEntries([["A2", "B2"], "右"]),
+                    ...Type.stringEntries([["A1", "B1"], "左"]),
+                    ...Type.stringEntries([["A2", "B2"], "右"]),
                     Base: "基础",
                     Sequin: "亮片",
                 },
                 EN: {
-                    ...Typing.stringEntries([["A1", "B1"], "Left"]),
-                    ...Typing.stringEntries([["A2", "B2"], "Right"]),
+                    ...Type.stringEntries([["A1", "B1"], "Left"]),
+                    ...Type.stringEntries([["A2", "B2"], "Right"]),
                     Base: "Base",
                     Sequin: "Sequin",
                 },
@@ -81,14 +81,14 @@ const asset = [
             translation: { CN: "时韵（身体）", EN: "Chrono Pattern (Body)" },
             layerNames: {
                 CN: {
-                    ...Typing.stringEntries([["A1_U", "A2_U", "A1_L", "A2_L"], "左"]),
-                    ...Typing.stringEntries([["B1_U", "B2_U", "B1_L", "B2_L"], "右"]),
+                    ...Type.stringEntries([["A1_U", "A2_U", "A1_L", "A2_L"], "左"]),
+                    ...Type.stringEntries([["B1_U", "B2_U", "B1_L", "B2_L"], "右"]),
                     Base: "基础",
                     Sequin: "亮片",
                 },
                 EN: {
-                    ...Typing.stringEntries([["A1_U", "A2_U", "A1_L", "A2_L"], "Left"]),
-                    ...Typing.stringEntries([["B1_U", "B2_U", "B1_L", "B2_L"], "Right"]),
+                    ...Type.stringEntries([["A1_U", "A2_U", "A1_L", "A2_L"], "Left"]),
+                    ...Type.stringEntries([["B1_U", "B2_U", "B1_L", "B2_L"], "Right"]),
                     Base: "Base",
                     Sequin: "Sequin",
                 },

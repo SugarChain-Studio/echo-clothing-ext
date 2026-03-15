@@ -1,7 +1,7 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { Container, createAfterDrawProcess, createItemDialogModular, Typing } from "../../../lib";
+import { Container, createAfterDrawProcess, createItemDialogModular, Type } from "../../../lib";
 
 // Milk Vending by Yaoki
 
@@ -441,7 +441,7 @@ const afterDrawProcess = createAfterDrawProcess(
     },
 });
 
-const buttons = Typing.record({
+const buttons = Type.record({
     左: /** @type {Rect} */ ({ x: 1265, y: 600, w: 225, h: 55 }),
     右: /** @type {Rect} */ ({ x: 1510, y: 600, w: 225, h: 55 }),
     左手: /** @type {Rect} */ ({ x: 1265, y: 890, w: 225, h: 55 }),

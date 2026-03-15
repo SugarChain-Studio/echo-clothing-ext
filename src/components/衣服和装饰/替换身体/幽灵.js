@@ -1,10 +1,10 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing, PoseMapTool } from "../../../lib";
+import { Type, PoseMapTool } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { ImageMapTools, Tools } from "@mod-utils/Tools";
 
-const mergingClothes = Typing.groups([
+const mergingClothes = Type.groups([
     "Bra",
     "Panties",
     "Suit",
@@ -164,7 +164,7 @@ function afterDraw(data, originalFunction, drawData) {
             if (C.PoseMapping.BodyUpper === "BaseUpper" || C.PoseMapping.BodyUpper === "TapedHands") {
                 const bodySize = C.Appearance.find((a) => a.Asset.Group.Name === "BodyUpper");
                 if (bodySize) {
-                    for (const g of Typing.groups(["HandsLeft", "HandsRight"])) {
+                    for (const g of Type.groups(["HandsLeft", "HandsRight"])) {
                         const armMask = ImageMapTools.assetLayer(
                             g,
                             `${bodySize.Asset.Name}_Asian`,

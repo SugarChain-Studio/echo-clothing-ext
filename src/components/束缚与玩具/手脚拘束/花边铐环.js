@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTool, Typing } from "../../../lib";
+import { PoseMapTool, Type } from "../../../lib";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
@@ -28,14 +28,14 @@ const assets = [
             translation: { CN: "花边手环", EN: "Lace Wrist Cuffs" },
             layerNames: {
                 CN: {
-                    ...Typing.stringEntries([["A1", "A2"], "左"]),
-                    ...Typing.stringEntries([["B1", "B2"], "右"]),
+                    ...Type.stringEntries([["A1", "A2"], "左"]),
+                    ...Type.stringEntries([["B1", "B2"], "右"]),
                     Lace: "花边",
                     Cuff: "铐环",
                 },
                 EN: {
-                    ...Typing.stringEntries([["A1", "A2"], "Left"]),
-                    ...Typing.stringEntries([["B1", "B2"], "Right"]),
+                    ...Type.stringEntries([["A1", "A2"], "Left"]),
+                    ...Type.stringEntries([["B1", "B2"], "Right"]),
                     Lace: "Lace",
                     Cuff: "Cuff",
                 },
@@ -71,16 +71,16 @@ const assets = [
             translation: { CN: "花边大腿环", EN: "Lace Thigh Cuffs" },
             layerNames: {
                 CN: {
-                    ...Typing.stringEntries([["A1", "A2", "A3", "A4"], "左"]),
-                    ...Typing.stringEntries([["B1", "B2", "B3", "B4"], "右"]),
+                    ...Type.stringEntries([["A1", "A2", "A3", "A4"], "左"]),
+                    ...Type.stringEntries([["B1", "B2", "B3", "B4"], "右"]),
                     Lace: "花边",
                     Cuff: "铐环",
                     Ring: "环",
                     Chain: "链条",
                 },
                 EN: {
-                    ...Typing.stringEntries([["A1", "A2", "A3", "A4"], "Left"]),
-                    ...Typing.stringEntries([["B1", "B2", "B3", "B4"], "Right"]),
+                    ...Type.stringEntries([["A1", "A2", "A3", "A4"], "Left"]),
+                    ...Type.stringEntries([["B1", "B2", "B3", "B4"], "Right"]),
                     Lace: "Lace",
                     Cuff: "Cuff",
                     Ring: "Ring",

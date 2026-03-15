@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [
@@ -28,7 +28,7 @@ const asset = [
             },
         },
     ],
-    ...Typing.mergeAddAssetParams(
+    ...Type.mergeAddAssetParams(
         [
             [],
             {

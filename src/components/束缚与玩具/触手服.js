@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { Typing, PoseMapTool } from "../../lib";
+import { Type, PoseMapTool } from "../../lib";
 import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<VibratingItemData, {}>} */
@@ -119,7 +119,7 @@ const asset = {
             ParentGroup: "BodyUpper",
             Name: "触手服手套",
             Priority: 27,
-            HideForAttribute: Typing.attributes(["LuziLimbTeleDevice"]),
+            HideForAttribute: Type.attributes(["LuziLimbTeleDevice"]),
             PoseMapping: {
                 AllFours: "Hide",
                 Hogtied: "Hide",

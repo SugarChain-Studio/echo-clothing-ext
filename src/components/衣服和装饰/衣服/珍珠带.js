@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -13,11 +13,11 @@ const asset = {
     DefaultColor: ["#545454", "#000000", "Default"],
     Layer: [
         { Name: "rd" },
-        Typing.screenLayer({ Name: "rg" }),
+        Type.screenLayer({ Name: "rg" }),
         { Name: "sd" },
-        Typing.screenLayer({ Name: "sg" }),
+        Type.screenLayer({ Name: "sg" }),
         { Name: "pd" },
-        Typing.screenLayer({ Name: "pg" }),
+        Type.screenLayer({ Name: "pg" }),
     ],
 };
 

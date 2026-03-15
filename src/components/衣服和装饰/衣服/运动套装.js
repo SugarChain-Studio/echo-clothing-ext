@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Typing } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Type } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -87,7 +87,7 @@ const assets = [
                     { Name: "l", Priority: 15 },
                     { Name: "bd", CreateLayerTypes: ["m"] },
                     { Name: "text", HasImage: false, Left: 250, Top: 280 },
-                    Typing.screenLayer({ Name: "bg", CreateLayerTypes: ["m"] }),
+                    Type.screenLayer({ Name: "bg", CreateLayerTypes: ["m"] }),
                 ],
             },
             (asset) => ArmMaskTool.createArmMaskForCloth(asset.DynamicGroupName, asset)
@@ -147,7 +147,7 @@ const assets = [
             DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
             PoseMapping: PoseMapTool.hideFullBody(),
-            Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Typing.screenLayer({ Name: "g", CreateLayerTypes: ["m"] })],
+            Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Type.screenLayer({ Name: "g", CreateLayerTypes: ["m"] })],
         },
         {
             translation: {
@@ -180,7 +180,7 @@ const assets = [
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "l" },
-                Typing.screenLayer({ Name: "g", CreateLayerTypes: ["m"] }),
+                Type.screenLayer({ Name: "g", CreateLayerTypes: ["m"] }),
             ],
         },
         {
@@ -238,14 +238,14 @@ const assets = [
             DefaultColor: ["#292929", "#00BBA6", "#FF4F4F", "#FF4F4F"],
             Layer: [
                 { Name: "cbd", Priority: 6 },
-                Typing.screenLayer({ Name: "cbg", Priority: 6 }),
+                Type.screenLayer({ Name: "cbg", Priority: 6 }),
                 { Name: "cfd", CopyLayerColor: "cbd" },
-                Typing.screenLayer({ Name: "cfg" }),
+                Type.screenLayer({ Name: "cfg" }),
                 { Name: "crd" },
-                Typing.screenLayer({ Name: "crg" }),
+                Type.screenLayer({ Name: "crg" }),
                 { Name: "dud" },
                 { Name: "dld" },
-                Typing.screenLayer({ Name: "dg" }),
+                Type.screenLayer({ Name: "dg" }),
             ],
         },
         {

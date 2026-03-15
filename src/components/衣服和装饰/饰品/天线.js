@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../../src/assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type { AddAssetWithConfigParams } */
 const asset = [
@@ -24,7 +24,7 @@ const asset = [
         ],
         Priority: 55,
         Layer: [
-            ...Typing.layerMap(
+            ...Type.layerMap(
                 [
                     { Name: "A1", ColorGroup: "主体" },
                     { Name: "A2", ColorGroup: "侧面" },
@@ -34,7 +34,7 @@ const asset = [
                 (l) => ({ AllowTypes: [{ typed: 0 }, { typed: 1 }, { typed: 4 }, { typed: 5 }], ...l })
             ),
             { Name: "A5", AllowTypes: [{ typed: 1 }, { typed: 5 }], ColorGroup: "发光" },
-            ...Typing.layerMap(
+            ...Type.layerMap(
                 [
                     { Name: "B1", ColorGroup: "主体" },
                     { Name: "B2", ColorGroup: "侧面" },
@@ -50,12 +50,12 @@ const asset = [
         translation: { CN: "天线耳机", EN: "Antenna Headphone" },
         layerNames: {
             CN: {
-                ...Typing.repeatEntries([["A1", "A2", "A3", "A4"], "右"]),
-                ...Typing.repeatEntries([["B1", "B2", "B3", "B4"], "左"]),
+                ...Type.repeatEntries([["A1", "A2", "A3", "A4"], "右"]),
+                ...Type.repeatEntries([["B1", "B2", "B3", "B4"], "左"]),
             },
             EN: {
-                ...Typing.repeatEntries([["A1", "A2", "A3", "A4"], "Right"]),
-                ...Typing.repeatEntries([["B1", "B2", "B3", "B4"], "Left"]),
+                ...Type.repeatEntries([["A1", "A2", "A3", "A4"], "Right"]),
+                ...Type.repeatEntries([["B1", "B2", "B3", "B4"], "Left"]),
                 主体: "Main",
                 侧面: "Side",
                 天线: "Antenna",

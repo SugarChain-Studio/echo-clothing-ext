@@ -1,10 +1,10 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../assetForward";
-import { Typing } from "../../lib";
+import { Type } from "../../lib";
 
 // 兼容 Echo V1 的自定义组名
 const v1CompatibleGroups = new Set(
-    Typing.groups([
+    Type.groups([
         "左眼_Luzi",
         "右眼_Luzi",
         "新前发_Luzi",

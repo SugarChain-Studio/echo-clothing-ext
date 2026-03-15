@@ -1,7 +1,16 @@
 import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { luziSuffixFixups } from "../../../lib/fixups";
-import { createItemDialogModular, PoseMapTool, PostPass } from "../../../lib";
+import { createItemDialogModular, PoseMapTool, PostPass, Type } from "../../../lib";
+import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
+
+/**
+ * @typedef {Object} ShockEvent
+ * @property {[{Group:AssetGroupItemName, Asset:string}]} immediateShock
+ */
+
+/** @type {ChatRoomRemoteEventEmitter<ShockEvent>} */
+export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@ShockEventHandler");
 
 /**
  * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
@@ -97,6 +106,7 @@ const dialog = createItemDialogModular({
         {
             location: { x: 1510, y: 675, w: 225, h: 55 },
             key: "触发电击",
+            hover: () => "H_触发电击",
             show: ({ data }) => data.currentModule === "Base",
             onclick: ({ item, chara }) => {
                 PropertyShockPublishAction(chara, item, false);
@@ -118,188 +128,176 @@ const dialog = createItemDialogModular({
     ],
 });
 
-/** @type { CustomAssetDefinition } */
-const asset = PostPass.asset(
+/** @type { AddAssetWithConfigParams } */
+const asset = [
+    ["ItemLegs"],
+    PostPass.asset(
+        {
+            Name: "电击器",
+            Random: false,
+            Gender: "F",
+            ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 60 }]),
+            Difficulty: 3,
+            Priority: 14,
+            Fetish: ["Masochism"],
+            DynamicGroupName: "ItemLegs",
+            PoseMapping: PoseMapTool.config(
+                ["Kneel", "KneelingSpread", "Spread", "LegsClosed"],
+                ["AllFours", "Hogtied"]
+            ),
+            Layer: [
+                { Name: "绑带" },
+                { Name: "本体" },
+                { Name: "电击肛塞", AllowTypes: [{ a: 1 }] },
+                { Name: "阴部", AllowTypes: [{ p: 1 }] },
+                { Name: "大腿内侧", AllowTypes: [{ u: 1 }] },
+                { Name: "小腹", AllowTypes: [{ d: 1 }] },
+                { Name: "闪光" },
+            ],
+        },
+        (asset) => {
+            luziSuffixFixups("ItemLegs", asset.Name);
+        }
+    ),
     {
-        Name: "电击器",
-        Random: false,
-        Gender: "F",
-        ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 60 }]),
-        Difficulty: 3,
-        Priority: 14,
-        Fetish: ["Masochism"],
-        PoseMapping: PoseMapTool.config(["Kneel", "KneelingSpread", "Spread", "LegsClosed"], ["AllFours", "Hogtied"]),
-        Layer: [
-            { Name: "绑带" },
-            { Name: "本体" },
-            { Name: "电击肛塞", AllowTypes: [{ a: 1 }] },
-            { Name: "阴部", AllowTypes: [{ p: 1 }] },
-            { Name: "大腿内侧", AllowTypes: [{ u: 1 }] },
-            { Name: "小腹", AllowTypes: [{ d: 1 }] },
-            { Name: "闪光" },
-        ],
-    },
-    (asset) => {
-        luziSuffixFixups("ItemLegs", asset.Name);
-    }
-);
-
-const layerNames = {
-    EN: {
-        绑带: "Straps",
-        本体: "Body",
-        电击肛塞: "Anal",
-        阴部: "Vaginal",
-        大腿内侧: "Inner Thigh",
-        小腹: "Lower Abdomen",
-        闪光: "Glow",
-    },
-};
-
-/** @type {AssetArchetypeConfig} */
-const extended = {
-    Archetype: ExtendedArchetype.MODULAR,
-    ScriptHooks: dialog.createHooks({ BeforeDraw: beforeDraw, ScriptDraw: scriptDraw }),
-    ChatTags: Tools.CommonChatTags(),
-    Modules: [
-        {
-            Name: "电击肛塞",
-            Key: "a",
-            DrawImages: false,
-            Options: [
-                {},
+        translation: { CN: "电击器", EN: "Shock Device" },
+        layerNames: {
+            EN: {
+                绑带: "Straps",
+                本体: "Body",
+                电击肛塞: "Anal",
+                阴部: "Vaginal",
+                大腿内侧: "Inner Thigh",
+                小腹: "Lower Abdomen",
+                闪光: "Glow",
+            },
+        },
+        extended: {
+            Archetype: ExtendedArchetype.MODULAR,
+            ScriptHooks: dialog.createHooks({ BeforeDraw: beforeDraw, ScriptDraw: scriptDraw }),
+            ChatTags: Tools.CommonChatTags(),
+            Modules: [
                 {
-                    Prerequisite: ["ButtEmpty"],
-                    Property: {
-                        Block: ["ItemButt"],
-                        Effect: [E.IsPlugged],
-                    },
+                    Name: "电击肛塞",
+                    Key: "a",
+                    DrawImages: false,
+                    Options: [
+                        {},
+                        { Prerequisite: ["ButtEmpty"], Property: { Block: ["ItemButt"], Effect: [E.IsPlugged] } },
+                    ],
+                },
+                {
+                    Name: "阴部",
+                    Key: "p",
+                    DrawImages: false,
+                    Options: [{}, { Prerequisite: ["VulvaEmpty"], Property: { Block: ["ItemVulva"] } }],
+                },
+                {
+                    Name: "大腿内侧",
+                    Key: "u",
+                    DrawImages: false,
+                    Options: [{}, {}],
+                },
+                {
+                    Name: "小腹",
+                    Key: "d",
+                    DrawImages: false,
+                    Options: [{}, {}],
+                },
+                {
+                    Name: "随机电击",
+                    Key: "r",
+                    DrawImages: false,
+                    Options: [{}, {}],
                 },
             ],
+            BaselineProperty: {
+                ShowText: false,
+                NextShockTime: 0,
+            },
         },
-        {
-            Name: "阴部",
-            Key: "p",
-            DrawImages: false,
-            Options: [
-                {},
-                {
-                    Prerequisite: ["VulvaEmpty"],
-                    Property: {
-                        Block: ["ItemVulva"],
-                    },
-                },
-            ],
+        assetStrings: {
+            CN: {
+                SelectBase: "选择配置",
+
+                ...Type.repeatEntries([["Optiona0", "Optionp0", "Optionu0", "Optiond0"], "无"]),
+                ...Type.repeatEntries([["Optiona1", "Optionp1", "Optionu1", "Optiond1"], "有"]),
+
+                Module电击肛塞: "电击肛塞",
+                Select电击肛塞: "配置电击肛塞",
+                Seta0: "SourceCharacter在DestinationCharacter身上使用了电击肛塞，并连接到AssetName。",
+                Seta1: "SourceCharacter从DestinationCharacter身上移除了电击肛塞。",
+
+                Module阴部: "电击阴栓",
+                Select阴部: "配置电击阴栓",
+                Setp0: "SourceCharacter在DestinationCharacter身上使用了阴部电击栓，并连接到AssetName。",
+                Setp1: "SourceCharacter从DestinationCharacter身上移除了阴部电击栓。",
+
+                Module大腿内侧: "大腿内侧贴片",
+                Select大腿内侧: "配置大腿内侧贴片",
+                Setu0: "SourceCharacter在DestinationCharacter身上使用了大腿内侧电击贴片，并连接到AssetName。",
+                Setu1: "SourceCharacter从DestinationCharacter身上移除了大腿内侧电击贴片。",
+
+                Module小腹: "小腹贴片",
+                Select小腹: "配置小腹贴片",
+                Setd0: "SourceCharacter在DestinationCharacter身上使用了小腹电击贴片，并连接到AssetName。",
+                Setd1: "SourceCharacter从DestinationCharacter身上移除了小腹电击贴片。",
+
+                Module随机电击: "随机电击",
+                Select随机电击: "配置随机电击",
+                Setr0: "SourceCharacter关闭了DestinationCharacterAssetName的随机电击功能。",
+                Setr1: "SourceCharacter启动了DestinationCharacterAssetName的随机电击功能。",
+
+                持续电击开关: "持续电击",
+                触发电击: "触发电击",
+
+                开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
+                停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
+            },
+            EN: {
+                SelectBase: "Select configuration",
+                Module电击肛塞: "Anal Shock Plug",
+                Select电击肛塞: "Configure Anal Shock Plug",
+                Optiona0: "None",
+                Optiona1: "Present",
+                Seta0: "SourceCharacter used an Anal Shock Plug on TargetCharacter",
+                Seta1: "SourceCharacter removed an Anal Shock Plug from TargetCharacter",
+
+                Module阴部: "Vaginal Shock Plug",
+                Select阴部: "Configure Vaginal Shock Plug",
+                Optionp0: "None",
+                Optionp1: "Present",
+                Setp0: "SourceCharacter used a Vaginal Shock Plug on TargetCharacter",
+                Setp1: "SourceCharacter removed a Vaginal Shock Plug from TargetCharacter",
+
+                Module大腿内侧: "Inner Thigh Patch",
+                Select大腿内侧: "Configure Inner Thigh Patch",
+                Optionu0: "None",
+                Optionu1: "Present",
+                Setu0: "SourceCharacter used an Inner Thigh Shock Patch on TargetCharacter",
+                Setu1: "SourceCharacter removed an Inner Thigh Shock Patch from TargetCharacter",
+
+                Module小腹: "Lower Abdomen Patch",
+                Select小腹: "Configure Lower Abdomen Patch",
+                Optiond0: "None",
+                Optiond1: "Present",
+                Setd0: "SourceCharacter used a Lower Abdomen Shock Patch on TargetCharacter",
+                Setd1: "SourceCharacter removed a Lower Abdomen Shock Patch from TargetCharacter",
+                持续电击开关: "Continuous Shock",
+                触发电击: "Trigger Shock",
+
+                设置开始间歇持续电击:
+                    "SourceCharacter enabled intermittent continuous shocks on DestinationCharacter AssetName",
+                设置停止间歇持续电击:
+                    "SourceCharacter disabled intermittent continuous shocks on DestinationCharacter AssetName",
+
+                开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
+                停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
+            },
         },
-        {
-            Name: "大腿内侧",
-            Key: "u",
-            DrawImages: false,
-            Options: [{}, {}],
-        },
-        {
-            Name: "小腹",
-            Key: "d",
-            DrawImages: false,
-            Options: [{}, {}],
-        },
-    ],
-    BaselineProperty: {
-        ShockLevel: 0,
-        ShowText: false,
-        NextShockTime: 0,
     },
-};
-
-/** @type {Translation.Dialog} */
-const assetStrings = {
-    CN: {
-        SelectBase: "选择配置",
-
-        Module电击肛塞: "电击肛塞",
-        Select电击肛塞: "配置电击肛塞",
-        Optiona0: "无",
-        Optiona1: "有",
-        Seta0: "SourceCharacter在TargetCharacter身上使用了电击肛塞",
-        Seta1: "SourceCharacter从TargetCharacter身上移除了电击肛塞",
-
-        Module阴部: "电击阴栓",
-        Select阴部: "配置电击阴栓",
-        Optionp0: "无",
-        Optionp1: "有",
-        Setp0: "SourceCharacter在TargetCharacter身上使用了阴部电击栓",
-        Setp1: "SourceCharacter从TargetCharacter身上移除了阴部电击栓",
-
-        Module大腿内侧: "大腿内侧贴片",
-        Select大腿内侧: "配置大腿内侧贴片",
-        Optionu0: "无",
-        Optionu1: "有",
-        Setu0: "SourceCharacter在TargetCharacter身上使用了大腿内侧电击贴片",
-        Setu1: "SourceCharacter从TargetCharacter身上移除了大腿内侧电击贴片",
-
-        Module小腹: "小腹贴片",
-        Select小腹: "配置小腹贴片",
-        Optiond0: "无",
-        Optiond1: "有",
-        Setd0: "SourceCharacter在TargetCharacter身上使用了小腹电击贴片",
-        Setd1: "SourceCharacter从TargetCharacter身上移除了小腹电击贴片",
-
-        持续电击开关: "持续电击",
-        触发电击: "触发电击",
-
-        设置开始间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName会间歇持续电击",
-        设置停止间歇持续电击: "SourceCharacter让DestinationCharacter身上的AssetName不再间歇持续电击",
-
-        开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
-        停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
-    },
-    EN: {
-        SelectBase: "Select configuration",
-        Module电击肛塞: "Anal Shock Plug",
-        Select电击肛塞: "Configure Anal Shock Plug",
-        Optiona0: "None",
-        Optiona1: "Present",
-        Seta0: "SourceCharacter used an Anal Shock Plug on TargetCharacter",
-        Seta1: "SourceCharacter removed an Anal Shock Plug from TargetCharacter",
-
-        Module阴部: "Vaginal Shock Plug",
-        Select阴部: "Configure Vaginal Shock Plug",
-        Optionp0: "None",
-        Optionp1: "Present",
-        Setp0: "SourceCharacter used a Vaginal Shock Plug on TargetCharacter",
-        Setp1: "SourceCharacter removed a Vaginal Shock Plug from TargetCharacter",
-
-        Module大腿内侧: "Inner Thigh Patch",
-        Select大腿内侧: "Configure Inner Thigh Patch",
-        Optionu0: "None",
-        Optionu1: "Present",
-        Setu0: "SourceCharacter used an Inner Thigh Shock Patch on TargetCharacter",
-        Setu1: "SourceCharacter removed an Inner Thigh Shock Patch from TargetCharacter",
-
-        Module小腹: "Lower Abdomen Patch",
-        Select小腹: "Configure Lower Abdomen Patch",
-        Optiond0: "None",
-        Optiond1: "Present",
-        Setd0: "SourceCharacter used a Lower Abdomen Shock Patch on TargetCharacter",
-        Setd1: "SourceCharacter removed a Lower Abdomen Shock Patch from TargetCharacter",
-        持续电击开关: "Continuous Shock",
-        触发电击: "Trigger Shock",
-
-        设置开始间歇持续电击:
-            "SourceCharacter enabled intermittent continuous shocks on DestinationCharacter AssetName",
-        设置停止间歇持续电击:
-            "SourceCharacter disabled intermittent continuous shocks on DestinationCharacter AssetName",
-
-        开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
-        停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
-    },
-};
-
-const translation = {
-    CN: "电击器",
-    EN: "Shock Device",
-};
+];
 
 export default function () {
-    AssetManager.addAssetWithConfig("ItemLegs", asset, { extended, translation, layerNames, assetStrings });
+    AssetManager.addAssetWithConfig(...asset);
 }

@@ -1,6 +1,6 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Typing } from "../../../lib";
+import { createAfterDrawProcess, Type } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -51,7 +51,7 @@ const asset = {
     Layer: [
         { Name: "base" },
         { Name: "outline" },
-        Typing.multiplyLayer({ Name: "shade" }),
+        Type.multiplyLayer({ Name: "shade" }),
         { Name: "line" },
         { Name: "text", Left: 250, Top: 100, HasImage: false },
         { Name: "highlight" },

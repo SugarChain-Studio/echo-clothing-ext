@@ -1,6 +1,6 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ImmPass, PoseMapTool, Typing } from "../../../lib";
+import { ImmPass, PoseMapTool, Type } from "../../../lib";
 import { customFixup } from "../../../lib/fixups";
 
 /** @type {Omit<Partial<CustomAssetDefinitionBase>, "BodyCosplay">} */
@@ -233,9 +233,9 @@ const asset = [
         {
             translation: { CN: "鬼手", EN: "Ghost Hand" },
             layerNames: DialogTools.combine(
-                Typing.repeatEntries([
+                Type.repeatEntries([
                     ["CN", "EN"],
-                    Typing.stringEntries(
+                    Type.stringEntries(
                         ...[1, 2, 3].map(
                             (num) =>
                                 /** @type {[string[],string]}*/ ([

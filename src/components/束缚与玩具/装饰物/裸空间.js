@@ -1,6 +1,6 @@
 import { ImageMapTools, StateTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createItemDialogNoArch, Typing } from "../../../lib";
+import { createItemDialogNoArch, Type } from "../../../lib";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 
 const typeURL = (type) => `luzi-canvas://rakuukan-type-${type}`;
@@ -24,7 +24,7 @@ const vps = [20, 40, 60, 80].map((r, i) => {
     return vp;
 });
 
-const clothGroups = Typing.groups([
+const clothGroups = Type.groups([
     "Cloth",
     "Cloth_笨笨蛋Luzi",
     "Cloth_笨笨笨蛋Luzi2",
@@ -99,7 +99,7 @@ const createLayer = (config, idx) => ({
 /** @type {(arg:NoArchItemData) => ExNoArchItemData} */
 const tconfig = (arg) => /** @type {ExNoArchItemData}*/ (arg);
 
-const operations = Typing.transform(
+const operations = Type.transform(
     (item) => {
         item.Property ??= {};
         item.Property.TypeRecord ??= {};

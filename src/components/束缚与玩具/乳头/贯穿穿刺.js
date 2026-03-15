@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { Typing } from "../../../lib";
+import { Type } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -18,7 +18,7 @@ const asset = {
     ],
     ParentGroup: "BodyUpper",
     PoseMapping: { AllFours: "AllFours" },
-    Layer: [{ Name: "d" }, Typing.screenLayer({ Name: "g" })],
+    Layer: [{ Name: "d" }, Type.screenLayer({ Name: "g" })],
 };
 
 const translation = {

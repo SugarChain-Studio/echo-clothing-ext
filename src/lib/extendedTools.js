@@ -1,4 +1,4 @@
-import { Typing } from "./typing";
+import { Type } from "./typing";
 
 /**
  * 为物品生成 左/右/两侧 的外观选项
@@ -95,7 +95,7 @@ export class ExtendedTools {
      * @param {Parameters<typeof createLeftRightBoth>[1]} [arg1]
      */
     static createLRBConfig(arg0, arg1 = { preset: "left", mirror: false }) {
-        if (Typing.addAssetParamHasGroup(arg0)) {
+        if (Type.addAssetParamHasGroup(arg0)) {
             return /** @type {AddAssetWithConfigParams} */ ([
                 arg0[0],
                 arg0[1],

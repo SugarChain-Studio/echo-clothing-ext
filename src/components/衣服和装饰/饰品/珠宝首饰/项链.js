@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../../assetForward";
-import { Typing } from "../../../../lib";
+import { Type } from "../../../../lib";
 
 /** @type { AddAssetWithConfigParams[] } */
 const asset = [
@@ -16,11 +16,11 @@ const asset = [
             PoseMapping: {},
             Layer: [
                 { Name: "cd" },
-                Typing.screenLayer({ Name: "cg" }),
+                Type.screenLayer({ Name: "cg" }),
                 { Name: "td" },
-                Typing.screenLayer({ Name: "tg" }),
+                Type.screenLayer({ Name: "tg" }),
                 { Name: "bd", CopyLayerColor: "2d", Priority: 5 },
-                Typing.screenLayer({ Name: "bg", Priority: 5 }),
+                Type.screenLayer({ Name: "bg", Priority: 5 }),
             ],
         },
         {
