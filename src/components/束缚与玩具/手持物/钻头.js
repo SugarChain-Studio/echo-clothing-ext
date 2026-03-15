@@ -35,14 +35,7 @@ const asset = {
 const extended = {
     Archetype: ExtendedArchetype.TYPED,
     DrawImages: false,
-    Options: [
-        {
-            Name: "不转",
-        },
-        {
-            Name: "转转转",
-        },
-    ],
+    Options: [{ Name: "不转" }, { Name: "转转转" }],
 };
 
 /**
@@ -72,30 +65,6 @@ function scriptDraw({ C, Item, PersistentData }) {
 
     Tools.drawUpdate(C, Data);
 }
-
-const dialogs = DialogTools.replicateGroupedItemDialog(["ItemHandheld"], ["钻头"], {
-    CN: {
-        Select: "转不转",
-        不转: "不转",
-        Set不转: "不转",
-        转转转: "转转转",
-        Set转转转: "转转转",
-    },
-    EN: {
-        Select: "Spin or Not",
-        不转: "Don't Spin",
-        Set不转: "Don't Spin",
-        转转转: "Spinnnnnn",
-        Set转转转: "Spinnnnnn",
-    },
-    UA: {
-        Select: "Ввімкнути або ні",
-        不转: "Не вмикати",
-        Set不转: "Не вмикати",
-        转转转: "ВЖЖЖЖЖЖЖЖ",
-        Set转转转: "ВЖЖЖЖЖЖЖЖ",
-    },
-});
 
 export default function () {
     // HookManager.globalFunction(`Assets${group}${asset.Name}BeforeDraw`, beforeDraw);
