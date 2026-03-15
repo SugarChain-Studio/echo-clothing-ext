@@ -1,6 +1,6 @@
 import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
-import { PostPass, PoseMapTool, Type } from "../../../../lib";
+import { PostPass, PoseMapTool, Layer } from "../../../../lib";
 import { LRTool } from "../../../../lib/sockLR";
 
 const LRStringGen = (base, key, blr = [0, 1, 2]) =>
@@ -171,7 +171,7 @@ const asset = [
                 ParentGroup: {},
                 PoseMapping: {},
                 Layer: [
-                    ...Type.layerMap(
+                    ...Layer.map(
                         [
                             { Name: "环_左", ColorGroup: "脚环", AllowTypes: { a: [0, 1] } },
                             { Name: "环_右", ColorGroup: "脚环", AllowTypes: { a: [0, 2] } },
@@ -184,7 +184,7 @@ const asset = [
                             PoseMapping: PoseMapTool.config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
                         })
                     ),
-                    ...Type.layerMap(
+                    ...Layer.map(
                         [
                             { Name: "手环_左", ColorGroup: "手环", AllowTypes: { w: [0, 1] } },
                             { Name: "手环_右", ColorGroup: "手环", AllowTypes: { w: [0, 2] } },

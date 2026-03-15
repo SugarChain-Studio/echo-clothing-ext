@@ -24,7 +24,7 @@ export function runAfterAssetOverrides() {
     worklist.length = 0;
 }
 
-export const AfterAssetOverrides = {
-    run: runAfterAssetOverrides,
-    register: afterAssetOverrides,
-};
+export class AfterAssetOverrides {
+    static run = runAfterAssetOverrides;
+    static register = afterAssetOverrides;
+}

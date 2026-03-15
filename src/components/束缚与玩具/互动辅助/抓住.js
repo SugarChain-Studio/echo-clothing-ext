@@ -58,7 +58,7 @@ export default function () {
         Object.fromEntries(
             assets
                 .filter((a) => a.previewSrc)
-                .map((a) => [ImageMapTools.assetPreview("ItemMisc", a.name), a.previewSrc])
+                .map((a) => [ImageMapTools.assetPreview("ItemMisc", a.name), /** @type {string}*/ (a.previewSrc)])
         )
     );
 }

@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Type } from "../../../lib";
+import { Layer } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -13,11 +13,11 @@ const asset = {
     DefaultColor: ["#545454", "#000000", "Default"],
     Layer: [
         { Name: "rd" },
-        Type.screenLayer({ Name: "rg" }),
+        Layer.screen({ Name: "rg" }),
         { Name: "sd" },
-        Type.screenLayer({ Name: "sg" }),
+        Layer.screen({ Name: "sg" }),
         { Name: "pd" },
-        Type.screenLayer({ Name: "pg" }),
+        Layer.screen({ Name: "pg" }),
     ],
 };
 

@@ -31,7 +31,7 @@ class Storage {
         if (this._data === undefined) {
             this.read();
         }
-        return this._data;
+        return /** @type {T}*/ (this._data);
     }
 
     read() {
@@ -39,10 +39,9 @@ class Storage {
         if (value) {
             const data = this._lzCompress ? LZString.decompressFromBase64(value) : value;
             try {
-                /** @type {T} */
                 this._data = /** @type {T} */ (JSON.parse(data));
             } catch (e) {
-                _Logger?.error(`Failed to parse data for key ${this._key}: ${e.message}`);
+                _Logger?.error(`Failed to parse data for key ${this._key}: ${/** @type {any}*/ (e).message}`);
                 this._data = this._defaultValue();
             }
         } else {
@@ -103,10 +102,14 @@ function setupImpl() {
         const [groupName, assetName] = args;
         const asset = AssetGet("Female3DCG", groupName, assetName);
         if (asset && AssetManager.assetIsCustomed(asset)) {
+            /** @type {`${AssetGroupName}/${string}`}*/
             const permissionKey = `${groupName}/${assetName}`;
-            storage.data[permissionKey] = Player.PermissionItems[permissionKey];
-            if (comparePermissions(storage.data[permissionKey], defaultPerm)) {
-                delete storage.data[permissionKey];
+            const cur = Player.PermissionItems[permissionKey];
+            if (cur) {
+                storage.data[permissionKey] = cur;
+                if (comparePermissions(storage.data[permissionKey], defaultPerm)) {
+                    delete storage.data[permissionKey];
+                }
             }
             storage.update();
         }
@@ -122,7 +125,8 @@ function setupImpl() {
 
             const restored = [];
 
-            for (const [permissionKey, permission] of Object.entries(storage.data)) {
+            for (const [pkey, permission] of Object.entries(storage.data)) {
+                const permissionKey = /** @type {`${AssetGroupName}/${string}`}*/ (pkey);
                 const [groupName, assetName] = /** @type {[AssetGroupName, string]} */ (permissionKey.split("/"));
                 const asset = AssetGet("Female3DCG", groupName, assetName);
                 if (asset && AssetManager.assetIsCustomed(asset)) {

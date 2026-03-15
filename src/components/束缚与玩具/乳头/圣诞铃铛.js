@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Type } from "../../../lib";
+import { Merge } from "../../../lib";
 
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [
@@ -28,7 +28,7 @@ const asset = [
             },
         },
     ],
-    ...Type.mergeAddAssetParams(
+    ...Merge.addAssetParams(
         [
             [],
             {

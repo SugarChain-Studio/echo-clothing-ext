@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../../assetForward";
-import { Type } from "../../../../lib";
+import { Layer } from "../../../../lib";
 
 /** @type { AddAssetWithConfigParams[] } */
 const asset = [
@@ -16,11 +16,11 @@ const asset = [
             PoseMapping: {},
             Layer: [
                 { Name: "cd" },
-                Type.screenLayer({ Name: "cg" }),
+                Layer.screen({ Name: "cg" }),
                 { Name: "td" },
-                Type.screenLayer({ Name: "tg" }),
+                Layer.screen({ Name: "tg" }),
                 { Name: "bd", CopyLayerColor: "2d", Priority: 5 },
-                Type.screenLayer({ Name: "bg", Priority: 5 }),
+                Layer.screen({ Name: "bg", Priority: 5 }),
             ],
         },
         {

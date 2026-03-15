@@ -81,11 +81,13 @@ const plugin = {
                     node.type === "CallExpression" &&
                     ((node.callee.type === "Identifier" && node.callee.name === "addAssetWithConfig") ||
                         isMemberIdentifier(node.callee, "addAssetWithConfig"));
-                const isScreenLayerCall = (node) =>
-                    !!node &&
-                    node.type === "CallExpression" &&
-                    ((node.callee.type === "Identifier" && node.callee.name === "screenLayer") ||
-                        isMemberIdentifier(node.callee, "screenLayer"));
+                const isSpecialLayerCall = (node) => {
+                    if (!node || node.type !== "CallExpression") return false;
+                    if (node.callee.type !== "MemberExpression" || node.callee.computed) return false;
+                    if (node.callee.object.type !== "Identifier" || node.callee.object.name !== "Layer") return false;
+                    if (node.callee.property.type !== "Identifier") return false;
+                    return node.callee.property.name === "screen" || node.callee.property.name === "multiply";
+                };
 
                 // Type & JSDoc detection
                 const typeMatches = (obj, regexp) => {
@@ -176,7 +178,7 @@ const plugin = {
                         keyName(obj.parent.parent.key) === "Layer"
                     )
                         return false;
-                    if (obj.parent && obj.parent.type === "CallExpression" && isScreenLayerCall(obj.parent))
+                    if (obj.parent && obj.parent.type === "CallExpression" && isSpecialLayerCall(obj.parent))
                         return false;
                     if (isAssetLayerDefinition(obj)) return false;
                     if (isCustomAssetByType(obj)) return true;

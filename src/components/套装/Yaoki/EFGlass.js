@@ -1,6 +1,6 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Type } from "../../../lib";
+import { createAfterDrawProcess, Layer } from "../../../lib";
 import { LSCG } from "../../../lib/lscg";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
@@ -30,11 +30,11 @@ const asset = {
         { Name: "visor_diff", Priority: 54 },
         { Name: "cover1", Priority: 54, AllowTypes: { v: 1 }, CopyLayerColor: "visor_diff" },
         { Name: "cover2", Priority: 54, AllowTypes: { v: 2 }, CopyLayerColor: "visor_diff" },
-        Type.screenLayer({ Name: "visor_gloss", Priority: 54 }),
+        Layer.screen({ Name: "visor_gloss", Priority: 54 }),
         { Name: "metal_diff" },
-        Type.screenLayer({ Name: "metal_gloss" }),
+        Layer.screen({ Name: "metal_gloss" }),
         { Name: "frame_diff" },
-        Type.screenLayer({ Name: "frame_gloss" }),
+        Layer.screen({ Name: "frame_gloss" }),
         { Name: "light1", HasImage: false },
         { Name: "light2", Priority: 54, HasImage: false },
         {

@@ -1,5 +1,3 @@
-import { Type } from "./typing";
-
 /**
  * 为物品生成 左/右/两侧 的外观选项
  * @param {CustomAssetDefinition} assetDef
@@ -61,7 +59,8 @@ function createLeftRightBoth(assetDef, { preset = "left", mirror = false } = {})
         },
     };
 
-    for (const layer of assetDef.Layer) {
+    for (const layer of assetDef.Layer ?? []) {
+        if (!layer.Name) continue;
         if (layer.Name.includes("左")) {
             layer.AllowTypes = leftConfig;
         } else if (layer.Name.includes("右")) {
@@ -73,6 +72,14 @@ function createLeftRightBoth(assetDef, { preset = "left", mirror = false } = {})
         extended,
         assetStrings,
     };
+}
+
+/**
+ * @param {AddAssetWithConfigParams | AddAssetWithConfigParamsNoGroup} arg0
+ * @returns {arg0 is AddAssetWithConfigParams}
+ */
+function addAssetParamHasGroup(arg0) {
+    return arg0.length === 3;
 }
 
 export class ExtendedTools {
@@ -95,7 +102,7 @@ export class ExtendedTools {
      * @param {Parameters<typeof createLeftRightBoth>[1]} [arg1]
      */
     static createLRBConfig(arg0, arg1 = { preset: "left", mirror: false }) {
-        if (Type.addAssetParamHasGroup(arg0)) {
+        if (addAssetParamHasGroup(arg0)) {
             return /** @type {AddAssetWithConfigParams} */ ([
                 arg0[0],
                 arg0[1],

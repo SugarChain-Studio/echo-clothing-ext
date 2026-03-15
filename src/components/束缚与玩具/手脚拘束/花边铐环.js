@@ -1,5 +1,6 @@
+import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { PoseMapTool, Type } from "../../../lib";
+import { PoseMapTool } from "../../../lib";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
@@ -28,14 +29,12 @@ const assets = [
             translation: { CN: "花边手环", EN: "Lace Wrist Cuffs" },
             layerNames: {
                 CN: {
-                    ...Type.stringEntries([["A1", "A2"], "左"]),
-                    ...Type.stringEntries([["B1", "B2"], "右"]),
+                    ...DialogTools.repeatEntries([["A1", "A2"], "左"], [["B1", "B2"], "右"]),
                     Lace: "花边",
                     Cuff: "铐环",
                 },
                 EN: {
-                    ...Type.stringEntries([["A1", "A2"], "Left"]),
-                    ...Type.stringEntries([["B1", "B2"], "Right"]),
+                    ...DialogTools.repeatEntries([["A1", "A2"], "Left"], [["B1", "B2"], "Right"]),
                     Lace: "Lace",
                     Cuff: "Cuff",
                 },
@@ -71,16 +70,17 @@ const assets = [
             translation: { CN: "花边大腿环", EN: "Lace Thigh Cuffs" },
             layerNames: {
                 CN: {
-                    ...Type.stringEntries([["A1", "A2", "A3", "A4"], "左"]),
-                    ...Type.stringEntries([["B1", "B2", "B3", "B4"], "右"]),
+                    ...DialogTools.repeatEntries([["A1", "A2", "A3", "A4"], "左"], [["B1", "B2", "B3", "B4"], "右"]),
                     Lace: "花边",
                     Cuff: "铐环",
                     Ring: "环",
                     Chain: "链条",
                 },
                 EN: {
-                    ...Type.stringEntries([["A1", "A2", "A3", "A4"], "Left"]),
-                    ...Type.stringEntries([["B1", "B2", "B3", "B4"], "Right"]),
+                    ...DialogTools.repeatEntries(
+                        [["A1", "A2", "A3", "A4"], "Left"],
+                        [["B1", "B2", "B3", "B4"], "Right"]
+                    ),
                     Lace: "Lace",
                     Cuff: "Cuff",
                     Ring: "Ring",

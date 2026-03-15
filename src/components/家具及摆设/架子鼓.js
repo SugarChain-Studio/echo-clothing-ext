@@ -1,5 +1,5 @@
 import { AssetManager } from "../../assetForward";
-import { Type } from "../../lib";
+import { Layer } from "../../lib";
 
 /** @type {AddAssetWithConfigParams} */
 const assets = [
@@ -20,7 +20,7 @@ const assets = [
             { Name: "A5" },
             { Name: "A6" },
             { Name: "A7" },
-            Type.screenLayer({ Name: "A7g" }),
+            Layer.screen({ Name: "A7g" }),
         ],
     },
     {

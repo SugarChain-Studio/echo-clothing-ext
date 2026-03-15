@@ -2,7 +2,7 @@ import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { flowAlgorithm, flowText, maxProdFlow } from "../../套装/Yaoki/牛奶贩卖机";
-import { createItemDialogModular, Type } from "../../../lib";
+import { createItemDialogModular, Layer } from "../../../lib";
 import { holdsEmptyGlass, setGlassContent } from "../手持物/玻璃杯饮料";
 
 const orgasmState = new StateTools.OrgasmState();
@@ -233,7 +233,7 @@ const asset = [
             Priority: 16,
             PoseMapping: { AllFours: "Hide" },
             Layer: [
-                ...Type.layerMap([{ Name: "瓶子" }, { Name: "固定" }, { Name: "泵体" }, { Name: "泵瓶" }], (l) => ({
+                ...Layer.map([{ Name: "瓶子" }, { Name: "固定" }, { Name: "泵体" }, { Name: "泵瓶" }], (l) => ({
                     ParentGroup: {},
                     Priority: 5,
                     ColorGroup: "背包",

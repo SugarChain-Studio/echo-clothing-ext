@@ -1,4 +1,4 @@
-import { ArmMaskTool, PostPass, PoseMapTool, Type } from "../../../lib";
+import { ArmMaskTool, PostPass, PoseMapTool, Layer } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 // Originally Designed by: 01musume
@@ -50,19 +50,19 @@ const asset = [
                     { Left: 190, Top: 210, Name: "d_2", ...upper, ColorGroup: "strap" },
                     { Left: 170, Top: 280, Name: "d_3", ...main },
                     { Left: 180, Top: 320, Name: "d_8", ...upper },
-                    Type.screenLayer({ Left: 190, Top: 210, Name: "g_1", ...upper }),
-                    Type.screenLayer({ Left: 190, Top: 210, Name: "g_2", ...upper }),
-                    Type.screenLayer({ Left: 170, Top: 280, Name: "g_3", ...main }),
+                    Layer.screen({ Left: 190, Top: 210, Name: "g_1", ...upper }),
+                    Layer.screen({ Left: 190, Top: 210, Name: "g_2", ...upper }),
+                    Layer.screen({ Left: 170, Top: 280, Name: "g_3", ...main }),
                     { Left: 190, Top: 210, Name: "d_5", ...upper, ColorGroup: "chain" },
                     { Left: 150, Top: 340, Name: "d_6", ...lower, ColorGroup: "chain" },
                     { Left: 150, Top: 340, Name: "d_7", ...lower, ColorGroup: "chain" },
-                    Type.screenLayer({ Left: 190, Top: 210, Name: "g_5", ...upper }),
-                    Type.screenLayer({ Left: 150, Top: 340, Name: "g_6", ...lower }),
-                    Type.screenLayer({ Left: 150, Top: 340, Name: "g_7", ...lower }),
+                    Layer.screen({ Left: 190, Top: 210, Name: "g_5", ...upper }),
+                    Layer.screen({ Left: 150, Top: 340, Name: "g_6", ...lower }),
+                    Layer.screen({ Left: 150, Top: 340, Name: "g_7", ...lower }),
                     { Left: 150, Top: 340, Name: "d_4", ...lower },
-                    Type.screenLayer({ Left: 150, Top: 340, Name: "g_4", ...lower }),
+                    Layer.screen({ Left: 150, Top: 340, Name: "g_4", ...lower }),
                     { Left: 240, Top: 340, Name: "d_f", ...lower },
-                    Type.screenLayer({ Left: 240, Top: 340, Name: "g_f", ...lower }),
+                    Layer.screen({ Left: 240, Top: 340, Name: "g_f", ...lower }),
                 ],
             },
             (asset) => {
@@ -153,20 +153,20 @@ const asset = [
                 Priority: 35,
                 Layer: [
                     { Name: "后d", Priority: 6 },
-                    Type.screenLayer({ Name: "后g", Priority: 6 }),
+                    Layer.screen({ Name: "后g", Priority: 6 }),
                     {
                         Name: "后xd",
                         InheritPoseMappingFields: true,
                         PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
                         CopyLayerColor: "后d",
                     },
-                    Type.screenLayer({
+                    Layer.screen({
                         Name: "后xg",
                         InheritPoseMappingFields: true,
                         PoseMapping: { OverTheHead: "Hide", Yoked: "Hide" },
                     }),
                     { Name: "前d", CopyLayerColor: "后d" },
-                    Type.screenLayer({ Name: "前g" }),
+                    Layer.screen({ Name: "前g" }),
                 ],
             },
             (asset) => {

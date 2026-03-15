@@ -1,7 +1,7 @@
 import { PoseMapTool, PostPass } from "../../../../lib";
-import { ArmMaskTool, Type } from "../../../../lib";
+import { ArmMaskTool } from "../../../../lib";
 import { AssetManager } from "../../../../assetForward";
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
@@ -66,7 +66,7 @@ const asset = [
         translation: { CN: "长旗袍", EN: "Long Qipao Dress" },
         layerNames: {
             CN: {
-                ...Type.stringEntries(
+                ...DialogTools.repeatEntries(
                     [["A1", "A2", "A3", "B1", "B2"], "主体"],
                     [["C1", "C2", "C3", "C4", "C5"], "肩部"]
                 ),
@@ -82,7 +82,7 @@ const asset = [
                 Accessory: "配件",
             },
             EN: {
-                ...Type.stringEntries(
+                ...DialogTools.repeatEntries(
                     [["A1", "A2", "A3", "B1", "B2"], "Main"],
                     [["C1", "C2", "C3", "C4", "C5"], "Shoulder"]
                 ),

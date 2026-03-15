@@ -30,10 +30,10 @@ function spHideAs(groupMap) {
     Object.assign(backOverrides, groupMap);
 }
 
-export const GroupConfig = {
-    forceCharaPreview,
-    spHideAs,
-};
+export class GroupConfig {
+    static forceCharaPreview = forceCharaPreview;
+    static spHideAs = spHideAs;
+}
 
 export default function () {
     // 眼睛和头发组使用预览图

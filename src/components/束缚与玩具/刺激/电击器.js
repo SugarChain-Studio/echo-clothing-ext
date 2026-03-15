@@ -1,7 +1,7 @@
 import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { luziSuffixFixups } from "../../../lib/fixups";
-import { createItemDialogModular, PoseMapTool, PostPass, Type } from "../../../lib";
+import { createItemDialogModular, PoseMapTool, PostPass } from "../../../lib";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 
 /**
@@ -220,8 +220,8 @@ const asset = [
             CN: {
                 SelectBase: "选择配置",
 
-                ...Type.repeatEntries([["Optiona0", "Optionp0", "Optionu0", "Optiond0"], "无"]),
-                ...Type.repeatEntries([["Optiona1", "Optionp1", "Optionu1", "Optiond1"], "有"]),
+                ...DialogTools.repeatEntries([["Optiona0", "Optionp0", "Optionu0", "Optiond0"], "无"]),
+                ...DialogTools.repeatEntries([["Optiona1", "Optionp1", "Optionu1", "Optiond1"], "有"]),
 
                 Module电击肛塞: "电击肛塞",
                 Select电击肛塞: "配置电击肛塞",

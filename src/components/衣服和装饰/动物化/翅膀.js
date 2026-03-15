@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../assetForward";
-import { Type } from "../../../lib";
+import { Layer } from "../../../lib";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
@@ -34,12 +34,7 @@ const asset = [
             Left: -175,
             Top: -125,
             DefaultColor: ["#A5A5A5", "#A5A5A5"],
-            Layer: [
-                { Name: "BL" },
-                { Name: "BR" },
-                Type.multiplyLayer({ Name: "SL" }),
-                Type.multiplyLayer({ Name: "SR" }),
-            ],
+            Layer: [{ Name: "BL" }, { Name: "BR" }, Layer.multiply({ Name: "SL" }), Layer.multiply({ Name: "SR" })],
         },
         {
             translation: {
@@ -58,12 +53,7 @@ const asset = [
             Random: false,
             Left: -205,
             Top: 95,
-            Layer: [
-                { Name: "BL" },
-                { Name: "BR" },
-                Type.multiplyLayer({ Name: "SL" }),
-                Type.multiplyLayer({ Name: "SR" }),
-            ],
+            Layer: [{ Name: "BL" }, { Name: "BR" }, Layer.multiply({ Name: "SL" }), Layer.multiply({ Name: "SR" })],
         },
         {
             translation: {

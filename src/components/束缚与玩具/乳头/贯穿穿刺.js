@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { Type } from "../../../lib";
+import { Layer } from "../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -18,7 +18,7 @@ const asset = {
     ],
     ParentGroup: "BodyUpper",
     PoseMapping: { AllFours: "AllFours" },
-    Layer: [{ Name: "d" }, Type.screenLayer({ Name: "g" })],
+    Layer: [{ Name: "d" }, Layer.screen({ Name: "g" })],
 };
 
 const translation = {

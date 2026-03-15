@@ -1,4 +1,4 @@
-import { ArmMaskTool, Type } from "../../../lib";
+import { ArmMaskTool, Layer } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
@@ -16,7 +16,7 @@ const asset = {
         { Name: "h2" },
         { Name: "h1" },
         { Name: "dp", CreateLayerTypes: ["typed"] },
-        Type.screenLayer({ Name: "gp", CreateLayerTypes: ["typed"] }),
+        Layer.screen({ Name: "gp", CreateLayerTypes: ["typed"] }),
     ],
 };
 

@@ -1,18 +1,18 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Type } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Layer } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
 
-    if (Property.TypeRecord.t !== 0) return;
+    if (Property?.TypeRecord?.["t"] !== 0) return;
 
-    const config = {
+    const config = /** @type {const}*/ ({
         Small: { w: 45, y: 8, r: 400 },
         Normal: { w: 60, y: 5, r: 300 },
         Large: { w: 70, y: 3, r: 250 },
         XLarge: { w: 80, y: 5, r: 200 },
-    };
+    });
 
     const thisConfig = config[G] || config.Normal;
 
@@ -23,10 +23,12 @@ const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer(
     const canvas = AnimationGenerateTempCanvas(C, A, width, height);
     const ctx = canvas.getContext("2d");
 
+    if (!ctx) return;
+
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    DynamicDrawTextArc(Property.Text, ctx, width / 2, height / 2, {
+    DynamicDrawTextArc(Property.Text ?? "", ctx, width / 2, height / 2, {
         fontSize: 48,
         fontFamily: data.font,
         width,
@@ -87,7 +89,7 @@ const assets = [
                     { Name: "l", Priority: 15 },
                     { Name: "bd", CreateLayerTypes: ["m"] },
                     { Name: "text", HasImage: false, Left: 250, Top: 280 },
-                    Type.screenLayer({ Name: "bg", CreateLayerTypes: ["m"] }),
+                    Layer.screen({ Name: "bg", CreateLayerTypes: ["m"] }),
                 ],
             },
             (asset) => ArmMaskTool.createArmMaskForCloth(asset.DynamicGroupName, asset)
@@ -147,7 +149,7 @@ const assets = [
             DynamicGroupName: "Panties",
             DefaultColor: "#1C1C1C",
             PoseMapping: PoseMapTool.hideFullBody(),
-            Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Type.screenLayer({ Name: "g", CreateLayerTypes: ["m"] })],
+            Layer: [{ Name: "d", CreateLayerTypes: ["m"] }, Layer.screen({ Name: "g", CreateLayerTypes: ["m"] })],
         },
         {
             translation: {
@@ -180,7 +182,7 @@ const assets = [
             Layer: [
                 { Name: "d", CreateLayerTypes: ["m"] },
                 { Name: "l" },
-                Type.screenLayer({ Name: "g", CreateLayerTypes: ["m"] }),
+                Layer.screen({ Name: "g", CreateLayerTypes: ["m"] }),
             ],
         },
         {
@@ -238,14 +240,14 @@ const assets = [
             DefaultColor: ["#292929", "#00BBA6", "#FF4F4F", "#FF4F4F"],
             Layer: [
                 { Name: "cbd", Priority: 6 },
-                Type.screenLayer({ Name: "cbg", Priority: 6 }),
+                Layer.screen({ Name: "cbg", Priority: 6 }),
                 { Name: "cfd", CopyLayerColor: "cbd" },
-                Type.screenLayer({ Name: "cfg" }),
+                Layer.screen({ Name: "cfg" }),
                 { Name: "crd" },
-                Type.screenLayer({ Name: "crg" }),
+                Layer.screen({ Name: "crg" }),
                 { Name: "dud" },
                 { Name: "dld" },
-                Type.screenLayer({ Name: "dg" }),
+                Layer.screen({ Name: "dg" }),
             ],
         },
         {

@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../../assetForward";
-import { Type } from "../../../../lib";
+import { Layer } from "../../../../lib";
 
 /** @type { AddAssetWithConfigParams }} */
 const asset = [
@@ -16,13 +16,13 @@ const asset = [
         DynamicGroupName: "Mask",
         Layer: [
             { Name: "金属d" },
-            Type.screenLayer({ Name: "金属g" }),
+            Layer.screen({ Name: "金属g" }),
             { Name: "宝石副d" },
-            Type.screenLayer({ Name: "宝石副g" }),
+            Layer.screen({ Name: "宝石副g" }),
             { Name: "宝石主d" },
-            Type.screenLayer({ Name: "宝石主g" }),
+            Layer.screen({ Name: "宝石主g" }),
             { Name: "宝石金属d", CopyLayerColor: "金属d" },
-            Type.screenLayer({ Name: "宝石金属g" }),
+            Layer.screen({ Name: "宝石金属g" }),
             { Name: "珍珠d" },
         ],
     },

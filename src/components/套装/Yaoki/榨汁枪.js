@@ -1,4 +1,4 @@
-import { ArmMaskTool, Type } from "../../../lib";
+import { ArmMaskTool, Layer } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 
 /** @type {CustomAssetDefinition} */
@@ -11,13 +11,7 @@ const asset = {
     AllowActivity: ["MasturbateItem"],
     Fetish: ["Sadism"],
     DefaultColor: ["Default", "#000000", "Default"],
-    Layer: [
-        { Name: "dc" },
-        Type.screenLayer({ Name: "gc" }),
-        { Name: "dg" },
-        Type.screenLayer({ Name: "gg" }),
-        { Name: "l" },
-    ],
+    Layer: [{ Name: "dc" }, Layer.screen({ Name: "gc" }), { Name: "dg" }, Layer.screen({ Name: "gg" }), { Name: "l" }],
 };
 
 const layerNames = {

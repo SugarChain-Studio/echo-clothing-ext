@@ -1,6 +1,5 @@
 import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { Type } from "../../../lib";
 
 /** @type {AssetDefinitionBase} */
 const base = {
@@ -72,8 +71,10 @@ const asset = [
                     /** @type {const} */ (["CN", "EN"]).map((lang) => [
                         lang,
                         {
-                            ...Type.stringEntries([Array.from({ length: 5 }, (_, idx) => `B${idx + 1}`), "↙"]),
-                            ...Type.stringEntries([Array.from({ length: 5 }, (_, idx) => `C${idx + 1}`), "↘"]),
+                            ...DialogTools.repeatEntries(
+                                [Array.from({ length: 5 }, (_, idx) => `B${idx + 1}`), "↙"],
+                                [Array.from({ length: 5 }, (_, idx) => `C${idx + 1}`), "↘"]
+                            ),
                         },
                     ])
                 )

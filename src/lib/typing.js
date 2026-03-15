@@ -1,3 +1,8 @@
+/**
+ * @template T
+ * @typedef {(arg0:T) => T} Identity
+ */
+
 /** @type {(arg:any)=>any} */
 const identity = (arg) => arg;
 
@@ -10,25 +15,8 @@ const identity = (arg) => arg;
 const merge = (arg0, arg1) => ({ ...arg0, ...arg1 });
 
 /**
- * @template {string} K
- * @template V
- * @param {Record<K,V>} record
- */
-function recordEntries(record) {
-    return /** @type {Array<[K,V]>} */ (Object.entries(record));
-}
-
-/**
  * @typedef {AssetDefinitionBase["DrawOffset"][0]} DrawOffsetItem
  */
-
-/**
- * @param {AddAssetWithConfigParams | AddAssetWithConfigParamsNoGroup} arg0
- * @returns {arg0 is AddAssetWithConfigParams}
- */
-function addAssetParamHasGroup(arg0) {
-    return arg0.length === 3;
-}
 
 /**
  *
@@ -90,28 +78,28 @@ function repeatEntries(...args) {
  * @typedef {(arg:T[], func:(arg:T)=>R)=>R[]} ArrayTransformFunction
  */
 
-export const Type = /** @type {const} */ ({
-    attributes: /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/ (identity),
-    groups: /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/ (identity),
-    drawOffset: /** @type {(arg:DrawOffsetItem) => DrawOffsetItem}*/ (identity),
-    asset: /** @type {(arg:CustomAssetDefinition) => CustomAssetDefinition}*/ (identity),
-
-    mergeItem: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/ (merge),
-    mergeApp: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/ (merge),
-
-    mergeAssets: /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinition[]>}*/ (merge),
-    mergeAddAssetParams,
-
-    assetTranslation: /** @type {(arg:Translation.String) => Translation.String}*/ (identity),
-    modularItem: /** @type {(arg:ModularItemConfig) => ModularItemConfig}*/ (identity),
-    typedItem: /** @type {(arg:TypedItemConfig) => TypedItemConfig}*/ (identity),
+export class Type {
+    /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/
+    static attributes = identity;
+    /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/
+    static groups = identity;
+    /** @type {Identity<DrawOffsetItem>}*/
+    static drawOffset = identity;
+    /** @type {Identity<CustomAssetDefinition>}*/
+    static asset = identity;
+    /** @type {Identity<Translation.String>}*/
+    static assetTranslation = identity;
+    /** @type {Identity<ModularItemConfig>}*/
+    static modularItem = identity;
+    /** @type {Identity<TypedItemConfig>}*/
+    static typedItem = identity;
     /**
      * @template {string} K
      * @template {any} V
      * @param {Record<K,V>} arg
      * @returns {Record<K,V>}
      */
-    record: (arg) => identity(arg),
+    static record = (arg) => identity(arg);
     /**
      * @template T
      * @template R
@@ -119,20 +107,25 @@ export const Type = /** @type {const} */ ({
      * @param {(arg: T) => R} func
      * @returns {R}
      */
-    transform: (obj, func) => func(obj),
-    entries: recordEntries,
-    addAssetParamHasGroup,
+    static transform = (obj, func) => func(obj);
+}
 
-    stringEntries: /** @type {typeof repeatEntries<string>} */ (repeatEntries),
-    repeatEntries,
+export class Merge {
+    /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/
+    static item = merge;
+    /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/
+    static app = merge;
+    /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinition[]>}*/
+    static assets = merge;
+    static addAssetParams = mergeAddAssetParams;
+    static repeatEntries = repeatEntries;
+}
 
-    layerMap: /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */ (
-        (args, func) => args.map(func)
-    ),
-    screenLayer: /** @type {(layer: AssetLayerDefinition) => AssetLayerDefinition} */ (
-        (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false })
-    ),
-    multiplyLayer: /** @type {(layer: AssetLayerDefinition) => AssetLayerDefinition} */ (
-        (layer) => ({ ...layer, BlendingMode: "multiply", AllowColorize: false })
-    ),
-});
+export class Layer {
+    /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */
+    static map = (args, func) => args.map(func);
+    /** @type {Identity<AssetLayerDefinition>} */
+    static screen = (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false });
+    /** @type {Identity<AssetLayerDefinition>} */
+    static multiply = (layer) => ({ ...layer, BlendingMode: "multiply", AllowColorize: false });
+}

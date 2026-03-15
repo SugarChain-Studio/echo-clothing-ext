@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Type } from "../../../lib";
+import { createAfterDrawProcess, Layer } from "../../../lib";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const itemAttr = {
@@ -28,13 +28,13 @@ const asset = {
     DefaultColor: ["#131313", "#7F7F7F", "#4D305B", "#B57CC1", "#F4A9FF"],
     Layer: [
         { Name: "frame_diff" },
-        Type.screenLayer({ Name: "frame_gloss" }),
+        Layer.screen({ Name: "frame_gloss" }),
         { Name: "metal_diff" },
-        Type.screenLayer({ Name: "metal_gloss" }),
+        Layer.screen({ Name: "metal_gloss" }),
         { Name: "mask_diff" },
         { Name: "cover1", AllowTypes: { v: 1 }, CopyLayerColor: "mask_diff" },
         { Name: "cover2", AllowTypes: { v: 2 }, CopyLayerColor: "mask_diff" },
-        Type.screenLayer({ Name: "mask_gloss" }),
+        Layer.screen({ Name: "mask_gloss" }),
         { Name: "light1", HasImage: false },
         { Name: "light2", HasImage: false },
     ],

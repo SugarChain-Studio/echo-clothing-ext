@@ -38,6 +38,8 @@ function afterDraw(
 ) {
     const tempCanvs = AnimationGenerateTempCanvas(C, A, 200, 120);
     const ctx = tempCanvs.getContext("2d");
+    if (!ctx) return;
+
     if (L === "Lines") {
         ctx.strokeStyle = Color;
 

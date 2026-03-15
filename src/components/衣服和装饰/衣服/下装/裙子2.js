@@ -1,6 +1,6 @@
-import { Tools } from "@mod-utils/Tools";
+import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
-import { PoseMapTool, Type } from "../../../../lib";
+import { PoseMapTool } from "../../../../lib";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
@@ -35,21 +35,25 @@ const asset = [
         translation: { CN: "呢子短裙", EN: "Woolen Short Skirt" },
         layerNames: {
             CN: {
-                ...Type.stringEntries([["A1", "A2", "A3"], "左2"]),
-                ...Type.stringEntries([["B1", "B2", "B3"], "左1"]),
-                ...Type.stringEntries([["C1", "C2", "C3"], "右2"]),
-                ...Type.stringEntries([["D1", "D2", "D3"], "右1"]),
-                ...Type.stringEntries([["E1", "E2", "E3"], "前"]),
+                ...DialogTools.repeatEntries(
+                    [["A1", "A2", "A3"], "左2"],
+                    [["B1", "B2", "B3"], "左1"],
+                    [["C1", "C2", "C3"], "右2"],
+                    [["D1", "D2", "D3"], "右1"],
+                    [["E1", "E2", "E3"], "前"]
+                ),
                 Base: "基础",
                 Shade: "阴影",
                 Line: "线条",
             },
             EN: {
-                ...Type.stringEntries([["A1", "A2", "A3"], "Left2"]),
-                ...Type.stringEntries([["B1", "B2", "B3"], "Left1"]),
-                ...Type.stringEntries([["C1", "C2", "C3"], "Right2"]),
-                ...Type.stringEntries([["D1", "D2", "D3"], "Right1"]),
-                ...Type.stringEntries([["E1", "E2", "E3"], "Front"]),
+                ...DialogTools.repeatEntries(
+                    [["A1", "A2", "A3"], "Left2"],
+                    [["B1", "B2", "B3"], "Left1"],
+                    [["C1", "C2", "C3"], "Right2"],
+                    [["D1", "D2", "D3"], "Right1"],
+                    [["E1", "E2", "E3"], "Front"]
+                ),
                 Base: "Base",
                 Shade: "Shade",
                 Line: "Line",

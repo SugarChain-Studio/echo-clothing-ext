@@ -1,6 +1,6 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../../assetForward";
-import { createItemDialogModular, PoseMapTool, Type } from "../../lib";
+import { createItemDialogModular, Layer, PoseMapTool } from "../../lib";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";
 
@@ -309,7 +309,7 @@ const assets = [
             Hide: ["HandsLeft", "HandsRight"],
             AllowActivePose: ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch"],
             Layer: [
-                ...Type.layerMap(
+                ...Layer.map(
                     [
                         { Name: "A1", ColorGroup: "Lining", Priority: 21 }, // 内衬-腰部1
                         { Name: "A2", ColorGroup: "Lining", Priority: 21 }, // 内衬-腰部2
@@ -329,7 +329,7 @@ const assets = [
                     (l) => ({ PoseMapping: {}, Priority: 17, ...l })
                 ),
 
-                ...Type.layerMap(
+                ...Layer.map(
                     [
                         { Name: "手1", ColorGroup: "Struct" }, // 结构-掌心
                         { Name: "手2", ColorGroup: "Metal" }, // 金属-手指
@@ -344,7 +344,7 @@ const assets = [
                 ),
 
                 // 这是手臂
-                ...Type.layerMap(
+                ...Layer.map(
                     [
                         { Name: "手臂1", ColorGroup: "Metal" }, // 金属-手臂主轴
                         { Name: "手臂2" }, // 电线
@@ -361,7 +361,7 @@ const assets = [
                 ),
 
                 // 前面的透明布料
-                ...Type.layerMap(
+                ...Layer.map(
                     [
                         { Name: "塑料布1" }, // 塑料布-主体
                         { Name: "塑料布2" }, // 塑料布-亮色
@@ -627,7 +627,7 @@ const assets = [
                         ],
                     },
                 },
-                ...Type.layerMap(
+                ...Layer.map(
                     [
                         { Name: "D1" }, // 电线
                         { Name: "D2", ColorGroup: "Metal" }, // 金属-脚
