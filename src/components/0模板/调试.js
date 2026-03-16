@@ -112,8 +112,72 @@ const asset = [
     ],
 ];
 
+/** @type {typeof CommonTakePhoto} */
+function takePhoto(Left, Top, Width, Height) {
+    CommonPhotoMode = true;
+
+    // redraw once in photo mode
+    DrawProcess(0);
+
+    const ImgData = /** @type {HTMLCanvasElement}*/ (document.getElementById("MainCanvas"))
+        ?.getContext("2d")
+        ?.getImageData(Left, Top, Width, Height);
+
+    if (!ImgData) return;
+
+    const PhotoCanvas = document.createElement("canvas");
+    PhotoCanvas.width = Width;
+    PhotoCanvas.height = Height;
+
+    PhotoCanvas.getContext("2d")?.putImageData(ImgData, 0, 0);
+
+    PhotoCanvas.toBlob((blob) => {
+        if (!blob) return;
+
+        const url = URL.createObjectURL(blob);
+        const filename = `photo_${Date.now()}.png`;
+
+        const newWindow = window.open("about:blank", "_blank");
+
+        if (!newWindow) {
+            console.warn("Popups blocked: Cannot open photo in new tab.");
+            return;
+        }
+
+        const doc = newWindow.document;
+        doc.title = filename;
+
+        const body = doc.body;
+        body.style.fontFamily = "sans-serif";
+
+        const bar = doc.createElement("div");
+        bar.style.padding = "10px";
+
+        const link = doc.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.textContent = `Download ${filename}`;
+
+        bar.appendChild(link);
+
+        const img = doc.createElement("img");
+        img.src = url;
+        img.style.display = "block";
+        img.style.maxWidth = "100%";
+
+        body.appendChild(bar);
+        body.appendChild(img);
+    }, "image/png");
+
+    CommonPhotoMode = false;
+}
+
 export default function load() {
     if (debugFlag) {
+        HookManager.hookFunction("CommonTakePhoto", 0, (args) => {
+            takePhoto(...args);
+        });
+
         AssetManager.addAssetWithConfig(asset);
 
         // 聊天室隐藏图标设置为闭眼的时候，截角色图时隐藏背景
