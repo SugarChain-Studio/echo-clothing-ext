@@ -71,6 +71,11 @@ const extended = {
             ],
         },
         {
+            Name: "HNipples",
+            Key: "hn",
+            Options: [{}, { Property: { Hide: ["Nipples"] } }],
+        },
+        {
             Name: "Close",
             Key: "c",
             Options: [{}, {}],
@@ -93,6 +98,10 @@ const assetStrings = {
         Optionc0: "关闭",
         Optionc1: "启用",
 
+        ModuleHNipples: "隐藏乳头",
+        Optionhn0: "不隐藏",
+        Optionhn1: "隐藏",
+
         详细设置: "详细设置隐藏图层",
         上一页: "上一页",
         下一页: "下一页",
@@ -110,6 +119,10 @@ const assetStrings = {
         SelectClose: "Configure Auto-Close Legs",
         Optionc0: "Disable",
         Optionc1: "Enable",
+
+        ModuleHNipples: "Hide Nipples",
+        Optionhn0: "Don't Hide",
+        Optionhn1: "Hide",
 
         详细设置: "Detailed Hide Settings",
         上一页: "Previous Page",
