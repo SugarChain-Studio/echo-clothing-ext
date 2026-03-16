@@ -99,6 +99,7 @@ const assetStrings = {
         Optionc1: "启用",
 
         ModuleHNipples: "隐藏乳头",
+        SelectHNipples: "配置隐藏乳头",
         Optionhn0: "不隐藏",
         Optionhn1: "隐藏",
 
@@ -121,6 +122,7 @@ const assetStrings = {
         Optionc1: "Enable",
 
         ModuleHNipples: "Hide Nipples",
+        SelectHNipples: "Configure Hide Nipples",
         Optionhn0: "Don't Hide",
         Optionhn1: "Hide",
 
