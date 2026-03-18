@@ -3,7 +3,7 @@ import { luziSuffixFixups } from "../../../lib/fixups";
 
 /**
  * @typedef {Object} TattooLayerDefinitionExtension
- * @property {string} DefaultColor - 默认颜色
+ * @property {BCColor} DefaultColor - 默认颜色
  * @property {Translation.Entry} Localized - 本地化名称
  * @property {string} ConfigKey - 配置键
  */

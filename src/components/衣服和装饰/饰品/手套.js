@@ -30,7 +30,7 @@ const assets = [
                 ["OverTheHead", { Left: 90, Top: 10 }]
             ),
             PoseMapping: glovePoseM(),
-            DefaultColor: ["default", "#ADAA9A"],
+            DefaultColor: ["Default", "#ADAA9A"],
             Layer: [{ AllowTypes: { typed: 0 } }, { Name: "L", AllowTypes: { typed: 1 } }],
         },
         {
