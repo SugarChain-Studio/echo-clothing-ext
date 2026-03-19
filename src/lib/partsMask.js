@@ -6,8 +6,9 @@ export class PartsMask {
     /**
      * @param {HTMLCanvasElement} canvas
      * @param {CustomGroupName[]} groups
+     * @param {CustomGroupName[]} [rGroups]
      */
-    constructor(canvas, groups) {
+    constructor(canvas, groups, rGroups) {
         /**
          * @private
          * @type {HTMLCanvasElement}
@@ -22,22 +23,35 @@ export class PartsMask {
 
         /**
          * @private
+         * @type {CustomGroupName[]}
+         */
+        this._rGroups = rGroups ?? [];
+
+        /**
+         * @private
          * @type {PartialDrawState | undefined}
          */
         this._state = undefined;
+
+        /**
+         * @private
+         * @type {PartialDrawState | undefined}
+         */
+        this._rState = undefined;
     }
 
     /**
      * @private
      * @param {Character} C
+     * @param {CustomGroupName[]} groups
      * @return {PartialDrawState}
      */
-    _calState(C) {
+    _calState(C, groups) {
         /** @type {PartialDrawState} */
         const state = [];
 
         /** @type {AssetLayer[]} */
-        const layers = this._groups.flatMap((g) => C.AppearanceLayers.filter((l) => l.Asset.Group.Name === g));
+        const layers = groups.flatMap((g) => C.AppearanceLayers.filter((l) => l.Asset.Group.Name === g));
         for (const layer of layers) {
             if (!layer.HasImage) continue;
 
@@ -110,16 +124,29 @@ export class PartsMask {
      * @param {Character} C
      */
     draw(C) {
-        const newState = this._calState(C);
+        const newState = this._calState(C, this._groups);
         if (C.MustDraw || !this._state || !this._stateCompare(newState, this._state)) {
             const ctx = this._canvas.getContext("2d");
             if (!ctx) return;
+            ctx.globalCompositeOperation = "source-over";
             ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
             for (const [url, x, y] of newState) {
                 const img = DrawGetImage(url);
                 ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
             this._state = newState;
+        }
+
+        const nrState = this._calState(C, this._rGroups);
+        if (C.MustDraw || !this._rState || !this._stateCompare(nrState, this._rState)) {
+            const ctx = this._canvas.getContext("2d");
+            if (!ctx) return;
+            ctx.globalCompositeOperation = "destination-out";
+            for (const [url, x, y] of nrState) {
+                const img = DrawGetImage(url);
+                ctx.drawImage(img, x, y - CanvasUpperOverflow);
+            }
+            this._rState = nrState;
         }
     }
 }

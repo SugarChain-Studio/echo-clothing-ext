@@ -12,3 +12,5 @@ export { PoseMapTool } from "./poseMapTool.js";
 export { PostPass, ImmPass } from "./postPass.js";
 export { CustomValidate } from "./customRemoveAtLogin.js";
 export { AfterAssetOverrides } from "./afterAssetOverrides.js";
+export { GLImageRenderer } from "./draw.js";
+export { PartsMask } from "./partsMask.js";
