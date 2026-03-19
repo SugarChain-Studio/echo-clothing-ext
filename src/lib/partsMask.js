@@ -116,7 +116,8 @@ export class PartsMask {
             if (!ctx) return;
             ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
             for (const [url, x, y] of newState) {
-                DrawImageEx(url, ctx, x, y - CanvasUpperOverflow);
+                const img = DrawGetImage(url);
+                ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
             this._state = newState;
         }
