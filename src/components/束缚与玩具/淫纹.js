@@ -599,11 +599,11 @@ function afterDraw(data, originalFunction, drawData) {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 200, 200);
 
-        const mask = Tools.getAssetURL(drawData, imgType);
-        DrawImageEx(mask, ctx, 0, 0, { BlendingMode: "destination-in" });
-
-        drawCanvas(Data.GlowCanvas, X, Y);
-        drawCanvasBlink(Data.GlowCanvas, X, Y);
+        Tools.getAssetImageThen(drawData, imgType).then((img) => {
+            DrawImageEx(img, ctx, 0, 0, { BlendingMode: "destination-in" });
+            drawCanvas(Data.GlowCanvas, X, Y);
+            drawCanvasBlink(Data.GlowCanvas, X, Y);
+        });
     }
     if (L === "泛光" && Property.TypeRecord?.g === 2) {
         if (Property.TypeRecord?.g !== 2) return;

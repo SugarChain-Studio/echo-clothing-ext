@@ -16,11 +16,12 @@ function afterDraw(drawData) {
     const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
     monadic(drawConfig[L]).then(({ partial, mask, blend }) => {
         const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
-        const maskURL = Tools.getAssetURL(drawData, mask);
-        DrawImageEx(maskURL, Canvas.getContext("2d"), X, Y, { BlendingMode: blend });
-        DrawImageEx(maskURL, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: blend });
-        drawCanvas(Canvas, 0, 0, AlphaMasks);
-        drawCanvasBlink(CanvasBlink, 0, 0, AlphaMasks);
+        Tools.getAssetImageThen(drawData, mask).then((img) => {
+            DrawImageEx(img, Canvas.getContext("2d"), X, Y, { BlendingMode: blend });
+            DrawImageEx(img, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: blend });
+            drawCanvas(Canvas, 0, 0, AlphaMasks);
+            drawCanvasBlink(CanvasBlink, 0, 0, AlphaMasks);
+        });
     });
 }
 

@@ -234,6 +234,14 @@ export class GLImageRenderer {
     }
 
     /**
+     * 将 BCColor 转换为 GL 可用的颜色数组，如果是 "Default" 则返回 undefined
+     * @param {BCColor} color
+     */
+    static BCColorToGLColor(color) {
+        return color === "Default" ? undefined : /** @type {Vec4} */ (GLDrawHexToRGBA(color));
+    }
+
+    /**
      * 绘制图片
      * @param {HTMLCanvasElement | HTMLImageElement} image
      * @param {number} x

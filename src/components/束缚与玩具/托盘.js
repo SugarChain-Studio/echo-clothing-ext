@@ -63,11 +63,11 @@ const layerNames = {
  */
 
 /**
- * @typedef { { Luzi_InventoryContent: ContainerProperty.ContainerData[], Luzi_InventoryType?: ContentsType } } TrayData
+ * @typedef { { Luzi_InventoryContent: ContainerProperty.ContainerData[], Luzi_InventoryType?: ContentsType } } TrayProperties
  */
 
 /**
- * @typedef { globalThis.ItemProperties & TrayData } ExtendItemProperties
+ * @typedef { globalThis.ItemProperties & TrayProperties } ExtendItemProperties
  */
 
 const drinkType = ["空杯", "橙汁", "可乐", "牛奶"];
@@ -371,30 +371,42 @@ const itemDialog = createItemDialogNoArch({
 
 const drinksImgs = { 橙汁: "橙汁", 牛奶: "牛奶", 可乐: "可乐", 空杯: "空杯" };
 
-/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<NoArchItemData, {}>} */
-function afterDraw(data, originalFunction, drawData) {
-    const { L, Property, C, X, Y, A, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
+/**
+ * @typedef {Object} TrayData
+ * @property {HTMLCanvasElement} cookiesCanvas
+ * @property {HTMLCanvasElement} drinksCanvas
+ */
+
+/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<NoArchItemData, TrayData>} */
+function afterDraw(mdata, originalFunction, drawData) {
+    const { L, Property, C, X, Y, A, AlphaMasks, drawCanvas, drawCanvasBlink, PersistentData } = drawData;
     const property = /** @type {ExtendItemProperties} */ (Property);
+    const data = PersistentData();
     if (!Array.isArray(property.Luzi_InventoryContent) && typeof property.Luzi_InventoryType !== "string") return;
     if (L === "曲奇" && property.Luzi_InventoryType === "曲奇") {
-        const canvas = AnimationGenerateTempCanvas(C, A, 160, 40);
+        const canvas = (data.cookiesCanvas ??= AnimationGenerateTempCanvas(C, A, 160, 40));
         const idx = property.Luzi_InventoryContent.length.toString().padStart(2, "0");
-        const imgURL = Tools.getAssetURL(drawData, `曲奇${idx}`);
         const ctx = canvas.getContext("2d");
-        DrawImageEx(imgURL, ctx, 0, 0);
-        drawCanvas(canvas, X, Y, AlphaMasks);
-        drawCanvasBlink(canvas, X, Y, AlphaMasks);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        Tools.getAssetImageThen(drawData, `曲奇${idx}`).then((img) => {
+            DrawImageEx(img, ctx, 0, 0);
+            drawCanvas(canvas, X, Y, AlphaMasks);
+            drawCanvasBlink(canvas, X, Y, AlphaMasks);
+        });
     } else if (L === "饮料" && property.Luzi_InventoryType === "饮料") {
-        const canvas = AnimationGenerateTempCanvas(C, A, 500, 70);
+        const canvas = (data.drinksCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 70));
         const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < maxv.饮料; i++) {
             const a = property.Luzi_InventoryContent[i];
             if (!a) continue;
             const name = a.IAsset && drinksImgs[a.IAsset];
             if (!name) continue;
-            const imgURL = Tools.getAssetURL(drawData, name);
             const margin = 170;
-            DrawImageEx(imgURL, ctx, margin + (i * (500 - margin * 2 - 40)) / (maxv.饮料 - 1), 0);
+            Tools.getAssetImageThen(drawData, name).then((img) => {
+                DrawImageEx(img, ctx, margin + (i * (500 - margin * 2 - 40)) / (maxv.饮料 - 1), 0);
+            });
         }
         drawCanvas(canvas, X, Y, AlphaMasks);
         drawCanvasBlink(canvas, X, Y, AlphaMasks);

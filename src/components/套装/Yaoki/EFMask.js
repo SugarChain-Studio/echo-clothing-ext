@@ -82,7 +82,6 @@ function scriptDraw(data, originalFunction, drawData) {
 const afterDraw = createAfterDrawProcess("modular", /** @type {CanvasCacheData} */ ({}), () => {}).onLayer(
     ["light2", "light1"],
     (_, drawData) => {
-        const resource = Tools.getAssetURL(drawData);
         const { C, A, X, Y, L, Color, Property, PersistentData, drawCanvas, drawCanvasBlink, AlphaMasks } = drawData;
 
         const phase = {
@@ -94,25 +93,26 @@ const afterDraw = createAfterDrawProcess("modular", /** @type {CanvasCacheData} 
 
         const data = PersistentData();
 
-        if (!data.canvas) {
-            data.canvas = AnimationGenerateTempCanvas(C, A, 180, 50);
-        }
+        const canvas = (data.canvas ??= AnimationGenerateTempCanvas(C, A, 180, 50));
 
-        const ctx = data.canvas.getContext("2d");
-        ctx.clearRect(0, 0, data.canvas.width, data.canvas.height);
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (Property.TypeRecord.f === 0) {
-            const Alpha = Math.sin((Date.now() / 1000 + C.MemberNumber) * Math.PI * 2 * 0.2 + thisPhase) * 0.3 + 0.7;
-            ctx.fillStyle = `${Color}${Alpha.toString(16).slice(2, 4)}`;
-        } else {
-            ctx.fillStyle = `${Color}`;
-        }
+        Tools.getAssetImageThen(drawData).then((img) => {
+            if (Property.TypeRecord.f === 0) {
+                const Alpha =
+                    Math.sin((Date.now() / 1000 + C.MemberNumber) * Math.PI * 2 * 0.2 + thisPhase) * 0.3 + 0.7;
+                ctx.fillStyle = `${Color}${Alpha.toString(16).slice(2, 4)}`;
+            } else {
+                ctx.fillStyle = `${Color}`;
+            }
 
-        ctx.fillRect(0, 0, data.canvas.width, data.canvas.height);
-        DrawImageEx(resource, ctx, 0, 0, { BlendingMode: "destination-in" });
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            DrawImageEx(img, ctx, 0, 0, { BlendingMode: "destination-in" });
 
-        drawCanvas(data.canvas, X, Y, AlphaMasks);
-        drawCanvasBlink(data.canvas, X, Y, AlphaMasks);
+            drawCanvas(canvas, X, Y, AlphaMasks);
+            drawCanvasBlink(canvas, X, Y, AlphaMasks);
+        });
     }
 );
 

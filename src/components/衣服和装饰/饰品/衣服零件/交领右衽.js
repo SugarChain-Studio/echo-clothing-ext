@@ -19,20 +19,13 @@ const afterDraw = createAfterDrawProcess(
     }
 ).onLayer(["A3", "A4"], ({ mask, renderer, canvas }, drawData) => {
     const { X, Y, Color, Opacity, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
-
-    const url = Tools.getAssetURL(drawData);
-
-    const src = DrawGetImage(url);
-    if (!src.complete) return;
-
-    const color =
-        Color === "Default" ? undefined : /** @type {[number, number, number, number]} */ (GLDrawHexToRGBA(Color));
-
-    renderer.clearRect(0, 0, canvas.width, canvas.height);
-    renderer.drawImage(src, X, Y - CanvasUpperOverflow, { color, colorAlpha: Opacity, alphaTex: mask.result });
-
-    drawCanvas(canvas, 0, CanvasUpperOverflow, AlphaMasks);
-    drawCanvasBlink(canvas, 0, CanvasUpperOverflow, AlphaMasks);
+    Tools.getAssetImageThen(drawData).then((img) => {
+        const color = GLImageRenderer.BCColorToGLColor(Color);
+        renderer.clearRect(0, 0, canvas.width, canvas.height);
+        renderer.drawImage(img, X, Y - CanvasUpperOverflow, { color, colorAlpha: Opacity, alphaTex: mask.result });
+        drawCanvas(canvas, 0, CanvasUpperOverflow, AlphaMasks);
+        drawCanvasBlink(canvas, 0, CanvasUpperOverflow, AlphaMasks);
+    });
 });
 
 /** @type { AddAssetWithConfigParams }} */
