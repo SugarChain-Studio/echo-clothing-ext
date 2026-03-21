@@ -1,7 +1,7 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { Container, createAfterDrawProcess, createItemDialogModular, Type } from "../../../lib";
+import { Container, createAfterDrawProcess, createItemDialogModular, GLImageRenderer, Type } from "../../../lib";
 
 // Milk Vending by Yaoki
 
@@ -56,19 +56,19 @@ const asset = {
             TextureMask: { Groups: ["BodyUpper", "Suit"] },
             BlendingMode: "destination-out",
         },
-        { Name: "底座", Left: 20, Top: 665 },
+        { Name: "底座", Left: 20, Top: 665, ColorGroup: "箱子" },
         { Name: "箱前", Left: 30, Top: -115, ColorGroup: "箱子" },
         { Name: "箱前图案", Left: 30, Top: -115, ColorGroup: "箱子" },
         { Name: "奶杯后", Left: 170, Top: 295, ColorGroup: "挤奶", AllowTypes: { m: 1 } },
-        { Name: "奶杯液", Left: 170, Top: 295, AllowTypes: { m: 1 }, HasImage: false, AllowColorize: false },
+        { Name: "奶杯液", Left: 170, Top: 295, AllowTypes: { m: 1 }, HasImage: false },
         { Name: "奶杯前", Left: 170, Top: 295, ColorGroup: "挤奶", AllowTypes: { m: 1 } },
-        { Name: "管液", Left: 170, Top: 295, AllowTypes: { m: 1 }, HasImage: false, AllowColorize: false },
+        { Name: "管液", Left: 170, Top: 295, AllowTypes: { m: 1 }, HasImage: false, CopyLayerColor: "奶杯液" },
         { Name: "管", Left: 170, Top: 295, ColorGroup: "挤奶", AllowTypes: { m: 1 } },
-        { Name: "前面板", Left: 30, Top: -115 },
+        { Name: "前面板", Left: 30, Top: -115, ColorGroup: "箱子" },
         { Name: "灯条", Left: 150, Top: 395 },
         { Name: "玻璃", Left: 30, Top: -115, AllowTypes: { w: 0 } },
-        { Name: "出液", Left: 190, Top: 435, HasImage: false },
-        { Name: "杯液", Left: 190, Top: 435, HasImage: false },
+        { Name: "出液", Left: 190, Top: 435, HasImage: false, CopyLayerColor: "奶杯液" },
+        { Name: "杯液", Left: 190, Top: 435, HasImage: false, CopyLayerColor: "奶杯液" },
         { Name: "杯半", Left: 190, Top: 435, HasImage: false },
     ],
 };
@@ -93,6 +93,8 @@ const layerNames = {
         奶杯后: "杯后",
         奶杯前: "杯前",
         管: "软管",
+
+        奶杯液: "液体",
     },
     EN: {
         通风口: "Vent",
@@ -116,6 +118,8 @@ const layerNames = {
         前面板: "Front Panel",
         灯条: "Light Strip",
         玻璃: "Glass",
+
+        奶杯液: "Fluid",
     },
 };
 
@@ -148,6 +152,10 @@ const layerNames = {
  * @property {HTMLCanvasElement} [OutputFlowCanvas]
  * @property {HTMLCanvasElement} [OutputContentCanvas]
  * @property {HTMLCanvasElement} [OutputCupCanvas]
+ * @property {GLImageRenderer} [HoseRenderer]
+ * @property {GLImageRenderer} [OutputFlowRenderer]
+ * @property {GLImageRenderer} [OutputContentRenderer]
+ * @property {GLImageRenderer} [OutputCupRenderer]
  */
 
 export const maxProdFlow = 10;
@@ -323,121 +331,123 @@ const afterDrawProcess = createAfterDrawProcess(
     }
 ).onLayers({
     奶杯液: ({ data }, drawData) => {
-        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.CupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.CupCanvas.getContext("2d");
-        const canvasY = CanvasUpperOverflow + 200;
+        const renderer = (data.CupRenderer ??= new GLImageRenderer(data.CupCanvas));
+        if (typeof data.MilkCupAmount !== "number") return;
         // Y范围: 200 ~ 400
-
-        if (typeof data.MilkCupAmount === "number") {
-            canvas.clearRect(0, 0, 500, 200);
-            DrawImageEx(source, canvas, X, Y - canvasY);
-            canvas.clearRect(0, 0, 500, 150 - Math.round((data.MilkCupAmount / 100) * 45));
-
+        const canvasY = CanvasUpperOverflow + 200;
+        renderer.clearRect(0, 0, 500, 200);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            renderer.drawImage(img, X, Y - canvasY, { color });
+            renderer.clearRect(0, 0, 500, 150 - Math.round((data.MilkCupAmount / 100) * 45));
             drawCanvas(data.CupCanvas, 0, canvasY);
             drawCanvasBlink(data.CupCanvas, 0, canvasY);
-        }
+        });
     },
     管液: ({ data }, drawData) => {
-        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         const ratio1 = ((350 - 327) / (350 - 305)) * 100;
         data.HoseCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.HoseCanvas.getContext("2d");
+        const renderer = (data.HoseRenderer ??= new GLImageRenderer(data.HoseCanvas));
+
+        if (typeof data.MilkCupAmount !== "number" || typeof data.MilkProdFlow !== "number") return;
+
+        // 327 ~ 440
+        const pLen = 440 - 327;
+        // 使用产量流速和杯内液体量的较大者，产量流速大和杯内液体多都会让液柱更长，液柱长度至少30
+        const kRatio = Math.min(Math.max(data.MilkCupAmount / ratio1, data.MilkProdFlow / maxProdFlow), 1);
+        // 低于 0.1 管子清空
+        if (kRatio <= 0.1) return;
+
+        renderer.clearRect(0, 0, 500, 200);
         const canvasY = CanvasUpperOverflow + 300;
-        // Y范围: 300 ~ 500
 
-        if (typeof data.MilkCupAmount === "number" && typeof data.MilkProdFlow === "number") {
-            // 327 ~ 440
-            const pLen = 440 - 327;
-            // 使用产量流速和杯内液体量的较大者，产量流速大和杯内液体多都会让液柱更长，液柱长度至少30
-            const kRatio = Math.min(Math.max(data.MilkCupAmount / ratio1, data.MilkProdFlow / maxProdFlow), 1);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            renderer.drawImage(img, X, Y - canvasY, { color });
 
-            // 低于 0.1 管子清空
-            if (kRatio > 0.1) {
-                canvas.clearRect(0, 0, 500, 200);
-                DrawImageEx(source, canvas, X, Y - canvasY);
+            // 产生液柱动画
+            if (data.MilkCupAmount < ratio1 * 100) {
+                const len = Math.round(kRatio * (pLen - 10) + 10);
+                const sep = pLen - len;
 
-                // 产生液柱动画
-                if (data.MilkCupAmount < ratio1 * 100) {
-                    const len = Math.round(kRatio * (pLen - 10) + 10);
-                    const sep = pLen - len;
+                const flowSpeed = 3;
+                const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
+                const startL = 27 + Math.round((start + data.RandomOffsetLeft) % pLen);
+                const startR = 27 + Math.round((start + data.RandomOffsetRight) % pLen);
 
-                    const flowSpeed = 3;
-                    const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
-                    const startL = 27 + Math.round((start + data.RandomOffsetLeft) % pLen);
-                    const startR = 27 + Math.round((start + data.RandomOffsetRight) % pLen);
-
-                    for (let i = 0; i < 2; i++) {
-                        const start = [startL, startR][i];
-                        canvas.clearRect(250 * i, start - pLen, 250, sep);
-                        canvas.clearRect(250 * i, start, 250, sep);
-                        canvas.clearRect(250 * i, start + pLen, 250, sep);
-                    }
+                for (let i = 0; i < 2; i++) {
+                    const start = [startL, startR][i];
+                    renderer.clearRect(250 * i, start - pLen, 250, sep);
+                    renderer.clearRect(250 * i, start, 250, sep);
+                    renderer.clearRect(250 * i, start + pLen, 250, sep);
                 }
-
-                drawCanvas(data.HoseCanvas, 0, canvasY);
-                drawCanvasBlink(data.HoseCanvas, 0, canvasY);
             }
-        }
+
+            drawCanvas(data.HoseCanvas, 0, canvasY);
+            drawCanvasBlink(data.HoseCanvas, 0, canvasY);
+        });
     },
     出液: ({ data, fillingLeft, fillingRight }, drawData) => {
-        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputFlowCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.OutputFlowCanvas.getContext("2d");
+        const renderer = (data.OutputFlowRenderer ??= new GLImageRenderer(data.OutputFlowCanvas));
+        if (!fillingLeft && !fillingRight) return;
         const canvasY = CanvasUpperOverflow + 400;
+        renderer.clearRect(0, 0, 500, 200);
 
-        if (fillingLeft || fillingRight) {
-            canvas.clearRect(0, 0, 500, 200);
-            DrawImageEx(source, canvas, X, Y - canvasY);
-            if (!fillingLeft) canvas.clearRect(0, 0, 250, 200);
-            if (!fillingRight) canvas.clearRect(250, 0, 250, 200);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            renderer.drawImage(img, X, Y - canvasY, { color });
+            if (!fillingLeft) renderer.clearRect(0, 0, 250, 200);
+            if (!fillingRight) renderer.clearRect(250, 0, 250, 200);
 
             drawCanvas(data.OutputFlowCanvas, 0, canvasY);
             drawCanvasBlink(data.OutputFlowCanvas, 0, canvasY);
-        }
+        });
     },
     杯液: ({ data, property, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
-        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputContentCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.OutputContentCanvas.getContext("2d");
+        const renderer = (data.OutputContentRenderer ??= new GLImageRenderer(data.OutputContentCanvas));
+        if (!fillingLeft && !fillingRight && !filledLeft && !filledRight) return;
         const canvasY = CanvasUpperOverflow + 400;
 
-        if (fillingLeft || fillingRight || filledLeft || filledRight) {
-            canvas.clearRect(0, 0, 500, 200);
-            DrawImageEx(source, canvas, X, Y - canvasY);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            renderer.clearRect(0, 0, 500, 200);
 
+            renderer.drawImage(img, X, Y - canvasY, { color });
             // 495 ~ 530
             const now = Date.now();
             const clearTop = (start) => 135 - Math.round(Math.min((now - start) / 2000, 1) * (530 - 495));
-
-            if (fillingLeft) canvas.clearRect(0, 0, 250, clearTop(property.Luzi_OutputStartLeft));
-            else if (!filledLeft) canvas.clearRect(0, 0, 250, 200);
-            if (fillingRight) canvas.clearRect(250, 0, 250, clearTop(property.Luzi_OutputStartRight));
-            else if (!filledRight) canvas.clearRect(250, 0, 250, 200);
+            if (fillingLeft) renderer.clearRect(0, 0, 250, clearTop(property.Luzi_OutputStartLeft));
+            else if (!filledLeft) renderer.clearRect(0, 0, 250, 200);
+            if (fillingRight) renderer.clearRect(250, 0, 250, clearTop(property.Luzi_OutputStartRight));
+            else if (!filledRight) renderer.clearRect(250, 0, 250, 200);
 
             drawCanvas(data.OutputContentCanvas, 0, canvasY);
             drawCanvasBlink(data.OutputContentCanvas, 0, canvasY);
-        }
+        });
     },
     杯半: ({ data, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
-        const { C, A, X, Y, drawCanvas, drawCanvasBlink } = drawData;
+        const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputCupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.OutputContentCanvas.getContext("2d");
+        const renderer = (data.OutputCupRenderer ??= new GLImageRenderer(data.OutputCupCanvas));
+        if (!fillingLeft && !fillingRight && !filledLeft && !filledRight) return;
         const canvasY = CanvasUpperOverflow + 400;
+        renderer.clearRect(0, 0, 500, 200);
 
-        if (fillingLeft || fillingRight || filledLeft || filledRight) {
-            canvas.clearRect(0, 0, 500, 200);
-            DrawImageEx(source, canvas, X, Y - canvasY);
-            if (!filledLeft && !fillingLeft) canvas.clearRect(0, 0, 250, 200);
-            if (!filledRight && !fillingRight) canvas.clearRect(250, 0, 250, 200);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            renderer.drawImage(img, X, Y - canvasY, { color });
+            if (!filledLeft && !fillingLeft) renderer.clearRect(0, 0, 250, 200);
+            if (!filledRight && !fillingRight) renderer.clearRect(250, 0, 250, 200);
             drawCanvas(data.OutputContentCanvas, 0, canvasY);
             drawCanvasBlink(data.OutputContentCanvas, 0, canvasY);
-        }
+        });
     },
 });
 

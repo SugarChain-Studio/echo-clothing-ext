@@ -2,7 +2,7 @@ import { StateTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { flowAlgorithm, flowText, maxProdFlow } from "../../套装/Yaoki/牛奶贩卖机";
-import { createItemDialogModular, Layer } from "../../../lib";
+import { createItemDialogModular, Layer, GLImageRenderer } from "../../../lib";
 import { holdsEmptyGlass, setGlassContent } from "../手持物/玻璃杯饮料";
 
 const orgasmState = new StateTools.OrgasmState();
@@ -17,6 +17,7 @@ const orgasmState = new StateTools.OrgasmState();
  * @property {number} RandomOffsetLeft
  * @property {number} RandomOffsetRight
  * @property {HTMLCanvasElement} [HoseCanvas]
+ * @property {GLImageRenderer} [HoseRenderer]
  */
 
 /**
@@ -172,44 +173,46 @@ function beforeDraw(mdata, originalFunction, { L, CA, PersistentData }) {
 /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, MilkCupData>} */
 function afterDraw(mdata, originalFunction, drawData) {
     // 与牛奶贩卖机相似的液柱算法，只是不处理吸杯内的液体，没有杯内液体太多导致管子直接满的情况
-    const { C, A, X, Y, L, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
+    const { C, A, X, Y, L, Color, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
     if (L === "不透明") {
         const data = PersistentData();
-        data.HoseCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
-        const source = Tools.getAssetURL(drawData);
-        const canvas = data.HoseCanvas.getContext("2d");
+        const canvas = (data.HoseCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200));
+        const render = (data.HoseRenderer ??= new GLImageRenderer(canvas));
+
+        if (typeof data.MilkProdFlow !== "number") return;
+        // 302 ~ 372
+        const pLen = 372 - 302;
+        const kRatio = Math.min(data.MilkProdFlow / maxProdFlow, 1);
+        // 低于 0.1 管子清空
+        if (kRatio <= 0.1) return;
+
         const canvasY = CanvasUpperOverflow + 250;
 
-        if (typeof data.MilkProdFlow === "number") {
-            // 302 ~ 372
-            const pLen = 372 - 302;
-            const kRatio = Math.min(data.MilkProdFlow / maxProdFlow, 1);
+        render.clearRect(0, 0, 500, 200);
 
-            // 低于 0.1 管子清空
-            if (kRatio > 0.1) {
-                canvas.clearRect(0, 0, 500, 200);
-                DrawImageEx(source, canvas, X, Y - canvasY);
+        Tools.getAssetImageThen(drawData).then((img) => {
+            const color = GLImageRenderer.BCColorToGLColor(Color);
+            render.drawImage(img, X, Y - canvasY, { color });
 
-                // 产生液柱动画
-                const len = Math.round(kRatio * (pLen - 10) + 10);
-                const sep = pLen - len;
+            // 产生液柱动画
+            const len = Math.round(kRatio * (pLen - 10) + 10);
+            const sep = pLen - len;
 
-                const flowSpeed = 3;
-                const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
-                const startL = 27 + Math.round((start + data.RandomOffsetLeft) % pLen);
-                const startR = 27 + Math.round((start + data.RandomOffsetRight) % pLen);
+            const flowSpeed = 3;
+            const start = (((Date.now() / 1000) % flowSpeed) * pLen) / flowSpeed;
+            const startL = 27 + Math.round((start + data.RandomOffsetLeft) % pLen);
+            const startR = 27 + Math.round((start + data.RandomOffsetRight) % pLen);
 
-                for (let i = 0; i < 2; i++) {
-                    const start = [startL, startR][i];
-                    canvas.clearRect(250 * i, start - pLen, 250, sep);
-                    canvas.clearRect(250 * i, start, 250, sep);
-                    canvas.clearRect(250 * i, start + pLen, 250, sep);
-                }
-
-                drawCanvas(data.HoseCanvas, 0, canvasY);
-                drawCanvasBlink(data.HoseCanvas, 0, canvasY);
+            for (let i = 0; i < 2; i++) {
+                const start = [startL, startR][i];
+                render.clearRect(250 * i, start - pLen, 250, sep);
+                render.clearRect(250 * i, start, 250, sep);
+                render.clearRect(250 * i, start + pLen, 250, sep);
             }
-        }
+
+            drawCanvas(canvas, 0, canvasY);
+            drawCanvasBlink(canvas, 0, canvasY);
+        });
     }
 }
 
@@ -239,15 +242,15 @@ const asset = [
                     ColorGroup: "背包",
                     ...l,
                 })),
-                { Name: "2_不透明", Priority: 5, AllowTypes: { s: 0 }, AllowColorize: false },
+                { Name: "2_不透明", Priority: 5, AllowTypes: { s: 0 } },
                 { Name: "2_管子", Priority: 5, AllowTypes: { s: 0 } },
                 { Name: "外橡胶", AllowTypes: { s: 0 }, ColorGroup: "橡胶" },
-                { Name: "不透明内", AllowTypes: { s: 0 }, AllowColorize: false },
+                { Name: "不透明内", AllowTypes: { s: 0 }, CopyLayerColor: "2_不透明" },
                 { Name: "内玻璃", AllowTypes: { s: 0 }, ColorGroup: "吸杯" },
                 { Name: "泵", AllowTypes: { s: 0 } },
                 { Name: "外玻璃", AllowTypes: { s: 0 }, ColorGroup: "吸杯" },
                 { Name: "内橡胶", AllowTypes: { s: 0 }, ColorGroup: "橡胶" },
-                { Name: "不透明", AllowTypes: { s: 0 }, AllowColorize: false, HasImage: false },
+                { Name: "不透明", AllowTypes: { s: 0 }, HasImage: false, CopyLayerColor: "2_不透明" },
                 { Name: "管子", AllowTypes: { s: 0 }, CopyLayerColor: "2_管子" },
             ],
         },
@@ -272,6 +275,8 @@ const asset = [
                     "外玻璃": "外",
 
                     "内橡胶": "内",
+
+                    "2_不透明": "液体",
                 },
                 EN: {
                     "背包": "Backpack",
@@ -292,6 +297,8 @@ const asset = [
                     "外玻璃": "Outer",
 
                     "内橡胶": "Inner",
+
+                    "2_不透明": "Liquid",
                 },
             },
             translation: { CN: "便携乳泵", EN: "Portable Breast Pump" },
