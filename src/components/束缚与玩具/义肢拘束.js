@@ -610,6 +610,7 @@ const assets = [
                 {
                     Name: "遮罩下",
                     BlendingMode: "destination-out",
+                    ...PoseMapTool.layerConfig(true, [], ["Kneel", "KneelingSpread"]),
                     ParentGroup: {},
                     TextureMask: {
                         Groups: [
