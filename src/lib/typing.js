@@ -78,28 +78,28 @@ function repeatEntries(...args) {
  * @typedef {(arg:T[], func:(arg:T)=>R)=>R[]} ArrayTransformFunction
  */
 
-export class Type {
+class _Type {
     /** @type {(arg:CustomAssetAttribute[]) => AssetAttribute[]}*/
-    static attributes = identity;
+    attributes = identity;
     /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/
-    static groups = identity;
+    groups = identity;
     /** @type {Identity<DrawOffsetItem>}*/
-    static drawOffset = identity;
+    drawOffset = identity;
     /** @type {Identity<CustomAssetDefinition>}*/
-    static asset = identity;
+    asset = identity;
     /** @type {Identity<Translation.String>}*/
-    static assetTranslation = identity;
+    assetTranslation = identity;
     /** @type {Identity<ModularItemConfig>}*/
-    static modularItem = identity;
+    modularItem = identity;
     /** @type {Identity<TypedItemConfig>}*/
-    static typedItem = identity;
+    typedItem = identity;
     /**
      * @template {string} K
      * @template {any} V
      * @param {Record<K,V>} arg
      * @returns {Record<K,V>}
      */
-    static record = (arg) => identity(arg);
+    record = (arg) => identity(arg);
     /**
      * @template T
      * @template R
@@ -107,25 +107,43 @@ export class Type {
      * @param {(arg: T) => R} func
      * @returns {R}
      */
-    static transform = (obj, func) => func(obj);
+    transform = (obj, func) => func(obj);
 }
 
-export class Merge {
+export const Type = new _Type();
+
+class _Merge {
     /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/
-    static item = merge;
+    item = merge;
     /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/
-    static app = merge;
+    app = merge;
     /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinition[]>}*/
-    static assets = merge;
-    static addAssetParams = mergeAddAssetParams;
-    static repeatEntries = repeatEntries;
+    assets = merge;
+    addAssetParams = mergeAddAssetParams;
+    repeatEntries = repeatEntries;
+
+    /**
+     * @param {Record<string, string>[]} args
+     */
+    stringRecords = (...args) => {
+        /** @type {Record<string, any>} */
+        const ret = {};
+        for (const arg of args) {
+            Object.assign(ret, arg);
+        }
+        return ret;
+    };
 }
 
-export class Layer {
+export const Merge = new _Merge();
+
+class _Layer {
     /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */
-    static map = (args, func) => args.map(func);
+    map = (args, func) => args.map(func);
     /** @type {Identity<AssetLayerDefinition>} */
-    static screen = (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false });
+    screen = (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false });
     /** @type {Identity<AssetLayerDefinition>} */
-    static multiply = (layer) => ({ ...layer, BlendingMode: "multiply", AllowColorize: false });
+    multiply = (layer) => ({ ...layer, BlendingMode: "multiply", AllowColorize: false });
 }
+
+export const Layer = new _Layer();
