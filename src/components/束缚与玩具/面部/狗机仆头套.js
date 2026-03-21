@@ -2,7 +2,7 @@ import { DialogTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { createAfterDrawProcess, Layer } from "../../../lib";
 
-const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
+const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (drawData, data) => {
     const { C, A, Color, Property, X, Y, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
 
     if (Property.TypeRecord.t !== 0) return;

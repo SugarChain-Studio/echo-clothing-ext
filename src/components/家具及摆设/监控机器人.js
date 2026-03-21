@@ -143,8 +143,8 @@ function scriptDraw(mdata, originalFunction, { C, PersistentData }) {
     Tools.drawUpdate(C, data);
 }
 
-const afterDraw = createAfterDrawProcess("typed", /** @type {SurRobotDrawData} */ ({}), () => {})
-    .onLayer(["绳子"], (_, drawData) => {
+const afterDraw = createAfterDrawProcess("typed", /** @type {SurRobotDrawData} */ ({}))
+    .onLayer("绳子", (drawData) => {
         const { C, A, CA, L, Color, GroupName, AlphaMasks, drawCanvas, drawCanvasBlink, PersistentData } = drawData;
         const layer = A.Layer.find((l) => l.Name === L);
         const { fixedYOffset } = CommonDrawComputeDrawingCoordinates(C, A, layer, GroupName);
@@ -206,7 +206,7 @@ const afterDraw = createAfterDrawProcess("typed", /** @type {SurRobotDrawData} *
         drawCanvas(data.ropeCanvas, 0, 0, AlphaMasks);
         drawCanvasBlink(data.ropeCanvas, 0, 0, AlphaMasks);
     })
-    .onLayer(["眼睛"], (_, drawData) => {
+    .onLayer(["眼睛"], (drawData) => {
         const { C, A, X, Y, Color, PersistentData, drawCanvas, drawCanvasBlink } = drawData;
 
         const data = PersistentData();

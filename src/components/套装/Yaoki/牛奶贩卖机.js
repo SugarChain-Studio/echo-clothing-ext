@@ -152,6 +152,7 @@ const layerNames = {
  * @property {HTMLCanvasElement} [OutputFlowCanvas]
  * @property {HTMLCanvasElement} [OutputContentCanvas]
  * @property {HTMLCanvasElement} [OutputCupCanvas]
+ * @property {GLImageRenderer} [CupRenderer]
  * @property {GLImageRenderer} [HoseRenderer]
  * @property {GLImageRenderer} [OutputFlowRenderer]
  * @property {GLImageRenderer} [OutputContentRenderer]
@@ -162,6 +163,7 @@ export const maxProdFlow = 10;
 
 const orgasmState = new StateTools.OrgasmState();
 
+/** @type {(item: Item) => boolean} */
 const vIsWorking = (item) => item.Property?.TypeRecord?.m === 1;
 
 /**
@@ -174,6 +176,7 @@ export function flowAlgorithm(C, Item, isWorking) {
     if (C.ArousalSettings.Active === "Inactive") return 0;
     if (!isWorking(Item)) return 0;
 
+    /** @type {(group: AssetGroupItemName) => number} */
     const arousalFactorF = (group) => {
         const factor = PreferenceGetArousalZone(C, group).Factor;
         if (factor < 2) return 0;
@@ -197,6 +200,7 @@ export function flowAlgorithm(C, Item, isWorking) {
     return ((arousalFactorV * mSpeed + orgasmFactor) / 8) * maxProdFlow;
 }
 
+/** @type {(value: number) => string} */
 export function flowText(value) {
     // maxProdFlow = 40 mL/min
     return `${(value * 4).toFixed(2)} mL/min`;
@@ -330,7 +334,7 @@ const afterDrawProcess = createAfterDrawProcess(
         };
     }
 ).onLayers({
-    奶杯液: ({ data }, drawData) => {
+    奶杯液: (drawData, { data }) => {
         const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.CupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const renderer = (data.CupRenderer ??= new GLImageRenderer(data.CupCanvas));
@@ -346,7 +350,7 @@ const afterDrawProcess = createAfterDrawProcess(
             drawCanvasBlink(data.CupCanvas, 0, canvasY);
         });
     },
-    管液: ({ data }, drawData) => {
+    管液: (drawData, { data }) => {
         const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         const ratio1 = ((350 - 327) / (350 - 305)) * 100;
         data.HoseCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
@@ -390,7 +394,7 @@ const afterDrawProcess = createAfterDrawProcess(
             drawCanvasBlink(data.HoseCanvas, 0, canvasY);
         });
     },
-    出液: ({ data, fillingLeft, fillingRight }, drawData) => {
+    出液: (drawData, { data, fillingLeft, fillingRight }) => {
         const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputFlowCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const renderer = (data.OutputFlowRenderer ??= new GLImageRenderer(data.OutputFlowCanvas));
@@ -408,7 +412,7 @@ const afterDrawProcess = createAfterDrawProcess(
             drawCanvasBlink(data.OutputFlowCanvas, 0, canvasY);
         });
     },
-    杯液: ({ data, property, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
+    杯液: (drawData, { data, property, fillingLeft, fillingRight, filledLeft, filledRight }) => {
         const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputContentCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const renderer = (data.OutputContentRenderer ??= new GLImageRenderer(data.OutputContentCanvas));
@@ -422,6 +426,7 @@ const afterDrawProcess = createAfterDrawProcess(
             renderer.drawImage(img, X, Y - canvasY, { color });
             // 495 ~ 530
             const now = Date.now();
+            /** @type {(start: number) => number} */
             const clearTop = (start) => 135 - Math.round(Math.min((now - start) / 2000, 1) * (530 - 495));
             if (fillingLeft) renderer.clearRect(0, 0, 250, clearTop(property.Luzi_OutputStartLeft));
             else if (!filledLeft) renderer.clearRect(0, 0, 250, 200);
@@ -432,7 +437,7 @@ const afterDrawProcess = createAfterDrawProcess(
             drawCanvasBlink(data.OutputContentCanvas, 0, canvasY);
         });
     },
-    杯半: ({ data, fillingLeft, fillingRight, filledLeft, filledRight }, drawData) => {
+    杯半: (drawData, { data, fillingLeft, fillingRight, filledLeft, filledRight }) => {
         const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink } = drawData;
         data.OutputCupCanvas ??= AnimationGenerateTempCanvas(C, A, 500, 200);
         const renderer = (data.OutputCupRenderer ??= new GLImageRenderer(data.OutputCupCanvas));
@@ -532,75 +537,82 @@ const itemDialog = createItemDialogModular({
         .../** @type {const}*/ ([
             ["左", "Left"],
             ["右", "Right"],
-        ]).flatMap(([cn, en]) => [
-            {
-                location: buttons[`${cn}手`],
-                key: `D${cn}放`,
-                show: ({ data, item }) =>
-                    data.currentModule === "Base" &&
-                    propTest(
-                        item,
-                        (p) => p[`Luzi_OutputDone${en}`] !== true && typeof p[`Luzi_OutputStart${en}`] !== "number"
-                    ),
-                enable: ({ item }) => {
-                    if (!Player.CanInteract()) return false;
-                    const handItem = InventoryGet(Player, "ItemHandheld");
-                    if (!handItem) return false;
-                    if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0) return false;
-                    if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return false;
-                    return true;
-                },
-                onclick: ({ item }) => {
-                    const handItem = InventoryGet(Player, "ItemHandheld");
-                    if (!handItem) return;
-                    handItem.Property ??= {};
-                    propValue(item, (p) => {
-                        p[`Luzi_Content${en}`] = Container.item2content(handItem);
-                        p[`Luzi_OutputStart${en}`] = Date.now();
-                        p.Luzi_MilkTotal -= 200;
-                    });
-                    InventoryRemove(Player, "ItemHandheld", true);
-                },
-                hover: ({ item }) => {
-                    if (!Player.CanInteract()) return "H互动";
-                    const handItem = InventoryGet(Player, "ItemHandheld");
-                    if (!handItem) return "H空杯";
-                    if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0) return "H空杯";
-                    if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return "H存量";
-                    return undefined;
-                },
-                actionKey: `A${cn}放`,
-            },
-            {
-                location: buttons[`${cn}手`],
-                key: `D${cn}拿`,
-                show: ({ data, item }) =>
-                    data.currentModule === "Base" &&
-                    propTest(
-                        item,
-                        (p) => p[`Luzi_OutputDone${en}`] === true || typeof p[`Luzi_OutputStart${en}`] === "number"
-                    ),
-                enable: ({ item }) =>
-                    !InventoryGet(Player, "ItemHandheld") &&
-                    Player.CanInteract() &&
-                    propTest(item, (p) => p[`Luzi_OutputDone${en}`] === true),
-                onclick: ({ item }) => {
-                    propValue(item, (p) => {
-                        if (p[`Luzi_Content${en}`])
-                            Container.content2item(Player, p[`Luzi_Content${en}`], { typed: 3 });
-                        p[`Luzi_OutputDone${en}`] = null;
-                    });
-                },
-                hover: ({ item }) => {
-                    if (!Player.CanInteract()) return "H互动";
-                    if (InventoryGet(Player, "ItemHandheld")) return "H空手";
-                    if (propTest(item, (p) => p.Luzi_OutputDoneLeft !== true)) return "H未满";
-                    return undefined;
-                },
-                actionKey: `A${cn}拿`,
-                leaveDialog: true,
-            },
-        ]),
+        ]).flatMap(
+            ([cn, en]) =>
+                /** @type {ItemDialog.ButtonConfig<ModularItemData>[]}*/ ([
+                    {
+                        location: buttons[`${cn}手`],
+                        key: `D${cn}放`,
+                        show: ({ data, item }) =>
+                            data.currentModule === "Base" &&
+                            propTest(
+                                item,
+                                (p) =>
+                                    p[`Luzi_OutputDone${en}`] !== true && typeof p[`Luzi_OutputStart${en}`] !== "number"
+                            ),
+                        enable: ({ item }) => {
+                            if (!Player.CanInteract()) return false;
+                            const handItem = InventoryGet(Player, "ItemHandheld");
+                            if (!handItem) return false;
+                            if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0)
+                                return false;
+                            if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return false;
+                            return true;
+                        },
+                        onclick: ({ item }) => {
+                            const handItem = InventoryGet(Player, "ItemHandheld");
+                            if (!handItem) return;
+                            handItem.Property ??= {};
+                            propValue(item, (p) => {
+                                p[`Luzi_Content${en}`] = Container.item2content(handItem);
+                                p[`Luzi_OutputStart${en}`] = Date.now();
+                                p.Luzi_MilkTotal -= 200;
+                            });
+                            InventoryRemove(Player, "ItemHandheld", true);
+                        },
+                        hover: ({ item }) => {
+                            if (!Player.CanInteract()) return "H互动";
+                            const handItem = InventoryGet(Player, "ItemHandheld");
+                            if (!handItem) return "H空杯";
+                            if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0)
+                                return "H空杯";
+                            if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return "H存量";
+                            return undefined;
+                        },
+                        actionKey: `A${cn}放`,
+                    },
+                    {
+                        location: buttons[`${cn}手`],
+                        key: `D${cn}拿`,
+                        show: ({ data, item }) =>
+                            data.currentModule === "Base" &&
+                            propTest(
+                                item,
+                                (p) =>
+                                    p[`Luzi_OutputDone${en}`] === true || typeof p[`Luzi_OutputStart${en}`] === "number"
+                            ),
+                        enable: ({ item }) =>
+                            !InventoryGet(Player, "ItemHandheld") &&
+                            Player.CanInteract() &&
+                            propTest(item, (p) => p[`Luzi_OutputDone${en}`] === true),
+                        onclick: ({ item }) => {
+                            propValue(item, (p) => {
+                                if (p[`Luzi_Content${en}`])
+                                    Container.content2item(Player, p[`Luzi_Content${en}`], { typed: 3 });
+                                p[`Luzi_OutputDone${en}`] = null;
+                            });
+                        },
+                        hover: ({ item }) => {
+                            if (!Player.CanInteract()) return "H互动";
+                            if (InventoryGet(Player, "ItemHandheld")) return "H空手";
+                            if (propTest(item, (p) => p.Luzi_OutputDoneLeft !== true)) return "H未满";
+                            return undefined;
+                        },
+                        actionKey: `A${cn}拿`,
+                        leaveDialog: true,
+                    },
+                ])
+        ),
     ],
     params: [
         {
@@ -657,6 +669,7 @@ const extended = {
     ],
 };
 
+/** @type {(str: string) => string} */
 function capitalizeFirst(str) {
     if (str.length === 0) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);

@@ -1,40 +1,48 @@
 import { Logger } from "@mod-utils/log";
 
 /**
- * @template {object} PreDataType
+ * @template {any} PreDataType
  * @template {ExtendedItemData<any>} DataType
  * @template {Record<string, any>} PersistentData
  */
 class AfterDrawProcess {
     /**
+     * @typedef {[PreDataType] extends [undefined | void] ?
+     *      (drawData: DynamicDrawingData<PersistentData>) => void :
+     *      (drawData: DynamicDrawingData<PersistentData>, preData:PreDataType) => void} LayerHowFunction
+     */
+
+    /**
      * @param {(drawData: DynamicDrawingData<PersistentData>, data?: DataType ) => PreDataType} [pre] 用于在每次绘制前计算一些数据
      */
     constructor(pre) {
         this.pre = pre;
+        /** @type {Record<string, LayerHowFunction>} */
         this.drawProcess = {};
     }
 
     /** @type {ExtendedItemScriptHookCallbacks.AfterDraw<DataType, PersistentData>} */
     afterDraw(data, originalFunction, drawData) {
-        const preData = this.pre ? this.pre(drawData, data) : {};
+        const preData = this.pre ? this.pre(drawData, data) : undefined;
         const { L } = drawData;
         if (L in this.drawProcess) {
-            this.drawProcess[L](preData, drawData);
+            this.drawProcess[L](drawData, preData);
         }
     }
 
     /** @type {ExtendedItemCallbacks.AfterDraw<PersistentData>} */
     basicAfterDraw(drawData) {
-        const preData = this.pre ? this.pre(drawData) : {};
+        const preData = this.pre ? this.pre(drawData) : undefined;
         const { L } = drawData;
         if (L in this.drawProcess) {
-            this.drawProcess[L](preData, drawData);
+            this.drawProcess[L](drawData, preData);
         }
     }
 
     /**
      * @param {string | string[]} layer
-     * @param {(preData:PreDataType, drawData: DynamicDrawingData<PersistentData>) => void} how
+     * @param {LayerHowFunction} how
+     * @returns {typeof this}
      */
     onLayer(layer, how) {
         const layers = Array.isArray(layer) ? layer : [layer];
@@ -45,7 +53,7 @@ class AfterDrawProcess {
     }
 
     /**
-     * @param {Record<string, Parameters<AfterDrawProcess["onLayer"]>[1]> } layers
+     * @param {Record<string, LayerHowFunction>} layers
      */
     onLayers(layers) {
         for (const [layer, how] of Object.entries(layers)) {
@@ -72,6 +80,14 @@ class AfterDrawProcess {
  * @returns {AfterDrawProcess<PreDataType, TextItemData, PersistentData>}
  */
 /**
+ * @template {Record<string, any>} PersistentData
+ *
+ * @overload
+ * @param {"modular"} mode
+ * @param {PersistentData} sample 仅用于类型推导的参数
+ * @returns {AfterDrawProcess<void, ModularItemData, PersistentData>}
+ */
+/**
  * @template {object} PreDataType
  * @template {Record<string, any>} PersistentData
  *
@@ -90,6 +106,14 @@ class AfterDrawProcess {
  * @param {PersistentData} sample 仅用于类型推导的参数
  * @param {(drawData: DynamicDrawingData<PersistentData>, data?: TypedItemData ) => PreDataType} [pre]
  * @returns {AfterDrawProcess<PreDataType, TypedItemData, PersistentData>}
+ */
+/**
+ * @template {Record<string, any>} PersistentData
+ *
+ * @overload
+ * @param {"noarch"} mode
+ * @param {PersistentData} sample 仅用于类型推导的参数
+ * @returns {AfterDrawProcess<void, NoArchItemData, PersistentData>}
  */
 /**
  * @template {object} PreDataType
@@ -128,9 +152,12 @@ export function registerDrawHook(asset, groupName, hooks) {
     const groups = Array.isArray(groupName) ? groupName : [groupName];
     for (const [key, func] of Object.entries(hooks)) {
         for (const g of groups) {
+            // @ts-ignore
             if (globalThis[`Assets${g}${asset.Name}${map[key]}`]) {
+                // @ts-ignore
                 Logger.warn(`Overriding existing hook: "Assets${g}${asset.Name}${map[key]}"`);
             }
+            // @ts-ignore
             globalThis[`Assets${g}${asset.Name}${map[key]}`] = func;
         }
     }

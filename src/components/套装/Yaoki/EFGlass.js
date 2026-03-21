@@ -105,9 +105,9 @@ function scriptDraw(data, originalFunction, drawData) {
     }
 }
 
-const afterDraw = createAfterDrawProcess("modular", /** @type {EFClassesData} */ ({}), () => {}).onLayer(
+const afterDraw = createAfterDrawProcess("modular", /** @type {EFClassesData} */ ({})).onLayer(
     ["effect", "light2", "light1"],
-    (_, drawData) => {
+    (drawData) => {
         const { C, A, X, Y, L, Color, Property, PersistentData, drawCanvas, drawCanvasBlink, AlphaMasks } = drawData;
 
         const phase = {
@@ -116,7 +116,7 @@ const afterDraw = createAfterDrawProcess("modular", /** @type {EFClassesData} */
             light1: 1.4,
         };
 
-        const thisPhase = phase[L] || 0.1;
+        const thisPhase = phase[/** @type {keyof typeof phase} */ (L)] || 0.1;
 
         const data = PersistentData();
         const canvas = (data.canvas ??= AnimationGenerateTempCanvas(C, A, 180, 50));

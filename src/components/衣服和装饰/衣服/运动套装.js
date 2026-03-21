@@ -2,7 +2,7 @@ import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Layer } from "../../../lib";
 
-const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (data, drawData) => {
+const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (drawData, data) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
 
     if (Property?.TypeRecord?.["t"] !== 0) return;

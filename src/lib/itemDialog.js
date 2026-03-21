@@ -142,6 +142,7 @@ class CustomItemDialog {
             const textValue = param.text(ctxText);
             if (!textValue) continue;
 
+            /** @type {CanvasTextAlign} */
             const oldAlign = MainCanvas.textAlign;
             MainCanvas.textAlign = param.align ?? "center";
             const { x, y, w } = param.location;
@@ -376,11 +377,23 @@ class CustomItemDialog {
     }
 
     /**
-     * @param {ExtendedItemCapsScriptHooksStruct<DataType, any>} [base] 基础hook
-     * @return {ExtendedItemCapsScriptHooksStruct<DataType, any>}
+     * @typedef { DataType extends ModularItemData ? ModularItemOption :
+     *   DataType extends TypedItemData ? TypedItemOption :
+     *   DataType extends NoArchItemData ? NoArchItemOption :
+     *     never} OptionType
+     */
+
+    /**
+     * @param {ExtendedItemCapsScriptHooksStruct<DataType, OptionType>} [base] 基础hook
+     * @return {ExtendedItemCapsScriptHooksStruct<DataType, OptionType>}
      */
     createHooks(base = {}) {
         const hooks = { ...base };
+
+        /**
+         * @param {(data:DataType)=>void} func
+         * @returns {(data: DataType, originalFunction: (()=>void) | null) => void}
+         */
         const originThen = (func) => (data, originalFunction) => {
             originalFunction?.();
             func(data);

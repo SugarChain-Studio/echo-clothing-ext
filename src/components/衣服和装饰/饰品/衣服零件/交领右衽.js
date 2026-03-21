@@ -2,27 +2,28 @@ import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
 import { createAfterDrawProcess, PoseMapTool, Type, GLImageRenderer, PartsMask } from "../../../../lib";
 
-const afterDraw = createAfterDrawProcess(
-    "typed",
-    /** @type {{mask:PartsMask,canvas:HTMLCanvasElement,renderer:GLImageRenderer}}*/ ({}),
-    ({ C, A, PersistentData }) => {
-        const data = PersistentData();
-        data.canvas ??= AnimationGenerateTempCanvas(C, A, 500, 1000);
-        data.renderer ??= new GLImageRenderer(data.canvas);
-        data.mask ??= new PartsMask(
-            AnimationGenerateTempCanvas(C, A, 500, 1000),
-            Type.groups(["Cloth", "ClothAccessory", "Bra", "BodyUpper"]),
-            Type.groups(["ArmsLeft", "AnkletRight", "HandsLeft", "HandsRight"])
-        );
-        data.mask.draw(C);
-        return { mask: data.mask, canvas: data.canvas, renderer: data.renderer };
-    }
-).onLayer(["A3", "A4"], ({ mask, renderer, canvas }, drawData) => {
-    const { X, Y, Color, Opacity, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
+/**
+ * @typedef {object} PersistData
+ * @property {PartsMask} mask
+ * @property {HTMLCanvasElement} canvas
+ * @property {GLImageRenderer} renderer
+ */
+
+const afterDraw = createAfterDrawProcess("typed", /** @type {PersistData}*/ ({})).onLayer(["A3", "A4"], (drawData) => {
+    const { C, A, X, Y, Color, Opacity, AlphaMasks, drawCanvas, drawCanvasBlink, PersistentData } = drawData;
+    const data = PersistentData();
+    const canvas = (data.canvas ??= AnimationGenerateTempCanvas(C, A, 500, 1000));
+    const renderer = (data.renderer ??= new GLImageRenderer(data.canvas));
+    data.mask ??= new PartsMask(
+        AnimationGenerateTempCanvas(C, A, 500, 1000),
+        Type.groups(["Cloth", "ClothAccessory", "Bra", "BodyUpper"]),
+        Type.groups(["ArmsLeft", "AnkletRight", "HandsLeft", "HandsRight"])
+    );
+    data.mask.draw(C);
     Tools.getAssetImageThen(drawData).then((img) => {
         const color = GLImageRenderer.BCColorToGLColor(Color);
         renderer.clearRect(0, 0, canvas.width, canvas.height);
-        renderer.drawImage(img, X, Y - CanvasUpperOverflow, { color, colorAlpha: Opacity, alphaTex: mask.result });
+        renderer.drawImage(img, X, Y - CanvasUpperOverflow, { color, colorAlpha: Opacity, alphaTex: data.mask.result });
         drawCanvas(canvas, 0, CanvasUpperOverflow, AlphaMasks);
         drawCanvasBlink(canvas, 0, CanvasUpperOverflow, AlphaMasks);
     });
