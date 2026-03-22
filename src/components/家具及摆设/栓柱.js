@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { registerDrawHook } from "../../lib/afterDraw";
-import { ChainCanvasCacheWSide } from "../../lib/chain";
+import { ChainCanvasCacheWSide } from "../../lib/draw/chain";
 
 /** @type { CustomAssetDefinition} */
 const asset = {

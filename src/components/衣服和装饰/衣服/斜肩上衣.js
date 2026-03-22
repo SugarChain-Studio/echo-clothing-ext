@@ -1,6 +1,5 @@
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
-import { takeLayerNames } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type {CustomAssetDefinition} */
@@ -27,12 +26,8 @@ const asset = {
 };
 
 const layerNames = {
-    CN: takeLayerNames(asset),
-    EN: {
-        左: "Left",
-        右: "Right",
-        衣服: "Cloth",
-    },
+    CN: { 左: "左", 右: "右", 衣服: "衣服" },
+    EN: { 左: "Left", 右: "Right", 衣服: "Cloth" },
 };
 
 const extended = {

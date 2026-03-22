@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../assetForward";
-import { cachePreloadGL } from "./cachePreload";
+import { AssetManager } from "../../assetForward";
+import { cachePreloadGL } from "../cachePreload";
 
 const vp = AssetManager.imageMapping.createVirtualPath("luzi-canvas://half-black-fill");
 
@@ -27,7 +27,7 @@ const topLeft = /** @type {const} */ ({
 
 const flip = /** @type {const} */ ({ Left: "Right", Right: "Left" });
 
-export class LRTool {
+export class SockLRTool {
     /**
      * 生成左右袜子
      * @param {CustomAssetDefinition} asset

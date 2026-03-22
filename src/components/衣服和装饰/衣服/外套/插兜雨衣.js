@@ -1,5 +1,4 @@
 import { AssetManager } from "../../../../assetForward";
-import { takeLayerNames } from "../../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -30,11 +29,8 @@ const asset = {
 };
 
 const layerNames = {
-    CN: takeLayerNames(asset),
-    EN: {
-        透明: "Transparent",
-        雨衣: "Raincoat",
-    },
+    CN: {},
+    EN: { 透明: "Transparent", 雨衣: "Raincoat" },
 };
 
 const translation = {

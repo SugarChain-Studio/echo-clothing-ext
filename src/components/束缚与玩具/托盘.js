@@ -1,7 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { createItemDialogNoArch, Type, Access } from "../../lib";
-import { registerDrinkLayers } from "../../lib/drinks";
+import { registerDrinkLayers } from "../../lib/generator/drinks";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

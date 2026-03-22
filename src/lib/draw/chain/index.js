@@ -1,4 +1,4 @@
-import { Access } from "../typing";
+import { Access } from "../../typing";
 import { drawChainCurry } from "./draw";
 import { calculateCatenaryPoints } from "./shape";
 

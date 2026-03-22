@@ -1,6 +1,6 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../assetForward";
-import { showPrompt } from "../prompt";
+import { AssetManager } from "../../assetForward";
+import { showPrompt } from "../../prompt";
 import { TranslationUtility } from "@sugarch/bc-mod-i18n";
 
 const dataKey = "EchoClothingCache";

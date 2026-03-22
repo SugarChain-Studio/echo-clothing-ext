@@ -6,12 +6,11 @@ import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
-import { AfterAssetOverrides, CraftingCache } from "./lib";
+import { AfterAssetOverrides, CraftingCache, ItemPermissionCache } from "./lib";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 
 import runBCPatch from "./bcPatch";
 import runDrawMod from "./drawMod";
-import { ItemPermissionCache } from "./lib/itemPermissionCache";
 
 const message = {
     en: "Initiating custom assets registration after player appearance loaded, some assets may be lost.",

@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { createAfterDrawProcess, GLImageRenderer, takeLayerNames } from "../../lib";
+import { createAfterDrawProcess, GLImageRenderer } from "../../lib";
 import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type { CustomAssetDefinition} */
@@ -283,7 +283,6 @@ const translation = {
 
 const layerNames = {
     CN: {
-        ...takeLayerNames(asset),
         绳子: "牵引光束",
         绳子光芒: "牵引光束发光",
         跟随模式_抓住: "跟随模式(抓住)",

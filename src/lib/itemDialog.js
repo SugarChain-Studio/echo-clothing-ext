@@ -426,6 +426,40 @@ class CustomItemDialog {
     }
 }
 
+class _ItemDialogTools {
+    /**
+     * @template {ExtendedItemData<any>} Rt
+     * @type {(arg:ItemDialog.ButtonConfig<Rt>)=>ItemDialog.ButtonConfig<Rt>}
+     */
+    buttons = (arg) => arg;
+
+    /**
+     * @template {ExtendedItemData<any>} Rt
+     * @type {(arg:ItemDialog.ParameterConfig<Rt>)=>ItemDialog.ParameterConfig<Rt>}
+     */
+    params = (arg) => arg;
+
+    /**
+     * @template {ExtendedItemData<any>} Rt
+     * @type {(arg:ItemDialog.TextConfig<Rt>)=>ItemDialog.TextConfig<Rt>}
+     */
+    texts = (arg) => arg;
+
+    /**
+     * @template {ExtendedItemData<any>} Rt
+     * @type {(arg:ItemDialog.CheckBoxConfig<Rt>)=>ItemDialog.CheckBoxConfig<Rt>}
+     */
+    checkboxes = (arg) => arg;
+
+    /**
+     * @template {ExtendedItemData<any>} Rt
+     * @type {(arg:ItemDialog.SliderConfig<Rt>)=>ItemDialog.SliderConfig<Rt>}
+     */
+    sliders = (arg) => arg;
+}
+
+export const ItemDialogTools = new _ItemDialogTools();
+
 /**
  * Factory that creates a DialogButtons instance for a generic DataType.
  * @template {ExtendedItemData<any>} DataType

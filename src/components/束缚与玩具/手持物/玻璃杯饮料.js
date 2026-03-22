@@ -2,7 +2,7 @@ import { Tools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { ActivityEvents } from "@sugarch/bc-event-handler";
-import { registerDrinkLayers } from "../../../lib/drinks";
+import { registerDrinkLayers } from "../../../lib/generator/drinks";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";

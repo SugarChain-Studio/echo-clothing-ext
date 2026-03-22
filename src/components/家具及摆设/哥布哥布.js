@@ -1,6 +1,6 @@
 import { AssetManager } from "../../assetForward";
 import { registerDrawHook } from "../../lib/afterDraw";
-import { ChainCanvasCache } from "../../lib/chain";
+import { ChainCanvasCache } from "../../lib/draw/chain";
 import { luziSuffixFixups } from "../../lib/fixups";
 
 /** @type { CustomAssetDefinition} */

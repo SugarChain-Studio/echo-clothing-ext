@@ -3,7 +3,7 @@
  */
 
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../assetForward";
+import { AssetManager } from "../../assetForward";
 
 const drinkList = /** @type {const} */ (["可乐", "橙汁", "牛奶", "空杯"]);
 

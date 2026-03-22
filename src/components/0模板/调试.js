@@ -3,7 +3,7 @@ import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { PostPass } from "../../lib";
 import { registerDrawHook } from "../../lib/afterDraw";
-import { PartsMask } from "../../lib/partsMask";
+import { PartsMask } from "../../lib/draw/partsMask";
 
 /**
  * @typedef {Object} GrayBodyDrawItem

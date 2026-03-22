@@ -1,7 +1,7 @@
 import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { createItemDialogModular } from "../../../lib";
-import { PartsMask } from "../../../lib/partsMask";
+import { PartsMask } from "../../../lib/draw/partsMask";
 
 /**
  * @typedef {Object} GradientCustomProperty

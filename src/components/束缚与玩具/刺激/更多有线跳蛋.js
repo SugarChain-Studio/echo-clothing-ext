@@ -1,5 +1,6 @@
+import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { takeLayerNames } from "../../../lib";
+import { Merge } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
 /** @type { CustomAssetDefinition } */
@@ -54,18 +55,18 @@ const asset = {
 };
 
 /** @type {Translation.Dialog} */
-const layerNames = {
-    CN: takeLayerNames(asset),
-    EN: {
-        跳蛋: "Vibrators",
-        跳蛋1: "Vibrator 1",
-        跳蛋2: "Vibrator 2",
-        跳蛋3: "Vibrator 3",
-        跳蛋4: "Vibrator 4",
-        跳蛋5: "Vibrator 5",
-        绑带: "Strap",
-    },
-};
+const layerNames = DialogTools.combine(
+    Merge.repeatEntries([
+        ["CN", "EN"],
+        DialogTools.repeatEntries(
+            ...Array.from({ length: 5 }, (i) => /** @type {[string,string]}*/ ([`跳蛋${i + 1}`, `${i}`]))
+        ),
+    ]),
+    {
+        CN: { 跳蛋: "跳蛋", 绑带: "绑带" },
+        EN: { 跳蛋: "Vibrators", 绑带: "Strap" },
+    }
+);
 
 /** @type {AssetArchetypeConfig} */
 const extended = {

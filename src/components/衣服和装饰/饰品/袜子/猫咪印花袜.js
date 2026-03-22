@@ -1,5 +1,5 @@
 import { AssetManager } from "../../../../assetForward";
-import { LRTool } from "../../../../lib/sockLR";
+import { SockLRTool } from "../../../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -68,7 +68,7 @@ const assetStrings = {
 
 export default function () {
     AssetManager.addAssetWithConfig(["Socks", "SuitLower"], asset, { translation, layerNames, extended, assetStrings });
-    LRTool.createSockLR(asset).forEach(([key, value]) => {
+    SockLRTool.createSockLR(asset).forEach(([key, value]) => {
         AssetManager.addAssetWithConfig(key, value, { translation, layerNames, extended, assetStrings });
     });
 }

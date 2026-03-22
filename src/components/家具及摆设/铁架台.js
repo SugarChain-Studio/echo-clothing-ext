@@ -1,6 +1,5 @@
 import { AssetManager } from "../../assetForward";
 import { Tools } from "@mod-utils/Tools";
-import { takeLayerNames } from "../../lib";
 
 /** @type {TopLeft.Definition} */
 const baseTop = {
@@ -106,10 +105,7 @@ const asset = {
 
 /** @type {Translation.Dialog} */
 const layerNames = {
-    CN: {
-        ...takeLayerNames(asset),
-        金属杆: "金属杆",
-    },
+    CN: { 金属杆: "金属杆" },
     EN: {
         底座: "Base",
         螺丝: "Screw",

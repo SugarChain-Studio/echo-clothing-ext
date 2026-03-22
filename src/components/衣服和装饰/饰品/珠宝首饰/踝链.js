@@ -1,7 +1,7 @@
 import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
 import { PostPass, PoseMapTool, Layer } from "../../../../lib";
-import { LRTool } from "../../../../lib/sockLR";
+import { SockLRTool } from "../../../../lib";
 
 /** @type {(base: Record<string, any>, key: string, blr?: number[]) => Record<string, any>} */
 const LRStringGen = (base, key, blr = [0, 1, 2]) =>
@@ -63,7 +63,7 @@ const asset = [
                 AssetManager.addImageMapping(
                     ImageMapTools.mirrorBodyTypeLayer("Jewelry", asset, "Normal", ["Small", "Large"])
                 );
-                LRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
+                SockLRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
             }
         ),
         {
@@ -121,7 +121,7 @@ const asset = [
                 AssetManager.addImageMapping(
                     ImageMapTools.mirrorBodyTypeLayer("Jewelry", asset, "Normal", ["Small", "Large"])
                 );
-                LRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
+                SockLRTool.createLRConfig("Jewelry", asset, { key: "lr", Left: 1, Right: 2 });
             }
         ),
         {
