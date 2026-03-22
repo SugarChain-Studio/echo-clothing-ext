@@ -3,6 +3,7 @@ import { AssetManager } from "../../../assetForward";
 import { createItemDialogNoArch, Type } from "../../../lib";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 
+/** @type {(type:number) => string} */
 const typeURL = (type) => `luzi-canvas://rakuukan-type-${type}`;
 
 const maskSize = 160;
@@ -100,6 +101,7 @@ const createLayer = (config, idx) => ({
 const tconfig = (arg) => /** @type {ExNoArchItemData}*/ (arg);
 
 const operations = Type.transform(
+    /** @type {(item:Item)=>void} */
     (item) => {
         item.Property ??= {};
         item.Property.TypeRecord ??= {};
@@ -165,14 +167,17 @@ const dialog = createItemDialogNoArch({
             checked: ({ item }) => item.Property?.TypeRecord?.["o"] === 1,
             actionKey: "A_Orgasm",
         },
-        ...rakuukanConfigs.map((g, i) => ({
-            text: ({ text }) => `${text("CB_Hole").replace("$Num", `${i + 1}`)}`,
-            show: ({ data }) => tconfig(data).currentDialog === "Details",
-            location: { x: 1200 + Math.floor(i / 5) * 200, y: 430 + (i % 5) * 75 },
-            textWidth: 120,
-            onclick: ({ item }) => operations.toggleH(item, i),
-            checked: ({ item }) => item.Property?.TypeRecord?.[`m${num2alphabet(i)}`] === 1,
-        })),
+        ...rakuukanConfigs.map(
+            (g, i) =>
+                /** @type {ItemDialog.CheckBoxConfig<NoArchItemData>} */ ({
+                    text: ({ text }) => `${text("CB_Hole").replace("$Num", `${i + 1}`)}`,
+                    show: ({ data }) => tconfig(data).currentDialog === "Details",
+                    location: { x: 1200 + Math.floor(i / 5) * 200, y: 430 + (i % 5) * 75 },
+                    textWidth: 120,
+                    onclick: ({ item }) => operations.toggleH(item, i),
+                    checked: ({ item }) => item.Property?.TypeRecord?.[`m${num2alphabet(i)}`] === 1,
+                })
+        ),
     ],
     texts: [
         {
@@ -259,10 +264,10 @@ const asset = [
 ];
 
 const layerMappings = rakuukanConfigs.reduce((acc, config, idx) => {
-    acc[config.type] ??= [];
-    acc[config.type].push(ImageMapTools.assetLayer("ItemAddon", `${asset[1].Name}_Hole${idx + 1}`));
+    const target = (acc[config.type] ??= []);
+    target.push(ImageMapTools.assetLayer("ItemAddon", `${asset[1].Name}_Hole${idx + 1}`));
     return acc;
-}, {});
+}, /** @type {Record<string, string[]>} */ ({}));
 
 vps.forEach((vp, type) => vp.map(layerMappings[type]));
 

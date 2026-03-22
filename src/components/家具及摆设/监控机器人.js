@@ -94,6 +94,7 @@ function beforeDraw(mdata, originalFunction, drawData) {
         }
     }
 
+    /** @type {(now: number) => number} */
     const next = (now) => now + (Math.random() * 10 + 2) * 1000;
 
     if (L === "眼睛") {

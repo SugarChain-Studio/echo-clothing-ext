@@ -12,6 +12,7 @@ const identity = (arg) => arg;
  * @typedef { (arg0:T, arg1?:Partial<U>) => U } MergeFunction
  */
 
+/** @type {MergeFunction<any,any>} */
 const merge = (arg0, arg1) => ({ ...arg0, ...arg1 });
 
 /**
@@ -25,7 +26,9 @@ const merge = (arg0, arg1) => ({ ...arg0, ...arg1 });
  * @return {AddAssetWithConfigParams[0]}
  */
 function mergeGroup(g0, g1) {
+    /** @type {AddAssetWithConfigParams[0]} */
     const ret = [];
+    /** @type {(group: AddAssetWithConfigParams[0] | undefined) => void} */
     const push = (group) => {
         if (Array.isArray(group)) {
             ret.push(...group);
@@ -111,6 +114,77 @@ class _Type {
 }
 
 export const Type = new _Type();
+
+class _Access {
+    /**
+     * 获取Record中特定key的值，如果没有则返回undefined
+     * @template {string} K
+     * @template {any} V
+     * @overload
+     * @param {Record<K, V>} obj
+     * @param {string} key
+     * @returns {V | undefined}
+     */
+    /**
+     * 获取Object中特定key的值，如果没有则返回undefined
+     * @template {object} R
+     * @template {string | number} K
+     * @overload
+     * @param {R} obj
+     * @param {K} key
+     * @returns {any}
+     */
+    /**
+     * @template {object} R
+     * @template {string | number} K
+     * @param {R} obj
+     * @param {K} key
+     * @returns {any}
+     */
+    get(obj, key) {
+        return /** @type {any}*/ (obj)?.[key];
+    }
+
+    /**
+     * 取得Record中特定key的值，如果没有则返回默认值
+     * @template {object} R
+     * @template {string | number} K
+     * @template {any} V
+     * @param {R} obj
+     * @param {K} key
+     * @param {V} defaultValue
+     * @returns {V}
+     */
+    getOr(obj, key, defaultValue) {
+        return /** @type {any}*/ (obj)?.[key] ?? defaultValue;
+    }
+
+    /**
+     * 设置对象属性的值，并返回该值。
+     * @template {object} R
+     * @template {string | number} K
+     * @template {any} V
+     * @param {R} obj
+     * @param {K} key
+     * @param {V} value
+     */
+    set(obj, key, value) {
+        /** @type {any}*/ (obj)[key] = value;
+        return /** @type {any}*/ (obj)[key];
+    }
+
+    /**
+     * @template {string} K
+     * @template {any} V
+     * @param {Record<K,V>} obj
+     * @returns {[K,V][]}
+     */
+    entries(obj) {
+        return /** @type {[K,V][]}*/ (Object.entries(obj));
+    }
+}
+
+export const Access = new _Access();
 
 class _Merge {
     /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionItem>}*/

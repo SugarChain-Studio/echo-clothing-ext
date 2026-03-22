@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Layer } from "../../../lib";
+import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Layer, Access } from "../../../lib";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (drawData, data) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;
@@ -14,7 +14,7 @@ const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer(
         XLarge: { w: 80, y: 5, r: 200 },
     });
 
-    const thisConfig = config[G] || config.Normal;
+    const thisConfig = Access.getOr(config, G, config.Normal);
 
     const height = 48;
     const width = thisConfig.w;
@@ -271,7 +271,7 @@ export default function () {
                 asset,
                 "Normal",
                 ["Large", "XLarge"],
-                /** @type {ExtendedItemConfig}*/ (option.extended)
+                /** @type {ExtendedItemConfig<any>}*/ (option.extended)
             )
         );
     }

@@ -1,7 +1,7 @@
 import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
-import { createItemDialogModular } from "../../../lib";
+import { Access, createItemDialogModular } from "../../../lib";
 import { ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
 
 /**
@@ -49,7 +49,7 @@ luggageHandler.on("grabLuggage", ({ senderCharacter }, { Sender, Target }) => {
     } else if (Sender === Player.MemberNumber) {
         Tools.findCharacter("TargetC", Target)
             .then((target) => InventoryGet(target, "ItemDevices")?.Asset)
-            .then((asset) => luggagePairItemMap[asset.Name])
+            .then((asset) => Access.get(luggagePairItemMap, asset.Name))
             .then((name) => AssetGet("Female3DCG", "ItemMisc", name))
             .then((asset, { TargetC }) => {
                 ChatRoomOrderTools.wearAndPair(Player, asset, { prevCharacter: TargetC.MemberNumber }, "lead");

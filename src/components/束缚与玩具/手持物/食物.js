@@ -204,7 +204,7 @@ export default function () {
     const iconMapping = ["曲奇", "吐司", "蛋挞", "月饼"].reduce((prev, item) => {
         prev[ImageMapTools.assetPreview("ItemHandheld", item)] = ImageMapTools.assetPreview("ItemMouth", item);
         return prev;
-    }, {});
+    }, /** @type {Record<string, string>} */ ({}));
 
     AssetManager.addImageMapping(iconMapping);
     assets.ItemHandheld?.filter((i) => ["蛋挞", "月饼"].includes(i.Name))?.forEach((i) => {

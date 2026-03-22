@@ -33,6 +33,7 @@ function wearHamburgerOnThankYou() {
 
 const jsDelivrBase = `https://cdn.jsdelivr.net/${ModInfo.repository?.replace("https://github.com/", "gh/")}`;
 
+/** @type {(path: string, version: string) => string} */
 const assetPath = (path, version) => {
     if (debugFlag) {
         return `${resourceBaseURL}/${path}?v=${version}`;
@@ -71,7 +72,7 @@ once(ModInfo.name, async () => {
 
     await import("https://cdn.jsdelivr.net/npm/bondage-club-mod-sdk@1.2.0");
 
-    const mod = globalThis.bcModSdk.registerMod(ModInfo);
+    const mod = /** @type {any}*/ (globalThis).bcModSdk.registerMod(ModInfo);
     HookManager.initWithMod(mod);
     AssetManager.init(setup);
 

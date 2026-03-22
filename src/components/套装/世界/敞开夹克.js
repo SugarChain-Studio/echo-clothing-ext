@@ -1,7 +1,7 @@
-import { ArmMaskTool, PoseMapTool } from "../../../lib";
+import { ArmMaskTool, Layer, PoseMapTool, Access } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { ImageMapTools } from "@mod-utils/Tools";
-/** @type {<T>(arg0: number, arg1: (number)=>T)=>T[]} */
+/** @type {<T>(arg0: number, arg1: (arg0:number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));
 
 /** @type {AssetPoseMapping} */
@@ -116,7 +116,7 @@ const asset = {
     DynamicGroupName: "Cloth",
     Expose: ["ItemNipples", "ItemNipples", "ItemBreast"],
     PoseMapping: poseMapping,
-    Layer: layerDefBase.map((l) => ({ ...l, ColorName: undefined })),
+    Layer: Layer.map(layerDefBase, (l) => ({ ...l, ColorName: undefined })),
 };
 
 const translation = {
@@ -131,7 +131,9 @@ const layerNames = {
         ...Object.fromEntries(layerDefBase.filter((l) => l.ColorName).map((l) => [l.Name, l.ColorName])),
     },
     EN: {
-        ...Object.fromEntries(layerDefBase.filter((l) => l.ColorName).map((l) => [l.Name, ENlayer[l.ColorName]])),
+        ...Object.fromEntries(
+            layerDefBase.filter((l) => l.ColorName).map((l) => [l.Name, Access.getOr(ENlayer, l.ColorName, "")])
+        ),
         Y_A1: "Back",
 
         外侧: "Outer",

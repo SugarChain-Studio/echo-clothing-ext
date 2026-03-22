@@ -1,5 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
+import { Access } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -113,7 +114,7 @@ const extended = {
     MaxLength: {
         Text: 10,
         ...[2, 3, 4].reduce((pv, cv) => {
-            pv[`Text${cv}`] = 10;
+            Access.set(pv, `Text${cv}`, 10);
             return pv;
         }, {}),
     },

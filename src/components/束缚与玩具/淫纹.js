@@ -1,7 +1,7 @@
 import { monadic } from "@mod-utils/monadic";
 import { AssetManager } from "../../assetForward";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { createItemDialogModular } from "../../lib";
+import { createItemDialogModular, Access } from "../../lib";
 import { LSCG } from "../../lib/lscg";
 import { luziSuffixFixups } from "../../lib/fixups";
 
@@ -528,8 +528,8 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
 //#region 动画绘制
 const type2Layer = Object.fromEntries(
     /** @type {AssetLayerDefinition[]}*/ (asset[1].Layer)
-        .filter((l) => typeof l.AllowTypes?.["t"] === "number")
-        .map((l) => /** @type {[string, string]}*/ ([l.AllowTypes["t"], l.Name]))
+        .filter((l) => typeof (/** @type {any} */ (l.AllowTypes)?.["t"]) === "number")
+        .map((l) => /** @type {[number, string]}*/ ([/** @type {any} */ (l.AllowTypes)["t"], l.Name]))
 );
 
 /** @type {(c: string) => [number, number, number]} */
@@ -570,8 +570,8 @@ function afterDraw(data, originalFunction, drawData) {
 
     if (L === "渐变层" && Property.TypeRecord?.g === 1) {
         const property = extProp(CA);
-        const imgType = type2Layer[property?.TypeRecord?.t ?? 0];
-        const mc = center[property?.TypeRecord?.t ?? 0] || center[0];
+        const imgType = Access.getOr(type2Layer, property?.TypeRecord?.t ?? 0, type2Layer[0]);
+        const mc = Access.getOr(center, property?.TypeRecord?.t ?? 0, center[0]);
 
         Data.GlowOffset ??= Math.floor(Math.random() * 1000);
         Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);

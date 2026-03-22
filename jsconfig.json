@@ -4,7 +4,7 @@
         "allowJs": true,
         "lib": ["es2021", "dom"],
         "strictFunctionTypes": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "paths": {
             "@mod-utils/*": ["./utils/src/*"]
         }

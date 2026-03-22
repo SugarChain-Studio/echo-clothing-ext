@@ -5,7 +5,7 @@ const ENlang = {
     右: "Right",
 };
 
-const assets = ["左", "右"].map(
+const assets = /** @type {const} */ (["左", "右"]).map(
     (side) =>
         /** @type {AddAssetWithConfigParamsNoGroup} */ ([
             {

@@ -3,8 +3,9 @@ import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
 import { registerDrawHook } from "../../../lib/afterDraw";
-import { PoseMapTool } from "../../../lib";
+import { Access, PoseMapTool } from "../../../lib";
 
+/** @type {Record<string, { partial: AssetGroupName[], mask: string, blend: GlobalCompositeOperation }>} */
 const drawConfig = {
     上身遮罩: { partial: ["BodyUpper"], mask: "身体遮罩", blend: "destination-out" },
     下身遮罩: { partial: ["BodyLower"], mask: "身体遮罩", blend: "destination-out" },
@@ -14,7 +15,7 @@ const drawConfig = {
 /** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
 function afterDraw(drawData) {
     const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
-    monadic(drawConfig[L]).then(({ partial, mask, blend }) => {
+    monadic(Access.get(drawConfig, L)).then(({ partial, mask, blend }) => {
         const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
         Tools.getAssetImageThen(drawData, mask).then((img) => {
             DrawImageEx(img, Canvas.getContext("2d"), X, Y, { BlendingMode: blend });

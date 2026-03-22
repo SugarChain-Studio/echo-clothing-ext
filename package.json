@@ -58,6 +58,7 @@
         "@sugarch/bc-asset-manager": "^1.3.0",
         "@sugarch/bc-event-handler": "^1.0.4",
         "@sugarch/bc-mod-hook-manager": "^0.3.4",
+        "@sugarch/bc-mod-i18n": "^0.0.4",
         "@sugarch/bc-mod-types": "^0.6.4",
         "@sugarch/bc-mod-utility": "^0.2.11",
         "@typescript-eslint/parser": "^8.56.1",
@@ -81,5 +82,5 @@
         "sweetalert2": "11.23.0",
         "typescript": "^5.9.3"
     },
-    "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+    "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
 }

@@ -111,6 +111,7 @@ function dialogClickHook(Data, originalFunction) {
 
     const property = /** @type {ExtendItemProperties} */ (DialogFocusItem.Property);
 
+    /** @type {(key: string, func: () => void, leaveDialog: boolean) => void} */
     const clickPush = (key, func, leaveDialog) => {
         const C = CharacterGetCurrent();
         if (!C) return;

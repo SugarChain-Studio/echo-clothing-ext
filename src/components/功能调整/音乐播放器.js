@@ -3,8 +3,12 @@ import { sleepFor } from "@sugarch/bc-mod-utility";
 let scriptLoadStarted = false;
 let scriptLoadDone = false;
 
+/** @type {Array<() => void>} */
 const afterload = [];
 
+/**
+ * @returns {Promise<void>}
+ */
 function loadScript() {
     if (scriptLoadDone) return Promise.resolve();
 
@@ -94,6 +98,10 @@ class PlayerManager {
         this.volume = 0;
     }
 
+    /**
+     * @param {any} data
+     * @param {string} _type
+     */
     createPlayer(data, _type) {
         return loadScript().then(() => {
             // @ts-ignore
@@ -110,6 +118,7 @@ class PlayerManager {
         });
     }
 
+    /** @param {string} source */
     setUrl(source) {
         if (this.src === source) return;
         this.src = source;
@@ -150,6 +159,7 @@ class PlayerManager {
             });
     }
 
+    /** @param {number} volume */
     setVolume(volume) {
         if (this.volume === volume) return;
         this.volume = volume;

@@ -149,6 +149,7 @@ function scriptDraw(data, originalFunction, { C, Item, PersistentData }) {
     if (type?.d && type.d !== 0) Tools.drawUpdate(C, Data);
 }
 
+/** @type {(freq: number) => number} */
 const lFunction = (freq) => {
     const time = Date.now();
     const ncosv = (Math.cos(((time * freq) / 1000) * 2 * Math.PI) + 1) / 2; // Normalize to [0, 1]

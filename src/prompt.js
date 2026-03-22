@@ -39,11 +39,16 @@ function resolve(entry, tag) {
 }
 
 // 缓存SweetAlert2实例
+/** @type {import("sweetalert2").default | null} */
 let SweetAlert = null;
 
 /**
+ * @typedef {import("sweetalert2").default["fire"]} SweetAlertFire
+ */
+
+/**
  * 加载SweetAlert2库
- * @returns {Promise<import("sweetalert2").default>} SweetAlert2实例
+ * @returns {Promise<{fire: SweetAlertFire}>} SweetAlert2实例
  */
 async function loadSweetAlert() {
     // 如果已经加载过，直接返回缓存的实例
@@ -51,8 +56,10 @@ async function loadSweetAlert() {
 
     try {
         // 首先检查全局对象上是否已有SweetAlert2
-        if (globalThis.Swal) {
-            SweetAlert = globalThis.Swal;
+        // @ts-ignore
+        if (globalThis["Swal"]) {
+            // @ts-ignore
+            SweetAlert = globalThis["Swal"];
         } else {
             // 否则动态加载库
             const module = await import("https://cdn.jsdelivr.net/npm/sweetalert2@11.23.0/+esm");

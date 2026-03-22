@@ -17,11 +17,13 @@ class _CustomValidate {
      * @overload
      * @param {CustomGroupName} group - The group the item belongs to.
      * @param {string} item - The item to be removed.
+     * @returns {void}
      */
     /**
      * 注册一个物品在登录时自动移除。
      * @overload
      * @param {AddAssetWithConfigParams} params - The asset parameters.
+     * @returns {void}
      */
     /**
      * @param {CustomGroupName|AddAssetWithConfigParams} arg0

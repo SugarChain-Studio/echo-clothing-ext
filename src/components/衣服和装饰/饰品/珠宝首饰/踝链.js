@@ -3,6 +3,7 @@ import { AssetManager } from "../../../../assetForward";
 import { PostPass, PoseMapTool, Layer } from "../../../../lib";
 import { LRTool } from "../../../../lib/sockLR";
 
+/** @type {(base: Record<string, any>, key: string, blr?: number[]) => Record<string, any>} */
 const LRStringGen = (base, key, blr = [0, 1, 2]) =>
     DialogTools.combine(
         {

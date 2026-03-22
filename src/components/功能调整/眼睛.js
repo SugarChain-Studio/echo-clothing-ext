@@ -1,4 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { Access } from "../../lib";
 
 /**
  * @typedef {Object} EyeExtCharacter
@@ -14,6 +15,7 @@ const eyeNames = ["Eyes2", "Eyes", "左眼_Luzi", "右眼_Luzi"];
 export default function () {
     HookManager.hookFunction("CharacterSetFacialExpression", 0, (args, next) => {
         if (!wceAnimationEnabled()) {
+            /** @type {(group: CustomGroupName) => void} */
             const callWithDifferentGroup = (group) => {
                 HookManager.invokeOriginal(
                     "CharacterSetFacialExpression",
@@ -36,14 +38,14 @@ export default function () {
 
     // Fix for WCE animation
 
-    const wceAnimationEnabled = () => globalThis.bceAnimationEngineEnabled?.() ?? false;
+    const wceAnimationEnabled = () => Access.getOr(globalThis, "bceAnimationEngineEnabled", () => false)();
 
     /** @type {EyeExtCharacter} */
     const eyes = {};
 
     const updateEyesRef = () => {
         Player.Appearance.forEach((item) => {
-            if (eyeNames.includes(item.Asset.Group.Name)) eyes[item.Asset.Group.Name] = item;
+            if (eyeNames.includes(item.Asset.Group.Name)) Access.set(eyes, item.Asset.Group.Name, item);
         });
     };
     /**

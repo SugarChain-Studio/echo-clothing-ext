@@ -394,7 +394,7 @@ const assetStrings = {
         ...layers.reduce((acc, { Localized }, idx) => {
             acc[`Optionp${idx}`] = `${Localized["CN"]}`;
             return acc;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
 
         ...posModules.reduce((acc, { Name, Localized, Key }) => {
             acc[`Module${Name}`] = `${Localized["CN"]}`;
@@ -402,7 +402,7 @@ const assetStrings = {
             acc[`Option${Key}0`] = "无";
             acc[`Option${Key}1`] = "显示";
             return acc;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
 
     EN: {
@@ -413,7 +413,7 @@ const assetStrings = {
         ...layers.reduce((acc, { Localized }, idx) => {
             acc[`Optionp${idx}`] = `${Localized["EN"]}`;
             return acc;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
 
         ...posModules.reduce((acc, { Name, Localized, Key }) => {
             acc[`Module${Name}`] = `${Localized["EN"]}`;
@@ -421,7 +421,7 @@ const assetStrings = {
             acc[`Option${Key}0`] = "None";
             acc[`Option${Key}1`] = "Visible";
             return acc;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
 };
 
@@ -432,22 +432,22 @@ const layerNames = {
             acc[`${Name}_1`] = `${Localized["CN"]}`;
             return acc;
         },
-        {
+        /** @type {Record<string, string>} */ ({
             动物: "动物图案",
             扑克: "扑克图案",
             麻将: "麻将图案",
-        }
+        })
     ),
     EN: layers.reduce(
         (acc, { Name, Localized }) => {
             acc[`${Name}_1`] = `${Localized["EN"]}`;
             return acc;
         },
-        {
+        /** @type {Record<string, string>} */ ({
             动物: "Animal Patterns",
             扑克: "Poker Patterns",
             麻将: "Mahjong Patterns",
-        }
+        })
     ),
 };
 

@@ -12,6 +12,7 @@ import { GroupConfig } from "./身体组调整";
 /** @type {Map<CustomGroupName, Set<CustomGroupName>>} */
 const mirrorMap = new Map();
 
+/** @type {(groupName: CustomGroupName, mirrorName: CustomGroupName) => void} */
 function addMirror(groupName, mirrorName) {
     if (!mirrorMap.has(groupName)) {
         mirrorMap.set(groupName, new Set([groupName]));

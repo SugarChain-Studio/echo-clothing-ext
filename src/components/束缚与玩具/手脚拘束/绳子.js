@@ -1,7 +1,8 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../assetForward";
-import { TypedOptionCombiner } from "../../../lib";
+import { Access, TypedOptionCombiner } from "../../../lib";
 
+/** @type {Record<"CN" | "EN", (idx: number) => string>} */
 const modeText = {
     CN: (idx) => `模式${idx}`,
     EN: (idx) => `Pattern ${idx}`,
@@ -88,7 +89,9 @@ const modeDisplay = {
 const modeDisplayFlatten = Object.fromEntries(
     Object.entries(modeDisplay).map(([key, value]) => [
         key,
-        value.map((item) => (item.startsWith("$") ? modeDisplay[item.slice(1)] : item)).flat(),
+        value
+            .map((item) => (item.startsWith("$") ? Access.getOr(modeDisplay, item.slice(1), modeDisplay.mode1) : item))
+            .flat(),
     ])
 );
 

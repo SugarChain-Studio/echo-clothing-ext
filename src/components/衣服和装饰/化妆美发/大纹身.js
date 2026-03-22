@@ -1,10 +1,11 @@
 import { AssetManager } from "../../../assetForward";
+import { Access } from "../../../lib";
 import { luziSuffixFixups } from "../../../lib/fixups";
 
 /**
  * @typedef {Object} TattooLayerDefinitionExtension
  * @property {BCColor} DefaultColor - 默认颜色
- * @property {Translation.Entry} Localized - 本地化名称
+ * @property {Record<"CN"|"EN",string>} Localized - 本地化名称
  * @property {string} ConfigKey - 配置键
  */
 
@@ -379,7 +380,7 @@ const assetStrings = {
             pv[`Option${layer.ConfigKey}0`] = "隐藏";
             pv[`Option${layer.ConfigKey}1`] = "显示";
             return pv;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
     EN: {
         SelectBase: "Select the tattoo to show",
@@ -389,20 +390,20 @@ const assetStrings = {
             pv[`Option${layer.ConfigKey}0`] = "Hide";
             pv[`Option${layer.ConfigKey}1`] = "Show";
             return pv;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
 };
 
 /** @type {Translation.Dialog} */
 const layerNames = [...LayerSettings, ...attrLayer].reduce(
     (pv, layer) => {
-        for (const [lang, entry] of Object.entries(layer.Localized)) {
+        for (const [lang, entry] of Access.entries(layer.Localized)) {
             if (!pv[lang]) pv[lang] = {};
             pv[lang][layer.Name] = entry;
         }
         return pv;
     },
-    {
+    /** @type {Translation.Dialog} */ ({
         CN: {
             部落: "部落",
             胸上: "胸上",
@@ -417,7 +418,7 @@ const layerNames = [...LayerSettings, ...attrLayer].reduce(
             梵花胸骨: "Sanskrit Chestbone",
             石蒜: "Lycoris",
         },
-    }
+    })
 );
 
 /** @type {Translation.Entry} */

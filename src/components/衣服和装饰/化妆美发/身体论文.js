@@ -24,10 +24,17 @@ const Positions = [
 const Options = Array.from(Positions, (_, i) => i).map((i) => String.fromCharCode(97 + i));
 
 /**
+ * @typedef {`Text${number}`} ExtTextItemPropertyKey
+ * @typedef {{[K in ExtTextItemPropertyKey]: string}} ExtTextItemProperties
+ * @typedef { ExtTextItemProperties & ItemProperties } ExtItemProperties
+ */
+
+/** @type {(item:Item)=>ExtItemProperties} */
+const props = (item) => /** @type {ExtItemProperties} */ (item.Property);
+
+/**
  * 用于在绘制角色后执行自定义绘制逻辑的钩子函数
- * @param {Object} data - 绘制所需的数据对象
- * @param {Function} originalFunction - 原始的绘制函数
- * @param {Object} modData - MOD特定的数据对象，包含各种绘制相关的属性和函数
+ * @type {ExtendedItemScriptHookCallbacks.AfterDraw<TextItemData>}
  */
 function afterDrawHook(data, originalFunction, { C, A, CA, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L, Color }) {
     if (L !== "Text") return;
@@ -55,9 +62,9 @@ function afterDrawHook(data, originalFunction, { C, A, CA, X, Y, drawCanvas, dra
             ...drawOptions,
             textAlign: p.textAlign,
         };
-        DynamicDrawText(CA.Property[`Text${index * 3 + 1}`] || "", ctx, center.X, center.Y - 10, option);
-        DynamicDrawText(CA.Property[`Text${index * 3 + 2}`] || "", ctx, center.X, center.Y, option);
-        DynamicDrawText(CA.Property[`Text${index * 3 + 3}`] || "", ctx, center.X, center.Y + 10, option);
+        DynamicDrawText(props(CA)[`Text${index * 3 + 1}`] || "", ctx, center.X, center.Y - 10, option);
+        DynamicDrawText(props(CA)[`Text${index * 3 + 2}`] || "", ctx, center.X, center.Y, option);
+        DynamicDrawText(props(CA)[`Text${index * 3 + 3}`] || "", ctx, center.X, center.Y + 10, option);
     });
 
     drawCanvas(TempCanvas, X, Y, AlphaMasks);
@@ -106,28 +113,31 @@ const extended = {
     Archetype: ExtendedArchetype.MODULAR,
     ChatSetting: ModularItemChatSetting.PER_MODULE,
     DrawImages: false,
-    Modules: Options.map((name, index) => ({
-        Name: `Text${index}`,
-        Key: name,
-        Options: [
-            {},
-            {
-                HasSubscreen: true,
-                ArchetypeConfig: {
-                    Archetype: ExtendedArchetype.TEXT,
-                    MaxLength: {
-                        [`Text${index * 3 + 1}`]: 20,
-                        [`Text${index * 3 + 2}`]: 20,
-                        [`Text${index * 3 + 3}`]: 20,
+    Modules: Options.map(
+        (name, index) =>
+            /** @type {ModularItemModuleConfig}*/ ({
+                Name: `Text${index}`,
+                Key: name,
+                Options: [
+                    {},
+                    {
+                        HasSubscreen: true,
+                        ArchetypeConfig: {
+                            Archetype: ExtendedArchetype.TEXT,
+                            MaxLength: {
+                                [`Text${index * 3 + 1}`]: 20,
+                                [`Text${index * 3 + 2}`]: 20,
+                                [`Text${index * 3 + 3}`]: 20,
+                            },
+                            Font: "Ananda Black",
+                            ScriptHooks: {
+                                AfterDraw: afterDrawHook,
+                            },
+                        },
                     },
-                    Font: "Ananda Black",
-                    ScriptHooks: {
-                        AfterDraw: afterDrawHook,
-                    },
-                },
-            },
-        ],
-    })),
+                ],
+            })
+    ),
 
     DrawData: {
         elementData: Options.map((_, idx) => ({
@@ -164,7 +174,7 @@ const assetStrings = {
             pv[`Option${name}0`] = "无";
             pv[`Option${name}1`] = "有";
             return pv;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
     EN: {
         SelectBase: "Select Text Position",
@@ -188,7 +198,7 @@ const assetStrings = {
             pv[`Option${name}0`] = "No";
             pv[`Option${name}1`] = "Yes";
             return pv;
-        }, {}),
+        }, /** @type {Record<string, string>} */ ({})),
     },
 };
 

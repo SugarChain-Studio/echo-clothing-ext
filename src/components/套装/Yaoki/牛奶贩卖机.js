@@ -474,6 +474,9 @@ export function RMouseIn(rect) {
 /** @type {(item:Item, cb: (p : MilkingVendorProperties) => boolean ) => boolean} */
 const propTest = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
 
+/** @type {(item:Item, cb: (p : MilkingVendorProperties) => void ) => void} */
+const propWork = (item, cb) => cb(/** @type {MilkingVendorProperties} */ (item.Property ?? {}));
+
 /**
  * @template T
  * @param {Item} item
@@ -491,7 +494,7 @@ const itemDialog = createItemDialogModular({
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneLeft === true || typeof p.Luzi_OutputStartLeft === "number"),
             enable: ({ item }) => propTest(item, (p) => p.Luzi_OutputDoneLeft === true),
-            onclick: ({ item }) => propValue(item, (p) => (p.Luzi_OutputDoneLeft = null)),
+            onclick: ({ item }) => propWork(item, (p) => (p.Luzi_OutputDoneLeft = null)),
             actionKey: "A拿左杯",
         },
         {
@@ -516,7 +519,7 @@ const itemDialog = createItemDialogModular({
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneRight === true || typeof p.Luzi_OutputStartRight === "number"),
             enable: ({ item }) => propTest(item, (p) => p.Luzi_OutputDoneRight === true),
-            onclick: ({ item }) => propValue(item, (p) => (p.Luzi_OutputDoneRight = null)),
+            onclick: ({ item }) => propWork(item, (p) => (p.Luzi_OutputDoneRight = null)),
             actionKey: "A拿右杯",
         },
         {

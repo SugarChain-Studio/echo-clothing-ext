@@ -1,5 +1,6 @@
 import { monadic } from "@mod-utils/monadic";
 import { AssetManager } from "@sugarch/bc-asset-manager";
+import { Type } from "../../lib";
 
 /**
  * @typedef {Object} FullMaskWork
@@ -12,7 +13,7 @@ import { AssetManager } from "@sugarch/bc-asset-manager";
 const wkList = [];
 
 /**
- * @property {CustomGroupName[] | undefined} group
+ * @type {CustomGroupName[] | undefined}
  */
 let groups = undefined;
 
@@ -27,7 +28,7 @@ function runFullMask({ group, asset, layers }) {
         .then((ls) =>
             ls.forEach((l) =>
                 l.Alpha.forEach((a) => {
-                    /** @type {Mutable<Alpha.Data>} */ (a).Group = nGroups;
+                    /** @type {Mutable<Alpha.Data>} */ (a).Group = Type.groups(nGroups);
                 })
             )
         );
@@ -37,7 +38,7 @@ export const FullMask = {
     /**
      * @param {CustomGroupName | CustomGroupName[]} group
      * @param {string} asset
-     * @property {string[]} [layers]
+     * @param {string[]} [layers]
      */
     push: (group, asset, layers) => {
         const group_ = Array.isArray(group) ? group : [group];

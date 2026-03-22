@@ -1,6 +1,8 @@
+import { Access } from "../typing";
 import { drawChainCurry } from "./draw";
 import { calculateCatenaryPoints } from "./shape";
 
+/** @type {(p1: {x: number, y: number}, p2: {x: number, y: number}) => number} */
 function distance(p1, p2) {
     const dx = p2.x - p1.x;
     const dy = p2.y - p1.y;
@@ -87,11 +89,11 @@ export class ChainCanvasCacheWSide {
             });
         }
 
-        if (this.old[side]) {
+        if (Access.get(this.old, side)) {
             return this.canvas[side];
         } else {
             this.old.draw(this.ctx[side], side);
-            this.old[side] = true;
+            Access.set(this.old, side, true);
             return this.canvas[side];
         }
     }

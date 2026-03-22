@@ -1,6 +1,8 @@
+import { Access } from "./typing";
+
 class InjectModule {
     static get() {
-        return window["LSCG"]?.getModule("InjectorModule");
+        return Access.get(globalThis, "LSCG")?.getModule("InjectorModule");
     }
 
     /**
@@ -30,6 +32,7 @@ class _LSCGAPI {
     /** @readonly */
     breathInterval = 2000;
 
+    /** @type {(max: number) => number} */
     random(max) {
         return Math.floor(Math.random() * max);
     }

@@ -140,7 +140,7 @@ const basicStrings = {
 };
 
 const assetStrings = Object.fromEntries(
-    ["CN", "EN"].map((lang) => [
+    /** @type {const}*/ (["CN", "EN"]).map((lang) => [
         lang,
         {
             ...basicStrings[lang],

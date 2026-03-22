@@ -21,6 +21,7 @@ const layerNames = {
     },
 };
 
+/** @type {Record<string,string>} */
 const langMapping = { CN: "CN", TW: "CN" };
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, {}>} */

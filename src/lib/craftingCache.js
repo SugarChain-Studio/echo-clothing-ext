@@ -1,7 +1,7 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "../assetForward";
 import { showPrompt } from "../prompt";
-import { i18n } from "../i18n";
+import { TranslationUtility } from "@sugarch/bc-mod-i18n";
 
 const dataKey = "EchoClothingCache";
 
@@ -90,7 +90,13 @@ let _Logger = null;
  * @param {...string} args - 格式化参数
  * @returns {string} - 本地化后的消息
  */
-const getMessage = (key, ...args) => i18n(messages, key, ...args);
+const getMessage = (key, ...args) => {
+    let msg = TranslationUtility.translateString(messages, key);
+    args.forEach((arg, index) => {
+        msg = msg.replace(`{${index}}`, arg);
+    });
+    return msg;
+};
 
 /**
  * 获取当前玩家所有模组制作物品
@@ -99,6 +105,7 @@ const getMessage = (key, ...args) => i18n(messages, key, ...args);
 function getCurrentModCraftItems() {
     if (!Player.Crafting) return [];
 
+    /** @type {{index: number, craft: CraftingItem}[]} */
     const modItems = [];
     Player.Crafting.forEach((craft, index) => {
         if (craft && isModCraftItem(craft)) {

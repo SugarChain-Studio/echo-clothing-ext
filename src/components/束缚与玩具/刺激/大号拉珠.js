@@ -1,6 +1,7 @@
 import { AssetManager } from "../../../assetForward";
 
 import { Tools } from "@mod-utils/Tools";
+import { Access } from "../../../lib";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const cAssets = {
@@ -111,8 +112,7 @@ const assetStrings = {
 
         ...Array.from({ length: 9 }, (_, i) => i).reduce((acc, i) => {
             const bcount = i + 1;
-            acc[`${bcount}`] = `${bcount}个珠子`;
-
+            Access.set(acc, `${bcount}`, `${bcount}个珠子`);
             return acc;
         }, /** @type {Translation.Entry} */ ({})),
     },
@@ -124,7 +124,7 @@ const assetStrings = {
         ...Array.from({ length: 9 }, (_, i) => i).reduce((acc, i) => {
             const bcount = i + 1;
             const bead = i === 0 ? "Bead" : "Beads";
-            acc[`${bcount}`] = `${bcount} ${bead}`;
+            Access.set(acc, `${bcount}`, `${bcount} ${bead}`);
             return acc;
         }, /** @type {Translation.Entry} */ ({})),
     },

@@ -3,6 +3,7 @@ import { AssetManager } from "../../assetForward";
 import { createItemDialogModular, Layer, PoseMapTool } from "../../lib";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";
+import { TranslationUtility } from "@sugarch/bc-mod-i18n";
 
 /**
  * @typedef {Object} ProtheticRestraintArmProps
@@ -134,7 +135,6 @@ const headItemDialog = createItemDialogModular({
                     show: ({ data, item }) => data.currentModule === "Visor" && item.Property?.TypeRecord?.v > 1,
                     enable: ({ item }) => item.Property?.CustomBlindBackground !== src,
                     requireLockPermission: true,
-                    checked: ({ item }) => item.Property?.CustomBlindBackground === src,
                     onclick: ({ item }) => {
                         item.Property ??= {};
                         item.Property.CustomBlindBackground = src;
@@ -1073,6 +1073,7 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
         /** @type {DialogMenuButton[]} */ (["Remove", "Struggle", "Unlock", "TightenLoosen"])
     );
 
+    /** @type {(buttons: Set<DialogMenuButton>, target: string) => void} */
     const runFilter = (buttons, target) => {
         const idx = DialogMenuButton.findIndex((b) => buttons.has(b));
         if (idx > 0) {
@@ -1112,9 +1113,8 @@ const interfaceStrings = {
 
 HookManager.hookFunction("InterfaceTextGet", 0, (args, next) => {
     const [key] = args;
-    const langEntry = interfaceStrings[TranslationLanguage] || interfaceStrings["EN"] || interfaceStrings["CN"];
-    if (langEntry && langEntry[key]) return langEntry[key];
-
+    const entry = TranslationUtility.translateString(interfaceStrings, key);
+    if (entry) return entry;
     return next(args);
 });
 
@@ -1141,11 +1141,10 @@ function injectItemClickStatus() {
         const tItem = C.Appearance.find((app) => app.Asset.Group.Name === "ItemArms" && app.Asset.Name === "义肢拘束A");
         const forbidStruggle = tItem && armProp(tItem).LuziForbidStruggle;
         if (C.IsPlayer() && tItem) {
-            const langEntry = interfaceStrings[TranslationLanguage] || interfaceStrings["EN"] || interfaceStrings["CN"];
             if (cur && cur.Asset.Name.includes("义肢拘束")) {
-                return langEntry.DialogMenuLuzi_ProResBlock;
+                return TranslationUtility.translateString(interfaceStrings, "DialogMenuLuzi_ProResBlock");
             } else if (forbidStruggle) {
-                return langEntry.DialogMenuLuzi_ProResStruggle;
+                return TranslationUtility.translateString(interfaceStrings, "DialogMenuLuzi_ProResStruggle");
             }
         }
         return null;

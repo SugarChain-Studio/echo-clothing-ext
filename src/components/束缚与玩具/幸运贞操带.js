@@ -197,6 +197,8 @@ function toDDHHMMSS(seconds) {
     if (typeof seconds !== "number" || isNaN(seconds)) return "<invalid>";
 
     let result = seconds;
+
+    /** @type {(number:number) => string} */
     const twodigit = (number) => {
         const ret = number.toString();
         if (ret.length < 2) return `0${ret}`;
@@ -223,6 +225,7 @@ function dialogDrawHook(Data, originalFunction) {
     if (!Item || Item.Asset.Name !== asset.Name) return;
 
     const dialogKey = DialogTools.dialogKey(Item);
+    /** @type {(...keys: any[]) => string} */
     const customDialogText = (...keys) => AssetTextGet(dialogKey(keys.join("")));
 
     const property = /**@type {ExtendItemProperties}*/ (Item.Property);

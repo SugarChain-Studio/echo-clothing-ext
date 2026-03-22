@@ -11,13 +11,13 @@ const baseMapping = {
 /** @type {AssetPoseMapping} */
 const foursMapping = PoseMapTool.fromHide({ AllFours: "", Hogtied: "" });
 
-/** @type { (string)=>Partial<AssetLayerDefinition> } */
+/** @type { (arg:string)=>Partial<AssetLayerDefinition> } */
 const bLConfig = (name) => ({
     Name: name,
     PoseMapping: baseMapping,
 });
 
-/** @type { (string)=>Partial<AssetLayerDefinition> } */
+/** @type { (arg:string)=>Partial<AssetLayerDefinition> } */
 const fLConfig = (name) => ({
     Name: `${name}_F`,
     CopyLayerColor: name,
@@ -298,9 +298,8 @@ export default function () {
     const mappings = {};
     for (const layer of asset.Layer) {
         if (layer.Name.endsWith("_F")) {
-            mappings[
-                `Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.Name}.png`
-            ] = `Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.CopyLayerColor}.png`;
+            mappings[`Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.Name}.png`] =
+                `Assets/Female3DCG/ItemDevices/${asset.Name}_${layer.CopyLayerColor}.png`;
         }
     }
     AssetManager.addImageMapping(mappings);

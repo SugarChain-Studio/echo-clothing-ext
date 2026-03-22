@@ -19,7 +19,7 @@ export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@Sh
 const shockInterval = 2000;
 const shockRunNextTime = () => CommonTime() + (Math.random() * 5 + 5) * 60 * 1000;
 
-/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ExtendedItemData, ShockDeviceData>} */
+/** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, ShockDeviceData>} */
 function beforeDraw(data, originalFunction, { L, PersistentData }) {
     if (L === "闪光") {
         const Data = PersistentData();
@@ -30,6 +30,7 @@ function beforeDraw(data, originalFunction, { L, PersistentData }) {
     }
 }
 
+/** @type {(C:Character, Item:Item)=>void} */
 function setNextShockRunTime(C, Item) {
     if (!C.IsPlayer()) return;
     Item.Property.NextShockTime = shockRunNextTime();
@@ -38,7 +39,7 @@ function setNextShockRunTime(C, Item) {
     }
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ExtendedItemData, ShockDeviceData>} */
+/** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, ShockDeviceData>} */
 function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
     const shockL = Item.Property?.ShockLevel || 0;
 
@@ -66,6 +67,7 @@ function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
         if (C.IsPlayer()) {
             const dialogKey = DialogTools.dialogKey(Item);
 
+            /** @type {(Key: string) => void} */
             const chatRoomMsg = (Key) => {
                 const Content = dialogKey(Key);
                 const Dictionary = new DictionaryBuilder()

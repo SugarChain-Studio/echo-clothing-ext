@@ -2,6 +2,7 @@ import { AssetManager } from "../../../../assetForward";
 import { PathTools } from "@sugarch/bc-mod-utility";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { luziSuffixFixups } from "../../../../lib/fixups";
+import { Access } from "../../../../lib";
 
 /** @type {AssetPoseMapping} */
 const specialMapping = {
@@ -630,7 +631,7 @@ const enabledModulesKey = new Set(asset.Layer.map((layer) => Object.keys(layer.A
 
 const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
-    pv[Key] = Math.max(pv[Key] || 0, cv.AllowTypes[Key]);
+    Access.set(pv, Key, Math.max(Access.getOr(pv, Key, 0), Access.getOr(cv.AllowTypes, Key, 0)));
     return pv;
 }, /** @type { Record<string, Number> } */ ({}));
 
@@ -644,7 +645,7 @@ const modules = Object.entries(typeNameNext)
             Name,
             DrawImages: true,
             Key,
-            Options: Array.from({ length: optionCount[Key] + 1 }, () => ({})),
+            Options: Array.from({ length: Access.getOr(optionCount, Key, 0) + 1 }, () => ({})),
         };
     });
 
@@ -652,7 +653,8 @@ const modules = Object.entries(typeNameNext)
 const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv, cv) => {
     const [k] = Object.entries(cv.AllowTypes)[0];
     pv[k] ??= {};
-    pv[k][cv.AllowTypes[k]] = cv.Name;
+    const idx = Access.getOr(cv.AllowTypes, k, 0);
+    pv[k][idx] = cv.Name;
     return pv;
 }, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 

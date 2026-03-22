@@ -122,10 +122,15 @@ function createArmMaskForCloth(groupName, asset, mode = "", allowTypes) {
  * @param {ArmMaskMode | GroupedAssetMaskMode} mode
  */
 function createArmMaskForGroupedCloth(assets, mode = "") {
+    /** @type {(group: CustomGroupName, asset: CustomAssetDefinition) => ArmMaskMode} */
     const resolveMode = typeof mode === "string" ? (_1, _2) => mode : (group, asset) => mode[group][asset.Name] ?? "";
     for (const [group, assetArr] of Object.entries(assets)) {
         for (const asset of assetArr) {
-            createArmMaskForCloth(/**@type {CustomGroupName}*/ (group), asset, resolveMode(group, asset));
+            createArmMaskForCloth(
+                /**@type {CustomGroupName}*/ (group),
+                asset,
+                resolveMode(/**@type {CustomGroupName}*/ (group), asset)
+            );
         }
     }
 }

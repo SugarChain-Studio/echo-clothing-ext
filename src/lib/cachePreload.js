@@ -2,9 +2,11 @@ import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { sleepUntil } from "@sugarch/bc-mod-utility";
 import { AfterAssetOverrides } from "./afterAssetOverrides";
 
+/** @type {string[]} */
 const loadQueue = [];
 let loaded = false;
 
+/** @type {(url: string) => Promise<void>} */
 async function cachePreloadGL(url) {
     if (loaded) {
         if (GLDrawCanvas) GLDrawLoadImage(GLDrawCanvas.GL, url);

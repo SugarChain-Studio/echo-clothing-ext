@@ -154,6 +154,6 @@ export default function () {
         ["空杯", "橙汁", "可乐", "牛奶"].reduce((acc, curr) => {
             acc[`Assets/Female3DCG/${group}/杯饮_${curr}.png`] = `Assets/Female3DCG/ItemTorso/托盘_${curr}.png`;
             return acc;
-        }, {})
+        }, /** @type {Record<string, string>} */ ({}))
     );
 }

@@ -17,7 +17,7 @@ import { PartsMask } from "../../lib/partsMask";
  */
 
 /**
- * @typedef {"Tops"|"Bottoms"|"Hands"} GrayBodyPersistentData
+ * @typedef {keyof GrayBodyDrawData} GrayBodyPersistentDataKey
  */
 
 /** @type {ExtendedItemCallbacks.AfterDraw<GrayBodyDrawData>} */
@@ -34,13 +34,12 @@ function afterDraw({ C, A, L, X, Y, Color, PersistentData, drawCanvas, drawCanva
     if (!groups) return;
 
     const data = PersistentData();
-    data[L] ??= {
+
+    const target = (data[/** @type {GrayBodyPersistentDataKey}*/ (L)] ??= {
         mask: new PartsMask(AnimationGenerateTempCanvas(C, A, 500, 1000), groups),
         canvas: AnimationGenerateTempCanvas(C, A, 500, 1000),
-    };
+    });
 
-    /** @type {GrayBodyDrawItem} */
-    const target = data[L];
     target.mask.draw(C);
 
     const ctx = target.canvas.getContext("2d");

@@ -29,6 +29,7 @@ const orgasmState = new StateTools.OrgasmState();
  * @typedef {ItemProperties & PortableMilkPumpCustomProperties} PortableMilkPumpProperties
  */
 
+/** @type {(item: Item) => boolean} */
 const vIsWorking = (item) => item.Property?.TypeRecord?.s === 0;
 
 const MilkMax = 3000;

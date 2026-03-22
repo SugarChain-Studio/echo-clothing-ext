@@ -1,6 +1,6 @@
 import { DialogTools } from "@mod-utils/Tools";
 import { AssetManager } from "../../../../assetForward";
-import { createItemDialogTyped } from "../../../../lib";
+import { Access, createItemDialogTyped } from "../../../../lib";
 import { luziSuffixFixups } from "../../../../lib/fixups";
 
 /** @type {Partial<AssetLayerDefinition>} */
@@ -122,7 +122,7 @@ const itemPairing = {
  * @return {Item|undefined}
  */
 function findPairItem(item, chara) {
-    const other = itemGroupPairing[item.Asset.Group.Name];
+    const other = Access.get(itemGroupPairing, item.Asset.Group.Name);
     return (
         other &&
         chara.Appearance.find((a) => a.Asset.Group.Name === other && a.Asset.Name === itemPairing[a.Asset.Name])

@@ -1,3 +1,4 @@
+/** @type {(ctx: CanvasRenderingContext2D, func: () => void) => void} */
 function transformScope(ctx, func) {
     ctx.save();
     func();
@@ -23,7 +24,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const codeColor = (color) => {
     const hex = color.slice(1);
     return /** @type {Color} */ (
-        ["r", "g", "b"].reduce(
+        /** @type {(keyof Color)[]} */ (["r", "g", "b"]).reduce(
             (acc, key, index) => {
                 acc[key] = parseInt(
                     hex.length === 3 ? hex[index] + hex[index] : hex.slice(index * 2, index * 2 + 2),
@@ -31,17 +32,20 @@ const codeColor = (color) => {
                 );
                 return acc;
             },
-            { a: hex.length === 8 ? parseInt(hex.slice(6, 8), 16) : 255 }
+            /** @type {Partial<Color>} */ ({ a: hex.length === 8 ? parseInt(hex.slice(6, 8), 16) : 255 })
         )
     );
 };
 
+/** @type {(color: Color) => string} */
 const colorCode = (color) =>
-    `#${["r", "g", "b"]
-        .map((k) => color[k])
-        .map(Math.round)
-        .map((v) => v.toString(16).padStart(2, "0"))
-        .join("")}${color.a < 255 ? (color.a / 255).toString(16).slice(2, 4) : ""}`;
+    `#${
+        /** @type {(keyof Color)[]} */ (["r", "g", "b"])
+            .map((k) => color[k])
+            .map(Math.round)
+            .map((v) => v.toString(16).padStart(2, "0"))
+            .join("")
+    }${color.a < 255 ? (color.a / 255).toString(16).slice(2, 4) : ""}`;
 
 /**
  * 混合两种颜色
@@ -52,7 +56,7 @@ const colorCode = (color) =>
  */
 const colorMix = (color1, color2, ratio) =>
     /** @type {Color} */ (
-        ["r", "g", "b", "a"].reduce((acc, key) => {
+        /** @type {(keyof Color)[]} */ (["r", "g", "b", "a"]).reduce((acc, key) => {
             acc[key] = lerp(color1[key], color2[key], ratio);
             return acc;
         }, /**@type {Partial<Color>}*/ ({}))
@@ -138,6 +142,7 @@ function drawChainSegment(ctx, { startp, endp, ratio, thickness, side, gradient 
     const hlGradient = ctx.createRadialGradient(hlC.x, hlC.y, 0, hlC.x, hlC.y, hlR);
     gradient(hlGradient);
 
+    /** @type {(x: number, theta1: number, theta2: number) => void} */
     const elp = (x, theta1, theta2) => ctx.ellipse(x, 0, radius, hWidth, 0, theta1, theta2);
 
     ctx.beginPath();
@@ -170,9 +175,11 @@ function drawChainSegment(ctx, { startp, endp, ratio, thickness, side, gradient 
  * @returns {(ctx:CanvasRenderingContext2D, side?: "left" | "right" | undefined)=>void}
  */
 export function drawChainCurry(points, { baseColor, thickness }) {
+    /** @type {(i: number) => number} */
     const widthRatio = (i) =>
         0.5 + 0.25 * (Math.cos((i / (points.length - 1)) * Math.PI * 2 * Math.ceil(points.length / 10)) + 1);
     const gradient = gradientStop(baseColor);
+    /** @type {(ctx: CanvasRenderingContext2D, init: number, side: "left" | "right") => void} */
     const repeatDraw = (ctx, init, side) => {
         for (let i = init; i < points.length; i += 2)
             drawChainSegment(ctx, {
@@ -187,10 +194,10 @@ export function drawChainCurry(points, { baseColor, thickness }) {
 
     return (ctx, side) => {
         const orders = { right: [1, 2], left: [2, 1] };
-        const defaultSides = ["right", "left"];
+        const defaultSides = /** @type {const} */ (["right", "left"]);
         const plan = side
-            ? orders[side].map((i) => [i, side])
-            : defaultSides.flatMap((s) => orders[s].map((i) => [i, s]));
+            ? orders[side].map((i) => /** @type {[number, "left" | "right"]} */ ([i, side]))
+            : defaultSides.flatMap((s) => orders[s].map((i) => /** @type {[number, "left" | "right"]} */ ([i, s])));
         plan.forEach(([init, s]) => repeatDraw(ctx, init, s));
     };
 }

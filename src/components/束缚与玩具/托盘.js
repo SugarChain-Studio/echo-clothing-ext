@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
-import { createItemDialogNoArch, Type } from "../../lib";
+import { createItemDialogNoArch, Type, Access } from "../../lib";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -156,6 +156,7 @@ const actionProcess = (dict, item) =>
 
 /**
  * @param {Item} tray
+ * @returns {void}
  */
 function takeItem(tray) {
     const props = /**@type {ExtendItemProperties}*/ (tray.Property);
@@ -401,7 +402,7 @@ function afterDraw(mdata, originalFunction, drawData) {
         for (let i = 0; i < maxv.饮料; i++) {
             const a = property.Luzi_InventoryContent[i];
             if (!a) continue;
-            const name = a.IAsset && drinksImgs[a.IAsset];
+            const name = a.IAsset && Access.getOr(drinksImgs, a.IAsset, "");
             if (!name) continue;
             const margin = 170;
             Tools.getAssetImageThen(drawData, name).then((img) => {

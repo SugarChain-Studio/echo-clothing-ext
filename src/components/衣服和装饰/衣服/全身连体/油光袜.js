@@ -321,11 +321,15 @@ const handPMap = PoseMapTool.config(
     ["BackBoxTie", "BackElbowTouch", "AllFours", "Hogtied"]
 );
 
+/** @type {(file: string) => string} */
 const maskURL = (file) => `luzi-canvas://glossy-bodystocking-mask/${file}`;
 
+const Poses = /** @type {AssetPoseName[]}*/ (["", "Yoked", "OverTheHead", "BackBoxTie", "BackCuffs", "BackElbowTouch"]);
+
 const preload = () => {
-    for (const pose of ["", "Yoked", "OverTheHead", "BackBoxTie", "BackCuffs", "BackElbowTouch"]) {
+    for (const pose of Poses) {
         for (const parent of ["Small", "Normal", "Large", "XLarge"]) {
+            /** @type {(layer: string, P?: string) => string} */
             const layerSource = (layer, P = pose) =>
                 ImageMapTools.assetLayer(
                     "Suit",
@@ -366,6 +370,7 @@ const preload = () => {
                         ctx.fillRect(0, 0, 500, 1000);
                     }
 
+                    /** @type {(mSource: string) => Promise<HTMLImageElement>} */
                     const getImage = async (mSource) =>
                         /** @type {Promise<HTMLImageElement>}*/ (
                             new Promise((resolve) => {

@@ -69,6 +69,7 @@ const layerNames = {
     },
 };
 
+/** @type {(n: number, def: any, src?: Record<number, any>) => any[]} */
 function generate(n, def, src = {}) {
     return Array.from({ length: n }, (_, i) => (src[i] === undefined ? def : src[i]));
 }

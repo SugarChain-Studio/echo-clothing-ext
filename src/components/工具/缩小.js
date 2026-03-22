@@ -1,7 +1,9 @@
 import { AssetManager } from "../../assetForward";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { luziSuffixFixups } from "../../lib/fixups";
+import { Access } from "../../lib";
 
+/** @type {Record<string, { ZoomModifier?: number, OverrideZoom?: number }>} */
 const assetAdjustments = {
     缩小地上: { OverrideZoom: 0.3 },
     缩小浮空: { OverrideZoom: 0.3 },
@@ -120,7 +122,7 @@ const groupName = "额外身高_Luzi";
 
 /** @type {Translation.GroupedEntries}*/
 const regroupedTranslations = Object.entries(translations).reduce((acc, [lang, entries]) => {
-    acc[lang] = { [groupName]: entries };
+    Access.set(acc, lang, { [groupName]: entries });
     return acc;
 }, {});
 
@@ -131,10 +133,10 @@ export default function () {
         if (args[1] === "Height" && args[2] === "Zoom") {
             const i = InventoryGet(args[0], /** @type {AssetGroupName} */ (groupName));
             if (i) {
-                if (assetAdjustments[i.Asset.Name]?.ZoomModifier)
-                    return ret + assetAdjustments[i.Asset.Name].ZoomModifier;
-                else if (assetAdjustments[i.Asset.Name]?.OverrideZoom)
-                    return assetAdjustments[i.Asset.Name].OverrideZoom;
+                if (Access.get(assetAdjustments, i.Asset.Name)?.ZoomModifier)
+                    return ret + Access.get(assetAdjustments, i.Asset.Name).ZoomModifier;
+                else if (Access.get(assetAdjustments, i.Asset.Name)?.OverrideZoom)
+                    return Access.get(assetAdjustments, i.Asset.Name).OverrideZoom;
             }
         }
         return ret;
