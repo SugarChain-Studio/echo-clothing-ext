@@ -2,6 +2,7 @@ import { Tools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "../../../lib";
 import { AssetManager } from "../../../assetForward";
 import { ActivityEvents } from "@sugarch/bc-event-handler";
+import { registerDrinkLayers } from "../../../lib/drinks";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";
@@ -150,10 +151,5 @@ ActivityEvents.on("SelfInvolved", "SipItem", (sender, player, { SourceCharacterC
 export default function () {
     AssetManager.addAssetWithConfig(group, asset, { extended, translation, layerNames: {}, assetStrings });
     ArmMaskTool.createArmMaskForCloth(group, asset, "Right");
-    AssetManager.addImageMapping(
-        ["空杯", "橙汁", "可乐", "牛奶"].reduce((acc, curr) => {
-            acc[`Assets/Female3DCG/${group}/杯饮_${curr}.png`] = `Assets/Female3DCG/ItemTorso/托盘_${curr}.png`;
-            return acc;
-        }, /** @type {Record<string, string>} */ ({}))
-    );
+    registerDrinkLayers({ Group: group, Name: asset.Name }, (type) => `Assets/Female3DCG/${group}/杯饮_${type}.png`);
 }

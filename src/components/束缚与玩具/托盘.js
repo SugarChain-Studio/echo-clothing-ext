@@ -1,6 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "../../assetForward";
 import { createItemDialogNoArch, Type, Access } from "../../lib";
+import { registerDrinkLayers } from "../../lib/drinks";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -405,7 +406,7 @@ function afterDraw(mdata, originalFunction, drawData) {
             const name = a.IAsset && Access.getOr(drinksImgs, a.IAsset, "");
             if (!name) continue;
             const margin = 170;
-            Tools.getAssetImageThen(drawData, name).then((img) => {
+            Tools.getAssetImageThen(drawData, `饮料-${name}`).then((img) => {
                 DrawImageEx(img, ctx, margin + (i * (500 - margin * 2 - 40)) / (maxv.饮料 - 1), 0);
             });
         }
@@ -523,4 +524,8 @@ const assetStrings = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ItemTorso", asset, { extended, translation, layerNames, assetStrings });
+    registerDrinkLayers(
+        { Group: "ItemTorso", Name: asset.Name },
+        (type) => `Assets/Female3DCG/ItemTorso/托盘_饮料-${type}.png`
+    );
 }
