@@ -12,6 +12,7 @@ const asset = [
             Random: false,
             Top: 0,
             Left: 0,
+            Expose: ["ItemNipples", "ItemBreast", "ItemNipplesPiercings"],
             DefaultColor: [
                 "#111111",
                 "#111111",
@@ -137,7 +138,11 @@ const asset = [
                 Modules: [
                     { Name: "手指", Key: "h", Options: [{}, {}, {}, {}] },
                     { Name: "剪裁", Key: "m", Options: [{}, {}, {}, {}, {}] },
-                    { Name: "胸口", Key: "b", Options: [{}, {}] },
+                    {
+                        Name: "胸口",
+                        Key: "b",
+                        Options: [{}, {}],
+                    },
                 ],
             },
             layerNames: {
