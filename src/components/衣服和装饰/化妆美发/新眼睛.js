@@ -150,6 +150,27 @@ const assets = [
     },
     {
         asset: {
+            Name: "眼睛3微调",
+            Left: 180,
+            Top: 119,
+            DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
+            Layer: [
+                { Name: "1", AllowColorize: true },
+                { Name: "2", AllowColorize: true },
+                { Name: "3", AllowColorize: true },
+                { Name: "4", AllowColorize: true },
+                { Name: "5", AllowColorize: true },
+            ],
+        },
+        translation: {
+            CN: "青玉(微调)",
+            EN: "Jade(Fine-tuning)",
+        },
+        layerNames: commonLayerNames,
+        specials: commonSpecials,
+    },
+    {
+        asset: {
             Name: "眼睛4",
             Left: 180,
             Top: 119,
