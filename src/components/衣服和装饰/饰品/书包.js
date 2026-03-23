@@ -1,5 +1,6 @@
-import { Merge, PoseMapTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { PoseMapTool } from "@local/lib/generator";
+import { Merge } from "@local/lib/type";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinitionBase} */
 const assetBase = {
@@ -56,3 +57,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

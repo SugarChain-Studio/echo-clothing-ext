@@ -1,6 +1,6 @@
-import { DialogTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool } from "../../../lib";
+﻿import { DialogTools, Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { ArmMaskTool } from "@local/lib/generator";
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, {}>} */
 function beforeDraw(data, originalFunction, { Pose }) {
@@ -59,3 +59,4 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset[1], "Right", { typed: [0] });
     AssetManager.addAssetWithConfig(...asset);
 }
+

@@ -1,7 +1,7 @@
-import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
-import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
+import { AssetManager } from "@local/AssetManager";
+import { ArmMaskTool } from "@local/lib/generator";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const mouthFoodDef = {

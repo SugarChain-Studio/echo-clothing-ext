@@ -1,8 +1,10 @@
-import { StateTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+﻿import { StateTools, Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { flowAlgorithm, flowText, maxProdFlow } from "../../套装/Yaoki/牛奶贩卖机";
-import { createItemDialogModular, Layer, GLImageRenderer } from "../../../lib";
+import { GLImageRenderer } from "@local/lib/draw";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { Layer } from "@local/lib/type";
 import { holdsEmptyGlass, setGlassContent } from "../手持物/玻璃杯饮料";
 
 const orgasmState = new StateTools.OrgasmState();
@@ -376,3 +378,4 @@ export default function () {
     AssetManager.addAssetWithConfig(["ItemTorso"], asset);
     orgasmState.watch(OrgasmEvents);
 }
+

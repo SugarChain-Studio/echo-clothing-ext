@@ -1,5 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { createItemDialogModular, PoseMapTool } from "../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { createItemDialogModular } from "@local/lib/itemDialog";
 
 /** @typedef {AssetLayerDefinition& { Text: Translation.Entry }} AssetLayerDefWithText */
 
@@ -159,3 +160,4 @@ const assetStrings = Object.fromEntries(
 export default function () {
     AssetManager.addAssetWithConfig("BodyMarkings", asset, { translation, layerNames, extended, assetStrings });
 }
+

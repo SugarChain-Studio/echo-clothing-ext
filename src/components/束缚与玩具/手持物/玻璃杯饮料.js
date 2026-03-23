@@ -1,8 +1,8 @@
-import { Tools } from "@mod-utils/Tools";
-import { ArmMaskTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { Tools } from "@mod-utils/Tools";
+import { ArmMaskTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 import { ActivityEvents } from "@sugarch/bc-event-handler";
-import { registerDrinkLayers } from "../../../lib/generator/drinks";
+import { registerDrinkLayers } from "@local/lib/generator/drinks";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";
@@ -153,3 +153,4 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth(group, asset, "Right");
     registerDrinkLayers({ Group: group, Name: asset.Name }, (type) => `Assets/Female3DCG/${group}/杯饮_${type}.png`);
 }
+

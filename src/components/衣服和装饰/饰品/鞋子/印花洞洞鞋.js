@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { PoseMapTool } from "../../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

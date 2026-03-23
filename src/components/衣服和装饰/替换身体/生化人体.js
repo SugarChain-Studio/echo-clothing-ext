@@ -1,9 +1,10 @@
-import { AssetManager } from "../../../assetForward";
+﻿import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
 import { partialDraw } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
-import { registerDrawHook } from "../../../lib/afterDraw";
-import { Access, PoseMapTool } from "../../../lib";
+import { registerDrawHook } from "@local/lib/draw";
+import { PoseMapTool } from "@local/lib/generator";
+import { Access } from "@local/lib/type";
 
 /** @type {Record<string, { partial: AssetGroupName[], mask: string, blend: GlobalCompositeOperation }>} */
 const drawConfig = {

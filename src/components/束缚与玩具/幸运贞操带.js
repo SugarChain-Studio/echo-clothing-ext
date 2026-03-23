@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
@@ -435,3 +435,4 @@ export default function () {
     AssetManager.addCustomAssetString(custom_dialogs);
     orgasmState.watch(OrgasmEvents);
 }
+

@@ -1,5 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { showPrompt } from "../../prompt";
 import { TranslationUtility } from "@sugarch/bc-mod-i18n";
 
@@ -339,3 +339,4 @@ export class CraftingCache {
         setup();
     }
 }
+

@@ -1,7 +1,7 @@
 import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { Merge } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { Merge } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type { CustomAssetDefinition } */
 const asset = {

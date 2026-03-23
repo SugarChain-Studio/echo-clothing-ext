@@ -1,6 +1,6 @@
-import { ArmMaskTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { ArmMaskTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

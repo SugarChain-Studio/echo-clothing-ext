@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const assets = {
@@ -180,3 +180,4 @@ export default function () {
         assetStrings: dialog,
     });
 }
+

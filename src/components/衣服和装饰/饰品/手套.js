@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {(overrides?: AssetPoseMapping) => AssetPoseMapping} */
 const glovePoseM = (overrides) => ({

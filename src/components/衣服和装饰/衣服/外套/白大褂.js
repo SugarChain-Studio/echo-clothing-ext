@@ -1,5 +1,5 @@
-import { ArmMaskTool, PoseMapTool } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
+﻿import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<TypedItemData, {}>} */
 
@@ -58,3 +58,4 @@ export default function () {
     AssetManager.addAssetWithConfig(...asset);
     ArmMaskTool.createArmMaskForCloth(asset[0], asset[1], "Hand");
 }
+

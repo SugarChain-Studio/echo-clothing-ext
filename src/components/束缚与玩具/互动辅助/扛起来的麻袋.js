@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { CustomValidate } from "../../../lib";
+import { CustomValidate } from "@local/lib/load";
 
 export default function () {
     AssetManager.addAsset(

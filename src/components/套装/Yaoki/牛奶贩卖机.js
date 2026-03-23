@@ -1,7 +1,11 @@
 import { StateTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
-import { Container, createAfterDrawProcess, createItemDialogModular, GLImageRenderer, Type } from "../../../lib";
+import { GLImageRenderer } from "@local/lib/draw";
+import { Type } from "@local/lib/type";
+import { createAfterDrawProcess } from "@local/lib/draw";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { Container } from "@local/lib/container";
 
 // Milk Vending by Yaoki
 

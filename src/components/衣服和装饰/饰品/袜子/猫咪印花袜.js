@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { SockLRTool } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { SockLRTool } from "@local/lib/generator";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -72,3 +72,4 @@ export default function () {
         AssetManager.addAssetWithConfig(key, value, { translation, layerNames, extended, assetStrings });
     });
 }
+

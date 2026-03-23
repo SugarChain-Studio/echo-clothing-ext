@@ -1,6 +1,7 @@
-import { AssetManager } from "../../../../assetForward";
-import { PostPass, SockLRTool } from "../../../../lib";
-import { luziSuffixFixups } from "../../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { SockLRTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 const translation = { CN: "绷带", EN: "Bandage", RU: "Повязка" };
 

@@ -1,6 +1,6 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { Access } from "../../../lib";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { Access } from "@local/lib/type";
 
 /**
  * @template {string} Name
@@ -244,3 +244,4 @@ export default function () {
         AssetManager.addAssetWithConfig(groupName, asset, { translation, layerNames, extended, assetStrings });
     }
 }
+

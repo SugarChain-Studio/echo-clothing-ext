@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -81,3 +81,4 @@ const assetStrings = {
 export default function () {
     AssetManager.addAssetWithConfig("Garters", asset, { extended, translation, layerNames, assetStrings });
 }
+

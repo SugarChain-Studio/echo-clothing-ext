@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 export default function () {
     AssetManager.modifyAsset("ItemMouth", "TonguePiercingGag", (group, asset) => {
@@ -35,3 +35,4 @@ export default function () {
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
 }
+

@@ -1,5 +1,5 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /**@type {AssetArchetypeConfig} */
 const extended = {
@@ -107,3 +107,4 @@ export default function () {
     );
     AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset);
 }
+

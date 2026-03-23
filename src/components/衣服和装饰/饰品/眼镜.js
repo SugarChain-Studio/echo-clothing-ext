@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { Layer } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const assets = [

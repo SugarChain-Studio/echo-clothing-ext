@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { Merge } from "../../../lib";
-import { groupFixup } from "../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { Merge } from "@local/lib/type";
+import { groupFixup } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinitionBase} */
 const baseAsset = {

@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
 
 /** @type {CustomAssetDefinition} */
@@ -82,3 +82,4 @@ export default function () {
         assetStrings,
     });
 }
+

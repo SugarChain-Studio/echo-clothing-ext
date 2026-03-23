@@ -1,5 +1,5 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type { AddAssetWithConfigParamsNoGroup[] }} */
 const asset = [
@@ -44,3 +44,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(["Bra", "ItemNipples"], asset);
 }
+

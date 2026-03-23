@@ -1,6 +1,6 @@
 import { ChatRoomOrder, ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
-import { AssetManager } from "../../../assetForward";
-import { createItemDialogNoArch } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogNoArch } from "@local/lib/itemDialog";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";

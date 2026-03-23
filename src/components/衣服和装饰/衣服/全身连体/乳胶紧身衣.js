@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { PoseMapTool } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -30,3 +30,4 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("Suit", asset, { translation, layerNames });
 }
+

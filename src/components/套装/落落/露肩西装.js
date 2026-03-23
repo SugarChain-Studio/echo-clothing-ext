@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { PostPass } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { PostPass } from "@local/lib/pass";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [

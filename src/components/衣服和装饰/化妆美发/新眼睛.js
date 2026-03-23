@@ -1,5 +1,5 @@
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /**
  * @typedef {object} SpecialExpressionDefinition
@@ -390,3 +390,4 @@ export default function () {
 
     AssetManager.addImageMapping(mappings);
 }
+

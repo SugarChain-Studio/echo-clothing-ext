@@ -1,5 +1,5 @@
-import { ArmMaskTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { ArmMaskTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomGroupName} */
 const group = "ItemHandheld";
@@ -177,3 +177,4 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth(group, asset, "Right", [{ t: [0, 1, 3, 4, 5, 6, 7], s: 1 }]);
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames, extended, assetStrings });
 }
+

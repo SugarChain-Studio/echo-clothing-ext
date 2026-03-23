@@ -1,4 +1,4 @@
-import { Access } from "./typing";
+import { Access } from "./type";
 
 class InjectModule {
     static get() {

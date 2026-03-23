@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 import { FullMask } from "../../功能调整/全身遮罩";
 
 /** @type {CustomAssetDefinition} */

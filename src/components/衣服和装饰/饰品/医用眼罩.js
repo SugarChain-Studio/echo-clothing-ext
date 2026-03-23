@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 const ENlang = {
     左: "Left",
@@ -64,3 +64,4 @@ const assets = /** @type {const} */ (["左", "右"]).map(
 export default function () {
     AssetManager.addAssetWithConfig(["Glasses", "Mask"], assets);
 }
+

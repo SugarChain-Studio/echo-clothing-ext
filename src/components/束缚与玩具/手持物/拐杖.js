@@ -1,5 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, PostPass } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { ArmMaskTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [

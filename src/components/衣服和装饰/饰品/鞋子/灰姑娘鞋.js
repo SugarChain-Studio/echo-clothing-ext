@@ -1,6 +1,6 @@
-import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { PoseMapTool } from "../../../../lib";
+﻿import { ImageMapTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
 
 /** @type {(layer:AssetLayerDefinition)=>AssetLayerDefinition} */
 const baseLayer = (layer) => ({
@@ -59,3 +59,4 @@ export default function () {
     AssetManager.addImageMapping(ImageMapTools.mirrorBodyTypeLayer("Shoes", asset, "Normal", ["Small", "Large"]));
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation });
 }
+

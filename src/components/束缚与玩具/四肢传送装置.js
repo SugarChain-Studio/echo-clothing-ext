@@ -1,7 +1,8 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { Type, PoseMapTool } from "../../lib";
-import { luziSuffixFixups } from "../../lib/fixups";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { Type } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AssetPoseName[]} */
 const PoseAllUpper = ["BaseUpper", "Yoked", "OverTheHead", "BackBoxTie", "BackElbowTouch", "BackCuffs"];

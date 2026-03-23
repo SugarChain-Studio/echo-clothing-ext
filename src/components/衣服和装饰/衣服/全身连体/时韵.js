@@ -1,5 +1,6 @@
-import { ImmPass, PoseMapTool } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
+﻿import { PoseMapTool } from "@local/lib/generator";
+import { ImmPass } from "@local/lib/pass";
+import { AssetManager } from "@local/AssetManager";
 import { DialogTools, ImageMapTools } from "@mod-utils/Tools";
 
 /** @type {AddAssetWithConfigParams[]} */
@@ -102,3 +103,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

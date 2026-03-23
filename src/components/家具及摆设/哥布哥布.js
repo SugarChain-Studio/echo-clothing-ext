@@ -1,7 +1,7 @@
-import { AssetManager } from "../../assetForward";
-import { registerDrawHook } from "../../lib/afterDraw";
-import { ChainCanvasCache } from "../../lib/draw/chain";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { registerDrawHook } from "@local/lib/draw";
+import { ChainCanvasCache } from "@local/lib/draw";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type { CustomAssetDefinition} */
 const asset = {

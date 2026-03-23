@@ -8,7 +8,8 @@
         "baseUrl": ".",
         "paths": {
             "@mod-utils/*": ["./utils/src/*"],
-            "@lib/*": ["./src/lib/*"]
+            "@local/lib/*": ["./src/lib/*"],
+            "@local/AssetManager": ["./src/assetForward"]
         }
     },
     "include": [

@@ -1,7 +1,7 @@
-import { AssetManager } from "../../assetForward";
+﻿import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { luziSuffixFixups } from "../../lib/fixups";
-import { Access } from "../../lib";
+import { luziSuffixFixups } from "@local/lib/fixups";
+import { Access } from "@local/lib/type";
 
 /** @type {Record<string, { ZoomModifier?: number, OverrideZoom?: number }>} */
 const assetAdjustments = {

@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { GroupConfig } from "./身体组调整";
 
 /**
@@ -274,3 +274,4 @@ export default function () {
         AssetManager.addCopyGroup(definition.mirror, definition.source, definition.description, definition.overrides);
     });
 }
+

@@ -1,7 +1,8 @@
 import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
-import { Access, createItemDialogModular } from "../../../lib";
+import { Access } from "@local/lib/type";
+import { createItemDialogModular } from "@local/lib/itemDialog";
 import { ChatRoomOrderTools, DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
 
 /**

@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 export default function () {
@@ -11,3 +11,4 @@ export default function () {
         return next(args);
     });
 }
+

@@ -1,7 +1,8 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Layer } from "../../../lib";
-import { LSCG } from "../../../lib/lscg";
+import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
+import { createAfterDrawProcess } from "@local/lib/draw";
+import { LSCG } from "@local/lib/lscg";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const itemAttr = {

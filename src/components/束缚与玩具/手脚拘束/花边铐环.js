@@ -1,6 +1,6 @@
-import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { PoseMapTool } from "../../../lib";
+﻿import { DialogTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
@@ -94,3 +94,4 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
 }
+

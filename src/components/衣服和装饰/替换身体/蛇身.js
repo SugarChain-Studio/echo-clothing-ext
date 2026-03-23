@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -74,3 +74,4 @@ export default function () {
     AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
     AssetManager.addAssetWithConfig("Wings", asset, { translation, layerNames });
 }
+

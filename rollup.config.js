@@ -27,9 +27,9 @@ module.exports = async (cliArgs) => {
             env,
             packageJSON,
             banner,
-            alias: {
-                "@lib": `${env.curDir}/src/lib`,
-                "@lib/*": `${env.curDir}/src/lib/*`,
+            aliasOpt: {
+                "@local/lib": `${env.curDir}/src/lib`,
+                "@local/AssetManager": `${env.curDir}/src/assetForward`,
             },
             output: {
                 file: undefined,

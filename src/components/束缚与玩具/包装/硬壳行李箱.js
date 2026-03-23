@@ -1,6 +1,6 @@
-import { DialogTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createItemDialogModular } from "../../../lib";
+﻿import { DialogTools, Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogModular } from "@local/lib/itemDialog";
 import { DrawMods, SharedCenterModifier } from "@mod-utils/ChatRoomOrder";
 import { luggageHandler } from "./行李箱";
 
@@ -199,3 +199,4 @@ export default function () {
         )
     );
 }
+

@@ -1,7 +1,8 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { createItemDialogNoArch, Type, Access } from "../../lib";
-import { registerDrinkLayers } from "../../lib/generator/drinks";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogNoArch } from "@local/lib/itemDialog";
+import { Type, Access } from "@local/lib/type";
+import { registerDrinkLayers } from "@local/lib/generator/drinks";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -529,3 +530,4 @@ export default function () {
         (type) => `Assets/Female3DCG/ItemTorso/托盘_饮料-${type}.png`
     );
 }
+

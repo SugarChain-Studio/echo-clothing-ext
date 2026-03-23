@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { GroupConfig } from "./身体组调整";
 
 /** @type {ExpressionName[]} */
@@ -246,3 +246,4 @@ export default function () {
         左眼_Luzi: "Eyes2",
     });
 }
+

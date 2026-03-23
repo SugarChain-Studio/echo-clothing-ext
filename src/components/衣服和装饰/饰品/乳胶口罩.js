@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type { CustomAssetDefinition} */
 const asset = {
@@ -27,3 +27,4 @@ const config = {
 export default function () {
     AssetManager.addAssetWithConfig([[["Mask", "ItemMouth", "ItemMouth2", "ItemMouth3"], asset, config]]);
 }
+

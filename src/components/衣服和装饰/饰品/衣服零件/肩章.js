@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type { AddAssetWithConfigParams }} */
 const asset = [
@@ -75,3 +75,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
+

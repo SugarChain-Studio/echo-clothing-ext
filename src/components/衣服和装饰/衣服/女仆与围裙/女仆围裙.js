@@ -1,6 +1,7 @@
-import { ArmMaskTool, PoseMapTool, PostPass } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
-import { luziSuffixFixups } from "../../../../lib/fixups";
+﻿import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [

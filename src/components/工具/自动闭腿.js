@@ -1,6 +1,6 @@
-import { AssetManager } from "../../assetForward";
-import { registerDrawHook } from "../../lib/afterDraw";
-import { customFixup } from "../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { registerDrawHook } from "@local/lib/draw";
+import { customFixup } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

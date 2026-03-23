@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -293,3 +293,4 @@ export default function () {
     AssetManager.addAssetWithConfig("ItemArms", asset, { extended, translation, assetStrings, layerNames });
     AssetManager.addAssetWithConfig("ItemLegs", asset2, { translation: translation2, layerNames: layerNames2 });
 }
+

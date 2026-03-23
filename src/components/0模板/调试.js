@@ -1,9 +1,9 @@
 import { debugFlag } from "@mod-utils/rollupHelper";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { PostPass } from "../../lib";
-import { registerDrawHook } from "../../lib/afterDraw";
-import { PartsMask } from "../../lib/draw/partsMask";
+import { PostPass } from "@local/lib/pass";
+import { registerDrawHook } from "@local/lib/draw";
+import { PartsMask } from "@local/lib/draw";
 
 /**
  * @typedef {Object} GrayBodyDrawItem

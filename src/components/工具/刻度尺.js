@@ -1,6 +1,6 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { Access } from "../../lib";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { Access } from "@local/lib/type";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -127,3 +127,4 @@ export default function () {
         extended,
     });
 }
+

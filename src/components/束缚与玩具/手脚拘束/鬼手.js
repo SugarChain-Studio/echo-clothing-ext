@@ -1,7 +1,9 @@
-import { DialogTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { ImmPass, Merge, PoseMapTool } from "../../../lib";
-import { customFixup } from "../../../lib/fixups";
+﻿import { DialogTools, Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { ImmPass } from "@local/lib/pass";
+import { Merge } from "@local/lib/type";
+import { customFixup } from "@local/lib/fixups";
 
 /** @type {Omit<Partial<CustomAssetDefinitionBase>, "BodyCosplay">} */
 const sharedProps = {

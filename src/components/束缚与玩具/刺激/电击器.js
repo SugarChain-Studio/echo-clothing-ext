@@ -1,7 +1,9 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { luziSuffixFixups } from "../../../lib/fixups";
-import { createItemDialogModular, PoseMapTool, PostPass } from "../../../lib";
+import { luziSuffixFixups } from "@local/lib/fixups";
+import { PoseMapTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { createItemDialogModular } from "@local/lib/itemDialog";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 
 /**

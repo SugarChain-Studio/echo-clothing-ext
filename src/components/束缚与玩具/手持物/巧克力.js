@@ -1,6 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
-import { ArmMaskTool, createItemDialogModular } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+import { ArmMaskTool } from "@local/lib/generator";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { AssetManager } from "@local/AssetManager";
 
 /**
  * @typedef {ItemProperties & {LuziRid?:number, LuziCid?:number}} ChocolateItemProperties

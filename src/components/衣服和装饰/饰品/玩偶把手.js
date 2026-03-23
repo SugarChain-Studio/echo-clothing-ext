@@ -1,6 +1,6 @@
-import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { Layer } from "../../../lib";
+﻿import { DialogTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
 
 /** @type {AssetLayerDefinition} */
 const propsS = {
@@ -114,3 +114,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
+

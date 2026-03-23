@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { Layer } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
 
 /** @type { AddAssetWithConfigParams }} */
 const asset = [
@@ -38,3 +38,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
+

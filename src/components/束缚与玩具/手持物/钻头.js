@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-// import { AssetManager } from "../../../assetForward";
+// import { AssetManager } from "@local/AssetManager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
@@ -72,3 +72,4 @@ export default function () {
     // AssetManager.addAsset(group, asset, extended, { CN: "钻头", UA: "Дриль", EN: "Drill" });
     // AssetManager.addCustomDialog(dialogs);
 }
+

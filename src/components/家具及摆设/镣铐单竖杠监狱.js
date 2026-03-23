@@ -1,6 +1,6 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {RectTuple} */
 const mask = [200, 423, 100, 100];

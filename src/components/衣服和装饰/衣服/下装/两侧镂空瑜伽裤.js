@@ -1,5 +1,5 @@
-import { PoseMapTool } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
+﻿import { PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
 
 /** @type {AddAssetWithConfigParams} */
@@ -44,3 +44,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
+

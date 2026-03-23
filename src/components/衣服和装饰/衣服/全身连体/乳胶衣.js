@@ -1,7 +1,8 @@
-import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { Access, createItemDialogTyped } from "../../../../lib";
-import { luziSuffixFixups } from "../../../../lib/fixups";
+﻿import { DialogTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogTyped } from "@local/lib/itemDialog";
+import { Access } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const gloveLayerInfo = {

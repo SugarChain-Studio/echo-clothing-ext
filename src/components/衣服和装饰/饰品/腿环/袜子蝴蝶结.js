@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {AssetPoseMapping} */
 const PoseMapping = {
@@ -69,3 +69,4 @@ const layerNames = {
 export default function () {
     AssetManager.addAssetWithConfig("Garters", asset, { translation, layerNames });
 }
+

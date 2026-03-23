@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { CustomValidate } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { CustomValidate } from "@local/lib/load";
 
 const asset = {
     Random: false,

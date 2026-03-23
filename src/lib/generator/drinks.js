@@ -3,7 +3,7 @@
  */
 
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 const drinkList = /** @type {const} */ (["可乐", "橙汁", "牛奶", "空杯"]);
 
@@ -40,3 +40,4 @@ HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
     }
     return ret;
 });
+

@@ -1,6 +1,7 @@
-import { ImageMapTools, StateTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createItemDialogNoArch, Type } from "../../../lib";
+﻿import { ImageMapTools, StateTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogNoArch } from "@local/lib/itemDialog";
+import { Type } from "@local/lib/type";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 
 /** @type {(type:number) => string} */
@@ -275,3 +276,4 @@ export default function () {
     orgasmState.watch(OrgasmEvents);
     AssetManager.addAssetWithConfig(...asset);
 }
+

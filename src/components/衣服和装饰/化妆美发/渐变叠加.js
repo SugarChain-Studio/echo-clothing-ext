@@ -1,7 +1,7 @@
-import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createItemDialogModular } from "../../../lib";
-import { PartsMask } from "../../../lib/draw/partsMask";
+﻿import { DialogTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { PartsMask } from "@local/lib/draw/partsMask";
 
 /**
  * @typedef {Object} GradientCustomProperty
@@ -254,3 +254,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

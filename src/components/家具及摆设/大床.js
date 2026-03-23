@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
-import { AssetManager } from "../../assetForward";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [

@@ -1,5 +1,5 @@
-import { PoseMapTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -98,3 +98,4 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation, extended, assetStrings });
 }
+

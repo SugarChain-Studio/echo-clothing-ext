@@ -1,5 +1,5 @@
-import { ArmMaskTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { ArmMaskTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -29,3 +29,4 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
     AssetManager.addAssetWithConfig("ItemHandheld", asset, { translation, layerNames });
 }
+

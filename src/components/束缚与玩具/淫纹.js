@@ -1,9 +1,10 @@
-import { monadic } from "@mod-utils/monadic";
-import { AssetManager } from "../../assetForward";
+﻿import { monadic } from "@mod-utils/monadic";
+import { AssetManager } from "@local/AssetManager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { createItemDialogModular, Access } from "../../lib";
-import { LSCG } from "../../lib/lscg";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { Access } from "@local/lib/type";
+import { LSCG } from "@local/lib/lscg";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /**
  * @typedef { { Masturbate:boolean, InstantOrgasm: boolean, OpenPerm?: boolean } } LewdCrestProps

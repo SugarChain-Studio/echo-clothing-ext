@@ -1,6 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Layer } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
+import { createAfterDrawProcess } from "@local/lib/draw";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
 const itemAttr = {

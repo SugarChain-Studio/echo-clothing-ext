@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { PoseMapTool } from "../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
 
 /** @type {AddAssetWithConfigParamsNoGroup[]} */
 const asset = [
@@ -63,3 +63,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(["ItemArms", "ItemTorso"], asset);
 }
+

@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { PoseMapTool } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {

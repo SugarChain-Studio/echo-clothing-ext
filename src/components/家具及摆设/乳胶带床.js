@@ -1,6 +1,6 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type { CustomAssetDefinition} */
 const asset = {

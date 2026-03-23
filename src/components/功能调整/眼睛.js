@@ -1,5 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { Access } from "../../lib";
+import { Access } from "@local/lib/type";
 
 /**
  * @typedef {Object} EyeExtCharacter

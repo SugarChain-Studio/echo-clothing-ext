@@ -1,4 +1,4 @@
-import { PostPass } from "../lib";
+import { PostPass } from "@local/lib/pass";
 
 __mod_rollup_imports__;
 

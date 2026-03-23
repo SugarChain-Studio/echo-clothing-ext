@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
-import { Access } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { Access } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /**
  * @typedef {Object} TattooLayerDefinitionExtension

@@ -1,6 +1,6 @@
-import { ArmMaskTool, PoseMapTool } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
-import { luziSuffixFixups } from "../../../../lib/fixups";
+﻿import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AssetLayerDefinition} */
 const hideFB = {

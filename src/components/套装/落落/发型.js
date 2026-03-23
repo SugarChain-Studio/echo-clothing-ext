@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {"HairFront"} */
 const hairFront = "HairFront";
@@ -82,3 +82,4 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
 }
+

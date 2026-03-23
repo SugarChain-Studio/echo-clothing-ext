@@ -1,6 +1,6 @@
-import { Tools } from "@mod-utils/Tools";
-import { PoseMapTool } from "../../lib";
-import { AssetManager } from "../../assetForward";
+﻿import { Tools } from "@mod-utils/Tools";
+import { PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {AssetPoseMapping} */
 const baseMapping = {
@@ -305,3 +305,4 @@ export default function () {
     AssetManager.addImageMapping(mappings);
     AssetManager.addAssetWithConfig("ItemDevices", asset, { translation, layerNames, extended, assetStrings });
 }
+

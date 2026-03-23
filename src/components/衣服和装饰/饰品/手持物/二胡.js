@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { ArmMaskTool } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { ArmMaskTool } from "@local/lib/generator";
 
 /** @type {AddAssetWithConfigParams} */
 const asset = [
@@ -27,3 +27,4 @@ export default function () {
     AssetManager.addAssetWithConfig(...asset);
     ArmMaskTool.createArmMaskForCloth("ClothAccessory", asset[1]);
 }
+

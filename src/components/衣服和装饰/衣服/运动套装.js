@@ -1,6 +1,9 @@
-import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { ArmMaskTool, createAfterDrawProcess, PostPass, PoseMapTool, Layer, Access } from "../../../lib";
+﻿import { ImageMapTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { Layer, Access } from "@local/lib/type";
+import { createAfterDrawProcess } from "@local/lib/draw";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (drawData, data) => {
     const { C, A, Color, Property, X, Y, G, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;

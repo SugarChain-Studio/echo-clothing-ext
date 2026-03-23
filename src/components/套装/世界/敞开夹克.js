@@ -1,5 +1,6 @@
-import { ArmMaskTool, Layer, PoseMapTool, Access } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+import { Layer, Access } from "@local/lib/type";
+import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 import { ImageMapTools } from "@mod-utils/Tools";
 /** @type {<T>(arg0: number, arg1: (arg0:number)=>T)=>T[]} */
 const iota = (times, func) => Array.from({ length: times }, (_, i) => func(i));

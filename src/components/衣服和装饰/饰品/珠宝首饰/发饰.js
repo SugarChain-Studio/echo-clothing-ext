@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { ExtendedTools } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { ExtendedTools } from "@local/lib/generator";
 
 const hairAccShared = {
     Random: false,
@@ -187,3 +187,4 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory3"], assets);
 }
+

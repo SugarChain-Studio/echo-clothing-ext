@@ -1,6 +1,6 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { PathTools } from "@sugarch/bc-mod-utility";
-import { luziSuffixFixups } from "../../../lib/fixups";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {AssetPoseMapping} */
 const upperMapping = {

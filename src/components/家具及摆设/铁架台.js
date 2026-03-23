@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
 
 /** @type {TopLeft.Definition} */
@@ -216,3 +216,4 @@ export default function () {
         assetStrings,
     });
 }
+

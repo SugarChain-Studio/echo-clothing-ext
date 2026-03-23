@@ -1,6 +1,7 @@
 import { DialogTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { createAfterDrawProcess, Layer } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
+import { createAfterDrawProcess } from "@local/lib/draw";
 
 const afterDraw = createAfterDrawProcess("text", {}, (_, data) => data).onLayer("text", (drawData, data) => {
     const { C, A, Color, Property, X, Y, AlphaMasks, drawCanvas, drawCanvasBlink } = drawData;

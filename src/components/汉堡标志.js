@@ -1,4 +1,4 @@
-import { AssetManager } from "../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { ModInfo } from "@mod-utils/rollupHelper";
 import { cloneWithTooltip, makeTooltipIcon } from "@mod-utils/Tooltip";
@@ -47,3 +47,4 @@ export default function () {
         return ret;
     });
 }
+

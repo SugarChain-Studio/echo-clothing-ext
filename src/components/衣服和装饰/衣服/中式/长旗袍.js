@@ -1,6 +1,6 @@
-import { PoseMapTool, PostPass } from "../../../../lib";
-import { ArmMaskTool } from "../../../../lib";
-import { AssetManager } from "../../../../assetForward";
+﻿import { PoseMapTool, ArmMaskTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { AssetManager } from "@local/AssetManager";
 import { DialogTools, Tools } from "@mod-utils/Tools";
 
 /** @type {AddAssetWithConfigParams} */
@@ -103,3 +103,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
+

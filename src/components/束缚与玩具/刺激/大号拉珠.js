@@ -1,7 +1,7 @@
-import { AssetManager } from "../../../assetForward";
+﻿import { AssetManager } from "@local/AssetManager";
 
 import { Tools } from "@mod-utils/Tools";
-import { Access } from "../../../lib";
+import { Access } from "@local/lib/type";
 
 /** @type {CustomGroupedAssetDefinitions} */
 const cAssets = {
@@ -182,3 +182,4 @@ export default function () {
         assetStrings,
     });
 }
+

@@ -1,5 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { getManyMirrors } from "../components/功能调整/复制身体区域";
 
 /**

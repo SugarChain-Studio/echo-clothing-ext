@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {TypedItemConfig} */
 const extended = {
@@ -454,3 +454,4 @@ const assetsN = [
 export default function () {
     AssetManager.addAssetWithConfig("新后发_Luzi", assetsN);
 }
+

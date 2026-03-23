@@ -1,4 +1,4 @@
-import { AssetManager } from "./assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { debugFlag, ModInfo, resourceBaseURL } from "@mod-utils/rollupHelper";
 
@@ -6,7 +6,8 @@ import { setup } from "./components";
 import { once } from "@sugarch/bc-mod-utility";
 import { CharacterTag } from "@mod-utils/charaTag";
 import { Logger } from "@mod-utils/log";
-import { AfterAssetOverrides, CraftingCache, ItemPermissionCache } from "./lib";
+import { CraftingCache, ItemPermissionCache } from "@local/lib/backups";
+import { AfterAssetOverrides } from "@local/lib/load";
 import { fetchAssetOverrides } from "@mod-utils/fetchAssetOverrides";
 
 import runBCPatch from "./bcPatch";

@@ -1,5 +1,5 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 const dataKey = "EchoItemPermissionCache";
 
@@ -162,3 +162,4 @@ export class ItemPermissionCache {
         setupImpl();
     }
 }
+

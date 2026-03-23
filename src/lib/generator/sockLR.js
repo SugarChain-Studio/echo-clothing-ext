@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { cachePreloadGL } from "../cachePreload";
+import { AssetManager } from "@local/AssetManager";
+import { cachePreloadGL } from "../load/cachePreload";
 
 const vp = AssetManager.imageMapping.createVirtualPath("luzi-canvas://half-black-fill");
 

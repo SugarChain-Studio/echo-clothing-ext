@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../assetForward";
-import { cachePreloadGL } from "../cachePreload";
+import { AssetManager } from "@local/AssetManager";
+import { cachePreloadGL } from "../load/cachePreload";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -78,3 +78,4 @@ export default function () {
     //     assetStrings,
     // });
 }
+

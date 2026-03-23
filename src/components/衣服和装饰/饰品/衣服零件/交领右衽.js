@@ -1,6 +1,10 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { createAfterDrawProcess, PoseMapTool, Type, GLImageRenderer, PartsMask } from "../../../../lib";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PartsMask } from "@local/lib/draw";
+import { PoseMapTool } from "@local/lib/generator";
+import { Type } from "@local/lib/type";
+import { GLImageRenderer } from "@local/lib/draw";
+import { createAfterDrawProcess } from "@local/lib/load";
 
 /**
  * @typedef {object} PersistData

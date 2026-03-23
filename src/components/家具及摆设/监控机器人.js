@@ -1,7 +1,8 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
-import { createAfterDrawProcess, GLImageRenderer } from "../../lib";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { createAfterDrawProcess } from "@local/lib/draw";
+import { GLImageRenderer } from "@local/lib/draw";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type { CustomAssetDefinition} */
 const asset = {

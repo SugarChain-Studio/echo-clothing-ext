@@ -1,5 +1,7 @@
-import { ArmMaskTool, PostPass, PoseMapTool, Layer } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { Layer } from "@local/lib/type";
+import { AssetManager } from "@local/AssetManager";
 
 // Originally Designed by: 01musume
 
@@ -182,3 +184,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

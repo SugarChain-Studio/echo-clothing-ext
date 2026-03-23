@@ -1,5 +1,5 @@
 import { debugFlag } from "@mod-utils/rollupHelper";
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -26,3 +26,4 @@ export default function () {
         AssetManager.addAssetWithConfig("外观工具", asset, { translation, layerNames: {} });
     }
 }
+

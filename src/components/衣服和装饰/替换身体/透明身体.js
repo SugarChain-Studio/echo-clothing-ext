@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -38,3 +38,4 @@ const translations = {
 export default function () {
     AssetManager.addAsset("动物身体_Luzi", asset, undefined, translations);
 }
+

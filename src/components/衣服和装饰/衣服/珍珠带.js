@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { Layer } from "../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -36,3 +36,4 @@ const layerNames = {
 export default function () {
     AssetManager.addAssetWithConfig("Panties", asset, { translation, layerNames });
 }
+

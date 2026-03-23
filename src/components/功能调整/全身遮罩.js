@@ -1,6 +1,6 @@
 import { monadic } from "@mod-utils/monadic";
 import { AssetManager } from "@sugarch/bc-asset-manager";
-import { Type } from "../../lib";
+import { Type } from "@local/lib/type";
 
 /**
  * @typedef {Object} FullMaskWork

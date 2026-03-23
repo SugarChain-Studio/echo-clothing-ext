@@ -1,4 +1,4 @@
-import { AssetManager } from "../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 import { Tools } from "@mod-utils/Tools";
 
@@ -261,3 +261,4 @@ export default function () {
     });
     AssetManager.addCustomAssetString(dialog);
 }
+

@@ -1,6 +1,7 @@
-import { AssetManager } from "../../../assetForward";
-import { Type, PoseMapTool } from "../../../lib";
-import { luziSuffixFixups } from "../../../lib/fixups";
+﻿import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { Type } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { ImageMapTools, Tools } from "@mod-utils/Tools";
 

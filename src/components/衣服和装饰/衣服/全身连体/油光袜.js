@@ -1,6 +1,8 @@
-import { ImageMapTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { AfterAssetOverrides, PoseMapTool, Layer } from "../../../../lib";
+﻿import { ImageMapTools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { Layer } from "@local/lib/type";
+import { AfterAssetOverrides } from "@local/lib/load";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 
 /** @type {AddAssetWithConfigParams[]} */

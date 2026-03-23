@@ -1,6 +1,8 @@
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
-import { AssetManager } from "../../assetForward";
-import { createItemDialogModular, Layer, PoseMapTool } from "../../lib";
+﻿import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool } from "@local/lib/generator";
+import { createItemDialogModular } from "@local/lib/itemDialog";
+import { Layer } from "@local/lib/type";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";
 import { TranslationUtility } from "@sugarch/bc-mod-i18n";
@@ -1174,3 +1176,4 @@ export default function () {
     injectItemClickStatus();
     AssetManager.addAssetWithConfig(assets);
 }
+

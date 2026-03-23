@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../../assetForward";
-import { ExtendedTools } from "../../../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { ExtendedTools } from "@local/lib/generator";
 
 /** @type { CustomAssetDefinition }} */
 const asset = {
@@ -90,3 +90,4 @@ export default function () {
         ...ExtendedTools.createLeftRightBoth(asset, { preset: "both", mirror: true }),
     });
 }
+

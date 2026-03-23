@@ -1,7 +1,8 @@
-import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../../assetForward";
-import { PostPass, PoseMapTool, Layer } from "../../../../lib";
-import { SockLRTool } from "../../../../lib";
+﻿import { DialogTools, ImageMapTools, Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { PoseMapTool, SockLRTool } from "@local/lib/generator";
+import { PostPass } from "@local/lib/pass";
+import { Layer } from "@local/lib/type";
 
 /** @type {(base: Record<string, any>, key: string, blr?: number[]) => Record<string, any>} */
 const LRStringGen = (base, key, blr = [0, 1, 2]) =>
@@ -252,3 +253,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

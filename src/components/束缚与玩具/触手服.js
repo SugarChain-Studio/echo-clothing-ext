@@ -1,7 +1,8 @@
-import { AssetManager } from "../../assetForward";
+﻿import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
-import { Type, PoseMapTool } from "../../lib";
-import { luziSuffixFixups } from "../../lib/fixups";
+import { PoseMapTool } from "@local/lib/generator";
+import { Type } from "@local/lib/type";
+import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<VibratingItemData, {}>} */
 function scriptDrawHook(data, originalFunction, drawData) {

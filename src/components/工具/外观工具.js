@@ -1,5 +1,5 @@
-import { AssetManager } from "../../assetForward";
-import { createItemDialogNoArch } from "../../lib";
+﻿import { AssetManager } from "@local/AssetManager";
+import { createItemDialogNoArch } from "@local/lib/itemDialog";
 import { runAutoCloseLegs } from "./自动闭腿";
 
 const groups = AssetFemale3DCG.filter((g) => g.Clothing).map((g) => /** @type {AssetGroupBodyName} */ (g.Group));
@@ -135,3 +135,4 @@ const assetStrings = {
 export default function () {
     AssetManager.addAssetWithConfig("外观工具", asset, { translation, layerNames: {}, extended, assetStrings });
 }
+

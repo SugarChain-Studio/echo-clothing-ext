@@ -1,5 +1,5 @@
-import { AssetManager } from "../../../assetForward";
-import { CustomValidate } from "../../../lib";
+import { AssetManager } from "@local/AssetManager";
+import { CustomValidate } from "@local/lib/load";
 
 /** @type { AddAssetWithConfigParams }} */
 const assets = [

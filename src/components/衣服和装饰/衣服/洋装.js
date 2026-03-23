@@ -1,5 +1,5 @@
-import { ArmMaskTool } from "../../../lib";
-import { AssetManager } from "../../../assetForward";
+﻿import { ArmMaskTool } from "@local/lib/generator";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {Partial<AssetLayerDefinition>} */
 const hogShow = {
@@ -195,3 +195,4 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
+

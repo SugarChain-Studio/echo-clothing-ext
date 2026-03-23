@@ -1,4 +1,4 @@
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {Partial<CustomAssetDefinitionAppearance>} */
 const 前发shared = {
@@ -149,3 +149,4 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig("新前发_Luzi", assets);
 }
+

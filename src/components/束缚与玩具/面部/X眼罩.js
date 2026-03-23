@@ -1,5 +1,5 @@
 import { DialogTools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
+import { AssetManager } from "@local/AssetManager";
 
 /** @type {AssetDefinitionBase} */
 const base = {
@@ -86,3 +86,4 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
+

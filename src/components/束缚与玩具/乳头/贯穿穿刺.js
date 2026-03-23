@@ -1,6 +1,6 @@
-import { Tools } from "@mod-utils/Tools";
-import { AssetManager } from "../../../assetForward";
-import { Layer } from "../../../lib";
+﻿import { Tools } from "@mod-utils/Tools";
+import { AssetManager } from "@local/AssetManager";
+import { Layer } from "@local/lib/type";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -29,3 +29,4 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemNipplesPiercings", asset, { translation, layerNames: {} });
 }
+
