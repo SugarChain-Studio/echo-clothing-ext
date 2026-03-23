@@ -23,7 +23,6 @@ const asset = [
             "#5C0000",
             "#600000",
         ],
-        Priority: 55,
         Layer: [
             ...Layer.map(
                 [
@@ -99,4 +98,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

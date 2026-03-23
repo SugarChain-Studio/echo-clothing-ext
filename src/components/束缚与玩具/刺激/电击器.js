@@ -274,12 +274,14 @@ const asset = [
         {
             Name: "电击器",
             Random: false,
+            IsRestraint: false,
             Gender: "F",
             ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 60 }]),
             Difficulty: 3,
             Priority: 14,
             Time: 10,
             Fetish: ["Masochism"],
+            Effect: ["UseRemote"],
             DynamicGroupName: "ItemLegs",
             PoseMapping: PoseMapTool.config(
                 ["Kneel", "KneelingSpread", "Spread", "LegsClosed"],
