@@ -13,121 +13,256 @@ import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
 export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@ShockEventHandler");
 
 /**
- * @typedef { { LastBlink:number, ShockTime:number, ShockOnOff: boolean, ShockIsRunning:boolean } } ShockDeviceData
+ * @typedef {Object} ShockDeviceData
+ * @property {number} BlinkLastTimer - 上次闪烁的时间戳
+ * @property {number} BlinkOnTimer - 闪烁开启的时间戳，用于控制闪烁持续时间
+ * @property {boolean} BlinkLed - 闪烁状态，用于在beforeDraw时切换图层显示
+ * @property {boolean} BlinkLedJustOn - 闪烁刚刚亮起的标记，用于在scriptDraw中触发一次性效果
+ * @property {"RUN" | undefined} ShockState - 电击状态，"RUN"表示正在电击中，undefined表示未电击
+ * @property {number} ShockTime - 上次触发电击的时间戳
+ * @property {boolean} ShockIsRunning - 电击是否正在进行
  */
 
+// 间隔时间配置
+// 最小间隔
+// 0 - 1 - 2 - 3 - 4
+// 1分钟 - 5分钟 - 10分钟 - 30分钟 - 60分钟
+// 最大间隔（在最小间隔基础上增加的随机时间）
+// 0 - 1 - 2 - 3 - 4
+// 0分钟 - 1分钟 - 5分钟 - 10分钟 - 30分钟
+// 随机电击持续时间
+// 0 - 1 - 2
+// 5秒 - 10秒 - 30秒
+
+/**
+ * @typedef {Object} ShockDevicePropertiesExt
+ * @property {number} [Luzi_RandomIntervalMin] - 随机电击最小间隔
+ * @property {number} [Luzi_RandomIntervalRange] - 随机电击间隔范围
+ * @property {number} [Luzi_RandomShockDuration] - 随机电击持续时间
+ * @property {boolean} [Luzi_ShockHardcore] - 是否开启硬核模式（电击时中止挣扎并停止移动）
+ * @property {number} [Luzi_ManualShock] - 手动触发电击的标记，设置为当前时间戳时触发一次电击
+ * @property {number} [Luzi_ShockEndTime] - 电击结束时间戳，用于控制电击持续时间，以及控制闪烁图层显示
+ */
+
+/**
+ * @typedef {ShockDevicePropertiesExt & ItemProperties} ShockDeviceProperties
+ */
+
+/** @type {(p: ItemProperties) => ShockDeviceProperties} */
+const props = (p) => p;
+
+const minute = 60 * 1000;
+
+/** @param {ItemProperties} p */
+const timeDetail = (p) =>
+    new (class {
+        /** @param {ItemProperties} ps */
+        constructor(ps) {
+            this._props = props(ps);
+        }
+        get minInterval() {
+            const v = this._props.Luzi_RandomIntervalMin;
+            if (![0, 1, 2, 3, 4].includes(v)) return minute;
+            return [1, 5, 10, 30, 60][v] * minute;
+        }
+        get minIntervalText() {
+            return `${this.minInterval / minute}min`;
+        }
+        get intervalRange() {
+            const v = this._props.Luzi_RandomIntervalRange;
+            if (![0, 1, 2, 3, 4].includes(v)) return minute;
+            return [0, 1, 5, 10, 30][v] * minute;
+        }
+        get maxIntervalText() {
+            return `${(this.intervalRange + this.minInterval) / minute}min`;
+        }
+        get duration() {
+            const v = this._props.Luzi_RandomShockDuration;
+            if (![0, 1, 2].includes(v)) return 5;
+            return [5, 10, 30][v] * 1000;
+        }
+        get durationText() {
+            return `${this.duration / 1000}s`;
+        }
+    })(p);
+
 const shockInterval = 2000;
-const shockRunNextTime = () => CommonTime() + (Math.random() * 5 + 5) * 60 * 1000;
+const blinkInterval = shockInterval / 2;
+
+/**
+ * @param {Character} C
+ * @param {Item} Item
+ * @param {boolean} Auto
+ */
+function customShock(C, Item, Auto) {
+    if (C.IsPlayer()) {
+        if (props(Item.Property)?.Luzi_ShockHardcore) {
+            if (StruggleMinigameIsRunning()) {
+                StruggleProgress = 0;
+                StruggleMinigameStop();
+            }
+            if (DialogMenuMode === "struggle") {
+                DialogLeave();
+            }
+        }
+        if (ChatRoomSlowtimer !== 0) {
+            ChatRoomSlowLeaveCancel();
+        }
+        PropertyShockPublishAction(C, Item, Auto);
+    }
+}
 
 /** @type {ExtendedItemScriptHookCallbacks.BeforeDraw<ModularItemData, ShockDeviceData>} */
-function beforeDraw(data, originalFunction, { L, PersistentData }) {
+function beforeDraw(mdata, originalFunction, { L, PersistentData }) {
     if (L === "闪光") {
-        const Data = PersistentData();
-        if (Data.ShockOnOff && Data.ShockIsRunning && CommonTime() < Data.LastBlink + 100) {
+        const data = PersistentData();
+        if (data.BlinkLed && data.ShockIsRunning) {
             return { Opacity: 1 };
         }
         return { Opacity: 0 };
     }
-}
-
-/** @type {(C:Character, Item:Item)=>void} */
-function setNextShockRunTime(C, Item) {
-    if (!C.IsPlayer()) return;
-    Item.Property.NextShockTime = shockRunNextTime();
-    if (ServerPlayerIsInChatRoom()) {
-        ChatRoomCharacterItemUpdate(Player, Item.Asset.Group.Name);
-    }
+    return {};
 }
 
 /** @type {ExtendedItemScriptHookCallbacks.ScriptDraw<ModularItemData, ShockDeviceData>} */
-function scriptDraw(data, originalFunction, { C, PersistentData, Item }) {
-    const shockL = Item.Property?.ShockLevel || 0;
+function scriptDraw(mdata, originalFunction, { C, PersistentData, Item }) {
+    const now = Date.now();
 
-    const Data = PersistentData();
-    Data.LastBlink = Data.LastBlink ?? CommonTime();
-    Data.ShockTime = Data.ShockTime ?? 0;
-    Data.ShockIsRunning = Data.ShockIsRunning ?? false;
+    const data = PersistentData();
+    data.BlinkLastTimer ??= now;
+    data.ShockTime ??= 0;
+    data.ShockIsRunning ??= false;
 
-    if (shockL === 1 && !Data.ShockOnOff) {
-        Data.ShockOnOff = true;
-        setNextShockRunTime(C, Item);
+    if (now - data.BlinkLastTimer > blinkInterval) {
+        data.BlinkLed = !data.BlinkLed;
+        data.BlinkLastTimer = now;
+
+        data.BlinkLedJustOn = data.BlinkLed;
+
+        CharacterRefresh(C);
+    } else {
+        data.BlinkLedJustOn = false;
     }
 
-    if (Data.ShockOnOff) {
-        const runBeginTime = Item.Property.NextShockTime;
-        const runEndTime = Item.Property.NextShockTime + 60 * 1000;
-        const now = CommonTime();
-        Data.LastBlink = Math.floor((now - Data.LastBlink) / shockInterval) * shockInterval + Data.LastBlink;
+    const property = props(Item.Property);
 
-        if (runBeginTime < now && now < runEndTime) {
-            AnimationRequestRefreshRate(C, 100);
-            AnimationRequestDraw(C);
+    let shouldUpdate = false;
+
+    if (C.IsPlayer()) {
+        if (property.Luzi_ManualShock) {
+            shouldUpdate = true;
+            property.Luzi_ManualShock = 0;
+            property.Luzi_ShockEndTime = Math.max(property.Luzi_ShockEndTime || 0, now + shockInterval);
         }
 
-        if (C.IsPlayer()) {
-            const dialogKey = DialogTools.dialogKey(Item);
-
-            /** @type {(Key: string) => void} */
-            const chatRoomMsg = (Key) => {
-                const Content = dialogKey(Key);
-                const Dictionary = new DictionaryBuilder()
-                    .sourceCharacter(C)
-                    .asset(Item.Asset, "AssetName", Item.Craft && Item.Craft.Name)
-                    .build();
-                ChatRoomMessage({
-                    Content,
-                    Type: "Action",
-                    Sender: C.MemberNumber,
-                    Dictionary,
-                });
-            };
-
-            if (runBeginTime < now && now < runEndTime) {
-                if (!Data.ShockIsRunning) {
-                    Data.ShockIsRunning = true;
-                    chatRoomMsg("开始间歇持续电击");
-                }
-
-                if (Data.ShockTime < Data.LastBlink) {
-                    Data.ShockTime = Data.LastBlink + shockInterval;
-                    PropertyShockPublishAction(C, Item, true);
-                }
-            } else if (now > runEndTime) {
-                Data.ShockIsRunning = false;
-                if (Item.Property.NextShockTime + 20 * 60 * 1000 > CommonTime()) {
-                    chatRoomMsg("停止间歇持续电击");
-                }
-                setNextShockRunTime(C, Item);
+        if (property.TypeRecord?.r === 1) {
+            const detail = timeDetail(property);
+            if (typeof data.ShockTime !== "number") {
+                data.ShockTime = now + detail.minInterval + Math.round(Math.random() * detail.intervalRange);
+                data.ShockState = undefined;
             }
+
+            if (now > data.ShockTime && data.ShockState === undefined) {
+                shouldUpdate = true;
+                property.Luzi_ShockEndTime = now + detail.duration;
+                data.ShockState = "RUN";
+            } else if (now > property.Luzi_ShockEndTime && data.ShockState === "RUN") {
+                data.ShockState = undefined;
+                data.ShockTime = now + detail.minInterval + Math.round(Math.random() * detail.intervalRange);
+            }
+        } else {
+            data.ShockState = undefined;
         }
+
+        if (property.Luzi_ShockEndTime > now && data.BlinkLedJustOn) {
+            customShock(C, Item, true);
+        }
+
+        if (property.Luzi_ShockEndTime > 0 && property.Luzi_ShockEndTime <= now) {
+            shouldUpdate = true;
+            property.Luzi_ShockEndTime = 0;
+        }
+    }
+
+    data.ShockIsRunning = property.Luzi_ShockEndTime > now;
+
+    if (shouldUpdate) {
+        ChatRoomCharacterItemUpdate(C, Item.Asset.Group.Name);
     }
 }
+
+/**
+ * @typedef {object} SliderConfigExtended
+ * @property {keyof Omit<ShockDevicePropertiesExt,"Luzi_ShockHardcore">} PropsKey
+ * @property {string} TextKey
+ * @property {"minIntervalText" | "maxIntervalText" | "durationText"} rightLabelKey
+ *
+ * @typedef {Partial<ItemDialog.SliderConfig<ModularItemData>> & SliderConfigExtended} SliderConfigExtendedType
+ */
 
 const dialog = createItemDialogModular({
     buttons: [
         {
-            location: { x: 1510, y: 675, w: 225, h: 55 },
-            key: "触发电击",
+            location: { x: 1385, y: 675, w: 225, h: 55 },
+            key: "D_触发电击",
             hover: () => "H_触发电击",
             show: ({ data }) => data.currentModule === "Base",
-            onclick: ({ item, chara }) => {
-                PropertyShockPublishAction(chara, item, false);
+            onclick: ({ item }) => {
+                props(item.Property).Luzi_ManualShock = Date.now();
             },
+            leaveDialog: true,
         },
     ],
     checkboxes: [
         {
-            location: { x: 1185, y: 675 },
-            text: ({ text }) => text("持续电击开关"),
-            checked: ({ item }) => item.Property?.ShockLevel > 0,
+            location: { x: 1400, y: 550 },
+            text: ({ text }) => text("D_HardCoreMode"),
+            checked: ({ item }) => props(item.Property)?.Luzi_ShockHardcore,
+            show: ({ data }) => data.currentModule === "随机电击",
+            hover: () => "H_HardCoreMode",
             onclick: ({ item }) => {
-                const shockL = item.Property?.ShockLevel || 0;
                 item.Property ??= {};
-                item.Property.ShockLevel = shockL > 0 ? 0 : 1;
+                props(item.Property).Luzi_ShockHardcore = !props(item.Property)?.Luzi_ShockHardcore;
             },
-            actionKey: ({ item }) => `设置${item.Property?.ShockLevel ? "开始" : "停止"}间歇持续电击`,
         },
     ],
+    sliders: /** @type {SliderConfigExtendedType[]} */ ([
+        {
+            location: { x: 1250, y: 650, w: 500 },
+            config: { min: 0, max: 4 },
+            PropsKey: "Luzi_RandomIntervalMin",
+            TextKey: "MinInterval",
+            rightLabelKey: "minIntervalText",
+        },
+        {
+            location: { x: 1250, y: 720, w: 500 },
+            config: { min: 0, max: 4 },
+            PropsKey: "Luzi_RandomIntervalRange",
+            TextKey: "MaxInterval",
+            rightLabelKey: "maxIntervalText",
+        },
+        {
+            location: { x: 1250, y: 790, w: 500 },
+            config: { min: 0, max: 2 },
+            PropsKey: "Luzi_RandomShockDuration",
+            TextKey: "ShockDuration",
+            rightLabelKey: "durationText",
+        },
+    ]).map(
+        (config) =>
+            /** @type {ItemDialog.SliderConfig<ModularItemData>} */ ({
+                show: ({ data, item }) =>
+                    data.currentModule === "随机电击" && [1, 2].includes(item.Property?.TypeRecord?.r),
+                value: ({ item }) => props(item.Property)?.[config.PropsKey] ?? 0,
+                onChange: ({ item }, value) => {
+                    item.Property ??= {};
+                    props(item.Property)[config.PropsKey] = value;
+                },
+                leftLabel: ({ text }) => text(config.TextKey),
+                rightLabel: ({ item }) => timeDetail(item.Property)[config.rightLabelKey],
+                ...config,
+            })
+    ),
 });
 
 /** @type { AddAssetWithConfigParams } */
@@ -141,6 +276,7 @@ const asset = [
             ...Tools.topLeftBuilder({ Top: 0, Left: 0 }, ["KneelingSpread", { Left: 60 }]),
             Difficulty: 3,
             Priority: 14,
+            Time: 10,
             Fetish: ["Masochism"],
             DynamicGroupName: "ItemLegs",
             PoseMapping: PoseMapTool.config(
@@ -178,11 +314,19 @@ const asset = [
             Archetype: ExtendedArchetype.MODULAR,
             ScriptHooks: dialog.createHooks({ BeforeDraw: beforeDraw, ScriptDraw: scriptDraw }),
             ChatTags: Tools.CommonChatTags(),
+            BaselineProperty: /** @type {ShockDeviceProperties} */ ({
+                ShowText: false,
+                Luzi_RandomIntervalMin: 0,
+                Luzi_RandomIntervalRange: 0,
+                Luzi_RandomShockDuration: 0,
+                Luzi_ShockHardcore: false,
+                ShockLevel: 2,
+            }),
+            DrawImages: false,
             Modules: [
                 {
                     Name: "电击肛塞",
                     Key: "a",
-                    DrawImages: false,
                     Options: [
                         {},
                         { Prerequisite: ["ButtEmpty"], Property: { Block: ["ItemButt"], Effect: [E.IsPlugged] } },
@@ -191,32 +335,12 @@ const asset = [
                 {
                     Name: "阴部",
                     Key: "p",
-                    DrawImages: false,
                     Options: [{}, { Prerequisite: ["VulvaEmpty"], Property: { Block: ["ItemVulva"] } }],
                 },
-                {
-                    Name: "大腿内侧",
-                    Key: "u",
-                    DrawImages: false,
-                    Options: [{}, {}],
-                },
-                {
-                    Name: "小腹",
-                    Key: "d",
-                    DrawImages: false,
-                    Options: [{}, {}],
-                },
-                {
-                    Name: "随机电击",
-                    Key: "r",
-                    DrawImages: false,
-                    Options: [{}, {}],
-                },
+                { Name: "大腿内侧", Key: "u", Options: [{}, {}] },
+                { Name: "小腹", Key: "d", Options: [{}, {}] },
+                { Name: "随机电击", Key: "r", Options: [{}, {}] },
             ],
-            BaselineProperty: {
-                ShowText: false,
-                NextShockTime: 0,
-            },
         },
         assetStrings: {
             CN: {
@@ -247,14 +371,21 @@ const asset = [
 
                 Module随机电击: "随机电击",
                 Select随机电击: "配置随机电击",
+                Optionr0: "关闭",
+                Optionr1: "启用",
                 Setr0: "SourceCharacter关闭了DestinationCharacterAssetName的随机电击功能。",
                 Setr1: "SourceCharacter启动了DestinationCharacterAssetName的随机电击功能。",
 
                 持续电击开关: "持续电击",
-                触发电击: "触发电击",
+                D_触发电击: "触发电击",
+                H_触发电击: "立即触发一次电击",
 
-                开始间歇持续电击: "SourceCharacter身上的AssetName突然开始电击！",
-                停止间歇持续电击: "SourceCharacter身上的AssetName停止电击。",
+                D_HardCoreMode: "硬核模式",
+                H_HardCoreMode: "电击器的电击会中止挣扎、停止移动。",
+
+                MinInterval: "最小间隔",
+                MaxInterval: "最大间隔",
+                ShockDuration: "持续时间",
             },
             EN: {
                 SelectBase: "Select configuration",
@@ -286,15 +417,22 @@ const asset = [
                 Setd0: "SourceCharacter used a Lower Abdomen Shock Patch on TargetCharacter",
                 Setd1: "SourceCharacter removed a Lower Abdomen Shock Patch from TargetCharacter",
                 持续电击开关: "Continuous Shock",
-                触发电击: "Trigger Shock",
+                D_触发电击: "Trigger Shock",
+                H_触发电击: "Trigger Shock Immediately",
 
-                设置开始间歇持续电击:
-                    "SourceCharacter enabled intermittent continuous shocks on DestinationCharacter AssetName",
-                设置停止间歇持续电击:
-                    "SourceCharacter disabled intermittent continuous shocks on DestinationCharacter AssetName",
+                Module随机电击: "Random Shock",
+                Select随机电击: "Configure Random Shock",
+                Optionr0: "Off",
+                Optionr1: "On",
+                Setr0: "SourceCharacter turned off Random Shock on DestinationCharacter AssetName.",
+                Setr1: "SourceCharacter turned on Random Shock on DestinationCharacter AssetName.",
 
-                开始间歇持续电击: "AssetName on SourceCharacter suddenly starts to shock!",
-                停止间歇持续电击: "AssetName SourceCharacter stops shocking.",
+                D_HardCoreMode: "Hardcore Mode",
+                H_HardCoreMode: "The shocker will stop struggling and stop leaving room.",
+
+                MinInterval: "Min Interval",
+                MaxInterval: "Max Interval",
+                ShockDuration: "Duration",
             },
         },
     },
