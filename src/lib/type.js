@@ -86,6 +86,8 @@ class _Type {
     attributes = identity;
     /** @type {(arg:CustomGroupName[]) => AssetGroupName[]}*/
     groups = identity;
+    /** @type {(arg:ActivityName[]) => ActivityName[]} */
+    activities = identity;
     /** @type {Identity<DrawOffsetItem>}*/
     drawOffset = identity;
     /** @type {Identity<CustomAssetDefinition>}*/
