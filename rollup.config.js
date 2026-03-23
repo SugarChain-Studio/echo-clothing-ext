@@ -35,7 +35,6 @@ module.exports = async (cliArgs) => {
                 file: undefined,
                 dir: env.destDir,
                 format: "esm",
-                entryFileNames: "[name].js",
                 chunkFileNames: "[name]-[hash].js",
             },
         }),
