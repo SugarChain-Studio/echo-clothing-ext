@@ -2,11 +2,13 @@
     "compilerOptions": {
         "checkJs": true,
         "allowJs": true,
-        "lib": ["es2021", "dom"],
+        "lib": ["es2022", "dom"],
         "strictFunctionTypes": false,
         "noImplicitAny": true,
+        "baseUrl": ".",
         "paths": {
-            "@mod-utils/*": ["./utils/src/*"]
+            "@mod-utils/*": ["./utils/src/*"],
+            "@lib/*": ["./src/lib/*"]
         }
     },
     "include": [

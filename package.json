@@ -27,7 +27,7 @@
     },
     "rollupSetting": {
         "output": "bc-cloth.js",
-        "input": "src/main.js",
+        "input": "src/bc-cloth.js",
         "assets": {
             "location": "resources",
             "assets": [

@@ -22,5 +22,22 @@ const banner = (() => {
 
 module.exports = async (cliArgs) => {
     const env = parseEnv(__dirname, cliArgs);
-    return [await createModRollupConfig({ env, packageJSON, banner })];
+    return [
+        await createModRollupConfig({
+            env,
+            packageJSON,
+            banner,
+            alias: {
+                "@lib": `${env.curDir}/src/lib`,
+                "@lib/*": `${env.curDir}/src/lib/*`,
+            },
+            output: {
+                file: undefined,
+                dir: env.destDir,
+                format: "esm",
+                entryFileNames: "[name].js",
+                chunkFileNames: "[name]-[hash].js",
+            },
+        }),
+    ];
 };
