@@ -504,7 +504,8 @@ const itemDialog = createItemDialogModular({
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneLeft !== true && typeof p.Luzi_OutputStartLeft !== "number"),
             enable: ({ item }) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
-            hover: ({ item }) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            hover: ({ item, text }) =>
+                propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? text("D_NeedMoreMilk") : undefined)),
             onclick: ({ item }) =>
                 propValue(item, (p) => {
                     p.Luzi_OutputStartLeft = Date.now();
@@ -529,7 +530,8 @@ const itemDialog = createItemDialogModular({
                 data.currentModule === "Base" &&
                 propTest(item, (p) => p.Luzi_OutputDoneRight !== true && typeof p.Luzi_OutputStartRight !== "number"),
             enable: ({ item }) => propTest(item, (p) => p.Luzi_MilkTotal >= 200),
-            hover: ({ item }) => propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? "牛奶存量不足" : undefined)),
+            hover: ({ item, text }) =>
+                propValue(item, (p) => (p.Luzi_MilkTotal < 200 ? text("D_NeedMoreMilk") : undefined)),
             onclick: ({ item }) =>
                 propValue(item, (p) => {
                     p.Luzi_OutputStartRight = Date.now();
@@ -573,13 +575,13 @@ const itemDialog = createItemDialogModular({
                             });
                             InventoryRemove(Player, "ItemHandheld", true);
                         },
-                        hover: ({ item }) => {
-                            if (!Player.CanInteract()) return "H互动";
+                        hover: ({ item, text }) => {
+                            if (!Player.CanInteract()) return text("H互动");
                             const handItem = InventoryGet(Player, "ItemHandheld");
-                            if (!handItem) return "H空杯";
+                            if (!handItem) return text("H空杯");
                             if (handItem.Asset.Name !== "杯饮" || handItem.Property?.TypeRecord?.typed !== 0)
-                                return "H空杯";
-                            if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return "H存量";
+                                return text("H空杯");
+                            if (propTest(item, (p) => p.Luzi_MilkTotal < 200)) return text("H存量");
                             return undefined;
                         },
                         actionKey: `A${cn}放`,
@@ -605,10 +607,10 @@ const itemDialog = createItemDialogModular({
                                 p[`Luzi_OutputDone${en}`] = null;
                             });
                         },
-                        hover: ({ item }) => {
-                            if (!Player.CanInteract()) return "H互动";
-                            if (InventoryGet(Player, "ItemHandheld")) return "H空手";
-                            if (propTest(item, (p) => p.Luzi_OutputDoneLeft !== true)) return "H未满";
+                        hover: ({ item, text }) => {
+                            if (!Player.CanInteract()) return text("H互动");
+                            if (InventoryGet(Player, "ItemHandheld")) return text("H空手");
+                            if (propTest(item, (p) => p.Luzi_OutputDoneLeft !== true)) return text("H未满");
                             return undefined;
                         },
                         actionKey: `A${cn}拿`,
@@ -698,7 +700,7 @@ const assetStrings = {
 
         产率: "产率",
         存量: "机器存量",
-        牛奶存量不足: "需要至少200 mL牛奶",
+        D_NeedMoreMilk: "需要至少200 mL牛奶",
 
         ...Object.fromEntries(
             ["左", "右"].flatMap((lr) => [
@@ -742,7 +744,7 @@ const assetStrings = {
 
         产率: "Production Rate",
         存量: "Machine Storage",
-        牛奶存量不足: "At least 200 mL of milk is required",
+        D_NeedMoreMilk: "At least 200 mL of milk is required",
 
         ...Object.fromEntries(
             [

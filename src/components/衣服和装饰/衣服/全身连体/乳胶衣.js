@@ -134,7 +134,7 @@ const itemDialog = createItemDialogTyped({
         {
             location: { x: 1385, y: 650, w: 225, h: 55 },
             key: "复制颜色",
-            hover: () => "H_复制颜色",
+            hover: ({ text }) => text("H_复制颜色"),
             enable: ({ item, chara }) => !!findPairItem(item, chara),
             onclick: ({ item, chara }) => {
                 const other = findPairItem(item, chara);

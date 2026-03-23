@@ -34,7 +34,7 @@ const armItemDialog = createItemDialogModular({
             show: ({ item, chara, data }) =>
                 data.currentModule === "Base" && armProp(item).LuziPRRoleplay && chara.IsPlayer(),
             onclick: ({ item }) => (armProp(item).LuziPRRoleplay = false),
-            hover: () => "H_DisablePRRoleplay",
+            hover: ({ text }) => text("H_DisablePRRoleplay"),
             leaveDialog: true,
             actionKey: "A_DisablePRRoleplay",
         },

@@ -6,12 +6,12 @@ const createText = (dialogKey) => (id) => AssetTextGet(dialogKey(id));
 /** @type {ItemDialog.DrawButtonFunction} */
 const drawButton = (text, id, location, hover) => {
     const rect = /** @type {RectTuple} */ (Object.values(location));
-    DrawButton(...rect, text(id), "White", null, hover && text(hover), false);
+    DrawButton(...rect, text(id), "White", null, hover, false);
 };
 /** @type {ItemDialog.DrawButtonFunction} */
 const drawButtonDisable = (text, id, location, hover) => {
     const rect = /** @type {RectTuple} */ (Object.values(location));
-    DrawButton(...rect, text(id), "Pink", null, hover && text(hover), true);
+    DrawButton(...rect, text(id), "Pink", null, hover, true);
 };
 
 /**
@@ -116,7 +116,7 @@ class CustomItemDialog {
         for (const button of this._buttons) {
             if (button.show && !button.show(ctx)) continue;
 
-            const hover = button.hover?.(ctx);
+            const hover = button.hover?.(ctxText);
 
             if ((!button.requireLockPermission || !lockRejected) && (!button.enable || button.enable(ctx))) {
                 drawButton(text, button.key, button.location, hover);
@@ -164,7 +164,7 @@ class CustomItemDialog {
             const X = x + (w ?? 64) + 15;
             const Y = y + (h ?? 64) / 2;
 
-            const hover = box.hover?.(ctx);
+            const hover = box.hover?.(ctxText);
             // DrawCheckbox(x, y, w ?? 64, h ?? 64, "", checked, !enable);
             // DrawButton(x, Y, w ?? 64, h ?? 64, "", "White", null, hover, !enable);
 

@@ -39,7 +39,7 @@ declare namespace ItemDialog {
         /** 按钮文本键值 */
         key: string;
         /** 按钮悬停时显示的文本，如果未定义则不显示 */
-        hover?: (ctx: DialogDrawContext<DataType>) => string | undefined;
+        hover?: (ctx: DialogDrawContextWithText<DataType>) => string | undefined;
         /** 按钮点击时的回调，必须显示的可用按钮才会触发，留空则不触发 */
         onclick?: (ctx: DialogDrawContext<DataType>) => void;
         /** 按钮是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
@@ -87,7 +87,7 @@ declare namespace ItemDialog {
         /** 复选框状态改变时的回调 */
         onclick: (ctx: DialogDrawContext<DataType>) => void;
         /** 复选框悬停时显示的文本，如果未定义则不显示 */
-        hover?: (ctx: DialogDrawContext<DataType>) => string | undefined;
+        hover?: (ctx: DialogDrawContextWithText<DataType>) => string | undefined;
         /** 复选框是否需要解锁权限才可用，此处理如同一个额外的 enable 条件 */
         requireLockPermission?: boolean;
     }

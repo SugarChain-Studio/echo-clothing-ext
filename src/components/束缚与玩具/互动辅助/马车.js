@@ -28,11 +28,11 @@ const dialog = createItemDialogNoArch({
                 Player.CanInteract() &&
                 (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
                 Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
-            hover: ({ chara, item }) => {
-                if (!Player.CanInteract()) return "D_无法驾驶_交互";
-                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
-                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
-                return "D_hint_连接马车_牵引";
+            hover: ({ chara, item, text }) => {
+                if (!Player.CanInteract()) return text("D_无法驾驶_交互");
+                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return text("D_锁权限");
+                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return text("D_没有马车");
+                return text("D_hint_连接马车_牵引");
             },
             onclick: ({ chara }) =>
                 monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {
@@ -58,11 +58,11 @@ const dialog = createItemDialogNoArch({
                 Player.CanInteract() &&
                 (!item.Property?.LockedBy || DialogCanUnlock(chara, item)) &&
                 Player.Appearance.some((a) => a.Asset.Name === carriageItemName),
-            hover: ({ chara, item }) => {
-                if (!Player.CanInteract()) return "D_无法驾驶_交互";
-                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return "D_锁权限";
-                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return "D_没有马车";
-                return "D_hint_连接马车_驾驶";
+            hover: ({ chara, item, text }) => {
+                if (!Player.CanInteract()) return text("D_无法驾驶_交互");
+                if (item.Property?.LockedBy && !DialogCanUnlock(chara, item)) return text("D_锁权限");
+                if (!Player.Appearance.some((a) => a.Asset.Name === carriageItemName)) return text("D_没有马车");
+                return text("D_hint_连接马车_驾驶");
             },
             onclick: ({ chara }) =>
                 monadic(Player.Appearance.find((a) => a.Asset.Name === carriageItemName)).then((carriage) => {

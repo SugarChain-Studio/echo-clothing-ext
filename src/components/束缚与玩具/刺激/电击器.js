@@ -205,7 +205,7 @@ const dialog = createItemDialogModular({
         {
             location: { x: 1385, y: 675, w: 225, h: 55 },
             key: "D_触发电击",
-            hover: () => "H_触发电击",
+            hover: ({ text }) => text("H_触发电击"),
             show: ({ data }) => data.currentModule === "Base",
             onclick: ({ item }) => {
                 props(item.Property).Luzi_ManualShock = Date.now();
@@ -219,7 +219,7 @@ const dialog = createItemDialogModular({
             text: ({ text }) => text("D_HardCoreMode"),
             checked: ({ item }) => props(item.Property)?.Luzi_ShockHardcore,
             show: ({ data }) => data.currentModule === "随机电击",
-            hover: () => "H_HardCoreMode",
+            hover: ({ text }) => text("H_HardCoreMode"),
             onclick: ({ item }) => {
                 item.Property ??= {};
                 props(item.Property).Luzi_ShockHardcore = !props(item.Property)?.Luzi_ShockHardcore;

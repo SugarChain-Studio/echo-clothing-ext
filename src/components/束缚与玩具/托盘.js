@@ -313,12 +313,12 @@ const itemDialog = createItemDialogNoArch({
                 checks.IsExtend(item.Property) &&
                 checks.AnyCanDec(item.Property),
             onclick: ({ item }) => takeItem(item),
-            hover: ({ item }) => {
-                if (!Player.CanInteract()) return "H互动";
-                if (!!InventoryGet(Player, "ItemHandheld")) return "H手空";
+            hover: ({ item, text }) => {
+                if (!Player.CanInteract()) return text("H互动");
+                if (!!InventoryGet(Player, "ItemHandheld")) return text("H手空");
                 const property = /** @type {ExtendItemProperties}*/ (item.Property);
-                if (!checks.IsExtend(property)) return "H数据";
-                if (!checks.AnyCanDec(property)) return "H盘有";
+                if (!checks.IsExtend(property)) return text("H数据");
+                if (!checks.AnyCanDec(property)) return text("H盘有");
                 return undefined;
             },
             actionKey: "A拿到手上",
@@ -342,14 +342,14 @@ const itemDialog = createItemDialogNoArch({
                 placeItem(item, handItem);
                 InventoryRemove(Player, "ItemHandheld");
             },
-            hover: ({ item }) => {
-                if (!Player.CanInteract()) return "H互动";
+            hover: ({ item, text }) => {
+                if (!Player.CanInteract()) return text("H互动");
                 const token = InventoryGet(Player, "ItemHandheld");
-                if (!token) return "H手有";
+                if (!token) return text("H手有");
                 const property = /** @type {ExtendItemProperties}*/ (item.Property);
-                if (!checks.IsExtend(property)) return "H数据";
-                if (checks.Full(property)) return "H盘满";
-                if (!checks.ItemCanInc(property, token)) return "H类型";
+                if (!checks.IsExtend(property)) return text("H数据");
+                if (checks.Full(property)) return text("H盘满");
+                if (!checks.ItemCanInc(property, token)) return text("H类型");
                 return undefined;
             },
             actionKey: "A放到托盘",
