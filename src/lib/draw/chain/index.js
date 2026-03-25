@@ -31,6 +31,9 @@ function compareState(oldState, inputState) {
     );
 }
 
+/**
+ * 链条缓存类，缓存链条的参数和绘制结果，避免重复计算和绘制
+ */
 export class ChainCanvasCache {
     /**
      * @param {HTMLCanvasElement} canvas
@@ -58,6 +61,10 @@ export class ChainCanvasCache {
     }
 }
 
+/**
+ * 分两侧的链条缓存类，缓存链条的参数和绘制结果，避免重复计算和绘制
+ * 此外，每侧绘制一半链节，用于让链条图层可以和其他图层交错叠加
+ */
 export class ChainCanvasCacheWSide {
     /**
      * @param {HTMLCanvasElement} canvasLeft
