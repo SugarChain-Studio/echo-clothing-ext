@@ -419,7 +419,6 @@ const asset = {
         { Name: "tiancai", AllowTypes: { yes: 2 } },
         { Name: "haikou", AllowTypes: { yes: 3 } },
         { Name: "银河", AllowTypes: { yes: 4 } },
-        { Name: "薇薇安", AllowTypes: { yes: 5 } },
 
         // 妖精小屋
         { Name: "菲露亚", AllowTypes: { yjxw: 1 } },
@@ -501,6 +500,7 @@ const asset = {
         { Name: "七分白衣", AllowTypes: { l: 48 } },
         { Name: "花怜", AllowTypes: { l: 49 } },
         { Name: "小思颖", AllowTypes: { l: 50 } },
+        { Name: "薇薇安", AllowTypes: { l: 51 } },
     ],
 };
 
@@ -638,7 +638,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     Access.set(pv, Key, Math.max(Access.getOr(pv, Key, 0), Access.getOr(cv.AllowTypes, Key, 0)));
     return pv;
-}, /** @type { Record<string, Number> } */ ({}));
+}, /** @type { Record<string, Number> } */({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -661,7 +661,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     const idx = Access.getOr(cv.AllowTypes, k, 0);
     pv[k][idx] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -701,7 +701,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
