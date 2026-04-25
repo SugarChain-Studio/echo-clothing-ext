@@ -32,6 +32,8 @@ const v1CompatibleGroups = new Set(
         "ItemMouth3",
         "ItemNipples",
         "ItemNipplesPiercings",
+        "ItemButt",
+        "ItemVulva",
         "ClothOuter",
     ])
 );
