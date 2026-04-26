@@ -24,7 +24,7 @@ const asset = {
 /** @type {Translation.Entry} */
 const translation = {
     CN: "半开百褶裙",
-    EN: "Half pleated skirt",
+    EN: "Half Pleated Skirt",
 };
 
 /** @type {Translation.Dialog} */
