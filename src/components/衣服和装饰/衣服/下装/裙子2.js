@@ -8,7 +8,7 @@ const asset = [
     {
         Name: "裙子2",
         Random: false,
-        ...Tools.topLeftBuilder({ Left: 80, Top: 410 }, ["KneelingSpread", { Left: 90 }]),
+        ...Tools.topLeftBuilder({ Left: 80, Top: 410 }, ["KneelingSpread", { Left: 170 }]),
         Priority: 26,
         ParentGroup: {},
         Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
@@ -65,4 +65,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-
