@@ -311,6 +311,7 @@ const asset = {
         { Name: "碧洛蒂丝", AllowTypes: { nest: 15 } },
         { Name: "喵头嘤3", AllowTypes: { nest: 16 } },
         { Name: "Elara", AllowTypes: { nest: 17 } },
+        { Name: "碧洛蒂丝2", AllowTypes: { nest: 18 } },
 
         // Foxys Fun Experience
         { Name: "Gab", AllowTypes: { ffe: 1 } },
@@ -429,6 +430,9 @@ const asset = {
         { Name: "暖雪", AllowTypes: { yjxw: 6 } },
         { Name: "赛琳", AllowTypes: { yjxw: 7 } },
         { Name: "云海", AllowTypes: { yjxw: 8 } },
+        { Name: "柚井", AllowTypes: { yjxw: 9 } },
+        { Name: "梅莉娅", AllowTypes: { yjxw: 10 } },
+        { Name: "梦梦2", AllowTypes: { yjxw: 11 } },
 
         // 血天使的住所
         { Name: "小粽子", AllowTypes: { xts: 1 } },
@@ -440,6 +444,17 @@ const asset = {
         { Name: "璐鹭", AllowTypes: { beacon: 2 } },
         { Name: "望", AllowTypes: { beacon: 3 } },
         { Name: "白月", AllowTypes: { beacon: 4 } },
+
+        // 兔子窝
+        { Name: "yumi2", AllowTypes: { tzw: 1 } },
+        { Name: "牧雨", AllowTypes: { tzw: 2 } },
+
+        // 水果罐头
+        { Name: "小桃α", AllowTypes: { smtgt: 1 } },
+        { Name: "小桃β", AllowTypes: { smtgt: 2 } },
+        { Name: "大桃α", AllowTypes: { smtgt: 3 } },
+        { Name: "大桃β", AllowTypes: { smtgt: 4 } },
+        { Name: "小词", AllowTypes: { smtgt: 5 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -501,6 +516,7 @@ const asset = {
         { Name: "花怜", AllowTypes: { l: 49 } },
         { Name: "小思颖", AllowTypes: { l: 50 } },
         { Name: "薇薇安", AllowTypes: { l: 51 } },
+        { Name: "朵朵", AllowTypes: { l: 52 } },
     ],
 };
 
@@ -543,6 +559,8 @@ const typeNameNext = {
     yjxw: "妖精小屋",
     xts: "血天使的住所",
     beacon: "Beacon",
+    tzw: "兔子窝",
+    smtgt: "水果罐头",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
