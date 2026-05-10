@@ -1,12 +1,12 @@
 import { AssetManager } from "@local/AssetManager";
 import { luziSuffixFixups } from "@local/lib/fixups";
 
-const hairAccShared = {
+const hairAccShared = /** @type {const} */ ({
     Random: false,
     Priority: 54,
     ParentGroup: {},
     DynamicGroupName: /** @type {AssetGroupBodyName}*/ ("HairAccessory1"),
-};
+});
 
 /** @type {AddAssetWithConfigParamsNoGroup[]}} */
 const assets = [

@@ -208,13 +208,12 @@ const asset = {
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     ParentGroup: {},
     PoseMapping: {},
-    AllowColorize: true,
     EditOpacity: true,
     DefaultColor: ["#DDDDDD", "#DDDDDD"],
     OverrideHeight: { Height: 30, Priority: 0 },
     Hide: fullGroups,
     Layer: [
-        ...bodyLayers.map((l) => ({
+        ...bodyLayers.map((l) => /** @type {const} */ ({
             ...l,
             AllowColorize: false,
             HasImage: false,

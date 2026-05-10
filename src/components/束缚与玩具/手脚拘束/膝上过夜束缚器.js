@@ -25,8 +25,8 @@ const asset = {
         Hogtied: PoseType.HIDE,
     },
     Layer: [
-        { Name: "Straps", AllowColorize: true },
-        { Name: "Details", ParentGroup: {}, AllowColorize: true },
+        { Name: "Straps", },
+        { Name: "Details", ParentGroup: {}, },
     ],
 };
 

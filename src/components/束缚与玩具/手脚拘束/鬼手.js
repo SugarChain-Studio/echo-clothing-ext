@@ -5,8 +5,7 @@ import { ImmPass } from "@local/lib/pass";
 import { Merge } from "@local/lib/type";
 import { customFixup } from "@local/lib/fixups";
 
-/** @type {Omit<Partial<CustomAssetDefinitionBase>, "BodyCosplay">} */
-const sharedProps = {
+const sharedProps = /** @type {const} */ ({
     Random: false,
     CraftGroup: "鬼手",
     Time: 5,
@@ -15,7 +14,7 @@ const sharedProps = {
     DrawLocks: false,
     DynamicGroupName: "ItemArms",
     ParentGroup: {},
-};
+});
 
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [

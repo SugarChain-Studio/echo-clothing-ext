@@ -1059,7 +1059,7 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
     const [C] = args;
 
     const basicBlockButtons = new Set(
-        /** @type {DialogMenuButton[]} */ ([
+        /** @type {DialogMenuButtonType[]} */ ([
             "Remove",
             "Struggle",
             "Unlock",
@@ -1072,10 +1072,10 @@ HookManager.hookFunction("DialogMenuButtonBuild", 0, (args, next) => {
     );
 
     const rulesBlockButtons = new Set(
-        /** @type {DialogMenuButton[]} */ (["Remove", "Struggle", "Unlock", "TightenLoosen"])
+        /** @type {DialogMenuButtonType[]} */ (["Remove", "Struggle", "Unlock", "TightenLoosen"])
     );
 
-    /** @type {(buttons: Set<DialogMenuButton>, target: string) => void} */
+    /** @type {(buttons: Set<DialogMenuButtonType>, target: string) => void} */
     const runFilter = (buttons, target) => {
         const idx = DialogMenuButton.findIndex((b) => buttons.has(b));
         if (idx > 0) {
