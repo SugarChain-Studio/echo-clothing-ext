@@ -144,6 +144,7 @@ const assets = [
             },
         }
     ),
+    makeFH("前发61", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
 ];
 
 export default function () {
