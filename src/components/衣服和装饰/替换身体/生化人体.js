@@ -43,7 +43,6 @@ const asset = {
     },
     DynamicAfterDraw: true,
     ParentGroup: {},
-    AllowColorize: true,
     EditOpacity: true,
     Hide: ["BodyUpper", "BodyLower", "Nipples"],
     Layer: [

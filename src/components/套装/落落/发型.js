@@ -3,7 +3,7 @@ import { AssetManager } from "@local/AssetManager";
 /** @type {"HairFront"} */
 const hairFront = "HairFront";
 
-const hairAttrShared = {
+const hairAttrShared = /** @type {const} */ ({
     Random: false,
     Left: 120,
     Top: 50,
@@ -11,7 +11,7 @@ const hairAttrShared = {
     ParentGroup: {},
     Extended: false,
     InheritColor: hairFront,
-};
+});
 
 /** @type {Translation.String} */
 const layerNames = {

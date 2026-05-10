@@ -1,13 +1,13 @@
 ﻿import { AssetManager } from "@local/AssetManager";
 import { ExtendedTools } from "@local/lib/generator";
 
-const hairAccShared = {
+const hairAccShared = /** @type {const} */ ({
     Random: false,
     Left: 100,
     Top: 0,
     Priority: 54,
     ParentGroup: {},
-};
+});
 
 /** @type { Translation.String } */
 const layerNames = {

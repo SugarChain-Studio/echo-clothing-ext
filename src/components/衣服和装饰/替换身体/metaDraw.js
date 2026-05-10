@@ -61,16 +61,7 @@ export function adjustCanvasAlpha(c, asset, canvas, alphaMultiplier) {
  */
 export function customTempCanvas(C, A, width, height, suffix) {
     const canvas = document.createElement("canvas");
-    // TODO: Remove once R127 is live
-    const prefix = (() => {
-        if (GameVersion === "R126") {
-            return AnimationGetDynamicDataName(C, AnimationDataTypes.Canvas, A);
-        } else {
-            // @ts-ignore
-            return AnimationGetDynamicDataName(C, A);
-        }
-    })();
-    canvas.setAttribute("name", `${prefix}__${suffix}`);
+    canvas.setAttribute("name", `${AnimationGetDynamicDataName(C, A)}__${suffix}`);
     canvas.width = width;
     canvas.height = height;
     return canvas;

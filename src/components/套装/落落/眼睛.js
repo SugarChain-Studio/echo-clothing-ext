@@ -50,11 +50,11 @@ const assets = [
             Top: 120,
             DefaultColor: ["Default", "Default", "Default", "Default", "Default"],
             Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
+                { Name: "1", },
+                { Name: "2", },
+                { Name: "3", },
+                { Name: "4", },
+                { Name: "5", },
             ],
         },
         translation: {

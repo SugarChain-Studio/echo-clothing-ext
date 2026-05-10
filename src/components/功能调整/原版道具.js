@@ -26,12 +26,12 @@ export default function () {
     });
 
     AssetManager.modifyAsset(["ItemBoots", "Shoes"], "HeellessHoof", (group, asset) => {
-        const alpha = asset.Alpha.find((x) => !x.Pose);
+        const alpha = asset.Layer[0].Alpha.find((x) => !x.Pose);
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
 
     AssetManager.modifyAsset(["Shoes"], "PumpHighHeels", (group, asset) => {
-        const alpha = asset.Alpha.find((x) => !x.Pose);
+        const alpha = asset.Layer[0].Alpha.find((x) => !x.Pose);
         /** @type {Mutable<Alpha.Data>}*/ (alpha).Masks = [];
     });
 }

@@ -161,7 +161,7 @@ export class PoseMapTool {
      * @example
      * // 配置一个姿势映射，AllFours和Hogtied姿势显示独特图片，BackBoxTie姿势隐藏
      * const poseMapping = PoseMapTool.Config(["AllFours", "Hogtied"], ["BackBoxTie"]);
-     * @param {boolean} inherit 是否继承父级的 PoseMapping 字段
+     * @param {true} inherit 是否继承父级的 PoseMapping 字段
      * @param  {(keyof AssetPoseMapping)[]} poses 需要配置有独特路径的姿势
      * @param  {PoseConfig} [hides] 需要隐藏的姿势
      * @param {AssetPoseMapping} [base] 用于扩展的基础姿势映射
