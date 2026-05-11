@@ -169,7 +169,7 @@ export class PoseMapTool {
      */
     static layerConfig(inherit, poses, hides, base) {
         return {
-            InheritPoseMappingFields: inherit,
+            ...(inherit ? { InheritPoseMappingFields: true } : {}),
             PoseMapping: PoseMapTool.config(poses, hides, base),
         };
     }

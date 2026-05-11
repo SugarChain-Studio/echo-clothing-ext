@@ -1,6 +1,6 @@
 ﻿import { AssetManager } from "@local/AssetManager";
 import { PoseMapTool } from "@local/lib/generator";
-import { Type } from "@local/lib/type";
+import { Layer, Type } from "@local/lib/type";
 import { luziSuffixFixups } from "@local/lib/fixups";
 import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
 import { ImageMapTools, Tools } from "@mod-utils/Tools";
@@ -208,13 +208,13 @@ const asset = {
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     ParentGroup: {},
     PoseMapping: {},
-    AllowColorize: true,
+
     EditOpacity: true,
     DefaultColor: ["#DDDDDD", "#DDDDDD"],
     OverrideHeight: { Height: 30, Priority: 0 },
     Hide: fullGroups,
     Layer: [
-        ...bodyLayers.map((l) => ({
+        ...Layer.map(bodyLayers, (l) => ({
             ...l,
             AllowColorize: false,
             HasImage: false,

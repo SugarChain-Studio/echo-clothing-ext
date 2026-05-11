@@ -3,6 +3,7 @@ import { AssetManager } from "@local/AssetManager";
 /** @type {"HairFront"} */
 const hairFront = "HairFront";
 
+/** @type {Partial<CustomAssetDefinitionAppearance>} */
 const hairAttrShared = {
     Random: false,
     Left: 120,
@@ -82,4 +83,3 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(assets);
 }
-

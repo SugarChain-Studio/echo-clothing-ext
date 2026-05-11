@@ -1,6 +1,7 @@
 import { AssetManager } from "@local/AssetManager";
 import { luziSuffixFixups } from "@local/lib/fixups";
 
+/** @type {Partial<CustomAssetDefinitionAppearance>} */
 const hairAccShared = {
     Random: false,
     Priority: 54,

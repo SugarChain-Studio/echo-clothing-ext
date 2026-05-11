@@ -49,13 +49,7 @@ const assets = [
             Left: 180,
             Top: 120,
             DefaultColor: ["Default", "Default", "Default", "Default", "Default"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "夜色",
@@ -94,4 +88,3 @@ export default function () {
 
     AssetManager.addImageMapping(mappings);
 }
-

@@ -49,12 +49,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }],
         },
         specials: {
             dizzy: "4",
@@ -86,14 +81,14 @@ const assets = [
             Top: 119,
             DefaultColor: ["Default", "Default", "Default", "Default", "Default", "Default", "#111", "#111"],
             Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-                { Name: "6", AllowColorize: true },
-                { Name: "7", AllowColorize: true },
-                { Name: "8", AllowColorize: true },
+                { Name: "1" },
+                { Name: "2" },
+                { Name: "3" },
+                { Name: "4" },
+                { Name: "5" },
+                { Name: "6" },
+                { Name: "7" },
+                { Name: "8" },
             ],
         },
         specials: {
@@ -133,13 +128,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "青玉",
@@ -154,13 +143,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "青玉(微调)",
@@ -175,13 +158,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "水晶",
@@ -196,13 +173,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "水晶（长睫毛）",
@@ -217,14 +188,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#FFE695", "Default", "#111", "Default"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-                { Name: "6", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }, { Name: "6" }],
         },
         translation: {
             CN: "黄玉",
@@ -239,14 +203,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#9CFFF9", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-                { Name: "6", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }, { Name: "6" }],
         },
         translation: {
             CN: "水晶（锐利）",
@@ -261,13 +218,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "青玉（睁大）",
@@ -282,13 +233,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "青玉（眼影）",
@@ -303,13 +248,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#5AFFD1", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "青玉（眼影2）",
@@ -324,13 +263,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#ffcb5a", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "異國短毛猫",
@@ -345,13 +278,7 @@ const assets = [
             Left: 180,
             Top: 119,
             DefaultColor: ["Default", "Default", "#ffcb5a", "Default", "#111"],
-            Layer: [
-                { Name: "1", AllowColorize: true },
-                { Name: "2", AllowColorize: true },
-                { Name: "3", AllowColorize: true },
-                { Name: "4", AllowColorize: true },
-                { Name: "5", AllowColorize: true },
-            ],
+            Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {
             CN: "缅甸猫",
@@ -390,4 +317,3 @@ export default function () {
 
     AssetManager.addImageMapping(mappings);
 }
-

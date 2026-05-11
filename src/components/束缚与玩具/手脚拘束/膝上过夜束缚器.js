@@ -24,10 +24,7 @@ const asset = {
         AllFours: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
     },
-    Layer: [
-        { Name: "Straps", AllowColorize: true },
-        { Name: "Details", ParentGroup: {}, AllowColorize: true },
-    ],
+    Layer: [{ Name: "Straps" }, { Name: "Details", ParentGroup: {} }],
 };
 
 const layerNames = {
@@ -49,4 +46,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemLegs", asset, { translation, layerNames });
 }
-

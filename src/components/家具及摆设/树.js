@@ -1,6 +1,7 @@
 import { AssetManager } from "@local/AssetManager";
 import { luziSuffixFixups } from "@local/lib/fixups";
 
+/** @type {CustomAssetDefinition} */
 const asset = {
     Name: "树",
     Random: false,

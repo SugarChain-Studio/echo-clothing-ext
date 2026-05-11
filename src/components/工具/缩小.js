@@ -128,9 +128,8 @@ const regroupedTranslations = Object.entries(translations).reduce((acc, [lang, e
 
 export default function () {
     HookManager.progressiveHook("CharacterAppearanceGetCurrentValue").override((args, next) => {
-        /** @type {number} */
         const ret = next(args);
-        if (args[1] === "Height" && args[2] === "Zoom") {
+        if (args[1] === "Height" && args[2] === "Zoom" && typeof ret === "number") {
             const i = InventoryGet(args[0], /** @type {AssetGroupName} */ (groupName));
             if (i) {
                 if (Access.get(assetAdjustments, i.Asset.Name)?.ZoomModifier)

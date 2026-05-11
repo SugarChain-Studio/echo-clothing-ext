@@ -5,7 +5,7 @@ import { ImmPass } from "@local/lib/pass";
 import { Merge } from "@local/lib/type";
 import { customFixup } from "@local/lib/fixups";
 
-/** @type {Omit<Partial<CustomAssetDefinitionBase>, "BodyCosplay">} */
+/** @type {Omit<Partial<CustomAssetDefinitionItem>,"BodyCosplay">} */
 const sharedProps = {
     Random: false,
     CraftGroup: "鬼手",
