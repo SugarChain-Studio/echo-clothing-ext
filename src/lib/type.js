@@ -16,6 +16,12 @@ const identity = (arg) => arg;
 const merge = (arg0, arg1) => ({ ...arg0, ...arg1 });
 
 /**
+ * @param {...Object} args
+ * @returns {Object}
+ */
+const mergeAll = (...args) => args.reduce((acc, arg) => ({ ...acc, ...arg }), {});
+
+/**
  * @typedef {AssetDefinitionBase["DrawOffset"][0]} DrawOffsetItem
  */
 
@@ -193,8 +199,7 @@ class _Merge {
     item = merge;
     /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinitionAppearance>}*/
     app = merge;
-    /** @type {MergeFunction<CustomAssetDefinitionBase, CustomAssetDefinition[]>}*/
-    assets = merge;
+    asset = /** @type {(...args: Partial<CustomAssetDefinition>[]) => CustomAssetDefinition}*/ (mergeAll);
     addAssetParams = mergeAddAssetParams;
     repeatEntries = repeatEntries;
 
