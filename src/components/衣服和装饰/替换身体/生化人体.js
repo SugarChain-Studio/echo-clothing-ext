@@ -1,6 +1,6 @@
 ﻿import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
-import { partialDraw } from "./metaDraw";
+import { partialDraw, PartialDrawCanvasCacheData } from "./metaDraw";
 import { monadic } from "@mod-utils/monadic";
 import { registerDrawHook } from "@local/lib/draw";
 import { PoseMapTool } from "@local/lib/generator";
@@ -13,11 +13,16 @@ const drawConfig = {
     底部: { partial: ["BodyUpper", "BodyLower"], mask: "底部遮罩", blend: "destination-in" },
 };
 
-/** @type {ExtendedItemCallbacks.AfterDraw<{}>} */
+/** @type {ExtendedItemCallbacks.AfterDraw<{drawCache: PartialDrawCanvasCacheData}>} */
 function afterDraw(drawData) {
-    const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L } = drawData;
+    const { C, A, X, Y, drawCanvas, drawCanvasBlink, AlphaMasks, L, PersistentData } = drawData;
     monadic(Access.get(drawConfig, L)).then(({ partial, mask, blend }) => {
-        const { Canvas, CanvasBlink } = partialDraw(C, A, partial);
+        const key = `Luzi_PartialDraw_${partial.join("_")}`;
+        const data = PersistentData();
+        data.drawCache ??= new PartialDrawCanvasCacheData();
+        const cache = data.drawCache.get(key);
+
+        const { Canvas, CanvasBlink } = partialDraw(C, A, partial, cache);
         Tools.getAssetImageThen(drawData, mask).then((img) => {
             DrawImageEx(img, Canvas.getContext("2d"), X, Y, { BlendingMode: blend });
             DrawImageEx(img, CanvasBlink.getContext("2d"), X, Y, { BlendingMode: blend });

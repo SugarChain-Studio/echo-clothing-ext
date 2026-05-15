@@ -2,7 +2,7 @@
 import { PoseMapTool } from "@local/lib/generator";
 import { Layer, Type } from "@local/lib/type";
 import { luziSuffixFixups } from "@local/lib/fixups";
-import { adjustCanvasAlpha, partialDraw } from "./metaDraw";
+import { adjustCanvasAlpha, AdjustedCanvasCacheData, partialDraw, PartialDrawCanvasCacheData } from "./metaDraw";
 import { ImageMapTools, Tools } from "@mod-utils/Tools";
 
 const mergingClothes = Type.groups([
@@ -141,11 +141,24 @@ function clippingMask(canvas, color) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData>} */
-function afterDraw(data, originalFunction, drawData) {
-    const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink, AlphaMasks, L, Property } = drawData;
+/**
+ * @typedef {AnimationPersistentData & {adjustedCache: AdjustedCanvasCacheData, partialCache: PartialDrawCanvasCacheData}} PersistentDataType
+ */
+
+/** @type {ExtendedItemScriptHookCallbacks.AfterDraw<ModularItemData, PersistentDataType>} */
+function afterDraw(mData, originalFunction, drawData) {
+    const { C, A, X, Y, Color, drawCanvas, drawCanvasBlink, AlphaMasks, L, Property, PersistentData } = drawData;
+    const data = PersistentData();
+    data.adjustedCache ??= new AdjustedCanvasCacheData();
+    data.partialCache ??= new PartialDrawCanvasCacheData();
+
     const layerDef = bodyLayerNames.get(L);
     if (layerDef && isBodyLayer(L)) {
+        const partialDrawCacheKey = `Luzi_PartialDraw_${L}`;
+        const partialCache = data.partialCache.get(partialDrawCacheKey);
+        const adjustedDrawCacheKey = `Luzi_AdjustedDraw_${L}`;
+        const adjustedCache = data.adjustedCache.get(adjustedDrawCacheKey);
+
         const pChara = { ...C, DrawAppearance: C.DrawAppearance.filter((a) => a.Asset.Name !== A.Name) };
         const groups = (layerDef.PGroups || [])
             .map((g) => C.Appearance.find((a) => a.Asset.Group.Name === g))
@@ -155,9 +168,9 @@ function afterDraw(data, originalFunction, drawData) {
 
         if (groups.length === 0) return;
 
-        const { Canvas, CanvasBlink } = partialDraw(C, A, groups);
-        const adjustedCanvas = adjustCanvasAlpha(C, A, Canvas, 0.5);
-        const adjustedCanvasBlink = adjustCanvasAlpha(C, A, CanvasBlink, 0.5);
+        const { Canvas, CanvasBlink } = partialDraw(C, A, groups, partialCache);
+        const adjustedCanvas = adjustCanvasAlpha(C, A, Canvas, 0.5, adjustedCache);
+        const adjustedCanvasBlink = adjustCanvasAlpha(C, A, CanvasBlink, 0.5, adjustedCache);
 
         if (L === "Body" || L === "FullBody" || L === "FullBody2") {
             const ctx = adjustedCanvas.getContext("2d");
@@ -187,7 +200,10 @@ function afterDraw(data, originalFunction, drawData) {
         drawCanvasBlink(adjustedCanvasBlink, 0, 0, AlphaMasks);
     }
     if (Property.TypeRecord?.le === 1 && L === "发光眼睛") {
-        const { Canvas, CanvasBlink } = partialDraw(C, A, ["Eyes", "右眼_Luzi", "Eyes2", "左眼_Luzi"]);
+        const partialDrawCacheKey = `Luzi_PartialDraw_${L}`;
+        const partialCache = data.partialCache.get(partialDrawCacheKey);
+
+        const { Canvas, CanvasBlink } = partialDraw(C, A, ["Eyes", "右眼_Luzi", "Eyes2", "左眼_Luzi"], partialCache);
 
         clippingMask(Canvas, Color);
         clippingMask(CanvasBlink, Color);
