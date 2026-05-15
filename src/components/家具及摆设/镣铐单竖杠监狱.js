@@ -1,6 +1,7 @@
 import { AssetManager } from "@local/AssetManager";
 import { Tools } from "@mod-utils/Tools";
 import { luziSuffixFixups } from "@local/lib/fixups";
+import { Layer } from "@local/lib/type";
 
 /** @type {RectTuple} */
 const mask = [200, 423, 100, 100];
@@ -28,11 +29,13 @@ const asset = {
             Name: "A_底盘",
             Priority: 3,
             ColorGroup: "金属主体",
+            FixedPosition: true,
         },
         { Name: "A_柱子伸缩", Priority: 5 },
         { Name: "A_阳具", Priority: 22 },
         {
             HasImage: false,
+            AllowColorize: false,
             AllowTypes: { d: [1, 2, 3, 4, 5] },
             Alpha: [
                 {
@@ -41,57 +44,30 @@ const asset = {
                 },
             ],
         },
-        { Name: "A_柱子1", Priority: 6, ColorGroup: "金属主体" },
+        { Name: "A_柱子1", Priority: 6, ColorGroup: "金属主体", FixedPosition: true },
         { Name: "A_柱子2", Priority: 6, ColorGroup: "金属主体" },
         {
             Name: "A_柱子3",
-
             Priority: 6,
             ColorGroup: "金属主体",
         },
 
-        {
-            Name: "上腿杆",
-            ColorGroup: "大腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
-        },
-        {
-            Name: "下腿杆",
-            ColorGroup: "小腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "Hide", Spread: "Spread" },
-        },
-        {
-            Name: "左小腿",
-            ColorGroup: "小腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
-        },
-        {
-            Name: "右小腿",
-            ColorGroup: "小腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
-        },
-        {
-            Name: "左大腿",
-            ColorGroup: "大腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
-        },
-        {
-            Name: "右大腿",
-            ColorGroup: "大腿金属",
-            Priority: 22,
-            ParentGroup: "BodyLower",
-            PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
-        },
+        ...Layer.map(
+            [
+                { Name: "上腿杆", ColorGroup: "大腿金属", PoseMapping: { LegsClosed: "Hide", Spread: "Spread" } },
+                { Name: "下腿杆", ColorGroup: "小腿金属", PoseMapping: { LegsClosed: "Hide", Spread: "Spread" } },
+                { Name: "左小腿", ColorGroup: "小腿金属" },
+                { Name: "右小腿", ColorGroup: "小腿金属" },
+                { Name: "左大腿", ColorGroup: "大腿金属" },
+                { Name: "右大腿", ColorGroup: "大腿金属" },
+            ],
+            (layer) => ({
+                Priority: 22,
+                ParentGroup: "BodyLower",
+                PoseMapping: { LegsClosed: "LegsClosed", Spread: "Spread" },
+                ...layer,
+            })
+        ),
     ],
 };
 
