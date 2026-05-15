@@ -456,6 +456,14 @@ const asset = {
         { Name: "大桃β", AllowTypes: { smtgt: 4 } },
         { Name: "小词", AllowTypes: { smtgt: 5 } },
 
+        // 幽灵之森
+        { Name: "洛洛", AllowTypes: { ylzs: 1 } },
+
+        // Rickyの家
+        { Name: "Ricky", AllowTypes: { ricky: 1 } },
+        { Name: "Enryu", AllowTypes: { ricky: 2 } },
+
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -561,6 +569,8 @@ const typeNameNext = {
     beacon: "Beacon",
     tzw: "兔子窝",
     smtgt: "水果罐头",
+    ylzs: "幽灵之森",
+    ricky: "Rickyの家",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
