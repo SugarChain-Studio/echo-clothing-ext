@@ -430,9 +430,7 @@ const asset = {
         { Name: "暖雪", AllowTypes: { yjxw: 6 } },
         { Name: "赛琳", AllowTypes: { yjxw: 7 } },
         { Name: "云海", AllowTypes: { yjxw: 8 } },
-        { Name: "柚井", AllowTypes: { yjxw: 9 } },
-        { Name: "梅莉娅", AllowTypes: { yjxw: 10 } },
-        { Name: "梦梦2", AllowTypes: { yjxw: 11 } },
+        { Name: "梦梦2", AllowTypes: { yjxw: 9 } },
 
         // 血天使的住所
         { Name: "小粽子", AllowTypes: { xts: 1 } },
@@ -446,8 +444,9 @@ const asset = {
         { Name: "白月", AllowTypes: { beacon: 4 } },
 
         // 兔子窝
-        { Name: "yumi2", AllowTypes: { tzw: 1 } },
+        { Name: "友未", AllowTypes: { tzw: 1 } },
         { Name: "牧雨", AllowTypes: { tzw: 2 } },
+        { Name: "雪月", AllowTypes: { tzw: 3 } },
 
         // 水果罐头
         { Name: "小桃α", AllowTypes: { smtgt: 1 } },
@@ -463,6 +462,17 @@ const asset = {
         { Name: "Ricky", AllowTypes: { ricky: 1 } },
         { Name: "Enryu", AllowTypes: { ricky: 2 } },
 
+        // Data's room
+        { Name: "蒂塔Data", AllowTypes: { data: 1 } },
+        { Name: "darkflow", AllowTypes: { data: 2 } },
+        { Name: "草莓", AllowTypes: { data: 3 } },
+
+        // 倾城家
+        { Name: "倾城", AllowTypes: { qchome: 1 } },
+        { Name: "凤翎", AllowTypes: { qchome: 2 } },
+        { Name: "Loren", AllowTypes: { qchome: 3 } },
+        { Name: "柚井", AllowTypes: { qchome: 4 } },
+        { Name: "梅莉娅", AllowTypes: { qchome: 5 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -525,6 +535,7 @@ const asset = {
         { Name: "小思颖", AllowTypes: { l: 50 } },
         { Name: "薇薇安", AllowTypes: { l: 51 } },
         { Name: "朵朵", AllowTypes: { l: 52 } },
+        { Name: "柳晓", AllowTypes: { l: 53 } },
     ],
 };
 
@@ -571,6 +582,8 @@ const typeNameNext = {
     smtgt: "水果罐头",
     ylzs: "幽灵之森",
     ricky: "Rickyの家",
+    data: "Data's room",
+    qchome: "倾城家",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
