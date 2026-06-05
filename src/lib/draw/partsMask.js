@@ -75,7 +75,7 @@ export class PartsMask {
 
             const poseSegment = ((p) =>
                 /** @type {string[]}*/ ([PoseType.HIDE, PoseType.DEFAULT]).includes(p) ? null : p)(
-                layer.PoseMapping[pose]
+                pose === "" ? "" : layer.PoseMapping[pose]
             );
 
             const shouldColorize = layer.AllowColorize && layerColor && layerColor.startsWith("#");
