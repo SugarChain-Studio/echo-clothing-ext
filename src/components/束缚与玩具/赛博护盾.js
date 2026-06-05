@@ -162,8 +162,8 @@ const asset = [
                 Select护盾: "设置是否遮挡屁股",
                 Options0: "不遮挡",
                 Options1: "遮挡",
-                SetOptions0: "SourceCharacter使DestinationCharacterAssetName不遮挡屁股",
-                SetOptions1: "SourceCharacter使DestinationCharacterAssetName遮挡屁股",
+                Sets0: "SourceCharacter使DestinationCharacterAssetName不遮挡屁股",
+                Sets1: "SourceCharacter使DestinationCharacterAssetName遮挡屁股",
 
                 ModuleIntensity: "按摩强度",
                 SelectIntensity: "设置多模式按摩强度",
@@ -209,8 +209,8 @@ const asset = [
                 Select护盾: "Set whether to cover the butt",
                 Options0: "No Cover",
                 Options1: "Cover",
-                SetOptions0: "SourceCharacter makes DestinationCharacter AssetName not cover the butt",
-                SetOptions1: "SourceCharacter makes DestinationCharacter AssetName cover the butt",
+                Sets0: "SourceCharacter makes DestinationCharacter AssetName not cover the butt",
+                Sets1: "SourceCharacter makes DestinationCharacter AssetName cover the butt",
 
                 ModuleIntensity: "Massager Intensity",
                 SelectIntensity: "Set Multi-Mode Massager Intensity",
