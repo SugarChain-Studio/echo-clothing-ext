@@ -1,4 +1,4 @@
-﻿import { ImageMapTools } from "@mod-utils/Tools";
+﻿import { ImageMapTools, Tools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
 import { ArmMaskTool, PoseMapTool } from "@local/lib/generator";
 import { PostPass } from "@local/lib/pass";
@@ -72,6 +72,18 @@ const assetStrings = {
     },
 };
 
+/**
+ *
+ * @param {CustomGroupName[]} group
+ * @param {AddAssetWithConfigParams[1]} asset
+ * @param {AddAssetWithConfigParams[2]} config
+ * @param {(group: CustomGroupName, asset: AddAssetWithConfigParams[1], config: AddAssetWithConfigParams[2]) => AddAssetWithConfigParams} mapper
+ * @returns {AddAssetWithConfigParams[]}
+ */
+function mapAssetParams(group, asset, config, mapper) {
+    return group.map((g) => mapper(g, asset, config));
+}
+
 /** @type {AddAssetWithConfigParams[]} */
 const assets = [
     [
@@ -139,7 +151,7 @@ const assets = [
             assetStrings,
         },
     ],
-    [
+    ...mapAssetParams(
         ["ClothLower", "Panties"],
         {
             Name: "运动套装bottom",
@@ -167,15 +179,24 @@ const assets = [
             },
             assetStrings,
         },
-    ],
+        (g, asset, config) => [
+            g,
+            {
+                ...asset,
+                ...(g === "ClothLower"
+                    ? Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 90 }])
+                    : Tools.topLeftBuilder({ Top: 370, Left: 130 })),
+            },
+            config,
+        ]
+    ),
     [
         ["ClothLower"],
         {
             Name: "运动套装skirt",
             Random: false,
             Gender: "F",
-            Left: 130,
-            Top: 370,
+            ...Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 90 }]),
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
             DynamicGroupName: "ClothLower",
