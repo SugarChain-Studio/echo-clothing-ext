@@ -184,7 +184,7 @@ const assets = [
             {
                 ...asset,
                 ...(g === "ClothLower"
-                    ? Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 460 }])
+                    ? Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 220 }])
                     : Tools.topLeftBuilder({ Top: 370, Left: 130 })),
             },
             config,
@@ -196,7 +196,7 @@ const assets = [
             Name: "运动套装skirt",
             Random: false,
             Gender: "F",
-            ...Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 460 }]),
+            ...Tools.topLeftBuilder({ Top: 370, Left: 130 }, ["KneelingSpread", { Left: 220 }]),
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
             DynamicGroupName: "ClothLower",
