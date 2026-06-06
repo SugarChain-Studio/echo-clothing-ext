@@ -312,6 +312,7 @@ const asset = {
         { Name: "喵头嘤3", AllowTypes: { nest: 16 } },
         { Name: "Elara", AllowTypes: { nest: 17 } },
         { Name: "碧洛蒂丝2", AllowTypes: { nest: 18 } },
+        { Name: "荀", AllowTypes: { nest: 19 } },
 
         // Foxys Fun Experience
         { Name: "Gab", AllowTypes: { ffe: 1 } },
@@ -461,11 +462,14 @@ const asset = {
         // Rickyの家
         { Name: "Ricky", AllowTypes: { ricky: 1 } },
         { Name: "Enryu", AllowTypes: { ricky: 2 } },
+        { Name: "Medb", AllowTypes: { ricky: 3 } },
+        { Name: "DVA", AllowTypes: { ricky: 4 } },
 
         // Data's room
         { Name: "蒂塔Data", AllowTypes: { data: 1 } },
         { Name: "darkflow", AllowTypes: { data: 2 } },
         { Name: "草莓", AllowTypes: { data: 3 } },
+        { Name: "Muse", AllowTypes: { data: 4 } },
 
         // 倾城家
         { Name: "倾城", AllowTypes: { qchome: 1 } },
