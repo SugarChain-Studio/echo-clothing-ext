@@ -101,6 +101,22 @@ const accessories = [
             translation: { CN: "耷拉兔耳", EN: "Droopy Bunny Ears" },
         },
     ],
+    [
+        {
+            Name: "角8",
+            Random: false,
+            DynamicGroupName: "HairAccessory1",
+            Top: 0,
+            Left: 0,
+            Priority: 51,
+            DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
+            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "B3" }, { Name: "B3" }, { Name: "B3" }],
+        },
+        {
+            translation: { CN: "角8", EN: "角8", RU: "角8" },
+            layerNames: { EN: { A1: "A1", A2: "A2", A3: "A3", B1: "B1", B2: "B2", B3: "B3" } },
+        },
+    ],
 ];
 
 export default function () {
