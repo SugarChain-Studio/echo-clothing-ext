@@ -110,7 +110,7 @@ const accessories = [
             Left: 0,
             Priority: 51,
             DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "B3" }, { Name: "B3" }, { Name: "B3" }],
+            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "B1" }, { Name: "B2" }, { Name: "B3" }],
         },
         {
             translation: { CN: "角8", EN: "角8", RU: "角8" },
