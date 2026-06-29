@@ -114,6 +114,7 @@ const asset = {
         { Name: "小火火", AllowTypes: { hz: 8 } },
         { Name: "梦语诗", AllowTypes: { hz: 9 } },
         { Name: "巧巧", AllowTypes: { hz: 10 } },
+        { Name: "巧巧2", AllowTypes: { hz: 11 } },
 
         // 吸血鬼城堡
         {
@@ -464,12 +465,17 @@ const asset = {
         { Name: "Enryu", AllowTypes: { ricky: 2 } },
         { Name: "Medb", AllowTypes: { ricky: 3 } },
         { Name: "DVA", AllowTypes: { ricky: 4 } },
+        { Name: "Sara", AllowTypes: { ricky: 5 } },
 
         // Data's room
-        { Name: "蒂塔Data", AllowTypes: { data: 1 } },
+        { Name: "蒂塔-谨贺新春", AllowTypes: { data: 1 } },
         { Name: "darkflow", AllowTypes: { data: 2 } },
         { Name: "草莓", AllowTypes: { data: 3 } },
         { Name: "Muse", AllowTypes: { data: 4 } },
+        { Name: "蒂塔", AllowTypes: { data: 5 } },
+        { Name: "落", AllowTypes: { data: 6 } },
+        { Name: "Sahrye", AllowTypes: { data: 7 } },
+        { Name: "蒂塔-花魁", AllowTypes: { data: 8 } },
 
         // 倾城家
         { Name: "倾城", AllowTypes: { qchome: 1 } },
@@ -477,6 +483,12 @@ const asset = {
         { Name: "Loren", AllowTypes: { qchome: 3 } },
         { Name: "柚井", AllowTypes: { qchome: 4 } },
         { Name: "梅莉娅", AllowTypes: { qchome: 5 } },
+
+        // hati家
+        { Name: "琵琵娅𝓟𝓲𝓹𝓲𝓪", AllowTypes: { hati: 1 } },
+        { Name: "卡茨娅𝓒𝓪𝓽𝔃𝓲𝓪", AllowTypes: { hati: 2 } },
+        { Name: "艾莉娅𝓐𝓮𝓵𝓲𝓪", AllowTypes: { hati: 3 } },
+        { Name: "𝓗𝓪𝓽𝓲", AllowTypes: { hati: 4 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -540,6 +552,8 @@ const asset = {
         { Name: "薇薇安", AllowTypes: { l: 51 } },
         { Name: "朵朵", AllowTypes: { l: 52 } },
         { Name: "柳晓", AllowTypes: { l: 53 } },
+        { Name: "妄羽", AllowTypes: { l: 54 } },
+        { Name: "羽和柚", AllowTypes: { l: 55 } },
     ],
 };
 
@@ -588,6 +602,7 @@ const typeNameNext = {
     ricky: "Rickyの家",
     data: "Data's room",
     qchome: "倾城家",
+    hati: "hati家",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
