@@ -489,6 +489,15 @@ const asset = {
         { Name: "卡茨娅𝓒𝓪𝓽𝔃𝓲𝓪", AllowTypes: { hati: 2 } },
         { Name: "艾莉娅𝓐𝓮𝓵𝓲𝓪", AllowTypes: { hati: 3 } },
         { Name: "𝓗𝓪𝓽𝓲", AllowTypes: { hati: 4 } },
+        { Name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮", AllowTypes: { hati: 5 } },
+        { Name: "九不扶", AllowTypes: { hati: 6 } },
+
+        // 七七家
+        { Name: "七分白衣", AllowTypes: { qq: 1 } },
+        { Name: "Hanna", AllowTypes: { qq: 2 } },
+        { Name: "樱", AllowTypes: { qq: 3 } },
+        { Name: "Penny", AllowTypes: { qq: 4 } },
+        { Name: "樱和七分白衣", AllowTypes: { qq: 5 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -545,15 +554,13 @@ const asset = {
         { Name: "薇薇", AllowTypes: { l: 44 } },
         { Name: "CC1", AllowTypes: { l: 45 } },
         { Name: "CC2", AllowTypes: { l: 46 } },
-        { Name: "Hanna", AllowTypes: { l: 47 } },
-        { Name: "七分白衣", AllowTypes: { l: 48 } },
-        { Name: "花怜", AllowTypes: { l: 49 } },
-        { Name: "小思颖", AllowTypes: { l: 50 } },
-        { Name: "薇薇安", AllowTypes: { l: 51 } },
-        { Name: "朵朵", AllowTypes: { l: 52 } },
-        { Name: "柳晓", AllowTypes: { l: 53 } },
-        { Name: "妄羽", AllowTypes: { l: 54 } },
-        { Name: "羽和柚", AllowTypes: { l: 55 } },
+        { Name: "花怜", AllowTypes: { l: 47 } },
+        { Name: "小思颖", AllowTypes: { l: 48 } },
+        { Name: "薇薇安", AllowTypes: { l: 49 } },
+        { Name: "朵朵", AllowTypes: { l: 50 } },
+        { Name: "柳晓", AllowTypes: { l: 51 } },
+        { Name: "妄羽", AllowTypes: { l: 52 } },
+        { Name: "羽和柚", AllowTypes: { l: 53 } },
     ],
 };
 
@@ -603,6 +610,7 @@ const typeNameNext = {
     data: "Data's room",
     qchome: "倾城家",
     hati: "hati家",
+    qq: "七七家",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
