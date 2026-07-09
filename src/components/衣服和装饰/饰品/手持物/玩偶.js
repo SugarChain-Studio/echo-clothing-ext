@@ -483,6 +483,12 @@ const asset = {
         { Name: "Loren", AllowTypes: { qchome: 3 } },
         { Name: "柚井", AllowTypes: { qchome: 4 } },
         { Name: "梅莉娅", AllowTypes: { qchome: 5 } },
+        { Name: "羽和柚", AllowTypes: { qchome: 6 } },
+        { Name: "羽(水)", AllowTypes: { qchome: 7 } },
+        { Name: "柚(水)", AllowTypes: { qchome: 8 } },
+        { Name: "kit", AllowTypes: { qchome: 9 } },
+        { Name: "kit(小浣熊)", AllowTypes: { qchome: 10 } },
+        { Name: "kit(狐仙)", AllowTypes: { qchome: 11 } },
 
         // hati家
         { Name: "琵琵娅𝓟𝓲𝓹𝓲𝓪", AllowTypes: { hati: 1 } },
@@ -560,8 +566,7 @@ const asset = {
         { Name: "朵朵", AllowTypes: { l: 50 } },
         { Name: "柳晓", AllowTypes: { l: 51 } },
         { Name: "妄羽", AllowTypes: { l: 52 } },
-        { Name: "羽和柚", AllowTypes: { l: 53 } },
-        { Name: "Yormi", AllowTypes: { l: 54 } },
+        { Name: "Yormi", AllowTypes: { l: 53 } },
     ],
 };
 
@@ -707,7 +712,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     Access.set(pv, Key, Math.max(Access.getOr(pv, Key, 0), Access.getOr(cv.AllowTypes, Key, 0)));
     return pv;
-}, /** @type { Record<string, Number> } */ ({}));
+}, /** @type { Record<string, Number> } */({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -730,7 +735,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     const idx = Access.getOr(cv.AllowTypes, k, 0);
     pv[k][idx] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -770,7 +775,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */ ({}));
+}, /** @type { Record<string,string> } */({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
