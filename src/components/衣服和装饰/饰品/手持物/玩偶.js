@@ -484,11 +484,6 @@ const asset = {
         { Name: "柚井", AllowTypes: { qchome: 4 } },
         { Name: "梅莉娅", AllowTypes: { qchome: 5 } },
         { Name: "羽和柚", AllowTypes: { qchome: 6 } },
-        { Name: "羽(水)", AllowTypes: { qchome: 7 } },
-        { Name: "柚(水)", AllowTypes: { qchome: 8 } },
-        { Name: "kit", AllowTypes: { qchome: 9 } },
-        { Name: "kit(小浣熊)", AllowTypes: { qchome: 10 } },
-        { Name: "kit(狐仙)", AllowTypes: { qchome: 11 } },
 
         // hati家
         { Name: "琵琵娅𝓟𝓲𝓹𝓲𝓪", AllowTypes: { hati: 1 } },
@@ -504,6 +499,14 @@ const asset = {
         { Name: "樱", AllowTypes: { qq: 3 } },
         { Name: "Penny", AllowTypes: { qq: 4 } },
         { Name: "樱和七分白衣", AllowTypes: { qq: 5 } },
+
+        // 观察者之庭
+        { Name: "妄羽", AllowTypes: { gcz: 1 } },
+        { Name: "羽(水)", AllowTypes: { gcz: 2 } },
+        { Name: "柚(水)", AllowTypes: { gcz: 3 } },
+        { Name: "kit", AllowTypes: { gcz: 4 } },
+        { Name: "kit(小浣熊)", AllowTypes: { gcz: 5 } },
+        { Name: "kit(狐仙)", AllowTypes: { gcz: 6 } },
 
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
@@ -565,8 +568,7 @@ const asset = {
         { Name: "薇薇安", AllowTypes: { l: 49 } },
         { Name: "朵朵", AllowTypes: { l: 50 } },
         { Name: "柳晓", AllowTypes: { l: 51 } },
-        { Name: "妄羽", AllowTypes: { l: 52 } },
-        { Name: "Yormi", AllowTypes: { l: 53 } },
+        { Name: "Yormi", AllowTypes: { l: 52 } },
     ],
 };
 
@@ -617,6 +619,7 @@ const typeNameNext = {
     qchome: "倾城家",
     hati: "hati家",
     qq: "七七家",
+    gcz: "观察者之庭",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
