@@ -433,6 +433,7 @@ const asset = {
         { Name: "赛琳", AllowTypes: { yjxw: 7 } },
         { Name: "云海", AllowTypes: { yjxw: 8 } },
         { Name: "梦梦2", AllowTypes: { yjxw: 9 } },
+        { Name: "米莉", AllowTypes: { yjxw: 10 } },
 
         // 血天使的住所
         { Name: "小粽子", AllowTypes: { xts: 1 } },
