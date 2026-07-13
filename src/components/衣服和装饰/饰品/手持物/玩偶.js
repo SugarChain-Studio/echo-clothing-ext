@@ -509,6 +509,18 @@ const asset = {
         { Name: "kit(小浣熊)", AllowTypes: { gcz: 5 } },
         { Name: "kit(狐仙)", AllowTypes: { gcz: 6 } },
 
+        // Quiet Room
+        { Name: "Yormi", AllowTypes: { qr: 1 } },
+        { Name: "Erica_QR", AllowTypes: { qr: 2 } },
+        { Name: "Eva_QR", AllowTypes: { qr: 3 } },
+        { Name: "Remie", AllowTypes: { qr: 4 } },
+        { Name: "Sara_QR", AllowTypes: { qr: 5 } },
+        { Name: "Saskia", AllowTypes: { qr: 6 } },
+        { Name: "Shiru", AllowTypes: { qr: 7 } },
+        { Name: "Sianna", AllowTypes: { qr: 8 } },
+        { Name: "Vemb", AllowTypes: { qr: 9 } },
+        { Name: "Volka", AllowTypes: { qr: 10 } },
+
         // 路过的玩偶
         { Name: "li", AllowTypes: { l: 1 } },
         { Name: "YouXiang", AllowTypes: { l: 2 } },
@@ -569,7 +581,8 @@ const asset = {
         { Name: "薇薇安", AllowTypes: { l: 49 } },
         { Name: "朵朵", AllowTypes: { l: 50 } },
         { Name: "柳晓", AllowTypes: { l: 51 } },
-        { Name: "Yormi", AllowTypes: { l: 52 } },
+        { Name: "妄羽", AllowTypes: { l: 52 } },
+        { Name: "羽和柚", AllowTypes: { l: 53 } },
     ],
 };
 
@@ -621,6 +634,7 @@ const typeNameNext = {
     hati: "hati家",
     qq: "七七家",
     gcz: "观察者之庭",
+    qr: "Quiet Room",
     l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
 };
 
@@ -716,7 +730,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     Access.set(pv, Key, Math.max(Access.getOr(pv, Key, 0), Access.getOr(cv.AllowTypes, Key, 0)));
     return pv;
-}, /** @type { Record<string, Number> } */({}));
+}, /** @type { Record<string, Number> } */ ({}));
 
 // 生成模块定义
 /** @type {ModularItemModuleConfig []} */
@@ -739,7 +753,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     const idx = Access.getOr(cv.AllowTypes, k, 0);
     pv[k][idx] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 
 modules.forEach((m) => {
     m.DrawData = {
@@ -779,7 +793,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
