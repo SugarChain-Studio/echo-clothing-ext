@@ -16,7 +16,757 @@ const specialMapping = {
     TapedHands: "TapedHands",
 };
 
-/** @type {CustomAssetDefinition} */
+/**
+ * @typedef {Object} PlushieRoomConfig
+ * @property {string} abbr 房间缩写（用作 module Key）
+ * @property {Translation.Entry | string} [name] 房间名称（同时作为短名称和全名称）
+ * @property {Translation.Entry | string} [shortName] 短名称，不设置则使用 name
+ * @property {Translation.Entry | string} [fullName] 全名称，不设置则使用 name
+ */
+
+/**
+ * @typedef {Object} PlushieItemConfig
+ * @property {string} name 显示名称（菜单里显示的名字）
+ * @property {string} roomAbbr 当前所在房间缩写
+ * @property {string[]} [oldRoomAbbr] 玩偶曾经所在的房间缩写，用于保持 AllowTypes 占位兼容（不注册到菜单）
+ * @property {boolean} [removed] 已移除的玩偶，保留 AllowTypes 占位但不出现在菜单中
+ * @property {string} [fileName] 文件名，默认为 name。如果与 name 不同，则 asset 路径用 fileName，菜单仍显示 name
+ * @property {AssetPoseMapping} [poseMapping] 物品姿势映射，不设置则使用默认映射
+ * @property {Translation.Entry | string} [customSetMessage] 自定义设置消息，覆盖自动生成的消息。为 string 时视为 CN，为 Translation.Entry 时按语言设置
+ */
+
+/**
+ * 房间定义
+ * @type {PlushieRoomConfig[]}
+ */
+const plushieRooms = [
+    {
+        abbr: "d",
+        shortName: { CN: "玩具店", EN: "Night at Saotome" },
+        fullName: { CN: "早乙女的玩具店", EN: "Night at Saotome" },
+    },
+    { abbr: "s", name: "狼窝" },
+    { abbr: "z", name: { CN: "芷窝", EN: "Mie" } },
+    { abbr: "c", name: "Catnest" },
+    { abbr: "f", name: { CN: "猫州猫庭府", EN: "Nekopara" } },
+    { abbr: "y", name: { CN: "小夜家", EN: "Home of Saya" } },
+    { abbr: "hz", name: { CN: "盒子的小黑屋", EN: "xiaoheiwu" } },
+    { abbr: "x", name: { CN: "吸血鬼城堡", EN: "Vampire Castle" } },
+    { abbr: "lihua", name: { CN: "笠花和An'an的家", EN: "Kasaki's room" } },
+    { abbr: "yb", name: "鸢堡" },
+    { abbr: "EILRSW", name: "EILRSW" },
+    { abbr: "yytc", name: { CN: "伊友", EN: "Friends of Yi" } },
+    { abbr: "xppjb", name: { CN: "香喷喷酒吧", EN: "xiangpenpen" } },
+    { abbr: "ffe", shortName: "FFE", fullName: "Foxys Fun Experience" },
+    { abbr: "lilian", name: { CN: "Lilian的大杂烩", EN: "Lilian Home" } },
+    { abbr: "lkls", name: { CN: "莉柯莉絲家與她的朋友", EN: "Licolis" } },
+    { abbr: "ce", name: "Celestial Enchants" },
+    { abbr: "ds", name: "Den of Sin" },
+    { abbr: "ll", name: "Latex Lab" },
+    { abbr: "hb", name: "月见里的海边" },
+    { abbr: "cai", name: "柴坊" },
+    { abbr: "nest", name: "Nest" },
+    { abbr: "pen", name: "1563" },
+    { abbr: "yyw", name: "鸭鸭窝" },
+    { abbr: "gggg", name: "Gugugaga" },
+    { abbr: "yyx", name: "羊羊星" },
+    { abbr: "hhdmj", name: "胡话的梦境" },
+    { abbr: "qqcy", name: "青青草原~" },
+    { abbr: "wd", name: "玩偶店" },
+    { abbr: "fdj", name: "岚の家" },
+    { abbr: "qt", name: "Ayako的Qt大家族" },
+    { abbr: "yes", name: "Yes" },
+    { abbr: "xjl", name: "小角落" },
+    { abbr: "yjxw", name: "妖精小屋" },
+    { abbr: "xts", name: "血天使的住所" },
+    { abbr: "beacon", name: "Beacon" },
+    { abbr: "tzw", name: "兔子窝" },
+    { abbr: "smtgt", name: "水果罐头" },
+    { abbr: "ylzs", name: "幽灵之森" },
+    { abbr: "ricky", name: "Rickyの家" },
+    { abbr: "data", name: "Data's room" },
+    { abbr: "qchome", name: "倾城家" },
+    { abbr: "hati", name: "hati家" },
+    { abbr: "qq", name: "七七家" },
+    { abbr: "gcz", name: "观察者之庭" },
+    { abbr: "qr", name: "Quiet Room" },
+    { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
+];
+
+/**
+ * 玩偶物品定义
+ * 编辑要点：
+ * 1. 如果玩偶的显示名称和文件名不同，在 `fileName` 中指定文件名。
+ * 2. 添加玩偶尽量在对应房间的区域尾部添加，以保持房间内玩偶的顺序一致。
+ * 2. 不要删除和挪动任何一行！如果要把一个玩偶移动到其他房间，需要在对应的 `roomAbbr` 中修改房间缩写。
+ * 3. 如果把一个玩偶挪出了任何房间，把原来的 `roomAbbr` 加入它的 `oldRoomAbbr` 中！
+ * 4. 如果要移除一个玩偶，不要删除它！设置 `removed` 为 `true`。
+ * 5. 实在没办法删除了挪走了其实问题也不大，就是别人已经制作的玩偶可能会乱套（例如 l:21 被替换成了另一个玩偶，制作物品就乱了）
+ *
+ * @type {PlushieItemConfig[]}
+ */
+const plushieItems = [
+    // 玩具店
+    { name: "Saki", roomAbbr: "d" },
+    { name: "Luzi", roomAbbr: "d", customSetMessage: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶." },
+    { name: "若若", roomAbbr: "d" },
+    { name: "Lamia", roomAbbr: "d" },
+
+    // 狼窝
+    { name: "Xin", roomAbbr: "s" },
+    { name: "吉娜", roomAbbr: "s" },
+    { name: "Ada", roomAbbr: "s" },
+    { name: "Luzi2", roomAbbr: "s", customSetMessage: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶." },
+    { name: "xin2", roomAbbr: "s", poseMapping: specialMapping },
+
+    // 芷窝
+    { name: "芷童", roomAbbr: "z", poseMapping: specialMapping },
+    { name: "Gin", roomAbbr: "z" },
+    { name: "Echo", roomAbbr: "z" },
+    { name: "ᐛ", roomAbbr: "z" },
+    { name: "ᐖ", roomAbbr: "z" },
+    { name: "芙缇娅", roomAbbr: "z" },
+    { name: "芷小童", roomAbbr: "z" },
+    { name: "临", roomAbbr: "z" },
+    { name: "小安", roomAbbr: "z" },
+    { name: "Suki", roomAbbr: "z" },
+    { name: "haru", roomAbbr: "z" },
+    { name: "兔叽", roomAbbr: "z" },
+    { name: "Lux", roomAbbr: "z" },
+
+    // Catnest
+    { name: "XinLian", roomAbbr: "c" },
+    { name: "Zheiyun", roomAbbr: "c" },
+    {
+        name: "Cyäegha",
+        roomAbbr: "c",
+        customSetMessage: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
+    },
+    {
+        name: "PumpkinPie",
+        roomAbbr: "c",
+        customSetMessage: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
+    },
+    { name: "Caius", roomAbbr: "c" },
+    { name: "Neko", roomAbbr: "c" },
+    { name: "居x", roomAbbr: "c" },
+    { name: "vaner", roomAbbr: "c" },
+
+    // 猫州猫庭府玩偶
+    { name: "Axa", roomAbbr: "f", customSetMessage: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶." },
+    { name: "Shirayuki", roomAbbr: "f" },
+    { name: "Nail", roomAbbr: "f" },
+    { name: "Nekonya蓝", roomAbbr: "f" },
+    { name: "小果", roomAbbr: "f" },
+    {
+        name: "埃菲尔徳",
+        roomAbbr: "f",
+        customSetMessage: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
+    },
+    { name: "小寒", roomAbbr: "f" },
+    { name: "沐猫", roomAbbr: "f" },
+
+    // 小夜家玩偶
+    { name: "向归夜", roomAbbr: "y" },
+    { name: "圣光光", roomAbbr: "y" },
+    { name: "娜娜", roomAbbr: "y" },
+    { name: "彤酱", roomAbbr: "y" },
+    { name: "璃心", roomAbbr: "y" },
+    { name: "雫", roomAbbr: "y" },
+    { name: "小狼", roomAbbr: "y" },
+    { name: "小果", roomAbbr: "y" },
+    { name: "时光光", roomAbbr: "y" },
+    { name: "xxxx", roomAbbr: "y" },
+    { name: "果子狸", roomAbbr: "y" },
+    { name: "雪瑗", roomAbbr: "y" },
+    { name: "xiu狸子", roomAbbr: "y" },
+    { name: "布菈", roomAbbr: "y" },
+    { name: "菲露娅", roomAbbr: "y" },
+    { name: "绫", roomAbbr: "y" },
+
+    // 盒子的小黑屋
+    { name: "葡萄果汁盒", roomAbbr: "hz" },
+    { name: "时雨Tokiame", roomAbbr: "hz" },
+    { name: "殇梦溪", roomAbbr: "hz" },
+    { name: "Neko", roomAbbr: "hz", fileName: "Neko2" },
+    { name: "mizuki池", roomAbbr: "hz" },
+    { name: "莉娅", roomAbbr: "hz" },
+    { name: "艾尔", roomAbbr: "hz" },
+    { name: "小火火", roomAbbr: "hz" },
+    { name: "梦语诗", roomAbbr: "hz" },
+    { name: "巧巧", roomAbbr: "hz" },
+    { name: "巧巧2", roomAbbr: "hz" },
+
+    // 吸血鬼城堡
+    {
+        name: "岚岚",
+        roomAbbr: "x",
+        poseMapping: specialMapping,
+        customSetMessage:
+            "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
+    },
+    { name: "欧佩娜", roomAbbr: "x" },
+    { name: "艾欧娜", roomAbbr: "x" },
+    { name: "柚子", roomAbbr: "x" },
+    { name: "梨子", roomAbbr: "x" },
+    { name: "Lyndis琳", roomAbbr: "x" },
+    { name: "黛烟", roomAbbr: "x" },
+    { name: "Liriel", roomAbbr: "x" },
+    { name: "瑟莉亚", roomAbbr: "x" },
+
+    // 笠花和An'an的家
+    { name: "笠花", roomAbbr: "lihua" },
+    { name: "An'an", roomAbbr: "lihua", fileName: "Anan" },
+    { name: "雨笠银花", roomAbbr: "lihua" },
+    { name: "dudu", roomAbbr: "lihua" },
+    { name: "卜卜", roomAbbr: "lihua" },
+    { name: "秋巧", roomAbbr: "lihua" },
+
+    // 鸢堡
+    { name: "鸢", roomAbbr: "yb" },
+    { name: "梓析", roomAbbr: "yb" },
+    { name: "梓䒩", roomAbbr: "yb" },
+    { name: "梓姌", roomAbbr: "yb" },
+    { name: "梓璇", roomAbbr: "yb" },
+    { name: "梓爱", roomAbbr: "yb" },
+    { name: "呐呐梓", roomAbbr: "yb" },
+    { name: "梓咪", roomAbbr: "yb" },
+    { name: "馅饼梓", roomAbbr: "yb" },
+    { name: "梓棂", roomAbbr: "yb" },
+    { name: "ZforShort", roomAbbr: "yb" },
+    { name: "小a", roomAbbr: "yb" },
+    { name: "透透子", roomAbbr: "yb" },
+    { name: "luobo", roomAbbr: "yb" },
+    { name: "岚宝", roomAbbr: "yb" },
+
+    // EILRSW
+    { name: "Pasimia", roomAbbr: "EILRSW" },
+    { name: "Alasade", roomAbbr: "EILRSW" },
+    { name: "Lyudmila", roomAbbr: "EILRSW" },
+    { name: "Emeia", roomAbbr: "EILRSW" },
+    { name: "希雅", roomAbbr: "EILRSW" },
+    { name: "酥酥", roomAbbr: "EILRSW" },
+    { name: "茗子", roomAbbr: "EILRSW" },
+    { name: "Kemera", roomAbbr: "EILRSW" },
+    { name: "viimi", roomAbbr: "EILRSW" },
+
+    // 伊友玩偶
+    { name: "伊斯特", roomAbbr: "yytc" },
+    { name: "Pekora-Kino", roomAbbr: "yytc" },
+    { name: "幽灵", roomAbbr: "yytc" },
+    { name: "希尔薇娅", roomAbbr: "yytc" },
+    { name: "小沫", roomAbbr: "yytc" },
+    { name: "Sive", roomAbbr: "yytc" },
+    { name: "40", roomAbbr: "yytc" },
+    { name: "焦糖", roomAbbr: "yytc" },
+    { name: "早紀", roomAbbr: "yytc" },
+    { name: "rin", roomAbbr: "yytc" },
+    { name: "w", roomAbbr: "yytc" },
+    { name: "OwQ", roomAbbr: "yytc" },
+    { name: "绛翎", roomAbbr: "yytc" },
+    { name: "玖儿", roomAbbr: "yytc" },
+    { name: "白澜諪", roomAbbr: "yytc" },
+
+    // 香喷喷酒吧
+    {
+        name: "依伊可",
+        roomAbbr: "xppjb",
+        customSetMessage:
+            "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
+    },
+    { name: "yumi", roomAbbr: "xppjb" },
+    { name: "白墨鴝", roomAbbr: "xppjb" },
+    { name: "忧绪", roomAbbr: "xppjb" },
+    { name: "五十提", roomAbbr: "xppjb" },
+    { name: "狸nux", roomAbbr: "xppjb" },
+    {
+        name: "依",
+        roomAbbr: "xppjb",
+        customSetMessage:
+            "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依!",
+    },
+    { name: "珥九", roomAbbr: "xppjb" },
+    { name: "暴狸龙", roomAbbr: "xppjb" },
+    { name: "Fu狸", roomAbbr: "xppjb" },
+    {
+        name: "依依",
+        roomAbbr: "xppjb",
+        customSetMessage: "天空一声巨响! 依依玩偶闪亮登场! 缓缓落在了DestinationCharacter怀里.",
+    },
+    { name: "wallyilma2", roomAbbr: "xppjb" },
+    { name: "Shadow γ", roomAbbr: "xppjb", fileName: "Shadow" },
+
+    // 失乐园 sly (已移除)
+    // { name: "Reisigure", roomAbbr: "sly", removed: true },
+    // { name: "Atlantis", roomAbbr: "sly", removed: true },
+    // { name: "澈羽枫灵", roomAbbr: "sly", removed: true, poseMapping: specialMapping },
+    // { name: "ReiSigureA", roomAbbr: "sly", removed: true },
+    // { name: "ReiSigureAE", roomAbbr: "sly", removed: true },
+    // { name: "ReiSigureEX", roomAbbr: "sly", removed: true },
+
+    // Lilian的大杂烩
+    { name: "Lilian", roomAbbr: "lilian" },
+    { name: "幽", roomAbbr: "lilian", poseMapping: specialMapping },
+    { name: "墨璃", roomAbbr: "lilian" },
+    { name: "Linnn", roomAbbr: "lilian" },
+    { name: "天使Linnn", roomAbbr: "lilian" },
+    { name: "兔战Linnn", roomAbbr: "lilian" },
+    { name: "Nagi", roomAbbr: "lilian" },
+
+    // 莉柯莉絲家與她的朋友
+    { name: "莉柯莉絲1", roomAbbr: "lkls" },
+    { name: "莉柯莉絲2", roomAbbr: "lkls" },
+    { name: "六月", roomAbbr: "lkls" },
+    { name: "晓璃", roomAbbr: "lkls" },
+    { name: "約爾", roomAbbr: "lkls" },
+    { name: "mai", roomAbbr: "lkls" },
+    { name: "kiseki", roomAbbr: "lkls" },
+    { name: "madoka", roomAbbr: "lkls" },
+    { name: "mamotta", roomAbbr: "lkls" },
+    { name: "sunny", roomAbbr: "lkls" },
+    { name: "marina", roomAbbr: "lkls" },
+    { name: "橙汁", roomAbbr: "lkls" },
+    { name: "Cynthiaa", roomAbbr: "lkls" },
+    { name: "MIZU", roomAbbr: "lkls" },
+    { name: "暖海", roomAbbr: "lkls" },
+    { name: "Lucy", roomAbbr: "lkls" },
+    { name: "小竹", roomAbbr: "lkls" },
+    { name: "小羽", roomAbbr: "lkls" },
+    { name: "紉唯", roomAbbr: "lkls" },
+    { name: "Hime", roomAbbr: "lkls" },
+    { name: "PENGPENG", roomAbbr: "lkls" },
+    { name: "櫻奈", roomAbbr: "lkls" },
+    { name: "贝斯蒂", roomAbbr: "lkls" },
+    { name: "euna", roomAbbr: "lkls" },
+    { name: "艾梅莉", roomAbbr: "lkls" },
+    { name: "TINA", roomAbbr: "lkls" },
+    { name: "Haruka", roomAbbr: "lkls" },
+    { name: "Ayman", roomAbbr: "lkls" },
+    { name: "歪歪", roomAbbr: "lkls" },
+    { name: "凌雨", roomAbbr: "lkls" },
+    { name: "小风", roomAbbr: "lkls" },
+
+    // Celestial Enchants
+    { name: "Celiko", roomAbbr: "ce" },
+    { name: "Lavender", roomAbbr: "ce" },
+    { name: "Siscuit", roomAbbr: "ce" },
+    { name: "Sabie", roomAbbr: "ce" },
+
+    // Den of Sin
+    { name: "Sin", roomAbbr: "ds" },
+    { name: "Cassandra Lee", roomAbbr: "ds" },
+    { name: "Gangriel", roomAbbr: "ds" },
+    { name: "Roslin", roomAbbr: "ds" },
+    { name: "Rika", roomAbbr: "ds" },
+
+    // Latex Lab
+    { name: "XDress", roomAbbr: "ll" },
+    { name: "Khloe", roomAbbr: "ll" },
+    { name: "Aeri", roomAbbr: "ll" },
+    { name: "Lillian", roomAbbr: "ll" },
+    { name: "Minerva", roomAbbr: "ll" },
+    { name: "delta", roomAbbr: "ll" },
+    { name: "Nabi", roomAbbr: "ll" },
+
+    // 月见里的海边
+    { name: "蝶灵忧凪", roomAbbr: "hb" },
+    { name: "蛇灵忧凪", roomAbbr: "hb" },
+    { name: "忧咲", roomAbbr: "hb" },
+    { name: "红熙", roomAbbr: "hb" },
+
+    // 自恋柴的衣橱
+    { name: "柴", roomAbbr: "cai", fileName: "柴柴1" },
+    { name: "柴²", roomAbbr: "cai", fileName: "柴柴2" },
+    { name: "柴³", roomAbbr: "cai", fileName: "柴柴3" },
+    { name: "柴⁴", roomAbbr: "cai", fileName: "柴柴4" },
+    { name: "柴⁵", roomAbbr: "cai", fileName: "柴柴5" },
+    { name: "柴⁶", roomAbbr: "cai", fileName: "柴柴6" },
+    { name: "柴⁷", roomAbbr: "cai", fileName: "柴柴7" },
+
+    // nest
+    { name: "Dango", roomAbbr: "nest" },
+    { name: "狼狼虫", roomAbbr: "nest" },
+    { name: "喵头嘤", roomAbbr: "nest" },
+    { name: "喵头嘤2", roomAbbr: "nest" },
+    { name: "lunara", roomAbbr: "nest" },
+    { name: "Kitty", roomAbbr: "nest" },
+    { name: "柴柴", roomAbbr: "nest" },
+    { name: "辛西婭2", roomAbbr: "nest" },
+    { name: "優米", roomAbbr: "nest" },
+    { name: "Lana", roomAbbr: "nest" },
+    { name: "枳", roomAbbr: "nest" },
+    { name: "Arco", roomAbbr: "nest" },
+    { name: "Rinko", roomAbbr: "nest" },
+    {
+        name: "姜海琳3",
+        roomAbbr: "nest",
+        customSetMessage:
+            "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
+    },
+    { name: "碧洛蒂丝", roomAbbr: "nest" },
+    { name: "喵头嘤3", roomAbbr: "nest" },
+    { name: "Elara", roomAbbr: "nest" },
+    { name: "碧洛蒂丝2", roomAbbr: "nest" },
+    { name: "荀", roomAbbr: "nest" },
+
+    // Foxys Fun Experience
+    { name: "Gab", roomAbbr: "ffe" },
+    { name: "Seb", roomAbbr: "ffe" },
+    { name: "Ryoko", roomAbbr: "ffe" },
+
+    // 1563
+    { name: "月月", roomAbbr: "pen" },
+    { name: "晓雾", roomAbbr: "pen" },
+    { name: "Penelope", roomAbbr: "pen" },
+    { name: "Noel", roomAbbr: "pen" },
+    { name: "叶子", roomAbbr: "pen" },
+
+    // 鸭鸭窝
+    { name: "Sunny2", roomAbbr: "yyw" },
+    { name: "月诺诺", roomAbbr: "yyw" },
+
+    // Gugugaga
+    { name: "白木", roomAbbr: "gggg" },
+    { name: "KocO", roomAbbr: "gggg" },
+    { name: "N", roomAbbr: "gggg" },
+
+    // 羊羊星
+    { name: "UMI", roomAbbr: "yyx" },
+    { name: "姜海琳", roomAbbr: "yyx" },
+    { name: "姜海琳1", roomAbbr: "yyx" },
+    { name: "姜海琳2", roomAbbr: "yyx" },
+    { name: "辛西婭1", roomAbbr: "yyx" },
+    { name: "辛西婭3", roomAbbr: "yyx" },
+    { name: "UM", roomAbbr: "yyx" },
+    {
+        name: "乳胶犬鹤子",
+        roomAbbr: "yyx",
+        customSetMessage: "SourceCharacter给了DestinationCharacter一个可怜巴巴的乳胶犬鹤子.",
+    },
+    { name: "鹤子", roomAbbr: "yyx" },
+    { name: "狄亚", roomAbbr: "yyx" },
+
+    // 胡话的梦境
+    { name: "腐化1", roomAbbr: "hhdmj" },
+    { name: "腐化2", roomAbbr: "hhdmj" },
+    { name: "北玄", roomAbbr: "hhdmj" },
+    { name: "梓筠", roomAbbr: "hhdmj" },
+    { name: "可可", roomAbbr: "hhdmj" },
+    { name: "梦梦", roomAbbr: "hhdmj" },
+    { name: "羽娅", roomAbbr: "hhdmj" },
+    { name: "玖玖", roomAbbr: "hhdmj" },
+    { name: "惟忆", roomAbbr: "hhdmj" },
+    { name: "晴雪", roomAbbr: "hhdmj" },
+
+    // 青青草原
+    { name: "太上皇小灰灰", roomAbbr: "qqcy" },
+    { name: "乖巧小灰灰", roomAbbr: "qqcy" },
+    { name: "月~", roomAbbr: "qqcy" },
+    { name: "梦~", roomAbbr: "qqcy" },
+    { name: "狼~", roomAbbr: "qqcy" },
+    { name: "鱼~", roomAbbr: "qqcy" },
+    { name: "火龙果", roomAbbr: "qqcy" },
+    { name: "狐狸~", roomAbbr: "qqcy" },
+    { name: "莉柯姐姐~", roomAbbr: "qqcy" },
+    { name: "小羽姐姐~", roomAbbr: "qqcy" },
+    { name: "老大姐姐~", roomAbbr: "qqcy" },
+    { name: "梦梦~", roomAbbr: "qqcy" },
+    { name: "狼崽", roomAbbr: "qqcy" },
+    { name: "乔", roomAbbr: "qqcy" },
+
+    // 玩偶店
+    { name: "希尔薇娅", roomAbbr: "wd" },
+    { name: "希尔薇娅2", roomAbbr: "wd" },
+    { name: "爱丽丝梦游仙境", roomAbbr: "wd" },
+    { name: "安", roomAbbr: "wd" },
+    { name: "麟", roomAbbr: "wd" },
+    { name: "羽猫", roomAbbr: "wd" },
+    { name: "小乔", roomAbbr: "wd" },
+    { name: "凛", roomAbbr: "wd" },
+
+    // 岚の家
+    { name: "岚1", roomAbbr: "fdj" },
+    { name: "岚3", roomAbbr: "fdj" },
+    { name: "莉柯莉絲3", roomAbbr: "fdj" },
+    { name: "小羽2", roomAbbr: "fdj" },
+    { name: "小依", roomAbbr: "fdj" },
+    { name: "UU", roomAbbr: "fdj" },
+    { name: "小毛衣", roomAbbr: "fdj" },
+    { name: "妍白", roomAbbr: "fdj" },
+    { name: "兔兔", roomAbbr: "fdj" },
+    { name: "布莱克", roomAbbr: "fdj" },
+    { name: "茶茶", roomAbbr: "fdj" },
+    { name: "小尤菲", roomAbbr: "fdj" },
+    { name: "蛇蛇", roomAbbr: "fdj" },
+    { name: "小away", roomAbbr: "fdj" },
+
+    // 小角落好了！
+    { name: "瑞饼", roomAbbr: "xjl" },
+    { name: "诺瑞莉卡", roomAbbr: "xjl" },
+    { name: "瑞饼饼", roomAbbr: "xjl" },
+    { name: "魂饨儿", roomAbbr: "xjl" },
+
+    // Ayako的Qt大家族
+    { name: "Melody Qt", roomAbbr: "qt" },
+
+    // Yes
+    { name: "Yes", roomAbbr: "yes" },
+    { name: "tiancai", roomAbbr: "yes" },
+    { name: "haikou", roomAbbr: "yes" },
+    { name: "银河", roomAbbr: "yes" },
+
+    // 妖精小屋
+    { name: "菲露亚", roomAbbr: "yjxw" },
+    { name: "鹤舞", roomAbbr: "yjxw" },
+    { name: "绿野幻梦", roomAbbr: "yjxw" },
+    { name: "kelar", roomAbbr: "yjxw" },
+    { name: "芝麻汤圆", roomAbbr: "yjxw" },
+    { name: "暖雪", roomAbbr: "yjxw" },
+    { name: "赛琳", roomAbbr: "yjxw" },
+    { name: "云海", roomAbbr: "yjxw" },
+    { name: "梦梦2", roomAbbr: "yjxw" },
+    { name: "米莉", roomAbbr: "yjxw" },
+
+    // 血天使的住所
+    { name: "小粽子", roomAbbr: "xts" },
+    { name: "血落音", roomAbbr: "xts" },
+    { name: "墨羽", roomAbbr: "xts" },
+
+    // beacon
+    { name: "鈴音", roomAbbr: "beacon" },
+    { name: "璐鹭", roomAbbr: "beacon" },
+    { name: "望", roomAbbr: "beacon" },
+    { name: "白月", roomAbbr: "beacon" },
+
+    // 兔子窝
+    { name: "友未", roomAbbr: "tzw" },
+    { name: "牧雨", roomAbbr: "tzw" },
+    { name: "雪月", roomAbbr: "tzw" },
+
+    // 水果罐头
+    { name: "小桃α", roomAbbr: "smtgt" },
+    { name: "小桃β", roomAbbr: "smtgt" },
+    { name: "大桃α", roomAbbr: "smtgt" },
+    { name: "大桃β", roomAbbr: "smtgt" },
+    { name: "小词", roomAbbr: "smtgt" },
+
+    // 幽灵之森
+    { name: "洛洛", roomAbbr: "ylzs" },
+
+    // Rickyの家
+    { name: "Ricky", roomAbbr: "ricky" },
+    { name: "Enryu", roomAbbr: "ricky" },
+    { name: "Medb", roomAbbr: "ricky" },
+    { name: "DVA", roomAbbr: "ricky" },
+    { name: "Sara", roomAbbr: "ricky" },
+
+    // Data's room
+    { name: "蒂塔-谨贺新春", roomAbbr: "data" },
+    { name: "darkflow", roomAbbr: "data" },
+    { name: "草莓", roomAbbr: "data" },
+    { name: "Muse", roomAbbr: "data" },
+    { name: "蒂塔", roomAbbr: "data" },
+    { name: "落", roomAbbr: "data" },
+    { name: "Sahrye", roomAbbr: "data" },
+    { name: "蒂塔-花魁", roomAbbr: "data" },
+
+    // 倾城家
+    { name: "倾城", roomAbbr: "qchome" },
+    { name: "凤翎", roomAbbr: "qchome" },
+    { name: "Loren", roomAbbr: "qchome" },
+    { name: "柚井", roomAbbr: "qchome" },
+    { name: "梅莉娅", roomAbbr: "qchome" },
+    { name: "羽和柚", roomAbbr: "qchome" },
+
+    // hati家
+    { name: "琵琵娅𝓟𝓲𝓹𝓲𝓪", roomAbbr: "hati" },
+    { name: "卡茨娅𝓒𝓪𝓽𝔃𝓲𝓪", roomAbbr: "hati" },
+    { name: "艾莉娅𝓐𝓮𝓵𝓲𝓪", roomAbbr: "hati" },
+    { name: "𝓗𝓪𝓽𝓲", roomAbbr: "hati" },
+    { name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮", roomAbbr: "hati" },
+    { name: "九不扶", roomAbbr: "hati" },
+
+    // 七七家
+    { name: "七分白衣", roomAbbr: "qq" },
+    { name: "Hanna", roomAbbr: "qq" },
+    { name: "樱", roomAbbr: "qq" },
+    { name: "Penny", roomAbbr: "qq" },
+    { name: "樱和七分白衣", roomAbbr: "qq" },
+
+    // 观察者之庭
+    { name: "妄羽", roomAbbr: "gcz" },
+    { name: "羽(水)", roomAbbr: "gcz" },
+    { name: "柚(水)", roomAbbr: "gcz" },
+    { name: "kit", roomAbbr: "gcz" },
+    { name: "kit(小浣熊)", roomAbbr: "gcz" },
+    { name: "kit(狐仙)", roomAbbr: "gcz" },
+
+    // Quiet Room
+    { name: "Yormi", roomAbbr: "qr" },
+    { name: "Erica", fileName: "Erica_QR", roomAbbr: "qr" },
+    { name: "Eva", fileName: "Eva_QR", roomAbbr: "qr" },
+    { name: "Remie", roomAbbr: "qr" },
+    { name: "Sara", fileName: "Sara_QR", roomAbbr: "qr" },
+    { name: "Saskia", roomAbbr: "qr" },
+    { name: "Shiru", roomAbbr: "qr" },
+    { name: "Sianna", roomAbbr: "qr" },
+    { name: "Vemb", roomAbbr: "qr" },
+    { name: "Volka", roomAbbr: "qr" },
+
+    // 路过的玩偶
+    { name: "li", roomAbbr: "l" },
+    { name: "YouXiang", roomAbbr: "l" },
+    { name: "泠雨", roomAbbr: "l" },
+    { name: "墨芸", roomAbbr: "l" },
+    { name: "Poi", roomAbbr: "l", poseMapping: specialMapping },
+    { name: "Pokemon", roomAbbr: "l" },
+    { name: "Clara", roomAbbr: "l" },
+    { name: "WallyIlma", roomAbbr: "l" },
+    { name: "奈芙塔莉", roomAbbr: "l" },
+    { name: "永翼", roomAbbr: "l" },
+    { name: "Annie", roomAbbr: "l" },
+    { name: "accoo", roomAbbr: "l" },
+    { name: "疾风", roomAbbr: "l" },
+    { name: "Eleanor", roomAbbr: "l" },
+    { name: "小铃铛", roomAbbr: "l" },
+    { name: "莉莉丝", roomAbbr: "l" },
+    { name: "LaBi", roomAbbr: "l" },
+    { name: "Shika", roomAbbr: "l" },
+    { name: "铃奈", roomAbbr: "l" },
+    { name: "小雨", roomAbbr: "l" },
+    { name: "清酒梓", roomAbbr: "l" },
+    { name: "忧绪bride", roomAbbr: "l" },
+    { name: "曦芙bride", roomAbbr: "l" },
+    { name: "小夏", roomAbbr: "l" },
+    { name: "玩偶师", roomAbbr: "l" },
+    { name: "触手姬", roomAbbr: "l" },
+    { name: "雪琪", roomAbbr: "l" },
+    { name: "溜溜猫", roomAbbr: "l" },
+    { name: "芋圆", roomAbbr: "l" },
+    { name: "月", roomAbbr: "l" },
+    { name: "er", roomAbbr: "l" },
+    { name: "Personas", roomAbbr: "l", poseMapping: specialMapping },
+    { name: "Soph", roomAbbr: "l" },
+    { name: "羽", roomAbbr: "l" },
+    { name: "Milim", roomAbbr: "l" },
+    { name: "云喵", roomAbbr: "l" },
+    { name: "miaomiao", roomAbbr: "l" },
+    { name: "Kiki", roomAbbr: "l" },
+    { name: "YL", roomAbbr: "l" },
+    { name: "殘楓", roomAbbr: "l" },
+    { name: "幽玉", roomAbbr: "l" },
+    { name: "小煜", roomAbbr: "l" },
+    {
+        name: "olga",
+        roomAbbr: "l",
+        customSetMessage: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶.",
+    },
+    { name: "薇薇", roomAbbr: "l" },
+    { name: "CC1", roomAbbr: "l" },
+    { name: "CC2", roomAbbr: "l" },
+    { name: "花怜", roomAbbr: "l" },
+    { name: "小思颖", roomAbbr: "l" },
+    { name: "薇薇安", roomAbbr: "l" },
+    { name: "朵朵", roomAbbr: "l" },
+    { name: "柳晓", roomAbbr: "l" },
+    { name: "妄羽", roomAbbr: "l" },
+    { name: "羽和柚", roomAbbr: "l" },
+];
+
+// ========== 生成函数 ==========
+// 下面是根据上面的内容，生成描述的代码
+// 也就是说，不用手动写描述文字啦，只用写上面的内容就行
+
+/**
+ * 从 PlushieRoomConfig[] 生成 typeNameNext
+ * @param {PlushieRoomConfig[]} rooms
+ * @returns {Record<string, TypeNameEntry | FullAndShort>}
+ */
+function generateTypeNameNext(rooms) {
+    /** @type {Record<string, TypeNameEntry | FullAndShort>} */
+    const result = {};
+    for (const room of rooms) {
+        if (room.shortName != null || room.fullName != null) {
+            result[room.abbr] = {
+                Short: room.shortName ?? room.name,
+                Full: room.fullName ?? room.name,
+            };
+        } else {
+            result[room.abbr] = room.name;
+        }
+    }
+    return result;
+}
+
+/**
+ * 从 PlushieItemConfig[] 生成 asset.Layer
+ * @param {PlushieItemConfig[]} items
+ * @returns {AssetLayerDefinition[]}
+ */
+function generateAssetLayers(items) {
+    /** @type {Record<string, number>} */
+    const typeIndex = {};
+    return items.map((item) => {
+        const idx = (typeIndex[item.roomAbbr] = (typeIndex[item.roomAbbr] || 0) + 1);
+        /** @type {AssetLayerDefinition} */
+        const layer = {
+            Name: item.fileName || item.name,
+            AllowTypes: { [item.roomAbbr]: idx },
+        };
+        if (item.poseMapping) {
+            layer.PoseMapping = item.poseMapping;
+        }
+        return layer;
+    });
+}
+
+/**
+ * 从 PlushieItemConfig[] 生成 predefDialog
+ * @param {PlushieItemConfig[]} items
+ * @returns {Translation.Dialog}
+ */
+function generatePredefDialog(items) {
+    /** @type {Record<string, number>} */
+    const typeIndex = {};
+    /** @type {Record<string, string>} */
+    const cn = {};
+    /** @type {Record<string, string>} */
+    const en = {};
+    /** @type {Record<string, string>} */
+    const ru = {};
+    for (const item of items) {
+        const idx = (typeIndex[item.roomAbbr] = (typeIndex[item.roomAbbr] || 0) + 1);
+        // 如果显示名称和文件名不同，需要覆盖 Option 文本
+        if (item.fileName != null && item.fileName !== item.name) {
+            cn[`Option${item.roomAbbr}${idx}`] = item.name;
+        }
+        // 自定义设置消息
+        if (item.customSetMessage) {
+            if (typeof item.customSetMessage === "string") {
+                cn[`Set${item.roomAbbr}${idx}`] = item.customSetMessage;
+            } else {
+                if (item.customSetMessage.CN) cn[`Set${item.roomAbbr}${idx}`] = item.customSetMessage.CN;
+                if (item.customSetMessage.EN) en[`Set${item.roomAbbr}${idx}`] = item.customSetMessage.EN;
+                if (item.customSetMessage.RU) ru[`Set${item.roomAbbr}${idx}`] = item.customSetMessage.RU;
+            }
+        }
+    }
+    /** @type {Translation.Dialog} */
+    const result = { CN: cn };
+    if (Object.keys(en).length) result.EN = en;
+    if (Object.keys(ru).length) result.RU = ru;
+    return result;
+}
+
+// 应用生成
+const typeNameNext = generateTypeNameNext(plushieRooms);
+const predefDialog = generatePredefDialog(plushieItems);
+const translation = { CN: "玩偶", EN: "Plushies" };
+
+/**
+ * 核心物品定义
+ * @type {CustomAssetDefinition}
+ */
 const asset = {
     Name: "玩偶",
     Random: false,
@@ -28,652 +778,8 @@ const asset = {
     DynamicGroupName: "ItemMisc",
     AllowActivity: ["SqueezeItem"],
     ActivityAudio: ["Squeak"],
-    Layer: [
-        // 玩具店
-        { Name: "Saki", AllowTypes: { d: 1 } },
-        { Name: "Luzi", AllowTypes: { d: 2 } },
-        { Name: "若若", AllowTypes: { d: 3 } },
-        { Name: "Lamia", AllowTypes: { d: 4 } },
-
-        // 狼窝
-        { Name: "Xin", AllowTypes: { s: 1 } },
-        { Name: "吉娜", AllowTypes: { s: 2 } },
-        { Name: "Ada", AllowTypes: { s: 3 } },
-        { Name: "Luzi2", AllowTypes: { s: 4 } },
-        {
-            Name: "xin2",
-            PoseMapping: specialMapping,
-            AllowTypes: { s: 5 },
-        },
-
-        // 芷窝
-        {
-            Name: "芷童",
-            PoseMapping: specialMapping,
-            AllowTypes: { z: 1 },
-        },
-        { Name: "Gin", AllowTypes: { z: 2 } },
-        { Name: "Echo", AllowTypes: { z: 3 } },
-        { Name: "ᐛ", AllowTypes: { z: 4 } },
-        { Name: "ᐖ", AllowTypes: { z: 5 } },
-        { Name: "芙缇娅", AllowTypes: { z: 6 } },
-        { Name: "芷小童", AllowTypes: { z: 7 } },
-        { Name: "临", AllowTypes: { z: 8 } },
-        { Name: "小安", AllowTypes: { z: 9 } },
-        { Name: "Suki", AllowTypes: { z: 10 } },
-        { Name: "haru", AllowTypes: { z: 11 } },
-        { Name: "兔叽", AllowTypes: { z: 12 } },
-        { Name: "Lux", AllowTypes: { z: 13 } },
-
-        // Catnest
-        { Name: "XinLian", AllowTypes: { c: 1 } },
-        { Name: "Zheiyun", AllowTypes: { c: 2 } },
-        { Name: "Cyäegha", AllowTypes: { c: 3 } },
-        { Name: "PumpkinPie", AllowTypes: { c: 4 } },
-        { Name: "Caius", AllowTypes: { c: 5 } },
-        { Name: "Neko", AllowTypes: { c: 6 } },
-        { Name: "居x", AllowTypes: { c: 7 } },
-        { Name: "vaner", AllowTypes: { c: 8 } },
-
-        // 猫州猫庭府玩偶
-        { Name: "Axa", AllowTypes: { f: 1 } },
-        { Name: "Shirayuki", AllowTypes: { f: 2 } },
-        { Name: "Nail", AllowTypes: { f: 3 } },
-        { Name: "Nekonya蓝", AllowTypes: { f: 4 } },
-        { Name: "小果", AllowTypes: { f: 5 } },
-        { Name: "埃菲尔徳", AllowTypes: { f: 6 } },
-        { Name: "小寒", AllowTypes: { f: 7 } },
-        { Name: "沐猫", AllowTypes: { f: 8 } },
-
-        // 小夜家玩偶
-        { Name: "向归夜", AllowTypes: { y: 1 } },
-        { Name: "圣光光", AllowTypes: { y: 2 } },
-        { Name: "娜娜", AllowTypes: { y: 3 } },
-        { Name: "彤酱", AllowTypes: { y: 4 } },
-        { Name: "璃心", AllowTypes: { y: 5 } },
-        { Name: "雫", AllowTypes: { y: 6 } },
-        { Name: "小狼", AllowTypes: { y: 7 } },
-        { Name: "小果", AllowTypes: { y: 8 } },
-        { Name: "时光光", AllowTypes: { y: 9 } },
-        { Name: "xxxx", AllowTypes: { y: 10 } },
-        { Name: "果子狸", AllowTypes: { y: 11 } },
-        { Name: "雪瑗", AllowTypes: { y: 12 } },
-        { Name: "xiu狸子", AllowTypes: { y: 13 } },
-        { Name: "布菈", AllowTypes: { y: 14 } },
-        { Name: "菲露娅", AllowTypes: { y: 15 } },
-        { Name: "绫", AllowTypes: { y: 16 } },
-
-        // 盒子的小黑屋
-        { Name: "葡萄果汁盒", AllowTypes: { hz: 1 } },
-        { Name: "时雨Tokiame", AllowTypes: { hz: 2 } },
-        { Name: "殇梦溪", AllowTypes: { hz: 3 } },
-        { Name: "Neko2", AllowTypes: { hz: 4 } },
-        { Name: "mizuki池", AllowTypes: { hz: 5 } },
-        { Name: "莉娅", AllowTypes: { hz: 6 } },
-        { Name: "艾尔", AllowTypes: { hz: 7 } },
-        { Name: "小火火", AllowTypes: { hz: 8 } },
-        { Name: "梦语诗", AllowTypes: { hz: 9 } },
-        { Name: "巧巧", AllowTypes: { hz: 10 } },
-        { Name: "巧巧2", AllowTypes: { hz: 11 } },
-
-        // 吸血鬼城堡
-        {
-            Name: "岚岚",
-            PoseMapping: specialMapping,
-            AllowTypes: { x: 1 },
-        },
-        { Name: "欧佩娜", AllowTypes: { x: 2 } },
-        { Name: "艾欧娜", AllowTypes: { x: 3 } },
-        { Name: "柚子", AllowTypes: { x: 4 } },
-        { Name: "梨子", AllowTypes: { x: 5 } },
-        { Name: "Lyndis琳", AllowTypes: { x: 6 } },
-        { Name: "黛烟", AllowTypes: { x: 7 } },
-        { Name: "Liriel", AllowTypes: { x: 8 } },
-        { Name: "瑟莉亚", AllowTypes: { x: 9 } },
-
-        // 笠花和An'an的家
-        { Name: "笠花", AllowTypes: { lihua: 1 } },
-        { Name: "Anan", AllowTypes: { lihua: 2 } },
-        { Name: "雨笠银花", AllowTypes: { lihua: 3 } },
-        { Name: "dudu", AllowTypes: { lihua: 4 } },
-        { Name: "卜卜", AllowTypes: { lihua: 5 } },
-        { Name: "秋巧", AllowTypes: { lihua: 6 } },
-
-        // 鸢堡
-        { Name: "鸢", AllowTypes: { yb: 1 } },
-        { Name: "梓析", AllowTypes: { yb: 2 } },
-        { Name: "梓䒩", AllowTypes: { yb: 3 } },
-        { Name: "梓姌", AllowTypes: { yb: 4 } },
-        { Name: "梓璇", AllowTypes: { yb: 5 } },
-        { Name: "梓爱", AllowTypes: { yb: 6 } },
-        { Name: "呐呐梓", AllowTypes: { yb: 7 } },
-        { Name: "梓咪", AllowTypes: { yb: 8 } },
-        { Name: "馅饼梓", AllowTypes: { yb: 9 } },
-        { Name: "梓棂", AllowTypes: { yb: 10 } },
-        { Name: "ZforShort", AllowTypes: { yb: 11 } },
-        { Name: "小a", AllowTypes: { yb: 12 } },
-        { Name: "透透子", AllowTypes: { yb: 13 } },
-        { Name: "luobo", AllowTypes: { yb: 14 } },
-        { Name: "岚宝", AllowTypes: { yb: 15 } },
-
-        // EILRSW
-        { Name: "Pasimia", AllowTypes: { EILRSW: 1 } },
-        { Name: "Alasade", AllowTypes: { EILRSW: 2 } },
-        { Name: "Lyudmila", AllowTypes: { EILRSW: 3 } },
-        { Name: "Emeia", AllowTypes: { EILRSW: 4 } },
-        { Name: "希雅", AllowTypes: { EILRSW: 5 } },
-        { Name: "酥酥", AllowTypes: { EILRSW: 6 } },
-        { Name: "茗子", AllowTypes: { EILRSW: 7 } },
-        { Name: "Kemera", AllowTypes: { EILRSW: 8 } },
-        { Name: "viimi", AllowTypes: { EILRSW: 9 } },
-
-        // 伊友玩偶
-        { Name: "伊斯特", AllowTypes: { yytc: 1 } },
-        { Name: "Pekora-Kino", AllowTypes: { yytc: 2 } },
-        { Name: "幽灵", AllowTypes: { yytc: 3 } },
-        { Name: "希尔薇娅", AllowTypes: { yytc: 4 } },
-        { Name: "小沫", AllowTypes: { yytc: 5 } },
-        { Name: "Sive", AllowTypes: { yytc: 6 } },
-        { Name: "40", AllowTypes: { yytc: 7 } },
-        { Name: "焦糖", AllowTypes: { yytc: 8 } },
-        { Name: "早紀", AllowTypes: { yytc: 9 } },
-        { Name: "rin", AllowTypes: { yytc: 10 } },
-        { Name: "w", AllowTypes: { yytc: 11 } },
-        { Name: "OwQ", AllowTypes: { yytc: 12 } },
-        { Name: "绛翎", AllowTypes: { yytc: 13 } },
-        { Name: "玖儿", AllowTypes: { yytc: 14 } },
-        { Name: "白澜諪", AllowTypes: { yytc: 15 } },
-
-        // 香喷喷酒吧
-        { Name: "依伊可", AllowTypes: { xppjb: 1 } },
-        { Name: "yumi", AllowTypes: { xppjb: 2 } },
-        { Name: "白墨鴝", AllowTypes: { xppjb: 3 } },
-        { Name: "忧绪", AllowTypes: { xppjb: 4 } },
-        { Name: "五十提", AllowTypes: { xppjb: 5 } },
-        { Name: "狸nux", AllowTypes: { xppjb: 6 } },
-        { Name: "依", AllowTypes: { xppjb: 7 } },
-        { Name: "珥九", AllowTypes: { xppjb: 8 } },
-        { Name: "暴狸龙", AllowTypes: { xppjb: 9 } },
-        { Name: "Fu狸", AllowTypes: { xppjb: 10 } },
-        { Name: "依依", AllowTypes: { xppjb: 11 } },
-        { Name: "wallyilma2", AllowTypes: { xppjb: 12 } },
-        { Name: "Shadow", AllowTypes: { xppjb: 13 } },
-
-        // 失乐园 sly
-        // { Name: "Reisigure", AllowTypes: { sly: 1 } },
-        // { Name: "Atlantis", AllowTypes: { sly: 2 } },
-        // {
-        //     Name: "澈羽枫灵",
-        //     PoseMapping: specialMapping,
-        //     AllowTypes: { sly: 3 },
-        // },
-        // { Name: "ReiSigureA", AllowTypes: { sly: 4 } },
-        // { Name: "ReiSigureAE", AllowTypes: { sly: 5 } },
-        // { Name: "ReiSigureEX", AllowTypes: { sly: 6 } },
-
-        // Lilian的大杂烩
-        { Name: "Lilian", AllowTypes: { lilian: 1 } },
-        {
-            Name: "幽",
-            PoseMapping: specialMapping,
-            AllowTypes: { lilian: 2 },
-        },
-        { Name: "墨璃", AllowTypes: { lilian: 3 } },
-        { Name: "Linnn", AllowTypes: { lilian: 4 } },
-        { Name: "天使Linnn", AllowTypes: { lilian: 5 } },
-        { Name: "兔战Linnn", AllowTypes: { lilian: 6 } },
-        { Name: "Nagi", AllowTypes: { lilian: 7 } },
-
-        // 莉柯莉絲家與她的朋友
-        { Name: "莉柯莉絲1", AllowTypes: { lkls: 1 } },
-        { Name: "莉柯莉絲2", AllowTypes: { lkls: 2 } },
-        { Name: "六月", AllowTypes: { lkls: 3 } },
-        { Name: "晓璃", AllowTypes: { lkls: 4 } },
-        { Name: "約爾", AllowTypes: { lkls: 5 } },
-        { Name: "mai", AllowTypes: { lkls: 6 } },
-        { Name: "kiseki", AllowTypes: { lkls: 7 } },
-        { Name: "madoka", AllowTypes: { lkls: 8 } },
-        { Name: "mamotta", AllowTypes: { lkls: 9 } },
-        { Name: "sunny", AllowTypes: { lkls: 10 } },
-        { Name: "marina", AllowTypes: { lkls: 11 } },
-        { Name: "橙汁", AllowTypes: { lkls: 12 } },
-        { Name: "Cynthiaa", AllowTypes: { lkls: 13 } },
-        { Name: "MIZU", AllowTypes: { lkls: 14 } },
-        { Name: "暖海", AllowTypes: { lkls: 15 } },
-        { Name: "Lucy", AllowTypes: { lkls: 16 } },
-        { Name: "小竹", AllowTypes: { lkls: 17 } },
-        { Name: "小羽", AllowTypes: { lkls: 18 } },
-        { Name: "紉唯", AllowTypes: { lkls: 19 } },
-        { Name: "Hime", AllowTypes: { lkls: 20 } },
-        { Name: "PENGPENG", AllowTypes: { lkls: 21 } },
-        { Name: "櫻奈", AllowTypes: { lkls: 22 } },
-        { Name: "贝斯蒂", AllowTypes: { lkls: 23 } },
-        { Name: "euna", AllowTypes: { lkls: 24 } },
-        { Name: "艾梅莉", AllowTypes: { lkls: 25 } },
-        { Name: "TINA", AllowTypes: { lkls: 26 } },
-        { Name: "Haruka", AllowTypes: { lkls: 27 } },
-        { Name: "Ayman", AllowTypes: { lkls: 28 } },
-        { Name: "歪歪", AllowTypes: { lkls: 29 } },
-        { Name: "凌雨", AllowTypes: { lkls: 30 } },
-        { Name: "小风", AllowTypes: { lkls: 31 } },
-
-        // Celestial Enchants
-        { Name: "Celiko", AllowTypes: { ce: 1 } },
-        { Name: "Lavender", AllowTypes: { ce: 2 } },
-        { Name: "Siscuit", AllowTypes: { ce: 3 } },
-        { Name: "Sabie", AllowTypes: { ce: 4 } },
-
-        // Den of Sin
-        { Name: "Sin", AllowTypes: { ds: 1 } },
-        { Name: "Cassandra Lee", AllowTypes: { ds: 2 } },
-        { Name: "Gangriel", AllowTypes: { ds: 3 } },
-        { Name: "Roslin", AllowTypes: { ds: 4 } },
-        { Name: "Rika", AllowTypes: { ds: 5 } },
-
-        // Latex Lab
-        { Name: "XDress", AllowTypes: { ll: 1 } },
-        { Name: "Khloe", AllowTypes: { ll: 2 } },
-        { Name: "Aeri", AllowTypes: { ll: 3 } },
-        { Name: "Lillian", AllowTypes: { ll: 4 } },
-        { Name: "Minerva", AllowTypes: { ll: 5 } },
-        { Name: "delta", AllowTypes: { ll: 6 } },
-        { Name: "Nabi", AllowTypes: { ll: 7 } },
-
-        // 月见里的海边
-        { Name: "蝶灵忧凪", AllowTypes: { hb: 1 } },
-        { Name: "蛇灵忧凪", AllowTypes: { hb: 2 } },
-        { Name: "忧咲", AllowTypes: { hb: 3 } },
-        { Name: "红熙", AllowTypes: { hb: 4 } },
-
-        // 自恋柴的衣橱
-        { Name: "柴柴1", AllowTypes: { cai: 1 } },
-        { Name: "柴柴2", AllowTypes: { cai: 2 } },
-        { Name: "柴柴3", AllowTypes: { cai: 3 } },
-        { Name: "柴柴4", AllowTypes: { cai: 4 } },
-        { Name: "柴柴5", AllowTypes: { cai: 5 } },
-        { Name: "柴柴6", AllowTypes: { cai: 6 } },
-        { Name: "柴柴7", AllowTypes: { cai: 7 } },
-
-        // nest
-        { Name: "Dango", AllowTypes: { nest: 1 } },
-        { Name: "狼狼虫", AllowTypes: { nest: 2 } },
-        { Name: "喵头嘤", AllowTypes: { nest: 3 } },
-        { Name: "喵头嘤2", AllowTypes: { nest: 4 } },
-        { Name: "lunara", AllowTypes: { nest: 5 } },
-        { Name: "Kitty", AllowTypes: { nest: 6 } },
-        { Name: "柴柴", AllowTypes: { nest: 7 } },
-        { Name: "辛西婭2", AllowTypes: { nest: 8 } },
-        { Name: "優米", AllowTypes: { nest: 9 } },
-        { Name: "Lana", AllowTypes: { nest: 10 } },
-        { Name: "枳", AllowTypes: { nest: 11 } },
-        { Name: "Arco", AllowTypes: { nest: 12 } },
-        { Name: "Rinko", AllowTypes: { nest: 13 } },
-        { Name: "姜海琳3", AllowTypes: { nest: 14 } },
-        { Name: "碧洛蒂丝", AllowTypes: { nest: 15 } },
-        { Name: "喵头嘤3", AllowTypes: { nest: 16 } },
-        { Name: "Elara", AllowTypes: { nest: 17 } },
-        { Name: "碧洛蒂丝2", AllowTypes: { nest: 18 } },
-        { Name: "荀", AllowTypes: { nest: 19 } },
-
-        // Foxys Fun Experience
-        { Name: "Gab", AllowTypes: { ffe: 1 } },
-        { Name: "Seb", AllowTypes: { ffe: 2 } },
-        { Name: "Ryoko", AllowTypes: { ffe: 3 } },
-
-        // 1563
-        { Name: "月月", AllowTypes: { pen: 1 } },
-        { Name: "晓雾", AllowTypes: { pen: 2 } },
-        { Name: "Penelope", AllowTypes: { pen: 3 } },
-        { Name: "Noel", AllowTypes: { pen: 4 } },
-        { Name: "叶子", AllowTypes: { pen: 5 } },
-
-        // 鸭鸭窝
-        { Name: "Sunny2", AllowTypes: { yyw: 1 } },
-        { Name: "月诺诺", AllowTypes: { yyw: 2 } },
-
-        // Gugugaga
-        { Name: "白木", AllowTypes: { gggg: 1 } },
-        { Name: "KocO", AllowTypes: { gggg: 2 } },
-        { Name: "N", AllowTypes: { gggg: 3 } },
-
-        // 羊羊星
-        { Name: "UMI", AllowTypes: { yyx: 1 } },
-        { Name: "姜海琳", AllowTypes: { yyx: 2 } },
-        { Name: "姜海琳1", AllowTypes: { yyx: 3 } },
-        { Name: "姜海琳2", AllowTypes: { yyx: 4 } },
-        { Name: "辛西婭1", AllowTypes: { yyx: 5 } },
-        { Name: "辛西婭3", AllowTypes: { yyx: 6 } },
-        { Name: "UM", AllowTypes: { yyx: 7 } },
-        { Name: "乳胶犬鹤子", AllowTypes: { yyx: 8 } },
-        { Name: "鹤子", AllowTypes: { yyx: 9 } },
-        { Name: "狄亚", AllowTypes: { yyx: 10 } },
-
-        // 胡话的梦境
-        { Name: "腐化1", AllowTypes: { hhdmj: 1 } },
-        { Name: "腐化2", AllowTypes: { hhdmj: 2 } },
-        { Name: "北玄", AllowTypes: { hhdmj: 3 } },
-        { Name: "梓筠", AllowTypes: { hhdmj: 4 } },
-        { Name: "可可", AllowTypes: { hhdmj: 5 } },
-        { Name: "梦梦", AllowTypes: { hhdmj: 6 } },
-        { Name: "羽娅", AllowTypes: { hhdmj: 7 } },
-        { Name: "玖玖", AllowTypes: { hhdmj: 8 } },
-        { Name: "惟忆", AllowTypes: { hhdmj: 9 } },
-        { Name: "晴雪", AllowTypes: { hhdmj: 10 } },
-
-        // 青青草原
-        { Name: "太上皇小灰灰", AllowTypes: { qqcy: 1 } },
-        { Name: "乖巧小灰灰", AllowTypes: { qqcy: 2 } },
-        { Name: "月~", AllowTypes: { qqcy: 3 } },
-        { Name: "梦~", AllowTypes: { qqcy: 4 } },
-        { Name: "狼~", AllowTypes: { qqcy: 5 } },
-        { Name: "鱼~", AllowTypes: { qqcy: 6 } },
-        { Name: "火龙果", AllowTypes: { qqcy: 7 } },
-        { Name: "狐狸~", AllowTypes: { qqcy: 8 } },
-        { Name: "莉柯姐姐~", AllowTypes: { qqcy: 9 } },
-        { Name: "小羽姐姐~", AllowTypes: { qqcy: 10 } },
-        { Name: "老大姐姐~", AllowTypes: { qqcy: 11 } },
-        { Name: "梦梦~", AllowTypes: { qqcy: 12 } },
-        { Name: "狼崽", AllowTypes: { qqcy: 13 } },
-        { Name: "乔", AllowTypes: { qqcy: 14 } },
-
-        // 玩偶店
-        { Name: "希尔薇娅", AllowTypes: { wd: 1 } },
-        { Name: "希尔薇娅2", AllowTypes: { wd: 2 } },
-        { Name: "爱丽丝梦游仙境", AllowTypes: { wd: 3 } },
-        { Name: "安", AllowTypes: { wd: 4 } },
-        { Name: "麟", AllowTypes: { wd: 5 } },
-        { Name: "羽猫", AllowTypes: { wd: 6 } },
-        { Name: "小乔", AllowTypes: { wd: 7 } },
-        { Name: "凛", AllowTypes: { wd: 8 } },
-        // { Name: "幽灵2", AllowTypes: { wd: 9 } },
-
-        // // 岚の家
-        { Name: "岚1", AllowTypes: { fdj: 1 } },
-        { Name: "岚3", AllowTypes: { fdj: 2 } },
-        { Name: "莉柯莉絲3", AllowTypes: { fdj: 3 } },
-        { Name: "小羽2", AllowTypes: { fdj: 4 } },
-        { Name: "小依", AllowTypes: { fdj: 5 } },
-        { Name: "UU", AllowTypes: { fdj: 6 } },
-        { Name: "小毛衣", AllowTypes: { fdj: 7 } },
-        { Name: "妍白", AllowTypes: { fdj: 8 } },
-        { Name: "兔兔", AllowTypes: { fdj: 9 } },
-        { Name: "布莱克", AllowTypes: { fdj: 10 } },
-        { Name: "茶茶", AllowTypes: { fdj: 11 } },
-        { Name: "小尤菲", AllowTypes: { fdj: 12 } },
-        { Name: "蛇蛇", AllowTypes: { fdj: 13 } },
-        { Name: "小away", AllowTypes: { fdj: 14 } },
-        // { Name: "小词", AllowTypes: { fdj:  } },
-        // { Name: "桦娜", AllowTypes: { fdj:  } },
-        // { Name: "小樱", AllowTypes: { fdj:  } },
-        // { Name: "云岫", AllowTypes: { fdj:  } },
-        // { Name: "Kimi", AllowTypes: { fdj:  } },
-
-        // 小角落好了！
-        { Name: "瑞饼", AllowTypes: { xjl: 1 } },
-        { Name: "诺瑞莉卡", AllowTypes: { xjl: 2 } },
-        { Name: "瑞饼饼", AllowTypes: { xjl: 3 } },
-        { Name: "魂饨儿", AllowTypes: { xjl: 4 } },
-
-        // Ayako的Qt大家族
-        { Name: "Melody Qt", AllowTypes: { qt: 1 } },
-
-        // Yes
-        { Name: "Yes", AllowTypes: { yes: 1 } },
-        { Name: "tiancai", AllowTypes: { yes: 2 } },
-        { Name: "haikou", AllowTypes: { yes: 3 } },
-        { Name: "银河", AllowTypes: { yes: 4 } },
-
-        // 妖精小屋
-        { Name: "菲露亚", AllowTypes: { yjxw: 1 } },
-        { Name: "鹤舞", AllowTypes: { yjxw: 2 } },
-        { Name: "绿野幻梦", AllowTypes: { yjxw: 3 } },
-        { Name: "kelar", AllowTypes: { yjxw: 4 } },
-        { Name: "芝麻汤圆", AllowTypes: { yjxw: 5 } },
-        { Name: "暖雪", AllowTypes: { yjxw: 6 } },
-        { Name: "赛琳", AllowTypes: { yjxw: 7 } },
-        { Name: "云海", AllowTypes: { yjxw: 8 } },
-        { Name: "梦梦2", AllowTypes: { yjxw: 9 } },
-        { Name: "米莉", AllowTypes: { yjxw: 10 } },
-
-        // 血天使的住所
-        { Name: "小粽子", AllowTypes: { xts: 1 } },
-        { Name: "血落音", AllowTypes: { xts: 2 } },
-        { Name: "墨羽", AllowTypes: { xts: 3 } },
-
-        // beacon
-        { Name: "鈴音", AllowTypes: { beacon: 1 } },
-        { Name: "璐鹭", AllowTypes: { beacon: 2 } },
-        { Name: "望", AllowTypes: { beacon: 3 } },
-        { Name: "白月", AllowTypes: { beacon: 4 } },
-
-        // 兔子窝
-        { Name: "友未", AllowTypes: { tzw: 1 } },
-        { Name: "牧雨", AllowTypes: { tzw: 2 } },
-        { Name: "雪月", AllowTypes: { tzw: 3 } },
-
-        // 水果罐头
-        { Name: "小桃α", AllowTypes: { smtgt: 1 } },
-        { Name: "小桃β", AllowTypes: { smtgt: 2 } },
-        { Name: "大桃α", AllowTypes: { smtgt: 3 } },
-        { Name: "大桃β", AllowTypes: { smtgt: 4 } },
-        { Name: "小词", AllowTypes: { smtgt: 5 } },
-
-        // 幽灵之森
-        { Name: "洛洛", AllowTypes: { ylzs: 1 } },
-
-        // Rickyの家
-        { Name: "Ricky", AllowTypes: { ricky: 1 } },
-        { Name: "Enryu", AllowTypes: { ricky: 2 } },
-        { Name: "Medb", AllowTypes: { ricky: 3 } },
-        { Name: "DVA", AllowTypes: { ricky: 4 } },
-        { Name: "Sara", AllowTypes: { ricky: 5 } },
-
-        // Data's room
-        { Name: "蒂塔-谨贺新春", AllowTypes: { data: 1 } },
-        { Name: "darkflow", AllowTypes: { data: 2 } },
-        { Name: "草莓", AllowTypes: { data: 3 } },
-        { Name: "Muse", AllowTypes: { data: 4 } },
-        { Name: "蒂塔", AllowTypes: { data: 5 } },
-        { Name: "落", AllowTypes: { data: 6 } },
-        { Name: "Sahrye", AllowTypes: { data: 7 } },
-        { Name: "蒂塔-花魁", AllowTypes: { data: 8 } },
-
-        // 倾城家
-        { Name: "倾城", AllowTypes: { qchome: 1 } },
-        { Name: "凤翎", AllowTypes: { qchome: 2 } },
-        { Name: "Loren", AllowTypes: { qchome: 3 } },
-        { Name: "柚井", AllowTypes: { qchome: 4 } },
-        { Name: "梅莉娅", AllowTypes: { qchome: 5 } },
-        { Name: "羽和柚", AllowTypes: { qchome: 6 } },
-
-        // hati家
-        { Name: "琵琵娅𝓟𝓲𝓹𝓲𝓪", AllowTypes: { hati: 1 } },
-        { Name: "卡茨娅𝓒𝓪𝓽𝔃𝓲𝓪", AllowTypes: { hati: 2 } },
-        { Name: "艾莉娅𝓐𝓮𝓵𝓲𝓪", AllowTypes: { hati: 3 } },
-        { Name: "𝓗𝓪𝓽𝓲", AllowTypes: { hati: 4 } },
-        { Name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮", AllowTypes: { hati: 5 } },
-        { Name: "九不扶", AllowTypes: { hati: 6 } },
-
-        // 七七家
-        { Name: "七分白衣", AllowTypes: { qq: 1 } },
-        { Name: "Hanna", AllowTypes: { qq: 2 } },
-        { Name: "樱", AllowTypes: { qq: 3 } },
-        { Name: "Penny", AllowTypes: { qq: 4 } },
-        { Name: "樱和七分白衣", AllowTypes: { qq: 5 } },
-
-        // 观察者之庭
-        { Name: "妄羽", AllowTypes: { gcz: 1 } },
-        { Name: "羽(水)", AllowTypes: { gcz: 2 } },
-        { Name: "柚(水)", AllowTypes: { gcz: 3 } },
-        { Name: "kit", AllowTypes: { gcz: 4 } },
-        { Name: "kit(小浣熊)", AllowTypes: { gcz: 5 } },
-        { Name: "kit(狐仙)", AllowTypes: { gcz: 6 } },
-
-        // Quiet Room
-        { Name: "Yormi", AllowTypes: { qr: 1 } },
-        { Name: "Erica_QR", AllowTypes: { qr: 2 } },
-        { Name: "Eva_QR", AllowTypes: { qr: 3 } },
-        { Name: "Remie", AllowTypes: { qr: 4 } },
-        { Name: "Sara_QR", AllowTypes: { qr: 5 } },
-        { Name: "Saskia", AllowTypes: { qr: 6 } },
-        { Name: "Shiru", AllowTypes: { qr: 7 } },
-        { Name: "Sianna", AllowTypes: { qr: 8 } },
-        { Name: "Vemb", AllowTypes: { qr: 9 } },
-        { Name: "Volka", AllowTypes: { qr: 10 } },
-
-        // 路过的玩偶
-        { Name: "li", AllowTypes: { l: 1 } },
-        { Name: "YouXiang", AllowTypes: { l: 2 } },
-        { Name: "泠雨", AllowTypes: { l: 3 } },
-        { Name: "墨芸", AllowTypes: { l: 4 } },
-        {
-            Name: "Poi",
-            PoseMapping: specialMapping,
-            AllowTypes: { l: 5 },
-        },
-        { Name: "Pokemon", AllowTypes: { l: 6 } },
-        { Name: "Clara", AllowTypes: { l: 7 } },
-        { Name: "WallyIlma", AllowTypes: { l: 8 } },
-        { Name: "奈芙塔莉", AllowTypes: { l: 9 } },
-        { Name: "永翼", AllowTypes: { l: 10 } },
-        { Name: "Annie", AllowTypes: { l: 11 } },
-        { Name: "accoo", AllowTypes: { l: 12 } },
-        { Name: "疾风", AllowTypes: { l: 13 } },
-        { Name: "Eleanor", AllowTypes: { l: 14 } },
-        { Name: "小铃铛", AllowTypes: { l: 15 } },
-        { Name: "莉莉丝", AllowTypes: { l: 16 } },
-        { Name: "LaBi", AllowTypes: { l: 17 } },
-        { Name: "Shika", AllowTypes: { l: 18 } },
-        { Name: "铃奈", AllowTypes: { l: 19 } },
-        { Name: "小雨", AllowTypes: { l: 20 } },
-        { Name: "清酒梓", AllowTypes: { l: 21 } },
-        { Name: "忧绪bride", AllowTypes: { l: 22 } },
-        { Name: "曦芙bride", AllowTypes: { l: 23 } },
-        { Name: "小夏", AllowTypes: { l: 24 } },
-        { Name: "玩偶师", AllowTypes: { l: 25 } },
-        { Name: "触手姬", AllowTypes: { l: 26 } },
-        { Name: "雪琪", AllowTypes: { l: 27 } },
-        { Name: "溜溜猫", AllowTypes: { l: 28 } },
-        { Name: "芋圆", AllowTypes: { l: 29 } },
-        { Name: "月", AllowTypes: { l: 30 } },
-        { Name: "er", AllowTypes: { l: 31 } },
-        {
-            Name: "Personas",
-            PoseMapping: specialMapping,
-            AllowTypes: { l: 32 },
-        },
-        { Name: "Soph", AllowTypes: { l: 33 } },
-        { Name: "羽", AllowTypes: { l: 34 } },
-        { Name: "Milim", AllowTypes: { l: 35 } },
-        { Name: "云喵", AllowTypes: { l: 36 } },
-        { Name: "miaomiao", AllowTypes: { l: 37 } },
-        { Name: "Kiki", AllowTypes: { l: 38 } },
-        { Name: "YL", AllowTypes: { l: 39 } },
-        { Name: "殘楓", AllowTypes: { l: 40 } },
-        { Name: "幽玉", AllowTypes: { l: 41 } },
-        { Name: "小煜", AllowTypes: { l: 42 } },
-        { Name: "olga", AllowTypes: { l: 43 } },
-        { Name: "薇薇", AllowTypes: { l: 44 } },
-        { Name: "CC1", AllowTypes: { l: 45 } },
-        { Name: "CC2", AllowTypes: { l: 46 } },
-        { Name: "花怜", AllowTypes: { l: 47 } },
-        { Name: "小思颖", AllowTypes: { l: 48 } },
-        { Name: "薇薇安", AllowTypes: { l: 49 } },
-        { Name: "朵朵", AllowTypes: { l: 50 } },
-        { Name: "柳晓", AllowTypes: { l: 51 } },
-        { Name: "妄羽", AllowTypes: { l: 52 } },
-        { Name: "羽和柚", AllowTypes: { l: 53 } },
-    ],
+    Layer: generateAssetLayers(plushieItems),
 };
-
-/** @type {Record<string, TypeNameEntry | FullAndShort>} */
-const typeNameNext = {
-    d: { Short: { CN: "玩具店", EN: "Night at Saotome" }, Full: { CN: "早乙女的玩具店", EN: "Night at Saotome" } },
-    s: "狼窝",
-    z: { CN: "芷窝", EN: "Mie" },
-    c: "Catnest",
-    f: { CN: "猫州猫庭府", EN: "Nekopara" },
-    y: { CN: "小夜家", EN: "Home of Saya" },
-    hz: { CN: "盒子的小黑屋", EN: "xiaoheiwu" },
-    x: { CN: "吸血鬼城堡", EN: "Vampire Castle" },
-    lihua: { CN: "笠花和An'an的家", EN: "Kasaki's room" },
-    yb: "鸢堡",
-    EILRSW: "EILRSW",
-    yytc: { CN: "伊友", EN: "Friends of Yi" },
-    xppjb: { CN: "香喷喷酒吧", EN: "xiangpenpen" },
-    // sly: { CN: "失乐园", EN: "Paradise Lost" },
-    ffe: { Short: "FFE", Full: "Foxys Fun Experience" },
-    lilian: { CN: "Lilian的大杂烩", EN: "Lilian Home" },
-    lkls: { CN: "莉柯莉絲家與她的朋友", EN: "Licolis" },
-    ce: "Celestial Enchants",
-    ds: "Den of Sin",
-    ll: "Latex Lab",
-    hb: "月见里的海边",
-    cai: "柴坊",
-    nest: "Nest",
-    pen: "1563",
-    yyw: "鸭鸭窝",
-    gggg: "Gugugaga",
-    yyx: "羊羊星",
-    hhdmj: "胡话的梦境",
-    qqcy: "青青草原~",
-    wd: "玩偶店",
-    fdj: "岚の家",
-    qt: "Ayako的Qt大家族",
-    yes: "Yes",
-    xjl: "小角落",
-    yjxw: "妖精小屋",
-    xts: "血天使的住所",
-    beacon: "Beacon",
-    tzw: "兔子窝",
-    smtgt: "水果罐头",
-    ylzs: "幽灵之森",
-    ricky: "Rickyの家",
-    data: "Data's room",
-    qchome: "倾城家",
-    hati: "hati家",
-    qq: "七七家",
-    gcz: "观察者之庭",
-    qr: "Quiet Room",
-    l: { CN: "(路过的玩偶)", EN: "(Wanderers)" },
-};
-
-const translation = { CN: "玩偶", EN: "Plushies" };
-
-/** @type {Translation.Dialog} */
-const predefDialog = {
-    CN: {
-        Optionhz4: "Neko",
-        Optionlihua2: "An'an",
-
-        Optionxppjb13: "Shadow γ",
-
-        Optioncai1: "柴",
-        Optioncai2: "柴²",
-        Optioncai3: "柴³",
-        Optioncai4: "柴⁴",
-        Optioncai5: "柴⁵",
-        Optioncai6: "柴⁶",
-        Optioncai7: "柴⁷",
-
-        Setd2: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
-        Sets4: "SourceCharacter给了DestinationCharacter一只笨蛋的Luzi玩偶.",
-        Setc3: "SourceCharacter给了DestinationCharacter一只超厉害超威严bc第一的Cyäegha大人的眼线!",
-        Setc4: "SourceCharacter给了DestinationCharacter一只超色气的PumpkinPie样子的玩偶.",
-        Setx1: "SourceCharacter给了DestinationCharacter一只城堡真正的主人, 伟大! 优雅! 的吸血鬼始祖岚岚大人样子的玩偶.",
-        Setxppjb1: "SourceCharacter给了DestinationCharacter一只每天都在逛该踹门摸头, QQ乃乃好看到咩噗美少女依伊可.",
-        Setxppjb7: "SourceCharacter给了DestinationCharacter一只上得厅堂下得厨房能文能武优雅高贵从不白给超绝美少女依!",
-        Setxppjb11: "天空一声巨响! 依依玩偶闪亮登场! 缓缓落在了DestinationCharacter怀里.",
-        Setf1: "SourceCharacter给了DestinationCharacter一只会吸血的Axa玩偶.",
-        Setf6: "SourceCharacter给了DestinationCharacter一只热气腾腾的埃菲尔徳玩偶.",
-        Setl43: "SourceCharacter给了DestinationCharacter一只可爱的、毛绒绒的大尾巴巨乳巫女狐幽玉(共感)玩偶.",
-        Setyyx8: "SourceCharacter给了DestinationCharacter一个可怜巴巴的乳胶犬鹤子.",
-        Setnest14: "SourceCharacter给了DestinationCharacter一只邪恶吸血猫, 优雅! 乖巧! 的吸血鬼岚岚眷属样子的玩偶.",
-    },
-};
-
-// 下面是根据上面的内容，生成描述的代码
-// 也就是说，不用手动写描述文字啦，只用写上面的内容就行
 
 /**
  * @typedef {Translation.Entry | string} TypeNameEntry
@@ -732,8 +838,10 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     return pv;
 }, /** @type { Record<string, Number> } */ ({}));
 
-// 生成模块定义
-/** @type {ModularItemModuleConfig []} */
+/**
+ * 生成模块定义
+ * @type {ModularItemModuleConfig []}
+ */
 const modules = Object.entries(typeNameNext)
     .filter(([key]) => enabledModulesKey.has(key))
     .map(([Key, typeName]) => {
@@ -755,6 +863,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     return pv;
 }, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 
+/** 注册菜单模块 */
 modules.forEach((m) => {
     m.DrawData = {
         elementData: m.Options.map((opt, idx) => {
