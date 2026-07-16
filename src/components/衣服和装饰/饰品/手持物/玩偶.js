@@ -612,6 +612,7 @@ const plushieItems = [
     { name: "Sianna", roomAbbr: "qr" },
     { name: "Vemb", roomAbbr: "qr" },
     { name: "Volka", roomAbbr: "qr" },
+    { name: "Angel", roomAbbr: "qr" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
