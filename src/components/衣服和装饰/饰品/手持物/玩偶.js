@@ -90,6 +90,7 @@ const plushieRooms = [
     { abbr: "qq", name: "七七家" },
     { abbr: "gcz", name: "观察者之庭" },
     { abbr: "qr", name: "Quiet Room" },
+    { abbr: "dou", name: "豆子家" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -613,6 +614,14 @@ const plushieItems = [
     { name: "Vemb", roomAbbr: "qr" },
     { name: "Volka", roomAbbr: "qr" },
     { name: "Angel", roomAbbr: "qr" },
+
+    // 豆子家
+    { name: "豆豆", roomAbbr: "dou" },
+    { name: "雪瑾", roomAbbr: "dou" },
+    { name: "布兰绮", roomAbbr: "dou" },
+    { name: "Larl", roomAbbr: "dou" },
+    { name: "愛", roomAbbr: "dou" },
+    { name: "饭团", roomAbbr: "dou" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
