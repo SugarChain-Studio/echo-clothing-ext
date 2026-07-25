@@ -120,7 +120,7 @@ const accessories = [
 ];
 
 export default function () {
-    AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory2"], accessories);
+    AssetManager.addAssetWithConfig(["HairAccessory1", "HairAccessory2", "HairAccessory3", "Hat"], accessories);
     for (const a of accessories) {
         luziSuffixFixups(["HairAccessory1", "HairAccessory2"], a[0].Name);
     }
