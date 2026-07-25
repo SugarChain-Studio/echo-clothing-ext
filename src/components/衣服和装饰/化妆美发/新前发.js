@@ -145,9 +145,19 @@ const assets = [
         }
     ),
     makeFH("前发61", { Layer: [{ Name: "底" }, { Name: "高光" }] }),
+    makeFH("前发62"),
+    makeFH("前发63"),
+    makeFH("前发64"),
+    makeFH("前发65"),
+    makeFH("前发66"),
+    makeFH("前发67"),
+    makeFH("前发68"),
+    makeFH("前发69", { Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }] }),
+    makeFH("前发70"),
+    makeFH("前发71", { Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }] }),
+    makeFH("前发72"),
 ];
 
 export default function () {
     AssetManager.addAssetWithConfig("新前发_Luzi", assets);
 }
-
