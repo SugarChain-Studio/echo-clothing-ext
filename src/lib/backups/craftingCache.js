@@ -5,51 +5,33 @@ import { TranslationUtility } from "@sugarch/bc-mod-i18n";
 
 const dataKey = "EchoClothingCache";
 
-/** @type {Record<string, Translation.Entry>} */
+/** @type {Translation.String} */
 const messages = {
-    title: {
-        CN: "服装拓展 - 制作物品数据恢复",
-        EN: "Echo Clothing - Crafting Data Recovery",
+    CN: {
+        title: "服装拓展 - 制作物品数据恢复",
+        detectionHeader: "<h3>检测到制作物品数据差异</h3>",
+        missingItems: "<p>备份中有{0}件制作物品，当前数据中缺少{1}件物品。</p>",
+        missingItemsList: "<p><b>缺少的物品:</b> {0}</p>",
+        chooseAction: "<p>请选择恢复操作:</p>",
+        restoreMissing: "恢复缺少的物品",
+        keepCurrent: "保留当前数据",
+        noAction: "无操作",
+        noItems: "无",
+        unnamedItem: "未命名物品",
+        moreItems: "...等{0}件物品",
     },
-    detectionHeader: {
-        CN: "<h3>检测到制作物品数据差异</h3>",
-        EN: "<h3>Crafting Data Differences Detected</h3>",
-    },
-    missingItems: {
-        CN: "<p>备份中有{0}件制作物品，当前数据中缺少{1}件物品。</p>",
-        EN: "<p>Backup contains {0} crafting items, {1} items are missing in current data.</p>",
-    },
-    missingItemsList: {
-        CN: "<p><b>缺少的物品:</b> {0}</p>",
-        EN: "<p><b>Missing items:</b> {0}</p>",
-    },
-    chooseAction: {
-        CN: "<p>请选择恢复操作:</p>",
-        EN: "<p>Please choose recovery action:</p>",
-    },
-    restoreMissing: {
-        CN: "恢复缺少的物品",
-        EN: "Restore Missing Items",
-    },
-    keepCurrent: {
-        CN: "保留当前数据",
-        EN: "Keep Current Data",
-    },
-    noAction: {
-        CN: "无操作",
-        EN: "No Action",
-    },
-    noItems: {
-        CN: "无",
-        EN: "None",
-    },
-    unnamedItem: {
-        CN: "未命名物品",
-        EN: "Unnamed Item",
-    },
-    moreItems: {
-        CN: "...等{0}件物品",
-        EN: "...and {0} more items",
+    EN: {
+        title: "Echo Clothing - Crafting Data Recovery",
+        detectionHeader: "<h3>Crafting Data Differences Detected</h3>",
+        missingItems: "<p>Backup contains {0} crafting items, {1} items are missing in current data.</p>",
+        missingItemsList: "<p><b>Missing items:</b> {0}</p>",
+        chooseAction: "<p>Please choose recovery action:</p>",
+        restoreMissing: "Restore Missing Items",
+        keepCurrent: "Keep Current Data",
+        noAction: "No Action",
+        noItems: "None",
+        unnamedItem: "Unnamed Item",
+        moreItems: "...and {0} more items",
     },
 };
 
@@ -339,4 +321,3 @@ export class CraftingCache {
         setup();
     }
 }
-
