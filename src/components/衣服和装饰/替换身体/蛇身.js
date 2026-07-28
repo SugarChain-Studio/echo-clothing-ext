@@ -50,7 +50,7 @@ const asset = {
                         "ClothAccessory_笨笨蛋Luzi",
                     ],
                     Masks: [[100, 500, 300, 630]],
-                    Pose: ["BaseLower", "LegsClosed", "Kneel", "KneelingSpread", "Spread", "LegsOpen"],
+                    Pose: ["BaseLower", "LegsClosed", "Kneel", "KneelingSpread", "Spread"],
                 },
             ],
         },
@@ -74,4 +74,3 @@ export default function () {
     AssetManager.addAssetWithConfig("动物身体_Luzi", asset, { translation, layerNames });
     AssetManager.addAssetWithConfig("Wings", asset, { translation, layerNames });
 }
-

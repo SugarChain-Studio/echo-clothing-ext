@@ -17,12 +17,11 @@ const PoseHideTop = {
  * @type {Readonly<AssetPoseMapping>}
  */
 const PoseHideBottom = {
-    // "BaseLower" | "Kneel" | "KneelingSpread" | "LegsClosed" | "LegsOpen" | "Spread"
+    // "BaseLower" | "Kneel" | "KneelingSpread" | "LegsClosed"  | "Spread"
     BaseLower: PoseType.HIDE,
     Kneel: PoseType.HIDE,
     KneelingSpread: PoseType.HIDE,
     LegsClosed: PoseType.HIDE,
-    LegsOpen: PoseType.HIDE,
     Spread: PoseType.HIDE,
 };
 
@@ -34,12 +33,11 @@ const Constants = {
     PoseHideAll: {
         ...PoseHideTop,
 
-        // "BaseLower" | "Kneel" | "KneelingSpread" | "LegsClosed" | "LegsOpen" | "Spread"
+        // "BaseLower" | "Kneel" | "KneelingSpread" | "LegsClosed" | "Spread"
         BaseLower: PoseType.HIDE,
         Kneel: PoseType.HIDE,
         KneelingSpread: PoseType.HIDE,
         LegsClosed: PoseType.HIDE,
-        LegsOpen: PoseType.HIDE,
         Spread: PoseType.HIDE,
 
         // "Hogtied" | "AllFours" | "Suspension"

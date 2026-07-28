@@ -11,7 +11,6 @@ const asset = {
         Kneel: 0,
         KneelingSpread: 30,
         LegsClosed: 0,
-        LegsOpen: 0,
         Spread: 0,
     },
     Priority: 12,

@@ -12,7 +12,6 @@ const asset = {
         Kneel: 0,
         KneelingSpread: 0,
         LegsClosed: 0,
-        LegsOpen: 0,
         Spread: 0,
     },
     Priority: 22,
@@ -81,4 +80,3 @@ const assetStrings = {
 export default function () {
     AssetManager.addAssetWithConfig("Garters", asset, { extended, translation, layerNames, assetStrings });
 }
-
