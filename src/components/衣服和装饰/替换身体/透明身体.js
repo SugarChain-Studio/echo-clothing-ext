@@ -27,7 +27,7 @@ const asset = {
         "新前发_Luzi",
         "新后发_Luzi",
     ],
-    Layer: [],
+    Layer: [{ Name: "dummy", PoseMapping: {}, AllowColorize: false, HasImage: false }],
 };
 
 const translations = {
@@ -38,4 +38,3 @@ const translations = {
 export default function () {
     AssetManager.addAsset("动物身体_Luzi", asset, undefined, translations);
 }
-
