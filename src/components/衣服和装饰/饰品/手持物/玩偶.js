@@ -92,6 +92,7 @@ const plushieRooms = [
     { abbr: "qr", name: "Quiet Room" },
     { abbr: "dou", name: "豆子家" },
     { abbr: "sx", name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮家" },
+    { abbr: "oukami", name: "Ōkami Dōjō" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -626,8 +627,14 @@ const plushieItems = [
     { name: "愛", roomAbbr: "dou" },
     { name: "饭团", roomAbbr: "dou" },
 
-    // 瑟茜𝓢𝓮𝓻𝓬𝓲𝓮家   
+    // 瑟茜𝓢𝓮𝓻𝓬𝓲𝓮家
     { name: "冰川", roomAbbr: "sx" },
+
+    { name: "Kylie", roomAbbr: "oukami", fileName: "Kylie-Lilja" },
+    { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki-Lilja" },
+    { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki2-Lilja" },
+    { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki3-Lilja" },
+    { name: "Ellie", roomAbbr: "oukami", fileName: "Ellie-Lilja" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
