@@ -594,6 +594,7 @@ const plushieItems = [
     { name: "镜华", roomAbbr: "hati" },
     { name: "珂崧", roomAbbr: "hati" },
     { name: "墨染清黎", roomAbbr: "hati" },
+    { name: "狸猫栖月", roomAbbr: "hati" },
 
     // 七七家
     { name: "七分白衣", roomAbbr: "qq" },
