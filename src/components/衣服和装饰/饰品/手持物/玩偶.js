@@ -136,6 +136,8 @@ const plushieItems = [
     { name: "haru", roomAbbr: "z" },
     { name: "兔叽", roomAbbr: "z" },
     { name: "Lux", roomAbbr: "z" },
+    { name: "礼服童", roomAbbr: "z" },
+    { name: "总裁童", roomAbbr: "z" },
 
     // Catnest
     { name: "XinLian", roomAbbr: "c" },
@@ -589,6 +591,9 @@ const plushieItems = [
     { name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮", roomAbbr: "hati" },
     { name: "九不扶", roomAbbr: "hati" },
     { name: "lily", roomAbbr: "hati" },
+    { name: "镜华", roomAbbr: "hati" },
+    { name: "珂崧", roomAbbr: "hati" },
+    { name: "墨染清黎", roomAbbr: "hati" },
 
     // 七七家
     { name: "七分白衣", roomAbbr: "qq" },
@@ -630,6 +635,7 @@ const plushieItems = [
     // 瑟茜𝓢𝓮𝓻𝓬𝓲𝓮家
     { name: "冰川", roomAbbr: "sx" },
 
+    // Ōkami Dōjō
     { name: "Kylie", roomAbbr: "oukami", fileName: "Kylie-Lilja" },
     { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki-Lilja" },
     { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki2-Lilja" },
