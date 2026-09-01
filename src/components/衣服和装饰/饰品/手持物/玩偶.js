@@ -350,6 +350,7 @@ const plushieItems = [
     { name: "歪歪", roomAbbr: "lkls" },
     { name: "凌雨", roomAbbr: "lkls" },
     { name: "小风", roomAbbr: "lkls" },
+    { name: "Hane", roomAbbr: "lkls" },
 
     // Celestial Enchants
     { name: "Celiko", roomAbbr: "ce" },
@@ -401,7 +402,7 @@ const plushieItems = [
     { name: "Lana", roomAbbr: "nest" },
     { name: "枳", roomAbbr: "nest" },
     { name: "Arco", roomAbbr: "nest" },
-    { name: "Rinko", roomAbbr: "nest" },
+    { name: "Rinko", roomAbbr: "l" },
     {
         name: "姜海琳3",
         roomAbbr: "nest",
@@ -413,6 +414,8 @@ const plushieItems = [
     { name: "Elara", roomAbbr: "nest" },
     { name: "碧洛蒂丝2", roomAbbr: "nest" },
     { name: "荀", roomAbbr: "nest" },
+    { name: "希娅", roomAbbr: "nest" },
+    { name: "娅娅2", roomAbbr: "nest" },
 
     // Foxys Fun Experience
     { name: "Gab", roomAbbr: "ffe" },
@@ -519,6 +522,7 @@ const plushieItems = [
     { name: "tiancai", roomAbbr: "yes" },
     { name: "haikou", roomAbbr: "yes" },
     { name: "银河", roomAbbr: "yes" },
+    { name: "七海", roomAbbr: "yes" },
 
     // 妖精小屋
     { name: "菲露亚", roomAbbr: "yjxw" },
@@ -531,6 +535,9 @@ const plushieItems = [
     { name: "云海", roomAbbr: "yjxw" },
     { name: "梦梦2", roomAbbr: "yjxw" },
     { name: "米莉", roomAbbr: "yjxw" },
+    { name: "娅娅", roomAbbr: "yjxw" },
+    { name: "蓓蓓(泡泡粉)", roomAbbr: "yjxw" },
+    { name: "蓓蓓(云锦白)", roomAbbr: "yjxw" },
 
     // 血天使的住所
     { name: "小粽子", roomAbbr: "xts" },
@@ -611,6 +618,12 @@ const plushieItems = [
     { name: "kit", roomAbbr: "gcz" },
     { name: "kit(小浣熊)", roomAbbr: "gcz" },
     { name: "kit(狐仙)", roomAbbr: "gcz" },
+    { name: "羽1", roomAbbr: "gcz" },
+    { name: "羽2", roomAbbr: "gcz" },
+    { name: "kit(恶魔)", roomAbbr: "gcz" },
+    { name: "kit(恶魔猫)", roomAbbr: "gcz" },
+    { name: "kit(小恶魔)", roomAbbr: "gcz" },
+    { name: "月饼(狐仙)", roomAbbr: "gcz" },
 
     // Quiet Room
     { name: "Yormi", roomAbbr: "qr" },
