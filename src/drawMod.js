@@ -13,28 +13,51 @@ export default function () {
             "GLDrawClearRect(GLDrawCanvas.GL, 0, 0, 2000, CanvasDrawHeight, 0);",
     });
 
-    HookManager.patchFunction("GLDrawAppearanceBuild", {
-        // 在 0px-1000px 的区域绘制角色，1000px-2000px 的区域绘制眨眼
-        "const blinkOffset = 500;": "const blinkOffset = 1000;",
+    if (GameVersion === "R131") {
+        HookManager.patchFunction("GLDrawAppearanceBuild", {
+            // 在 0px-1000px 的区域绘制角色，1000px-2000px 的区域绘制眨眼
+            "const blinkOffset = 500;": "const blinkOffset = 1000;",
 
-        "GLDrawClearRect(GLDrawCanvas.GL, 0, 0, 1000, CanvasDrawHeight, 0);":
-            "GLDrawClearRect(GLDrawCanvas.GL, 0, 0, 2000, CanvasDrawHeight, 0);",
+            "GLDrawClearRect(GLDrawCanvas.GL, 0, 0, 1000, CanvasDrawHeight, 0);":
+                "GLDrawClearRect(GLDrawCanvas.GL, 0, 0, 2000, CanvasDrawHeight, 0);",
 
-        // 将角色移动到宽度 1000px 的区域的中间，即 250px-750px 的区域
-        "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, 0)":
-            "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, 250)",
-        "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, blinkOffset)":
-            "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, blinkOffset + 250)",
+            // 将角色移动到宽度 1000px 的区域的中间，即 250px-750px 的区域
+            "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, 0)":
+                "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, 250)",
+            "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, blinkOffset)":
+                "GLDrawClearRect(GLDrawCanvas.GL, x, CanvasDrawHeight - y - h, w, h, blinkOffset + 250)",
 
-        "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, 0),": "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, 250),",
-        "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset),":
-            "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset + 250),",
+            "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, 0),": "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, 250),",
+            "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset),":
+                "GLDrawImage(src, GLDrawCanvas.GL, x, y, opts, blinkOffset + 250),",
 
-        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 0, alphaMasks":
-            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 250, alphaMasks",
-        "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset, alphaMasks":
-            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset + 250, alphaMasks",
-    });
+            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 0, alphaMasks":
+                "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, 250, alphaMasks",
+            "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset, alphaMasks":
+                "GLDraw2DCanvas(GLDrawCanvas.GL, Img, x, y, blinkOffset + 250, alphaMasks",
+        });
+    } else {
+        HookManager.patchFunction("GLDrawAppearanceBuild", {
+            // 在 0px-1000px 的区域绘制角色，1000px-2000px 的区域绘制眨眼
+            "const blinkOffset = 500;": "const blinkOffset = 1000;",
+
+            "GLDrawClearRect(gl, 0, 0, 1000, CanvasDrawHeight, 0);":
+                "GLDrawClearRect(gl, 0, 0, 2000, CanvasDrawHeight, 0);",
+
+            // 将角色移动到宽度 1000px 的区域的中间，即 250px-750px 的区域
+            "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, 0)":
+                "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, 250)",
+            "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, blinkOffset)":
+                "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, blinkOffset + 250)",
+
+            "GLDrawImage(src, gl, x, y, opts, 0),": "GLDrawImage(src, gl, x, y, opts, 250),",
+            "GLDrawImage(src, gl, x, y, opts, blinkOffset),": "GLDrawImage(src, gl, x, y, opts, blinkOffset + 250),",
+
+            "GLDraw2DCanvas(gl, Img, x, y, 0, alphaMasks": "GLDraw2DCanvas(gl, Img, x, y, 250, alphaMasks",
+            "GLDraw2DCanvas(gl, Img, x, y, blinkOffset, alphaMasks":
+                "GLDraw2DCanvas(gl, Img, x, y, blinkOffset + 250, alphaMasks",
+        });
+    }
 
     // CommonDrawCanvasPrepare 函数调用时机非常早，修改效果并不能保证生效，通过在 DrawCharacter 中修改Canvas的宽度来保证效果生效
     HookManager.patchFunction("CommonDrawCanvasPrepare", {
