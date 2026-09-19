@@ -94,7 +94,7 @@ const plushieRooms = [
     { abbr: "sx", name: "瑟茜𝓢𝓮𝓻𝓬𝓲𝓮家" },
     { abbr: "oukami", name: "Ōkami Dōjō" },
     { abbr: "RBS", name: "Remi Bondage Service" },
-    // { abbr: "jy", name: "九灣" },
+    { abbr: "jy", name: "九灣" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -611,9 +611,9 @@ const plushieItems = [
     { name: "Penny", roomAbbr: "qq" },
     { name: "樱和七分白衣", roomAbbr: "qq" },
     { name: "蓝月", roomAbbr: "qq" },
-    // { name: "雨希", roomAbbr: "qq" },
-    // { name: "雨希和七分白衣", roomAbbr: "qq" },
-    // { name: "蓝月和七分白衣", roomAbbr: "qq" },
+    { name: "雨希", roomAbbr: "qq" },
+    { name: "雨希和七分白衣", roomAbbr: "qq" },
+    { name: "蓝月和七分白衣", roomAbbr: "qq" },
 
     // 观察者之庭
     { name: "妄羽", roomAbbr: "gcz" },
@@ -660,23 +660,23 @@ const plushieItems = [
     { name: "Kiki", roomAbbr: "oukami", fileName: "Kiki3-Lilja" },
     { name: "Ellie", roomAbbr: "oukami", fileName: "Ellie-Lilja" },
 
-    // // Remi Bondage Service
-    // { name: "lizzy", roomAbbr: "RBS" },
-    // { name: "akiroo", roomAbbr: "RBS" },
-    // { name: "aria", roomAbbr: "RBS" },
-    // { name: "Arteriel", roomAbbr: "RBS" },
-    // { name: "hu", roomAbbr: "RBS" },
-    // { name: "ivy", roomAbbr: "RBS" },
-    // { name: "kiyo", roomAbbr: "RBS" },
-    // { name: "nhiii", roomAbbr: "RBS" },
-    // { name: "Remilia", roomAbbr: "RBS" },
-    // { name: "谧娆", roomAbbr: "RBS" },
-    // { name: "小舞", roomAbbr: "RBS" },
+    // Remi Bondage Service
+    { name: "lizzy", roomAbbr: "RBS" },
+    { name: "akiroo", roomAbbr: "RBS" },
+    { name: "aria", roomAbbr: "RBS" },
+    { name: "Arteriel", roomAbbr: "RBS" },
+    { name: "hu", roomAbbr: "RBS" },
+    { name: "ivy", roomAbbr: "RBS" },
+    { name: "kiyo", roomAbbr: "RBS" },
+    { name: "nhiii", roomAbbr: "RBS" },
+    { name: "Remilia", roomAbbr: "RBS" },
+    { name: "谧娆", roomAbbr: "RBS" },
+    { name: "小舞", roomAbbr: "RBS" },
 
-    // // 九灣
-    // { name: "清芙", roomAbbr: "jw" },
-    // { name: "小咪", roomAbbr: "jw" },
-    // { name: "lily", roomAbbr: "jw" },
+    // 九灣
+    { name: "清芙", roomAbbr: "jy" },
+    { name: "小咪", roomAbbr: "jy" },
+    { name: "lily", roomAbbr: "jy" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
