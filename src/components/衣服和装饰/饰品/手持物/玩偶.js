@@ -95,6 +95,7 @@ const plushieRooms = [
     { abbr: "oukami", name: "Ōkami Dōjō" },
     { abbr: "RBS", name: "Remi Bondage Service" },
     { abbr: "jy", name: "九灣" },
+    { abbr: "bedroom", name: "Bed Room" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -353,6 +354,8 @@ const plushieItems = [
     { name: "凌雨", roomAbbr: "lkls" },
     { name: "小风", roomAbbr: "lkls" },
     { name: "Hane", roomAbbr: "lkls" },
+    { name: "慕颜", roomAbbr: "lkls" },
+    { name: "莉柯莉絲4", roomAbbr: "lkls" },
 
     // Celestial Enchants
     { name: "Celiko", roomAbbr: "ce" },
@@ -677,6 +680,12 @@ const plushieItems = [
     { name: "清芙", roomAbbr: "jy" },
     { name: "小咪", roomAbbr: "jy" },
     { name: "lily", roomAbbr: "jy" },
+    { name: "Sally", roomAbbr: "jy" },
+
+    // bedroom
+    { name: "慕颜(猫咪)", roomAbbr: "bedroom" },
+    { name: "渔舟", roomAbbr: "bedroom" },
+    { name: "龙", roomAbbr: "bedroom" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
