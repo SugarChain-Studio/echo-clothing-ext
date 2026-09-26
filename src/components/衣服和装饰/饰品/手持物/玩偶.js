@@ -356,6 +356,7 @@ const plushieItems = [
     { name: "Hane", roomAbbr: "lkls" },
     { name: "慕颜", roomAbbr: "lkls" },
     { name: "莉柯莉絲4", roomAbbr: "lkls" },
+    { name: "莉柯莉絲5", roomAbbr: "lkls" },
 
     // Celestial Enchants
     { name: "Celiko", roomAbbr: "ce" },
