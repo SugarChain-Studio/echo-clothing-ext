@@ -10,12 +10,12 @@ const asset = [
             Random: false,
             Left: 0,
             Top: 0,
-            ParentGroup: {},
+            // ParentGroup: {},
             PoseMapping: PoseMapTool.config(
                 ["LegsClosed", "Spread"],
                 ["AllFours", "Kneel", "KneelingSpread", "Hogtied"]
             ),
-            Layer: [],
+            // Layer: [],
         },
         {
             translation: { CN: "蝴蝶结鞋子", EN: "Bow Shoes" },
