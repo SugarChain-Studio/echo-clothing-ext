@@ -27,29 +27,29 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.59.0)
       '@sugarch/bc-asset-manager':
-        specifier: ^1.4.1
-        version: 1.4.1(@sugarch/bc-mod-hook-manager@0.3.4(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
+        specifier: ^1.4.2
+        version: 1.4.2(@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-event-handler':
         specifier: ^1.0.4
-        version: 1.0.4(@sugarch/bc-mod-hook-manager@0.3.4(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
+        version: 1.0.4(@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-mod-hook-manager':
-        specifier: ^0.3.4
-        version: 0.3.4(bondage-club-mod-sdk@1.2.0)
+        specifier: ^0.3.5
+        version: 0.3.5(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-mod-i18n':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5
       '@sugarch/bc-mod-types':
-        specifier: ^0.6.4
-        version: 0.6.4
+        specifier: ^0.6.5
+        version: 0.6.5
       '@sugarch/bc-mod-utility':
-        specifier: ^0.2.11
-        version: 0.2.11
+        specifier: ^0.2.12
+        version: 0.2.12
       '@typescript-eslint/parser':
         specifier: ^8.56.1
         version: 8.56.1(eslint@10.0.2)(typescript@5.9.3)
       bc-stubs:
-        specifier: 129.0.0-Beta.1
-        version: 129.0.0-Beta.1
+        specifier: 132.0.0
+        version: 132.0.0
       bondage-club-mod-sdk:
         specifier: ^1.2.0
         version: 1.2.0
@@ -408,10 +408,10 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
-  '@sugarch/bc-asset-manager@1.4.1':
-    resolution: {integrity: sha512-DRwcVv+O/CsAd0LYLEIeFWoMTs25GLnHV+SES1QHnnbpw7gsFKhVYWVQXxneuPL7V9ZX2Ph2flYqjn/LdZeDZA==}
+  '@sugarch/bc-asset-manager@1.4.2':
+    resolution: {integrity: sha512-ONO51SlA/3bCf838upyVpNtQe080Z8nSI8ogfP/QMPyP+03ir4t/KS2r2SFWX7w/wznvws0OudanHTM++8YAYg==}
     peerDependencies:
-      '@sugarch/bc-mod-hook-manager': 0.3.4
+      '@sugarch/bc-mod-hook-manager': 0.3.5
       bondage-club-mod-sdk: ^1.2.0
 
   '@sugarch/bc-event-handler@1.0.4':
@@ -420,19 +420,22 @@ packages:
       '@sugarch/bc-mod-hook-manager': 0.3.4
       bondage-club-mod-sdk: ^1.2.0
 
-  '@sugarch/bc-mod-hook-manager@0.3.4':
-    resolution: {integrity: sha512-pW3n1ITeAGjzGW9I8Ax0fBiuQPRlB+5TxkTIrMC8L+mNrefok50AUFkQkwnKlRf8R9xjMqIKKzIhfITIxa8jsA==}
+  '@sugarch/bc-mod-hook-manager@0.3.5':
+    resolution: {integrity: sha512-YRA2WgyIqxbqBn3pFCB/VTTMmlw1EX1PShvtkpwyYooxYrDValYQC6BXGgkrpq1Q3ZvL4a1VoBTPwkuERIiOcQ==}
     peerDependencies:
       bondage-club-mod-sdk: ^1.2.0
 
-  '@sugarch/bc-mod-i18n@0.0.4':
-    resolution: {integrity: sha512-WfRYUnTeShFu4MLkPGTau4gYZxZQziIYGAoewZyGddQkTQX1iKGiMBLvysgXxw1qmabd3j4upf+JPH0swcMgXA==}
+  '@sugarch/bc-mod-i18n@0.0.5':
+    resolution: {integrity: sha512-uOIwv6GOjIl76kuUOcBRm0v7EA77JuG7ICFItkSsd2nSFnTQWjvzSDlHkp1rXizXAaksKGgp2B/jiHEflAGTrA==}
 
   '@sugarch/bc-mod-types@0.6.4':
     resolution: {integrity: sha512-NKRM++hvpiDV+s/WG6BE/i6nutaBigGmbteRxN083/hgbi2RW2Tysq7LJYSrZJz8iN3zwxPOdeqjHdUbMeARhw==}
 
-  '@sugarch/bc-mod-utility@0.2.11':
-    resolution: {integrity: sha512-Zbr4lJp6IkM4rBUTcnb2HzW5rY9tplcrADF9wWpiFfRPOdRy0iE4u7usGIZy9HS6TCBW5uwcYfgWgU73oz7rnw==}
+  '@sugarch/bc-mod-types@0.6.5':
+    resolution: {integrity: sha512-TvFnkyXFB/VzQ+PcMMr76YLh8mwLwd2Tkx+HDQmHhKjc0CZ39QGJZoyk4AQ3MgPkA45b6jBipi8alhXaGgU3rg==}
+
+  '@sugarch/bc-mod-utility@0.2.12':
+    resolution: {integrity: sha512-7s3bgSOYi3JAdYyamgFhMuv3pO3ls9zsN/Om47N4M2vcfcnsIV56tJqoPEu4sbvE0eCHkJUOQan6eyzZrHeW/A==}
 
   '@total-typescript/ts-reset@0.6.1':
     resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
@@ -555,8 +558,8 @@ packages:
     resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
     engines: {node: '>= 0.8'}
 
-  bc-stubs@129.0.0-Beta.1:
-    resolution: {integrity: sha512-gj2J1yviCKxnwSaGLPahiFP+1vAmbnH7+uk/KzxYdGlNFrxms793F95kgebiszecD1hN9ZPgcdRCtQ88rUfoCA==}
+  bc-stubs@132.0.0:
+    resolution: {integrity: sha512-mYQx/aBFyZ+Ma4wQ1Sr8hJuxR16czg5Bo2F/w0Ynx6iEMmOMHSwyAXKe5hTCUNirruJTzTQWlMi0vYTFHpQ2GQ==}
 
   bondage-club-mod-sdk@1.2.0:
     resolution: {integrity: sha512-S+li+PgX7Qo5yccS/R/eAXC4Opq8lc5AdhTPjC2XhWxDGTieUQKj3QJ4ZLgL8x0ySnK7h+DvlkRZd8+OT5JErQ==}
@@ -1234,11 +1237,6 @@ packages:
   secure-compare@3.0.1:
     resolution: {integrity: sha512-AckIIV90rPDcBcglUwXPF3kg0P0qmPsPXAj6BBEENQE1p5yA1xfmDJzfi1Tappj37Pv2mVbKpL3Z1T+Nn7k1Qw==}
 
-  semver@7.7.2:
-    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.7.4:
     resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
     engines: {node: '>=10'}
@@ -1286,8 +1284,8 @@ packages:
     resolution: {integrity: sha512-5UswCV6hpaRsNg5kkEHVcbBIXEYoVbMQaHJBXJCyEQ+CiFPV1NIOY0XOFWG4XR4GZcB8Kn6AsRs/9cy9TbqVMQ==}
     engines: {node: '>=10.0.0'}
 
-  socket.io-parser@4.2.6:
-    resolution: {integrity: sha512-asJqbVBDsBCJx0pTqw3WfesSY0iRX+2xzWEWzrpcH7L6fLzrhyF8WPI8UaeM4YCuDfpwA/cgsdugMsmtz8EJeg==}
+  socket.io-parser@4.2.7:
+    resolution: {integrity: sha512-IH/iSeO9T6gz1KkFleGDWkG9N3dl4jXVYUtMhIqH10Md0ttMer8nUNWiP1DKuNrybD2xBrixLJdCC9J6ECoYkg==}
     engines: {node: '>=10.0.0'}
 
   source-map-support@0.5.21:
@@ -1474,7 +1472,7 @@ snapshots:
     dependencies:
       '@simple-libs/child-process-utils': 1.0.1
       '@simple-libs/stream-utils': 1.1.0
-      semver: 7.7.2
+      semver: 7.7.4
     optionalDependencies:
       conventional-commits-filter: 5.0.0
       conventional-commits-parser: 6.2.0
@@ -1694,34 +1692,36 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@sugarch/bc-asset-manager@1.4.1(@sugarch/bc-mod-hook-manager@0.3.4(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-asset-manager@1.4.2(@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
     dependencies:
-      '@sugarch/bc-mod-hook-manager': 0.3.4(bondage-club-mod-sdk@1.2.0)
-      '@sugarch/bc-mod-i18n': 0.0.4
+      '@sugarch/bc-mod-hook-manager': 0.3.5(bondage-club-mod-sdk@1.2.0)
+      '@sugarch/bc-mod-i18n': 0.0.5
+      '@sugarch/bc-mod-types': 0.6.5
+      bondage-club-mod-sdk: 1.2.0
+
+  '@sugarch/bc-event-handler@1.0.4(@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+    dependencies:
+      '@sugarch/bc-mod-hook-manager': 0.3.5(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-mod-types': 0.6.4
       bondage-club-mod-sdk: 1.2.0
 
-  '@sugarch/bc-event-handler@1.0.4(@sugarch/bc-mod-hook-manager@0.3.4(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0)':
     dependencies:
-      '@sugarch/bc-mod-hook-manager': 0.3.4(bondage-club-mod-sdk@1.2.0)
-      '@sugarch/bc-mod-types': 0.6.4
+      '@sugarch/bc-mod-types': 0.6.5
       bondage-club-mod-sdk: 1.2.0
 
-  '@sugarch/bc-mod-hook-manager@0.3.4(bondage-club-mod-sdk@1.2.0)':
+  '@sugarch/bc-mod-i18n@0.0.5':
     dependencies:
-      '@sugarch/bc-mod-types': 0.6.4
-      bondage-club-mod-sdk: 1.2.0
-
-  '@sugarch/bc-mod-i18n@0.0.4':
-    dependencies:
-      '@sugarch/bc-mod-types': 0.6.4
+      '@sugarch/bc-mod-types': 0.6.5
 
   '@sugarch/bc-mod-types@0.6.4': {}
 
-  '@sugarch/bc-mod-utility@0.2.11':
+  '@sugarch/bc-mod-types@0.6.5': {}
+
+  '@sugarch/bc-mod-utility@0.2.12':
     dependencies:
       '@types/semver': 7.7.1
-      semver: 7.7.2
+      semver: 7.7.4
 
   '@total-typescript/ts-reset@0.6.1': {}
 
@@ -1845,7 +1845,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.1.2
 
-  bc-stubs@129.0.0-Beta.1:
+  bc-stubs@132.0.0:
     dependencies:
       '@total-typescript/ts-reset': 0.6.1
       socket.io-client: 4.6.1
@@ -1926,7 +1926,7 @@ snapshots:
       conventional-commits-filter: 5.0.0
       handlebars: 4.7.8
       meow: 13.2.0
-      semver: 7.7.2
+      semver: 7.7.4
 
   conventional-changelog@7.1.1(conventional-commits-filter@5.0.0):
     dependencies:
@@ -2397,7 +2397,7 @@ snapshots:
   normalize-package-data@7.0.1:
     dependencies:
       hosted-git-info: 8.1.0
-      semver: 7.7.2
+      semver: 7.7.4
       validate-npm-package-license: 3.0.4
 
   object-inspect@1.13.4: {}
@@ -2559,8 +2559,6 @@ snapshots:
 
   secure-compare@3.0.1: {}
 
-  semver@7.7.2: {}
-
   semver@7.7.4: {}
 
   serialize-javascript@6.0.2:
@@ -2612,13 +2610,13 @@ snapshots:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.3.7
       engine.io-client: 6.4.0
-      socket.io-parser: 4.2.6
+      socket.io-parser: 4.2.7
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  socket.io-parser@4.2.6:
+  socket.io-parser@4.2.7:
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3
