@@ -156,7 +156,7 @@ declare namespace ItemDialog {
 }
 
 declare namespace ContainerProperty {
-    interface ContainerData extends Omit<Item, "Asset"> {
+    interface ContainerData extends Omit<Item, "Asset" | "Difficulty" | "Color"> {
         IAsset?: string;
         IGroup?: AssetGroupItemName;
     }

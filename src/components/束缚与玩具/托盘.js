@@ -170,7 +170,7 @@ function takeItem(tray) {
         const value = validTarget[target];
 
         const idx = props.Luzi_InventoryContent.indexOf(value);
-        props.Luzi_InventoryContent[idx] = {};
+        props.Luzi_InventoryContent[idx] = { Property: {} };
 
         const item = InventoryWear(Player, "杯饮", "ItemHandheld");
         if (!item) return undefined;
@@ -230,7 +230,7 @@ const itemDialog = createItemDialogNoArch({
                 const property = /** @type {ExtendItemProperties}*/ (item.Property);
                 property.Luzi_InventoryType = "曲奇";
                 if (!Array.isArray(property.Luzi_InventoryContent)) property.Luzi_InventoryContent = [];
-                property.Luzi_InventoryContent.push({});
+                property.Luzi_InventoryContent.push({ Property: {} });
             },
             actionKey: "A曲奇加一",
             actionProcess,
@@ -254,7 +254,7 @@ const itemDialog = createItemDialogNoArch({
             onclick: ({ item }) => {
                 const property = /** @type {ExtendItemProperties}*/ (item.Property);
                 property.Luzi_InventoryType = "曲奇";
-                property.Luzi_InventoryContent = Array.from({ length: maxv.曲奇 }, () => ({}));
+                property.Luzi_InventoryContent = Array.from({ length: maxv.曲奇 }, () => ({ Property: {} }));
             },
             actionKey: "A曲奇加满",
             actionProcess,
@@ -270,7 +270,7 @@ const itemDialog = createItemDialogNoArch({
                             const property = /** @type {ExtendItemProperties}*/ (item.Property);
                             property.Luzi_InventoryType = "饮料";
                             if (property.Luzi_InventoryContent.length < maxv.饮料)
-                                property.Luzi_InventoryContent.push({ IAsset: drink });
+                                property.Luzi_InventoryContent.push({ IAsset: drink, Property: {} });
                             else property.Luzi_InventoryContent.find((it) => !it.IAsset).IAsset = drink;
                         },
                         actionKey: `A加${drink}`,
@@ -530,4 +530,3 @@ export default function () {
         (type) => `Assets/Female3DCG/ItemTorso/托盘_饮料-${type}.png`
     );
 }
-

@@ -1127,7 +1127,9 @@ HookManager.hookFunction("DrawCharacter", 0, (args, next) => {
     );
     if (headItem && headItem.Property?.TypeRecord?.v > 0) {
         const blockValue = headItem.Property?.TypeRecord?.ib ?? 0;
-        ChatRoomHideIconState = Math.max(ChatRoomHideIconState, blockValue > 0 ? blockValue + 1 : 0);
+        ChatRoomHideIconState = /** @type {typeof ChatRoomHideIconState} */ (
+            Math.max(ChatRoomHideIconState, blockValue > 0 ? blockValue + 1 : 0)
+        );
     }
     const ret = next(args);
     ChatRoomHideIconState = oldChatRoomHideIconState;
@@ -1155,12 +1157,19 @@ function injectItemClickStatus() {
     if (!target[key]) target[key] = callback;
 }
 
+/**
+ * @param {CraftingItem | CraftingPartialItem} craft
+ * @returns {craft is CraftingItem} */
+function isCraftItem(craft) {
+    return /** @type {any} */ (craft)?.Lock !== undefined;
+}
+
 HookManager.hookFunction("InventoryWear", 0, (args, next) => {
     const [C, assetName, _1, _2, _3, _4, Craft] = args;
 
     const ret = next(args);
 
-    if (C.IsPlayer() && assetName === "义肢拘束A" && Craft?.Lock === undefined) {
+    if (C.IsPlayer() && assetName === "义肢拘束A" && isCraftItem(Craft) && Craft.Lock !== "") {
         ret.Property ??= {};
         armProp(ret).LuziPRRoleplay = true;
     }

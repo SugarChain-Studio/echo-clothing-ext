@@ -1,6 +1,6 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
-import { Layer } from "@local/lib/type";
+import { Layer, Type } from "@local/lib/type";
 import { createAfterDrawProcess } from "@local/lib/draw";
 
 /** @type {Partial<CustomAssetDefinitionItem>} */
@@ -63,7 +63,7 @@ const translation = {
     EN: "EvilFall Mask",
 };
 
-const itemAssetBase = /** @type {CustomAssetDefinition} */ ({ ...asset, ...itemAttr });
+const itemAssetBase = /** @type {CustomAssetDefinitionItem} */ ({ ...asset, ...itemAttr });
 
 /**
  * @typedef {object} CanvasCacheData
@@ -181,8 +181,8 @@ const config = { layerNames, translation, extended, assetStrings };
 const assetN = [
     ["Mask", asset, config],
     ["ItemMouth", itemAssetBase, config],
-    ["ItemMouth2", { ...itemAssetBase, Block: ["ItemMouth"] }, config],
-    ["ItemMouth3", { ...itemAssetBase, Block: ["ItemMouth", "ItemMouth2"] }, config],
+    ["ItemMouth2", { ...itemAssetBase, Block: Type.groups(["ItemMouth"]) }, config],
+    ["ItemMouth3", { ...itemAssetBase, Block: Type.groups(["ItemMouth", "ItemMouth2"]) }, config],
 ];
 
 export default function () {

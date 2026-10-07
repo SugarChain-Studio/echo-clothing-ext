@@ -1,7 +1,7 @@
 import { Tools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
 
-/** @type { CustomAssetDefinition} */
+/** @type { CustomAssetDefinitionBase } */
 const asset = {
     Name: "时尚口罩",
     Random: false,
@@ -82,7 +82,7 @@ export default function () {
     AssetManager.addAssetWithConfig([
         [
             "Mask",
-            asset,
+            /** @type {CustomAssetDefinitionAppearance} */ (asset),
             {
                 ...config,
                 extended: {
@@ -97,7 +97,11 @@ export default function () {
         ],
         [
             ["ItemMouth", "ItemMouth2", "ItemMouth3"],
-            { ...asset, Prerequisite: ["GagFlat"], Effect: [] },
+            {
+                .../** @type {CustomAssetDefinitionItem} */ (asset),
+                Prerequisite: /** @type {AssetPrerequisite[]} */ (["GagFlat"]),
+                Effect: [],
+            },
             {
                 ...config,
                 extended: {
@@ -116,4 +120,3 @@ export default function () {
         ],
     ]);
 }
-
