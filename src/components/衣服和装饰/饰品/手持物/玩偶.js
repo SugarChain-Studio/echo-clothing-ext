@@ -96,6 +96,7 @@ const plushieRooms = [
     { abbr: "RBS", name: "Remi Bondage Service" },
     { abbr: "jy", name: "九灣" },
     { abbr: "bedroom", name: "Bed Room" },
+    { abbr: "zss", name: "这是啥" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -688,6 +689,10 @@ const plushieItems = [
     { name: "渔舟", roomAbbr: "bedroom" },
     { name: "龙", roomAbbr: "bedroom" },
     { name: "小渔", roomAbbr: "bedroom" },
+
+    // 这是啥
+    { name: "魔女荀", roomAbbr: "zss" },
+    { name: "女仆荀", roomAbbr: "zss" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
