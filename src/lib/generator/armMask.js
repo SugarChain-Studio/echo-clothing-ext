@@ -1,7 +1,7 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
 import { cachePreloadGL } from "../load/cachePreload";
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { onImageRefresh } from "../imageRefresh";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
@@ -135,14 +135,12 @@ function createArmMaskForGroupedCloth(assets, mode = "") {
     }
 }
 
-HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
-    const [URL] = args;
-    if (URL?.src?.includes(argMaskGroup)) {
+onImageRefresh((url) => {
+    if (url.includes(argMaskGroup)) {
         Character.filter((c) =>
             c.Appearance.some((item) => itemSet.has(`${item.Asset.Group.Name}::${item.Asset.Name}`))
         ).forEach((c) => (c.MustDraw = true));
     }
-    return next(args);
 });
 
 export class ArmMaskTool {
