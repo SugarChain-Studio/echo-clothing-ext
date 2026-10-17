@@ -2,7 +2,7 @@
  * @typedef {"可乐" | "橙汁" | "牛奶" | "空杯"} DrinkType
  */
 
-import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { onImageRefresh } from "../imageRefresh";
 import { AssetManager } from "@local/AssetManager";
 
 const drinkList = /** @type {const} */ (["可乐", "橙汁", "牛奶", "空杯"]);
@@ -30,14 +30,11 @@ export function registerDrinkLayers(assetId, layerName) {
     registeredAssets.push(`${assetId.Group}::${assetId.Name}`);
 }
 
-HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
-    const ret = next(args);
-    const [URL] = args;
-    if (URL && URL.src && URL.src.includes("Icons/Luzi_GlassDrink_")) {
+onImageRefresh((url) => {
+    if (url.includes("Icons/Luzi_GlassDrink_")) {
         Character.filter((c) =>
             c.Appearance.some((app) => registeredAssets.includes(`${app.Asset.Group.Name}::${app.Asset.Name}`))
         ).forEach((c) => (c.MustDraw = true));
     }
-    return ret;
 });
 
