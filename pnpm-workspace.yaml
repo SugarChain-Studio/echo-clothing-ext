@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - "@sugarch/bc-asset-manager@1.4.7"
+  - "@sugarch/bc-mod-utility@0.2.13"
