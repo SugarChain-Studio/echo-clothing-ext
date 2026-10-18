@@ -76,8 +76,11 @@ AssetManager.afterLoad(() => {
     LoginInventoryFixups.push(...myFixups);
 });
 
-HookManager.hookFunction("LoginPerformCraftingFixups", 0, (args, next) => {
-    performWardrobeFixup(Player);
+const insideFlag = HookManager.insideFlag("CraftingLoadServer");
+HookManager.hookFunction("CraftingDecompressServerData", 0, (args, next) => {
+    if (insideFlag.inside) {
+        performWardrobeFixup(Player);
+    }
 
     return next(args);
 });
