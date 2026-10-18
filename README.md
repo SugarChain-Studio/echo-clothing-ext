@@ -62,7 +62,7 @@ It adds extra clothes categories in the wardrobe after the original body zones, 
 
 All the new clothing, binding, and wardrobe slots are invisible to those who don't use the script.
 
-## 额外的服装槽位 和 一些bug😶
+## Contact
 
 Discord：<https://discord.gg/K9YnNqsNKx>
 
