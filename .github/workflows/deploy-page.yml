@@ -152,7 +152,6 @@ jobs:
         run: echo "${{ steps.changelog.outputs.message }}"
 
       - name: Discord notification
-        uses: appleboy/discord-action@v1.2.0
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          message: ${{ steps.changelog.outputs.message }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node ./scripts/.discord-notify.js temp.txt
