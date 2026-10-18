@@ -132,7 +132,7 @@ export class PartsMask {
             ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
             for (const [url, x, y] of newState) {
                 const img = DrawGetImage(url);
-                ctx.drawImage(img, x, y - CanvasUpperOverflow);
+                if (img) ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
             this._state = newState;
         }
@@ -144,7 +144,7 @@ export class PartsMask {
             ctx.globalCompositeOperation = "destination-out";
             for (const [url, x, y] of nrState) {
                 const img = DrawGetImage(url);
-                ctx.drawImage(img, x, y - CanvasUpperOverflow);
+                if (img) ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
             this._rState = nrState;
         }
