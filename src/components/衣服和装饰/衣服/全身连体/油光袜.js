@@ -377,15 +377,24 @@ const preload = () => {
                         ctx.fillRect(0, 0, 500, 1000);
                     }
 
-                    /** @type {(mSource: string) => Promise<HTMLImageElement>} */
-                    const getImage = async (mSource) =>
-                        /** @type {Promise<HTMLImageElement>}*/ (
-                            new Promise((resolve) => {
-                                const img = DrawGetImage(mSource);
-                                if (img.complete) resolve(img);
-                                else img.addEventListener("load", () => resolve(img));
-                            })
-                        );
+                    /** @type {(mSource: string) => Promise<ImageBitmap>} */
+                    const getImage = async (mSource) => {
+                        // R133 开始，改用 DrawImageCache 进行图片获取
+                        // bc-stubs 在修改时仍在 R132 版本，使用 @ts-ignore 忽略类型检查
+                        // @ts-ignore
+                        let waits = 10;
+                        while (true) {
+                            // @ts-ignore
+                            if (!!DrawImageCache) {
+                                const ret = DrawGetImage(mSource);
+                                // @ts-ignore
+                                if (!!ret) return ret;
+                            }
+                            if (waits-- <= 0) break;
+                            await new Promise((resolve) => setTimeout(resolve, 5000));
+                        }
+                        throw new Error(`Failed to get image for source: ${mSource}`);
+                    };
 
                     await Promise.all(masks.map(getImage)).then((imgs) => {
                         ctx.globalCompositeOperation = "source-over";

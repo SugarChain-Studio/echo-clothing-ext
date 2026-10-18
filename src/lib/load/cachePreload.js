@@ -22,7 +22,10 @@ AfterAssetOverrides.register(() => {
         sleepUntil(() => !!GLDrawCanvas, 100).then(() => {
             loadQueue.forEach((q) => GLDrawLoadImage(GLDrawCanvas.GL, q));
         });
-        loadQueue.forEach((q) => DrawGetImage(q));
+        // @ts-ignore: DrawImageCache don't have type definitions yet
+        sleepUntil(() => !!DrawImageCache, 100).then(() => {
+            loadQueue.forEach((q) => DrawGetImage(q));
+        });
         loadQueue.length = 0;
     });
 });
