@@ -13,6 +13,7 @@ const baseAsset = {
         { Left: 180, Top: 300, Name: "上", ParentGroup: "BodyUpper" },
         { Left: 240, Top: 500, Name: "下" },
     ],
+    PoseMapping: { AllFours: PoseType.HIDE, Hogtied: PoseType.HIDE },
 };
 
 /** @type {CustomAssetDefinitionBase} */
@@ -39,6 +40,7 @@ const upperAsset = {
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Suit",
     Layer: [{ Name: "上" }],
+    PoseMapping: { AllFours: PoseType.HIDE, Hogtied: PoseType.HIDE },
 };
 
 const translation = { CN: "创口贴", EN: "BandAid" };
