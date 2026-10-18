@@ -4,6 +4,7 @@ import { PoseMapTool } from "@local/lib/generator";
 import { Layer } from "@local/lib/type";
 import { AfterAssetOverrides } from "@local/lib/load";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { Logger } from "@mod-utils/log";
 
 /** @type {AddAssetWithConfigParams[]} */
 const asset = [
@@ -377,18 +378,33 @@ const preload = () => {
                         ctx.fillRect(0, 0, 500, 1000);
                     }
 
-                    /** @type {(mSource: string) => Promise<ImageBitmap>} */
-                    const getImage = async (mSource) => {
-                        // R133 开始，改用 DrawImageCache 进行图片获取
-                        // bc-stubs 在修改时仍在 R132 版本，使用 @ts-ignore 忽略类型检查
-                        // @ts-ignore
+                    /**
+                     * 取图并立即绘制。
+                     *
+                     * R133 的图片由 DrawImageCache 管理，缓存清理会 close 掉 ImageBitmap，
+                     * 因此不能先取齐再绘制；这里取到就画，若图片已被释放则重新取图重试。
+                     * @type {(mSource: string) => Promise<void>}
+                     */
+                    const drawMask = async (mSource) => {
+                        // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
                         let waits = 10;
+                        let detachedRetries = 3;
                         while (true) {
                             // @ts-ignore
-                            if (!!DrawImageCache) {
-                                const ret = DrawGetImage(mSource);
-                                // @ts-ignore
-                                if (!!ret) return ret;
+                            const img = DrawImageCache ? DrawGetImage(mSource) : undefined;
+                            if (img) {
+                                try {
+                                    ctx.drawImage(img, 0, 0);
+                                    return;
+                                } catch (error) {
+                                    const detached =
+                                        error instanceof DOMException && error.name === "InvalidStateError";
+                                    if (!detached || detachedRetries-- <= 0) throw error;
+                                    // 丢弃已释放的缓存项，下次取图会重新加载
+                                    // @ts-ignore
+                                    DrawImageCache?.delete?.(mSource);
+                                    continue;
+                                }
                             }
                             if (waits-- <= 0) break;
                             await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -396,17 +412,15 @@ const preload = () => {
                         throw new Error(`Failed to get image for source: ${mSource}`);
                     };
 
-                    await Promise.all(masks.map(getImage)).then((imgs) => {
-                        ctx.globalCompositeOperation = "source-over";
-                        for (const img of imgs) {
-                            ctx.drawImage(img, 0, 0);
-                        }
-                    });
+                    ctx.globalCompositeOperation = "source-over";
+                    for (const mSource of masks) {
+                        await drawMask(mSource);
+                    }
 
                     canvas.toBlob((b) => {
                         vp.resolve(URL.createObjectURL(b));
                     });
-                })();
+                })().catch((error) => Logger.error(`generate stockings mask failed: ${error}`));
             }
         }
     }

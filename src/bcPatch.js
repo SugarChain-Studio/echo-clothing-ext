@@ -1,15 +1,21 @@
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { sleepUntil } from "@sugarch/bc-mod-utility";
+import { Logger } from "@mod-utils/log";
+
+/** ModSDK 接管后挂在对象上的入口函数（router）的源码特征 */
+const ROUTER_SOURCE = /\bprecomputed\.enter\b/;
 
 /**
  * 把成员函数的函数头改造成带 `function` 关键字的函数表达式头。
  *
  * 成员函数字符串化后形如 `name(args) { ... }`，ModSDK 会把它包在括号里求值，
- * 缺少 `function` 时并不是合法表达式。
+ * 缺少 `function` 时并不是合法表达式。源码本身已是函数表达式时无需处理。
  * @param {string} head 函数体中第一个 `{` 之前的部分
  * @returns {string | undefined}
  */
 function toFunctionExpressionHead(head) {
+    if (/^\s*(async\s+)?function\b/.test(head)) return undefined;
+
     const match = /^(async\s+)?[\w$]+\s*\(/.exec(head);
     if (!match) return undefined;
     return match[1] ? `async function ${head.slice(match[1].length)}` : `function ${head}`;
@@ -31,7 +37,12 @@ function getOriginalSource(name) {
     // 尚未被 ModSDK 接管时，对象上的方法就是原始实现
     const [objectName, methodName] = name.split(".");
     const fn = /** @type {any} */ (globalThis)[objectName]?.[methodName];
-    return typeof fn === "function" ? fn.toString() : undefined;
+    if (typeof fn !== "function") return undefined;
+
+    // 两个 ImageCache 实例共用一个原型，补丁过程中同步到原型的入口函数会互相可见，
+    // 此时读到的可能是 router 而非真实实现，不能当作源码使用
+    const source = fn.toString();
+    return ROUTER_SOURCE.test(source) ? undefined : source;
 }
 
 /**
@@ -66,21 +77,45 @@ function syncEntrypoint(name) {
  * 由于成员函数源码缺少 `function` 关键字，额外补一条把函数头改成
  * `function ...` 的补丁，使其求值结果成为合法表达式。
  *
- * @param {string} name 点分路径，例如 "GLDrawImageCache._refreshCharactersForImage"
+ * 多个名字共用同一个原型时（`DrawImageCache` 与 `GLDrawImageCache`），必须先取好
+ * 全部源码再打补丁，否则前一个同步到原型的入口函数会被后一个当成原始实现读取。
+ *
+ * @param {string[]} names 点分路径，例如 "GLDrawImageCache._refreshCharactersForImage"
  * @param {Record<string, string>} patches
  */
-function patchMemberFunction(name, patches) {
-    const source = getOriginalSource(name);
-    if (!source) return;
+function patchMemberFunctions(names, patches) {
+    const sources = names.map((name) => ({ name, source: getOriginalSource(name) }));
+    /** @type {string[]} */
+    const applied = [];
 
-    const brace = source.indexOf("{");
-    if (brace < 0) return;
+    for (const { name, source } of sources) {
+        if (!source) {
+            Logger.warn(`patchMemberFunction: 取不到 ${name} 的原始实现，补丁未应用`);
+            continue;
+        }
 
-    const head = source.slice(0, brace);
-    const fixedHead = toFunctionExpressionHead(head);
+        const brace = source.indexOf("{");
+        if (brace < 0) {
+            Logger.warn(`patchMemberFunction: ${name} 的源码格式不符合预期，补丁未应用`);
+            continue;
+        }
 
-    HookManager.patchFunction(name, fixedHead ? { [head]: fixedHead, ...patches } : patches);
-    syncEntrypoint(name);
+        for (const from of Object.keys(patches)) {
+            if (!source.includes(from)) {
+                Logger.warn(`patchMemberFunction: ${name} 中未找到待替换文本，补丁可能不生效：${from}`);
+            }
+        }
+
+        const head = source.slice(0, brace);
+        const fixedHead = toFunctionExpressionHead(head);
+
+        HookManager.patchFunction(name, fixedHead ? { [head]: fixedHead, ...patches } : patches);
+        applied.push(name);
+    }
+
+    // 入口函数必须在全部 patch 完成后再同步：ModSDK 首次登记某个名字时会读取对象上的方法，
+    // 而共用原型上提前写入的入口函数会被当成原始实现，导致后续求值失败。
+    for (const name of applied) syncEntrypoint(name);
 }
 
 export default function () {
@@ -97,7 +132,9 @@ export default function () {
     HookManager.afterInit(async () => {
         // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
         await sleepUntil(() => !!globalThis["GLDrawImageCache"] && !!globalThis["DrawImageCache"], 100);
-        patchMemberFunction("GLDrawImageCache._refreshCharactersForImage", patch);
-        patchMemberFunction("DrawImageCache._refreshCharactersForImage", patch);
+        patchMemberFunctions(
+            ["GLDrawImageCache._refreshCharactersForImage", "DrawImageCache._refreshCharactersForImage"],
+            patch
+        );
     });
 }
