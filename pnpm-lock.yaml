@@ -227,7 +227,7 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.64.8)
       '@sugarch/bc-asset-manager':
-        specifier: 1.4.8
+        specifier: ^1.4.8
         version: 1.4.8(@sugarch/bc-mod-hook-manager@0.3.5(bondage-club-mod-sdk@1.2.0))(bondage-club-mod-sdk@1.2.0)
       '@sugarch/bc-event-handler':
         specifier: ^1.0.5
