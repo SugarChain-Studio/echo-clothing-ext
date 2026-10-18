@@ -55,8 +55,8 @@
         "@rollup/plugin-node-resolve": "^16.0.1",
         "@rollup/plugin-replace": "^6.0.2",
         "@rollup/plugin-terser": "^0.4.4",
-        "@sugarch/bc-asset-manager": "^1.4.3",
-        "@sugarch/bc-event-handler": "^1.0.4",
+        "@sugarch/bc-asset-manager": "1.4.5",
+        "@sugarch/bc-event-handler": "^1.0.5",
         "@sugarch/bc-mod-hook-manager": "^0.3.5",
         "@sugarch/bc-mod-i18n": "^0.0.5",
         "@sugarch/bc-mod-types": "^0.6.5",
@@ -82,5 +82,5 @@
         "sweetalert2": "11.23.0",
         "typescript": "^5.9.3"
     },
-    "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
+    "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
 }
