@@ -1,7 +1,8 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
-import { cachePreloadGL } from "../load/cachePreload";
+import { registerDynamicAsset } from "../load/dynamicAsset";
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
+import { sleepUntil } from "@sugarch/bc-mod-utility";
 
 const bodySizes = ["Small", "Normal", "Large", "XLarge", "FlatSmall", "FlatMedium"];
 
@@ -26,8 +27,8 @@ const maskTexPath = (name, size, pose) => ImageMapTools.assetLayer(argMaskGroup,
 for (const size of bodySizes) {
     for (const { Name, ParentGroup, PoseMapping } of Object.values(nameRecord)) {
         const size_ = ParentGroup === "BodyUpper" ? size : undefined;
-        cachePreloadGL(maskTexPath(Name, size_));
-        if (!PoseMapping) cachePreloadGL(maskTexPath(Name, size_, "TapedHands"));
+        registerDynamicAsset(maskTexPath(Name, size_));
+        if (!PoseMapping) registerDynamicAsset(maskTexPath(Name, size_, "TapedHands"));
     }
 }
 
@@ -150,8 +151,12 @@ const hook = (args, next) => {
     return ret;
 };
 
-HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
-HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
+(async () => {
+    // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
+    await sleepUntil(() => !!globalThis["GLDrawImageCache"] && !!globalThis["DrawImageCache"], 100);
+    HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
+    HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
+})();
 
 export class ArmMaskTool {
     static createArmMaskForCloth = createArmMaskForCloth;

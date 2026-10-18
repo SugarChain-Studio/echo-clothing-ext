@@ -4,6 +4,7 @@
 
 import { HookManager } from "@sugarch/bc-mod-hook-manager";
 import { AssetManager } from "@local/AssetManager";
+import { sleepUntil } from "@sugarch/bc-mod-utility";
 
 const drinkList = /** @type {const} */ (["可乐", "橙汁", "牛奶", "空杯"]);
 
@@ -45,5 +46,9 @@ const hook = (args, next) => {
     return ret;
 };
 
-HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
-HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
+(async () => {
+    // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
+    await sleepUntil(() => !!globalThis["GLDrawImageCache"] && !!globalThis["DrawImageCache"], 100);
+    HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
+    HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
+})();

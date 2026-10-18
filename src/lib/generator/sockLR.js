@@ -1,6 +1,6 @@
 import { ImageMapTools } from "@mod-utils/Tools";
 import { AssetManager } from "@local/AssetManager";
-import { cachePreloadGL } from "../load/cachePreload";
+import { registerDynamicAsset } from "../load/dynamicAsset";
 
 const vp = AssetManager.imageMapping.createVirtualPath("luzi-canvas://half-black-fill");
 
@@ -16,7 +16,7 @@ new Promise((resolve) => {
         vp.resolve(url);
         resolve(url);
     });
-}).then((url) => cachePreloadGL(url));
+}).then((url) => registerDynamicAsset(url));
 
 const topLeft = /** @type {const} */ ({
     SocksLeft: { Top: 0, Left: { "": 0, "KneelingSpread": 30 } },
