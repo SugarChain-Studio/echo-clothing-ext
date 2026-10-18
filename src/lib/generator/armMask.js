@@ -135,15 +135,23 @@ function createArmMaskForGroupedCloth(assets, mode = "") {
     }
 }
 
-HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
-    const [URL] = args;
-    if (URL?.src?.includes(argMaskGroup)) {
+/**
+ * @param {never} args
+ * @param {(args:never)=>never} next
+ */
+const hook = (args, next) => {
+    const ret = next(args);
+    const [URL] = /** @type {[{ url: string }]} */ (args);
+    if (URL && URL.url && URL.url.includes(argMaskGroup)) {
         Character.filter((c) =>
             c.Appearance.some((item) => itemSet.has(`${item.Asset.Group.Name}::${item.Asset.Name}`))
         ).forEach((c) => (c.MustDraw = true));
     }
-    return next(args);
-});
+    return ret;
+};
+
+HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
+HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
 
 export class ArmMaskTool {
     static createArmMaskForCloth = createArmMaskForCloth;

@@ -30,14 +30,20 @@ export function registerDrinkLayers(assetId, layerName) {
     registeredAssets.push(`${assetId.Group}::${assetId.Name}`);
 }
 
-HookManager.hookFunction("DrawRefreshCharacterForImage", 0, (args, next) => {
+/**
+ * @param {never} args
+ * @param {(args:never)=>never} next
+ */
+const hook = (args, next) => {
     const ret = next(args);
-    const [URL] = args;
-    if (URL && URL.src && URL.src.includes("Icons/Luzi_GlassDrink_")) {
+    const [URL] = /** @type {[{ url: string }]} */ (args);
+    if (URL && URL.url && URL.url.includes("Icons/Luzi_GlassDrink_")) {
         Character.filter((c) =>
             c.Appearance.some((app) => registeredAssets.includes(`${app.Asset.Group.Name}::${app.Asset.Name}`))
         ).forEach((c) => (c.MustDraw = true));
     }
     return ret;
-});
+};
 
+HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);
+HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
