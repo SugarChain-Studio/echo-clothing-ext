@@ -377,20 +377,29 @@ const preload = () => {
                         ctx.fillRect(0, 0, 500, 1000);
                     }
 
-                    /** @type {(mSource: string) => Promise<HTMLImageElement>} */
-                    const getImage = async (mSource) =>
-                        /** @type {Promise<HTMLImageElement>}*/ (
-                            new Promise((resolve) => {
+                    /** @type {(mSource: string) => Promise<CanvasImageSource | undefined>} */
+                    const getImage = (mSource) =>
+                        new Promise((resolve) => {
+                            let tries = 0;
+                            const attempt = () => {
                                 const img = DrawGetImage(mSource);
-                                if (img.complete) resolve(img);
-                                else img.addEventListener("load", () => resolve(img));
-                            })
-                        );
+                                if (!img) {
+                                    // R133+: undefined until loaded. Give up after about 10 seconds.
+                                    if (++tries > 200) resolve(undefined);
+                                    else setTimeout(attempt, 50);
+                                } else if (!(img instanceof HTMLImageElement) || img.complete) {
+                                    resolve(img);
+                                } else {
+                                    img.addEventListener("load", () => resolve(img));
+                                }
+                            };
+                            attempt();
+                        });
 
                     await Promise.all(masks.map(getImage)).then((imgs) => {
                         ctx.globalCompositeOperation = "source-over";
                         for (const img of imgs) {
-                            ctx.drawImage(img, 0, 0);
+                            if (img) ctx.drawImage(img, 0, 0);
                         }
                     });
 

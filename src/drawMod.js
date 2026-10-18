@@ -26,8 +26,9 @@ export default function () {
         "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, blinkOffset)":
             "GLDrawClearRect(gl, x, CanvasDrawHeight - y - h, w, h, blinkOffset + 250)",
 
-        "GLDrawImage(src, gl, x, y, opts, 0),": "GLDrawImage(src, gl, x, y, opts, 250),",
-        "GLDrawImage(src, gl, x, y, opts, blinkOffset),": "GLDrawImage(src, gl, x, y, opts, blinkOffset + 250),",
+        // No trailing comma: R132 calls end in ",", R133 in ";"
+        "GLDrawImage(src, gl, x, y, opts, 0)": "GLDrawImage(src, gl, x, y, opts, 250)",
+        "GLDrawImage(src, gl, x, y, opts, blinkOffset)": "GLDrawImage(src, gl, x, y, opts, blinkOffset + 250)",
 
         "GLDraw2DCanvas(gl, Img, x, y, 0, alphaMasks": "GLDraw2DCanvas(gl, Img, x, y, 250, alphaMasks",
         "GLDraw2DCanvas(gl, Img, x, y, blinkOffset, alphaMasks":

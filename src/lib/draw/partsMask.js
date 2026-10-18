@@ -130,11 +130,20 @@ export class PartsMask {
             if (!ctx) return;
             ctx.globalCompositeOperation = "source-over";
             ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+            let complete = true;
             for (const [url, x, y] of newState) {
                 const img = DrawGetImage(url);
+                // R133+: DrawGetImage returns undefined until the image has loaded
+                if (!img) {
+                    complete = false;
+                    continue;
+                }
                 ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
-            this._state = newState;
+            // Retry on the next draw until every image is in
+            this._state = complete ? newState : undefined;
+            // The canvas was cleared, so the destination-out pass below has to be redone
+            this._rState = undefined;
         }
 
         const nrState = this._calState(C, this._rGroups);
@@ -142,11 +151,16 @@ export class PartsMask {
             const ctx = this._canvas.getContext("2d");
             if (!ctx) return;
             ctx.globalCompositeOperation = "destination-out";
+            let complete = true;
             for (const [url, x, y] of nrState) {
                 const img = DrawGetImage(url);
+                if (!img) {
+                    complete = false;
+                    continue;
+                }
                 ctx.drawImage(img, x, y - CanvasUpperOverflow);
             }
-            this._rState = nrState;
+            this._rState = complete ? nrState : undefined;
         }
     }
 }

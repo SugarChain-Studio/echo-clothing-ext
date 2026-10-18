@@ -192,7 +192,9 @@ export class GLImageRenderer {
     _prepareTex(img) {
         const gl = this.gl;
 
-        if (img instanceof HTMLImageElement) {
+        // R133+ hands out ImageBitmaps; cache those too, or every draw allocates a new texture
+        const cacheable = img instanceof HTMLImageElement || img instanceof ImageBitmap;
+        if (cacheable) {
             const cachedTex = this.textureCache.get(img);
             if (cachedTex) {
                 gl.bindTexture(gl.TEXTURE_2D, cachedTex);
@@ -210,7 +212,7 @@ export class GLImageRenderer {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
-        if (img instanceof HTMLImageElement) {
+        if (cacheable) {
             this.textureCache.set(img, tex);
         }
 

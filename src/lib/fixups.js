@@ -76,11 +76,22 @@ AssetManager.afterLoad(() => {
     LoginInventoryFixups.push(...myFixups);
 });
 
-HookManager.hookFunction("LoginPerformCraftingFixups", 0, (args, next) => {
-    performWardrobeFixup(Player);
+if (typeof (/** @type {any} */ (globalThis).LoginPerformCraftingFixups) === "function") {
+    // R132 and earlier
+    HookManager.hookFunction("LoginPerformCraftingFixups", 0, (args, next) => {
+        performWardrobeFixup(Player);
 
-    return next(args);
-});
+        return next(args);
+    });
+} else {
+    // R133 removed LoginPerformCraftingFixups. LoginSetupPlayer runs once per login and has
+    // decompressed the wardrobe by the time it returns.
+    HookManager.hookFunction("LoginSetupPlayer", 0, (args, next) => {
+        const ret = next(args);
+        performWardrobeFixup(Player);
+        return ret;
+    });
+}
 
 HookManager.hookFunction("AssetGet", 0, (args, next) => {
     const itemKey = `${args[1]}::${args[2]}`;
