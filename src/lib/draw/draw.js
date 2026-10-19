@@ -1,4 +1,18 @@
 /**
+ * 基于 WebGL2 的离屏渲染器，用于绘制角色动态部件（衣物、机关、液体等）。
+ *
+ * 特性：
+ * - 可以给图片叠加单色（`drawImage` 的 `color` 选项），通过灰度调色着色器实现；
+ * - 可以额外传入一张 alpha 遮罩（`alphaTex`），用它的 alpha 通道裁剪绘制结果，
+ *   常用于配合 {@link PartsMask} 处理遮挡关系；
+ * - 同一个画布复用一个渲染器实例（挂在 `canvas.__glRenderer` 上），
+ *   以便复用着色器程序、顶点缓冲和纹理缓存。
+ *
+ * 颜色/遮罩都通过片元着色器完成，因此绘制结果直接写入 WebGL 画布，
+ * 调用方之后可以像普通画布一样使用它（例如作为 `alphaTex` 或绘制到角色画布）。
+ */
+
+/**
  * @typedef {Object} GLCanvasExt
  * @property {GLImageRenderer} __glRenderer
  */
@@ -15,9 +29,44 @@
  * @typedef {[number, number, number, number]} Vec4
  */
 
+/**
+ * 判断图片是否适合按对象引用缓存 WebGL 纹理。
+ *
+ * `TexImageSource` 各类型的可变性不同：
+ * - `ImageBitmap` / `VideoFrame`：解码后的不可变快照（仅在 `close()` 后失效），
+ *   对象与像素内容一一对应，可以放心缓存；
+ * - `HTMLImageElement`：加载完成后内容不再变化，但首次绘制时可能尚未加载完成，
+ *   因此命中缓存后仍需重新上传一次；
+ * - `HTMLCanvasElement` / `OffscreenCanvas` / `HTMLVideoElement` / `ImageData`：
+ *   内容会随时间变化（canvas 重绘、视频换帧、buffer 被改写），缓存纹理会在下次
+ *   绘制时读到旧内容，因此不缓存。
+ * @param {TexImageSource} img
+ * @returns {img is HTMLImageElement | ImageBitmap | VideoFrame}
+ */
+function shouldCache(img) {
+    if (img instanceof HTMLImageElement) return true;
+    if (typeof ImageBitmap !== "undefined" && img instanceof ImageBitmap) return true;
+    if (typeof VideoFrame !== "undefined" && img instanceof VideoFrame) return true;
+    return false;
+}
+
+/**
+ * 判断图片内容是否是解码后就不再变化的快照：这类图片命中纹理缓存后无需重新上传。
+ * @param {HTMLImageElement | ImageBitmap | VideoFrame} img
+ * @returns {boolean}
+ */
+function isImmutable(img) {
+    if (typeof ImageBitmap !== "undefined" && img instanceof ImageBitmap) return true;
+    if (typeof VideoFrame !== "undefined" && img instanceof VideoFrame) return true;
+    return false;
+}
+
 export class GLImageRenderer {
     /**
-     * @param {GLCanvas} canvas
+     * 创建（或取回）画布对应的渲染器。
+     *
+     * 同一画布只会创建一个实例：重复调用会直接返回 `canvas.__glRenderer`。
+     * @param {GLCanvas} canvas 目标画布，需要是 WebGL2 可用的 canvas
      */
     constructor(canvas) {
         if (canvas.__glRenderer) return canvas.__glRenderer;
@@ -28,7 +77,10 @@ export class GLImageRenderer {
         /** @type {WebGL2RenderingContext} */
         this.gl = canvas.getContext("webgl2", GLDrawGetOptions());
 
-        /** @type {WeakMap<HTMLImageElement, WebGLTexture>} */
+        /**
+         * 图片对象 → 已分配的纹理，避免同一张图每次绘制都新建纹理
+         * @type {WeakMap<HTMLImageElement | ImageBitmap | VideoFrame, WebGLTexture>}
+         */
         this.textureCache = new WeakMap();
 
         const gl = this.gl;
@@ -110,13 +162,14 @@ export class GLImageRenderer {
         this.programPlain = this._createProgram(vs, fs_plain);
         this.programColor = this._createProgram(vs, fs_color);
 
+        // 两个程序共用顶点着色器，属性/统一变量位置分别缓存
         this.locPlain = this._getLocations(this.programPlain, false);
         this.locColor = this._getLocations(this.programColor, true);
 
         /** @type {WebGLBuffer} */
         this.buffer = gl.createBuffer();
 
-        // white texture
+        // 1x1 白色纹理，未提供 alphaTex 时用它占位（遮罩 alpha 恒为 1）
         this.whiteTex = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.whiteTex);
         gl.texImage2D(
@@ -138,9 +191,10 @@ export class GLImageRenderer {
     }
 
     /**
+     * 编译一个着色器。
      * @private
-     * @param {number} type
-     * @param {string} src
+     * @param {number} type `gl.VERTEX_SHADER` 或 `gl.FRAGMENT_SHADER`
+     * @param {string} src 着色器源码
      * @returns {WebGLShader}
      */
     _compile(type, src) {
@@ -152,9 +206,10 @@ export class GLImageRenderer {
     }
 
     /**
+     * 把顶点着色器与片元着色器链接成一个程序。
      * @private
-     * @param {string} vs
-     * @param {string} fs
+     * @param {string} vs 顶点着色器源码
+     * @param {string} fs 片元着色器源码
      * @returns {WebGLProgram}
      */
     _createProgram(vs, fs) {
@@ -167,9 +222,12 @@ export class GLImageRenderer {
     }
 
     /**
+     * 查询程序里用到的属性与统一变量的位置。
+     *
+     * 不带着色分支的程序没有 `u_color`，此时返回 `null`。
      * @private
      * @param {WebGLProgram} prog
-     * @param {boolean} withColor
+     * @param {boolean} withColor 是否为调色程序
      */
     _getLocations(prog, withColor) {
         const gl = this.gl;
@@ -185,6 +243,11 @@ export class GLImageRenderer {
     }
 
     /**
+     * 取得图片对应的纹理，必要时上传并缓存。
+     *
+     * 命中缓存时：
+     * - 不可变快照（`ImageBitmap` / `VideoFrame`）直接复用，无需重新上传；
+     * - `HTMLImageElement` 重新上传一次，保证拿到最终图像（首次绘制时可能还没加载完）。
      * @private
      * @param {TexImageSource} img
      * @returns {WebGLTexture}
@@ -192,11 +255,15 @@ export class GLImageRenderer {
     _prepareTex(img) {
         const gl = this.gl;
 
-        if (img instanceof HTMLImageElement) {
+        const should_cache = shouldCache(img);
+
+        if (should_cache) {
             const cachedTex = this.textureCache.get(img);
             if (cachedTex) {
                 gl.bindTexture(gl.TEXTURE_2D, cachedTex);
-                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                if (!isImmutable(img)) {
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                }
                 return cachedTex;
             }
         }
@@ -210,7 +277,7 @@ export class GLImageRenderer {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
-        if (img instanceof HTMLImageElement) {
+        if (should_cache) {
             this.textureCache.set(img, tex);
         }
 
@@ -218,6 +285,7 @@ export class GLImageRenderer {
     }
 
     /**
+     * 把绘制区域（左上角与尺寸）写入顶点缓冲。
      * @private
      * @param {number} x
      * @param {number} y
@@ -242,14 +310,17 @@ export class GLImageRenderer {
     }
 
     /**
-     * 绘制图片
-     * @param {HTMLCanvasElement | HTMLImageElement} image
+     * 绘制图片。
+     *
+     * 传入 `color` 时走调色着色器（灰度 + 单色叠加），否则原样绘制；
+     * `alphaTex` 提供额外的透明度遮罩，`colorAlpha` 整体调节不透明度。
+     * @param {HTMLCanvasElement | HTMLImageElement | ImageBitmap} image
      * @param {number} x
      * @param {number} y
      * @param {{
      *   color?: Vec3 | Vec4,
      *   colorAlpha?: number,
-     *   alphaTex?: HTMLCanvasElement | HTMLImageElement
+     *   alphaTex?: HTMLCanvasElement | HTMLImageElement | ImageBitmap
      * }} [opts]
      */
     drawImage(image, x, y, opts = {}) {
@@ -320,8 +391,8 @@ export class GLImageRenderer {
     }
 
     /**
-     * 绘制测试网格
-     * @param {number} [size=50]
+     * 绘制测试网格，用于调试画布坐标与尺寸。
+     * @param {number} [size=50] 单个格子的边长
      */
     drawTestGrid(size = 50) {
         if (!this._gridCanvas) {
