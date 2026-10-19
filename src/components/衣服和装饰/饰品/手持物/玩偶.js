@@ -757,6 +757,7 @@ const plushieItems = [
     { name: "Kylie", roomAbbr: "l", fileName: "Kylie-Lilja" },
     { name: "Kiki", roomAbbr: "l", fileName: "Kiki-Lilja" },
     { name: "由空", roomAbbr: "l" },
+    { name: "Avine", roomAbbr: "l" },
 ];
 
 // ========== 生成函数 ==========
@@ -922,7 +923,7 @@ const optionCount = asset.Layer.reduce((pv, cv) => {
     const Key = Object.keys(cv.AllowTypes)[0];
     Access.set(pv, Key, Math.max(Access.getOr(pv, Key, 0), Access.getOr(cv.AllowTypes, Key, 0)));
     return pv;
-}, /** @type { Record<string, Number> } */({}));
+}, /** @type { Record<string, Number> } */ ({}));
 
 /**
  * 生成模块定义
@@ -947,7 +948,7 @@ const typedLayerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduc
     const idx = Access.getOr(cv.AllowTypes, k, 0);
     pv[k][idx] = cv.Name;
     return pv;
-}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */({}));
+}, /** @type { Record<keyof typeof typeNameNext, Record<number,string>> } */ ({}));
 
 /** 注册菜单模块 */
 modules.forEach((m) => {
@@ -988,7 +989,7 @@ const layerNames = /** @type {AssetLayerDefinition[]}*/ (asset.Layer).reduce((pv
     const [k, v] = Object.entries(cv.AllowTypes)[0];
     pv[`${takeShortName(typeNameNext[k], "CN")}${v}`] = cv.Name;
     return pv;
-}, /** @type { Record<string,string> } */({}));
+}, /** @type { Record<string,string> } */ ({}));
 
 const cnDialog = DialogTools.dialogGenerator(
     modules,
