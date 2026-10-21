@@ -757,7 +757,7 @@ const plushieItems = [
     { name: "Kylie", roomAbbr: "l", fileName: "Kylie-Lilja" },
     { name: "Kiki", roomAbbr: "l", fileName: "Kiki-Lilja" },
     { name: "由空", roomAbbr: "l" },
-    { name: "Avine", roomAbbr: "l" },
+    { name: "Avaine", roomAbbr: "l" },
 ];
 
 // ========== 生成函数 ==========
