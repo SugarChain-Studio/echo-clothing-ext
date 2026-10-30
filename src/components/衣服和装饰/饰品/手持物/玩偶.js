@@ -683,6 +683,7 @@ const plushieItems = [
     { name: "小咪", roomAbbr: "jy" },
     { name: "lily", roomAbbr: "jy" },
     { name: "Sally", roomAbbr: "jy" },
+    { name: "Rain", roomAbbr: "jy" },
 
     // bedroom
     { name: "慕颜(猫咪)", roomAbbr: "bedroom" },
@@ -758,6 +759,8 @@ const plushieItems = [
     { name: "Kiki", roomAbbr: "l", fileName: "Kiki-Lilja" },
     { name: "由空", roomAbbr: "l" },
     { name: "Avaine", roomAbbr: "l" },
+    { name: "Shivas", roomAbbr: "l" },
+    { name: "绿叶幻梦", roomAbbr: "l" },
 ];
 
 // ========== 生成函数 ==========
