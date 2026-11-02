@@ -97,6 +97,7 @@ const plushieRooms = [
     { abbr: "jy", name: "九灣" },
     { abbr: "bedroom", name: "Bed Room" },
     { abbr: "zss", name: "这是啥" },
+    { abbr: "xzc", name: "雪儿的珍藏" },
     { abbr: "l", name: { CN: "(路过的玩偶)", EN: "(Wanderers)" } },
 ];
 
@@ -684,6 +685,7 @@ const plushieItems = [
     { name: "lily", roomAbbr: "jy" },
     { name: "Sally", roomAbbr: "jy" },
     { name: "Rain", roomAbbr: "jy" },
+    { name: "铃", roomAbbr: "jy" },
 
     // bedroom
     { name: "慕颜(猫咪)", roomAbbr: "bedroom" },
@@ -694,6 +696,10 @@ const plushieItems = [
     // 这是啥
     { name: "魔女荀", roomAbbr: "zss" },
     { name: "女仆荀", roomAbbr: "zss" },
+
+    // 雪儿的珍藏
+    { name: "寒江雪", roomAbbr: "xzc" },
+    { name: "雪和miya", roomAbbr: "xzc" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
