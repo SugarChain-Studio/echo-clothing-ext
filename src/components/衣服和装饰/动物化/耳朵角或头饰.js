@@ -124,7 +124,7 @@ const accessories = [
             DynamicGroupName: "HairAccessory1",
             Top: 0,
             Left: 0,
-            Priority: 51,
+            Priority: 54,
             Layer: [{ Name: "A1" }, { Name: "A2" }],
         },
         {

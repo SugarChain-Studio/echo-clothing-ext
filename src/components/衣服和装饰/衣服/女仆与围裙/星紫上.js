@@ -15,6 +15,11 @@ const asset = [
             Priority: 30,
             ParentGroup: "BodyUpper",
             PoseMapping: {
+                Yoked: "Yoked",
+                OverTheHead: "OverTheHead",
+                BackBoxTie: "BackBoxTie",
+                BackElbowTouch: "BackElbowTouch",
+                BackCuffs: "BackCuffs",
                 Hogtied: PoseType.HIDE,
                 AllFours: PoseType.HIDE,
             },

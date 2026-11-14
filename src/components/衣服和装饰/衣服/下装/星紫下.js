@@ -13,6 +13,10 @@ const asset = {
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     ParentGroup: "BodyLower",
     PoseMapping: {
+        Kneel: "Kneel",
+        KneelingSpread: "KneelingSpread",
+        LegsClosed: "LegsClosed",
+        Spread: "Spread",
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
