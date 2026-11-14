@@ -3,36 +3,47 @@ import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
-    Name: "半开百褶裙",
+    Name: "星紫下",
     Random: false,
     Top: 0,
     Left: {
         [PoseType.DEFAULT]: 0,
         KneelingSpread: 90,
     },
-    DefaultColor: ["#7F1739", "Default", "Default"],
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
+    ParentGroup: "BodyLower",
     PoseMapping: {
-        Kneel: "KneelingSpread",
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
     Priority: 26,
-    Layer: [{ Name: "裙子" }, { Name: "白线" }, { Name: "链子" }],
+    Layer: [
+        { Name: "A1" },
+        { Name: "A2" },
+        { Name: "A3" },
+        { Name: "A4" },
+        { Name: "B1" },
+        { Name: "B2" },
+        { Name: "C1" }
+    ],
 };
 
 /** @type {Translation.Entry} */
 const translation = {
-    CN: "半开百褶裙",
-    EN: "Half Pleated Skirt",
+    CN: "星紫",
+    EN: "星紫",
 };
 
 /** @type {Translation.Dialog} */
 const layerNames = {
     EN: {
-        裙子: "Skirt",
-        白线: "White line",
-        链子: "Chain",
+        A1: "1",
+        A2: "2",
+        A3: "3",
+        A4: "4",
+        B1: "1",
+        B2: "2",
+        C1: "1",
     },
 };
 

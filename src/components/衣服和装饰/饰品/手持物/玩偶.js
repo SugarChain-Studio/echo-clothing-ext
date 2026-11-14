@@ -175,6 +175,7 @@ const plushieItems = [
     },
     { name: "小寒", roomAbbr: "f" },
     { name: "沐猫", roomAbbr: "f" },
+    { name: "七海1", roomAbbr: "yes" },
 
     // 小夜家玩偶
     { name: "向归夜", roomAbbr: "y" },
@@ -531,6 +532,8 @@ const plushieItems = [
     { name: "haikou", roomAbbr: "yes" },
     { name: "银河", roomAbbr: "yes" },
     { name: "七海", roomAbbr: "yes" },
+    { name: "七海2", roomAbbr: "yes" },
+    { name: "七海3", roomAbbr: "yes" },
 
     // 妖精小屋
     { name: "菲露亚", roomAbbr: "yjxw" },

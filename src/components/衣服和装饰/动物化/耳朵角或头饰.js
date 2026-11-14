@@ -117,6 +117,21 @@ const accessories = [
             layerNames: { EN: { A1: "A1", A2: "A2", A3: "A3", B1: "B1", B2: "B2", B3: "B3" } },
         },
     ],
+    [
+        {
+            Name: "星紫头饰",
+            Random: false,
+            DynamicGroupName: "HairAccessory1",
+            Top: 0,
+            Left: 0,
+            Priority: 51,
+            Layer: [{ Name: "A1" }, { Name: "A2" }],
+        },
+        {
+            translation: { CN: "星紫头饰", EN: "星紫头饰", RU: "星紫头饰" },
+            layerNames: { EN: { A1: "A1", A2: "A2" } },
+        },
+    ],
 ];
 
 export default function () {
