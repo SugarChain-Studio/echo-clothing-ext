@@ -28,7 +28,7 @@ const asset = {
         { Name: "A4" },
         { Name: "B1" },
         { Name: "B2" },
-        { Name: "C1" }
+        { Name: "C1" },
     ],
 };
 
