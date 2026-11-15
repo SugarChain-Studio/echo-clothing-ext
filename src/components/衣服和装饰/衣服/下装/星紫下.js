@@ -20,15 +20,14 @@ const asset = {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
-    Priority: 26,
     Layer: [
-        { Name: "A1" },
-        { Name: "A2" },
-        { Name: "A3" },
-        { Name: "A4" },
-        { Name: "B1" },
-        { Name: "B2" },
-        { Name: "C1" },
+        { Name: "A1", Priority: 26, },
+        { Name: "A2", Priority: 26, },
+        { Name: "A3", Priority: 26, },
+        { Name: "A4", Priority: 26, },
+        { Name: "B1", Priority: 1, },
+        { Name: "B2", Priority: 1, },
+        { Name: "C1", Priority: 26, },
     ],
 };
 

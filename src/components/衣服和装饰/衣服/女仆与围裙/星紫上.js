@@ -12,7 +12,6 @@ const asset = [
             Random: false,
             Top: 0,
             Left: 0,
-            Priority: 30,
             ParentGroup: "BodyUpper",
             PoseMapping: {
                 Yoked: "Yoked",
@@ -24,9 +23,9 @@ const asset = [
                 AllFours: PoseType.HIDE,
             },
             Layer: [
-                { Name: "A1" },
-                { Name: "A2" },
-                { Name: "B1" },
+                { Name: "A1", Priority: 35, },
+                { Name: "A2", Priority: 35, },
+                { Name: "B1", Priority: 35, },
             ],
         },
         (asset) => {
