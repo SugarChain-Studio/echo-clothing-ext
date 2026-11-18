@@ -1,3 +1,4 @@
 minimumReleaseAgeExclude:
-  - "@sugarch/bc-asset-manager@1.4.8"
+  - "@sugarch/bc-asset-manager@1.4.9"
   - "@sugarch/bc-mod-utility@0.2.13"
+  - "@sugarch/bc-event-handler@1.0.6"
