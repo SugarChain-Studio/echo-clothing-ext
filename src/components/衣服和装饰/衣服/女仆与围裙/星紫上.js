@@ -23,9 +23,9 @@ const asset = [
                 AllFours: PoseType.HIDE,
             },
             Layer: [
-                { Name: "A1", Priority: 35, },
-                { Name: "A2", Priority: 35, },
-                { Name: "B1", Priority: 35, },
+                { Name: "A1", Priority: 35 },
+                { Name: "A2", Priority: 35 },
+                { Name: "B1", Priority: 35 },
             ],
         },
         (asset) => {

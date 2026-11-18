@@ -21,13 +21,13 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Layer: [
-        { Name: "A1", Priority: 26, },
-        { Name: "A2", Priority: 26, },
-        { Name: "A3", Priority: 26, },
-        { Name: "A4", Priority: 26, },
-        { Name: "B1", Priority: 1, },
-        { Name: "B2", Priority: 1, },
-        { Name: "C1", Priority: 26, },
+        { Name: "A1", Priority: 26 },
+        { Name: "A2", Priority: 26 },
+        { Name: "A3", Priority: 26 },
+        { Name: "A4", Priority: 26 },
+        { Name: "B1", Priority: 1 },
+        { Name: "B2", Priority: 1 },
+        { Name: "C1", Priority: 26 },
     ],
 };
 
