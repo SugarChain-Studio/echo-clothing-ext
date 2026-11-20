@@ -30,6 +30,9 @@ const ASSET_NAME = "淫纹";
 /** @type { (item: Item) => ExtendItemProperties } */
 const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
 
+/** @type {[BCColor,BCColor]} */
+const defaultGradientColor = ["#D75CFF", "#72B5FF"];
+
 // #region 交互界面
 const dialog = createItemDialogModular({
     buttons: [
@@ -311,7 +314,7 @@ const asset = [
         RemoveTime: 15,
         Time: 10,
         ParentGroup: {},
-        DefaultColor: ["#EA3E74", "Default", "Default", "Default", "#D75CFF", "#72B5FF", "#FFBFF1"],
+        DefaultColor: ["#EA3E74", "Default", "Default", "Default", ...defaultGradientColor, "#FFBFF1"],
         DynamicGroupName: "ItemPelvis",
         Category: ["Fantasy"],
         PoseMapping: { Hogtied: "Hide", AllFours: "Hide" },
@@ -578,8 +581,8 @@ function afterDraw(data, originalFunction, drawData) {
         Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);
 
         const [c1, c2] = ((colors) => {
-            if (!Array.isArray(colors) && colors.length < 6) return ["#D75CFF", "#72B5FF"];
-            return [4, 5].map((idx) => colorDefault(colors[idx], A.DefaultColor[idx]));
+            if (!Array.isArray(colors) && colors.length < 6) return defaultGradientColor;
+            return [4, 5].map((idx) => colorDefault(colors[idx], defaultGradientColor[idx - 4]));
         })(CA.Color ?? CA.Asset.DefaultColor);
 
         const ctx = Data.GlowCanvas.getContext("2d");
