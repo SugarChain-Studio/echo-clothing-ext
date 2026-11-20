@@ -1,5 +1,4 @@
 import { AssetManager } from "@local/AssetManager";
-import { luziSuffixFixups } from "@local/lib/fixups";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -52,5 +51,4 @@ const layerNames = {
 
 export default function () {
     AssetManager.addAssetWithConfig("ClothLower", asset, { translation, layerNames });
-    luziSuffixFixups("ClothLower", asset.Name);
 }
