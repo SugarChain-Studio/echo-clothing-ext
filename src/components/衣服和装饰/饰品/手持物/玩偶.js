@@ -708,6 +708,8 @@ const plushieItems = [
 
     // yorozuya
     { name: "卷卷", roomAbbr: "yoro" },
+    { name: "uu大王", roomAbbr: "yoro" },
+    { name: "小唯", roomAbbr: "yoro" },
 
     // 路过的玩偶
     { name: "li", roomAbbr: "l" },
