@@ -47,7 +47,6 @@ const hook = (args, next) => {
 };
 
 (async () => {
-    // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
     await sleepUntil(() => !!globalThis["GLDrawImageCache"] && !!globalThis["DrawImageCache"], 100);
     HookManager.hookFunction("GLDrawImageCache._refreshCharactersForImage", 0, hook);
     HookManager.hookFunction("DrawImageCache._refreshCharactersForImage", 0, hook);

@@ -130,7 +130,6 @@ export default function () {
     };
 
     HookManager.afterInit(async () => {
-        // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
         await sleepUntil(() => !!globalThis["GLDrawImageCache"] && !!globalThis["DrawImageCache"], 100);
         patchMemberFunctions(
             ["GLDrawImageCache._refreshCharactersForImage", "DrawImageCache._refreshCharactersForImage"],

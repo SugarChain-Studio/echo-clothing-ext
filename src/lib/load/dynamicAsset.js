@@ -66,7 +66,6 @@ AfterAssetOverrides.register(() => {
 
 // 游戏清理缓存前会调用 CommonDrawWarmDrawnAssets 重新标记角色用到的图片，
 // 这里把注册的资源一并标记，避免它们因长时间未被使用而被逐出缓存。
-// @ts-ignore: bc-stubs 仍是 R132，尚未包含该函数
 HookManager.hookFunction("CommonDrawWarmDrawnAssets", 0, (args, next) => {
     const caches = imageCaches();
     if (caches.length > 0) {

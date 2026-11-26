@@ -386,11 +386,9 @@ const preload = () => {
                      * @type {(mSource: string) => Promise<void>}
                      */
                     const drawMask = async (mSource) => {
-                        // @ts-ignore: bc-stubs 仍是 R132，尚未包含 DrawImageCache
                         let waits = 10;
                         let detachedRetries = 3;
                         while (true) {
-                            // @ts-ignore
                             const img = DrawImageCache ? DrawGetImage(mSource) : undefined;
                             if (img) {
                                 try {
