@@ -11,7 +11,7 @@ const asset = {
     Left: 150,
     Priority: 9,
     ParentGroup: {},
-        Layer: [
+    Layer: [
         { Color: ["#493F3F"], Name: "Lines", HasImage: false },
         { Color: ["#493F3F"], Name: "Text", HasImage: false },
     ],
@@ -126,4 +126,3 @@ export default function () {
         extended,
     });
 }
-

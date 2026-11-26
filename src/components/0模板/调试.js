@@ -94,7 +94,7 @@ const asset = [
                 Top: 0,
                 Left: 0,
                 Random: false,
-                                DynamicAfterDraw: true,
+                DynamicAfterDraw: true,
                 Layer: [
                     { Color: ["#CCCCCC"], Name: "Tops", Priority: 8, HasImage: false },
                     { Color: ["#CCCCCC"], Name: "Bottoms", Priority: 10, HasImage: false, CopyLayerColor: "Tops" },

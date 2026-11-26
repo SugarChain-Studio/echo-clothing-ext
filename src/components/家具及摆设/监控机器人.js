@@ -26,7 +26,7 @@ const asset = {
     DynamicBeforeDraw: true,
     DynamicScriptDraw: true,
     DynamicAfterDraw: true,
-        FixedPosition: true,
+    FixedPosition: true,
     Layer: [
         { Color: ["#84DBFF"], Top: 0, Left: 0, Name: "绳子", ColorGroup: "绳子", HasImage: false },
         { Color: ["#B2E8FF"], Top: 0, Left: 0, Name: "绳子光芒", ColorGroup: "绳子", HasImage: false },

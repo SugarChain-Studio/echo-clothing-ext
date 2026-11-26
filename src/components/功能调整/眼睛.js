@@ -75,15 +75,12 @@ export default function () {
     });
 
     /** @type {(ev: string, arg: any) => arg is ServerCharacterExpressionUpdate} */
-    const argCheck = (ev, arg) => {
-        return (
-            ev === "ChatRoomCharacterExpressionUpdate" &&
-            arg &&
-            typeof arg === "object" &&
-            "Group" in arg &&
-            "Expression" in arg
-        );
-    };
+    const argCheck = (ev, arg) =>
+        ev === "ChatRoomCharacterExpressionUpdate" &&
+        arg &&
+        typeof arg === "object" &&
+        "Group" in arg &&
+        "Expression" in arg;
 
     HookManager.hookFunction("ServerSend", 0, (args, next) => {
         if (argCheck(args[0], args[1]) && wceAnimationEnabled()) {

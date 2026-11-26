@@ -15,7 +15,7 @@ const asset = {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-        Layer: [
+    Layer: [
         {
             Color: ["#623B3B"],
             Name: "鞋带",

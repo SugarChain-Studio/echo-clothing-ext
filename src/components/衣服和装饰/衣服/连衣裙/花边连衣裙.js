@@ -8,7 +8,7 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 30,
-        PoseMapping: {
+    PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
@@ -98,4 +98,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
-

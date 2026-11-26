@@ -414,7 +414,7 @@ const clothAsset = [
         DynamicGroupName: "ItemPelvis",
         Layer: clothLCSetting.map((layer, index) => ({
             Name: layer.Src,
-            ...(index == 0 ? { Color: ["#E975A0"] } : {}),
+            ...(index === 0 ? { Color: ["#E975A0"] } : {}),
             AllowTypes: { typed: index },
         })),
     },

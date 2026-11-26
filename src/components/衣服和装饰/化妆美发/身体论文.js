@@ -88,7 +88,7 @@ const asset = {
     },
     Extended: true,
     DynamicAfterDraw: true,
-        Layer: [
+    Layer: [
         {
             Color: ["#000000"],
             Name: "Text",

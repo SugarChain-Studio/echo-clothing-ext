@@ -14,7 +14,7 @@ const asset = {
         Spread: 0,
     },
     Priority: 12,
-        Layer: [
+    Layer: [
         {
             Color: ["#351C1C"],
             Name: "上袜",

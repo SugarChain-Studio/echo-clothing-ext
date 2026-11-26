@@ -34,7 +34,7 @@ const asset = {
     Top: 200,
     Prerequisite: ["HasBreasts"],
     Priority: 30,
-        Layer: [
+    Layer: [
         { Color: ["#000000"], Name: "E1", ...noPose },
 
         { Color: ["#0E164D"], Name: "A1", ...hogShow },
@@ -165,4 +165,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
-

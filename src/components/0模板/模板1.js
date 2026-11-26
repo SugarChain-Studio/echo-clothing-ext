@@ -16,7 +16,7 @@ const asset = {
     PoseMapping: {
         Yoked: PoseType.DEFAULT,
     },
-        Layer: [
+    Layer: [
         { Color: ["#FFFFF"], Name: "Layer1", Priority: 0 },
         {
             Name: "Layer2",
@@ -77,4 +77,3 @@ export default function () {
     //     assetStrings,
     // });
 }
-
