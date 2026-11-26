@@ -9,9 +9,9 @@ const asset = {
     Top: -60,
     Left: 0,
     Extended: true,
-    DefaultColor: ["#111111", "#111111", "#111111", "#111111", "#5e5c5c", "#828282", "#f1c4c4", "#A9AFAF"],
     Layer: [
         {
+            Color: ["#111111"],
             Name: "帽尖",
             Priority: 55,
             AllowTypes: { z: 1 },
@@ -39,6 +39,7 @@ const asset = {
             CopyLayerColor: "帽尖",
         },
         {
+            Color: ["#111111"],
             Name: "帽檐",
             Priority: 56,
             Alpha: [
@@ -54,22 +55,27 @@ const asset = {
             ],
         },
         {
+            Color: ["#111111"],
             Name: "帽里",
             Priority: 3,
         },
         {
+            Color: ["#5e5c5c"],
             Name: "帽里装饰",
             Priority: 3,
         },
         {
+            Color: ["#828282"],
             Name: "蝴蝶结",
             Priority: 57,
         },
         {
+            Color: ["#f1c4c4"],
             Name: "绑带",
             Priority: 55,
         },
         {
+            Color: ["#A9AFAF"],
             Name: "吊坠",
             Priority: 55,
         },

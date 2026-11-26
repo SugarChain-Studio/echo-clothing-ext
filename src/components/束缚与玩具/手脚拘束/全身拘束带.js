@@ -20,19 +20,18 @@ const asset = [
             SetPose: ["BackElbowTouch", "LegsClosed"],
             AllowActivePose: ["BackElbowTouch", "Kneel", "LegsClosed"],
             ParentGroup: {},
-            DefaultColor: ["Default", "#4A4A4A", "Default", "#E2C443", "Default", "#4A4A4A", "Default", "#E2C443"],
             Layer: [
                 { Name: "A1_U", ColorGroup: "环", ParentGroup: "BodyUpper" },
                 { Name: "A1_L", CopyLayerColor: "A1_U", ParentGroup: "BodyLower" },
-                { Name: "B1", ColorGroup: "条带" },
+                { Color: ["#4A4A4A"], Name: "B1", ColorGroup: "条带" },
                 { Name: "B2", ColorGroup: "阴影" },
-                { Name: "B3", ColorGroup: "轮廓线" },
+                { Color: ["#E2C443"], Name: "B3", ColorGroup: "轮廓线" },
                 { Name: "C1", ColorGroup: "环" },
-                { Name: "D1_U", ColorGroup: "条带", ParentGroup: "BodyUpper" },
+                { Color: ["#4A4A4A"], Name: "D1_U", ColorGroup: "条带", ParentGroup: "BodyUpper" },
                 { Name: "D1_L", CopyLayerColor: "D1_U", ParentGroup: "BodyLower" },
                 { Name: "D2_U", ColorGroup: "阴影", ParentGroup: "BodyUpper" },
                 { Name: "D2_L", CopyLayerColor: "D2_U", ParentGroup: "BodyLower" },
-                { Name: "D3_U", ColorGroup: "轮廓线", ParentGroup: "BodyUpper" },
+                { Color: ["#E2C443"], Name: "D3_U", ColorGroup: "轮廓线", ParentGroup: "BodyUpper" },
                 { Name: "D3_L", CopyLayerColor: "D3_U", ParentGroup: "BodyLower" },
                 {
                     Name: "↑_遮罩",
@@ -63,4 +62,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(["ItemArms", "ItemTorso"], asset);
 }
-

@@ -11,10 +11,9 @@ const asset = {
     Left: 150,
     Priority: 9,
     ParentGroup: {},
-    DefaultColor: ["#493F3F", "#493F3F"],
-    Layer: [
-        { Name: "Lines", HasImage: false },
-        { Name: "Text", HasImage: false },
+        Layer: [
+        { Color: ["#493F3F"], Name: "Lines", HasImage: false },
+        { Color: ["#493F3F"], Name: "Text", HasImage: false },
     ],
 };
 

@@ -11,8 +11,7 @@ const asset = {
     Priority: 53,
     DynamicGroupName: "Mask",
     IsRestraint: false,
-    DefaultColor: ["#0A0A0A", "Default", "#E2C443"],
-    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
+    Layer: [{ Color: ["#0A0A0A"], Name: "A1" }, { Name: "A2" }, { Color: ["#E2C443"], Name: "A3" }],
 };
 
 /** @type {AddAssetWithConfigParams[2]} */
@@ -27,4 +26,3 @@ const config = {
 export default function () {
     AssetManager.addAssetWithConfig([[["Mask", "ItemMouth", "ItemMouth2", "ItemMouth3"], asset, config]]);
 }
-

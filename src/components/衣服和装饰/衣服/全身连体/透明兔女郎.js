@@ -13,10 +13,9 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     DynamicGroupName: "Suit",
-    DefaultColor: ["#111", "#111", "Default", "Default", "Default", "Default"],
     Layer: [
-        { Name: "A1", Opacity: 0.4 },
-        { Name: "A2" },
+        { Color: ["#111"], Name: "A1", Opacity: 0.4 },
+        { Color: ["#111"], Name: "A2" },
         { Name: "B1" },
         { Name: "B2" },
         { Name: "B3" },

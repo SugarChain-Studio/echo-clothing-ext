@@ -74,7 +74,6 @@ const groups = [
             MaxOpacity: 1,
             Asset: [],
             Hide: ["HairFront"],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔前发(覆盖)",
@@ -94,7 +93,6 @@ const groups = [
             MaxOpacity: 1,
             Asset: [],
             Hide: ["HairBack"],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔后发(覆盖)",
@@ -112,7 +110,6 @@ const groups = [
             MinOpacity: 0,
             MaxOpacity: 1,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔额外头发",
@@ -134,13 +131,13 @@ const groups = [
                     Name: "少",
                     Random: false,
                     Priority: 9,
-                    DefaultColor: ["#D9DCFF"],
+                    Layer: [{ Color: ["#D9DCFF"] }],
                 },
                 {
                     Name: "中",
                     Random: false,
                     Priority: 9,
-                    DefaultColor: ["#D9DCFF"],
+                    Layer: [{ Color: ["#D9DCFF"] }],
                 },
             ],
         },
@@ -158,7 +155,6 @@ const groups = [
             Default: false,
             Random: false,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔鞭痕",
@@ -173,7 +169,6 @@ const groups = [
             Default: false,
             Random: false,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔替用身体",
@@ -189,7 +184,6 @@ const groups = [
             Random: false,
             BodyCosplay: true,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔身高调整",
@@ -208,7 +202,6 @@ const groups = [
             MinOpacity: 0,
             MaxOpacity: 1,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔长袖子",
@@ -223,7 +216,6 @@ const groups = [
             AllowNone: true,
             Random: false,
             Asset: [],
-            Color: ["Default"],
         },
         description: {
             CN: "🍔外观工具",
@@ -246,4 +238,3 @@ export default function () {
         左眼_Luzi: "Eyes2",
     });
 }
-

@@ -13,11 +13,10 @@ const asset = [
             Top: 0,
             Left: 0,
             Priority: 32,
-            DefaultColor: ["Default", "#000000"],
             ParentGroup: "BodyUpper",
             DynamicGroupName: "Cloth",
             PoseMapping: PoseMapTool.hideFullBody(),
-            Layer: [{ Name: "裙" }, { Name: "扣子" }],
+            Layer: [{ Name: "裙" }, { Color: ["#000000"], Name: "扣子" }],
         },
         (asset) => {
             ArmMaskTool.createArmMaskForCloth("Cloth", asset);

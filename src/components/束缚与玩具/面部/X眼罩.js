@@ -11,30 +11,17 @@ const base = {
     Fetish: ["Leather"],
     Priority: 44,
     DynamicGroupName: "ItemHead",
-    DefaultColor: [
-        "#2F2F2F",
-        "#2F2F2F",
-        "#101010",
-        "Default",
-        "#151515",
-        "Default",
-        "#2F2F2F",
-        "#101010",
-        "Default",
-        "#151515",
-        "Default",
-    ],
     Layer: [
-        { Name: "A1" },
-        { Name: "B1", ColorGroup: "底色" },
-        { Name: "B2", ColorGroup: "阴影" },
+        { Color: ["#2F2F2F"], Name: "A1" },
+        { Color: ["#2F2F2F"], Name: "B1", ColorGroup: "底色" },
+        { Color: ["#101010"], Name: "B2", ColorGroup: "阴影" },
         { Name: "B3", ColorGroup: "亮色" },
-        { Name: "B4", ColorGroup: "描边" },
+        { Color: ["#151515"], Name: "B4", ColorGroup: "描边" },
         { Name: "B5", ColorGroup: "铆钉" },
-        { Name: "C1", ColorGroup: "底色" },
-        { Name: "C2", ColorGroup: "阴影" },
+        { Color: ["#2F2F2F"], Name: "C1", ColorGroup: "底色" },
+        { Color: ["#101010"], Name: "C2", ColorGroup: "阴影" },
         { Name: "C3", ColorGroup: "亮色" },
-        { Name: "C4", ColorGroup: "描边" },
+        { Color: ["#151515"], Name: "C4", ColorGroup: "描边" },
         { Name: "C5", ColorGroup: "铆钉" },
     ],
 };
@@ -86,4 +73,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
-

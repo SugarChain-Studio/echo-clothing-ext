@@ -8,30 +8,18 @@ const asset = {
     Left: 100,
     Top: 450,
     ParentGroup: {},
-    DefaultColor: [
-        "#7d7d7d", // 右_底色 (bdbdbd * 0.66)
-        "#92a3a8", // 右_装饰 (ddf7ff * 0.66)
-        "#a888a7", // 右_本体 (ffcefd * 0.66)
-        "#a8a580", // 右_装饰环 (fffac2 * 0.66)
-        "#7699a8", // 右_装饰珠 (b2e7ff * 0.66)
-        "#7d7d7d", // 左_底色 (bdbdbd * 0.66)
-        "#92a3a8", // 左_装饰 (ddf7ff * 0.66)
-        "#a888a7", // 左_本体 (ffcefd * 0.66)
-        "#a8a580", // 左_装饰环 (fffac2 * 0.66)
-        "#7699a8", // 左_装饰珠 (b2e7ff * 0.66)
-    ],
     Priority: 34,
     Layer: [
-        { Name: "右_底色", ColorGroup: "底色" },
-        { Name: "右_装饰", ColorGroup: "装饰" },
-        { Name: "右_本体", ColorGroup: "本体" },
-        { Name: "右_装饰环", ColorGroup: "装饰环" },
-        { Name: "右_装饰珠", ColorGroup: "装饰珠" },
-        { Name: "左_底色", ColorGroup: "底色" },
-        { Name: "左_装饰", ColorGroup: "装饰" },
-        { Name: "左_本体", ColorGroup: "本体" },
-        { Name: "左_装饰环", ColorGroup: "装饰环" },
-        { Name: "左_装饰珠", ColorGroup: "装饰珠" },
+        { Color: ["#7d7d7d"], Name: "右_底色", ColorGroup: "底色" },
+        { Color: ["#92a3a8"], Name: "右_装饰", ColorGroup: "装饰" },
+        { Color: ["#a888a7"], Name: "右_本体", ColorGroup: "本体" },
+        { Color: ["#a8a580"], Name: "右_装饰环", ColorGroup: "装饰环" },
+        { Color: ["#7699a8"], Name: "右_装饰珠", ColorGroup: "装饰珠" },
+        { Color: ["#7d7d7d"], Name: "左_底色", ColorGroup: "底色" },
+        { Color: ["#92a3a8"], Name: "左_装饰", ColorGroup: "装饰" },
+        { Color: ["#a888a7"], Name: "左_本体", ColorGroup: "本体" },
+        { Color: ["#a8a580"], Name: "左_装饰环", ColorGroup: "装饰环" },
+        { Color: ["#7699a8"], Name: "左_装饰珠", ColorGroup: "装饰珠" },
     ],
 };
 
@@ -90,4 +78,3 @@ export default function () {
         ...ExtendedTools.createLeftRightBoth(asset, { preset: "both", mirror: true }),
     });
 }
-

@@ -14,30 +14,17 @@ const asset = [
         IsRestraint: false,
         DynamicGroupName: "ItemHandheld",
         ParentGroup: {},
-        DefaultColor: [
-            "Default",
-            "Default",
-            "Default",
-            "#202020",
-            "Default",
-            "Default",
-            "Default",
-            "#333333",
-            "Default",
-            "Default",
-            "Default",
-        ],
         PoseMapping: {},
         Layer: [
             { Name: "A1", ColorGroup: "肩带", Priority: 6 },
             { Name: "A2", ColorGroup: "肩带" },
             { Name: "A3" },
-            { Name: "B1" },
+            { Color: ["#202020"], Name: "B1" },
             { Name: "B2", BlendingMode: "multiply", AllowColorize: false },
             { Name: "B3" },
             { Name: "B4" },
             { Name: "B5" },
-            { Name: "B6" },
+            { Color: ["#333333"], Name: "B6" },
             { Name: "B7" },
             { Name: "B8" },
             { Name: "B9" },
@@ -86,4 +73,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset[1], "Short");
     AssetManager.addAssetWithConfig(...asset);
 }
-

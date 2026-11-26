@@ -23,29 +23,9 @@ const asset = {
     MinOpacity: 0,
     MaxOpacity: 1,
     DynamicGroupName: "ItemDevices",
-    DefaultColor: [
-        "#000000",
-        "Default",
-        "Default",
-        "Default",
-        "#000000",
-        "Default",
-        "Default",
-        "Default",
-        "#000000",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "#444444",
-        "#000000",
-        "Default",
-        "Default",
-    ],
     Layer: [
         {
+            Color: ["#000000"],
             Name: "拘束袋充气底色",
             ColorGroup: "底色",
             AllowTypes: { o: 1 },
@@ -70,6 +50,7 @@ const asset = {
         },
 
         {
+            Color: ["#000000"],
             Name: "拘束袋底色",
             ColorGroup: "底色",
             AllowTypes: { o: 0 },
@@ -94,6 +75,7 @@ const asset = {
         },
 
         {
+            Color: ["#000000"],
             Name: "头拘束袋底色",
             ColorGroup: "底色",
             AllowTypes: { t: 1 },
@@ -136,12 +118,14 @@ const asset = {
         },
 
         {
+            Color: ["#444444"],
             Name: "罐子",
             ColorGroup: "罐子",
             AllowTypes: { g: 1 },
             MinOpacity: 1,
         },
         {
+            Color: ["#000000"],
             Name: "罐子软管",
             ColorGroup: "罐子",
             AllowTypes: { g: 1 },

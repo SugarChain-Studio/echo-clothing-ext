@@ -18,13 +18,12 @@ const asset = [
                 AllFours: PoseType.HIDE,
             },
             DynamicGroupName: "Cloth",
-            DefaultColor: ["#797070", "#937373", "#25251F", "#AA8484"],
             Layer: [
-                { Name: "基础" },
-                { Name: "文胸基础" },
-                { Name: "边缘" },
+                { Color: ["#797070"], Name: "基础" },
+                { Color: ["#937373"], Name: "文胸基础" },
+                { Color: ["#25251F"], Name: "边缘" },
                 { Name: "文胸基础阴影", BlendingMode: "multiply", AllowColorize: false },
-                { Name: "文胸蕾丝" },
+                { Color: ["#AA8484"], Name: "文胸蕾丝" },
                 {
                     Name: "下摆阴影",
                     BlendingMode: "multiply",
@@ -58,4 +57,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

@@ -11,12 +11,11 @@ const asset = {
     Top: 270,
     ParentGroup: {},
     Fetish: ["Sadism"],
-    DefaultColor: ["Default", "Default", "Default", "#000000"],
     Layer: [
         { Name: "m" },
         { Name: "h2" },
         { Name: "h1" },
-        { Name: "dp", CreateLayerTypes: ["typed"] },
+        { Color: ["#000000"], Name: "dp", CreateLayerTypes: ["typed"] },
         Layer.screen({ Name: "gp", CreateLayerTypes: ["typed"] }),
     ],
 };

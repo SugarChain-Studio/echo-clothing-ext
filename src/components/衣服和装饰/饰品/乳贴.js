@@ -9,12 +9,14 @@ const asset = [
             Random: false,
             ...Tools.topLeftBuilder({ Left: 180, Top: 290 }, ["AllFours", { Left: 190, Top: 330 }]),
             ParentGroup: "BodyUpper",
-            DefaultColor: ["#B16565", "#B16565"],
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
             DynamicGroupName: "Bra",
-            Layer: [{ Name: "左" }, { Name: "右" }],
+            Layer: [
+                { Color: ["#B16565"], Name: "左" },
+                { Color: ["#B16565"], Name: "右" },
+            ],
         },
         {
             translation: { CN: "乳贴1", EN: "Pasties 1" },
@@ -27,12 +29,14 @@ const asset = [
             Random: false,
             ...Tools.topLeftBuilder({ Left: 180, Top: 290 }, ["AllFours", { Left: 190, Top: 330 }]),
             ParentGroup: "BodyUpper",
-            DefaultColor: ["#B16565", "#B16565"],
             Prerequisite: ["HasBreasts", "AccessBreast"],
             Expose: ["ItemBreast", "ItemNipples", "ItemNipplesPiercings"],
             PoseMapping: { AllFours: "AllFours" },
             DynamicGroupName: "Bra",
-            Layer: [{ Name: "左" }, { Name: "右" }],
+            Layer: [
+                { Color: ["#B16565"], Name: "左" },
+                { Color: ["#B16565"], Name: "右" },
+            ],
         },
         {
             translation: { CN: "乳贴2", EN: "Pasties 2" },
@@ -44,4 +48,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(["Bra", "ItemNipples"], asset);
 }
-

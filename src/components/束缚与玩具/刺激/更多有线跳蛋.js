@@ -20,7 +20,6 @@ const asset = {
         Kneel: "LegsClosed",
         LegsClosed: "LegsClosed",
     },
-    DefaultColor: ["Default", "Default", "Default", "Default", "Default", "#3B3B3B"],
     Layer: [
         {
             Name: "跳蛋1",
@@ -48,6 +47,7 @@ const asset = {
             AllowTypes: { n: [3, 4] },
         },
         {
+            Color: ["#3B3B3B"],
             Name: "绑带",
             ParentGroup: "BodyLower",
         },

@@ -12,8 +12,14 @@ const asset = [
         Priority: 20,
         PoseMapping: PoseMapTool.config(["Hogtied"], ["AllFours"]),
         DynamicGroupName: "Suit",
-        DefaultColor: ["Default", "#2D2D2D", "Default", "Default", "Default", "Default"],
-        Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "B1" }, { Name: "B2" }, { Name: "C1" }],
+        Layer: [
+            { Name: "A1" },
+            { Color: ["#2D2D2D"], Name: "A2" },
+            { Name: "A3" },
+            { Name: "B1" },
+            { Name: "B2" },
+            { Name: "C1" },
+        ],
     },
     {
         translation: { CN: "复古泳装", EN: "Retro Swimsuit" },
@@ -27,4 +33,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

@@ -69,9 +69,8 @@ const asset = {
     Left: 0,
     AllowActivePose: [],
     DynamicGroupName: "BodyMarkings",
-    DefaultColor: "#752626",
     Layer: [
-        { Name: "Base", HasImage: false, AllowTypes: {} },
+        { Color: ["#752626"], Name: "Base", HasImage: false, AllowTypes: {} },
         ...layers.map((layer) => ({ ...layer, AllowTypes: { [layer.Name]: 1 }, CopyLayerColor: "Base" })),
     ],
 };
@@ -160,4 +159,3 @@ const assetStrings = Object.fromEntries(
 export default function () {
     AssetManager.addAssetWithConfig("BodyMarkings", asset, { translation, layerNames, extended, assetStrings });
 }
-

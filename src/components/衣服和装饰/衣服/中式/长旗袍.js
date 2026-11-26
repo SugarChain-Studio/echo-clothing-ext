@@ -19,32 +19,17 @@ const asset = [
             Priority: 30,
             Prerequisite: ["HasBreasts"],
             PoseMapping: PoseMapTool.config(["Hogtied", "AllFours"]),
-            DefaultColor: [
-                "Default",
-                "Default",
-                "Default",
-                "Default",
-                "#000000",
-                "Default",
-                "Default",
-                "Default",
-                "Default",
-                "#000000",
-                "Default",
-                "Default",
-                "Default",
-            ],
             Layer: [
                 { Name: "A1", ColorGroup: "Base" },
                 { Name: "A2", ColorGroup: "Shade" },
                 { Name: "A3", ColorGroup: "Highlight" },
                 { Name: "B1", ColorGroup: "Trim" },
-                { Name: "B2", ColorGroup: "Outline" },
+                { Color: ["#000000"], Name: "B2", ColorGroup: "Outline" },
                 { Name: "C1", ColorGroup: "Base" },
                 { Name: "C2", ColorGroup: "Shade" },
                 { Name: "C3", ColorGroup: "Highlight" },
                 { Name: "C5", ColorGroup: "Trim" },
-                { Name: "C4", ColorGroup: "Outline" },
+                { Color: ["#000000"], Name: "C4", ColorGroup: "Outline" },
                 {
                     Name: "D1",
                     ColorGroup: "Accessory",
@@ -103,4 +88,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

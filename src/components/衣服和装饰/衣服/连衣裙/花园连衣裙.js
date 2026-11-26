@@ -8,8 +8,7 @@ const asset = {
     Left: 90,
     Top: 210,
     PoseMapping: PoseMapTool.hideFullBody(),
-    DefaultColor: ["Default", "Default", "Default", "#303030", "Default"],
-    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
+    Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Color: ["#303030"], Name: "A4" }, { Name: "A5" }],
 };
 
 /** @type {Translation.Entry} */
@@ -40,4 +39,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("Cloth", asset);
     AssetManager.addAssetWithConfig("Cloth", asset, { translation, layerNames });
 }
-

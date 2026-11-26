@@ -84,7 +84,7 @@ function repeatEntries(...args) {
 /**
  * @template T
  * @template R
- * @typedef {(arg:T[], func:(arg:T)=>R)=>R[]} ArrayTransformFunction
+ * @typedef {(arg:T[], func:(arg:T, idx:number, array:T[])=>R)=>R[]} ArrayTransformFunction
  */
 
 class _Type {
@@ -220,7 +220,7 @@ export const Merge = new _Merge();
 
 class _Layer {
     /** @type {ArrayTransformFunction<AssetLayerDefinition, AssetLayerDefinition>} */
-    map = (args, func) => args.map(func);
+    map = (args, func) => args.map((v, i, a) => func(v, i, a));
     /** @type {Identity<AssetLayerDefinition>} */
     screen = (layer) => ({ ...layer, BlendingMode: "screen", AllowColorize: false });
     /** @type {Identity<AssetLayerDefinition>} */

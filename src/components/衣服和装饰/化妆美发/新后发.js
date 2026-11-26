@@ -403,16 +403,15 @@ const assetsN = [
             Left: 0,
             Top: 0,
             ParentGroup: {},
-            DefaultColor: ["Default", "Default", "#AE7384", "#AE7384", "#B3B3B3", "#B3B3B3", "#D7D7D7", "#D7D7D7"],
             Layer: [
                 { Name: "A1", ColorGroup: "Base", InheritColor: "HairFront" },
                 { Name: "B1", ColorGroup: "Base", InheritColor: "HairFront" },
-                { Name: "A2", ColorGroup: "Stripe" },
-                { Name: "B2", ColorGroup: "Stripe" },
-                { Name: "A3", ColorGroup: "Ties" },
-                { Name: "B3", ColorGroup: "Ties" },
-                { Name: "A4", ColorGroup: "Ring" },
-                { Name: "B4", ColorGroup: "Ring" },
+                { Color: ["#AE7384"], Name: "A2", ColorGroup: "Stripe" },
+                { Color: ["#AE7384"], Name: "B2", ColorGroup: "Stripe" },
+                { Color: ["#B3B3B3"], Name: "A3", ColorGroup: "Ties" },
+                { Color: ["#B3B3B3"], Name: "B3", ColorGroup: "Ties" },
+                { Color: ["#D7D7D7"], Name: "A4", ColorGroup: "Ring" },
+                { Color: ["#D7D7D7"], Name: "B4", ColorGroup: "Ring" },
             ],
         },
         {
@@ -454,4 +453,3 @@ const assetsN = [
 export default function () {
     AssetManager.addAssetWithConfig("新后发_Luzi", assetsN);
 }
-

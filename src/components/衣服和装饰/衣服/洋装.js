@@ -34,67 +34,37 @@ const asset = {
     Top: 200,
     Prerequisite: ["HasBreasts"],
     Priority: 30,
-    DefaultColor: [
-        "#000000",
-        "#0E164D",
-        "#020212",
-        "#040820",
-        "#020212",
-        "#121113",
-        "#000000",
-        "#363330",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#0E164D",
-        "#020212",
-        "#1D1D1D",
-        "#000000",
-        "#0E164D",
-        "#020212",
-    ],
-    Layer: [
-        { Name: "E1", ...noPose },
+        Layer: [
+        { Color: ["#000000"], Name: "E1", ...noPose },
 
-        { Name: "A1", ...hogShow },
-        { Name: "A2", ...hogShow },
-        { Name: "B1", ...hogHide, Priority: 6 }, // Hogtied 是空的
-        { Name: "B2", ...hogHide, Priority: 6 }, // Hogtied 是空的
-        { Name: "C1", ...hogShow },
-        { Name: "C2", ...hogShow },
-        { Name: "C3", ...hogShow },
-        { Name: "DA1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
-        { Name: "DA2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
-        { Name: "DB1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
-        { Name: "DB2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
-        { Name: "DC1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
-        { Name: "DC2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
-        { Name: "DD1", ...hogShow, ColorGroup: "花" },
-        { Name: "DD2", ...hogShow, ColorGroup: "花阴影" },
-        { Name: "DE1", ...hogShow, ColorGroup: "花" },
-        { Name: "DE2", ...hogShow, ColorGroup: "花阴影" },
-        { Name: "DF1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
-        { Name: "DF2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
-        { Name: "DG1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
-        { Name: "DG2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
-        { Name: "DH1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
-        { Name: "DH2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "A1", ...hogShow },
+        { Color: ["#020212"], Name: "A2", ...hogShow },
+        { Color: ["#040820"], Name: "B1", ...hogHide, Priority: 6 }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "B2", ...hogHide, Priority: 6 }, // Hogtied 是空的
+        { Color: ["#121113"], Name: "C1", ...hogShow },
+        { Color: ["#000000"], Name: "C2", ...hogShow },
+        { Color: ["#363330"], Name: "C3", ...hogShow },
+        { Color: ["#0E164D"], Name: "DA1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DA2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "DB1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DB2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "DC1", ...hogHide, ColorGroup: "花" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DC2", ...hogHide, ColorGroup: "花阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "DD1", ...hogShow, ColorGroup: "花" },
+        { Color: ["#020212"], Name: "DD2", ...hogShow, ColorGroup: "花阴影" },
+        { Color: ["#0E164D"], Name: "DE1", ...hogShow, ColorGroup: "花" },
+        { Color: ["#020212"], Name: "DE2", ...hogShow, ColorGroup: "花阴影" },
+        { Color: ["#0E164D"], Name: "DF1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DF2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "DG1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DG2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
+        { Color: ["#0E164D"], Name: "DH1", ...hogHide, ColorGroup: "蝴蝶结" }, // Hogtied 是空的
+        { Color: ["#020212"], Name: "DH2", ...hogHide, ColorGroup: "蝴蝶结阴影" }, // Hogtied 是空的
 
-        { Name: "FA1", ...noPose }, // 项圈
-        { Name: "FA2", ...noPose },
-        { Name: "FB1", ...noPose, ColorGroup: "花" },
-        { Name: "FB2", ...noPose, ColorGroup: "花阴影" },
+        { Color: ["#1D1D1D"], Name: "FA1", ...noPose }, // 项圈
+        { Color: ["#000000"], Name: "FA2", ...noPose },
+        { Color: ["#0E164D"], Name: "FB1", ...noPose, ColorGroup: "花" },
+        { Color: ["#020212"], Name: "FB2", ...noPose, ColorGroup: "花阴影" },
     ],
 };
 

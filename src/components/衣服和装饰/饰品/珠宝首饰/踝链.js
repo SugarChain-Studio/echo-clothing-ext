@@ -51,11 +51,10 @@ const asset = [
                 Priority: 20,
                 DynamicGroupName: "Jewelry",
                 ParentGroup: "BodyLower",
-                DefaultColor: ["Default", "#9FEEFF", "Default"],
                 PoseMapping: PoseMapTool.config(["Spread", "LegsClosed"], ["Kneel", "KneelingSpread"]),
                 Layer: [
                     { Name: "链" },
-                    { Name: "钻", AllowTypes: { s: 0 } },
+                    { Color: ["#9FEEFF"], Name: "钻", AllowTypes: { s: 0 } },
                     { Name: "珠", AllowTypes: { s: 1 } },
                     { Name: "链2", Priority: 7, CopyLayerColor: "链" },
                 ],
@@ -253,4 +252,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
-

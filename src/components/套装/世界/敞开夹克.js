@@ -84,6 +84,30 @@ const layerDefBase = /** @type {MyDefinition[]} */ ([
         },
     ]);
 
+/** @type {BCColor[]} */
+const layerColors = [
+    "#A9A5C3",
+    "#A9A5C3",
+    "#000000",
+    "#000000",
+    "#3A3A3A",
+    "#3A3A3A",
+    "#222222",
+    "#222222",
+    "#A6A6A6",
+    "#A6A6A6",
+    "#A9A5C3",
+    "#A9A5C3",
+    "#A9A5C3",
+    "#A9A5C3",
+    "#141414",
+    "#141414",
+    "#424242",
+    "#424242",
+    "#000000",
+    "#000000",
+];
+
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "敞夹克",
@@ -91,33 +115,15 @@ const asset = {
     Left: 50,
     Top: 70,
     Priority: 31,
-    DefaultColor: [
-        "#A9A5C3",
-        "#A9A5C3",
-        "#000000",
-        "#000000",
-        "#3A3A3A",
-        "#3A3A3A",
-        "#222222",
-        "#222222",
-        "#A6A6A6",
-        "#A6A6A6",
-        "#A9A5C3",
-        "#A9A5C3",
-        "#A9A5C3",
-        "#A9A5C3",
-        "#141414",
-        "#141414",
-        "#424242",
-        "#424242",
-        "#000000",
-        "#000000",
-    ],
     ParentGroup: "BodyUpper",
     DynamicGroupName: "Cloth",
     Expose: ["ItemNipples", "ItemNipples", "ItemBreast"],
     PoseMapping: poseMapping,
-    Layer: Layer.map(layerDefBase, (l) => ({ ...l, ColorName: undefined })),
+    Layer: Layer.map(layerDefBase, (l, index) => ({
+        ...l,
+        Color: [layerColors[index]],
+        ColorName: undefined,
+    })),
 };
 
 const translation = {

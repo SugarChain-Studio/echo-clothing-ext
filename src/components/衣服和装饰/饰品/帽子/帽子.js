@@ -10,8 +10,12 @@ const assets = [
             Left: 0,
             Top: -18,
             Priority: 55,
-            DefaultColor: ["#660606", "#000000", "#C18A34", "#CFAC68"],
-            Layer: [{ Name: "帽顶" }, { Name: "帽身" }, { Name: "纹样" }, { Name: "帽帘" }],
+            Layer: [
+                { Color: ["#660606"], Name: "帽顶" },
+                { Color: ["#000000"], Name: "帽身" },
+                { Color: ["#C18A34"], Name: "纹样" },
+                { Color: ["#CFAC68"], Name: "帽帘" },
+            ],
         },
         {
             translation: { CN: "冕旒", EN: "Mian Liu" },
@@ -28,8 +32,12 @@ const assets = [
             Left: 0,
             Top: 0,
             Priority: 55,
-            DefaultColor: ["Default", "#FFF260", "#3E5FBB", "#F83A3A"],
-            Layer: [{ Name: "底" }, { Name: "眼白" }, { Name: "瞳孔" }, { Name: "涂色" }],
+            Layer: [
+                { Name: "底" },
+                { Color: ["#FFF260"], Name: "眼白" },
+                { Color: ["#3E5FBB"], Name: "瞳孔" },
+                { Color: ["#F83A3A"], Name: "涂色" },
+            ],
         },
         {
             translation: { CN: "狐狸面具", EN: "Fox Mask" },
@@ -46,8 +54,12 @@ const assets = [
             Left: 160,
             Top: 20,
             Priority: 7,
-            DefaultColor: ["#FFB1B1", "#FFB1B1", "#856757", "#5A4A41"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }],
+            Layer: [
+                { Color: ["#FFB1B1"], Name: "A1" },
+                { Color: ["#FFB1B1"], Name: "A2" },
+                { Color: ["#856757"], Name: "A3" },
+                { Color: ["#5A4A41"], Name: "A4" },
+            ],
         },
         {
             translation: { CN: "邦尼特帽", EN: "Bonnet Colonial Hat" },

@@ -265,6 +265,28 @@ const posModules = [
     },
 ];
 
+/** @type {BCColor[]} */
+const layerColors = [
+    "#4C1919",
+    "#906262",
+    "#B7B7B7",
+    "#7955C1",
+    "#5E192F",
+    "#2E4B1F",
+    "#1D5266",
+    "#412B62",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#950000",
+    "#00610B",
+    "#000000",
+    "#7E3A00",
+    "#679B96",
+    "#3C3C3C",
+];
+
 /** @type {CustomAssetDefinition} */
 const asset = {
     Name: "标志纹饰",
@@ -275,31 +297,12 @@ const asset = {
     Extended: true,
     ParentGroup: {},
     PoseMapping: {},
-    DefaultColor: [
-        "#4C1919",
-        "#906262",
-        "#B7B7B7",
-        "#7955C1",
-        "#5E192F",
-        "#2E4B1F",
-        "#1D5266",
-        "#412B62",
-        "#000000",
-        "#000000",
-        "#000000",
-        "#000000",
-        "#950000",
-        "#00610B",
-        "#000000",
-        "#7E3A00",
-        "#679B96",
-        "#3C3C3C",
-    ],
     Layer: layers.reduce((acc, layer, idx) => {
         acc.push({
             Name: `${layer.Name}_1`,
             AllowTypes: { p: idx },
             ColorGroup: layer.ColorGroup,
+            Color: [layerColors[idx]],
         });
         acc.push({
             Name: `${layer.Name}_2`,

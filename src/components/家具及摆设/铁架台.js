@@ -15,7 +15,6 @@ const asset = {
     Random: false,
     Left: 0,
     Top: 0,
-    DefaultColor: [],
     PoseMapping: {},
     AllowLock: true,
     Time: 30,
@@ -216,4 +215,3 @@ export default function () {
         assetStrings,
     });
 }
-

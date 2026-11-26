@@ -11,7 +11,6 @@ const asset = {
         KneelingSpread: 90,
     },
     Priority: 26,
-    DefaultColor: ["#560E0E", "#560E0E", "#1F1F1F"],
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
@@ -19,6 +18,7 @@ const asset = {
     },
     Layer: [
         {
+            Color: ["#560E0E"],
             Name: "上",
             PoseMapping: {
                 AllFours: PoseType.HIDE,
@@ -26,6 +26,7 @@ const asset = {
             },
         },
         {
+            Color: ["#560E0E"],
             Name: "下",
             PoseMapping: {
                 Kneel: "Kneel",
@@ -37,6 +38,7 @@ const asset = {
             },
         },
         {
+            Color: ["#1F1F1F"],
             Name: "扣子",
             ParentGroup: {},
             PoseMapping: {

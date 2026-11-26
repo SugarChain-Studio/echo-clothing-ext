@@ -16,70 +16,48 @@ const asset = [
             Top: 0,
             Left: 0,
             Expose: ["ItemNipples", "ItemBreast", "ItemNipplesPiercings"],
-            DefaultColor: [
-                "#111111",
-                "#111111",
-                "#251515",
-                "#251515",
-                "#251515",
-                "#000000",
-                "#111111",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-            ],
             Layer: [
-                { Name: "Z1" }, // 身体色晕
-                { Name: "A1" }, // 底色
-                { Name: "A2", ColorGroup: "Shade1" }, // 身体曲线暗色
-                { Name: "A3", ColorGroup: "Shade1" },
-                { Name: "A4", ColorGroup: "Shade1" },
-                { Name: "B1" }, // 边缘线
-                { Name: "B2" }, // 边缘暗色
-                { Name: "C1", ColorGroup: "BS" }, // 身体暗色细节
-                { Name: "C2", ColorGroup: "BS" },
-                { Name: "C3", ColorGroup: "BS" },
-                { Name: "C4", ColorGroup: "BS" },
-                { Name: "C5", ColorGroup: "BS" },
-                { Name: "C6", ColorGroup: "BS" },
-                { Name: "C7", ColorGroup: "BS" },
-                { Name: "C8", ColorGroup: "BS" },
-                { Name: "C9", ColorGroup: "BS" },
-                { Name: "C10", ColorGroup: "BS" },
-                { Name: "C11", ColorGroup: "BS" },
-                { Name: "C12", ColorGroup: "BS" },
-                { Name: "D1", ColorGroup: "HL" }, // 身体高光细节
-                { Name: "D2", ColorGroup: "HL" },
-                { Name: "D3", ColorGroup: "HL" },
-                { Name: "D4", ColorGroup: "HL" },
-                { Name: "D5", ColorGroup: "HL" },
-                { Name: "D6", ColorGroup: "HL" },
-                { Name: "D7", ColorGroup: "HL" },
+                { Color: ["#111111"], Name: "Z1" }, // 身体色晕
+                { Color: ["#111111"], Name: "A1" }, // 底色
+                { Color: ["#251515"], Name: "A2", ColorGroup: "Shade1" }, // 身体曲线暗色
+                { Color: ["#251515"], Name: "A3", ColorGroup: "Shade1" },
+                { Color: ["#251515"], Name: "A4", ColorGroup: "Shade1" },
+                { Color: ["#000000"], Name: "B1" }, // 边缘线
+                { Color: ["#111111"], Name: "B2" }, // 边缘暗色
+                { Color: ["#000000"], Name: "C1", ColorGroup: "BS" }, // 身体暗色细节
+                { Color: ["#000000"], Name: "C2", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C3", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C4", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C5", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C6", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C7", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C8", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C9", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C10", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C11", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C12", ColorGroup: "BS" },
+                { Color: ["#FFFFFF"], Name: "D1", ColorGroup: "HL" }, // 身体高光细节
+                { Color: ["#FFFFFF"], Name: "D2", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D3", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D4", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D5", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D6", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D7", ColorGroup: "HL" },
                 ...Layer.map(
                     [
                         { Name: "E1", CopyLayerColor: "A1" },
                         { Name: "F1", CopyLayerColor: "B1" },
                         { Name: "F2", CopyLayerColor: "B2" },
-                        { Name: "G1", ColorGroup: "HL" },
-                        { Name: "G2", ColorGroup: "HL" },
+                        {
+                            Color: ["#FFFFFF"],
+                            Name: "G1",
+                            ColorGroup: "HL",
+                        },
+                        {
+                            Color: ["#FFFFFF"],
+                            Name: "G2",
+                            ColorGroup: "HL",
+                        },
                         { Name: "L", CopyLayerColor: "B1", AllowTypes: { h: [1, 2, 3], m: [0, 2, 3] } },
                     ],
                     (l) => ({
@@ -225,41 +203,23 @@ const asset = [
             Random: false,
             Top: 0,
             Left: 0,
-            DefaultColor: [
-                "#111111",
-                "#111111",
-                "#251515",
-                "#251515",
-                "#111111",
-                "#111111",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#000000",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-                "#FFFFFF",
-            ],
             Layer: [
-                { Name: "Z1" }, // 身体色晕
-                { Name: "A1" }, // 底色
-                { Name: "A2", ColorGroup: "Shade1" }, // 身体曲线暗色
-                { Name: "A3", ColorGroup: "Shade1" },
-                { Name: "B1" }, // 边缘线
-                { Name: "B2" }, // 边缘暗色
-                { Name: "C1", ColorGroup: "BS" }, // 身体暗色细节
-                { Name: "C2", ColorGroup: "BS" },
-                { Name: "C3", ColorGroup: "BS" },
-                { Name: "C4", ColorGroup: "BS" },
-                { Name: "C5", ColorGroup: "BS" },
-                { Name: "C6", ColorGroup: "BS" },
-                { Name: "D1", ColorGroup: "HL" }, // 身体高光细节
-                { Name: "D2", ColorGroup: "HL" },
-                { Name: "D3", ColorGroup: "HL" },
-                { Name: "D4", ColorGroup: "HL" },
+                { Color: ["#111111"], Name: "Z1" }, // 身体色晕
+                { Color: ["#111111"], Name: "A1" }, // 底色
+                { Color: ["#251515"], Name: "A2", ColorGroup: "Shade1" }, // 身体曲线暗色
+                { Color: ["#251515"], Name: "A3", ColorGroup: "Shade1" },
+                { Color: ["#111111"], Name: "B1" }, // 边缘线
+                { Color: ["#111111"], Name: "B2" }, // 边缘暗色
+                { Color: ["#000000"], Name: "C1", ColorGroup: "BS" }, // 身体暗色细节
+                { Color: ["#000000"], Name: "C2", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C3", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C4", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C5", ColorGroup: "BS" },
+                { Color: ["#000000"], Name: "C6", ColorGroup: "BS" },
+                { Color: ["#FFFFFF"], Name: "D1", ColorGroup: "HL" }, // 身体高光细节
+                { Color: ["#FFFFFF"], Name: "D2", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D3", ColorGroup: "HL" },
+                { Color: ["#FFFFFF"], Name: "D4", ColorGroup: "HL" },
                 {
                     Name: "tmask",
                     AllowTypes: { t: 1 },

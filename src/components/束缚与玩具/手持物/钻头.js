@@ -20,11 +20,11 @@ const asset = {
     PoseMapping: {
         ...AssetPoseMapping.ItemHandheld,
     },
-    DefaultColor: ["#888888"],
     DynamicBeforeDraw: true,
     DynamicScriptDraw: true,
     Layer: [
         {
+            Color: ["#888888"],
             Priority: 26,
             Name: "Base",
         },
@@ -72,4 +72,3 @@ export default function () {
     // AssetManager.addAsset(group, asset, extended, { CN: "钻头", UA: "Дриль", EN: "Drill" });
     // AssetManager.addCustomDialog(dialogs);
 }
-

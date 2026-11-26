@@ -31,8 +31,11 @@ const asset = [
             Top: 0,
             Left: 0,
             Priority: 20,
-            DefaultColor: ["#272020", "#221717", "#221717"],
-            Layer: [{ Name: "袜子" }, { Name: "条纹" }, { Name: "袜边" }],
+            Layer: [
+                { Color: ["#272020"], Name: "袜子" },
+                { Color: ["#221717"], Name: "条纹" },
+                { Color: ["#221717"], Name: "袜边" },
+            ],
         },
         {
             translation: {

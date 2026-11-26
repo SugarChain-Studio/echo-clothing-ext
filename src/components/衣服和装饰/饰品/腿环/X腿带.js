@@ -12,9 +12,8 @@ const asset = {
     Priority: 22,
     Extended: true,
     PoseMapping: PoseMapTool.config(["Kneel", "LegsClosed", "Spread", "KneelingSpread"], ["Hogtied", "AllFours"]),
-    DefaultColor: ["#141414"],
     Layer: [
-        { Name: "带子" },
+        { Color: ["#141414"], Name: "带子" },
         {
             Name: "左腿",
             HasImage: false,

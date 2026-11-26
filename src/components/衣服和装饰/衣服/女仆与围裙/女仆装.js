@@ -39,9 +39,9 @@ const asset = [
                 Left: 0,
                 Priority: 30,
                 Prerequisite: ["HasBreasts"],
-                DefaultColor: ["#3F3F3F", "#808080"],
                 Layer: [
                     {
+                        Color: ["#3F3F3F"],
                         Name: "裙子",
                         PoseMapping: {
                             Yoked: "Yoked",
@@ -53,6 +53,7 @@ const asset = [
                         },
                     },
                     {
+                        Color: ["#808080"],
                         Name: "围裙",
                         PoseMapping: {
                             AllFours: "Hide",

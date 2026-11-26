@@ -43,12 +43,11 @@ const asset = [
         PoseMapping: {},
         Fetish: ["Latex", "Forniphilia"],
         Effect: [E.Leash],
-        DefaultColor: ["#111111", "#FFFFFF", "#111111", "#FFFFFF"],
         Layer: [
             ...Layer.map(
                 [
-                    { Name: "s_base", ColorGroup: "base" },
-                    { Name: "s_hlight", ColorGroup: "hlight" },
+                    { Color: ["#111111"], Name: "s_base", ColorGroup: "base" },
+                    { Color: ["#FFFFFF"], Name: "s_hlight", ColorGroup: "hlight" },
                 ],
                 (l) => ({
                     ...propsS,
@@ -58,8 +57,8 @@ const asset = [
             ),
             ...Layer.map(
                 [
-                    { Name: "t_base", ColorGroup: "base" },
-                    { Name: "t_hlight", ColorGroup: "hlight" },
+                    { Color: ["#111111"], Name: "t_base", ColorGroup: "base" },
+                    { Color: ["#FFFFFF"], Name: "t_hlight", ColorGroup: "hlight" },
                 ],
                 (l) => ({
                     ...propsT,
@@ -114,4 +113,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

@@ -17,8 +17,7 @@ const asset = {
     Hide: ["Mouth"],
     Effect: [E.BlockMouth, E.GagMedium],
     ExpressionTrigger: [{ Name: "DroolSides", Group: "Fluids", Timer: 30 }],
-    DefaultColor: ["#181818", "Default", "Default", "Default"],
-    Layer: [{ Name: "带子" }, { Name: "金属" }, { Name: "南瓜" }, { Name: "眼睛" }],
+    Layer: [{ Color: ["#181818"], Name: "带子" }, { Name: "金属" }, { Name: "南瓜" }, { Name: "眼睛" }],
     PoseMapping: {},
 };
 
@@ -41,4 +40,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemMouth", asset, { translation, layerNames });
 }
-

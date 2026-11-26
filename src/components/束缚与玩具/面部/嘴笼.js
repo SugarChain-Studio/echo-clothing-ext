@@ -14,12 +14,11 @@ const asset = {
     AllowTighten: true,
     DynamicGroupName: "ItemMouth",
     Effect: [E.BlockMouth, E.ProtrudingMouth],
-    DefaultColor: ["Default", "Default", "#DADADA", "#191919", "Default", "Default"],
     Layer: [
         { Name: "inner" },
         { Name: "shade" },
-        { Name: "cage" },
-        { Name: "strap" },
+        { Color: ["#DADADA"], Name: "cage" },
+        { Color: ["#191919"], Name: "strap" },
         { Name: "screw" },
         { Name: "buckle" },
     ],
@@ -60,4 +59,3 @@ const assetN = [
 export default function () {
     AssetManager.addAssetWithConfig(assetN);
 }
-

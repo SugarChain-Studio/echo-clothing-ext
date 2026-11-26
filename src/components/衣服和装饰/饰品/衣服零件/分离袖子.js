@@ -11,7 +11,6 @@ const assets = [
         Top: 60,
         ParentGroup: "BodyUpper",
         DynamicGroupName: "长袖子_Luzi",
-        DefaultColor: ["Default", "Default", "#333333", "Default"],
         PoseMapping: PoseMapTool.config(
             ["BackBoxTie", "BackCuffs", "BackElbowTouch", "OverTheHead", "Yoked"],
             ["Hogtied", "AllFours"]
@@ -20,7 +19,7 @@ const assets = [
         Layer: [
             { Name: "A1" },
             { Name: "A2" },
-            { Name: "A3" },
+            { Color: ["#333333"], Name: "A3" },
             { Name: "A4", ...PoseMapTool.layerConfig(true, [], ["BackBoxTie", "BackElbowTouch"]) },
         ],
     },
@@ -36,4 +35,3 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(...assets);
 }
-

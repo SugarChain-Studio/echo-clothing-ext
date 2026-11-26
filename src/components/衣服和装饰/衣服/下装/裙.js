@@ -12,10 +12,9 @@ const asset = {
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     SetPose: ["LegsClosed"],
     AllowActivePose: ["Kneel", "LegsClosed"],
-    DefaultColor: ["#7F1739", "Default", "Default"],
     PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
-        { Name: "底面", Priority: 1, ParentGroup: {}, ...PoseMapTool.layerConfig(true, ["Kneel"]) },
+        { Color: ["#7F1739"], Name: "底面", Priority: 1, ParentGroup: {}, ...PoseMapTool.layerConfig(true, ["Kneel"]) },
         { Name: "上裙子" },
         { Name: "下裙子", ...PoseMapTool.layerConfig(true, ["Kneel"]) },
         { Name: "上拉链" },

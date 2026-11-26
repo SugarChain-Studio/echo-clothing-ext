@@ -9,7 +9,6 @@ const asset = {
     Top: 180,
     Left: 120,
     Expose: ["ItemNipples", "ItemNipplesPiercings", "ItemBreast"],
-    DefaultColor: ["Default", "#000000", "Default", "#000000", "Default"],
     PoseMapping: { Hogtied: "Hogtied", AllFours: "Hide" },
     DynamicGroupName: "Cloth",
     Layer: [
@@ -20,6 +19,7 @@ const asset = {
             AllowTypes: { A: 1 },
         },
         {
+            Color: ["#000000"],
             Name: "衣服B1",
             Priority: 16,
             CopyLayerColor: "衣服A1",
@@ -31,6 +31,7 @@ const asset = {
             AllowTypes: { A: 0 },
         },
         {
+            Color: ["#000000"],
             Name: "衣服A1",
             Priority: 16,
             AllowTypes: { A: 0 },

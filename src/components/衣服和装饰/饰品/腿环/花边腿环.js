@@ -6,7 +6,6 @@ const asset = {
     Random: false,
     Gender: "F",
     Top: 462,
-    DefaultColor: ["Default", "#E3E3E3", "#181818", "#3F3F3F", "Default", "#E3E3E3", "#181818", "#3F3F3F"],
     Left: {
         BaseLower: 0,
         Kneel: 0,
@@ -25,14 +24,14 @@ const asset = {
     },
     Layer: [
         { Name: "左腿阴影", ColorGroup: "阴影", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿花边", ColorGroup: "花边", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿环", ColorGroup: "环", AllowTypes: { typed: [0, 2] } },
-        { Name: "左腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [0, 2] } },
+        { Color: ["#E3E3E3"], Name: "左腿花边", ColorGroup: "花边", AllowTypes: { typed: [0, 2] } },
+        { Color: ["#181818"], Name: "左腿环", ColorGroup: "环", AllowTypes: { typed: [0, 2] } },
+        { Color: ["#3F3F3F"], Name: "左腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [0, 2] } },
 
         { Name: "右腿阴影", ColorGroup: "阴影", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿花边", ColorGroup: "花边", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿环", ColorGroup: "环", AllowTypes: { typed: [1, 2] } },
-        { Name: "右腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [1, 2] } },
+        { Color: ["#E3E3E3"], Name: "右腿花边", ColorGroup: "花边", AllowTypes: { typed: [1, 2] } },
+        { Color: ["#181818"], Name: "右腿环", ColorGroup: "环", AllowTypes: { typed: [1, 2] } },
+        { Color: ["#3F3F3F"], Name: "右腿蝴蝶结", ColorGroup: "蝴蝶结", AllowTypes: { typed: [1, 2] } },
     ],
 };
 

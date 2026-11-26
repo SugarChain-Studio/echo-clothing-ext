@@ -6,7 +6,6 @@ const assetdef = {
     Name: "迷你裤",
     Top: 400,
     Random: false,
-    DefaultColor: ["#727B91", "#FFD1A3", "#88665A"],
     PoseMapping: {
         KneelingSpread: "KneelingSpread",
         Hogtied: PoseType.HIDE,
@@ -15,9 +14,9 @@ const assetdef = {
     Priority: 26,
     DynamicGroupName: "ClothLower",
     Layer: [
-        { Name: "裤子", ParentGroup: "BodyLower" },
-        { Name: "磨损", ParentGroup: "BodyLower" },
-        { Name: "扣子", ParentGroup: {} },
+        { Color: ["#727B91"], Name: "裤子", ParentGroup: "BodyLower" },
+        { Color: ["#FFD1A3"], Name: "磨损", ParentGroup: "BodyLower" },
+        { Color: ["#88665A"], Name: "扣子", ParentGroup: {} },
     ],
 };
 

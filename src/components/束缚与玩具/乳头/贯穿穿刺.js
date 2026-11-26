@@ -11,14 +11,13 @@ const asset = {
     AllowLock: true,
     ...Tools.topLeftBuilder({ Left: 190, Top: 300 }, ["AllFours", { Top: 340 }]),
     Prerequisite: ["AccessBreast", "AccessBreastSuitZip"],
-    DefaultColor: ["#222"],
     ExpressionTrigger: [
         { Name: "Closed", Group: "Eyes", Timer: 5 },
         { Name: "Angry", Group: "Eyebrows", Timer: 5 },
     ],
     ParentGroup: "BodyUpper",
     PoseMapping: { AllFours: "AllFours" },
-    Layer: [{ Name: "d" }, Layer.screen({ Name: "g" })],
+    Layer: [{ Color: ["#222"], Name: "d" }, Layer.screen({ Name: "g" })],
 };
 
 const translation = {
@@ -29,4 +28,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemNipplesPiercings", asset, { translation, layerNames: {} });
 }
-

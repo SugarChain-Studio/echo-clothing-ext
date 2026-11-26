@@ -9,8 +9,10 @@ const asset = [
             Random: false,
             Top: 0,
             Left: 0,
-            DefaultColor: ["#141414", "#000000"],
-            Layer: [{ Name: "翼膜" }, { Name: "翼骨" }],
+            Layer: [
+                { Color: ["#141414"], Name: "翼膜" },
+                { Color: ["#000000"], Name: "翼骨" },
+            ],
         },
         {
             translation: {
@@ -33,8 +35,12 @@ const asset = [
             Random: false,
             Left: -175,
             Top: -125,
-            DefaultColor: ["#A5A5A5", "#A5A5A5"],
-            Layer: [{ Name: "BL" }, { Name: "BR" }, Layer.multiply({ Name: "SL" }), Layer.multiply({ Name: "SR" })],
+            Layer: [
+                { Color: ["#A5A5A5"], Name: "BL" },
+                { Color: ["#A5A5A5"], Name: "BR" },
+                Layer.multiply({ Name: "SL" }),
+                Layer.multiply({ Name: "SR" }),
+            ],
         },
         {
             translation: {
@@ -71,4 +77,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig("Wings", asset);
 }
-

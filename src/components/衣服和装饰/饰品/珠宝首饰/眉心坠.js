@@ -12,14 +12,13 @@ const asset = [
         ParentGroup: {},
         PoseMapping: {},
         Priority: 53,
-        DefaultColor: ["#966C2D", "#368DBF", "#368DBF", "Default"],
         DynamicGroupName: "Mask",
         Layer: [
-            { Name: "金属d" },
+            { Color: ["#966C2D"], Name: "金属d" },
             Layer.screen({ Name: "金属g" }),
-            { Name: "宝石副d" },
+            { Color: ["#368DBF"], Name: "宝石副d" },
             Layer.screen({ Name: "宝石副g" }),
-            { Name: "宝石主d" },
+            { Color: ["#368DBF"], Name: "宝石主d" },
             Layer.screen({ Name: "宝石主g" }),
             { Name: "宝石金属d", CopyLayerColor: "金属d" },
             Layer.screen({ Name: "宝石金属g" }),
@@ -38,4 +37,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

@@ -11,8 +11,11 @@ const accessories = [
             Top: -40,
             Left: 90,
             Priority: 20,
-            DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
-            Layer: [{ Name: "内圈" }, { Name: "绒毛" }, { Name: "外圈" }],
+            Layer: [
+                { Color: ["#7A4646"], Name: "内圈" },
+                { Color: ["#888888"], Name: "绒毛" },
+                { Color: ["#0F0F0F"], Name: "外圈" },
+            ],
         },
         {
             translation: { CN: "耳朵 1", EN: "Ears 1", RU: "Уши 1" },
@@ -27,8 +30,11 @@ const accessories = [
             Top: 0,
             Left: 90,
             Priority: 20,
-            DefaultColor: ["#916A6A", "#888888", "#917451"],
-            Layer: [{ Name: "内圈" }, { Name: "绒毛" }, { Name: "外圈" }],
+            Layer: [
+                { Color: ["#916A6A"], Name: "内圈" },
+                { Color: ["#888888"], Name: "绒毛" },
+                { Color: ["#917451"], Name: "外圈" },
+            ],
         },
         {
             translation: { CN: "耳朵 2", EN: "Ears 2", RU: "Уши 2" },
@@ -77,8 +83,11 @@ const accessories = [
             Left: 160,
             Top: 150,
             Priority: 51,
-            DefaultColor: ["#FFFFFF", "#888888", "#000000"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }],
+            Layer: [
+                { Color: ["#FFFFFF"], Name: "A1" },
+                { Color: ["#888888"], Name: "A2" },
+                { Color: ["#000000"], Name: "A3" },
+            ],
         },
         {
             translation: { CN: "鱼鳍耳朵", EN: "Fish Fin Ears" },
@@ -109,8 +118,14 @@ const accessories = [
             Top: 0,
             Left: 0,
             Priority: 51,
-            DefaultColor: ["#7A4646", "#888888", "#0F0F0F"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "B1" }, { Name: "B2" }, { Name: "B3" }],
+            Layer: [
+                { Color: ["#7A4646"], Name: "A1" },
+                { Color: ["#888888"], Name: "A2" },
+                { Color: ["#0F0F0F"], Name: "A3" },
+                { Name: "B1" },
+                { Name: "B2" },
+                { Name: "B3" },
+            ],
         },
         {
             translation: { CN: "角8", EN: "角8", RU: "角8" },

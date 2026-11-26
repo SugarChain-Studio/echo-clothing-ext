@@ -1,10 +1,9 @@
-﻿import { AssetManager } from "@local/AssetManager";
+import { AssetManager } from "@local/AssetManager";
 import { Access } from "@local/lib/type";
 import { luziSuffixFixups } from "@local/lib/fixups";
 
 /**
  * @typedef {Object} TattooLayerDefinitionExtension
- * @property {BCColor} DefaultColor - 默认颜色
  * @property {Record<"CN"|"EN",string>} Localized - 本地化名称
  * @property {string} ConfigKey - 配置键
  */
@@ -27,7 +26,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Ta",
     },
     {
@@ -41,7 +40,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "UBa",
     },
     {
@@ -55,7 +54,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "UBb",
     },
     {
@@ -70,7 +69,7 @@ const LayerSettings = [
         Top: 200,
         ParentGroup: "BodyUpper",
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "SFSa",
     },
     {
@@ -85,7 +84,7 @@ const LayerSettings = [
         Top: 200,
         ParentGroup: "BodyUpper",
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "SFSb",
     },
     {
@@ -100,7 +99,7 @@ const LayerSettings = [
         Top: 200,
         ParentGroup: "BodyUpper",
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "SFSc",
     },
     {
@@ -114,7 +113,6 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
         ConfigKey: "LaL",
     },
     {
@@ -128,7 +126,6 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
         ConfigKey: "LaR",
     },
     {
@@ -142,7 +139,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Td",
         ParentGroup: "BodyUpper",
     },
@@ -157,7 +154,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Tf",
         ParentGroup: "BodyUpper",
     },
@@ -172,7 +169,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Tc",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -191,7 +188,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "W",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -212,7 +209,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Te",
         PoseMapping: {
             AllFours: PoseType.HIDE,
@@ -230,7 +227,6 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
         ConfigKey: "Ca",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -249,7 +245,6 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "Default",
         ConfigKey: "Cb",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -267,7 +262,7 @@ const LayerSettings = [
         Left: 130,
         Top: 200,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "SSa",
         ParentGroup: "BodyUpper",
         PoseMapping: {
@@ -286,7 +281,7 @@ const LayerSettings = [
         Top: 470,
         Priority: 9,
         BlendingMode: "source-atop",
-        DefaultColor: "#000000",
+        Color: ["#000000"],
         ConfigKey: "Fa",
         ParentGroup: "BodyLower",
         PoseMapping: {
@@ -312,7 +307,7 @@ const attrLayer = [
         Top: 470,
         Priority: 13,
         BlendingMode: "source-atop",
-        DefaultColor: "#FE3636",
+        Color: ["#FE3636"],
         ConfigKey: "Fa",
         ParentGroup: "BodyLower",
         PoseMapping: {
@@ -335,6 +330,7 @@ function layerMapping(layer) {
         Left: layer.Left || 0,
         Top: layer.Top || 0,
         AllowTypes: { [layer.ConfigKey]: 1 },
+        Color: layer.Color,
         ParentGroup: layer.ParentGroup,
         PoseMapping: layer.PoseMapping,
     };
@@ -346,7 +342,6 @@ const asset = {
     Time: 5,
     RemoveTime: 5,
     IsRestraint: false,
-    DefaultColor: LayerSettings.map((layer) => layer.DefaultColor),
     Extended: true,
     BodyCosplay: true,
     Layer: LayerSettings.map(layerMapping).concat(attrLayer.map(layerMapping)),

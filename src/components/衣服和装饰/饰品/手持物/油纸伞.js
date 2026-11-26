@@ -18,12 +18,11 @@ const asset = {
         AllFours: PoseType.HIDE,
         TapedHands: PoseType.HIDE,
     },
-    DefaultColor: ["#776451", "Default", "#776451", "#C3C0BA"],
     Layer: [
-        { Name: "伞柄", Priority: 55 },
+        { Color: ["#776451"], Name: "伞柄", Priority: 55 },
         { Name: "伞暗面", Priority: 2 },
-        { Name: "伞骨", Priority: 2 },
-        { Name: "伞面无图案", Priority: 1, AllowTypes: { typed: 0 } },
+        { Color: ["#776451"], Name: "伞骨", Priority: 2 },
+        { Color: ["#C3C0BA"], Name: "伞面无图案", Priority: 1, AllowTypes: { typed: 0 } },
         { Name: "伞面花1", Priority: 1, AllowTypes: { typed: 1 } },
         { Name: "伞面花2", Priority: 1, AllowTypes: { typed: 2 } },
         { Name: "伞面山水", Priority: 1, AllowTypes: { typed: 3 } },
@@ -102,4 +101,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemHandheld", asset, { translation, layerNames, extended, assetStrings });
 }
-

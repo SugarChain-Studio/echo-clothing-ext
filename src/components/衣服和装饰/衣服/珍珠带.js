@@ -10,11 +10,10 @@ const asset = {
     ParentGroup: {},
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {},
-    DefaultColor: ["#545454", "#000000", "Default"],
     Layer: [
-        { Name: "rd" },
+        { Color: ["#545454"], Name: "rd" },
         Layer.screen({ Name: "rg" }),
-        { Name: "sd" },
+        { Color: ["#000000"], Name: "sd" },
         Layer.screen({ Name: "sg" }),
         { Name: "pd" },
         Layer.screen({ Name: "pg" }),
@@ -36,4 +35,3 @@ const layerNames = {
 export default function () {
     AssetManager.addAssetWithConfig("Panties", asset, { translation, layerNames });
 }
-

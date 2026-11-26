@@ -11,16 +11,15 @@ const asset = [
             Left: 170,
             Top: 300,
             Priority: 25,
-            DefaultColor: ["#000000", "#000000", "#000000", "#625F6C", "#000000"],
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
             PoseMapping: PoseMapTool.hideFullBody(),
             Layer: [
-                { Name: "A1", AllowTypes: { typed: 0 } },
-                { Name: "A2", AllowTypes: { typed: 1 }, CopyLayerColor: "A1" },
-                { Name: "A3" },
-                { Name: "A4" },
-                { Name: "A5" },
+                { Color: ["#000000"], Name: "A1", AllowTypes: { typed: 0 } },
+                { Color: ["#000000"], Name: "A2", AllowTypes: { typed: 1 }, CopyLayerColor: "A1" },
+                { Color: ["#000000"], Name: "A3" },
+                { Color: ["#625F6C"], Name: "A4" },
+                { Color: ["#000000"], Name: "A5" },
                 { Name: "A6" },
             ],
         },
@@ -59,4 +58,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig("Cloth", asset);
 }
-

@@ -9,11 +9,11 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 26,
-    DefaultColor: ["#1F1F1F", "#1F1F1F", "#1F1F1F", "#1F1F1F", "#FFFFFF"],
     PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
-        { Name: "绳子", ParentGroup: {} },
+        { Color: ["#1F1F1F"], Name: "绳子", ParentGroup: {} },
         {
+            Color: ["#1F1F1F"],
             Name: "裙",
             PoseMapping: {
                 BackBoxTie: "BackElbowTouch",
@@ -26,9 +26,9 @@ const asset = {
                 TapedHands: "TapedHands",
             },
         },
-        { Name: "蝴蝶结小" },
-        { Name: "蝴蝶结大", ParentGroup: {} },
-        { Name: "珠", ParentGroup: {} },
+        { Color: ["#1F1F1F"], Name: "蝴蝶结小" },
+        { Color: ["#1F1F1F"], Name: "蝴蝶结大", ParentGroup: {} },
+        { Color: ["#FFFFFF"], Name: "珠", ParentGroup: {} },
     ],
 };
 

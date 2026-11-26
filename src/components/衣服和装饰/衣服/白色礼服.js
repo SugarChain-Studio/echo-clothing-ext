@@ -36,22 +36,11 @@ const asset = [
                 ParentGroup: "BodyUpper",
                 DynamicGroupName: "Cloth",
                 PoseMapping: PoseMapTool.config(["Hogtied", "AllFours"]),
-                DefaultColor: [
-                    "Default",
-                    "Default",
-                    "Default",
-                    "#D3CAAE",
-                    "Default",
-                    "Default",
-                    "Default",
-                    "Default",
-                    "#4E6F7A",
-                ],
                 Layer: [
                     { Left: 190, Top: 210, Name: "d_1", ...upper, ColorGroup: "strap" },
                     { Left: 190, Top: 210, Name: "d_2", ...upper, ColorGroup: "strap" },
                     { Left: 170, Top: 280, Name: "d_3", ...main },
-                    { Left: 180, Top: 320, Name: "d_8", ...upper },
+                    { Color: ["#D3CAAE"], Left: 180, Top: 320, Name: "d_8", ...upper },
                     Layer.screen({ Left: 190, Top: 210, Name: "g_1", ...upper }),
                     Layer.screen({ Left: 190, Top: 210, Name: "g_2", ...upper }),
                     Layer.screen({ Left: 170, Top: 280, Name: "g_3", ...main }),
@@ -63,7 +52,7 @@ const asset = [
                     Layer.screen({ Left: 150, Top: 340, Name: "g_7", ...lower }),
                     { Left: 150, Top: 340, Name: "d_4", ...lower },
                     Layer.screen({ Left: 150, Top: 340, Name: "g_4", ...lower }),
-                    { Left: 240, Top: 340, Name: "d_f", ...lower },
+                    { Color: ["#4E6F7A"], Left: 240, Top: 340, Name: "d_f", ...lower },
                     Layer.screen({ Left: 240, Top: 340, Name: "g_f", ...lower }),
                 ],
             },
@@ -184,4 +173,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
-

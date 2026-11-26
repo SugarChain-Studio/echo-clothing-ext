@@ -9,28 +9,16 @@ const asset = {
     Top: 210,
     Priority: 21,
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    DefaultColor: [
-        "Default",
-        "#111111",
-        "Default",
-        "#111111",
-        "Default",
-        "#111111",
-        "Default",
-        "#111111",
-        "Default",
-        "Default",
-    ],
     PoseMapping: PoseMapTool.hideFullBody(),
     Layer: [
         { Name: "圆环", ParentGroup: {}, AllowTypes: { typed: [0, 1, 3] } },
-        { Name: "连接", AllowTypes: { typed: 0 } },
+        { Color: ["#111111"], Name: "连接", AllowTypes: { typed: 0 } },
         { Name: "连接反光", AllowTypes: { typed: 0 } },
-        { Name: "胸罩带", ColorGroup: "胸底色", AllowTypes: { typed: [0, 1, 2] } },
+        { Color: ["#111111"], Name: "胸罩带", ColorGroup: "胸底色", AllowTypes: { typed: [0, 1, 2] } },
         { Name: "胸罩带反光", ColorGroup: "胸反光", AllowTypes: { typed: [0, 1, 2] } },
-        { Name: "胸罩", ColorGroup: "胸底色", AllowTypes: { typed: [0, 1, 2] } },
+        { Color: ["#111111"], Name: "胸罩", ColorGroup: "胸底色", AllowTypes: { typed: [0, 1, 2] } },
         { Name: "胸罩反光", ColorGroup: "胸反光", AllowTypes: { typed: [0, 1, 2] } },
-        { Name: "皮革带", AllowTypes: { typed: [0, 1, 3] } },
+        { Color: ["#111111"], Name: "皮革带", AllowTypes: { typed: [0, 1, 3] } },
         { Name: "皮革带反光", AllowTypes: { typed: [0, 1, 3] } },
         { Name: "拉链", ParentGroup: {}, AllowTypes: { typed: [0, 1, 3] } },
     ],
@@ -98,4 +86,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("Bra", asset, { layerNames, translation, extended, assetStrings });
 }
-

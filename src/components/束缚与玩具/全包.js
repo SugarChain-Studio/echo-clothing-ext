@@ -137,7 +137,6 @@ const assets = [
             SetPose: ["BackElbowTouch", "LegsClosed"],
             Effect: [E.Block, E.BlockWardrobe, E.Slow],
             Prerequisite: ["HasBreasts"],
-            DefaultColor: ["Default", "#841E1E"],
             Layer: [
                 {
                     Name: "上",
@@ -146,6 +145,7 @@ const assets = [
                     PoseMapping: { BackElbowTouch: PoseType.DEFAULT },
                 },
                 {
+                    Color: ["#841E1E"],
                     Name: "下",
                     Priority: 24,
                     ParentGroup: "BodyLower",

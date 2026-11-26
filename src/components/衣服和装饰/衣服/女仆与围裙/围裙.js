@@ -15,8 +15,7 @@ const asset = [
             ParentGroup: {},
             PoseMapping: PoseMapTool.hideFullBody(),
             DynamicGroupName: "ClothAccessory",
-            DefaultColor: ["Default", "Default", "Default", "#242424"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }],
+            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Color: ["#242424"], Name: "A4" }],
         },
         (asset) => {
             ArmMaskTool.createArmMaskForCloth("Cloth", asset);
@@ -34,4 +33,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

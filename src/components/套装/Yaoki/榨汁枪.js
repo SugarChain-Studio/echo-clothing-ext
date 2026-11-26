@@ -11,8 +11,13 @@ const asset = {
     ParentGroup: {},
     AllowActivity: ["MasturbateItem"],
     Fetish: ["Sadism"],
-    DefaultColor: ["Default", "#000000", "Default"],
-    Layer: [{ Name: "dc" }, Layer.screen({ Name: "gc" }), { Name: "dg" }, Layer.screen({ Name: "gg" }), { Name: "l" }],
+    Layer: [
+        { Name: "dc" },
+        Layer.screen({ Name: "gc" }),
+        { Color: ["#000000"], Name: "dg" },
+        Layer.screen({ Name: "gg" }),
+        { Name: "l" },
+    ],
 };
 
 const layerNames = {

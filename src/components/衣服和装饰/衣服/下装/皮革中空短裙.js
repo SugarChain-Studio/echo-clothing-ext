@@ -16,11 +16,10 @@ const asset = [
         PoseMapping: PoseMapTool.hideFullBody(),
         ParentGroup: {},
         Priority: 26,
-        DefaultColor: ["Default", "Default", "#000000", "Default"],
         Layer: [
             { Name: "底", AllowTypes: { typed: 0 } },
             { Name: "底_亮色", AllowTypes: { typed: [1, 2] } },
-            { Name: "底_暗色", AllowTypes: { typed: [1] } },
+            { Color: ["#000000"], Name: "底_暗色", AllowTypes: { typed: [1] } },
             { Name: "反光" },
         ],
     },
@@ -55,4 +54,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(...asset);
 }
-

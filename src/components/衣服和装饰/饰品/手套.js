@@ -30,8 +30,7 @@ const assets = [
                 ["OverTheHead", { Left: 90, Top: 10 }]
             ),
             PoseMapping: glovePoseM(),
-            DefaultColor: ["Default", "#ADAA9A"],
-            Layer: [{ AllowTypes: { typed: 0 } }, { Name: "L", AllowTypes: { typed: 1 } }],
+            Layer: [{ AllowTypes: { typed: 0 } }, { Color: ["#ADAA9A"], Name: "L", AllowTypes: { typed: 1 } }],
         },
         {
             translation: { CN: "袖手套", EN: "Sleeve Gloves" },

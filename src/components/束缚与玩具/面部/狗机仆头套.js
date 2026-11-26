@@ -48,14 +48,13 @@ const asset = {
     Fetish: ["Latex", "Leather"],
     Effect: [E.GagEasy, E.OpenMouth],
     Block: ["ItemNose", "ItemHead"],
-    DefaultColor: ["#1C1C1C", "#B6B6B6", "#B6B6B6", "#DFDFDF"],
     Layer: [
-        { Name: "base" },
-        { Name: "outline" },
+        { Color: ["#1C1C1C"], Name: "base" },
+        { Color: ["#B6B6B6"], Name: "outline" },
         Layer.multiply({ Name: "shade" }),
-        { Name: "line" },
+        { Color: ["#B6B6B6"], Name: "line" },
         { Name: "text", Left: 250, Top: 100, HasImage: false },
-        { Name: "highlight" },
+        { Color: ["#DFDFDF"], Name: "highlight" },
     ],
     Alpha: [
         {

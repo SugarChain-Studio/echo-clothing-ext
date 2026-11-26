@@ -79,7 +79,6 @@ const asset = [
         AllowTighten: false,
         DynamicGroupName: "ItemVulva",
         ParentGroup: {},
-        DefaultColor: ["Default", "#AE3131", "#5CB5FF", "#FF5CFC"],
         Prerequisite: ["AccessCrotch", "HasVagina", "CanCoverVulva"],
         ExpressionTrigger: [{ Name: "Soft", Group: "Eyebrows", Timer: 10 }],
         Effect: [E.CanEdge, E.Chaste],
@@ -89,12 +88,12 @@ const asset = [
         PoseMapping: PoseMapTool.hideFullBody(),
         Layer: [
             { Name: "Base" },
-            { Name: "Lock", LockLayer: true },
+            { Color: ["#AE3131"], Name: "Lock", LockLayer: true },
             { Name: "BaseFilter", CopyLayerColor: "Base" },
             { Name: "LightColor1", HasImage: false },
             { Name: "LightColor2", HasImage: false },
-            { Name: "Light", AllowColorize: false, HasImage: false },
-            { Name: "Bloom", AllowColorize: false, HasImage: false },
+            { Color: ["#5CB5FF"], Name: "Light", AllowColorize: false, HasImage: false },
+            { Color: ["#FF5CFC"], Name: "Bloom", AllowColorize: false, HasImage: false },
         ],
     },
     {

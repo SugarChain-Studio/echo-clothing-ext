@@ -10,8 +10,10 @@ const asset = {
     Left: 200,
     Extended: true,
     Priority: 4,
-    DefaultColor: ["#ADADAD", "#000000"],
-    Layer: [{ Name: "牌子" }, { Name: "文字", AllowTypes: { typed: [1, 2, 3, 4] }, CreateLayerTypes: ["typed"] }],
+    Layer: [
+        { Color: ["#ADADAD"], Name: "牌子" },
+        { Color: ["#000000"], Name: "文字", AllowTypes: { typed: [1, 2, 3, 4] }, CreateLayerTypes: ["typed"] },
+    ],
 };
 
 const layerNames = {

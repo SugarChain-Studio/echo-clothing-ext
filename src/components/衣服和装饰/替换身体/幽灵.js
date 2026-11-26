@@ -226,7 +226,6 @@ const asset = {
     PoseMapping: {},
 
     EditOpacity: true,
-    DefaultColor: ["#DDDDDD", "#DDDDDD"],
     OverrideHeight: { Height: 30, Priority: 0 },
     Hide: fullGroups,
     Layer: [
@@ -236,12 +235,14 @@ const asset = {
             HasImage: false,
         })),
         {
+            Color: ["#DDDDDD"],
             Name: "RimLight",
             Left: 180,
             Top: 120,
             AllowTypes: { le: 1 },
         },
         {
+            Color: ["#DDDDDD"],
             Name: "发光眼睛",
             HasImage: false,
             AllowTypes: { le: 1 },

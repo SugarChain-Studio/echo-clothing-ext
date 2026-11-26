@@ -14,8 +14,10 @@ const asset = {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    Layer: [{ Name: "袜套" }, { Name: "蝴蝶结" }],
-    DefaultColor: ["#8D8D8D", "#8D8D8D"],
+    Layer: [
+        { Color: ["#8D8D8D"], Name: "袜套" },
+        { Color: ["#8D8D8D"], Name: "蝴蝶结" },
+    ],
     Priority: 23,
 };
 
@@ -56,4 +58,3 @@ export default function () {
     });
     AssetManager.addImageMapping(imageMapping);
 }
-

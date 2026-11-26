@@ -16,12 +16,13 @@ const asset = {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    DefaultColor: ["#000000", "#212121"],
     Layer: [
         {
+            Color: ["#000000"],
             Name: "袜子",
         },
         {
+            Color: ["#212121"],
             Name: "鞋底",
         },
     ],

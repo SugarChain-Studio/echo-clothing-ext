@@ -10,9 +10,11 @@ const asset = {
     Left: 0,
     ParentGroup: {},
     Fetish: ["Sadism"],
-    DefaultColor: ["#969696", "#A30000"],
     AllowActivity: ["RubItem", "SpankItem"],
-    Layer: [{ Name: "Base" }, { Name: "Pattern" }],
+    Layer: [
+        { Color: ["#969696"], Name: "Base" },
+        { Color: ["#A30000"], Name: "Pattern" },
+    ],
 };
 
 const translation = {
@@ -29,4 +31,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth("ItemHandheld", asset, "Right");
     AssetManager.addAssetWithConfig("ItemHandheld", asset, { translation, layerNames });
 }
-

@@ -46,8 +46,10 @@ const assets = [
         {
             Name: "发卡1",
             ...hairAccShared,
-            DefaultColor: ["#621616", "#621616"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#621616"], Name: "右" },
+                { Color: ["#621616"], Name: "左" },
+            ],
         },
         { translation: { CN: "发卡1", EN: "Basic Hair Clip 1" }, layerNames },
     ]),
@@ -55,8 +57,10 @@ const assets = [
         {
             Name: "发卡2",
             ...hairAccShared,
-            DefaultColor: ["#621616", "#621616"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#621616"], Name: "右" },
+                { Color: ["#621616"], Name: "左" },
+            ],
         },
         { translation: { CN: "发卡2", EN: "Basic Hair Clip 2" }, layerNames },
     ]),
@@ -64,8 +68,10 @@ const assets = [
         {
             Name: "X发卡",
             ...hairAccShared,
-            DefaultColor: ["#621616", "#621616"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#621616"], Name: "右" },
+                { Color: ["#621616"], Name: "左" },
+            ],
         },
         { translation: { CN: "X发卡", EN: "X Hair Clip" }, layerNames },
     ]),
@@ -73,8 +79,12 @@ const assets = [
         {
             Name: "心型发卡",
             ...hairAccShared,
-            DefaultColor: ["#9B3C5C", "#9B3C5C", "#9B3C5C", "#9B3C5C"],
-            Layer: [{ Name: "右夹子" }, { Name: "右心" }, { Name: "左夹子" }, { Name: "左心" }],
+            Layer: [
+                { Color: ["#9B3C5C"], Name: "右夹子" },
+                { Color: ["#9B3C5C"], Name: "右心" },
+                { Color: ["#9B3C5C"], Name: "左夹子" },
+                { Color: ["#9B3C5C"], Name: "左心" },
+            ],
         },
         { translation: { CN: "心型发卡", EN: "Heart Hair Clip" }, layerNames },
     ]),
@@ -82,8 +92,10 @@ const assets = [
         {
             Name: "星星发卡",
             ...hairAccShared,
-            DefaultColor: ["#D0CF58", "#D0CF58"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#D0CF58"], Name: "右" },
+                { Color: ["#D0CF58"], Name: "左" },
+            ],
         },
         { translation: { CN: "星星发卡", EN: "Star Hair Clip" }, layerNames },
     ]),
@@ -91,8 +103,10 @@ const assets = [
         {
             Name: "星星发卡2",
             ...hairAccShared,
-            DefaultColor: ["#D0CF58", "#D0CF58"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#D0CF58"], Name: "右" },
+                { Color: ["#D0CF58"], Name: "左" },
+            ],
         },
         { translation: { CN: "星星发卡2", EN: "Star Hair Clip 2" }, layerNames },
     ]),
@@ -100,8 +114,10 @@ const assets = [
         {
             Name: "月亮发饰",
             ...hairAccShared,
-            DefaultColor: ["#D0CF58", "#D0CF58"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#D0CF58"], Name: "右" },
+                { Color: ["#D0CF58"], Name: "左" },
+            ],
         },
         { translation: { CN: "月亮发饰", EN: "Moon Hair Clip" }, layerNames },
     ]),
@@ -109,8 +125,10 @@ const assets = [
         {
             Name: "蝴蝶",
             ...hairAccShared,
-            DefaultColor: ["#8B87FF", "#8B87FF"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#8B87FF"], Name: "右" },
+                { Color: ["#8B87FF"], Name: "左" },
+            ],
         },
         { translation: { CN: "蝴蝶", EN: "Butterfly Hair Clip" }, layerNames },
     ]),
@@ -118,8 +136,12 @@ const assets = [
         {
             Name: "蝴蝶2",
             ...hairAccShared,
-            DefaultColor: ["#6382FF", "#6382FF", "#6382FF", "#6382FF"],
-            Layer: [{ Name: "右后" }, { Name: "右前" }, { Name: "左后" }, { Name: "左前" }],
+            Layer: [
+                { Color: ["#6382FF"], Name: "右后" },
+                { Color: ["#6382FF"], Name: "右前" },
+                { Color: ["#6382FF"], Name: "左后" },
+                { Color: ["#6382FF"], Name: "左前" },
+            ],
         },
         { translation: { CN: "蝴蝶2", EN: "Butterfly Hair Clip 2" }, layerNames },
     ]),
@@ -127,8 +149,10 @@ const assets = [
         {
             Name: "蝙蝠翼发卡",
             ...hairAccShared,
-            DefaultColor: ["#232323", "#232323"],
-            Layer: [{ Name: "右" }, { Name: "左" }],
+            Layer: [
+                { Color: ["#232323"], Name: "右" },
+                { Color: ["#232323"], Name: "左" },
+            ],
         },
         { translation: { CN: "蝙蝠翼发卡", EN: "Bat Wing Hair Clip" }, layerNames },
     ]),

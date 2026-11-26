@@ -16,7 +16,6 @@ const asset = {
     Left: 120,
     Top: 640,
     ParentGroup: {},
-    DefaultColor: ["#991d1d", "#991d1d", "#991d1d", "#991d1d", "#991d1d", "#991d1d", "#991d1d", "#991d1d"],
     Priority: 22,
     PoseMapping: {
         Hogtied: PoseType.HIDE,
@@ -27,14 +26,14 @@ const asset = {
         Spread: "Spread",
     },
     Layer: [
-        { Name: "蝴蝶结1 左" },
-        { Name: "蝴蝶结2 左", PoseMapping },
-        { Name: "蝴蝶结3 左", PoseMapping },
-        { Name: "蝴蝶结4 左", PoseMapping },
-        { Name: "蝴蝶结1 右" },
-        { Name: "蝴蝶结2 右", PoseMapping },
-        { Name: "蝴蝶结3 右", PoseMapping },
-        { Name: "蝴蝶结4 右", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结1 左" },
+        { Color: ["#991d1d"], Name: "蝴蝶结2 左", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结3 左", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结4 左", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结1 右" },
+        { Color: ["#991d1d"], Name: "蝴蝶结2 右", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结3 右", PoseMapping },
+        { Color: ["#991d1d"], Name: "蝴蝶结4 右", PoseMapping },
     ],
 };
 
@@ -69,4 +68,3 @@ const layerNames = {
 export default function () {
     AssetManager.addAssetWithConfig("Garters", asset, { translation, layerNames });
 }
-

@@ -48,7 +48,6 @@ const assets = [
             Name: "眼睛11",
             Left: 180,
             Top: 120,
-            DefaultColor: ["Default", "Default", "Default", "Default", "Default"],
             Layer: [{ Name: "1" }, { Name: "2" }, { Name: "3" }, { Name: "4" }, { Name: "5" }],
         },
         translation: {

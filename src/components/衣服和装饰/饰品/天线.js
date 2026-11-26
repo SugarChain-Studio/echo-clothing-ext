@@ -2,6 +2,9 @@
 import { AssetManager } from "@local/AssetManager";
 import { Layer } from "@local/lib/type";
 
+/** @type {BCColor[]} */
+const colors = ["#8F8F8F", "#000000", "#131313", "#5C0000"];
+
 /** @type { AddAssetWithConfigParams } */
 const asset = [
     ["HairAccessory1", "HairAccessory3"],
@@ -11,18 +14,6 @@ const asset = [
         Left: 170,
         Top: 10,
         ParentGroup: {},
-        DefaultColor: [
-            "#8F8F8F",
-            "#000000",
-            "#131313",
-            "#5C0000",
-            "#600000",
-            "#8F8F8F",
-            "#000000",
-            "#131313",
-            "#5C0000",
-            "#600000",
-        ],
         Layer: [
             ...Layer.map(
                 [
@@ -31,9 +22,13 @@ const asset = [
                     { Name: "A3", ColorGroup: "天线" },
                     { Name: "A4", ColorGroup: "灯" },
                 ],
-                (l) => ({ AllowTypes: [{ typed: 0 }, { typed: 1 }, { typed: 4 }, { typed: 5 }], ...l })
+                (l, idx) => ({
+                    Color: [colors[idx]],
+                    AllowTypes: [{ typed: 0 }, { typed: 1 }, { typed: 4 }, { typed: 5 }],
+                    ...l,
+                })
             ),
-            { Name: "A5", AllowTypes: [{ typed: 1 }, { typed: 5 }], ColorGroup: "发光" },
+            { Color: ["#600000"], Name: "A5", AllowTypes: [{ typed: 1 }, { typed: 5 }], ColorGroup: "发光" },
             ...Layer.map(
                 [
                     { Name: "B1", ColorGroup: "主体" },
@@ -41,9 +36,13 @@ const asset = [
                     { Name: "B3", ColorGroup: "天线" },
                     { Name: "B4", ColorGroup: "灯" },
                 ],
-                (l) => ({ AllowTypes: [{ typed: 2 }, { typed: 3 }, { typed: 4 }, { typed: 5 }], ...l })
+                (l, idx) => ({
+                    Color: [colors[idx]],
+                    AllowTypes: [{ typed: 2 }, { typed: 3 }, { typed: 4 }, { typed: 5 }],
+                    ...l,
+                })
             ),
-            { Name: "B5", AllowTypes: [{ typed: 3 }, { typed: 5 }], ColorGroup: "发光" },
+            { Color: ["#5C0000"], Name: "B5", AllowTypes: [{ typed: 3 }, { typed: 5 }], ColorGroup: "发光" },
         ],
     },
     {

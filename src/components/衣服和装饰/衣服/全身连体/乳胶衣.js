@@ -58,14 +58,13 @@ const assetUpper = {
     Left: 0,
     Prerequisite: ["HasBreasts"],
     Expose: ["ItemNipples", "ItemBreast", "ItemNipplesPiercings"],
-    DefaultColor: ["#232323", "#000000", "#FFFFFF", "#232323", "#000000", "#FFFFFF"],
     Layer: [
-        { Name: "手套底色", ...gloveLayerInfo, ColorGroup: "Base" },
-        { Name: "手套阴影", ...gloveLayerInfo, ColorGroup: "Shadow" },
-        { Name: "手套高光", ...gloveLayerInfo, ColorGroup: "Highlight" },
-        { Name: "上底色", ...upperLayerInfo, ColorGroup: "Base" },
-        { Name: "上阴影", ...upperLayerInfo, ColorGroup: "Shadow" },
-        { Name: "上高光", ...upperLayerInfo, ColorGroup: "Highlight" },
+        { Color: ["#232323"], Name: "手套底色", ...gloveLayerInfo, ColorGroup: "Base" },
+        { Color: ["#000000"], Name: "手套阴影", ...gloveLayerInfo, ColorGroup: "Shadow" },
+        { Color: ["#FFFFFF"], Name: "手套高光", ...gloveLayerInfo, ColorGroup: "Highlight" },
+        { Color: ["#232323"], Name: "上底色", ...upperLayerInfo, ColorGroup: "Base" },
+        { Color: ["#000000"], Name: "上阴影", ...upperLayerInfo, ColorGroup: "Shadow" },
+        { Color: ["#FFFFFF"], Name: "上高光", ...upperLayerInfo, ColorGroup: "Highlight" },
     ],
 };
 
@@ -81,11 +80,10 @@ const assetLower = {
     Left: 0,
     Prerequisite: ["HasVagina"],
     Attribute: ["SuitLower"],
-    DefaultColor: ["#232323", "#000000", "#FFFFFF"],
     Layer: [
-        { Name: "下底色", ...lowerLayerInfo },
-        { Name: "下阴影", ...lowerLayerInfo },
-        { Name: "下高光", ...lowerLayerInfo },
+        { Color: ["#232323"], Name: "下底色", ...lowerLayerInfo },
+        { Color: ["#000000"], Name: "下阴影", ...lowerLayerInfo },
+        { Color: ["#FFFFFF"], Name: "下高光", ...lowerLayerInfo },
         {
             Name: "袜遮罩",
             AllowTypes: { typed: 0 },

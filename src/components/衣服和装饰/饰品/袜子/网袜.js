@@ -14,9 +14,9 @@ const asset = {
         Spread: 0,
     },
     Priority: 12,
-    DefaultColor: ["#351C1C", "#351C1C", "#1C1111", "#1C1111", "#170E0E", "#170E0E", "#000000"],
-    Layer: [
+        Layer: [
         {
+            Color: ["#351C1C"],
             Name: "上袜",
             PoseMapping: {
                 LegsClosed: PoseType.DEFAULT,
@@ -28,6 +28,7 @@ const asset = {
             },
         },
         {
+            Color: ["#351C1C"],
             Name: "下袜",
             PoseMapping: {
                 LegsClosed: "LegsClosed",
@@ -39,6 +40,7 @@ const asset = {
             },
         },
         {
+            Color: ["#1C1111"],
             Name: "上网",
             PoseMapping: {
                 LegsClosed: PoseType.DEFAULT,
@@ -50,6 +52,7 @@ const asset = {
             },
         },
         {
+            Color: ["#1C1111"],
             Name: "下网",
             PoseMapping: {
                 LegsClosed: "LegsClosed",
@@ -61,6 +64,7 @@ const asset = {
             },
         },
         {
+            Color: ["#170E0E"],
             Name: "上图案",
             PoseMapping: {
                 LegsClosed: PoseType.DEFAULT,
@@ -72,6 +76,7 @@ const asset = {
             },
         },
         {
+            Color: ["#170E0E"],
             Name: "下图案",
             PoseMapping: {
                 LegsClosed: "LegsClosed",
@@ -83,6 +88,7 @@ const asset = {
             },
         },
         {
+            Color: ["#000000"],
             Name: "腰线",
             PoseMapping: {
                 LegsClosed: PoseType.DEFAULT,

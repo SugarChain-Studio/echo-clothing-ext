@@ -41,7 +41,6 @@ const asset = {
     Priority: 8,
     Gender: "F",
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
-    DefaultColor: ["Default", "Default", "#696776", "#7E5F69", "#E3BFBF"],
     PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
@@ -75,11 +74,13 @@ const asset = {
             Left: 180,
         },
         {
+            Color: ["#696776"],
             Name: "腹中脑容器",
             Top: 400,
             Left: 180,
         },
         {
+            Color: ["#7E5F69"],
             Name: "腹中脑",
             Top: 400,
             Left: 180,
@@ -100,6 +101,7 @@ const asset = {
             HasImage: false,
         },
         {
+            Color: ["#E3BFBF"],
             Name: "网格",
             ParentGroup: "BodyUpper",
         },

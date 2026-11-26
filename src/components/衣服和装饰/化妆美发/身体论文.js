@@ -88,9 +88,9 @@ const asset = {
     },
     Extended: true,
     DynamicAfterDraw: true,
-    DefaultColor: ["#000000"],
-    Layer: [
+        Layer: [
         {
+            Color: ["#000000"],
             Name: "Text",
             Left: 0,
             Top: 120,

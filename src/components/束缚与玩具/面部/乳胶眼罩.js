@@ -87,8 +87,13 @@ const asset = [
             Fetish: ["Leather"],
             Priority: 44,
             DynamicGroupName: "ItemHead",
-            DefaultColor: ["#0A0A0A", "Default", "#E2C443", "#E2C443", "#E2C443"],
-            Layer: [{ Name: "A1" }, { Name: "A2" }, { Name: "A3" }, { Name: "A4" }, { Name: "A5" }],
+            Layer: [
+                { Color: ["#0A0A0A"], Name: "A1" },
+                { Name: "A2" },
+                { Color: ["#E2C443"], Name: "A3" },
+                { Color: ["#E2C443"], Name: "A4" },
+                { Color: ["#E2C443"], Name: "A5" },
+            ],
         },
         {
             translation: { CN: "乳胶眼罩2", EN: "Latex Blindfold 2" },
@@ -107,4 +112,3 @@ export default function () {
     );
     AssetManager.addAssetWithConfig(["Glasses", "Mask"], asset);
 }
-

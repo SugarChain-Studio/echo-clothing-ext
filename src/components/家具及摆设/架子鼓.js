@@ -11,7 +11,6 @@ const assets = [
         Left: -200,
         DynamicGroupName: "ItemDevices",
         FixedPosition: true,
-        DefaultColor: ["Default", "Default", "Default", "Default", "Default", "Default", "#111"],
         Layer: [
             { Name: "A1" },
             { Name: "A2" },
@@ -19,7 +18,7 @@ const assets = [
             { Name: "A4" },
             { Name: "A5" },
             { Name: "A6" },
-            { Name: "A7" },
+            { Color: ["#111"], Name: "A7" },
             Layer.screen({ Name: "A7g" }),
         ],
     },
@@ -51,4 +50,3 @@ const assets = [
 export default function () {
     AssetManager.addAssetWithConfig(...assets);
 }
-

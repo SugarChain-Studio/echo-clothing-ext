@@ -12,31 +12,6 @@ const asset = {
     SetPose: ["BackElbowTouch", "LegsClosed"],
     LayerVisibility: true,
     Difficulty: 25,
-    DefaultColor: [
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "Default",
-        "#000000",
-        "Default",
-        "Default",
-        "Default",
-        "#232323",
-        "#000000",
-        "#FFFFFF",
-        "#232323",
-        "#000000",
-        "#FFFFFF",
-    ],
     Layer: [
         {
             Name: "外壳盖子关闭",
@@ -129,6 +104,7 @@ const asset = {
             AllowTypes: { l: 0 },
         },
         {
+            Color: ["#000000"],
             Name: "绳子",
             ColorGroup: "乳胶睡袋闭合处",
             Priority: 25,
@@ -153,6 +129,7 @@ const asset = {
             ParentGroup: "BodyLower",
         },
         {
+            Color: ["#232323"],
             Name: "乳胶上底色",
             ColorGroup: "乳胶睡袋底色",
             Priority: 23,
@@ -160,6 +137,7 @@ const asset = {
             ParentGroup: "BodyUpper",
         },
         {
+            Color: ["#000000"],
             Name: "乳胶上阴影",
             ColorGroup: "乳胶睡袋阴影",
             Priority: 23,
@@ -167,6 +145,7 @@ const asset = {
             ParentGroup: "BodyUpper",
         },
         {
+            Color: ["#FFFFFF"],
             Name: "乳胶上高光",
             ColorGroup: "乳胶睡袋高光",
             Priority: 23,
@@ -174,6 +153,7 @@ const asset = {
             ParentGroup: "BodyUpper",
         },
         {
+            Color: ["#232323"],
             Name: "乳胶下底色",
             ColorGroup: "乳胶睡袋底色",
             Priority: 23,
@@ -181,6 +161,7 @@ const asset = {
             ParentGroup: "BodyLower",
         },
         {
+            Color: ["#000000"],
             Name: "乳胶下阴影",
             ColorGroup: "乳胶睡袋阴影",
             Priority: 23,
@@ -188,6 +169,7 @@ const asset = {
             ParentGroup: "BodyLower",
         },
         {
+            Color: ["#FFFFFF"],
             Name: "乳胶下高光",
             ColorGroup: "乳胶睡袋高光",
             Priority: 23,

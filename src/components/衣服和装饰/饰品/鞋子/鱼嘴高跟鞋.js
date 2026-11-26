@@ -15,29 +15,34 @@ const asset = {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    DefaultColor: ["#FFFFFF", "#FFFFFF", "#000000", "#000000", "#000000", "#000000"],
     Layer: [
         {
+            Color: ["#FFFFFF"],
             Name: "高光",
             Priority: 24,
         },
         {
+            Color: ["#FFFFFF"],
             Name: "卡扣",
             Priority: 24,
         },
         {
+            Color: ["#000000"],
             Name: "绑带",
             Priority: 23,
         },
         {
+            Color: ["#000000"],
             Name: "鞋面",
             Priority: 23,
         },
         {
+            Color: ["#000000"],
             Name: "鞋垫",
             Priority: 7,
         },
         {
+            Color: ["#000000"],
             Name: "鞋底",
             Priority: 7,
         },

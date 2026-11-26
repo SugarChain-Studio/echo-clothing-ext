@@ -41,11 +41,10 @@ const assets = [
             Left: 190,
             Top: 80,
             Layer: [
-                { Name: "r", CreateLayerTypes: ["typed"] },
+                { Color: ["#050505"], Name: "r", CreateLayerTypes: ["typed"] },
                 Layer.screen({ Name: "rg", CreateLayerTypes: ["typed"] }),
                 { Name: "g", CreateLayerTypes: ["typed"] },
             ],
-            DefaultColor: ["#050505", "Default"],
         },
         {
             translation: { CN: "色散墨镜", EN: "Iridescent Sunglasses" },

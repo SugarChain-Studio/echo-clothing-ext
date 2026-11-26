@@ -17,12 +17,11 @@ const assets = /** @type {const} */ (["左", "右"]).map(
                 Priority: 29,
                 Extended: true,
                 DynamicGroupName: "Glasses",
-                DefaultColor: ["Default", "Default", "#F65E5E", "#242424"],
                 Layer: [
                     { Name: "线" },
                     { Name: "底" },
-                    { Name: "心", AllowTypes: { typed: 1 } },
-                    { Name: "X", AllowTypes: { typed: 2 } },
+                    { Color: ["#F65E5E"], Name: "心", AllowTypes: { typed: 1 } },
+                    { Color: ["#242424"], Name: "X", AllowTypes: { typed: 2 } },
                 ],
             },
             {
@@ -64,4 +63,3 @@ const assets = /** @type {const} */ (["左", "右"]).map(
 export default function () {
     AssetManager.addAssetWithConfig(["Glasses", "Mask"], assets);
 }
-

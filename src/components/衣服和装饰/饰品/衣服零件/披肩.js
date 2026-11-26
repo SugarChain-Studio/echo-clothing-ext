@@ -58,12 +58,11 @@ const assets = [
             },
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            DefaultColor: ["#490707", "#490707", "#FFFFFF", "#FFFFFF"],
             Layer: [
-                { Name: "衣左", ColorGroup: "衣" },
-                { Name: "衣右", ColorGroup: "衣" },
-                { Name: "绒左", ColorGroup: "绒" },
-                { Name: "绒右", ColorGroup: "绒" },
+                { Color: ["#490707"], Name: "衣左", ColorGroup: "衣" },
+                { Color: ["#490707"], Name: "衣右", ColorGroup: "衣" },
+                { Color: ["#FFFFFF"], Name: "绒左", ColorGroup: "绒" },
+                { Color: ["#FFFFFF"], Name: "绒右", ColorGroup: "绒" },
             ],
         },
         {
@@ -94,12 +93,11 @@ const assets = [
             },
             Prerequisite: ["HasBreasts"],
             ParentGroup: "BodyUpper",
-            DefaultColor: ["#490707", "#490707", "#FFFFFF", "#FFFFFF"],
             Layer: [
-                { Name: "衣左", ColorGroup: "衣" },
-                { Name: "衣右", ColorGroup: "衣" },
-                { Name: "绒左", ColorGroup: "绒" },
-                { Name: "绒右", ColorGroup: "绒" },
+                { Color: ["#490707"], Name: "衣左", ColorGroup: "衣" },
+                { Color: ["#490707"], Name: "衣右", ColorGroup: "衣" },
+                { Color: ["#FFFFFF"], Name: "绒左", ColorGroup: "绒" },
+                { Color: ["#FFFFFF"], Name: "绒右", ColorGroup: "绒" },
             ],
         },
         {

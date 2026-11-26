@@ -16,9 +16,9 @@ const asset = {
         Hogtied: "Hogtied",
         AllFours: "Hide",
     },
-    DefaultColor: ["#202020", "#202020", "#757575", "#FFFFFF"],
     Layer: [
         {
+            Color: ["#202020"],
             Name: "鞋面",
             Priority: 23,
             AllowTypes: { l: 0 },
@@ -26,12 +26,14 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
+            Color: ["#202020"],
             Name: "鞋底",
             Priority: 22,
             InheritPoseMappingFields: true,
             PoseMapping: { Hogtied: "Hide" },
         },
         {
+            Color: ["#757575"],
             Name: "搭扣",
             Priority: 23,
             AllowTypes: { l: 0 },
@@ -39,6 +41,7 @@ const asset = {
             PoseMapping: { Hogtied: "Hide" },
         },
         {
+            Color: ["#FFFFFF"],
             Name: "高光",
             Priority: 23,
             AllowTypes: { l: 0 },
@@ -170,4 +173,3 @@ export default function () {
     AssetManager.addAssetWithConfig("Shoes", asset, { layerNames, translation, extended, assetStrings });
     AssetManager.addImageMapping(imageMapping);
 }
-

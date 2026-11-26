@@ -8,27 +8,13 @@ const asset = {
     Top: 0,
     Left: 0,
     Priority: 30,
-    DefaultColor: [
-        "#3F3F3F",
-        "#3F3F3F",
-        "#9B3131",
-        "#3F3F3F",
-        "#9B3131",
-        "#9B3131",
-        "#9B3131",
-        "#9B3131",
-        "#9B3131",
-        "#3F3F3F",
-        "#3F3F3F",
-        "#323232",
-        "#3F3F3F",
-    ],
-    PoseMapping: {
+        PoseMapping: {
         Hogtied: PoseType.HIDE,
         AllFours: PoseType.HIDE,
     },
     Layer: [
         {
+            Color: ["#3F3F3F"],
             Name: "袖左",
             ColorGroup: "袖子花边",
             PoseMapping: {
@@ -39,6 +25,7 @@ const asset = {
             },
         },
         {
+            Color: ["#3F3F3F"],
             Name: "袖右",
             ColorGroup: "袖子花边",
             PoseMapping: {
@@ -48,17 +35,17 @@ const asset = {
                 Hogtied: PoseType.HIDE,
             },
         },
-        { Name: "裙边2", ParentGroup: {} },
-        { Name: "裙边", ParentGroup: {} },
-        { Name: "裙", ColorGroup: "裙子" },
-        { Name: "胸罩", ColorGroup: "裙子" },
-        { Name: "束腰左", ColorGroup: "裙子" },
-        { Name: "束腰右", ColorGroup: "裙子" },
-        { Name: "束腰中", ColorGroup: "裙子" },
-        { Name: "束腰绑带" },
-        { Name: "腰带", ColorGroup: "蝴蝶结" },
-        { Name: "花边" },
-        { Name: "蝴蝶结", ColorGroup: "蝴蝶结", ParentGroup: {} },
+        { Color: ["#9B3131"], Name: "裙边2", ParentGroup: {} },
+        { Color: ["#3F3F3F"], Name: "裙边", ParentGroup: {} },
+        { Color: ["#9B3131"], Name: "裙", ColorGroup: "裙子" },
+        { Color: ["#9B3131"], Name: "胸罩", ColorGroup: "裙子" },
+        { Color: ["#9B3131"], Name: "束腰左", ColorGroup: "裙子" },
+        { Color: ["#9B3131"], Name: "束腰右", ColorGroup: "裙子" },
+        { Color: ["#9B3131"], Name: "束腰中", ColorGroup: "裙子" },
+        { Color: ["#3F3F3F"], Name: "束腰绑带" },
+        { Color: ["#3F3F3F"], Name: "腰带", ColorGroup: "蝴蝶结" },
+        { Color: ["#323232"], Name: "花边" },
+        { Color: ["#3F3F3F"], Name: "蝴蝶结", ColorGroup: "蝴蝶结", ParentGroup: {} },
     ],
 };
 

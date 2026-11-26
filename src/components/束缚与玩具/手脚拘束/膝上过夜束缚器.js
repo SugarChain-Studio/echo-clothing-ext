@@ -11,7 +11,6 @@ const asset = {
     Priority: 27,
     Time: 12,
     RemoveTime: 10,
-    DefaultColor: ["#505050", "#BBBBBB"],
     Extended: false,
     AllowLock: true,
     AllowTighten: true,
@@ -24,7 +23,10 @@ const asset = {
         AllFours: PoseType.HIDE,
         Hogtied: PoseType.HIDE,
     },
-    Layer: [{ Name: "Straps" }, { Name: "Details", ParentGroup: {} }],
+    Layer: [
+        { Color: ["#505050"], Name: "Straps" },
+        { Color: ["#BBBBBB"], Name: "Details", ParentGroup: {} },
+    ],
 };
 
 const layerNames = {

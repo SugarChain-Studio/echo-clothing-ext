@@ -17,9 +17,14 @@ const asset = {
         AllFours: "Hide",
     },
     ParentGroup: "BodyLower",
-    DefaultColor: ["#6F8460", "#222", "Default"],
     Layer: [
-        { Name: "u", Priority: 7, InheritPoseMappingFields: true, PoseMapping: { Hogtied: "Hide" } },
+        {
+            Color: ["#6F8460"],
+            Name: "u",
+            Priority: 7,
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
         {
             Name: "t2",
             Priority: 7,
@@ -48,7 +53,13 @@ const asset = {
                 },
             ],
         },
-        { Name: "t", AllowTypes: { typed: 0 }, InheritPoseMappingFields: true, PoseMapping: { Hogtied: "Hide" } },
+        {
+            Color: ["#222"],
+            Name: "t",
+            AllowTypes: { typed: 0 },
+            InheritPoseMappingFields: true,
+            PoseMapping: { Hogtied: "Hide" },
+        },
         {
             Name: "p",
             AllowTypes: { typed: [1, 2, 3] },

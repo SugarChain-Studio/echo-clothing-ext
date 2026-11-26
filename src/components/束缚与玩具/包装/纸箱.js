@@ -42,7 +42,6 @@ const assets = [
         Top: 0,
         Left: 0,
         Priority: 55,
-        DefaultColor: ["Default", "#000000", "#000000"],
         Layer: [
             {
                 Name: "B",
@@ -50,6 +49,7 @@ const assets = [
                 PoseMapping: { KneelingSpread: "Kneel", Kneel: "Kneel", Hogtied: "Hogtied", AllFours: "Hogtied" },
             },
             {
+                Color: ["#000000"],
                 HasImage: false,
                 AllowColorize: false,
                 Alpha: [
@@ -63,6 +63,7 @@ const assets = [
                 ],
             },
             {
+                Color: ["#000000"],
                 Name: "F",
                 CreateLayerTypes: ["e"],
                 CopyLayerColor: "B",

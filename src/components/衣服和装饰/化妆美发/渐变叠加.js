@@ -207,10 +207,9 @@ const asset = [
             Priority: 54,
             ParentGroup: {},
             InheritColor: "HairFront",
-            DefaultColor: ["#FF8888", "#FF8888"],
             Layer: [
-                { Name: "Back", HasImage: false, Priority: 6 },
-                { Name: "Front", HasImage: false, Priority: 53 },
+                { Name: "Back", Color: ["#FF8888"], HasImage: false, Priority: 6 },
+                { Name: "Front", Color: ["#FF8888"], HasImage: false, Priority: 53 },
             ],
         },
         {
@@ -233,10 +232,9 @@ const asset = [
             Priority: 54,
             ParentGroup: {},
             InheritColor: "HairFront",
-            DefaultColor: ["#FF88E7", "#FF88E7"],
             Layer: [
-                { Name: "Back", HasImage: false, Priority: 6 },
-                { Name: "Front", HasImage: false, Priority: 53 },
+                { Name: "Back", Color: ["#FF88E7"], HasImage: false, Priority: 6 },
+                { Name: "Front", Color: ["#FF88E7"], HasImage: false, Priority: 53 },
             ],
         },
         {
@@ -254,4 +252,3 @@ const asset = [
 export default function () {
     AssetManager.addAssetWithConfig(asset);
 }
-

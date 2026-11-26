@@ -16,8 +16,13 @@ const asset = {
     Fetish: ["Sadism"],
     AllowActivity: ["SpankItem", "RubItem"],
     PoseMapping: { ...AssetPoseMapping.ItemHandheld },
-    DefaultColor: ["Default", "#292d33", "#0f0a00", "#ffffff", "#ffe5ca"],
-    Layer: [{ Name: "Handle" }, { Name: "Metal1" }, { Name: "Metal2" }, { Name: "Shine1" }, { Name: "Shine2" }],
+    Layer: [
+        { Name: "Handle" },
+        { Color: ["#292d33"], Name: "Metal1" },
+        { Color: ["#0f0a00"], Name: "Metal2" },
+        { Color: ["#ffffff"], Name: "Shine1" },
+        { Color: ["#ffe5ca"], Name: "Shine2" },
+    ],
 };
 
 const translation = {
@@ -46,4 +51,3 @@ export default function () {
     ArmMaskTool.createArmMaskForCloth(group, asset, "Right");
     AssetManager.addAssetWithConfig(group, asset, { translation, layerNames });
 }
-

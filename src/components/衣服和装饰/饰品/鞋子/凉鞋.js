@@ -15,13 +15,14 @@ const asset = {
         Hogtied: "Hide",
         AllFours: "Hide",
     },
-    DefaultColor: ["#623B3B", "#181818"],
-    Layer: [
+        Layer: [
         {
+            Color: ["#623B3B"],
             Name: "鞋带",
             Priority: 17,
         },
         {
+            Color: ["#181818"],
             Name: "鞋底",
             Priority: 1,
         },

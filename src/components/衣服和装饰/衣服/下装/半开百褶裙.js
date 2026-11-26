@@ -10,7 +10,6 @@ const asset = {
         [PoseType.DEFAULT]: 0,
         KneelingSpread: 90,
     },
-    DefaultColor: ["#7F1739", "Default", "Default"],
     Expose: ["ItemVulva", "ItemVulvaPiercings", "ItemButt"],
     PoseMapping: {
         Kneel: "KneelingSpread",
@@ -18,7 +17,7 @@ const asset = {
         AllFours: PoseType.HIDE,
     },
     Priority: 26,
-    Layer: [{ Name: "裙子" }, { Name: "白线" }, { Name: "链子" }],
+    Layer: [{ Color: ["#7F1739"], Name: "裙子" }, { Name: "白线" }, { Name: "链子" }],
 };
 
 /** @type {Translation.Entry} */
