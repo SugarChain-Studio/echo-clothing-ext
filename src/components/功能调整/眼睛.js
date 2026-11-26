@@ -73,13 +73,25 @@ export default function () {
         }
         return next(args);
     });
+
+    /** @type {(ev: string, arg: any) => arg is ServerCharacterExpressionUpdate} */
+    const argCheck = (ev, arg) => {
+        return (
+            ev === "ChatRoomCharacterExpressionUpdate" &&
+            arg &&
+            typeof arg === "object" &&
+            "Group" in arg &&
+            "Expression" in arg
+        );
+    };
+
     HookManager.hookFunction("ServerSend", 0, (args, next) => {
-        if (args[0] === "ChatRoomCharacterExpressionUpdate" && wceAnimationEnabled()) {
+        if (argCheck(args[0], args[1]) && wceAnimationEnabled()) {
             updateEyesRef();
             if (args[1].Group === "Eyes" && updateExpressionRef("Eyes", "右眼_Luzi")) {
-                args[1].Group = "右眼_Luzi";
+                args[1].Group = /** @type {ExpressionGroupName} */ ("右眼_Luzi");
             } else if (args[1].Group === "Eyes2" && updateExpressionRef("Eyes2", "左眼_Luzi")) {
-                args[1].Group = "左眼_Luzi";
+                args[1].Group = /** @type {ExpressionGroupName} */ ("左眼_Luzi");
             }
         }
         return next(args);
