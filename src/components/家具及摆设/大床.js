@@ -81,7 +81,6 @@ const assets = [
             Time: 5,
             RemoveTime: 5,
             Visible: false,
-            DefaultColor: ["#523629", "#888990", "#808284"],
             OverrideHeight: { Height: 20, HeightRatioProportion: 1, Priority: 21 },
             RemoveItemOnRemove: [
                 { Group: "ItemAddon", Name: "Covers" },

@@ -29,9 +29,9 @@ const asset = [
             Top: 110,
             Priority: 25,
             DynamicGroupName: "Mask",
-            DefaultColor: "#BBB",
             ParentGroup: {},
             PoseMapping: {},
+            Layer: [{ Color: ["#BBB"] }],
         },
         {
             translation: { CN: "透明网格面纱", EN: "Transparent Grid Veil" },

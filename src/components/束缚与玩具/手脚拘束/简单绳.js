@@ -12,12 +12,12 @@ const asset = {
     AllowLock: false,
     AllowTighten: true,
     Random: false,
-    DefaultColor: "#7B6C4F",
     Effect: [E.Block, E.BlockWardrobe],
     AllowActivePose: ["BackElbowTouch"],
     SetPose: ["BackElbowTouch"],
     ParentGroup: "BodyUpper",
     PoseMapping: {},
+    Layer: [{ Color: ["#7B6C4F"] }],
 };
 
 const translation = {
@@ -28,4 +28,3 @@ const translation = {
 export default function () {
     AssetManager.addAssetWithConfig("ItemArms", asset, { translation, layerNames: {} });
 }
-

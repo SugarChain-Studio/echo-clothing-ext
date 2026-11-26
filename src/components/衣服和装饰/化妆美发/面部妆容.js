@@ -18,9 +18,9 @@ const defs = [
             Random: false,
             Left: 200,
             Top: 120,
-            DefaultColor: ["#000000"],
             ParentGroup: {},
             DynamicGroupName: "FaceMarkings",
+            Layer: [{ Color: ["#000000"] }],
         },
         {
             translation: {
@@ -37,9 +37,9 @@ const defs = [
             Random: false,
             Left: 200,
             Top: 120,
-            DefaultColor: ["#000000"],
             ParentGroup: {},
             DynamicGroupName: "FaceMarkings",
+            Layer: [{ Color: ["#000000"] }],
         },
         {
             translation: {
@@ -92,7 +92,7 @@ const defs = [
             DynamicGroupName: "FaceMarkings",
             ParentGroup: {},
             CreateLayerTypes: ["m"],
-            DefaultColor: "#C6091C",
+            Layer: [{ Color: ["#C6091C"] }],
         },
         {
             translation: { CN: "花钿", EN: "Huadian" },

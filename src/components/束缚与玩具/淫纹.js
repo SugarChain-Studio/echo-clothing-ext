@@ -33,6 +33,9 @@ const extProp = (item) => /** @type {ExtendItemProperties}*/ (item.Property);
 /** @type {[BCColor,BCColor]} */
 const defaultGradientColor = ["#D75CFF", "#72B5FF"];
 
+/** @type {BCColor} */
+const defaultGradient2Color = "#FFBFF1";
+
 // #region 交互界面
 const dialog = createItemDialogModular({
     buttons: [
@@ -334,7 +337,7 @@ const asset = [
                 HasImage: false,
             },
             { Color: [defaultGradientColor[1]], Name: "发光2", HasImage: false },
-            { Color: ["#FFBFF1"], Name: "泛光", HasImage: false, AllowTypes: { g: 2 } },
+            { Color: [defaultGradient2Color], Name: "泛光", HasImage: false, AllowTypes: { g: 2 } },
         ],
     },
     {
@@ -592,9 +595,9 @@ function afterDraw(data, originalFunction, drawData) {
         Data.GlowCanvas ??= AnimationGenerateTempCanvas(C, A, 200, 200);
 
         const [c1, c2] = ((colors) => {
-            if (!Array.isArray(colors) && colors.length < 6) return defaultGradientColor;
+            if (!Array.isArray(colors) || colors.length < 6) return defaultGradientColor;
             return [4, 5].map((idx) => colorDefault(colors[idx], defaultGradientColor[idx - 4]));
-        })(CA.Color ?? CA.Asset.DefaultColor);
+        })(CA.Color);
 
         const ctx = Data.GlowCanvas.getContext("2d");
         ctx.clearRect(0, 0, 200, 200);
@@ -641,7 +644,7 @@ function afterDraw(data, originalFunction, drawData) {
 
         ctx.globalAlpha = 0.2 + 0.3 * Math.cos(Data.V1GlowCycle);
         const gradient = ctx.createRadialGradient(100, 108, 0, 100, 108, 100);
-        const c = colorDefault(Color, A.DefaultColor[6]);
+        const c = colorDefault(Color, defaultGradient2Color);
         gradient.addColorStop(0, c);
         gradient.addColorStop(1, `${c}00`);
         ctx.fillStyle = gradient;
