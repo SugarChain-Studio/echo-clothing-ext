@@ -6,6 +6,7 @@ import { GLImageRenderer } from "@local/lib/draw";
 import { createItemDialogModular } from "@local/lib/itemDialog";
 import { Layer } from "@local/lib/type";
 import { holdsEmptyGlass, setGlassContent } from "../手持物/玻璃杯饮料";
+import { registerNumberProperty } from "@local/lib/property";
 
 const orgasmState = new StateTools.OrgasmState();
 
@@ -26,6 +27,8 @@ const orgasmState = new StateTools.OrgasmState();
  * @typedef {Object} PortableMilkPumpCustomProperties
  * @property {number} Luzi_MilkTotal
  */
+
+registerNumberProperty("Luzi_MilkTotal");
 
 /**
  * @typedef {ItemProperties & PortableMilkPumpCustomProperties} PortableMilkPumpProperties
@@ -378,4 +381,3 @@ export default function () {
     AssetManager.addAssetWithConfig(["ItemTorso"], asset);
     orgasmState.watch(OrgasmEvents);
 }
-

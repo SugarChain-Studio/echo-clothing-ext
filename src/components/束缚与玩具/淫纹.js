@@ -5,10 +5,15 @@ import { createItemDialogModular } from "@local/lib/itemDialog";
 import { Access } from "@local/lib/type";
 import { LSCG } from "@local/lib/lscg";
 import { luziSuffixFixups } from "@local/lib/fixups";
+import { registerBooleanProperty } from "@local/lib/property";
 
 /**
  * @typedef { { Masturbate:boolean, InstantOrgasm: boolean, OpenPerm?: boolean } } LewdCrestProps
  */
+
+registerBooleanProperty("Masturbate");
+registerBooleanProperty("InstantOrgasm");
+registerBooleanProperty("OpenPerm");
 
 /**
  * @typedef { globalThis.ItemProperties & LewdCrestProps } ExtendItemProperties

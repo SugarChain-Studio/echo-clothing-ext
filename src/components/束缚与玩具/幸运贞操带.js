@@ -2,6 +2,7 @@ import { AssetManager } from "@local/AssetManager";
 import { ChatRoomEvents } from "@sugarch/bc-event-handler";
 import { OrgasmEvents } from "@sugarch/bc-event-handler";
 import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
+import { registerNumberProperty } from "@local/lib/property";
 
 /**
  * @typedef {Object} ExtendItemPropertiesPart
@@ -13,6 +14,14 @@ import { DialogTools, StateTools, Tools } from "@mod-utils/Tools";
  * @property {number} RuinedOrgasmCount
  * @property {number} ResistedOrgasmCount
  */
+
+registerNumberProperty("LastStruggleTime");
+registerNumberProperty("StruggleCount");
+registerNumberProperty("WornTime");
+registerNumberProperty("LastOrgasmTime");
+registerNumberProperty("OrgasmCount");
+registerNumberProperty("RuinedOrgasmCount");
+registerNumberProperty("ResistedOrgasmCount");
 
 /**
  * @typedef {globalThis.ItemProperties & ExtendItemPropertiesPart} ExtendItemProperties

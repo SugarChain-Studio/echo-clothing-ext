@@ -1,4 +1,5 @@
 import { AssetManager } from "@local/AssetManager";
+import { registerBooleanProperty, registerNumberProperty } from "@local/lib/property";
 
 import { Tools } from "@mod-utils/Tools";
 
@@ -7,6 +8,9 @@ import { Tools } from "@mod-utils/Tools";
  * @property {number} Liquid
  * @property {boolean} Auto
  */
+
+registerNumberProperty("Liquid");
+registerBooleanProperty("Auto");
 
 /**
  * @typedef { Object } Rect
@@ -261,4 +265,3 @@ export default function () {
     });
     AssetManager.addCustomAssetString(dialog);
 }
-

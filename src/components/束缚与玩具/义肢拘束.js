@@ -6,6 +6,7 @@ import { Layer } from "@local/lib/type";
 import { Tools } from "@mod-utils/Tools";
 import { monadic } from "@mod-utils/monadic";
 import { TranslationUtility } from "@sugarch/bc-mod-i18n";
+import { registerBooleanProperty } from "@local/lib/property";
 
 /**
  * @typedef {Object} ProtheticRestraintArmProps
@@ -14,6 +15,11 @@ import { TranslationUtility } from "@sugarch/bc-mod-i18n";
  * @property {boolean} [LuziSelfInteract] 互动限制-私密区域t
  * @property {boolean} [LuziPRRoleplay] 角色扮演模式
  */
+
+registerBooleanProperty("LuziAutoMasturbate");
+registerBooleanProperty("LuziForbidStruggle");
+registerBooleanProperty("LuziSelfInteract");
+registerBooleanProperty("LuziPRRoleplay");
 
 /**
  * @typedef { globalThis.ItemProperties & ProtheticRestraintArmProps } ArmItemProperties

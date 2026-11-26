@@ -6,6 +6,7 @@ import { Type } from "@local/lib/type";
 import { createAfterDrawProcess } from "@local/lib/draw";
 import { createItemDialogModular } from "@local/lib/itemDialog";
 import { Container } from "@local/lib/container";
+import { registerBooleanProperty, registerCustomProperty, registerNumberProperty } from "@local/lib/property";
 
 // Milk Vending by Yaoki
 
@@ -141,6 +142,14 @@ const layerNames = {
 /**
  * @typedef {ItemProperties & MilkingVendorCustomProperties} MilkingVendorProperties
  */
+
+registerNumberProperty("Luzi_MilkTotal");
+registerNumberProperty("Luzi_OutputStartLeft");
+registerNumberProperty("Luzi_OutputStartRight");
+registerBooleanProperty("Luzi_OutputDoneLeft");
+registerBooleanProperty("Luzi_OutputDoneRight");
+registerCustomProperty("Luzi_ContentLeft");
+registerCustomProperty("Luzi_ContentRight");
 
 /**
  * @typedef {Object} MilkCupData

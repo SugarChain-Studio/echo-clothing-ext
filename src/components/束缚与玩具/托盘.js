@@ -3,6 +3,7 @@ import { AssetManager } from "@local/AssetManager";
 import { createItemDialogNoArch } from "@local/lib/itemDialog";
 import { Type, Access } from "@local/lib/type";
 import { registerDrinkLayers } from "@local/lib/generator/drinks";
+import { registerCustomProperty, registerEnumProperty } from "@local/lib/property";
 
 /** @type {CustomAssetDefinition} */
 const asset = {
@@ -67,6 +68,9 @@ const layerNames = {
 /**
  * @typedef { { Luzi_InventoryContent: ContainerProperty.ContainerData[], Luzi_InventoryType?: ContentsType } } TrayProperties
  */
+
+registerCustomProperty("Luzi_InventoryContent");
+registerEnumProperty("Luzi_InventoryType", ["曲奇", "饮料"]);
 
 /**
  * @typedef { globalThis.ItemProperties & TrayProperties } ExtendItemProperties

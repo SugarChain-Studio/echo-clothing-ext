@@ -2,6 +2,7 @@
 import { AssetManager } from "@local/AssetManager";
 import { createItemDialogModular } from "@local/lib/itemDialog";
 import { PartsMask } from "@local/lib/draw/partsMask";
+import { registerNumberProperty } from "@local/lib/property";
 
 /**
  * @typedef {Object} GradientCustomProperty
@@ -13,6 +14,10 @@ import { PartsMask } from "@local/lib/draw/partsMask";
 /**
  * @typedef {GradientCustomProperty & ItemProperties} GradientItemProperties
  */
+
+registerNumberProperty("upperBound");
+registerNumberProperty("gradientSize");
+registerNumberProperty("rotation");
 
 /** @type {(p:ItemProperties)=>GradientItemProperties} */
 const props = (p) => p;

@@ -5,6 +5,7 @@ import { PoseMapTool } from "@local/lib/generator";
 import { PostPass } from "@local/lib/pass";
 import { createItemDialogModular } from "@local/lib/itemDialog";
 import { ChatRoomRemoteEventEmitter } from "@sugarch/bc-event-handler";
+import { registerBooleanProperty, registerNumberProperty } from "@local/lib/property";
 
 /**
  * @typedef {Object} ShockEvent
@@ -45,6 +46,13 @@ export const luggageHandler = new ChatRoomRemoteEventEmitter("EchoClothingExt@Sh
  * @property {number} [Luzi_ManualShock] - 手动触发电击的标记，设置为当前时间戳时触发一次电击
  * @property {number} [Luzi_ShockEndTime] - 电击结束时间戳，用于控制电击持续时间，以及控制闪烁图层显示
  */
+
+registerNumberProperty("Luzi_RandomIntervalMin");
+registerNumberProperty("Luzi_RandomIntervalRange");
+registerNumberProperty("Luzi_RandomShockDuration");
+registerBooleanProperty("Luzi_ShockHardcore");
+registerNumberProperty("Luzi_ManualShock");
+registerNumberProperty("Luzi_ShockEndTime");
 
 /**
  * @typedef {ShockDevicePropertiesExt & ItemProperties} ShockDeviceProperties

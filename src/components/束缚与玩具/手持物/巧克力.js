@@ -2,10 +2,14 @@ import { Tools } from "@mod-utils/Tools";
 import { ArmMaskTool } from "@local/lib/generator";
 import { createItemDialogModular } from "@local/lib/itemDialog";
 import { AssetManager } from "@local/AssetManager";
+import { registerNumberProperty } from "@local/lib/property";
 
 /**
  * @typedef {ItemProperties & {LuziRid?:number, LuziCid?:number}} ChocolateItemProperties
  */
+
+registerNumberProperty("LuziRid");
+registerNumberProperty("LuziCid");
 
 /** @type {(p:ItemProperties)=>ChocolateItemProperties} */
 const extProp = (p) => p;

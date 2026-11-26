@@ -1,6 +1,7 @@
 import { ImageMapTools } from "@mod-utils/Tools/imageMapTools";
 import { AssetManager } from "@local/AssetManager";
 import { luziSuffixFixups } from "@local/lib/fixups";
+import { registerStringProperty } from "@local/lib/property";
 
 /** @type { {X:number,Y:number, textAlign: CanvasTextAlign}[]} */
 const Positions = [
@@ -28,6 +29,10 @@ const Options = Array.from(Positions, (_, i) => i).map((i) => String.fromCharCod
  * @typedef {{[K in ExtTextItemPropertyKey]: string}} ExtTextItemProperties
  * @typedef { ExtTextItemProperties & ItemProperties } ExtItemProperties
  */
+
+Positions.forEach((_, index) => {
+    if (![1, 2].includes(index)) registerStringProperty(`Text${index * 3 + 1}`);
+});
 
 /** @type {(item:Item)=>ExtItemProperties} */
 const props = (item) => /** @type {ExtItemProperties} */ (item.Property);
